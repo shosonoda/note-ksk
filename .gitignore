@@ -5,6 +5,8 @@
 .lake/
 .DS_Store
 
+/gomi
+
 # Documentation
 docs/build
 
