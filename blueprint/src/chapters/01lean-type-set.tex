@@ -1,0 +1,62 @@
+\chapter{Leanの型理論と集合論}
+
+\section{型理論}
+Leanの基礎付けは型理論（type theory）であって，集合論（set theory）ではない．
+従って，集合論とは微妙に異なる振る舞いをすることがある．
+以下では2つの統語的な違いを説明する．
+
+% ## Brief note on type theory
+
+% Lean is based on type theory,
+% which means that some things work slightly differently from set theory.
+% We highlight two syntactical differences.
+
+\begin{itemize}
+    \item まず，型理論において包含関係（$\in$, element-of relation）は基本的な関係ではない．その代わりに，型判断（$\,:\,$, typying judgement）がある．
+    % Firstly, the element-of relation (`∈`) plays no fundamental role.
+    % Instead, there is a typing judgment (`:`).
+    このため，「$x$は集合$X$の要素である」と言う代わりに，「$x:X$」と書いて「$x$は型$X$の項である」と言う．
+    都合の良いことに，「$f:X \to Y$」と書いて「$f$の型は$X \to Y$である」と言える．そしてこれは「$f$が$X$から$Y$への写像である」ことを意味する．
+    % This means that we write `x : X` to say that "`x` is a term of type `X`"
+    % instead of "`x` is an element of the set `X`".
+    % Conveniently, we can write `f : X → Y` to mean "`f` has type `X → Y`",
+    % in other words "`f` is a function from `X` to `Y`".
+\end{itemize}
+
+  \begin{itemize}
+    \item もう一つ，型理論では$\mapsto$よりも$\lambda$記法（lambda-notation）を用いる．
+    例えば整数の自乗関数は$\lambda x. x^2$と定義される．これは集合論における$x \mapsto x^2$に相当する．
+    % Secondly, type theorists do not use the mapsto symbol (`↦`),
+    % but instead use lambda-notation.
+    % This means that we can define the square function on the integers via
+    % `λ x, x^2`, which translates to `x ↦ x^2` in set-theoretic notation.
+    % For more information about `λ`, see the Wikipedia page on
+    % [lambda calculus](https://en.wikipedia.org/wiki/Lambda_calculus).
+  \end{itemize}
+
+  Lean の型理論については，
+% For a more extensive discussion of type theory,
+% see the dedicated
+\begin{itemize}
+  \item \url{https://leanprover-community.github.io/lean-perfectoid-spaces/type_theory.html}
+\end{itemize}
+を見よ．
+
+% on the perfectoid project website.
+
+\section{Leanの集合論}
+\begin{itemize}
+  \item \texttt{Mathlib.Data.Set.Defs}
+\end{itemize}
+
+Leanにおいて，
+型$\alpha$の項からなる集合 $a : \texttt{Set } \alpha$ は，述語$\alpha \to \mathtt{Prop}$として実装されている．
+これは実装上の都合であって，この実装を当てにするべきではない（de Moura）．
+その代わり，述語 $p : \alpha \to \mathtt{Prop}$ を集合$\{x \mid p x\}$に変換する関数 $\texttt{setOf } p : \texttt{Set } \alpha := p$ と，
+包含関係 $a \in p$ に変換する関数 $\texttt{Mem } (s : p) (a : \alpha) : \mathtt{Prop} := s a$ を使用することが推奨されている．
+
+\begin{itemize}
+    \item \texttt{Mathlib.Data.Finset}
+\end{itemize}
+
+Mathlibにはまた，有限集合が定義されている．有限集合では帰納法が使える．

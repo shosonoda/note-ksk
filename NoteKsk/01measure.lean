@@ -12,13 +12,13 @@ import Mathlib.MeasureTheory.OuterMeasure.Basic
 import Mathlib.MeasureTheory.Measure.MeasureSpaceDef
 import Mathlib.MeasureTheory.Measure.MeasureSpace
 
-open Set MeasurableSpace
+open Finset Set MeasurableSpace  --- Finset.Insert
 open scoped BigOperators
 
 namespace LebesgueNotes
 
 universe u v
-variable {α : Type u}
+variable {α : Type u} {ι : Type v}
 
 --------------------------------------------------------------------------------
 -- 1. 有限加法族（algebra of sets）
@@ -61,21 +61,37 @@ lemma inter_mem (hC : FiniteAdditiveFamily C) (hs : s ∈ C) (ht : t ∈ C) : s 
   hC.compl_mem ( hC.union_mem ( hC.compl_mem hs ) (hC.compl_mem ht) )
   -- MeasureTheory.IsSetAlgebra.inter_mem (h := hC) hs ht
 
-/-- 差集合も入る（`s \ t = s ∩ tᶜ`）。-/
+/-- 差集合も入る（`s \ t = s ∩ tᶜ`）。 -/
 lemma diff_mem (hC : FiniteAdditiveFamily C) (hs : s ∈ C) (ht : t ∈ C) : s \ t ∈ C :=
-  MeasureTheory.IsSetAlgebra.diff_mem (h := hC) hs ht
+  hC.inter_mem hs (hC.compl_mem ht)
+  -- MeasureTheory.IsSetAlgebra.diff_mem (h := hC) hs ht
 
-/-- 有限和（`Finset` 添字の二重 `iUnion`）で閉じる。-/
-lemma biUnion_mem {ι : Type v} (hC : FiniteAdditiveFamily C) (s : ι → Set α) (S : Finset ι)
+/-- 有限和（`Finset` 添字の二重 `iUnion`）で閉じる（帰納法）。 -/
+lemma biUnion_mem (hC : FiniteAdditiveFamily C) (s : ι → Set α) (S : Finset ι)
     (hs : ∀ i ∈ S, s i ∈ C) :
-    (⋃ i ∈ S, s i) ∈ C :=
-  MeasureTheory.IsSetAlgebra.biUnion_mem (h := hC) S hs
+    (⋃ i ∈ S, s i) ∈ C := by
+  classical
+  induction S using Finset.induction with
+  | empty => simp [hC.empty_mem]
+  | insert i S _ h =>
+    simp_rw [← Finset.mem_coe, Finset.coe_insert, Set.biUnion_insert]
+    refine hC.union_mem (hs i (mem_insert_self i S)) ?_
+    exact h (fun n hnS ↦ hs n (mem_insert_of_mem hnS))
+  -- MeasureTheory.IsSetAlgebra.biUnion_mem (h := hC) S hs
 
 /-- 有限交わり（`Finset` 添字の二重 `iInter`）で閉じる。-/
-lemma biInter_mem {ι : Type v} (hC : FiniteAdditiveFamily C) (s : ι → Set α) (S : Finset ι)
+lemma biInter_mem (hC : FiniteAdditiveFamily C) (s : ι → Set α) (S : Finset ι) (hS : S.Nonempty)
     (hs : ∀ i ∈ S, s i ∈ C) :
-    (⋂ i ∈ S, s i) ∈ C :=
-  MeasureTheory.IsSetAlgebra.biInter_mem (h := hC) S hs
+    (⋂ i ∈ S, s i) ∈ C := by
+  classical
+  induction hS using Finset.Nonempty.cons_induction with
+  | singleton => simpa using hs
+  | cons i S hiS _ h =>
+    simp_rw [← Finset.mem_coe, Finset.coe_cons, Set.biInter_insert]
+    simp only [cons_eq_insert, Finset.mem_insert, forall_eq_or_imp] at hs
+    refine hC.inter_mem hs.1 ?_
+    exact h (fun n hnS ↦ hs.2 n hnS)
+  -- MeasureTheory.IsSetAlgebra.biInter_mem (h := hC) S hs
 
 end FiniteAdditiveFamily
 
@@ -131,24 +147,24 @@ lemma measurable_diff (hs : MeasurableSet s) (ht : MeasurableSet t) :
     MeasurableSet (s \ t) :=
   hs.diff ht
 
-/-- 可算和で閉じる（`Countable ι` を仮定）。-/
+/-- 可算和で閉じる（`Countable ι` を仮定）。 -/
 lemma measurable_iUnion {ι : Sort v} [Countable ι] (f : ι → Set α)
     (hf : ∀ i, MeasurableSet (f i)) :
     MeasurableSet (⋃ i, f i) :=
   MeasurableSet.iUnion hf
 
-/-- 可算交わりで閉じる（`Countable ι` を仮定）。-/
+/-- 可算交わりで閉じる（`Countable ι` を仮定）。 -/
 lemma measurable_iInter {ι : Sort v} [Countable ι] (f : ι → Set α)
     (hf : ∀ i, MeasurableSet (f i)) :
     MeasurableSet (⋂ i, f i) :=
   MeasurableSet.iInter hf
 
-/-- （確認）可測集合全体 `{s | MeasurableSet s}` は有限加法族。-/
+/-- （確認）可測集合全体 `{s | MeasurableSet s}` は有限加法族。 -/
 lemma measurableSets_FiniteAdditiveFamily :
     FiniteAdditiveFamily (α := α) {s : Set α | MeasurableSet s} := by
   refine ⟨?_, ?_, ?_⟩
   · -- empty
-    simpa using (MeasurableSet.empty : MeasurableSet (∅ : Set α))
+    simpa using (MeasurableSet.empty : MeasurableSet (∅ : Set α) )
   · -- compl
     intro s hs
     simpa using hs.compl
@@ -162,7 +178,7 @@ end SigmaAlgebra
 -- 3. 外測度（OuterMeasure）
 --------------------------------------------------------------------------------
 
-/-- 外測度（Mathlib: `MeasureTheory.OuterMeasure α`）。-/
+/-- 外測度（Mathlib: `MeasureTheory.OuterMeasure α`）。 -/
 abbrev OuterMeasure (α : Type u) : Type u :=
   MeasureTheory.OuterMeasure α
 
@@ -170,20 +186,20 @@ namespace OuterMeasure
 
 variable (μ : MeasureTheory.OuterMeasure α)
 
-/-- 外測度の公理 (1): `μ ∅ = 0`。-/
+/-- 外測度の公理 (1): `μ ∅ = 0`。 -/
 lemma empty : μ (∅ : Set α) = 0 :=
   by simpa using (MeasureTheory.measure_empty (μ := μ))
 
-/-- 外測度の公理 (2): 単調性。-/
+/-- 外測度の公理 (2): 単調性。 -/
 lemma mono (h : s ⊆ t) : μ s ≤ μ t :=
   MeasureTheory.measure_mono (μ := μ) h
 
-/-- 外測度の公理 (3): 可算劣加法性（一般形は `measure_iUnion_le` として使える）。-/
-lemma iUnion_le {ι : Type v} [Countable ι] (s : ι → Set α) :
+/-- 外測度の公理 (3): 可算劣加法性（一般形は `measure_iUnion_le` として使える）。 -/
+lemma iUnion_le [Countable ι] (s : ι → Set α) :
     μ (⋃ i, s i) ≤ ∑' i, μ (s i) :=
   MeasureTheory.measure_iUnion_le (μ := μ) s
 
-/-- 特に二つの和について劣加法性。-/
+/-- 特に二つの和について劣加法性。 -/
 lemma union_le (s t : Set α) : μ (s ∪ t) ≤ μ s + μ t :=
   MeasureTheory.measure_union_le (μ := μ) s t
 
@@ -211,25 +227,25 @@ lemma empty : μ (∅ : Set α) = 0 :=
 lemma mono (h : s ⊆ t) : μ s ≤ μ t :=
   MeasureTheory.measure_mono (μ := μ) h
 
-/-- 測度は（外測度として）可算劣加法的。-/
-lemma iUnion_le {ι : Type v} [Countable ι] (s : ι → Set α) :
+/-- 測度は（外測度として）可算劣加法的。 -/
+lemma iUnion_le [Countable ι] (s : ι → Set α) :
     μ (⋃ i, s i) ≤ ∑' i, μ (s i) :=
   MeasureTheory.measure_iUnion_le (μ := μ) s
 
 /-- 測度の（定義に含まれる）可測集合上での可算加法性：
-可測で互いに素な列 `f : ℕ → Set α` に対し `μ (⋃ i, f i) = ∑' i, μ (f i)`。-/
+可測で互いに素な列 `f : ℕ → Set α` に対し `μ (⋃ i, f i) = ∑' i, μ (f i)`。 -/
 theorem iUnion_of_disjoint (f : ℕ → Set α)
     (hf : ∀ i, MeasurableSet (f i))
-    (hdis : Pairwise (Disjoint on f)) :
+    (hdis : Pairwise (Disjoint f)) :
     μ (⋃ i, f i) = ∑' i, μ (f i) := by
   simpa using μ.m_iUnion (f := f) hf hdis
 
-/-- 有限加法性の典型例：互いに素な和集合の測度。-/
+/-- 有限加法性の典型例：互いに素な和集合の測度。 -/
 theorem union (s₁ s₂ : Set α) (hd : Disjoint s₁ s₂) (h₂ : MeasurableSet s₂) :
     μ (s₁ ∪ s₂) = μ s₁ + μ s₂ := by
   simpa using (MeasureTheory.measure_union (μ := μ) (s₁ := s₁) (s₂ := s₂) hd h₂)
 
-/-- 分割公式：`μ (s ∩ t) + μ (s \\ t) = μ s`（`t` 可測）。-/
+/-- 分割公式：`μ (s ∩ t) + μ (s \\ t) = μ s`（`t` 可測）。 -/
 theorem inter_add_diff (s t : Set α) (ht : MeasurableSet t) :
     μ (s ∩ t) + μ (s \ t) = μ s := by
   simpa using (MeasureTheory.measure_inter_add_diff (μ := μ) (s := s) (t := t) ht)
