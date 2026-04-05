@@ -1,0 +1,777 @@
+\newcommand{\dint}{D\text{-}\!\!\int}
+\newcommand{\uint}[2]{\overline{\int_{#1}^{#2}}}
+\newcommand{\lint}[2]{\underline{\int_{#1}^{#2}}}
+\chapter{Riemann積分の復習}
+
+\section{Riemann積分}
+
+Riemann積分は，区間$[a,b]$上の関数$f : [a,b] \to \mathbb{R}$を積分する方法である．1854年にB.~Riemann\footnote{Riemann (1826--1866), 教授資格論文「三角級数による関数の表現可能性に関して」1854}が初めて厳密に定式化した．
+この方法は，区間$[a,b]$を細かく分割して，分割した区間の上で関数$f$の値を評価し，それらの値を足し合わせることで積分を定義する．
+伝統的には2つの方法がある．
+一つはRiemann和による方法で，もう一つはDarboux\footnote{Darboux (1842--1917)}の上積分と下積分による方法である．
+両者は同値であることが知られている．
+%Riemann積分は，関数$f$が（区分的）連続である場合に特に有効である．
+
+\subsection{Riemann和による定義}
+\begin{definition}[区間の分割]
+    区間$[a,b]$の分割$\mathcal{P}$は，区間$[a,b]$を有限個の区間へ分割したものであり，
+    \[
+    \mathcal{P} : a = x_0 < x_1 < \cdots < x_n = b
+    \]
+    と表される．分割の大きさを
+    \[ |\mathcal{P}| := \max_{1 \leq i \leq n} (x_i - x_{i-1})\]
+    と定義する．
+\end{definition}
+
+\begin{definition}[Riemann和]
+    関数$f : [a,b] \to \mathbb{R}$の区間$[a,b]$の分割$\mathcal{P}$に対するRiemann和は，分割$\mathcal{P}$の各区間$[x_{i-1}, x_i]$において，関数$f$の値を評価する点$t_i \in [x_{i-1}, x_i]$を選び，それらの値を足し合わせたものである．
+    すなわち，
+    \[
+        S(f,\mathcal{P},t) := \sum_{i=1}^n f(t_i)(x_i - x_{i-1}),
+    \]
+    ここで，$t = (t_1, t_2, \ldots, t_n)$は分割$\mathcal{P}$に対する評価点の列である．    
+\end{definition}
+
+\begin{definition}[Riemann可積分]
+    関数$f : [a,b] \to \mathbb{R}$が区間$[a,b]$上でRiemann可積分であるとは，
+    ある実数$I$が存在して，任意の$\varepsilon > 0$に対して，区間$[a,b]$の分割$\mathcal{P}$と評価点の列$t$が存在して，
+    \[
+        |S(f,\mathcal{P},t) - I| < \varepsilon
+    \]
+    が成り立つことをいう．$I$を関数$f$の区間$[a,b]$に対するRiemann積分と呼び，\[\int_a^b f(x) dx\]と表す．
+\end{definition}
+
+つまり，関数$f$のRiemann積分とは，Riemann和$S(f,\mathcal{P},t)$の細分に関する極限である．
+\[
+\lim_{|\mathcal{P}|\to 0} S(f,\mathcal{P},t) = \int_a^b f(x) dx.
+\]
+特に，関数$f$が（区分的）連続である場合は，Riemann可積分であることが知られている．
+また，非有界な関数はRiemann可積分でないことも知られている（なぜか）．
+
+\subsection{Darbouxの上積分と下積分による定義}
+
+\begin{definition}[Darbouxの上和と下和]
+    関数$f : [a,b] \to \mathbb{R}$の区間$[a,b]$の分割$\mathcal{P}$に対するDarbouxの上和と下和（過剰和と不足和）は，分割$\mathcal{P}$の各区間$[x_{i-1}, x_i]$における$f$の上界と下界を用いて定義される．
+    すなわち，
+    \begin{align*}
+        U(f,\mathcal{P}) &:= \sum_{i=1}^n (x_i - x_{i-1}) \sup_{x \in [x_{i-1}, x_i]} f(x), \\
+        L(f,\mathcal{P}) &:= \sum_{i=1}^n (x_i - x_{i-1}) \inf_{x \in [x_{i-1}, x_i]} f(x).
+    \end{align*}
+\end{definition}
+
+Darbouxの上和と下和は（上界と下界なので）必ずしもRiemann和と一致するわけではないが，常に
+\[
+L(f,\mathcal{P}) \leq S(f,\mathcal{P},t) \leq U(f,\mathcal{P})
+\]
+が成り立つ．
+
+\begin{definition}[Darbouxの上積分と下積分]
+    関数$f : [a,b] \to \mathbb{R}$の区間$[a,b]$の分割$\mathcal{P}$に対するDarboux上積分（下積分）は，上和（下和）の分割$\mathcal{P}$に関する下限（上限）として定義される．
+    すなわち，
+    \begin{align*}
+        \uint{a}{b} f(x) dx &:= \inf_{\mathcal{P}} U(f,\mathcal{P}), \\
+        \lint{a}{b} f(x) dx &:= \sup_{\mathcal{P}} L(f,\mathcal{P}).
+    \end{align*}
+\end{definition}
+
+\begin{definition}[Darboux可積分]
+    関数$f : [a,b] \to \mathbb{R}$が区間$[a,b]$上でDarboux可積分であるとは，任意の$\varepsilon > 0$に対して，区間$[a,b]$の分割$\mathcal{P}$が存在して，
+    \[
+        U(f,\mathcal{P}) - L(f,\mathcal{P}) < \varepsilon
+    \]
+    が成り立つことをいう．このとき，Darboux上積分と下積分は等しくなり，この値を関数$f$の区間$[a,b]$に対するDarboux積分と呼び，\[\dint_a^b f(x) dx\]と表す．
+\end{definition}
+単にDarboux上積分と下積分が等しくなることをもってDarboux可積分と定義することもある．
+
+\begin{theorem}[Darboux]
+    関数$f : [a,b] \to \mathbb{R}$が区間$[a,b]$上でRiemann可積分であることとDarboux可積分であることは同値である．
+    さらに，このときRiemann積分とDarboux積分は等しい．
+    \[
+    \int_a^b f(x) dx = \uint{a}{b} f(x) dx = \lint{a}{b} f(x) dx = 
+    \dint_a^b f(x) dx.
+    \]
+\end{theorem}
+
+\subsection{Riemann可積分関数の例}
+スローガンとして，Riemann可積分関数は「区分的に連続な有界関数」である．つまり，高々有限個の点を除いて連続な関数である．
+% \begin{itemize}
+%     \item 区分的に連続な関数はRiemann可積分である．
+%     \item 単関数はRiemann可積分である．
+%     \item 非有界な関数はRiemann可積分でない．
+%     \item Dirichlet関数（有理数上で1，無理数上で0）はRiemann可積分でない．
+%     \item Thomae関数（有理数$p/q$上で$1/q$，無理数上で0）はRiemann可積分である．
+% \end{itemize}
+
+\begin{example}
+    定数関数$f(x) = c$はRiemann可積分であり，その積分値は
+    \[ \int_a^b f(x) dx = c(b-a) \]
+    である．
+\end{example}
+\begin{proof}
+    区間$[a,b]$の分割$\mathcal{P}$と評価点の列$t$を任意に選ぶと，Riemann和は常に
+    \[
+    S(f,\mathcal{P},t) = \sum_{i=1}^n c(x_i - x_{i-1}) = c(b-a)
+    \]
+    となる．
+    これは分割$\mathcal{P}$の選び方に依らない．
+    したがって，任意の$\varepsilon > 0$に対して，区間$[a,b]$の分割$\mathcal{P}$と評価点の列$t$が存在して，
+    \[
+    |S(f,\mathcal{P},t) - c(b-a)| = 0 < \varepsilon
+    \]
+    が成り立つ．
+\end{proof}
+% \begin{proof}%[Proof（Darbouxの上積分と下積分による証明）]
+%     区間$[a,b]$の分割$\mathcal{P}$を任意に選ぶと，Darbouxの上和と下和は常に
+%     \[
+%     U(f,\mathcal{P}) = L(f,\mathcal{P}) = c(b-a)
+%     \]
+%     となる．したがって，任意の$\varepsilon > 0$に対して，区間$[a,b]$の分割$\mathcal{P}$が存在して，
+%     \[
+%     U(f,\mathcal{P}) - L(f,\mathcal{P}) = 0 < \varepsilon
+%     \]
+%     が成り立つ．    
+% \end{proof}
+
+\begin{example}
+    区間$[a,b]$上の単関数（simple function）とは，区分的に定数となる関数である．
+    区間$[a,b]$上の分割$\mathcal P_0 : a = x_0 < x_1 < \cdots < x_n = b$を用いて単関数は以下のように表示できる．
+    \[
+    f(x) := \sum_{i=1}^n c_i 1_{[x_{i-1},x_i)}(x), \quad f(b):= c_n.
+    \]
+    単関数はRiemann可積分であり，その積分値は
+    \[ \int_a^b f(x) dx = \sum_{i=1}^n c_i (x_i - x_{i-1}) \]
+    である．
+\end{example}
+\begin{proof}
+    区間$[a,b]$の分割$\mathcal{P}$として，$\mathcal P_0$よりも細かい分割を選ぶと，Darbouxの上和と下和は常に
+    \[
+    U(f,\mathcal{P}) = L(f,\mathcal{P}) = \sum_{i=1}^n c_i (x_i - x_{i-1})
+    \]
+    となる．したがって，Darboux可積分である．よってRiemann可積分である．
+    % 任意の$\varepsilon > 0$に対して，区間$[a,b]$の分割$\mathcal{P}$が存在して，
+    % \[
+    % U(f,\mathcal{P}) - L(f,\mathcal{P}) = 0 < \varepsilon
+    % \]
+    % が成り立つ．さらに，このときDarboux上積分と下積分は等しくなり，この値は
+    % \[ \uint{a}{b} f(x) dx = \underline{\int_a^b} f(x) dx = \sum_{i=1}^n c_i (x_i - x_{i-1}) \]
+    % である．
+\end{proof}
+
+\begin{example}
+    区間$[a,b]$上の関数$f(x) = x$はRiemann可積分であり，その積分値は
+    \[ \int_a^b f(x) dx = \frac{b^2 - a^2}{2} \]
+    である．
+\end{example}
+\begin{proof}
+    区間$[a,b]$の分割$\mathcal{P} : a = x_0 < x_1 < \cdots < x_n = b$を用いて，評価点の列$t$として$t_i := \frac{x_i+x_{i-1}}{2}$を選ぶと，Riemann和は以下のようになる．
+    \[
+    S(f,\mathcal{P},t) = \sum_{i=1}^n \frac{x_i + x_{i-1}}{2} (x_i - x_{i-1}) = \frac{b^2 - a^2}{2}.
+    \]
+    これは分割$\mathcal{P}$の選び方に依らない．よってRiemann可積分である．
+\end{proof}
+
+\begin{example}
+    区間$[a,b]$上の連続関数はRiemann可積分である．
+\end{example}
+\begin{proof}
+    区間$[a,b]$上の連続関数$f$は一様連続である．したがって，任意の$\varepsilon > 0$と$n \in \mathbb{N}$に対して，
+    ある$\delta >0$が存在して，\[|x-y| < \delta \implies |f(x) - f(y)| < \varepsilon\]が成り立つ．
+    この$\delta$を用いて，区間$[a,b]$の分割$\mathcal{P}$として$|\mathcal P| < \delta$となるものを選ぶと，
+    \[U(f,\mathcal{P}) - L(f,\mathcal{P}) = \sum_{i=1}^n \left( \sup_{x \in [x_{i-1}, x_i]} f(x) - \inf_{x \in [x_{i-1}, x_i]} f(x) \right)(x_i - x_{i-1}) \le \frac{\varepsilon}{b-a} \sum_{i=1}^n (x_i - x_{i-1}) = \varepsilon\]
+    が成り立つ．ただし恒等式 $\sup_x f(x) - \inf_y f(y) = \sup_{x,y} |f(x) - f(y)|$ を使った．したがって，Riemann可積分である．
+\end{proof}
+
+\begin{example}
+    Riemann可積分関数の和はRiemann可積分である．
+\end{example}
+\begin{proof}
+    区間$[a,b]$上のRiemann可積分関数$f$と$g$を任意に選ぶ．
+    任意の$\varepsilon > 0$に対して，区間$[a,b]$の分割$\mathcal{P}$と評価点の列$t$が存在して，
+    \[
+    |S(f,\mathcal{P},t) - \int_a^b f(x) dx| < \frac{\varepsilon}{2}, \quad |S(g,\mathcal{P},t) - \int_a^b g(x) dx| < \frac{\varepsilon}{2}
+    \]
+    が成り立つ．このとき，Riemann和の線型性により，
+    \[
+    |S(f+g,\mathcal{P},t) - \int_a^b (f(x) + g(x)) dx| < \varepsilon
+    \]
+    が成り立つ．
+    % さらに，Riemann和の積に関する性質により，
+    % \[
+    % |S(fg,\mathcal{P},t) - \int_a^b f(x)g(x) dx| < \varepsilon
+    % \]
+    % が成り立つ．
+\end{proof}
+
+\begin{example}
+    1点で不連続な関数$f : [a,b] \to \mathbb{R}$はRiemann可積分である．
+\end{example}
+\begin{proof}
+    $f$の不連続点を$t_1$として，区分定数関数$g : [a,b] \to \mathbb{R}$を以下のように定義する．
+    \[
+%    g(x) := f(a) 1_{[a,t_1)}(x) + f(t_1) 1_{[t_1,b]}(x).
+g(x) = \begin{cases}
+    \lim_{t \to t_1-0} f(t) & \text{if } x \in [a, t_1), \\
+    \lim_{t \to t_1+0} f(t) - \lim_{t \to t_1-0} f(t) & \text{if } x \in [t_1, b].
+\end{cases}
+    \]
+    これは単関数であるからRiemann可積分である．
+    %その積分値は \[\int_a^b g(x) dx = f(a)(t_1 - a) + f(t_1)(b - t_1)\]である．さらに，
+    一方，関数$f-g$は区間$[a,b]$上の連続関数であるから，Riemann可積分である．
+    Riemann積分の線型性により，関数$f$はRiemann可積分であり，その積分値は
+    \[\int_a^b f(x) dx = \int_a^b g(x) dx + \int_a^b (f(x) - g(x)) dx\]
+    である．
+\end{proof}
+
+\begin{example}
+    区分的に連続な関数$f:[a,b] \to \mathbb{R}$はRiemann可積分である．
+\end{example}
+\begin{proof}
+    $f$の不連続点は有限個であるから，$1$点の場合と同様に区分的に定数となる関数$g$を定義して，$f-g$が連続関数であることを確認すればよい．
+\end{proof}
+% \begin{proof}
+%     $f$の不連続点を$x_1, x_2, \ldots, x_n$とする．区間$[a,b]$の分割$\mathcal{P}$として，区分的に定数となる関数$g$を定義することができる．
+%     すなわち，区間$[x_{i-1}, x_i]$において，関数$f$の値を評価する点$t_i \in [x_{i-1}, x_i]$を選び，関数$g$を以下のように定義する．
+%     \[
+%     g(x) := \sum_{i=1}^n \left( \lim_{t \to x_i+0} f(t) - \lim_{t \to x_i-0} f(t) \right) 1_{[x_{i-1}, x_i)}(x), \quad g(b):= f(t_n).
+%     \]
+%     この関数$g$は単関数であるからRiemann可積分であり，その積分値は
+%     \[
+%     \int_a^b g(x) dx = \sum_{i=1}^n f(t_i)(x_i - x_{i-1}) = S(f,\mathcal{P},t)
+%     \]
+%     である．さらに，関数$f-g$は区間$[a,b]$上の連続関数であるから，Riemann可積分であり，その積分値は0である．
+% \end{proof}
+
+% \begin{theorem}[区分求積法]
+%     連続関数$f : [a,b] \to \mathbb{R}$に対して，区間$[a,b]$の$n$等分割$\mathcal{P}_n$をとり，
+%     細かくしていくと，Riemann和$S(f,\mathcal{P}_n,t)$はRiemann積分$\int_a^b f(x) dx$に収束する．
+%     \[
+%     S(f,\mathcal{P}_n,t) = \frac{1}{n} \sum_{i=1}^n f(t_i) \to \int_a^b f(x) dx \quad (n \to \infty).
+%     \]
+% \end{theorem}
+% \begin{proof}
+%     連続関数$f$は一様連続である．したがって，任意の$\varepsilon > 0$に対して，区間$[a,b]$の分割$\mathcal{P}_n$が存在して，任意の評価点の列$t$に対して，
+%     \[
+%     |S(f,\mathcal{P}_n,t) - \int_a^b f(x) dx| < \varepsilon
+%     \]
+%     が成り立つ．
+% \end{proof}
+
+\begin{theorem}[区分求積法]
+    Riemann可積分関数$f : [a,b] \to \mathbb{R}$に対して，区間$[a,b]$の$n$等分割$\mathcal{P}_n = \sqcup_{i=1}^n J_i^{(n)}$と，評価点の列$t^{(n)}$として$t_i^{(n)} \in J_i^{(n)}$を選ぶ．
+    % Riemann和を
+    % \[
+    % S(f,\mathcal{P}_n,t) = \frac{1}{n} \sum_{i=1}^n f(t_i)
+    % \]
+    % と定義する．
+    このとき
+    \[
+    \lim_{n \to \infty} \frac{b-a}{n} \sum_{i=1}^n f(t_i^{(n)}) = \int_a^b f(x) dx.
+    \]
+\end{theorem}
+\begin{proof}
+    区分求積によるRiemann和を$I_n := \frac{b-a}{n} \sum_{i=1}^n f(t_i^{(n)})$とおく．
+    $\mathcal P_n$によるDarbouxの上和と下和の差は
+    \[
+    U(f,\mathcal{P}_n) - L(f,\mathcal{P}_n) = \frac{1}{n} \sum_{i=1}^n \left( \sup_{x \in J_i^{(n)}} f(x) - \inf_{x \in J_i^{(n)}} f(x) \right)
+    \]
+    である．Riemann可積分関数は有界なので，この差は0に収束する．一方，
+    Riemann和は常にDarbouxの上和と下和の間にある．
+    \[
+    L(f,\mathcal{P}_n) \leq I_n \leq U(f,\mathcal{P}_n)
+    \]
+    はさみうちの原理により，Riemann和もRiemann積分に収束する．
+\end{proof}
+
+\begin{theorem}[微分積分学の第二基本定理]
+%    関数$F:[a,b] \to \mathbb{R}$は連続かつ$(a,b)$上で微分可能であり，その微分$f := F'$は区間$[a,b]$上で連続であるとする．
+$C^1$級関数$F:[a,b] \to \mathbb{R}$に対して，
+    $F$の微分$f := F'$は区間$[a,b]$上でRiemann可積分であり，その積分値は
+    \[
+    \int_a^b f(x) dx = F(b) - F(a)
+    \]
+    である．
+\end{theorem}
+\begin{proof}
+    区間$[a,b]$の分割$\mathcal{P}$を任意にとる．
+    $F$に対する平均値の定理により，任意の$i$に対して，区間$[x_{i-1}, x_i]$の点$t_i$が存在して，
+\[
+f(t_i) = \frac{F(x_i) - F(x_{i-1})}{x_i - x_{i-1}}.
+\]
+この点を評価点としてRiemann和を定義すると，Riemann和$S(f,\mathcal{P}_n,t)$は以下のようなtelescopic sumとなる．
+\[
+S(f,\mathcal{P}_n,t) = \sum_{i=1}^n f(t_i)(x_i - x_{i-1}) = \sum_{i=1}^n (F(x_i) - F(x_{i-1})) = F(b) - F(a).
+\]
+これは分割$\mathcal{P}$の選び方に依らない．したがって，任意の$\varepsilon > 0$に対して，区間$[a,b]$の分割$\mathcal{P}$と評価点の列$t$が存在して，
+\[
+|S(f,\mathcal{P},t) - (F(b) - F(a))| = 0 < \varepsilon
+\]が成り立つ．
+\end{proof}
+
+% \begin{theorem}
+%     Riemann可積分関数$f:[a,b] \to \mathbb{R}$は有界である．
+% \end{theorem}
+% \begin{proof}
+%     任意の$\varepsilon > 0$に対して，区間$[a,b]$の分割$\mathcal{P}$と評価点の列$t$が存在して，
+%     \[
+%     |S(f,\mathcal{P},t) - \int_a^b f(x) dx| < \varepsilon
+%     \]
+%     が成り立つ．このとき，Riemann和の定義から，任意の$i$に対して，関数$f$の値を評価する点$t_i$が存在して，
+%     \[
+%     |f(t_i)| < \frac{\varepsilon}{b-a} + \frac{|\int_a^b f(x) dx|}{b-a}
+%     \]
+%     が成り立つ．したがって，関数$f$は有界である．
+% \end{proof}
+
+\subsection{Riemann可積分でない例}
+
+\begin{example}
+    非有界関数はRiemann可積分でない．
+\end{example}
+\begin{proof}
+    区間$[a,b]$上の非有界関数$f$を任意に選ぶ．非有界性の仮定より，$[a,b]$の任意の分割$\mathcal{P}$において，ある区間$[x_{i-1}, x_i]$が存在して上和または下和が非有界である．したがって，Riemann可積分でない．
+\end{proof}
+
+\begin{theorem}
+    定義域が無限大の関数はRiemann可積分でない．
+\end{theorem}
+\begin{proof}
+    区間$[a,\infty)$上の関数$f$を任意に選ぶ．区間$[a,b]$の分割$\mathcal{P}$を任意にとる．このとき，区間$[x_{n-1}, x_n]$に対する上和は
+    \[U(f,\mathcal{P}) \geq (x_n - x_{n-1}) \sup_{x \in [x_{n-1}, x_n]} f(x)\]
+    である．$f$は定義域が無限大であるから，ある区間$[x_{n-1}, x_n]$が存在して上和が非有界である．したがって，Riemann可積分でない．
+\end{proof}
+
+\begin{example}
+    Dirichlet関数（有理数上で1，無理数上で0となる関数）$f:[0,1] \to \mathbb{R}$
+    \[
+    f(x) = \begin{cases}
+        1 & \text{if } x \in \mathbb{Q} \cap [0,1], \\
+        0 & \text{if } x \in (\mathbb{R} \setminus \mathbb{Q}) \cap [0,1].
+    \end{cases}
+    \]
+    はRiemann可積分でない．
+\end{example}
+\begin{proof}
+    区間$[a,b]$の分割$\mathcal{P}$と評価点の列$t$を任意にとる．
+    Dirichlet関数$f$は区間$[a,b]$上で稠密に不連続点を持つ．従って，各区間$[x_{i-1}, x_i]$に対して，
+    \[
+    \sup_{x \in [x_{i-1}, x_i]} f(x) = 1, \quad \inf_{x \in [x_{i-1}, x_i]} f(x) = 0
+    \]
+    である．よってDarbouxの上和と下和は常に
+    \[
+    U(f,\mathcal{P}) = \sum_{i=1}^n 1 \cdot (x_i - x_{i-1}) = b-a,
+    \quad L(f,\mathcal{P}) = \sum_{i=1}^n 0 \cdot (x_i - x_{i-1}) = 0
+    \]
+    となる．これは分割の取り方によらないため，Darboux可積分でない．よってRiemann可積分でない．
+\end{proof}
+
+\begin{example}
+    区間$[0,1]$上の有理点に番号をふる：$r : \mathbb{N} \to \mathbb{Q} \cap [0,1]$（全単射）．
+    これを用いて，区間$[0,1]$上の関数列$\{f_n\}$を以下のように定義する．
+    \[f_n(x) := \sum_{i=1}^n 1_{\{r(i)\}}(x).\]
+    各$n$に対して，$f_n$は区分的に連続なのでRiemann可積分である．一方，極限はDirichlet関数に各点収束するから，極限関数はRiemann可積分でない．
+\end{example}
+
+\subsection{極限と積分の順序交換}
+\begin{theorem}
+    Riemann可積分関数列$\{f_n\}$が区間$[a,b]$上で一様収束して，関数$f$に収束するとする．このとき，関数$f$は区間$[a,b]$上でRiemann可積分であり，さらに，
+    \[
+    \lim_{n \to \infty} \int_a^b f_n(x) dx = \int_a^b f(x) dx.
+    \]
+\end{theorem}
+
+\begin{proof}
+    上積分と下積分の単調性により，
+    \[
+    \uint{a}{b} f(x) dx \le \uint{a}{b} f_n(x) dx + (b-a)\| f - f_n \|,
+    \quad \lint{a}{b} f(x) dx \ge \lint{a}{b} f_n(x) dx - (b-a)\| f - f_n \|.
+    \]
+    $f_n$はRiemann可積分なので，%任意の$\varepsilon_1 > 0$に対して，区間$[a,b]$の分割$\mathcal{P}$と評価点の列$t$が存在して，
+    \[
+    \uint{a}{b} f_n(x) dx = \lint{a}{b} f_n(x) dx = \int_a^b f_n(x) dx.
+    \]
+    よって
+    \[
+    \uint{a}{b} f(x) dx - \lint{a}{b} f(x) dx \le \underbrace{\uint{a}{b} f_n(x) dx - \lint{a}{b} f_n(x) dx}_{=0} + 2(b-a)\| f - f_n \| \to 0 \quad (\text{as } n \to \infty).
+    \]
+    積分の線形性により，
+    \[
+    | \int_a^b f_n(x)dx - \int_a^b f(x)dx | \le \int_a^b dx \|f_n - f\| \to 0 \quad (\text{as } n \to \infty).
+    \]
+\end{proof}
+% \begin{proof}
+%     $\varepsilon>0$を任意にとる．
+%     $f_n$が$f$に一様収束しているので，任意の$\varepsilon_1 > 0$に対して，ある$N \in \mathbb{N}$が存在して，任意の$n \geq N$に対して，任意の$x \in [a,b]$に対して，
+%     \[|f_n(x) - f(x)| < \varepsilon_1\]
+%     が成り立つ．特に，任意の区間$I \subset [a,b]$に対して，
+%     \[
+%     \sup_{t \in I} f(t) \le \sup_{t \in I}　f_n(t) + \varepsilon_1, \quad \inf_{t \in I} f(t) \ge \inf_{t \in I} f_n(t) - \varepsilon_1
+%     \]
+%     である．
+%     各$f_n$はRiemann可積分なので，任意の$\varepsilon_2>0$に対して，区間$[a,b]$の分割$\mathcal{P}$と評価点の列$t$が存在して，
+%     \[
+%     U(f_n, \mathcal P) - L(f_n, \mathcal P) < \varepsilon_2, \quad |S(f_n,\mathcal{P},t) - \int_a^b f_n(x) dx| < \varepsilon_2.
+%     \]
+%     この$\mathcal P$と一様性を用いて，
+%     \begin{align*}
+%         U(f,\mathcal P) &= \sum_{j=1}^m \sup_{x \in [x_{j-1}, x_j]} f(x) (x_j - x_{j-1})\le \sum_{j=1}^m \left( \sup_{x \in [x_{j-1}, x_j]} f_n(x) + \varepsilon_1 \right) (x_j - x_{j-1}) = U(f_n, \mathcal P) + \varepsilon_1(b-a)\\
+%         L(f,\mathcal P) &= \sum_{j=1}^m \inf_{x \in [x_{j-1}, x_j]} f(x) (x_j - x_{j-1})\ge \sum_{j=1}^m \left( \inf_{x \in [x_{j-1}, x_j]} f_n(x) - \varepsilon_1 \right) (x_j - x_{j-1}) = L(f_n, \mathcal P) - \varepsilon_1(b-a)
+%     \end{align*}
+%     したがって，
+%     \[
+%     U(f,\mathcal P) - L(f,\mathcal P) < U(f_n, \mathcal P) - L(f_n, \mathcal P) + 2\varepsilon_1(b-a) < \varepsilon_2 + 2\varepsilon_1(b-a).
+%     \]
+%     よって，関数$f$はRiemann可積分であり，その積分は以下のように評価できる．
+%     \[
+%     |S(f,\mathcal P,t) - \int_a^b f(x)dx| < \varepsilon_2 + 2\varepsilon_1(b-a).
+%     \]
+%     また，
+%     \[
+%     |S(f_n,\mathcal{P},t) - S(f,\mathcal{P},t)| = \sum_{j=1}^m |f_n(t_j) - f(t_j)| (x_j - x_{j-1}) < \varepsilon_1(b-a).
+%     \]
+%     三角不等式を用いて，$\varepsilon_2=\varepsilon/2, \varepsilon_1 = \varepsilon/(6(b-a))$とおくと，
+%     \begin{align*}
+%         &|\int_a^b f_n(x) dx - \int_a^b f(x)dx| \\
+%         &\le |\int_a^b f_n(x) dx - S(f_n,\mathcal{P},t)| + |S(f_n,\mathcal{P},t) - S(f,\mathcal{P},t)| + |S(f,\mathcal{P},t) - \int_a^b f(x)dx| \\
+%         &< \varepsilon_2 + 3\varepsilon_1(b-a) = \varepsilon.
+%     \end{align*}
+% \end{proof}
+
+\begin{remark}
+多くの場合に一様収束は期待できないため，より一般的な収束概念を用いて順序交換の定理を証明する必要がある．
+Riemann積分の範囲では，Arzelaの優収束定理を用いて各点収束に対する順序交換の定理を証明できる．これはLebesgue積分の収束定理の系なので，これ以上は追究しない．
+\end{remark}
+
+\subsection{順序交換の応用例}
+
+\begin{theorem}[関数項級数の項別積分]
+区間$[a,b]$上のRiemann可積分関数列$\{f_n\}$が定める級数$\sum_{n=1}^\infty f_n(x)$で一様収束して，関数$g$に収束するとする．このとき，関数$g$は区間$[a,b]$上でRiemann可積分であり，さらに，
+    \[
+    \int_a^b g(x) dx = \sum_{n=1}^\infty \int_a^b f_n(x) dx.
+    \]
+\end{theorem}
+\begin{proof}
+    関数列$\{f_n\}$の部分和を$S_N := \sum_{n=1}^N f_n$とおく．このとき，$S_N$は区間$[a,b]$上でRiemann可積分であり，さらに，
+    \[
+    \int_a^b S_N(x) dx = \sum_{n=1}^N \int_a^b f_n(x) dx.
+    \]
+    $S_N$は$g$に一様収束するから，前の定理より，
+    \[
+    \int_a^b g(x) dx = \lim_{N \to \infty} \int_a^b S_N(x) dx = \lim_{N \to \infty} \sum_{n=1}^N \int_a^b f_n(x) dx = \sum_{n=1}^\infty \int_a^b f_n(x) dx.
+    \]
+\end{proof}
+
+例えばTaylor展開やFourier級数の項別積分などがこの定理の応用例である．
+
+\begin{example}[一様収束しないが順序交換できる例]
+    区間$[0,1]$上の関数列$\{f_n\}$を以下のように定義する．
+    \[
+    f_n(x) = \begin{cases}
+        1 & \text{if } 0 \le x < \frac{1}{n}, \\
+        0 & \text{if } \frac{1}{n} \le x \le 1.
+    \end{cases}
+    \]
+    このとき，関数列$\{f_n\}$は区間$[0,1]$上で関数$f(x) = 0$に各点収束する．
+    一方，一様収束はしない．
+    ところが，任意の$n$に対して，
+    \[
+    \int_0^1 f_n(x) dx = \frac{1}{n} \to 0 \quad (n \to \infty), \qquad \int_0^1 f(x) dx = 0
+    \]
+    であるから，一様収束しないにもかかわらず，順序交換ができる．
+\end{example}
+
+\subsection{Riemann積分の長所と短所}
+
+\paragraph{長所：定義が素朴であり，計算しやすい}
+\begin{itemize}
+    \item Riemann和 $\approx$ 単関数 $\approx$ 区分求積法
+    \item 微分積分学の基本定理
+\end{itemize}
+
+\paragraph{短所：無限回操作に対して不安定}
+\begin{itemize}
+    \item Dirichlet関数のように不連続点が稠密に存在する関数はRiemann可積分でない．
+    \item 定義域が非有界の関数はRiemann可積分でない．
+    \item 非有界な関数はRiemann可積分でない．
+    \item 一様収束よりも弱い収束ではRiemann可積分性が保たれない．
+\end{itemize}
+
+\paragraph{原因：Riemann積分の定義が有限和（有限分割$\mathcal P$）の極限}
+なので，非有界性や無限回操作に対して不安定である．
+% \[
+% S(f,\mathcal P) = \sum_{i=1}^n f(t_i) (x_i - x_{i-1}), \quad \int_a^b f(x) dx = \lim_{|\mathcal P| \to 0} S(f,\mathcal P).
+% \]
+\[
+\mathcal P : I = \bigsqcup_{i=1}^n A_i, \quad S(f,\mathcal P) = \sum_{i=1}^n f(x_i) |A_i|, \quad \int_a^b f(x) dx = \lim_{|\mathcal P| \to 0} S(f,\mathcal P).
+\]
+
+\paragraph{技術的課題：無限和（無限分割）にすると何が起きるか}
+\[
+\mathcal P' : I=\bigsqcup_{i=1}^\infty A_i, \quad 
+S'(f,\mathcal P'):=\sum_{i=1}^\infty f(x_i) |A_i|, \quad \int_a^b f(x) dx = \lim_{|\mathcal P'| \to 0} S'(f,\mathcal P').
+\]
+\begin{itemize}
+    \item 級数が収束するための条件は何か
+    \item 分割の取り方に依らず積分が確定するための条件は何か
+\end{itemize}
+
+%なぜ極限がいるか？なぜ無限がいるか？なぜ順序交換がいるか？
+% \begin{itemize}
+%     \item 極限：微分積分学の基本定理を証明するためには，平均値の定理を用いてRiemann和が微分の値に収束することを示す必要がある．
+%     \item 無限：Riemann積分は無限個の区間における関数値の和として定義されるため，無限が重要な役割を果たす．
+%     \item 順序交換：関数列の極限と積分の順序を交換する際には，適切な収束条件が必要である．
+% \end{itemize}
+\paragraph{解決策：Lebesgue積分}
+
+\begin{itemize}
+    \item Riemann積分・Jordan測度を（互換性を保ちながら）修正し，より広いクラスの関数を積分可能にする
+    \item 有限加法性から可算加法性へ
+\end{itemize}
+
+\paragraph{展望：何が嬉しいか}
+\begin{itemize}
+    \item 非有界な関数や定義域が無限大の関数も積分可能になる
+    \item 不連続点が稠密に存在する関数も積分可能になる
+    \item より弱い収束概念で順序交換ができるようになる
+\end{itemize}
+
+\paragraph{多くの応用先}
+\begin{itemize}
+    \item 確率論・数理統計学：無限回試行，確率過程
+    \item 関数解析・作用素論：無限次元の「線形代数」
+    \item 微分方程式論・制御理論：解空間・状態空間の無限次元性
+    \item 調和解析・信号処理：Fourier級数，Fourier変換
+\end{itemize}
+
+\section{Jordan測度}
+
+\subsection{$\RR^d$のRiemann積分}
+%Riemann積分の基礎にあるのは，区間$[a,b]$の分割$\mathcal{P}$と，区間の体積すなわち長さである．
+$d$次元Euclid空間$\RR^d$上のRiemann積分は，区間$[a,b]$の代わりに有限区間$I = [a_1,b_1] \times \cdots \times [a_d,b_d]$を基礎集合として定義される．
+区間$[a,b]$の分割$\mathcal{P}$は，有限区間$[a_1,b_1] \times \cdots \times [a_d,b_d]$の（重なりのない）有限分割$\mathcal{P}$に一般化される．
+\[
+\mathcal P : I = \bigsqcup_{j=1}^m J_j
+\]
+区間$[a,b]$の長さは，$d$次元の体積に一般化される．
+\[
+|\prod_{i=1}^d [a_i, b_i]| := \prod_{i=1}^d (b_i - a_i).
+\]
+これを有限区間の測度という．$d=1,2,3$のときは，それぞれ長さ，面積，体積と呼ばれる．
+これらを用いて，Riemann和とDarbouxの上（下）和は以下のように定義される．
+\[
+S(f,\mathcal P, t) := \sum_{j=1}^m f(t_j) |J_j|, \quad U(f,\mathcal P) := \sum_{j=1}^m \sup_{x \in J_j} f(x) |J_j|, \quad L(f,\mathcal P) := \sum_{j=1}^m \inf_{x \in J_j} f(x) |J_j|.
+\]
+Riemann積分とDarbouxの上（下）積分は，これらの和の極限をとることで定義される．
+\[
+\int_I f(x)dx := \lim_{|\mathcal P| \to 0} S(f,\mathcal P, t), \quad \uint{I}{} f(x) dx := \inf_{\mathcal P} U(f,\mathcal P), \quad \lint{I}{} f(x) dx := \sup_{\mathcal P} L(f,\mathcal P).
+\]
+
+\subsection{Jordan測度（有限加法的測度）}
+有限区間$I$に対するRiemann積分を，さらに一般の集合まで拡張しようと考えるのは，自然なことである．
+集合$A (\subset I) \subset \RR^d$の指示関数$1_A$の積分は，集合$A$の「測度」を表すと考えられるためである．
+\[
+\int_I 1_A(x) dx = \text{``}m(A)\text{''}
+\]
+以下では，そのような測度としてJordan測度を定義する．1次元の場合の同様に，これは有限分割に基づく測度であるから，有限加法的測度と呼ばれる．Dirichlet関数の台（$A = \mathbb{Q} \cap [0,1]$）のように境界が複雑な集合に対しては，Jordan測度は定義できない．
+
+指示関数$1_A$のRiemann積分を計算する過程では，集合$A$を覆う非交区間$\{I_j\}_{j=1}^m$が自然に現れる．
+特に，Darboux式の上積分と下積分に対応するものとして，外測度と内測度が定義される．
+
+\begin{definition}[Jordanの外測度と内測度]
+    集合$A \subset \RR^d$のJordan外測度$m^*(A)$は，集合$A$を覆う有限個の区間の体積の和の下限として定義される．
+    \[
+    m^*(A) := \inf \left\{ \sum_{i=1}^n |J_i| : A \subset \bigcup_{i=1}^n J_i, J_i \text{は区間} \right\}.
+    \]
+    集合$A \subset \RR^d$のJordan内測度$m_*(A)$は，集合$A$に含まれる有限個の区間の体積の和の上限として定義される．
+    \[
+    m_*(A) := \sup \left\{ \sum_{i=1}^n |J_i| : A \supset \bigcup_{i=1}^n J_i, J_i \text{は区間} \right\}.
+    \]    
+\end{definition}
+
+作り方から，以下が成り立つ．
+\[
+m_*(A) = \lint{I}{} 1_A(x) dx \le \uint{I}{} 1_A(x) dx = m^*(A).
+\]
+さらに，外測度と内測度が等しいとき，集合$A$はJordanの意味で可測（measurable）であるという．
+%このとき，集合$A$のJordan測度$m(A)$は，外測度と内測度の共通値として定義される．
+\begin{definition}[Jordan可測]
+    集合$A \subset \RR^d$がJordan可測であるとは，$m^*(A) = m_*(A)$が成り立つことをいう．このとき，集合$A$のJordan測度$m_J(A)$は，外測度と内測度の共通値として定義される．
+\end{definition}
+
+\begin{theorem}[Jordan可測の判定法]
+    有界集合$A \subset \RR^d$がJordan可測であることと，集合$A$の境界$\partial A$のJordan測度が0であることは同値である．
+\end{theorem}
+\begin{proof}
+    $\Rightarrow$：集合$A$がJordan可測であるとする．
+    任意の$\varepsilon > 0$に対して，集合$A$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
+    \[\sum_{i=1}^n |J_i| < m^*(A) + \varepsilon.\]
+    このとき，集合$A$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
+    \[\sum_{i=1}^m |K_i| > m_*(A) - \varepsilon.\]
+    したがって，集合$A$の境界$\partial A$は，区間の列$\{J_i\}_{i=1}^n$と$\{K_i\}_{i=1}^m$の和集合で覆われる．
+    \[\partial A \subset \left( \bigcup_{i=1}^n J_i \right) \cup \left( \bigcup_{i=1}^m K_i \right).\]
+    よって，集合$A$の境界$\partial A$のJordan測度は0である．    
+    $\Leftarrow$：集合$A$の境界$\partial A$のJordan測度が0であるとする．
+    任意の$\varepsilon > 0$に対して，集合$A$の境界$\partial A$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
+    \[\sum_{i=1}^n |J_i| < \varepsilon.\]
+    このとき，集合$A$を覆う区間の列$\{K_i\}_{i=1}^m$が存在して，
+    \[\sum_{i=1}^m |K_i| < m^*(A) + \varepsilon.\]
+    したがって，集合$A$に含まれる区間の列$\{L_i\}_{i=1}^l$が存在して，
+    \[\sum_{i=1}^l |L_i| > m_*(A) - \varepsilon.\]
+    よって，集合$A$のJordan測度は$m^*(A) = m_*(A)$である．
+\end{proof}
+
+%境界は常に閉集合であるから，Jordan可測集合はほとんど開集合であるといえる．
+\begin{theorem}[Jordan可測集合の性質]
+    集合$A \subset \RR^d$がJordan可測であるとする．このとき，集合$A$はある開集合$U$とある閉集合$F$を用いて，$F \subset A \subset U$を満たす．さらに，集合$A$のJordan測度は，集合$U$のJordan測度と集合$F$のJordan測度の共通値である．
+\end{theorem}
+
+\subsection{Jordan測度の性質}
+\begin{theorem}[Jordan測度の性質]
+    集合$A \subset \RR^d$がJordan可測であるとする．このとき，集合$A$のJordan測度は以下の性質を満たす．
+    \begin{itemize}
+        \item $m_J(A) \ge 0$
+        \item $m_J(\emptyset) = 0$
+        \item $A \subset B$ならば$m_J(A) \le m_J(B)$
+        \item $m_J(A) = m_J(\overline{A})$（$\overline{A}$は集合$A$の閉包）
+        \item $m_J(A) = m_J(\mathrm{int}(A))$（$\mathrm{int}(A)$は集合$A$の内部）
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    $m_J(A) \ge 0$：集合$A$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
+    \[\sum_{i=1}^n |J_i| < m^*(A) + \varepsilon.\]
+    このとき，集合$A$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
+    \[\sum_{i=1}^m |K_i| > m_*(A) - \varepsilon.\]
+    したがって，集合$A$のJordan測度は0以上である．
+    $m_J(\emptyset) = 0$：空集合$\emptyset$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
+    \[\sum_{i=1}^n |J_i| < \varepsilon.\]
+    このとき，空集合$\emptyset$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
+    \[\sum_{i=1}^m |K_i| > -\varepsilon.\]
+    したがって，空集合$\emptyset$のJordan測度は0である．
+    $A \subset B$ならば$m_J(A) \le m_J(B)$：集合$B$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
+    \[\sum_{i=1}^n |J_i| < m^*(B) + \varepsilon.\]
+    このとき，集合$A$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
+    \[\sum_{i=1}^m |K_i| > m_*(A) - \varepsilon.\]
+    したがって，集合$A$のJordan測度は集合$B$のJordan測度以下である．
+    $m_J(A) = m_J(\overline{A})$：集合$A$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
+    \[\sum_{i=1}^n |J_i| < m^*(A) + \varepsilon.\]
+    このとき，集合$\overline{A}$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
+    \[\sum_{i=1}^m |K_i| > m_*(\overline{A}) - \varepsilon.\]
+    したがって，集合$A$のJordan測度は集合$\overline{A}$のJordan測度以上である．逆に，集合$\overline{A}$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
+    \[\sum_{i=1}^n |J_i| < m^*(\overline{A}) + \varepsilon.\]
+    このとき，集合$A$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
+    \[\sum_{i=1}^m |K_i| > m_*(A) - \varepsilon.\]
+    したがって，集合$A$のJordan測度は集合$\overline{A}$のJordan測度以下である．
+    $m_J(A) = m_J(\mathrm{int}(A))$：集合$A$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
+    \[\sum_{i=1}^n |J_i| < m^*(A) + \varepsilon.\]
+    このとき，集合$\mathrm{int}(A)$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
+    \[\sum_{i=1}^m |K_i| > m_*(\mathrm{int}(A)) - \varepsilon.\]
+    したがって，集合$A$のJordan測度は集合$\mathrm{int}(A)$のJordan測度以上である．逆に，集合$\mathrm{int}(A)$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
+    \[\sum_{i=1}^n |J_i| < m^*(\mathrm{int}(A)) + \varepsilon.\]
+    このとき，集合$A$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
+    \[\sum_{i=1}^m |K_i| > m_*(A) - \varepsilon.\]
+    したがって，集合$A$のJordan測度は集合$\mathrm{int}(A)$のJordan測度以下である．      
+\end{proof}
+\begin{theorem}[Jordan測度の有限加法性]
+    集合$A, B \subset \RR^d$がJordan可測であるとする．このとき，集合$A \cup B$もJordan可測であり，さらに，
+    \[
+    m_J(A \cup B) = m_J(A) + m_J(B) - m_J(A \cap B).
+    \]
+\end{theorem}
+\begin{proof}
+    集合$A \cup B$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
+    \[\sum_{i=1}^n |J_i| < m^*(A \cup B) + \varepsilon.\]
+    このとき，集合$A$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
+    \[\sum_{i=1}^m |K_i| > m_*(A) - \varepsilon.\]
+    さらに，集合$B$に含まれる区間の列$\{L_i\}_{i=1}^l$が存在して，
+    \[\sum_{i=1}^l |L_i| > m_*(B) - \varepsilon.\]
+    したがって，集合$A \cup B$のJordan測度は以下のように評価できる．
+    \begin{align*}
+        m_J(A \cup B) &\le m^*(A \cup B) \\
+        &\le m^*(A) + m^*(B) - m^*(A \cap B) \\
+        &\le m_J(A) + m_J(B) - m_J(A \cap B) + 2\varepsilon.
+    \end{align*}
+    逆に，集合$A \cup B$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
+    \[\sum_{i=1}^n |J_i| < m^*(A \cup B) + \varepsilon.\]
+    このとき，集合$A$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
+    \[\sum_{i=1}^m |K_i| > m_*(A) - \varepsilon.\]
+    さらに，集合$B$に含まれる区間の列$\{L_i\}_{i=1}^l$が存在して，
+    \[\sum_{i=1}^l |L_i| > m_*(B) - \varepsilon.\]
+    したがって，集合$A \cup B$のJordan測度は以下のように評価できる．
+    \begin{align*}
+        m_J(A \cup B) &\ge m_*(A \cup B) \\
+        &\ge m_*(A) + m_*(B) - m_*(A \cap B) \\
+        &\ge m_J(A) + m_J(B) - m_J(A \cap B) - 2\varepsilon.
+    \end{align*}
+    以上より，集合$A \cup B$のJordan測度は集合$A$のJordan測度と集合$B$のJordan測度と集合$A \cap B$のJordan測度を用いて，$m_J(A \cup B) = m_J(A) + m_J(B) - m_J(A \cap B)$と表される．
+\end{proof}
+\begin{remark}
+    上の定理は，集合$A$と集合$B$が互いに素であるとき，集合$A \cup B$のJordan測度は集合$A$のJordan測度と集合$B$のJordan測度の和になることを意味する．
+\end{remark}
+\begin{theorem}[Jordan測度の有限加法性の一般化]
+    集合$A_1, A_2, \ldots, A_n \subset \RR^d$がJordan可測であるとする．このとき，集合$\bigcup_{i=1}^n A_i$もJordan可測であり，さらに，
+    \[m_J\left( \bigcup_{i=1}^n A_i \right) = \sum_{i=1}^n m_J(A_i) - \sum_{1 \le i < j \le n} m_J(A_i \cap A_j) + \cdots + (-1)^{n-1} m_J\left( \bigcap_{i=1}^n A_i \right).\]
+\end{theorem}
+\begin{proof}
+    集合$\bigcup_{i=1}^n A_i$を覆う区間の列$\{J_i\}_{i=1}^m$が存在して
+    \[\sum_{i=1}^m |J_i| < m^*\left( \bigcup_{i=1}^n A_i \right) + \varepsilon.\]
+    このとき，集合$A_i$に含まれる区間の列$\{K_i^{(j)}\}_{i=1}^{m_j}$が存在して  
+    \[\sum_{i=1}^{m_j} |K_i^{(j)}| > m_*(A_j) - \varepsilon.\]
+    したがって，集合$\bigcup_{i=1}^n A_i$のJordan測度は以下のように評価できる．
+    \begin{align*}
+        m_J\left( \bigcup_{i=1}^n A_i \right) &\le m^*\left( \bigcup_{i=1}^n A_i \right) \\
+        &\le \sum_{i=1}^n m^*(A_i) - \sum_{1 \le i < j \le n} m^*(A_i \cap A_j) + \cdots + (-1)^{n-1} m^*\left( \bigcap_{i=1}^n A_i \right) \\
+        &\le \sum_{i=1}^n m_J(A_i) - \sum_{1 \le i < j \le n} m_J(A_i \cap A_j) + \cdots + (-1)^{n-1} m_J\left( \bigcap_{i=1}^n A_i \right) + 2^n \varepsilon.
+    \end{align*}
+    逆に，集合$\bigcup_{i=1}^n A_i$を覆う区間の列$\{J_i\}_{i=1}^m$が存在して
+    \[\sum_{i=1}^m |J_i| < m^*\left( \bigcup_{i=1}^n A_i \right) + \varepsilon.\]
+    このとき，集合$A_i$に含まれる区間の列$\{K_i^{(j)}\}_{i=1}^{m_j}$が存在して  
+    \[\sum_{i=1}^{m_j} |K_i^{(j)}| > m_*(A_j) - \varepsilon.\]
+    したがって，集合$\bigcup_{i=1}^n A_i$のJordan測度は以下のように評価できる．
+    \begin{align*}
+        m_J\left( \bigcup_{i=1}^n A_i \right) &\ge m_*\left( \bigcup_{i=1}^n A_i \right) \\
+        &\ge \sum_{i=1}^n m_*(A_i) - \sum_{1 \le i < j \le n} m_*(A_i \cap A_j) + \cdots + (-1)^{n-1} m_*\left( \bigcap_{i=1}^n A_i \right) \\
+        &\ge \sum_{i=1}^n m_J(A_i) - \sum_{1 \le i < j \le n} m_J(A_i \cap A_j) + \cdots + (-1)^{n-1} m_J\left( \bigcap_{i=1}^n A_i \right) - 2^n \varepsilon.
+    \end{align*}
+    以上より，集合$\bigcup_{i=1}^n A_i$のJordan測度は集合$A_i$のJordan測度を用いて，$m_J\left( \bigcup_{i=1}^n A_i \right) = \sum_{i=1}^n m_J(A_i) - \sum_{1 \le i < j \le n} m_J(A_i \cap A_j) + \cdots + (-1)^{n-1} m_J\left( \bigcap_{i=1}^n A_i \right)$と表される．
+\end{proof}
+\begin{remark}
+    上の定理は，集合$A_1, A_2, \ldots, A_n$が互いに素であるとき，集合$\bigcup_{i=1}^n A_i$のJordan測度は集合$A_i$のJordan測度の和になることを意味する．
+\end{remark}
+
+\subsection{有限加法族}
+Jordan可測集合の観察をもとに，有限加法族を定義する．
+\begin{definition}[有限加法族]
+    集合$X$の部分集合の族$\mathcal{F}$が有限加法族であるとは，以下の条件を満たすことをいう．
+    \begin{itemize}
+        \item $\emptyset \in \mathcal{F}$
+        \item $A \in \mathcal{F}$ならば$X \setminus A \in \mathcal{F}$
+        \item $A, B \in \mathcal{F}$ならば$A \cup B \in \mathcal{F}$
+    \end{itemize}
+\end{definition}
+\begin{theorem}[有限加法族の性質]
+    集合$X$の部分集合の族$\mathcal{F}$が有限加法族であるとする．このとき，以下の性質が成り立つ．
+    \begin{itemize}
+        \item $A, B \in \mathcal{F}$ならば$A \cap B \in \mathcal{F}$
+        \item $A_1, A_2, \ldots, A_n \in \mathcal{F}$ならば$\bigcup_{i=1}^n A_i \in \mathcal{F}$
+        \item $A_1, A_2, \ldots, A_n \in \mathcal{F}$ならば$\bigcap_{i=1}^n A_i \in \mathcal{F}$
+    \end{itemize}
+\end{theorem}
+\begin{proof}
+    $A, B \in \mathcal{F}$ならば$A \cap B \in \mathcal{F}$：$A, B \in \mathcal{F}$ならば$X \setminus A, X \setminus B \in \mathcal{F}$であるから，$X \setminus (A \cap B) = (X \setminus A) \cup (X \setminus B) \in \mathcal{F}$である．
+    $A_1, A_2, \ldots, A_n \in \mathcal{F}$ならば$\bigcup_{i=1}^n A_i \in \mathcal{F}$：$A_1, A_2, \ldots, A_n \in \mathcal{F}$ならば$X \setminus A_1, X \setminus A_2, \ldots, X \setminus A_n \in \mathcal{F}$であるから，$X \setminus \left( \bigcup_{i=1}^n A_i \right) = \bigcap_{i=1}^n (X \setminus A_i) \in \mathcal{F}$である．
+    $A_1, A_2, \ldots, A_n \in \mathcal{F}$ならば$\bigcap_{i=1}^n A_i \in \mathcal{F}$：$A_1, A_2, \ldots, A_n \in \mathcal{F}$ならば$X \setminus A_1, X \setminus A_2, \ldots, X \setminus A_n \in \mathcal{F}$であるから，$X \setminus \left( \bigcap_{i=1}^n A_i \right) = \bigcup_{i=1}^n (X \setminus A_i) \in \mathcal{F}$である．
+\end{proof}
+\begin{remark}
+    上の定理は，有限加法族が集合の交わりや集合の和に対して閉じていることを意味する．
+\end{remark}
+\begin{theorem}[Jordan可測集合の有限加法族]
+    $\RR^d$のJordan可測集合の全体は，$\RR^d$の部分集合の有限加法族をなす．
+\end{theorem}
+\begin{proof}
+    $\emptyset$はJordan可測である．
+    集合$A$がJordan可測であるとする．このとき，集合$A$の境界$\partial A$のJordan測度は0である．
+    集合$A$の補集合$\RR^d \setminus A$の境界は集合$A$の境界$\partial A$と等しいから，集合$\RR^d \setminus A$の境界のJordan測度も0である．したがって，集合$\RR^d \setminus A$もJordan可測である．
+    集合$A, B$がJordan可測であるとする．このとき，集合$A \cup B$の境界は集合$A$の境界と集合$B$の境界の和集合に含まれるから，集合$A \cup B$の境界のJordan測度は0である．したがって，集合$A \cup B$もJordan可測である．
+\end{proof}
+
+
+

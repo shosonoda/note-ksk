@@ -1,0 +1,59 @@
+\chapter{補遺}
+
+\section{上限と下限}
+
+\subsection{実数の上限と下限}
+
+集合の上限と下限は，それぞれ最小上界と最大下界である．
+\begin{definition}
+    集合$A \subset \RR$の上限（下限）とは，$A$の上界（下界）であって，$A$の任意の上界（下界）よりも小さい（大きい）ものをいう．
+\end{definition}
+
+\begin{proposition}
+    $c \in \RR$に対して，$c = \sup A$（$c = \inf A$）であることと，以下の条件が成り立つことは同値である．
+    \begin{itemize}
+        \item $c$は$A$の上界（下界）である．
+        \item 任意の$\varepsilon > 0$に対して，$c - \varepsilon$（$c + \varepsilon$）は$A$の上界（下界）でない．つまり，ある$a \in A$が存在して，$a > c - \varepsilon$（$a < c + \varepsilon$）が成り立つ．
+    \end{itemize}
+\end{proposition}
+
+\begin{proposition}
+    非空集合$A,B \subset \RR$に対し，$A \subset B$ならば$\sup A \le \sup B$かつ$\inf A \ge \inf B$が成り立つ．
+\end{proposition}
+
+\begin{proposition}
+    $c>0$に対し，\[\sup_{x \in A} cf(x) = c \sup_{x \in A} f(x), \quad \inf_{x \in A} cf(x) = c \inf_{x \in A} f(x)\]
+    $c<0$に対し，\[\sup_{x \in A} cf(x) = c \inf_{x \in A} f(x), \quad \inf_{x \in A} cf(x) = c \sup_{x \in A} f(x)\]
+\end{proposition}
+
+\begin{proposition}
+    非空集合$A,B \subset \RR$に対し，\[ A+B := \{a+b \mid a \in A, b \in B\}, \quad A-B := \{a-b \mid a \in A, b \in B\} \]と定めると，
+    \[\sup (A+B) = \sup A + \sup B, \quad \inf (A+B) = \inf A + \inf B\]
+    \[\sup (A-B) = \sup A - \inf B, \quad \inf (A-B) = \inf A - \sup B\]
+\end{proposition}
+
+\subsection{関数の上限と下限}
+
+\begin{definition}
+    集合$A$上の実数値関数$f$の上限と下限とは，それぞれ以下のように定義される．
+    \[\sup_{x \in A} f(x) := \inf \{ M \in \mathbb{R} \mid \forall x \in A, f(x) \le M \}\]
+    \[\inf_{x \in A} f(x) := \sup \{ m \in \mathbb{R} \mid \forall x \in A, f(x) \ge m \}\]
+\end{definition}
+
+\begin{proposition}
+    \[
+    \sup_{x \in A} f(x) = \sup f(A), \quad \inf_{x \in A} f(x) = \inf f(A)
+    \]
+\end{proposition}
+
+\begin{proposition}
+    $c>0$に対し，\[\sup_{x \in A} cf(x) = c \sup_{x \in A} f(x), \quad \inf_{x \in A} cf(x) = c \inf_{x \in A} f(x)\]
+    $c<0$に対し，\[\sup_{x \in A} cf(x) = c \inf_{x \in A} f(x), \quad \inf_{x \in A} cf(x) = c \sup_{x \in A} f(x)\]
+\end{proposition}
+
+\begin{proposition}
+    \[ \sup_{x,y \in A} f(x) + g(y) = \sup_{x \in A} f(x) + \sup_{y \in A} g(y), \quad \inf_{x,y \in A} f(x) + g(y) = \inf_{x \in A} f(x) + \inf_{y \in A} g(y) \]
+    \[ \sup_{x,y \in A} f(x) - g(y) = \sup_{x \in A} f(x) - \inf_{y \in A} g(y), \quad \inf_{x,y \in A} f(x) - g(y) = \inf_{x \in A} f(x) - \sup_{y \in A} g(y) \]
+%    \[\sup_{x \in A} f(x) - \inf_{x \in A} f(x) = \sup_{x,y \in A} |f(x) - f(y)|\]
+\end{proposition}
+

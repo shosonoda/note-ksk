@@ -41,13 +41,13 @@ namespace FiniteAdditiveFamily
 
 variable {s t : Set α} {C : Set (Set α)} --- {hC : FiniteAdditiveFamily C}
 
-lemma empty_mem' (hC : FiniteAdditiveFamily C) : (∅ : Set α) ∈ C :=
+example (hC : FiniteAdditiveFamily C) : (∅ : Set α) ∈ C :=
   hC.empty_mem
 
-lemma compl_mem' (hC : FiniteAdditiveFamily C) (hs : s ∈ C) : sᶜ ∈ C :=
+example (hC : FiniteAdditiveFamily C) (hs : s ∈ C) : sᶜ ∈ C :=
   hC.compl_mem hs
 
-lemma union_mem' (hC : FiniteAdditiveFamily C) (hs : s ∈ C) (ht : t ∈ C) : s ∪ t ∈ C :=
+example (hC : FiniteAdditiveFamily C) (hs : s ∈ C) (ht : t ∈ C) : s ∪ t ∈ C :=
   hC.union_mem hs ht
 
 /-- `univ` も入る（`∅` と補集合から）。 -/
