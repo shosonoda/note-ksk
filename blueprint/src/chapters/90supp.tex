@@ -27,7 +27,7 @@
 \end{proposition}
 
 \begin{proposition}
-    非空集合$A,B \subset \RR$に対し，\[ A+B := \{a+b \mid a \in A, b \in B\}, \quad A-B := \{a-b \mid a \in A, b \in B\} \]と定めると，
+    非空集合$A,B \subset \RR$に対し，\textbf{Minkoswki和}を\[ A+B := \{a+b \mid a \in A, b \in B\}, \quad A-B := \{a-b \mid a \in A, b \in B\} \]と定めると，
     \[\sup (A+B) = \sup A + \sup B, \quad \inf (A+B) = \inf A + \inf B\]
     \[\sup (A-B) = \sup A - \inf B, \quad \inf (A-B) = \inf A - \sup B\]
 \end{proposition}
@@ -57,3 +57,262 @@
 %    \[\sup_{x \in A} f(x) - \inf_{x \in A} f(x) = \sup_{x,y \in A} |f(x) - f(y)|\]
 \end{proposition}
 
+\begin{remark}
+    以下は\textbf{対角集合に制限されている}ので，劣加法性しかいえない
+    \[ \sup_{x \in A} f(x) + g(x) = \sup_{(x,\red{x}) \in A \times A} f(x) + g(\red{x}) \red{\;\le\;} \sup_{(x,\red{y}) \in A \times A} f(x) + g(y) = \sup_{x \in A} f(x) + \sup_{y \in A} g(y)\]
+    %, \quad \inf_{x,y \in A} f(x) + g(y) = \inf_{x \in A} f(x) + \inf_{y \in A} g(y) \]
+    %\[ \sup_{x,y \in A} f(x) - g(y) = \sup_{x \in A} f(x) - \inf_{y \in A} g(y), \quad \inf_{x,y \in A} f(x) - g(y) = \inf_{x \in A} f(x) - \sup_{y \in A} g(y) \]
+    （他も同様）
+\end{remark}
+
+\section{開集合系}
+
+\subsection{位相}
+
+\begin{definition}
+    集合$X$上の開集合系（位相）とは，$\mathcal O \subset \mathcal P(X)$であって，以下を満たすものをいう．
+    \begin{itemize}
+        \item $\emptyset, X \in \mathcal O$．
+        \item $\{U_i\}_{i \in I} \subset \mathcal O$ならば$\bigcup_{i \in I} U_i \in \mathcal O$．
+        \item $U_1,\dots,U_n \in \mathcal O$ならば$\bigcap_{k=1}^n U_k \in \mathcal O$．
+    \end{itemize}
+    $\mathcal O$の元を開集合と呼ぶ．
+\end{definition}
+
+\begin{definition}
+    部分集合$F \subset X$が閉集合であるとは，その補集合$F^c$が開集合であることをいう．
+\end{definition}
+
+\begin{proposition}
+    閉集合全体は，$\emptyset$と$X$を含み，任意個の共通部分と有限個の和集合について閉じている．
+\end{proposition}
+
+\begin{definition}
+    集合$X$上の集合族$\mathcal U \subset \mathcal P(X)$が位相の基底であるとは，以下を満たすことをいう．
+    \begin{itemize}
+        \item 任意の$x \in X$に対して，ある$U \in \mathcal U$が存在して$x \in U$．
+        \item $x \in U_1 \cap U_2$かつ$U_1,U_2 \in \mathcal U$ならば，ある$U_3 \in \mathcal U$が存在して$x \in U_3 \subset U_1 \cap U_2$．
+    \end{itemize}
+\end{definition}
+
+\begin{proposition}
+    基底$\mathcal U$に対し，$\mathcal U$の元の和集合全体は位相をなし，$\mathcal U$を含む最小の位相である．
+\end{proposition}
+
+\begin{proposition}
+    関数$f : X \to Y$が連続であることと，$Y$の任意の開集合$V$に対して$f^{-1}(V)$が$X$の開集合であることは同値である．
+\end{proposition}
+
+\subsection{Borel集合}
+
+\begin{definition}
+    位相空間$X$のBorel $\sigma$-代数とは，$X$の開集合全体を含む最小の$\sigma$-代数であり，$\mathcal B(X)$と書く．
+\end{definition}
+
+\begin{proposition}
+    $\mathcal B(X)$は，$X$の閉集合全体を含む最小の$\sigma$-代数でもある．
+\end{proposition}
+
+\begin{proposition}
+    $\RR$では
+    \[
+    \mathcal B(\RR)
+    = \sigma(\{(a,b) \mid a<b\})
+    = \sigma(\{(-\infty,a) \mid a \in \RR\})
+    = \sigma(\{(-\infty,a] \mid a \in \RR\})
+    \]
+    が成り立つ．
+\end{proposition}
+
+\begin{proposition}
+    連続関数$f : X \to Y$に対して，任意のBorel集合$E \in \mathcal B(Y)$について$f^{-1}(E) \in \mathcal B(X)$が成り立つ．特に連続関数はBorel可測である．
+\end{proposition}
+
+\section{Lebesgue測度}
+
+\subsection{Lebesgue外測度}
+
+\begin{definition}
+    $\RR$の部分集合$A$に対し，Lebesgue外測度$\lambda^*(A)$を
+    \[
+    \lambda^*(A)
+    := \inf \left\{ \sum_{n=1}^{\infty} |I_n| \mid A \subset \bigcup_{n=1}^{\infty} I_n,\ I_n \text{ は開区間} \right\}
+    \]
+    により定める．ここで$|I_n|$は区間$I_n$の長さである．
+\end{definition}
+
+\begin{theorem}
+    $\lambda^*$は$\RR$上の外測度である．
+\end{theorem}
+
+\begin{definition}
+    集合$A \subset \RR$がLebesgue可測であるとは，任意の$E \subset \RR$に対して
+    \[
+    \lambda^*(E) = \lambda^*(E \cap A) + \lambda^*(E \setminus A)
+    \]
+    が成り立つことをいう．
+\end{definition}
+
+\begin{theorem}
+    Lebesgue可測集合全体を$\mathcal L$と書くとき，$\mathcal L$は$\sigma$-代数をなし，$\lambda := \lambda^*|_{\mathcal L}$は完全測度となる．
+\end{theorem}
+
+\subsection{Lebesgue測度の基本性質}
+
+\begin{theorem}
+    任意の$a \le b$に対して，
+    \[
+    \lambda((a,b)) = \lambda((a,b]) = \lambda([a,b)) = \lambda([a,b]) = b-a
+    \]
+    が成り立つ．
+\end{theorem}
+
+\begin{theorem}
+    Lebesgue測度は平行移動不変である．すなわち，任意のLebesgue可測集合$A \subset \RR$と$t \in \RR$に対して
+    \[
+    \lambda(A+t) = \lambda(A)
+    \]
+    が成り立つ．
+\end{theorem}
+
+\begin{theorem}
+    すべてのBorel集合はLebesgue可測である．さらに，Lebesgue測度はBorel $\sigma$-代数上の測度の完備化として得られる．
+\end{theorem}
+
+\begin{theorem}
+    $\lambda(N)=0$ならば，$N$の任意の部分集合はLebesgue可測である．
+\end{theorem}
+
+\begin{theorem}
+    任意のLebesgue可測集合$A \subset \RR$に対して
+    \[
+    \lambda(A) = \inf\{\lambda(U) \mid A \subset U,\ U \text{ は開集合}\}
+    \]
+    が成り立つ．また，任意のBorel集合$A \subset \RR$に対して
+    \[
+    \lambda(A) = \sup\{\lambda(K) \mid K \subset A,\ K \text{ はコンパクト集合}\}
+    \]
+    が成り立つ．
+\end{theorem}
+
+\begin{theorem}
+    $\RR$にはLebesgue非可測集合が存在する．
+\end{theorem}
+
+\section{測度}
+
+\subsection{$\sigma$-代数}
+
+\begin{definition}
+    集合$X$上の$\sigma$-代数とは，$\mathcal M \subset \mathcal P(X)$であって，以下を満たすものをいう．
+    \begin{itemize}
+        \item $\emptyset \in \mathcal M$．
+        \item $A \in \mathcal M$ならば$A^c \in \mathcal M$．
+        \item $A_1,A_2,\dots \in \mathcal M$ならば$\bigcup_{n=1}^{\infty} A_n \in \mathcal M$．
+    \end{itemize}
+\end{definition}
+
+\begin{proposition}
+    $\sigma$-代数は，可算共通部分と有限和集合，有限共通部分，差集合について閉じている．
+\end{proposition}
+
+\begin{definition}
+    集合族$\mathcal C \subset \mathcal P(X)$を含む最小の$\sigma$-代数を$\sigma(\mathcal C)$と書き，$\mathcal C$が生成する$\sigma$-代数という．
+\end{definition}
+
+\subsection{外測度}
+
+\begin{definition}
+    集合$X$上の外測度とは，写像$\mu^* : \mathcal P(X) \to [0,\infty]$であって，以下を満たすものをいう．
+    \begin{itemize}
+        \item $\mu^*(\emptyset)=0$．
+        \item $A \subset B$ならば$\mu^*(A) \le \mu^*(B)$．
+        \item 任意の集合列$\{A_n\}_{n=1}^{\infty}$に対して
+        \[
+        \mu^*\left(\bigcup_{n=1}^{\infty} A_n\right) \le \sum_{n=1}^{\infty} \mu^*(A_n)
+        \]
+        が成り立つ．
+    \end{itemize}
+\end{definition}
+
+\begin{proposition}
+    外測度は有限劣加法性
+    \[
+    \mu^*(A \cup B) \le \mu^*(A) + \mu^*(B)
+    \]
+    を満たす．
+\end{proposition}
+
+\subsection{Carathéodory可測性}
+
+\begin{definition}
+    外測度$\mu^*$に対し，集合$A \subset X$がCarathéodory可測であるとは，任意の$E \subset X$に対して
+    \[
+    \mu^*(E) = \mu^*(E \cap A) + \mu^*(E \setminus A)
+    \]
+    が成り立つことをいう．
+\end{definition}
+
+\begin{theorem}[Carathéodory]
+    外測度$\mu^*$に関するCarathéodory可測集合全体は$\sigma$-代数をなす．
+\end{theorem}
+
+\begin{theorem}
+    上の$\sigma$-代数を$\mathcal M_{\mu^*}$と書くとき，$\mu := \mu^*|_{\mathcal M_{\mu^*}}$は$(X,\mathcal M_{\mu^*})$上の測度である．
+\end{theorem}
+
+\subsection{測度}
+
+\begin{definition}
+    可測空間$(X,\mathcal M)$上の測度とは，写像$\mu : \mathcal M \to [0,\infty]$であって，以下を満たすものをいう．
+    \begin{itemize}
+        \item $\mu(\emptyset)=0$．
+        \item 互いに素な可測集合列$\{A_n\}_{n=1}^{\infty}$に対して
+        \[
+        \mu\left(\bigcup_{n=1}^{\infty} A_n\right) = \sum_{n=1}^{\infty} \mu(A_n)
+        \]
+        が成り立つ．
+    \end{itemize}
+\end{definition}
+
+\begin{proposition}
+    測度は単調であり，可算劣加法性を満たす．
+\end{proposition}
+
+\begin{proposition}
+    互いに素な可測集合$A,B \in \mathcal M$に対して
+    \[
+    \mu(A \cup B) = \mu(A) + \mu(B)
+    \]
+    が成り立つ．また，$B \subset A$かつ$\mu(B)<\infty$ならば
+    \[
+    \mu(A \setminus B) = \mu(A) - \mu(B)
+    \]
+    が成り立つ．
+\end{proposition}
+
+\begin{theorem}
+    $A_1 \subset A_2 \subset \cdots$かつ$A=\bigcup_{n=1}^{\infty} A_n$ならば
+    \[
+    \mu(A) = \lim_{n \to \infty} \mu(A_n)
+    \]
+    が成り立つ．
+\end{theorem}
+
+\begin{theorem}
+    $A_1 \supset A_2 \supset \cdots$かつ$A=\bigcap_{n=1}^{\infty} A_n$で，さらに$\mu(A_1)<\infty$ならば
+    \[
+    \mu(A) = \lim_{n \to \infty} \mu(A_n)
+    \]
+    が成り立つ．
+\end{theorem}
+
+\subsection{完備化}
+
+\begin{definition}
+    測度$\mu$が完備であるとは，$\mu(N)=0$ならば$N$の任意の部分集合が可測であることをいう．
+\end{definition}
+
+\begin{theorem}
+    任意の測度$\mu$は完備化をもつ．すなわち，元の可測集合と零集合の部分集合で生成される$\sigma$-代数上に，$\mu$を拡張する完全測度が存在する．
+\end{theorem}
