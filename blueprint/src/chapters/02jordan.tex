@@ -1,33 +1,14 @@
+\setcounter{chapter}{1}
 \chapter{Jordan測度}
 
-\section{$\RR^d$のRiemann積分}
-%Riemann積分の基礎にあるのは，区間$[a,b]$の分割$\mathcal{P}$と，区間の体積すなわち長さである．
-$d$次元Euclid空間$\RR^d$上のRiemann積分は，区間$[a,b]$の代わりに有限区間$I = [a_1,b_1] \times \cdots \times [a_d,b_d]$を基礎集合として定義される．
-区間$[a,b]$の分割$\mathcal{P}$は，有限区間$[a_1,b_1] \times \cdots \times [a_d,b_d]$の（重なりのない）有限分割$\mathcal{P}$に一般化される．
-\[
-\mathcal P : I = \bigsqcup_{j=1}^m J_j
-\]
-区間$[a,b]$の長さは，$d$次元の体積に一般化される．
-\[
-|\prod_{i=1}^d [a_i, b_i]| := \prod_{i=1}^d (b_i - a_i).
-\]
-これを有限区間の測度という．$d=1,2,3$のときは，それぞれ長さ，面積，体積と呼ばれる．
-これらを用いて，Riemann和とDarbouxの上（下）和は以下のように定義される．
-\[
-S(f,\mathcal P, t) := \sum_{j=1}^m f(t_j) |J_j|, \quad U(f,\mathcal P) := \sum_{j=1}^m \sup_{x \in J_j} f(x) |J_j|, \quad L(f,\mathcal P) := \sum_{j=1}^m \inf_{x \in J_j} f(x) |J_j|.
-\]
-Riemann積分とDarbouxの上（下）積分は，これらの和の極限をとることで定義される．
-\[
-\int_I f(x)dx := \lim_{|\mathcal P| \to 0} S(f,\mathcal P, t), \quad \uint{I}{} f(x) dx := \inf_{\mathcal P} U(f,\mathcal P), \quad \lint{I}{} f(x) dx := \sup_{\mathcal P} L(f,\mathcal P).
-\]
-
-\section{Jordan測度（有限加法的測度）}
-有限区間$I$に対するRiemann積分を，さらに一般の集合まで拡張しようと考えるのは，自然なことである．
-集合$A (\subset I) \subset \RR^d$の指示関数$1_A$の積分は，集合$A$の「測度」を表すと考えられるためである．
+有限区間$I \subset \RR^d$に対するRiemann積分を，一般の集合$A$まで拡張しよう．その出発点として，集合$A$の指示関数$1_A$の積分と，$A$の「体積」の対応が利用できる．
+%集合$A (\subset I) \subset \RR^d$の指示関数$1_A$の積分は，集合$A$の「測度」と対応する．
 \[
 \int_I 1_A(x) dx = \text{``}m(A)\text{''}
 \]
 以下では，そのような測度としてJordan測度を定義する．1次元の場合の同様に，これは有限分割に基づく測度であるから，有限加法的測度と呼ばれる．Dirichlet関数の台（$A = \mathbb{Q} \cap [0,1]$）のように境界が複雑な集合に対しては，Jordan測度は定義できない．
+
+\section{Jordan測度}%（有限加法的測度）}
 
 指示関数$1_A$のRiemann積分を計算する過程では，集合$A$を覆う非交区間$\{I_j\}_{j=1}^m$が自然に現れる．
 特に，Darboux式の上積分と下積分に対応するものとして，外測度と内測度が定義される．
@@ -64,7 +45,8 @@ m_*(A) = \lint{I}{} 1_A(x) dx \le \uint{I}{} 1_A(x) dx = m^*(A).
     \[\sum_{i=1}^m |K_i| > m_*(A) - \varepsilon.\]
     したがって，集合$A$の境界$\partial A$は，区間の列$\{J_i\}_{i=1}^n$と$\{K_i\}_{i=1}^m$の和集合で覆われる．
     \[\partial A \subset \left( \bigcup_{i=1}^n J_i \right) \cup \left( \bigcup_{i=1}^m K_i \right).\]
-    よって，集合$A$の境界$\partial A$のJordan測度は0である．    
+    よって，集合$A$の境界$\partial A$のJordan測度は0である．
+
     $\Leftarrow$：集合$A$の境界$\partial A$のJordan測度が0であるとする．
     任意の$\varepsilon > 0$に対して，集合$A$の境界$\partial A$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
     \[\sum_{i=1}^n |J_i| < \varepsilon.\]
@@ -92,22 +74,23 @@ m_*(A) = \lint{I}{} 1_A(x) dx \le \uint{I}{} 1_A(x) dx = m^*(A).
     \end{itemize}
 \end{theorem}
 \begin{proof}
-    $m_J(A) \ge 0$：集合$A$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
+    \begin{itemize}
+    \item $m_J(A) \ge 0$：集合$A$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
     \[\sum_{i=1}^n |J_i| < m^*(A) + \varepsilon.\]
     このとき，集合$A$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
     \[\sum_{i=1}^m |K_i| > m_*(A) - \varepsilon.\]
     したがって，集合$A$のJordan測度は0以上である．
-    $m_J(\emptyset) = 0$：空集合$\emptyset$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
+    \item $m_J(\emptyset) = 0$：空集合$\emptyset$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
     \[\sum_{i=1}^n |J_i| < \varepsilon.\]
     このとき，空集合$\emptyset$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
     \[\sum_{i=1}^m |K_i| > -\varepsilon.\]
     したがって，空集合$\emptyset$のJordan測度は0である．
-    $A \subset B$ならば$m_J(A) \le m_J(B)$：集合$B$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
+    \item $A \subset B$ならば$m_J(A) \le m_J(B)$：集合$B$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
     \[\sum_{i=1}^n |J_i| < m^*(B) + \varepsilon.\]
     このとき，集合$A$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
     \[\sum_{i=1}^m |K_i| > m_*(A) - \varepsilon.\]
     したがって，集合$A$のJordan測度は集合$B$のJordan測度以下である．
-    $m_J(A) = m_J(\overline{A})$：集合$A$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
+    \item $m_J(A) = m_J(\overline{A})$：集合$A$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
     \[\sum_{i=1}^n |J_i| < m^*(A) + \varepsilon.\]
     このとき，集合$\overline{A}$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
     \[\sum_{i=1}^m |K_i| > m_*(\overline{A}) - \varepsilon.\]
@@ -116,7 +99,7 @@ m_*(A) = \lint{I}{} 1_A(x) dx \le \uint{I}{} 1_A(x) dx = m^*(A).
     このとき，集合$A$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
     \[\sum_{i=1}^m |K_i| > m_*(A) - \varepsilon.\]
     したがって，集合$A$のJordan測度は集合$\overline{A}$のJordan測度以下である．
-    $m_J(A) = m_J(\mathrm{int}(A))$：集合$A$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
+    \item $m_J(A) = m_J(\mathrm{int}(A))$：集合$A$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
     \[\sum_{i=1}^n |J_i| < m^*(A) + \varepsilon.\]
     このとき，集合$\mathrm{int}(A)$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
     \[\sum_{i=1}^m |K_i| > m_*(\mathrm{int}(A)) - \varepsilon.\]
@@ -125,6 +108,7 @@ m_*(A) = \lint{I}{} 1_A(x) dx \le \uint{I}{} 1_A(x) dx = m^*(A).
     このとき，集合$A$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
     \[\sum_{i=1}^m |K_i| > m_*(A) - \varepsilon.\]
     したがって，集合$A$のJordan測度は集合$\mathrm{int}(A)$のJordan測度以下である．      
+    \end{itemize}
 \end{proof}
 \begin{theorem}[Jordan測度の有限加法性]
     集合$A, B \subset \RR^d$がJordan可測であるとする．このとき，集合$A \cup B$もJordan可測であり，さらに，

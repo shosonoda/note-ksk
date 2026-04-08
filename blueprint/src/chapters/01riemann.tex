@@ -1,6 +1,3 @@
-\newcommand{\dint}{D\text{-}\!\!\int}
-\newcommand{\uint}[2]{\overline{\int_{#1}^{#2}}}
-\newcommand{\lint}[2]{\underline{\int_{#1}^{#2}}}
 \chapter{Riemann積分}
 
 %\section{Riemann積分}
@@ -541,3 +538,25 @@ S'(f,\mathcal P'):=\sum_{i=1}^\infty f(x_i) |A_i|, \quad \int_a^b f(x) dx = \lim
     \item 微分方程式論・制御理論：解空間・状態空間の無限次元性
     \item 調和解析・信号処理：Fourier級数，Fourier変換
 \end{itemize}
+
+\section{（補足）$\RR^d$のRiemann積分}
+%Riemann積分の基礎にあるのは，区間$[a,b]$の分割$\mathcal{P}$と，区間の体積すなわち長さである．
+$d$次元Euclid空間$\RR^d$上のRiemann積分は，区間$[a,b]$の代わりに有限区間$I = [a_1,b_1] \times \cdots \times [a_d,b_d]$を基礎集合として定義される．
+区間$[a,b]$の分割$\mathcal{P}$は，有限区間$[a_1,b_1] \times \cdots \times [a_d,b_d]$の（重なりのない）有限分割$\mathcal{P}$に一般化される．
+\[
+\mathcal P : I = \bigsqcup_{j=1}^m J_j
+\]
+区間$[a,b]$の長さは，$d$次元の体積に一般化される．
+\[
+|\prod_{i=1}^d [a_i, b_i]| := \prod_{i=1}^d (b_i - a_i).
+\]
+これを有限区間の測度という．$d=1,2,3$のときは，それぞれ長さ，面積，体積と呼ばれる．
+
+これらを用いて，Riemann和とDarbouxの上（下）和は以下のように定義される．
+\[
+S(f,\mathcal P, t) := \sum_{j=1}^m f(t_j) |J_j|, \quad U(f,\mathcal P) := \sum_{j=1}^m \sup_{x \in J_j} f(x) |J_j|, \quad L(f,\mathcal P) := \sum_{j=1}^m \inf_{x \in J_j} f(x) |J_j|.
+\]
+Riemann積分とDarbouxの上（下）積分は，これらの和の極限をとることで定義される．
+\[
+\int_I f(x)dx := \lim_{|\mathcal P| \to 0} S(f,\mathcal P, t), \quad \uint{I}{} f(x) dx := \inf_{\mathcal P} U(f,\mathcal P), \quad \lint{I}{} f(x) dx := \sup_{\mathcal P} L(f,\mathcal P).
+\]
