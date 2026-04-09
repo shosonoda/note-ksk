@@ -1,0 +1,333 @@
+%==================================================
+% 1. 1.3 冒頭のスローガン差し替え
+%==================================================
+
+
+
+
+%==================================================
+% 2--3. Example 2 の差し替え
+%==================================================
+
+
+
+
+%==================================================
+% 4,5 は削除済み
+%==================================================
+
+
+%==================================================
+% 6. Example 7 の差し替え
+%==================================================
+
+
+
+%==================================================
+% 7. Theorem 8 の差し替え
+%==================================================
+
+\begin{theorem}[区分求積法]
+関数 $f:[a,b]\to\mathbb R$ は Riemann 可積分とする．
+区間 $[a,b]$ の分割と評価点の列
+\[
+\mathcal P_k:\ a=x_0^{(k)}<x_1^{(k)}<\cdots<x_{n_k}^{(k)}=b,
+\qquad
+x_{i-1}^{(k)}\le t_i^{(k)}\le x_i^{(k)}
+\]
+をとり，
+\[
+|\mathcal P_k|\to 0\qquad (k\to\infty)
+\]
+とする．このとき，
+\[
+S(f,\mathcal P_k,t^{(k)})\to \int_a^b f(x)\,dx
+\qquad (k\to\infty)
+\]
+が成り立つ．
+\end{theorem}
+
+\begin{proof}
+\[
+I:=\int_a^b f(x)\,dx,
+\qquad
+M:=\sup_{x\in[a,b]}|f(x)|<\infty
+\]
+とおく．
+
+まず
+\[
+U(f,\mathcal P_k)-L(f,\mathcal P_k)\to 0
+\qquad (k\to\infty)
+\]
+を示す．
+任意の $\varepsilon>0$ をとる．
+$f$ は Darboux 可積分であるから，ある分割
+\[
+\mathcal Q:\ a=y_0<y_1<\cdots<y_m=b
+\]
+が存在して
+\[
+U(f,\mathcal Q)-L(f,\mathcal Q)<\frac{\varepsilon}{3}
+\]
+となる．
+
+各 $k$ について，共通細分
+\[
+\mathcal R_k:=\mathcal P_k\cup\mathcal Q
+\]
+を考える．
+$\mathcal R_k$ は $\mathcal Q$ の細分だから
+\[
+U(f,\mathcal R_k)-L(f,\mathcal R_k)
+\le
+U(f,\mathcal Q)-L(f,\mathcal Q)
+<
+\frac{\varepsilon}{3}.
+\]
+
+一方，$\mathcal R_k$ は $\mathcal P_k$ に $\mathcal Q$ の分点を高々 $m-1$ 個付け加えたものである．
+分割に 1 点を付け加えるとき，上和の減少量も下和の増加量も高々 $2M|\mathcal P_k|$ である
+（実際，長さ $\ell\le |\mathcal P_k|$ の 1 つの区間を 2 つに分けるだけなので，
+旧寄与と新寄与の差は高々 $2M\ell$ で抑えられる）．
+したがって
+\[
+0\le U(f,\mathcal P_k)-U(f,\mathcal R_k)\le 2M(m-1)|\mathcal P_k|,
+\]
+\[
+0\le L(f,\mathcal R_k)-L(f,\mathcal P_k)\le 2M(m-1)|\mathcal P_k|.
+\]
+$|\mathcal P_k|\to 0$ より，十分大きい $k$ に対して両方とも $\varepsilon/3$ 未満となる．
+このとき
+\[
+\begin{aligned}
+U(f,\mathcal P_k)-L(f,\mathcal P_k)
+&=
+\bigl(U(f,\mathcal P_k)-U(f,\mathcal R_k)\bigr)
++\bigl(U(f,\mathcal R_k)-L(f,\mathcal R_k)\bigr)\\
+&\qquad
++\bigl(L(f,\mathcal R_k)-L(f,\mathcal P_k)\bigr)
+<\varepsilon.
+\end{aligned}
+\]
+よって
+\[
+U(f,\mathcal P_k)-L(f,\mathcal P_k)\to 0.
+\]
+\end{proof}
+
+
+%==================================================
+% 8. Theorem 9 の差し替え
+%==================================================
+
+\begin{theorem}[微分積分学の第二基本定理]
+$C^1$ 級関数 $F:[a,b]\to\mathbb R$ に対して，$f:=F'$ は区間 $[a,b]$ 上で Riemann 可積分であり，
+\[
+\int_a^b f(x)\,dx = F(b)-F(a)
+\]
+が成り立つ．
+\end{theorem}
+
+\begin{proof}
+$f=F'$ は連続であるから，Example 4 により Riemann 可積分である．
+
+区間 $[a,b]$ の任意の分割
+\[
+\mathcal P:\ a=x_0<x_1<\cdots<x_n=b
+\]
+をとる．平均値の定理により，各 $i=1,\dots,n$ に対して
+\[
+t_i\in[x_{i-1},x_i]
+\]
+が存在して
+\[
+f(t_i)=\frac{F(x_i)-F(x_{i-1})}{x_i-x_{i-1}}
+\]
+となる．この点列 $t=(t_1,\dots,t_n)$ を評価点として Riemann 和をとると，
+\[
+\begin{aligned}
+S(f,\mathcal P,t)
+&=
+\sum_{i=1}^n f(t_i)(x_i-x_{i-1})\\
+&=
+\sum_{i=1}^n \bigl(F(x_i)-F(x_{i-1})\bigr)\\
+&=
+F(b)-F(a)
+\end{aligned}
+\]
+となる．
+
+特に，$|\mathcal P_k|\to 0$ を満たす任意の分割列 $\{\mathcal P_k\}$ をとり，
+各 $\mathcal P_k$ に対して上のように平均値の定理で評価点 $t^{(k)}$ を選べば，
+\[
+S(f,\mathcal P_k,t^{(k)})=F(b)-F(a)
+\qquad (k=1,2,\dots)
+\]
+である．
+前定理（区分求積法）より
+\[
+\int_a^b f(x)\,dx
+=
+\lim_{k\to\infty} S(f,\mathcal P_k,t^{(k)})
+=
+F(b)-F(a).
+\]
+\end{proof}
+
+
+%==================================================
+% 10. Remark 3 と Example 11 の差し替え
+%==================================================
+
+\begin{remark}
+一様収束は，極限と積分の順序交換を保証する分かりやすい十分条件である．
+しかし，一様収束よりも弱い収束では，一般には Riemann 可積分性そのものが極限で失われることがある．
+次の例はその典型例である．
+\end{remark}
+
+\begin{example}
+区間 $[0,1]$ 上の有理点に番号をふる：
+\[
+r:\mathbb N\to \mathbb Q\cap[0,1]
+\]
+を全単射とする．これを用いて
+\[
+f_n(x):=\sum_{i=1}^n \mathbf 1_{\{r(i)\}}(x)
+\]
+と定める．
+
+各 $n$ に対して，$f_n$ の不連続点は有限集合
+\[
+\{r(1),\dots,r(n)\}
+\]
+に含まれる．したがって $f_n$ は区分的に連続であり，Riemann 可積分である．
+実際，有限個の点の近傍だけを十分短く切り出せば
+\[
+\int_0^1 f_n(x)\,dx=0
+\]
+であることも分かる．
+
+一方，各 $x\in[0,1]$ に対して
+\[
+\lim_{n\to\infty}f_n(x)=
+\begin{cases}
+1, & x\in \mathbb Q\cap[0,1],\\[1mm]
+0, & x\in [0,1]\setminus\mathbb Q,
+\end{cases}
+\]
+すなわち極限関数は Dirichlet 関数であり，Riemann 可積分でない．
+また，$m>n$ とすると
+\[
+f_n(r(m))=0,\qquad \lim_{k\to\infty} f_k(r(m))=1
+\]
+であるから，一様収束もしていない．
+
+したがって，一様収束よりも弱い収束では，極限関数の可積分性すら一般には保たれない．
+特にこの例では
+\[
+\int_0^1 \lim_{n\to\infty} f_n(x)\,dx
+\]
+自体が定義できないので，順序交換はその前段階で破綻する．
+\end{example}
+
+
+%==================================================
+% 11. Lebesgue 積分導入部の差し替え
+%==================================================
+
+
+
+
+%==================================================
+% 12. 拡張実数に関する定義・注意
+%==================================================
+
+\begin{definition}[拡張実数]
+\[
+\overline{\mathbb R}:=\mathbb R\cup\{\pm\infty\}
+\]
+とおく．
+\end{definition}
+
+\begin{definition}[Darboux の上和と下和]
+関数 $f:[a,b]\to\overline{\mathbb R}$ と分割
+\[
+\mathcal P:\ a=x_0<x_1<\cdots<x_n=b
+\]
+に対し，各 $i=1,\dots,n$ について
+\[
+M_i:=\sup_{x\in[x_{i-1},x_i]} f(x)\in\overline{\mathbb R},
+\qquad
+m_i:=\inf_{x\in[x_{i-1},x_i]} f(x)\in\overline{\mathbb R}
+\]
+とおく．
+ただし，以下の有限和が $\overline{\mathbb R}$ において定義できる場合に限って，
+\[
+U(f,\mathcal P):=\sum_{i=1}^n M_i(x_i-x_{i-1}),
+\qquad
+L(f,\mathcal P):=\sum_{i=1}^n m_i(x_i-x_{i-1})
+\]
+をそれぞれ Darboux の上和，下和と呼ぶ．
+\end{definition}
+
+\begin{definition}[Darboux の上積分と下積分]
+関数 $f:[a,b]\to\overline{\mathbb R}$ に対して
+\[
+\overline{\int_a^b} f(x)\,dx := \inf_{\mathcal P} U(f,\mathcal P),
+\qquad
+\underline{\int_a^b} f(x)\,dx := \sup_{\mathcal P} L(f,\mathcal P)
+\]
+と定める．
+\end{definition}
+
+\begin{definition}[Darboux 可積分]
+本章では，実数値関数 $f:[a,b]\to\mathbb R$ に対して
+\[
+\overline{\int_a^b} f(x)\,dx
+=
+\underline{\int_a^b} f(x)\,dx
+\in\mathbb R
+\]
+が成り立つとき，$f$ は Darboux 可積分であるという．
+\end{definition}
+
+\begin{remark}[拡張実数を用いるときの注意]
+$\overline{\mathbb R}$ では
+\[
++\infty+(-\infty)
+\]
+は未定義である．
+したがって，ある小区間では $\sup f=+\infty$，別の小区間では $\sup f=-\infty$ となるような場合には，
+$U(f,\mathcal P)$ 自体が定義できない．下和についても同様である．
+
+また，Riemann 和
+\[
+S(f,\mathcal P,t)=\sum_{i=1}^n f(t_i)(x_i-x_{i-1})
+\]
+や Definition 3 の条件
+\[
+|S(f,\mathcal P,t)-I|<\varepsilon
+\]
+は，$f(t_i)=\pm\infty$ を許すと一般には意味を失う．
+このため，本章では Darboux の上積分・下積分を述べるときに限って
+$f:[a,b]\to\overline{\mathbb R}$ を許し，
+Riemann 和，Riemann 可積分性，区分求積法，一様収束などを扱う箇所では
+$f:[a,b]\to\mathbb R$ を仮定しておくのが安全である．
+
+特に，Riemann 可積分な関数は自動的に有界な実数値関数である．
+\end{remark}
+
+%==================================================
+% 補足
+%==================================================
+
+% Example 5 を削除するなら，
+% 「Riemann 積分の線形性」
+% \[
+% \int_a^b (\alpha f+\beta g)\,dx
+% =
+% \alpha\int_a^b f(x)\,dx+\beta\int_a^b g(x)\,dx
+% \]
+% は独立の定理として別に置いておく方が安全です．
+% Theorem 10, 11 の証明で使いやすくなります．

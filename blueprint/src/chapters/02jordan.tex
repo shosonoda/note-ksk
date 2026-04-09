@@ -1,6 +1,30 @@
 \setcounter{chapter}{1}
 \chapter{Jordan測度}
 
+Lebesgue積分に進む前に，Riemann積分の構成要素を整理する．
+積分では専ら可積分関数に興味があったが，実は，関数の足元に目を向けると集合の体積（測度）が現れる．関数の積分と集合の測度を橋渡しする道具として，集合$A$の指示関数
+\[
+1_A(x) := \begin{cases}
+    1 & x \in A \\
+    0 & x \notin A
+\end{cases}
+\]
+が便利である．集合$A \subset \RR^d$の指示関数がRiemann可積分であるとき，その積分を$A$の関数とみなす．
+\[
+m(A) := \int_I 1_A(x) dx
+\]
+例えば$A$として基本図形 $J = \prod_{i=1}^d [a_i,b_i]$ を代入すると，その積分は$J$の体積となる
+\[
+m\left( \prod_{i=1}^d [a_i,b_i] \right) = \prod_{i=1}^d (b_i - a_i).
+\]
+このことから，$m(A)$は集合$A$の体積を表していると考えられる．実際，後で見るように，disjoint union $A \sqcup B$ に対し，$m( A \sqcup B ) = m(A) +m(B)$ となり，いかにも体積のように振る舞うことが観察できる．
+
+実は，こうして得られた$m(A)$は，Riemann和の「体積」側にも現れている
+\[
+S\left(f,\sqcup_{i=1}^n J_i,t\right) = \sum_{i=1}^n f(t_i) m(J_i)
+\]
+Riemann和は$\sum \text{高さ} \times \text{長さ（面積，体積）}$の抽象化であったから，$m$は測度である．
+
 有限区間$I \subset \RR^d$に対するRiemann積分を，一般の集合$A$まで拡張しよう．その出発点として，集合$A$の指示関数$1_A$の積分と，$A$の「体積」の対応が利用できる．
 %集合$A (\subset I) \subset \RR^d$の指示関数$1_A$の積分は，集合$A$の「測度」と対応する．
 \[
