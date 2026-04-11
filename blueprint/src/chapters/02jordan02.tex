@@ -2,324 +2,638 @@
 \chapter{Jordan測度}
 
 \paragraph{本章の目標}
-Jordan測度，Jordan可測集合，有限加法族
+Jordan測度，Jordan可測集合，有限加法族（集合代数）
 
-%Dirichlet関数の例を分析するため，
-Riemann和の構成要素は以下のように整理できる
+第1章では1次元のRiemann積分を導入し，Dirichlet関数によって
+Riemann積分が常には定義できないことを見た．
+その障害は，関数の不連続性だけでなく，
+集合の「境界の大きさ」にも由来している．
+本章では，その背後にある集合論的な構成を
+Jordan測度の立場から整理する．
+
+有界集合 $A \subset \RR^d$ の指示関数
 \[
-S(f,\calP,t) = \sum_{i=1} f(t_i) m(E_i)
+1_A(x) :=
+\begin{cases}
+1 & (x \in A),\\
+0 & (x \notin A)
+\end{cases}
 \]
-\begin{itemize}
-    \item 積分領域 $X$
-    \item Riemann可積分関数 $f : X \to \RR$
-    \item Jordan測度 $m_J : \calA \to [0,\infty]$
-    \item Jordan可測集合
-\end{itemize}
+を考えると，$1_A$ がRiemann可積分であるかどうかは，
+$A$ を有限個の直方体でどこまでうまく近似できるかという問題になる．
+この「有限個」という条件が，
+後のLebesgue理論との違いを最も早く露わにする．
 
-\section{$\RR^d$の基本集合}
+\section{\texorpdfstring{$\RR^d$}{Rd}の基本集合}
 
-%%% tbc %%%
-\begin{definition}
-$\RR$の区間とは，$a \le b$ に対し，
+\begin{definition}[区間と長さ]
+実数 $a \le b$ に対し，
 \begin{align*}
-[a,b] &:= \{ x \in \RR \mid a \le x \le b \}, 
-&(a,b] &:= \{ x \in \RR \mid a < x \le b \},\\
-[a,b) &:= \{ x \in \RR \mid a \le x < b \},  
-&(a,b) &:= \{ x \in \RR \mid a < x < b \}    
+[a,b] &:= \{x \in \RR \mid a \le x \le b\}, &
+[a,b) &:= \{x \in \RR \mid a \le x < b\},\\
+(a,b] &:= \{x \in \RR \mid a < x \le b\}, &
+(a,b) &:= \{x \in \RR \mid a < x < b\}
 \end{align*}
-%\end{definition}
-%\begin{definition}
-$\RR$の区間$I = [a,b], [a,b), (a,b], (a,b)$ の長さはいずれも以下で定義される
+を $\RR$ の有界区間という．
+これらの長さは端点の開閉に依らず
 \[
 |I| := b-a
 \]
+で定める．
+\end{definition}
+
+\begin{definition}[長方体]
+$\RR^d$ の有界長方体とは，
+各成分が有界区間である直積
+\[
+R = I_1 \times \cdots \times I_d
+\]
+のことである．
+その体積を
+\[
+|R| := \prod_{k=1}^d |I_k|
+\]
+で定める．
+$d=1,2,3$ のときは，それぞれ長さ，面積，体積と呼ぶ．
 \end{definition}
 
 \begin{remark}
-あとで見るように，長さには（有限）加法性
+端点の開閉は体積に影響しない．
+以後，有限分割を扱う際には
 \[
-| A \sqcup B | = |A| + |B|
+Q = \prod_{k=1}^d [a_k,b_k)
 \]
-が要請される．
-これに伴い，1点集合の長さは 0 であることが言える．実際，
-$\{a\} = [a,a]$ なので，
-\[
-| [a,b) | = | [a,a] + (a,b)| = |[a,a]| + |(a,b)|.
-\]
-よって，$|[a,a]| = |\{a\}| = 0$である．
-1点が長さや面積を持たないことは，Euclid幾何学の要請である．
-
-一方，線や面は点の集まりであることもまたEuclid幾何学の要請である．
-実際，
-\[
-[a,b] = \bigsqcup_{x \in [a,b]}\{x\}
-\]
-と分解できる．ところが，左辺は長さ$b-a$を持つのに対し，右辺は長さ$0$の和であり，長さの加法性が破綻する．
-これは測度の加法性を無限分割まで拡張する際に，技術的な条件が必要であることを示唆している．
+という半開長方体を主に用いる．
+境界は後でJordan零集合として無視できるので，
+閉長方体・開長方体・半開長方体の違いは本質的でない．
 \end{remark}
 
-\begin{definition}
-$\RR^d$の区間 $I$ とは，$\RR$の区間 $I_1, \ldots, I_d$の直積である
+\begin{definition}[基本集合]
+$\RR^d$ の基本集合とは，
+有限個の互いに素な半開長方体の合併
 \[
-I := \prod_{k=1}^d I_k = I_1 \times \cdots \times I_d.
+E = \bigsqcup_{j=1}^n Q_j
 \]
-$I$の測度は，成分区間の長さの積によって定義される
+のことである．
+このとき
 \[
-|I| := \prod_{k=1}^d |I_k| = (b_1-a_1) \times \cdots \times (b_d - a_d).
+m_J(E) := \sum_{j=1}^n |Q_j|
 \]
-$d=1,2,3$のときはそれぞれ長さ，面積，体積という．
+と定める．
 \end{definition}
 
-\begin{definition}
-    $\RR^d$の基本集合（区間塊）とは，
-    有限個の区間$I_i$の合併（和集合）\[\bigcup_{i=1}^n I_i\]である．
-\end{definition}
-
-基本集合を定める要素区間$I_i$は互いに交わっていてもよい．
-ただし，$\RR^d$の基本集合は，有限個の互いに交わらない区間の合併として書ける．
-
-\begin{lemma}[]
-    任意の基本集合$A := \cup_{i=1}^n I_i$に対し，$J_j \cap J_k = \empty (j \neq k)$ なる有限個の区間が存在して，
-\[
-A := \bigcup_{i=1}^n I_i = \bigsqcup_{j=1}^m J_j
-\]
-とできる．特に，その測度の和$\sum_{j=1}^m |J_j|$は区間の取り方に依らない．
+\begin{lemma}[格子分割]
+有限個の有界長方体の合併は，基本集合として書き直せる．
+特に，基本集合の表示に現れる長方体の端点を全て集めて格子分割を取れば，
+その各小長方体は元の集合に含まれるか，さもなくば交わらないかのいずれかである．
 \end{lemma}
+\begin{proof}
+各座標方向ごとに，もとの長方体に現れる全ての端点を
+\[
+a_k = t_{k,0} < t_{k,1} < \cdots < t_{k,N_k} = b_k
+\]
+と並べる．
+すると格子の小長方体
+\[
+\prod_{k=1}^d [t_{k,i_k-1},t_{k,i_k})
+\]
+は，各座標方向で元の端点をまたがないので，
+もとの各長方体に対して「丸ごと含まれる」か「全く交わらない」かのどちらかである．
+したがって，有限個の長方体の合併は，そのうち必要な小長方体だけを集めた基本集合として表せる．
+\end{proof}
 
-\begin{definition}
-    基本集合$A \subset \RR^d$の測度$m(A)$を，非交和分解の要素区間の和で定義する
-    \[
-    m(A) := \sum_{i=1}^n |I_i|, \quad A = \bigsqcup_{i=1}^n I_i.
-    \]
-\end{definition}
-
-\begin{theorem}
-    %%% 単調性，有限劣加法性，（非交和のとき）有限加法性．
+\begin{theorem}[基本集合の測度の性質]
+基本集合 $E,F \subset \RR^d$ に対して次が成り立つ．
+\begin{enumerate}
+    \item $m_J(E) \ge 0$，特に $m_J(\emptyset)=0$
+    \item $E \subset F$ ならば $m_J(E) \le m_J(F)$
+    \item $E \cap F = \emptyset$ ならば $m_J(E \sqcup F) = m_J(E) + m_J(F)$
+    \item 任意の $c \in \RR^d$ に対して $m_J(E+c) = m_J(E)$
+\end{enumerate}
 \end{theorem}
+\begin{proof}
+$E,F$ を共通の格子分割で書き直せば，
+どちらも同じ小半開長方体の有限個の合併として表せる．
+すると $m_J$ は「含まれている小長方体の体積を足し上げる」という形になるので，
+非負性，単調性，有限加法性は直ちに従う．
+また平行移動は各小長方体の辺の長さを変えないから，体積も変わらない．
+\end{proof}
 
-\section{$\RR^d$のRiemann積分}
-%Riemann積分の基礎にあるのは，区間$[a,b]$の分割$\mathcal{P}$と，区間の体積すなわち長さである．
-$d$次元Euclid空間$\RR^d$上のRiemann積分は，区間$[a,b]$の代わりに有限区間$I = [a_1,b_1] \times \cdots \times [a_d,b_d]$を基礎集合として定義される．
-区間$[a,b]$の分割$\mathcal{P}$は，有限区間$[a_1,b_1] \times \cdots \times [a_d,b_d]$の（重なりのない）有限分割$\mathcal{P}$に一般化される．
+\section{\texorpdfstring{$\RR^d$}{Rd}のRiemann積分}
+
+第1章の1次元Riemann積分は，そのまま $d$ 次元へ拡張できる．
+積分区間としては有界閉長方体
 \[
-\mathcal P : I = \bigsqcup_{j=1}^m J_j
+I = [a_1,b_1] \times \cdots \times [a_d,b_d]
 \]
-区間$[a,b]$の長さは，$d$次元の体積に一般化される．
+を取り，分割 $\calP$ は各座標方向の有限分割から得られる有限個の小長方体の族
 \[
-|\prod_{i=1}^d [a_i, b_i]| := \prod_{i=1}^d (b_i - a_i).
+I = \bigsqcup_{j=1}^N R_j
 \]
-これを有限区間の測度という．$d=1,2,3$のときは，それぞれ長さ，面積，体積と呼ばれる．
-
-これらを用いて，Riemann和とDarbouxの上（下）和は以下のように定義される．
+とする．
+分割の大きさは
 \[
-S(f,\mathcal P, t) := \sum_{j=1}^m f(t_j) |J_j|, \quad U(f,\mathcal P) := \sum_{j=1}^m \sup_{x \in J_j} f(x) |J_j|, \quad L(f,\mathcal P) := \sum_{j=1}^m \inf_{x \in J_j} f(x) |J_j|.
+|\calP| := \max_{1 \le k \le d,\ 1 \le i \le n_k} (x_{k,i}-x_{k,i-1})
 \]
-Riemann積分とDarbouxの上（下）積分は，これらの和の極限をとることで定義される．
+で測る．
+
+有界関数 $f : I \to \RR$ に対し，各小長方体 $R_j$ から評価点 $t_j \in R_j$ を選んで
 \[
-\int_I f(x)dx := \lim_{|\mathcal P| \to 0} S(f,\mathcal P, t), \quad \uint{I}{} f(x) dx := \inf_{\mathcal P} U(f,\mathcal P), \quad \lint{I}{} f(x) dx := \sup_{\mathcal P} L(f,\mathcal P).
+S(f,\calP,t) := \sum_{j=1}^N f(t_j)\,|R_j|
 \]
+をRiemann和という．
+またDarbouxの上和・下和を
+\[
+U(f,\calP) := \sum_{j=1}^N \sup_{x \in R_j} f(x)\,|R_j|,
+\qquad
+L(f,\calP) := \sum_{j=1}^N \inf_{x \in R_j} f(x)\,|R_j|
+\]
+で定める．
 
-\section{Jordan測度}%（有限加法的測度）}
+特に $f = 1_A$ のとき，各小長方体上での上限と下限は $0$ か $1$ しか取らないので，
+\[
+U(1_A,\calP)
+= \sum_{R_j \cap A \neq \emptyset} |R_j|,
+\qquad
+L(1_A,\calP)
+= \sum_{R_j \subset A} |R_j|
+\]
+となる．
+つまり，指示関数の上和と下和は，
+分割に沿って $A$ を外側・内側から近似する基本集合の体積そのものである．
+これがJordan測度の出発点である．
 
-指示関数$1_A$のRiemann積分を計算する過程では，集合$A$を覆う非交区間$\{I_j\}_{j=1}^m$が自然に現れる．
-特に，Darboux式の上積分と下積分に対応するものとして，外測度と内測度が定義される．
+\section{Jordan外測度・Jordan内測度}
 
-\begin{definition}[Jordanの外測度と内測度]
-    集合$A \subset \RR^d$のJordan外測度$m^*(A)$は，集合$A$を覆う有限個の区間の体積の和の下限として定義される．
-    \[
-    m^*(A) := \inf \left\{ \sum_{i=1}^n |J_i| : A \subset \bigcup_{i=1}^n J_i, J_i \text{は区間} \right\}.
-    \]
-    集合$A \subset \RR^d$のJordan内測度$m_*(A)$は，集合$A$に含まれる有限個の区間の体積の和の上限として定義される．
-    \[
-    m_*(A) := \sup \left\{ \sum_{i=1}^n |J_i| : A \supset \bigcup_{i=1}^n J_i, J_i \text{は区間} \right\}.
-    \]    
+\begin{definition}[Jordan外測度とJordan内測度]
+集合 $A \subset \RR^d$ に対し，
+\[
+m_J^*(A)
+:=
+\inf\{m_J(E) \mid E \text{ は基本集合},\ A \subset E\}
+\]
+をJordan外測度，
+\[
+m_{J,*}(A)
+:=
+\sup\{m_J(E) \mid E \text{ は基本集合},\ E \subset A\}
+\]
+をJordan内測度という．
 \end{definition}
 
-作り方から，以下が成り立つ．
+\begin{remark}
+Jordan理論は本質的に有界集合の理論である．
+実際，$A$ が有界でなければ，有限個の長方体で $A$ 全体を覆えないので
+$m_J^*(A)=\infty$ となる．
+後のLebesgue測度では，可算個の長方体を使えるため，
+この有界性の制約が大きく緩和される．
+\end{remark}
+
+\begin{proposition}
+任意の集合 $A \subset \RR^d$ に対して
 \[
-m_*(A) = \lint{I}{} 1_A(x) dx \le \uint{I}{} 1_A(x) dx = m^*(A).
+m_{J,*}(A) \le m_J^*(A)
 \]
-さらに，外測度と内測度が等しいとき，集合$A$はJordanの意味で可測（measurable）であるという．
-%このとき，集合$A$のJordan測度$m(A)$は，外測度と内測度の共通値として定義される．
-\begin{definition}[Jordan可測]
-    集合$A \subset \RR^d$がJordan可測であるとは，$m^*(A) = m_*(A)$が成り立つことをいう．このとき，集合$A$のJordan測度$m_J(A)$は，外測度と内測度の共通値として定義される．
+が成り立つ．
+\end{proposition}
+\begin{proof}
+$A$ を含む基本集合が存在しなければ $m_J^*(A)=\infty$ であり自明である．
+そうでないとき，$E \subset A \subset F$ を満たす基本集合 $E,F$ に対して
+基本集合の単調性より $m_J(E) \le m_J(F)$ である．
+左辺で上限を，右辺で下限を取ればよい．
+\end{proof}
+
+\begin{definition}[Jordan可測，Jordan零集合]
+有界集合 $A \subset \RR^d$ がJordan可測であるとは
+\[
+m_{J,*}(A) = m_J^*(A)
+\]
+が成り立つことをいう．
+その共通値を $A$ のJordan測度と書き，$m_J(A)$ で表す．
+
+また $m_J^*(N)=0$ を満たす集合 $N$ をJordan零集合という．
 \end{definition}
+
+\begin{lemma}
+基本集合の境界はJordan零集合である．
+\end{lemma}
+\begin{proof}
+まず半開長方体
+\[
+Q = \prod_{k=1}^d [a_k,b_k)
+\]
+について示す．
+$\partial Q$ は有限個の座標超平面片の合併に含まれる：
+\[
+\partial Q \subset
+\bigcup_{k=1}^d
+\Bigl(
+\{x_k=a_k\} \cap \prod_{i=1}^d [a_i,b_i]
+\Bigr)
+\cup
+\bigcup_{k=1}^d
+\Bigl(
+\{x_k=b_k\} \cap \prod_{i=1}^d [a_i,b_i]
+\Bigr).
+\]
+各面は，厚さ $\delta$ の薄い板で覆えるので，
+その被覆の体積は $\delta$ に比例していくらでも小さくできる．
+したがって各面はJordan零であり，有限和である $\partial Q$ もJordan零である．
+基本集合の境界は有限個の半開長方体の境界の和集合に含まれるから，同様にJordan零である．
+\end{proof}
 
 \begin{theorem}[Jordan可測の判定法]
-    有界集合$A \subset \RR^d$がJordan可測であることと，集合$A$の境界$\partial A$のJordan測度が0であることは同値である．
+有界集合 $A \subset \RR^d$ と，それを含む有界閉長方体 $I$ を取る．
+このとき次は同値である．
+\begin{enumerate}
+    \item $1_A$ は $I$ 上でRiemann可積分である
+    \item $A$ はJordan可測である
+    \item 任意の $\eps > 0$ に対し，基本集合 $F,G$ が存在して
+    \[
+    F \subset A \subset G,
+    \qquad
+    m_J(G \setminus F) < \eps
+    \]
+    を満たす
+    \item 境界 $\partial A := \cl A \setminus \intr A$ はJordan零集合である
+\end{enumerate}
 \end{theorem}
 \begin{proof}
-    $\Rightarrow$：集合$A$がJordan可測であるとする．
-    任意の$\varepsilon > 0$に対して，集合$A$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
-    \[\sum_{i=1}^n |J_i| < m^*(A) + \varepsilon.\]
-    このとき，集合$A$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
-    \[\sum_{i=1}^m |K_i| > m_*(A) - \varepsilon.\]
-    したがって，集合$A$の境界$\partial A$は，区間の列$\{J_i\}_{i=1}^n$と$\{K_i\}_{i=1}^m$の和集合で覆われる．
-    \[\partial A \subset \left( \bigcup_{i=1}^n J_i \right) \cup \left( \bigcup_{i=1}^m K_i \right).\]
-    よって，集合$A$の境界$\partial A$のJordan測度は0である．
+\textbf{(1) $\Rightarrow$ (3)}\quad
+$1_A$ がRiemann可積分なら，Darbouxの判定法により，
+任意の $\eps > 0$ に対して
+\[
+U(1_A,\calP) - L(1_A,\calP) < \eps
+\]
+となる分割 $\calP$ が取れる．
+この分割に対し
+\[
+F := \bigcup_{R_j \subset A} R_j,
+\qquad
+G := \bigcup_{R_j \cap A \neq \emptyset} R_j
+\]
+とおけば，$F,G$ は基本集合で
+$F \subset A \subset G$ かつ
+\[
+m_J(G \setminus F)
+=
+U(1_A,\calP) - L(1_A,\calP)
+< \eps
+\]
+である．
 
-    $\Leftarrow$：集合$A$の境界$\partial A$のJordan測度が0であるとする．
-    任意の$\varepsilon > 0$に対して，集合$A$の境界$\partial A$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
-    \[\sum_{i=1}^n |J_i| < \varepsilon.\]
-    このとき，集合$A$を覆う区間の列$\{K_i\}_{i=1}^m$が存在して，
-    \[\sum_{i=1}^m |K_i| < m^*(A) + \varepsilon.\]
-    したがって，集合$A$に含まれる区間の列$\{L_i\}_{i=1}^l$が存在して，
-    \[\sum_{i=1}^l |L_i| > m_*(A) - \varepsilon.\]
-    よって，集合$A$のJordan測度は$m^*(A) = m_*(A)$である．
+\textbf{(3) $\Rightarrow$ (1)}\quad
+$F \subset A \subset G$ を満たす基本集合 $F,G$ を取る．
+格子分割を共通に細分すれば，$F$ と $G$ がいずれも分割の小長方体の合併になる分割 $\calP$ が作れる．
+そのとき
+\[
+L(1_A,\calP) \ge m_J(F),
+\qquad
+U(1_A,\calP) \le m_J(G)
+\]
+だから
+\[
+U(1_A,\calP) - L(1_A,\calP)
+\le m_J(G \setminus F)
+< \eps.
+\]
+ゆえに $1_A$ はRiemann可積分である．
+
+\textbf{(2) $\Leftrightarrow$ (3)}\quad
+$A$ がJordan可測で，共通値を $m_J(A)$ とする．
+定義より，任意の $\eps > 0$ に対して基本集合 $F,G$ を
+\[
+F \subset A \subset G,
+\qquad
+m_J(F) > m_J(A)-\frac{\eps}{2},
+\qquad
+m_J(G) < m_J(A)+\frac{\eps}{2}
+\]
+となるように取れる．
+すると
+\[
+m_J(G \setminus F) = m_J(G)-m_J(F) < \eps
+\]
+である．
+逆に (3) が成り立てば
+\[
+m_J^*(A)-m_{J,*}(A)
+\le m_J(G)-m_J(F)
+= m_J(G \setminus F)
+< \eps
+\]
+となるので，$\eps$ の任意性から $m_J^*(A)=m_{J,*}(A)$ である．
+
+\textbf{(3) $\Rightarrow$ (4)}\quad
+$F \subset A \subset G$ とすると
+\[
+\partial A \subset \cl G \setminus \intr F
+\subset (G \setminus F) \cup \partial G \cup \partial F.
+\]
+ここで $\partial F,\partial G$ はJordan零集合であるから，
+\[
+m_J^*(\partial A)
+\le m_J(G \setminus F) + m_J^*(\partial G) + m_J^*(\partial F)
+= m_J(G \setminus F)
+< \eps
+\]
+が従う．
+したがって $\partial A$ はJordan零である．
+
+\textbf{(4) $\Rightarrow$ (3)}\quad
+$\partial A$ がJordan零集合なので，
+任意の $\eps > 0$ に対して
+\[
+\partial A \subset H,
+\qquad
+H \text{ は基本集合},
+\qquad
+m_J(H) < \eps
+\]
+となる基本集合 $H$ が存在する．
+いま
+\[
+K := \cl A \setminus H
+\]
+とおくと，$\cl A \setminus \partial A = \intr A$ より $K \subset \intr A$ である．
+$K$ はコンパクトで $\intr A$ は開集合だから，
+$K$ を有限個の小半開長方体で覆って，その合併 $F$ を
+\[
+K \subset F \subset \intr A \subset A
+\]
+となるように取れる．
+すると $A \subset F \cup H$ なので，
+$G := F \cup H$ とおけば基本集合で
+\[
+F \subset A \subset G,
+\qquad
+G \setminus F \subset H
+\]
+が成り立つ．
+したがって
+\[
+m_J(G \setminus F) \le m_J(H) < \eps.
+\]
 \end{proof}
 
-%境界は常に閉集合であるから，Jordan可測集合はほとんど開集合であるといえる．
-\begin{theorem}[Jordan可測集合の性質]
-    集合$A \subset \RR^d$がJordan可測であるとする．このとき，集合$A$はある開集合$U$とある閉集合$F$を用いて，$F \subset A \subset U$を満たす．さらに，集合$A$のJordan測度は，集合$U$のJordan測度と集合$F$のJordan測度の共通値である．
-\end{theorem}
+\begin{corollary}
+有界集合 $A \subset I$ がJordan可測であるとき，
+\[
+\int_I 1_A(x)\,dx = m_J(A)
+\]
+が成り立つ．
+\end{corollary}
+\begin{proof}
+上の定理より $1_A$ はRiemann可積分である．
+さらに基本集合 $F,G$ による近似に対して
+\[
+m_J(F) \le \int_I 1_A(x)\,dx \le m_J(G)
+\]
+が成り立つので，$m_J(G \setminus F)$ を $0$ に近づければ
+積分値は $m_J(A)$ に一致する．
+\end{proof}
+
+\begin{example}
+\begin{enumerate}
+    \item 基本集合はJordan可測であり，そのJordan測度は最初に定めた $m_J$ に一致する
+    \item 有限集合はJordan零集合である
+    \item 線分や超平面片など，$\RR^d$ の中で厚みをもたない典型的な図形はJordan零集合である
+\end{enumerate}
+\end{example}
+\begin{proof}
+\begin{enumerate}
+    \item 基本集合 $E$ 自身を内側近似と外側近似に取れば
+    $m_{J,*}(E)=m_J^*(E)=m_J(E)$ である
+    \item 1点集合は十分小さい長方体1つで覆えるのでJordan零である．有限集合はその有限和である
+    \item 例えば超平面片 $\{x_d=0\} \cap [-M,M]^d$ は厚さ $\delta$ の板
+    \[
+    [-M,M]^{d-1} \times [-\delta,\delta]
+    \]
+    で覆えるのでJordan零である．線分も同様に細い長方体で覆える
+\end{enumerate}
+\end{proof}
+
+\begin{remark}
+差が最も見えやすい例は
+\[
+A = [0,1] \cap \QQ
+\]
+である．
+各点集合 $\{q\}$ はJordan零集合だが，
+$A$ は $[0,1]$ の中で稠密なので
+\[
+\partial A = [0,1]
+\]
+となり，Jordan可測ではない．
+したがってJordan可測集合は可算和で閉じていない．
+
+一方で，後に導入するLebesgue測度では
+$A$ は可測で，しかも測度 $0$ をもつ．
+ここに「有限分割に基づく理論」と「可算分割に耐える理論」の違いが現れる．
+\end{remark}
+
+\begin{remark}
+上の例は「有界集合でもJordan可測とは限らない」ことを示すが，
+この集合は閉集合ではない．
+閉集合や開集合が必ずJordan可測だと言っているわけでもないことに注意する．
+Jordan可測性の本質は，開閉ではなく
+「境界がJordan零かどうか」にある．
+\end{remark}
 
 \section{Jordan測度の性質}
+
+\begin{theorem}[Jordan可測集合の閉性]
+Jordan可測集合 $A,B \subset \RR^d$ と $c \in \RR^d$ に対して，
+\[
+A \cup B,\qquad
+A \cap B,\qquad
+A \setminus B,\qquad
+A+c
+\]
+は再びJordan可測である．
+\end{theorem}
+\begin{proof}
+境界について
+\[
+\partial(A \cup B) \subset \partial A \cup \partial B,
+\qquad
+\partial(A \cap B) \subset \partial A \cup \partial B,
+\]
+\[
+\partial(A \setminus B) \subset \partial A \cup \partial B,
+\qquad
+\partial(A+c) = \partial A + c
+\]
+が成り立つ．
+Jordan零集合の有限和と平行移動は再びJordan零集合だから，
+判定法より各集合はJordan可測である．
+\end{proof}
+
 \begin{theorem}[Jordan測度の性質]
-    集合$A \subset \RR^d$がJordan可測であるとする．このとき，集合$A$のJordan測度は以下の性質を満たす．
-    \begin{itemize}
-        \item $m_J(A) \ge 0$
-        \item $m_J(\emptyset) = 0$
-        \item $A \subset B$ならば$m_J(A) \le m_J(B)$
-        \item $m_J(A) = m_J(\overline{A})$（$\overline{A}$は集合$A$の閉包）
-        \item $m_J(A) = m_J(\mathrm{int}(A))$（$\mathrm{int}(A)$は集合$A$の内部）
-    \end{itemize}
-\end{theorem}
-\begin{proof}
-    \begin{itemize}
-    \item $m_J(A) \ge 0$：集合$A$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
-    \[\sum_{i=1}^n |J_i| < m^*(A) + \varepsilon.\]
-    このとき，集合$A$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
-    \[\sum_{i=1}^m |K_i| > m_*(A) - \varepsilon.\]
-    したがって，集合$A$のJordan測度は0以上である．
-    \item $m_J(\emptyset) = 0$：空集合$\emptyset$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
-    \[\sum_{i=1}^n |J_i| < \varepsilon.\]
-    このとき，空集合$\emptyset$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
-    \[\sum_{i=1}^m |K_i| > -\varepsilon.\]
-    したがって，空集合$\emptyset$のJordan測度は0である．
-    \item $A \subset B$ならば$m_J(A) \le m_J(B)$：集合$B$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
-    \[\sum_{i=1}^n |J_i| < m^*(B) + \varepsilon.\]
-    このとき，集合$A$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
-    \[\sum_{i=1}^m |K_i| > m_*(A) - \varepsilon.\]
-    したがって，集合$A$のJordan測度は集合$B$のJordan測度以下である．
-    \item $m_J(A) = m_J(\overline{A})$：集合$A$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
-    \[\sum_{i=1}^n |J_i| < m^*(A) + \varepsilon.\]
-    このとき，集合$\overline{A}$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
-    \[\sum_{i=1}^m |K_i| > m_*(\overline{A}) - \varepsilon.\]
-    したがって，集合$A$のJordan測度は集合$\overline{A}$のJordan測度以上である．逆に，集合$\overline{A}$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
-    \[\sum_{i=1}^n |J_i| < m^*(\overline{A}) + \varepsilon.\]
-    このとき，集合$A$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
-    \[\sum_{i=1}^m |K_i| > m_*(A) - \varepsilon.\]
-    したがって，集合$A$のJordan測度は集合$\overline{A}$のJordan測度以下である．
-    \item $m_J(A) = m_J(\mathrm{int}(A))$：集合$A$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
-    \[\sum_{i=1}^n |J_i| < m^*(A) + \varepsilon.\]
-    このとき，集合$\mathrm{int}(A)$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
-    \[\sum_{i=1}^m |K_i| > m_*(\mathrm{int}(A)) - \varepsilon.\]
-    したがって，集合$A$のJordan測度は集合$\mathrm{int}(A)$のJordan測度以上である．逆に，集合$\mathrm{int}(A)$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
-    \[\sum_{i=1}^n |J_i| < m^*(\mathrm{int}(A)) + \varepsilon.\]
-    このとき，集合$A$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
-    \[\sum_{i=1}^m |K_i| > m_*(A) - \varepsilon.\]
-    したがって，集合$A$のJordan測度は集合$\mathrm{int}(A)$のJordan測度以下である．      
-    \end{itemize}
-\end{proof}
-\begin{theorem}[Jordan測度の有限加法性]
-    集合$A, B \subset \RR^d$がJordan可測であるとする．このとき，集合$A \cup B$もJordan可測であり，さらに，
+Jordan可測集合 $A,B \subset \RR^d$ と $c \in \RR^d$ に対して次が成り立つ．
+\begin{enumerate}
+    \item $m_J(A) \ge 0$，特に $m_J(\emptyset)=0$
+    \item $A \subset B$ ならば $m_J(A) \le m_J(B)$
+    \item $A \cap B = \emptyset$ ならば
     \[
-    m_J(A \cup B) = m_J(A) + m_J(B) - m_J(A \cap B).
+    m_J(A \sqcup B) = m_J(A) + m_J(B)
     \]
+    が成り立つ
+    \item 一般に
+    \[
+    m_J(A \cup B) = m_J(A) + m_J(B) - m_J(A \cap B)
+    \]
+    が成り立つ
+    \item $m_J(A+c)=m_J(A)$
+    \item $m_J(\cl A)=m_J(A)=m_J(\intr A)$
+\end{enumerate}
 \end{theorem}
 \begin{proof}
-    集合$A \cup B$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
-    \[\sum_{i=1}^n |J_i| < m^*(A \cup B) + \varepsilon.\]
-    このとき，集合$A$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
-    \[\sum_{i=1}^m |K_i| > m_*(A) - \varepsilon.\]
-    さらに，集合$B$に含まれる区間の列$\{L_i\}_{i=1}^l$が存在して，
-    \[\sum_{i=1}^l |L_i| > m_*(B) - \varepsilon.\]
-    したがって，集合$A \cup B$のJordan測度は以下のように評価できる．
-    \begin{align*}
-        m_J(A \cup B) &\le m^*(A \cup B) \\
-        &\le m^*(A) + m^*(B) - m^*(A \cap B) \\
-        &\le m_J(A) + m_J(B) - m_J(A \cap B) + 2\varepsilon.
-    \end{align*}
-    逆に，集合$A \cup B$を覆う区間の列$\{J_i\}_{i=1}^n$が存在して，
-    \[\sum_{i=1}^n |J_i| < m^*(A \cup B) + \varepsilon.\]
-    このとき，集合$A$に含まれる区間の列$\{K_i\}_{i=1}^m$が存在して，
-    \[\sum_{i=1}^m |K_i| > m_*(A) - \varepsilon.\]
-    さらに，集合$B$に含まれる区間の列$\{L_i\}_{i=1}^l$が存在して，
-    \[\sum_{i=1}^l |L_i| > m_*(B) - \varepsilon.\]
-    したがって，集合$A \cup B$のJordan測度は以下のように評価できる．
-    \begin{align*}
-        m_J(A \cup B) &\ge m_*(A \cup B) \\
-        &\ge m_*(A) + m_*(B) - m_*(A \cap B) \\
-        &\ge m_J(A) + m_J(B) - m_J(A \cap B) - 2\varepsilon.
-    \end{align*}
-    以上より，集合$A \cup B$のJordan測度は集合$A$のJordan測度と集合$B$のJordan測度と集合$A \cap B$のJordan測度を用いて，$m_J(A \cup B) = m_J(A) + m_J(B) - m_J(A \cap B)$と表される．
+\begin{enumerate}
+    \item 外測度の定義から明らかである．また $\emptyset$ は基本集合なので測度は $0$ である
+    \item $A \subset B$ ならば，$B$ を覆う基本集合はすべて $A$ も覆うので
+    $m_J^*(A) \le m_J^*(B)$ である．
+    両者はJordan可測だから
+    \[
+    m_J(A)=m_J^*(A) \le m_J^*(B)=m_J(B)
+    \]
+    となる
+    \item ある有界閉長方体 $I$ が $A \cup B$ を含むように取る．
+    すると
+    \[
+    1_{A \sqcup B} = 1_A + 1_B
+    \]
+    であり，左辺右辺はいずれも $I$ 上Riemann可積分である．
+    よって第1章の積分の線形性から
+    \[
+    m_J(A \sqcup B)
+    = \int_I 1_{A \sqcup B}(x)\,dx
+    = \int_I 1_A(x)\,dx + \int_I 1_B(x)\,dx
+    = m_J(A)+m_J(B)
+    \]
+    を得る
+    \item 恒等式
+    \[
+    1_{A \cup B} = 1_A + 1_B - 1_{A \cap B}
+    \]
+    を積分すればよい
+    \item 基本集合の体積は平行移動不変なので，$m_J^*(A+c)=m_J^*(A)$，
+    $m_{J,*}(A+c)=m_{J,*}(A)$ が成り立つ．
+    よってJordan測度も不変である
+    \item
+    \[
+    \intr A \subset A \subset \cl A,
+    \qquad
+    \cl A \setminus \intr A = \partial A
+    \]
+    であり，$\partial A$ はJordan零集合である．
+    したがって (2), (3) より
+    \[
+    m_J(\cl A) = m_J(A) = m_J(\intr A)
+    \]
+    が従う
+\end{enumerate}
 \end{proof}
+
 \begin{remark}
-    上の定理は，集合$A$と集合$B$が互いに素であるとき，集合$A \cup B$のJordan測度は集合$A$のJordan測度と集合$B$のJordan測度の和になることを意味する．
-\end{remark}
-\begin{theorem}[Jordan測度の有限加法性の一般化]
-    集合$A_1, A_2, \ldots, A_n \subset \RR^d$がJordan可測であるとする．このとき，集合$\bigcup_{i=1}^n A_i$もJordan可測であり，さらに，
-    \[m_J\left( \bigcup_{i=1}^n A_i \right) = \sum_{i=1}^n m_J(A_i) - \sum_{1 \le i < j \le n} m_J(A_i \cap A_j) + \cdots + (-1)^{n-1} m_J\left( \bigcap_{i=1}^n A_i \right).\]
-\end{theorem}
-\begin{proof}
-    集合$\bigcup_{i=1}^n A_i$を覆う区間の列$\{J_i\}_{i=1}^m$が存在して
-    \[\sum_{i=1}^m |J_i| < m^*\left( \bigcup_{i=1}^n A_i \right) + \varepsilon.\]
-    このとき，集合$A_i$に含まれる区間の列$\{K_i^{(j)}\}_{i=1}^{m_j}$が存在して  
-    \[\sum_{i=1}^{m_j} |K_i^{(j)}| > m_*(A_j) - \varepsilon.\]
-    したがって，集合$\bigcup_{i=1}^n A_i$のJordan測度は以下のように評価できる．
-    \begin{align*}
-        m_J\left( \bigcup_{i=1}^n A_i \right) &\le m^*\left( \bigcup_{i=1}^n A_i \right) \\
-        &\le \sum_{i=1}^n m^*(A_i) - \sum_{1 \le i < j \le n} m^*(A_i \cap A_j) + \cdots + (-1)^{n-1} m^*\left( \bigcap_{i=1}^n A_i \right) \\
-        &\le \sum_{i=1}^n m_J(A_i) - \sum_{1 \le i < j \le n} m_J(A_i \cap A_j) + \cdots + (-1)^{n-1} m_J\left( \bigcap_{i=1}^n A_i \right) + 2^n \varepsilon.
-    \end{align*}
-    逆に，集合$\bigcup_{i=1}^n A_i$を覆う区間の列$\{J_i\}_{i=1}^m$が存在して
-    \[\sum_{i=1}^m |J_i| < m^*\left( \bigcup_{i=1}^n A_i \right) + \varepsilon.\]
-    このとき，集合$A_i$に含まれる区間の列$\{K_i^{(j)}\}_{i=1}^{m_j}$が存在して  
-    \[\sum_{i=1}^{m_j} |K_i^{(j)}| > m_*(A_j) - \varepsilon.\]
-    したがって，集合$\bigcup_{i=1}^n A_i$のJordan測度は以下のように評価できる．
-    \begin{align*}
-        m_J\left( \bigcup_{i=1}^n A_i \right) &\ge m_*\left( \bigcup_{i=1}^n A_i \right) \\
-        &\ge \sum_{i=1}^n m_*(A_i) - \sum_{1 \le i < j \le n} m_*(A_i \cap A_j) + \cdots + (-1)^{n-1} m_*\left( \bigcap_{i=1}^n A_i \right) \\
-        &\ge \sum_{i=1}^n m_J(A_i) - \sum_{1 \le i < j \le n} m_J(A_i \cap A_j) + \cdots + (-1)^{n-1} m_J\left( \bigcap_{i=1}^n A_i \right) - 2^n \varepsilon.
-    \end{align*}
-    以上より，集合$\bigcup_{i=1}^n A_i$のJordan測度は集合$A_i$のJordan測度を用いて，$m_J\left( \bigcup_{i=1}^n A_i \right) = \sum_{i=1}^n m_J(A_i) - \sum_{1 \le i < j \le n} m_J(A_i \cap A_j) + \cdots + (-1)^{n-1} m_J\left( \bigcap_{i=1}^n A_i \right)$と表される．
-\end{proof}
-\begin{remark}
-    上の定理は，集合$A_1, A_2, \ldots, A_n$が互いに素であるとき，集合$\bigcup_{i=1}^n A_i$のJordan測度は集合$A_i$のJordan測度の和になることを意味する．
+Jordan測度は，Jordan可測集合の上では
+「有限加法的な体積」として振る舞う．
+しかし，その本質はあくまで有限加法性であり，
+可算個の集合を同時に扱うところで理論が止まる．
+ここが後のLebesgue測度との最大の違いである．
 \end{remark}
 
 \section{有限加法族}
-Jordan可測集合の観察をもとに，有限加法族を定義する．
+
 \begin{definition}[有限加法族]
-    集合$X$の部分集合の族$\mathcal{F}$が有限加法族であるとは，以下の条件を満たすことをいう．
-    \begin{itemize}
-        \item $\emptyset \in \mathcal{F}$
-        \item $A \in \mathcal{F}$ならば$X \setminus A \in \mathcal{F}$
-        \item $A, B \in \mathcal{F}$ならば$A \cup B \in \mathcal{F}$
-    \end{itemize}
+集合 $X$ の部分集合族 $\calA \subset \mathcal P(X)$ が有限加法族であるとは，
+次の3条件を満たすことをいう．
+\begin{enumerate}
+    \item $\emptyset \in \calA$
+    \item $A \in \calA$ ならば $X \setminus A \in \calA$
+    \item $A,B \in \calA$ ならば $A \cup B \in \calA$
+\end{enumerate}
+有限加法族は集合代数（algebra of sets）とも呼ばれる．
 \end{definition}
-\begin{theorem}[有限加法族の性質]
-    集合$X$の部分集合の族$\mathcal{F}$が有限加法族であるとする．このとき，以下の性質が成り立つ．
-    \begin{itemize}
-        \item $A, B \in \mathcal{F}$ならば$A \cap B \in \mathcal{F}$
-        \item $A_1, A_2, \ldots, A_n \in \mathcal{F}$ならば$\bigcup_{i=1}^n A_i \in \mathcal{F}$
-        \item $A_1, A_2, \ldots, A_n \in \mathcal{F}$ならば$\bigcap_{i=1}^n A_i \in \mathcal{F}$
-    \end{itemize}
-\end{theorem}
+
+\begin{proposition}[有限加法族の基本性質]
+$\calA$ が $X$ 上の有限加法族ならば，任意の $A,B,A_1,\dots,A_n \in \calA$ に対して
+\begin{enumerate}
+    \item $X \in \calA$
+    \item $A \cap B \in \calA$
+    \item $A \setminus B \in \calA$
+    \item $\bigcup_{k=1}^n A_k \in \calA$
+    \item $\bigcap_{k=1}^n A_k \in \calA$
+\end{enumerate}
+が成り立つ．
+\end{proposition}
 \begin{proof}
-    $A, B \in \mathcal{F}$ならば$A \cap B \in \mathcal{F}$：$A, B \in \mathcal{F}$ならば$X \setminus A, X \setminus B \in \mathcal{F}$であるから，$X \setminus (A \cap B) = (X \setminus A) \cup (X \setminus B) \in \mathcal{F}$である．
-    $A_1, A_2, \ldots, A_n \in \mathcal{F}$ならば$\bigcup_{i=1}^n A_i \in \mathcal{F}$：$A_1, A_2, \ldots, A_n \in \mathcal{F}$ならば$X \setminus A_1, X \setminus A_2, \ldots, X \setminus A_n \in \mathcal{F}$であるから，$X \setminus \left( \bigcup_{i=1}^n A_i \right) = \bigcap_{i=1}^n (X \setminus A_i) \in \mathcal{F}$である．
-    $A_1, A_2, \ldots, A_n \in \mathcal{F}$ならば$\bigcap_{i=1}^n A_i \in \mathcal{F}$：$A_1, A_2, \ldots, A_n \in \mathcal{F}$ならば$X \setminus A_1, X \setminus A_2, \ldots, X \setminus A_n \in \mathcal{F}$であるから，$X \setminus \left( \bigcap_{i=1}^n A_i \right) = \bigcup_{i=1}^n (X \setminus A_i) \in \mathcal{F}$である．
+\[
+X = X \setminus \emptyset,
+\qquad
+A \cap B = X \setminus \bigl((X \setminus A) \cup (X \setminus B)\bigr),
+\qquad
+A \setminus B = A \cap (X \setminus B)
+\]
+だから，(1)--(3) は補集合と和集合についての閉性から従う．
+(4), (5) はこれを有限回繰り返せばよい．
 \end{proof}
-\begin{remark}
-    上の定理は，有限加法族が集合の交わりや集合の和に対して閉じていることを意味する．
-\end{remark}
+
+\begin{definition}[有限加法的集合関数]
+有限加法族 $\calA$ 上の集合関数 $\mu : \calA \to [0,\infty)$ が有限加法的であるとは，
+$A,B \in \calA$ が互いに素であるとき
+\[
+\mu(A \sqcup B) = \mu(A)+\mu(B)
+\]
+が成り立つことをいう．
+\end{definition}
+
 \begin{theorem}[Jordan可測集合の有限加法族]
-    $\RR^d$のJordan可測集合の全体は，$\RR^d$の部分集合の有限加法族をなす．
+有界Jordan可測集合 $X \subset \RR^d$ を固定し，
+\[
+\calA_X := \{A \subset X \mid A \text{ はJordan可測}\}
+\]
+とおく．
+このとき $\calA_X$ は $X$ 上の有限加法族であり，
+$m_J : \calA_X \to [0,\infty)$ は有限加法的である．
 \end{theorem}
 \begin{proof}
-    $\emptyset$はJordan可測である．
-    集合$A$がJordan可測であるとする．このとき，集合$A$の境界$\partial A$のJordan測度は0である．
-    集合$A$の補集合$\RR^d \setminus A$の境界は集合$A$の境界$\partial A$と等しいから，集合$\RR^d \setminus A$の境界のJordan測度も0である．したがって，集合$\RR^d \setminus A$もJordan可測である．
-    集合$A, B$がJordan可測であるとする．このとき，集合$A \cup B$の境界は集合$A$の境界と集合$B$の境界の和集合に含まれるから，集合$A \cup B$の境界のJordan測度は0である．したがって，集合$A \cup B$もJordan可測である．
+$\emptyset$ はJordan可測である．
+また $A \subset X$ がJordan可測なら
+\[
+\partial(X \setminus A) \subset \partial X \cup \partial A
+\]
+だから $X \setminus A$ もJordan可測である．
+さらに $A,B \subset X$ がJordan可測なら
+\[
+\partial(A \cup B) \subset \partial A \cup \partial B
+\]
+より $A \cup B$ もJordan可測である．
+したがって $\calA_X$ は有限加法族である．
+有限加法性は前節のJordan測度の有限加法性そのものである．
 \end{proof}
+
+\begin{remark}
+注意すべきなのは，
+Jordan可測集合全体をそのまま $\RR^d$ 上で見ても有限加法族にはならないことである．
+補集合を取ると一般に有界性を失うからである．
+したがって，Jordan理論では最初に有界な全体集合 $X$ を固定して
+その内部で議論するのが自然である．
+\end{remark}
+
+\begin{remark}
+さらに $\calA_X$ は一般には $\sigma$-加法族ではない．
+例えば $X=[0,1]$ とし，$\QQ \cap [0,1]=\{q_1,q_2,\dots\}$ と書くと，
+各単点集合 $\{q_n\}$ は $\calA_X$ に属し，
+\[
+m_J(\{q_n\})=0
+\]
+であるが，
+\[
+\bigcup_{n=1}^\infty \{q_n\} = \QQ \cap [0,1]
+\]
+はJordan可測でない．
+この欠点を克服するために，
+次章以降では「有限加法族」を「$\sigma$-加法族」へ，
+Jordan測度をLebesgue測度へと拡張していく．
+\end{remark}
