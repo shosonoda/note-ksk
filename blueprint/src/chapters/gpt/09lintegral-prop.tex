@@ -1,0 +1,560 @@
+\chapter{Lebesgue積分の性質}
+
+\paragraph{本章の目標}
+前章でLebesgue積分を定義した．
+本章では，その積分を実際の計算に使うための基本性質を整理する．
+特に
+\[
+\text{単調性},\qquad \text{線形性},\qquad \text{a.e.\ 不変性},\qquad \text{Chebyshev不等式}
+\]
+を証明し，
+確率論や関数解析で必要になる計算規則を揃える．
+
+\section{動機づけ}
+
+積分を定義しただけでは，まだ計算には使いにくい．
+例えば
+\[
+\int_E(f+g)\,dm,\qquad
+\int_E cf\,dm,\qquad
+\int_{A\sqcup B}f\,dm
+\]
+がどう振る舞うかが分からなければ，
+実際の応用ではほとんど何もできない．
+
+また，Lebesgue積分では
+\[
+f=g \quad \text{a.e.}
+\]
+を同一視してよいことが本質である．
+この原理があるからこそ，零集合上で生じるコーナーケースを気にせず，
+確率変数や関数列を計算できる．
+
+\section{準備：正部分と負部分}
+
+以後，$E \subset \RR^d$ はLebesgue可測集合とし，
+$f,g:E \to \eRR$ は可測関数とする．
+
+\begin{proposition}[基本恒等式]
+任意の可測関数 $f$ に対して
+\[
+f=f^+-f^-,
+\qquad
+|f|=f^++f^-,
+\qquad
+f^+f^-=0
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+$f(x)\ge 0$ のとき
+\[
+f^+(x)=f(x),\qquad f^-(x)=0
+\]
+であり，
+$f(x)<0$ のとき
+\[
+f^+(x)=0,\qquad f^-(x)=-f(x)
+\]
+である．
+したがって各点 $x$ ごとに上の3つの等式が成り立つ．
+\end{proof}
+
+\begin{proposition}[非負関数による表示]
+$f$ が可積分であることと，
+ある非負可積分関数 $u,v$ が存在して
+\[
+f=u-v
+\]
+と書けることは同値である．
+このとき
+\[
+\int_E f\,dm=\int_E u\,dm-\int_E v\,dm
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+前章で示した表示の独立性より，
+$f=u-v$ と書ければ積分値
+\[
+\int_E u\,dm-\int_E v\,dm
+\]
+は表示に依らない．
+
+まず $f$ が可積分なら
+\[
+f=f^+-f^-
+\]
+であり，
+$f^+,f^-$ は非負可積分であるから条件を満たす．
+
+逆に $f=u-v$ と書け，$u,v$ が非負可積分とする．
+このとき
+\[
+f^+\le u,\qquad f^-\le v
+\]
+が成り立つ．
+実際，$f(x)\ge 0$ なら
+\[
+f^+(x)=f(x)=u(x)-v(x)\le u(x)
+\]
+であり，$f(x)<0$ なら $f^+(x)=0\le u(x)$ である．
+$f^-\le v$ も同様である．
+したがって単調性より
+\[
+\int_E f^+\,dm\le \int_E u\,dm<\infty,
+\qquad
+\int_E f^-\,dm\le \int_E v\,dm<\infty.
+\]
+よって $f$ は可積分である．
+\end{proof}
+
+\section{集合に関する性質}
+
+\begin{proposition}[零集合上では積分は消える]
+$m(E)=0$ で $f$ が $E$ 上可積分ならば
+\[
+\int_E f\,dm=0
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+前章で，零集合上では任意の可測関数の積分が $0$ になることを示した．
+したがってそのまま従う．
+\end{proof}
+
+\begin{proposition}[互いに素な集合への加法性]
+$A,B \subset E$ を互いに素な可測集合とし，
+$f$ を $A\sqcup B$ 上の可積分関数とする．
+このとき
+\[
+\int_{A \sqcup B} f\,dm
+=
+\int_A f\,dm+\int_B f\,dm
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+$f=f^+-f^-$ と書く．
+$f^+,f^-$ は非負可積分だから，前章の集合に関する加法性より
+\[
+\int_{A \sqcup B} f^+\,dm
+=
+\int_A f^+\,dm+\int_B f^+\,dm
+\]
+および
+\[
+\int_{A \sqcup B} f^-\,dm
+=
+\int_A f^-\,dm+\int_B f^-\,dm
+\]
+が成り立つ．
+したがって
+\begin{align*}
+\int_{A \sqcup B} f\,dm
+&=
+\int_{A \sqcup B} f^+\,dm-\int_{A \sqcup B} f^-\,dm \\
+&=
+\left(\int_A f^+\,dm+\int_B f^+\,dm\right)
+-\left(\int_A f^-\,dm+\int_B f^-\,dm\right) \\
+&=
+\int_A f\,dm+\int_B f\,dm.
+\end{align*}
+\end{proof}
+
+\begin{proposition}[a.e.\ 不変性]
+$f,g$ を $E$ 上の可積分関数とする．
+もし
+\[
+f=g \quad \text{a.e.\ on } E
+\]
+ならば
+\[
+\int_E f\,dm=\int_E g\,dm
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+前章ですでに示した．
+要点は，$f$ と $g$ の差があるのは零集合の上だけであり，
+零集合上の積分は $0$ になることである．
+\end{proof}
+
+\section{順序と大きさ}
+
+\begin{proposition}[単調性]
+$f,g$ を $E$ 上の可積分関数とする．
+もし
+\[
+f\le g \quad \text{a.e.\ on } E
+\]
+ならば
+\[
+\int_E f\,dm\le \int_E g\,dm
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+\[
+h:=g-f
+\]
+とおくと，$h$ は a.e.\ で非負である．
+また
+\[
+|h|\le |g|+|f|
+\]
+だから $h$ は可積分である．
+さらに a.e.\ 不変性により，$h$ は非負関数として扱ってよい．
+したがって
+\[
+\int_E h\,dm\ge 0.
+\]
+一方，
+\[
+g=f+h
+\]
+だから
+\[
+\int_E g\,dm=\int_E f\,dm+\int_E h\,dm\ge \int_E f\,dm.
+\]
+\end{proof}
+
+\begin{proposition}[定数による評価]
+$m(E)<\infty$ とし，$a,b \in \RR$ が
+\[
+a\le f(x)\le b \quad \text{a.e.\ on } E
+\]
+を満たすとする．
+このとき
+\[
+a\,m(E)\le \int_E f\,dm\le b\,m(E)
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+a.e.\ で
+\[
+a1_E\le f\le b1_E
+\]
+だから，単調性より
+\[
+\int_E a1_E\,dm\le \int_E f\,dm\le \int_E b1_E\,dm.
+\]
+定数関数の積分
+\[
+\int_E c1_E\,dm=c\,m(E)
+\]
+を用いれば結論を得る．
+\end{proof}
+
+\begin{proposition}[絶対値による評価]
+$f$ が $E$ 上可積分ならば
+\[
+\left|\int_E f\,dm\right|
+\le
+\int_E |f|\,dm
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+a.e.\ で
+\[
+-|f|\le f\le |f|
+\]
+だから，単調性より
+\[
+-\int_E |f|\,dm
+\le
+\int_E f\,dm
+\le
+\int_E |f|\,dm.
+\]
+したがって絶対値をとればよい．
+\end{proof}
+
+\begin{proposition}[積分が $0$ であることの判定]
+$f$ が $E$ 上可積分であるとする．
+このとき次は同値である．
+\begin{enumerate}
+    \item
+    \[
+    \int_E |f|\,dm=0
+    \]
+    \item
+    \[
+    f=0 \quad \text{a.e.\ on } E
+    \]
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\textbf{(2) $\Rightarrow$ (1)}\quad
+$|f|=0$ a.e.\ だから，a.e.\ 不変性より
+\[
+\int_E |f|\,dm=0.
+\]
+
+\textbf{(1) $\Rightarrow$ (2)}\quad
+$|f|$ は非負可測関数であり，
+前章の判定法より
+\[
+|f|=0 \quad \text{a.e.\ on } E
+\]
+である．
+これは $f=0$ a.e.\ と同値である．
+\end{proof}
+
+\begin{proposition}[Chebyshev不等式]
+$f$ を $E$ 上の可積分関数とし，$\alpha>0$ とする．
+このとき
+\[
+m\bigl(\{x \in E \mid |f(x)|\ge \alpha\}\bigr)
+\le
+\frac{1}{\alpha}\int_E |f|\,dm
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+\[
+A:=\{x \in E \mid |f(x)|\ge \alpha\}
+\]
+とおく．
+すると a.e.\ で
+\[
+\alpha 1_A\le |f|
+\]
+が成り立つので，単調性より
+\[
+\alpha\,m(A)
+=
+\int_E \alpha 1_A\,dm
+\le
+\int_E |f|\,dm.
+\]
+両辺を $\alpha$ で割ればよい．
+\end{proof}
+
+\section{線形性}
+
+\begin{proposition}[斉次性]
+$f$ を $E$ 上の可積分関数，$c \in \RR$ とする．
+このとき
+\[
+\int_E cf\,dm
+=
+c\int_E f\,dm
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+まず $c\ge 0$ の場合を示す．
+\[
+f=f^+-f^-
+\]
+だから
+\[
+cf=(cf^+)-(cf^-)
+\]
+であり，$cf^+,cf^-$ は非負可積分である．
+したがって
+\begin{align*}
+\int_E cf\,dm
+&=
+\int_E cf^+\,dm-\int_E cf^-\,dm \\
+&=
+c\int_E f^+\,dm-c\int_E f^-\,dm \\
+&=
+c\int_E f\,dm.
+\end{align*}
+
+次に $c<0$ とする．
+このとき
+\[
+cf=(-c)(-f)
+\]
+であり，$-c>0$ だから前半の結果を $-f$ に適用して
+\[
+\int_E cf\,dm
+=
+(-c)\int_E (-f)\,dm
+=
+(-c)\left(-\int_E f\,dm\right)
+=
+c\int_E f\,dm
+\]
+を得る．
+\end{proof}
+
+\begin{proposition}[加法性]
+$f,g$ を $E$ 上の可積分関数とする．
+このとき $f+g$ も可積分で，
+\[
+\int_E (f+g)\,dm
+=
+\int_E f\,dm+\int_E g\,dm
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+まず
+\[
+|f+g|\le |f|+|g|
+\]
+だから，右辺の可積分性より
+$f+g$ も可積分である．
+
+次に
+\[
+f=f^+-f^-,
+\qquad
+g=g^+-g^-
+\]
+と書くと
+\[
+f+g=(f^++g^+)-(f^-+g^-)
+\]
+である．
+$f^++g^+$ と $f^-+g^-$ は非負可積分であるから，
+前章の非負関数の加法性と表示の独立性より
+\begin{align*}
+\int_E (f+g)\,dm
+&=
+\int_E (f^++g^+)\,dm-\int_E (f^-+g^-)\,dm \\
+&=
+\left(\int_E f^+\,dm+\int_E g^+\,dm\right)
+-\left(\int_E f^-\,dm+\int_E g^-\,dm\right) \\
+&=
+\int_E f\,dm+\int_E g\,dm.
+\end{align*}
+\end{proof}
+
+\begin{corollary}[有限和]
+$f_1,\dots,f_n$ を $E$ 上の可積分関数とすると
+\[
+\int_E \left(\sum_{k=1}^n f_k\right)\,dm
+=
+\sum_{k=1}^n \int_E f_k\,dm
+\]
+が成り立つ．
+\end{corollary}
+\begin{proof}
+前命題を繰り返し用いればよい．
+\end{proof}
+
+\section{計算則のまとめ}
+
+\begin{theorem}[Lebesgue積分の基本公式]
+$E \subset \RR^d$ を可測集合とし，$f,g$ を $E$ 上の可積分関数とする．
+このとき次が成り立つ．
+\begin{enumerate}
+    \item $m(E)=0$ なら
+    \[
+    \int_E f\,dm=0
+    \]
+    \item $f=g$ a.e.\ なら
+    \[
+    \int_E f\,dm=\int_E g\,dm
+    \]
+    \item $f\le g$ a.e.\ なら
+    \[
+    \int_E f\,dm\le \int_E g\,dm
+    \]
+    \item 任意の $c \in \RR$ に対して
+    \[
+    \int_E cf\,dm=c\int_E f\,dm
+    \]
+    \item
+    \[
+    \int_E (f+g)\,dm=\int_E f\,dm+\int_E g\,dm
+    \]
+    \item
+    \[
+    \left|\int_E f\,dm\right|\le \int_E |f|\,dm
+    \]
+    \item
+    \[
+    \int_E |f|\,dm=0
+    \iff
+    f=0 \text{ a.e.\ on } E
+    \]
+    \item $A,B \subset E$ が互いに素なら
+    \[
+    \int_{A \sqcup B} f\,dm
+    =
+    \int_A f\,dm+\int_B f\,dm
+    \]
+    \item $\alpha>0$ に対して
+    \[
+    m(\{|f|\ge \alpha\})
+    \le
+    \frac{1}{\alpha}\int_E |f|\,dm
+    \]
+\end{enumerate}
+\end{theorem}
+
+\begin{remark}
+この章で得た公式は，今後の章でほぼ毎回使う．
+特に
+\[
+f=g \text{ a.e.}
+\]
+なら積分値を区別しなくてよいこと，
+および
+\[
+\left|\int f\right|\le \int |f|
+\]
+という評価は，
+収束定理を運用する際の基本になる．
+\end{remark}
+
+\begin{example}
+$m(E)<\infty$ とし，
+\[
+|f(x)|\le M \quad \text{a.e.\ on } E
+\]
+を満たすとする．
+このとき $f$ は可積分で，
+\[
+\left|\int_E f\,dm\right|\le M\,m(E)
+\]
+が成り立つ．
+\end{example}
+\begin{proof}
+\[
+|f|\le M1_E
+\]
+だから
+\[
+\int_E |f|\,dm\le M\,m(E)<\infty.
+\]
+よって $f$ は可積分である．
+さらに絶対値による評価より
+\[
+\left|\int_E f\,dm\right|
+\le
+\int_E |f|\,dm
+\le
+M\,m(E).
+\]
+\end{proof}
+
+\section{解釈とまとめ}
+
+本章で示した性質により，Lebesgue積分は
+\[
+\text{順序を保ち，線形で，零集合を無視できる}
+\]
+ことが分かった．
+これはまさに，確率論や関数解析で積分を計算道具として使うために必要な性質である．
+
+特に重要なのは次の3点である．
+\begin{enumerate}
+    \item $f=g$ a.e.\ なら積分値も同じ
+    \item $|f|$ を積分すれば $f$ の大きさを制御できる
+    \item 集合の大きさと積分の大きさをChebyshev不等式で結びつけられる
+\end{enumerate}
+
+次章では，これらの性質を基礎にして
+\[
+\lim \quad \text{と} \quad \int
+\]
+の順序交換を正当化する収束定理を学ぶ．

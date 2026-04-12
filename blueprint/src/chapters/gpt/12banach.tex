@@ -1,0 +1,888 @@
+\chapter{Banach空間}
+
+\paragraph{本章の目標}
+ここまでで，Lebesgue積分によって関数を積分し，
+収束定理によって極限と積分の交換も扱えるようになった．
+次の段階では，関数そのものを「点」とみなし，
+関数全体の集まりを1つの空間として考える．
+その基本概念がノルム空間とBanach空間である．
+
+本章では
+\begin{enumerate}
+    \item ノルム空間・Banach空間の定義
+    \item 有限次元空間 $\RR^d$ の例
+    \item 連続関数空間 $C(X)$ が sup-norm で Banach 空間になること
+    \item 測度空間上の $L^p(X,m)$ の定義
+    \item Hölder の不等式，Minkowski の不等式，Riesz--Fischer の定理
+\end{enumerate}
+を証明する．
+
+\section{動機づけ}
+
+微分積分では，1つ1つの関数を個別に扱ってきた．
+しかし関数解析では，
+\[
+\text{連続関数全体},\qquad
+\text{可積分関数全体},\qquad
+\text{二乗可積分関数全体}
+\]
+のような「関数の集まり」自体を対象にする．
+
+そのとき最初に必要になるのは，
+関数の大きさや2つの関数の近さを測る道具である．
+例えば連続関数 $f,g$ に対して
+\[
+\sup_{x\in X}|f(x)-g(x)|
+\]
+が小さければ，$f$ と $g$ はどの点でも一様に近いと言える．
+また可積分関数に対して
+\[
+\left(\int_X |f-g|^p\,dm\right)^{1/p}
+\]
+が小さければ，平均的な意味で近いと言える．
+
+この「大きさ」を抽象化したものがノルムであり，
+そのノルムに関して極限が取り尽くされている空間がBanach空間である．
+Lebesgue積分論の収束定理は，
+まさにこうした完備な関数空間の上で本領を発揮する．
+
+\section{ノルム空間とBanach空間}
+
+\begin{definition}[ノルム]
+実ベクトル空間 $X$ 上の写像
+\[
+\|\cdot\|:X\to [0,\infty)
+\]
+がノルムであるとは，任意の $x,y\in X$ と任意の $a\in\RR$ に対して
+次を満たすことをいう．
+\begin{enumerate}
+    \item
+    \[
+    \|x\|=0 \iff x=0
+    \]
+    \item
+    \[
+    \|ax\|=|a|\,\|x\|
+    \]
+    \item
+    \[
+    \|x+y\|\le \|x\|+\|y\|
+    \]
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[ノルム空間]
+実ベクトル空間 $X$ とその上のノルム $\|\cdot\|$ の組
+\[
+(X,\|\cdot\|)
+\]
+をノルム空間という．
+\end{definition}
+
+\begin{remark}
+ノルムが与えられると，
+\[
+d(x,y):=\|x-y\|
+\]
+によって距離が定まる．
+したがってノルム空間では，点列の収束やCauchy列を距離空間と同様に定義できる．
+\end{remark}
+
+\begin{definition}[Banach空間]
+ノルム空間 $X$ がBanach空間であるとは，
+$X$ の任意のCauchy列が $X$ の元に収束することをいう．
+\end{definition}
+
+\begin{example}[\texorpdfstring{$\RR^d$}{Rd} の $p$-ノルム]
+$x=(x_1,\dots,x_d)\in\RR^d$ に対し，
+$1\le p<\infty$ のとき
+\[
+\|x\|_p:=\left(\sum_{k=1}^d |x_k|^p\right)^{1/p},
+\]
+また
+\[
+\|x\|_\infty:=\max_{1\le k\le d}|x_k|
+\]
+と定める．
+これらは $\RR^d$ 上のノルムである．
+\end{example}
+
+\begin{proposition}
+$1\le p\le\infty$ に対して，
+\[
+(\RR^d,\|\cdot\|_p)
+\]
+はBanach空間である．
+\end{proposition}
+\begin{proof}
+$\{x^{(n)}\}_{n=1}^{\infty}$ を $\RR^d$ のCauchy列とし，
+\[
+x^{(n)}=(x_1^{(n)},\dots,x_d^{(n)})
+\]
+と書く．
+各成分 $k=1,\dots,d$ に対して
+\[
+|x_k^{(n)}-x_k^{(m)}|
+\le
+\|x^{(n)}-x^{(m)}\|_p
+\]
+が成り立つ．
+したがって各実数列 $\{x_k^{(n)}\}_{n=1}^{\infty}$ は $\RR$ でCauchy列であり，
+$\RR$ の完備性より極限
+\[
+x_k:=\lim_{n\to\infty}x_k^{(n)}
+\]
+が存在する．
+
+\[
+x:=(x_1,\dots,x_d)\in\RR^d
+\]
+とおく．
+$1\le p<\infty$ のとき
+\[
+\|x^{(n)}-x\|_p^p
+=
+\sum_{k=1}^d |x_k^{(n)}-x_k|^p
+\to 0
+\]
+である．
+実際，和は有限個しかないので，各項が $0$ に収束すれば和も $0$ に収束する．
+
+また $p=\infty$ のときは，各 $k$ について
+\[
+|x_k^{(n)}-x_k|\to 0
+\]
+であるから，有限個の実数の最大値も $0$ に収束して
+\[
+\|x^{(n)}-x\|_\infty
+=
+\max_{1\le k\le d}|x_k^{(n)}-x_k|
+\to 0
+\]
+を得る．
+
+よって $\{x^{(n)}\}$ は $x\in\RR^d$ に収束する．
+したがって $\RR^d$ は完備である．
+\end{proof}
+
+\begin{remark}
+有限次元空間では，各成分ごとに議論できるため，
+完備性の証明は比較的素朴である．
+しかし関数空間では成分が有限個ではないので，
+完備性は自明ではない．
+この違いが有限次元と無限次元の大きな分かれ目である．
+\end{remark}
+
+\section{\texorpdfstring{$C(X)$}{C(X)} と sup-norm}
+
+以後，$X$ をコンパクト距離空間とする．
+
+\begin{definition}[連続関数空間]
+\[
+C(X):=\{f:X\to\RR \mid f \text{ は連続}\}
+\]
+とおく．
+\end{definition}
+
+\begin{definition}[sup-norm]
+$f\in C(X)$ に対して
+\[
+\|f\|_\infty:=\sup_{x\in X}|f(x)|
+\]
+と定める．
+\end{definition}
+
+\begin{remark}
+$X$ がコンパクトで $f$ が連続なら，最大値の定理より $|f|$ は $X$ 上で最大値をとる．
+したがって
+\[
+\|f\|_\infty<\infty
+\]
+である．
+$X$ のコンパクト性は，sup-norm を考えるうえで重要である．
+\end{remark}
+
+\begin{proposition}
+\[
+\|\cdot\|_\infty
+\]
+は $C(X)$ 上のノルムである．
+\end{proposition}
+\begin{proof}
+まず
+\[
+\|f\|_\infty\ge 0
+\]
+であり，
+\[
+\|f\|_\infty=0
+\]
+なら
+\[
+|f(x)|\le \|f\|_\infty=0
+\]
+が任意の $x\in X$ で成り立つから $f=0$ である．
+
+次に任意の $a\in\RR$ に対して
+\[
+\|af\|_\infty
+=
+\sup_{x\in X}|a||f(x)|
+=
+|a|\,\|f\|_\infty
+\]
+である．
+
+最後に任意の $x\in X$ に対して
+\[
+|f(x)+g(x)|\le |f(x)|+|g(x)|
+\]
+だから，上限をとれば
+\[
+\|f+g\|_\infty\le \|f\|_\infty+\|g\|_\infty
+\]
+を得る．
+\end{proof}
+
+\begin{lemma}[一様極限の連続性]
+$f_n\in C(X)$ が
+\[
+\|f_n-f\|_\infty\to 0
+\]
+を満たすとする．
+このとき $f$ は連続である．
+\end{lemma}
+\begin{proof}
+$x_0\in X$ を任意に取る．
+$\eps>0$ を与える．
+$\|f_n-f\|_\infty\to 0$ だから，ある $N$ が存在して
+\[
+\|f_N-f\|_\infty<\frac{\eps}{3}
+\]
+である．
+
+$f_N$ は連続だから，ある $\delta>0$ が存在して
+\[
+d(x,x_0)<\delta
+\implies
+|f_N(x)-f_N(x_0)|<\frac{\eps}{3}
+\]
+が成り立つ．
+したがって $d(x,x_0)<\delta$ なら
+\begin{align*}
+|f(x)-f(x_0)|
+&\le |f(x)-f_N(x)|+|f_N(x)-f_N(x_0)|+|f_N(x_0)-f(x_0)|\\
+&< \frac{\eps}{3}+\frac{\eps}{3}+\frac{\eps}{3}
+=\eps.
+\end{align*}
+よって $f$ は $x_0$ で連続である．
+$x_0$ は任意だから，$f$ は $X$ 上連続である．
+\end{proof}
+
+\begin{theorem}
+\[
+(C(X),\|\cdot\|_\infty)
+\]
+はBanach空間である．
+\end{theorem}
+\begin{proof}
+$\{f_n\}_{n=1}^{\infty}$ を $C(X)$ のCauchy列とする．
+すると任意の $\eps>0$ に対して，ある $N$ が存在して
+\[
+m,n\ge N \implies \|f_n-f_m\|_\infty<\eps
+\]
+である．
+
+各 $x\in X$ を固定すると
+\[
+|f_n(x)-f_m(x)|\le \|f_n-f_m\|_\infty
+\]
+だから，実数列 $\{f_n(x)\}$ はCauchy列である．
+ゆえに極限
+\[
+f(x):=\lim_{n\to\infty}f_n(x)
+\]
+が存在する．
+こうして写像 $f:X\to\RR$ が定まる．
+
+次に $f_n\to f$ が sup-norm で成り立つことを示す．
+$\eps>0$ を与え，上のCauchy条件を満たす $N$ を取る．
+$n\ge N$ とし，任意の $x\in X$ に対して $m\to\infty$ とすると
+\[
+|f_n(x)-f(x)|
+=
+\lim_{m\to\infty}|f_n(x)-f_m(x)|
+\le \eps
+\]
+を得る．
+したがって
+\[
+\|f_n-f\|_\infty\le \eps
+\qquad (n\ge N)
+\]
+であり，
+\[
+\|f_n-f\|_\infty\to 0
+\]
+が従う．
+
+最後に補題より，$f$ は連続である．
+よって $f\in C(X)$ であり，$\{f_n\}$ は $C(X)$ の元に収束する．
+したがって $C(X)$ は完備である．
+\end{proof}
+
+\begin{example}
+$X=[a,b]$ とすると，
+\[
+C([a,b])
+\]
+は sup-norm に関してBanach空間である．
+これは微分方程式や積分方程式で最もよく現れる関数空間の1つである．
+\end{example}
+
+\section{\texorpdfstring{$L^p(X,m)$}{Lp(X,m)} 空間}
+
+以後，
+\[
+(X,\calF,m)
+\]
+を測度空間とし，
+$1\le p<\infty$ を固定する．
+
+\begin{definition}
+可測関数 $f:X\to\RR$ で
+\[
+\int_X |f|^p\,dm<\infty
+\]
+を満たすもの全体を
+\[
+\mathcal L^p(X,m)
+\]
+と書く．
+\end{definition}
+
+\begin{remark}
+$f$ と $g$ が a.e.\ で一致するなら，
+第8章と第9章の a.e.\ 不変性より
+\[
+\int_X |f|^p\,dm=\int_X |g|^p\,dm
+\]
+である．
+したがって $L^p$ では，関数を点ごとにではなく
+「a.e.\ の違いを無視した同値類」として扱うのが自然である．
+\end{remark}
+
+\begin{definition}[\texorpdfstring{$L^p(X,m)$}{Lp(X,m)}]
+$\mathcal L^p(X,m)$ の上に
+\[
+f\sim g
+\iff
+f=g \quad \text{a.e.\ on } X
+\]
+という同値関係を入れる．
+この同値類全体を
+\[
+L^p(X,m)
+\]
+と書く．
+\end{definition}
+
+\begin{definition}[\texorpdfstring{$L^p$}{Lp} ノルム]
+$f\in L^p(X,m)$ に対して
+\[
+\|f\|_p
+:=
+\left(\int_X |f|^p\,dm\right)^{1/p}
+\]
+と定める．
+\end{definition}
+
+\begin{remark}
+厳密には $f$ は同値類であるが，
+記号が煩雑になるのを避けるため，
+代表元も同じ記号 $f$ で書く．
+上の量が代表元の取り方によらないことは a.e.\ 不変性から従う．
+\end{remark}
+
+\begin{proposition}
+$L^p(X,m)$ は実ベクトル空間である．
+\end{proposition}
+\begin{proof}
+$f,g\in L^p(X,m)$ と $a,b\in\RR$ を取る．
+可測性は第7章で示した和とスカラー倍の可測性から従う．
+
+また任意の実数 $u,v$ に対して
+\[
+|u+v|^p\le (|u|+|v|)^p\le 2^{p-1}(|u|^p+|v|^p)
+\]
+が成り立つから，
+\[
+|af+bg|^p
+\le
+2^{p-1}\bigl(|a|^p|f|^p+|b|^p|g|^p\bigr)
+\]
+である．
+右辺は可積分であるから
+\[
+\int_X |af+bg|^p\,dm<\infty
+\]
+を得る．
+よって $af+bg\in \mathcal L^p(X,m)$ である．
+
+さらに $f\sim f'$，$g\sim g'$ なら
+\[
+af+bg=af'+bg'
+\quad \text{a.e.}
+\]
+だから，演算は同値類上でもwell-definedである．
+したがって $L^p(X,m)$ は実ベクトル空間である．
+\end{proof}
+
+\begin{example}
+$X=(0,1]$，$m$ をLebesgue測度とし，
+\[
+f(x):=x^{-1/2}
+\]
+とおく．
+すると
+\[
+\int_0^1 |f(x)|\,dx=\int_0^1 x^{-1/2}\,dx=2<\infty
+\]
+だから
+\[
+f\in L^1((0,1],m)
+\]
+である．
+しかし
+\[
+\int_0^1 |f(x)|^2\,dx=\int_0^1 x^{-1}\,dx=\infty
+\]
+だから
+\[
+f\notin L^2((0,1],m)
+\]
+である．
+このように，$p$ が変わると空間も変わる．
+\end{example}
+
+\section{Hölderの不等式とMinkowskiの不等式}
+
+\begin{lemma}[Youngの不等式]
+$1<p<\infty$ とし，
+\[
+\frac{1}{p}+\frac{1}{q}=1
+\]
+を満たす $q$ を共役指数とする．
+このとき任意の $a,b\ge 0$ に対して
+\[
+ab\le \frac{a^p}{p}+\frac{b^q}{q}
+\]
+が成り立つ．
+\end{lemma}
+\begin{proof}
+$a=0$ のときは自明であるから $a>0$ とする．
+\[
+\phi(t):=at-\frac{t^q}{q}
+\qquad (t\ge 0)
+\]
+とおくと
+\[
+\phi'(t)=a-t^{q-1}
+\]
+である．
+したがって $\phi$ は
+\[
+t=a^{1/(q-1)}=a^{p-1}
+\]
+で最大値をとる．
+そこで
+\begin{align*}
+\phi(t)
+&\le \phi(a^{p-1}) \\
+&= a\cdot a^{p-1}-\frac{(a^{p-1})^q}{q} \\
+&= a^p-\frac{a^p}{q}
+=\frac{a^p}{p}.
+\end{align*}
+$t=b$ とおけば
+\[
+ab-\frac{b^q}{q}\le \frac{a^p}{p}
+\]
+すなわち
+\[
+ab\le \frac{a^p}{p}+\frac{b^q}{q}
+\]
+を得る．
+\end{proof}
+
+\begin{theorem}[Hölderの不等式]
+$1<p<\infty$ とし，
+$q$ を共役指数とする．
+このとき
+$f\in L^p(X,m)$，
+$g\in L^q(X,m)$ に対して
+\[
+fg\in L^1(X,m)
+\]
+であり，
+\[
+\int_X |fg|\,dm\le \|f\|_p\|g\|_q
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+$\|f\|_p=0$ または $\|g\|_q=0$ のときは右辺が $0$ であり，
+第9章の「積分が $0$ であることの判定」より
+$f=0$ a.e.\ または $g=0$ a.e.\ だから自明である．
+
+以下では
+\[
+\|f\|_p>0,\qquad \|g\|_q>0
+\]
+とする．
+Young の不等式を
+\[
+a=\frac{|f(x)|}{\|f\|_p},
+\qquad
+b=\frac{|g(x)|}{\|g\|_q}
+\]
+に適用すると，a.e.\ で
+\[
+\frac{|f(x)g(x)|}{\|f\|_p\|g\|_q}
+\le
+\frac{|f(x)|^p}{p\|f\|_p^p}
++\frac{|g(x)|^q}{q\|g\|_q^q}
+\]
+を得る．
+両辺を積分すると
+\begin{align*}
+\frac{1}{\|f\|_p\|g\|_q}\int_X |fg|\,dm
+&\le
+\frac{1}{p\|f\|_p^p}\int_X |f|^p\,dm
++
+\frac{1}{q\|g\|_q^q}\int_X |g|^q\,dm \\
+&=
+\frac{1}{p}+\frac{1}{q}
+=1.
+\end{align*}
+したがって
+\[
+\int_X |fg|\,dm\le \|f\|_p\|g\|_q.
+\]
+特に左辺は有限だから $fg\in L^1(X,m)$ である．
+\end{proof}
+
+\begin{theorem}[Minkowskiの不等式]
+$1\le p<\infty$ とする．
+$f,g\in L^p(X,m)$ ならば
+\[
+f+g\in L^p(X,m)
+\]
+であり，
+\[
+\|f+g\|_p\le \|f\|_p+\|g\|_p
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+まず $p=1$ のときは
+\[
+|f+g|\le |f|+|g|
+\]
+を積分すれば
+\[
+\|f+g\|_1
+=
+\int_X |f+g|\,dm
+\le
+\int_X |f|\,dm+\int_X |g|\,dm
+=
+\|f\|_1+\|g\|_1
+\]
+である．
+
+以下では $1<p<\infty$ とする．
+$q$ を共役指数とする．
+$\|f+g\|_p=0$ のときは自明だから，
+\[
+\|f+g\|_p>0
+\]
+と仮定する．
+すると
+\begin{align*}
+\|f+g\|_p^p
+&=
+\int_X |f+g|^p\,dm \\
+&=
+\int_X |f+g|\,|f+g|^{p-1}\,dm \\
+&\le
+\int_X |f|\,|f+g|^{p-1}\,dm
++
+\int_X |g|\,|f+g|^{p-1}\,dm.
+\end{align*}
+
+ここで
+\[
+\bigl(|f+g|^{p-1}\bigr)^q=|f+g|^p
+\]
+であるから，Hölder の不等式より
+\begin{align*}
+\int_X |f|\,|f+g|^{p-1}\,dm
+&\le
+\|f\|_p
+\left(
+\int_X |f+g|^p\,dm
+\right)^{1/q} \\
+&=
+\|f\|_p \|f+g\|_p^{p-1},
+\end{align*}
+同様に
+\[
+\int_X |g|\,|f+g|^{p-1}\,dm
+\le
+\|g\|_p \|f+g\|_p^{p-1}.
+\]
+したがって
+\[
+\|f+g\|_p^p
+\le
+(\|f\|_p+\|g\|_p)\|f+g\|_p^{p-1}.
+\]
+$\|f+g\|_p>0$ だから両辺を $\|f+g\|_p^{p-1}$ で割って
+\[
+\|f+g\|_p\le \|f\|_p+\|g\|_p
+\]
+を得る．
+\end{proof}
+
+\begin{proposition}
+$1\le p<\infty$ に対して
+\[
+\|\cdot\|_p
+\]
+は $L^p(X,m)$ 上のノルムである．
+\end{proposition}
+\begin{proof}
+非負性は自明である．
+また
+\[
+\|af\|_p^p
+=
+\int_X |a|^p|f|^p\,dm
+=
+|a|^p\|f\|_p^p
+\]
+だから
+\[
+\|af\|_p=|a|\,\|f\|_p
+\]
+である．
+
+さらに $\|f\|_p=0$ なら
+\[
+\int_X |f|^p\,dm=0
+\]
+であり，第9章の「積分が $0$ であることの判定」より
+\[
+|f|^p=0 \quad \text{a.e.}
+\]
+だから $f=0$ a.e.\ である．
+すなわち $L^p$ の元として $f=0$ である．
+逆向きは明らかである．
+
+最後に三角不等式は Minkowski の不等式である．
+したがって $\|\cdot\|_p$ はノルムである．
+\end{proof}
+
+\section{Riesz--Fischerの定理}
+
+\begin{theorem}[Riesz--Fischer]
+$1\le p<\infty$ とする．
+このとき
+\[
+(L^p(X,m),\|\cdot\|_p)
+\]
+はBanach空間である．
+\end{theorem}
+\begin{proof}
+$\{f_n\}_{n=1}^{\infty}$ を $L^p(X,m)$ のCauchy列とする．
+各 $f_n$ の代表元を同じ記号で表す．
+
+$\{f_n\}$ はCauchy列だから，
+部分列 $\{f_{n_k}\}$ を
+\[
+\|f_{n_{k+1}}-f_{n_k}\|_p<2^{-k}
+\qquad (k\in\NN)
+\]
+となるように取れる．
+各 $k$ に対して
+\[
+g_k:=|f_{n_{k+1}}-f_{n_k}|
+\]
+とおく．
+すると $g_k\in L^p(X,m)$ である．
+
+さらに
+\[
+s_N:=\sum_{k=1}^N g_k
+\]
+とおくと，Minkowski の不等式より
+\[
+\|s_N\|_p
+\le
+\sum_{k=1}^N \|g_k\|_p
+<
+\sum_{k=1}^{\infty}2^{-k}
+=1
+\]
+である．
+したがって
+\[
+\int_X s_N^p\,dm=\|s_N\|_p^p\le 1
+\]
+である．
+
+$s_N$ は単調増加する非負可測関数列であるから
+\[
+s(x):=\sum_{k=1}^{\infty}g_k(x)
+\]
+とおくと，
+単調収束定理より
+\[
+\int_X s^p\,dm
+=
+\lim_{N\to\infty}\int_X s_N^p\,dm
+\le 1.
+\]
+よって
+\[
+s\in L^p(X,m)
+\]
+であり，特に
+\[
+s(x)<\infty
+\quad \text{a.e. on } X
+\]
+である．
+
+この零集合を除いた各点 $x$ に対して，
+任意の $m>\ell$ について
+\[
+|f_{n_m}(x)-f_{n_\ell}(x)|
+\le
+\sum_{k=\ell}^{m-1}g_k(x)
+\]
+が成り立つ．
+右辺は $\ell\to\infty$ で $0$ に収束するから，
+$\{f_{n_k}(x)\}$ は a.e.\ でCauchy列である．
+したがってある可測関数 $f$ が存在して
+\[
+f_{n_k}(x)\to f(x)
+\quad \text{a.e. on } X
+\]
+となる．
+
+次にこの $f$ が $L^p$ 極限であることを示す．
+各 $\ell$ に対して
+\[
+t_\ell:=\sum_{k=\ell}^{\infty}g_k
+=
+s-\sum_{k=1}^{\ell-1}g_k
+\]
+とおくと，
+\[
+|f-f_{n_\ell}|\le t_\ell
+\quad \text{a.e.}
+\]
+である．
+また
+\[
+\|t_\ell\|_p
+\le
+\sum_{k=\ell}^{\infty}\|g_k\|_p
+\le
+\sum_{k=\ell}^{\infty}2^{-k}
+\to 0
+\]
+が Minkowski の不等式から従う．
+したがって単調性より
+\[
+\|f-f_{n_\ell}\|_p\le \|t_\ell\|_p\to 0.
+\]
+特に $f\in L^p(X,m)$ であり，
+\[
+f_{n_\ell}\to f \quad \text{in } L^p
+\]
+が成り立つ．
+
+最後に元の列全体が $f$ に収束することを示す．
+$\eps>0$ を与える．
+$\{f_n\}$ はCauchy列だから，ある $N_1$ が存在して
+\[
+n,m\ge N_1
+\implies
+\|f_n-f_m\|_p<\frac{\eps}{2}
+\]
+である．
+また部分列 $f_{n_k}\to f$ だから，ある $k$ が存在して
+\[
+n_k\ge N_1,
+\qquad
+\|f_{n_k}-f\|_p<\frac{\eps}{2}
+\]
+となる．
+すると $n\ge N_1$ に対して
+\[
+\|f_n-f\|_p
+\le
+\|f_n-f_{n_k}\|_p+\|f_{n_k}-f\|_p
+<
+\frac{\eps}{2}+\frac{\eps}{2}
+=\eps.
+\]
+よって
+\[
+f_n\to f \quad \text{in } L^p(X,m)
+\]
+である．
+したがって $L^p(X,m)$ は完備である．
+\end{proof}
+
+\begin{remark}
+この証明の要点は，
+Cauchy列から「差の和が可積分になる部分列」を取り出し，
+その差の級数
+\[
+\sum_{k=1}^{\infty}|f_{n_{k+1}}-f_{n_k}|
+\]
+を使って点ごとの極限を構成することである．
+これは収束定理と不等式を組み合わせた，
+Lebesgue積分論らしい完備性の証明である．
+\end{remark}
+
+\section{解釈とまとめ}
+
+Banach空間の本質は，
+「極限を取っても空間の外へ出ない」
+という点にある．
+有限次元の $\RR^d$ ではこれは座標ごとに従ったが，
+関数空間では積分論が必要になった．
+
+本章で得た代表的なBanach空間は次の2つである．
+\begin{enumerate}
+    \item コンパクト空間上の連続関数空間
+    \[
+    C(X),\qquad \|f\|_\infty=\sup_{x\in X}|f(x)|
+    \]
+    \item 測度空間上の可積分関数空間
+    \[
+    L^p(X,m),\qquad
+    \|f\|_p=\left(\int_X |f|^p\,dm\right)^{1/p}
+    \]
+\end{enumerate}
+
+特に $L^p$ 空間では，
+Hölder の不等式と Minkowski の不等式が
+積や和の計算を支え，
+Riesz--Fischer の定理が完備性を保証した．
+次章では $p=2$ の場合をさらに詳しく見て，
+角度や直交が使えるHilbert空間へ進む．

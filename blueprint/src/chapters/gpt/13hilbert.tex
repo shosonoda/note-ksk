@@ -1,0 +1,790 @@
+\chapter{Hilbert空間}
+
+\paragraph{本章の目標}
+前章では，関数の大きさを測るノルムを導入し，
+$L^p$ 空間や $C(X)$ がBanach空間になることを見た．
+その中でも
+\[
+p=2
+\]
+の場合は特別である．
+このときノルムは内積から作られ，
+長さだけでなく角度や直交も扱えるようになる．
+
+本章では
+\begin{enumerate}
+    \item 内積空間・Hilbert空間の定義
+    \item Cauchy--Schwarz の不等式と内積から誘導されるノルム
+    \item $L^2(X,m)$ がHilbert空間になること
+    \item 正規直交系，Fourier係数，Bessel の不等式，Parseval の等式
+    \item Fourier関数系という典型例
+\end{enumerate}
+を説明する．
+
+\section{動機づけ}
+
+ノルムだけでは，ベクトルの長さは分かっても，
+2つのベクトルがどれくらい「直交しているか」は分からない．
+しかし実際には
+\[
+\text{最小二乗法},\qquad
+\text{Fourier級数},\qquad
+\text{エネルギー評価}
+\]
+のように，直交が本質的な役割を果たす場面が多い．
+
+例えば $L^2([0,1])$ の関数 $f$ を
+\[
+1,\ \cos(2\pi x),\ \sin(2\pi x),\dots
+\]
+のような基本関数で展開したいとき，
+係数は
+\[
+\int_0^1 f(x)\cos(2\pi nx)\,dx,
+\qquad
+\int_0^1 f(x)\sin(2\pi nx)\,dx
+\]
+で与えられる．
+これらは単なる積分ではなく，
+関数 $f$ と基本関数との「内積」になっている．
+
+この考え方を抽象化したのがHilbert空間である．
+
+\section{内積空間とHilbert空間}
+
+\begin{definition}[内積]
+実ベクトル空間 $H$ 上の写像
+\[
+\langle \cdot,\cdot\rangle:H\times H\to\RR
+\]
+が内積であるとは，任意の $x,y,z\in H$ と任意の $a\in\RR$ に対して
+次を満たすことをいう．
+\begin{enumerate}
+    \item
+    \[
+    \langle x+ y,z\rangle=\langle x,z\rangle+\langle y,z\rangle
+    \]
+    \item
+    \[
+    \langle ax,y\rangle=a\langle x,y\rangle
+    \]
+    \item
+    \[
+    \langle x,y\rangle=\langle y,x\rangle
+    \]
+    \item
+    \[
+    \langle x,x\rangle\ge 0
+    \]
+    かつ
+    \[
+    \langle x,x\rangle=0 \iff x=0
+    \]
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[内積空間]
+内積を備えた実ベクトル空間を内積空間という．
+\end{definition}
+
+\begin{example}[\texorpdfstring{$\RR^d$}{Rd} の標準内積]
+$x=(x_1,\dots,x_d)$，$y=(y_1,\dots,y_d)\in\RR^d$ に対して
+\[
+\langle x,y\rangle:=\sum_{k=1}^d x_k y_k
+\]
+と定めると，これは $\RR^d$ 上の内積である．
+\end{example}
+
+\begin{theorem}[Cauchy--Schwarzの不等式]
+内積空間 $H$ の任意の $x,y\in H$ に対して
+\[
+|\langle x,y\rangle|
+\le
+\sqrt{\langle x,x\rangle}\sqrt{\langle y,y\rangle}
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+$y=0$ のときは自明である．
+以下では $y\ne 0$ とする．
+任意の $t\in\RR$ に対して
+\[
+\langle x-ty,x-ty\rangle\ge 0
+\]
+である．
+これを展開すると
+\[
+\langle x,x\rangle-2t\langle x,y\rangle+t^2\langle y,y\rangle\ge 0
+\]
+を得る．
+左辺は $t$ の2次式であり，すべての $t$ に対して非負だから判別式は $0$ 以下である．
+したがって
+\[
+4\langle x,y\rangle^2-4\langle x,x\rangle\langle y,y\rangle\le 0
+\]
+すなわち
+\[
+\langle x,y\rangle^2\le \langle x,x\rangle\langle y,y\rangle
+\]
+が成り立つ．
+両辺は非負だから平方根をとって結論を得る．
+\end{proof}
+
+\begin{corollary}[内積から誘導されるノルム]
+内積空間 $H$ に対して
+\[
+\|x\|:=\sqrt{\langle x,x\rangle}
+\]
+とおくと，これは $H$ 上のノルムである．
+\end{corollary}
+\begin{proof}
+まず
+\[
+\|x\|=0
+\iff
+\langle x,x\rangle=0
+\iff
+x=0
+\]
+である．
+
+次に
+\[
+\|ax\|^2=\langle ax,ax\rangle=a^2\langle x,x\rangle=|a|^2\|x\|^2
+\]
+だから
+\[
+\|ax\|=|a|\,\|x\|
+\]
+である．
+
+最後に
+\begin{align*}
+\|x+y\|^2
+&=
+\langle x+y,x+y\rangle \\
+&=
+\|x\|^2+2\langle x,y\rangle+\|y\|^2 \\
+&\le
+\|x\|^2+2\|x\|\|y\|+\|y\|^2 \\
+&=
+(\|x\|+\|y\|)^2
+\end{align*}
+である．
+両辺は非負だから平方根をとって
+\[
+\|x+y\|\le \|x\|+\|y\|
+\]
+を得る．
+\end{proof}
+
+\begin{proposition}[Pythagorasの定理]
+内積空間 $H$ の $x,y\in H$ が
+\[
+\langle x,y\rangle=0
+\]
+を満たすとする．
+このとき
+\[
+\|x+y\|^2=\|x\|^2+\|y\|^2
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+\[
+\|x+y\|^2
+=
+\langle x+y,x+y\rangle
+=
+\langle x,x\rangle+\langle x,y\rangle+\langle y,x\rangle+\langle y,y\rangle
+=
+\|x\|^2+\|y\|^2
+\]
+である．
+\end{proof}
+
+\begin{definition}[Hilbert空間]
+内積空間 $H$ が，
+上の内積から誘導されるノルムに関して完備であるとき，
+$H$ をHilbert空間という．
+\end{definition}
+
+\begin{example}
+$\RR^d$ は標準内積に関してHilbert空間である．
+実際，誘導されるノルムは
+\[
+\|x\|=\left(\sum_{k=1}^d |x_k|^2\right)^{1/2}
+\]
+であり，前章で $\RR^d$ はこのノルムに関して完備であることを示した．
+\end{example}
+
+\section{\texorpdfstring{$L^2(X,m)$}{L2(X,m)} はHilbert空間}
+
+以後，
+\[
+(X,\calF,m)
+\]
+を測度空間とする．
+
+\begin{definition}[\texorpdfstring{$L^2$}{L2} の内積]
+$f,g\in L^2(X,m)$ に対して
+\[
+\langle f,g\rangle:=\int_X f g\,dm
+\]
+と定める．
+\end{definition}
+
+\begin{proposition}
+上の式は $L^2(X,m)$ 上のwell-definedな内積である．
+\end{proposition}
+\begin{proof}
+まず $f,g\in L^2(X,m)$ なら，
+前章の Hölder の不等式を $p=q=2$ に適用して
+\[
+\int_X |fg|\,dm\le \|f\|_2\|g\|_2<\infty
+\]
+を得る．
+したがって積分は有限である．
+
+また $f=f'$ a.e., $g=g'$ a.e.\ なら
+\[
+fg=f'g' \quad \text{a.e.}
+\]
+だから，第8章の a.e.\ 不変性より
+\[
+\int_X fg\,dm=\int_X f'g'\,dm
+\]
+である．
+よってこの式は同値類の取り方によらない．
+
+線形性と対称性は積分の線形性から直ちに従う．
+さらに
+\[
+\langle f,f\rangle=\int_X f^2\,dm\ge 0
+\]
+である．
+もし
+\[
+\langle f,f\rangle=0
+\]
+なら
+\[
+\int_X f^2\,dm=0
+\]
+であり，第9章の「積分が $0$ であることの判定」より
+\[
+f^2=0 \quad \text{a.e.}
+\]
+したがって $f=0$ a.e.\ である．
+すなわち $L^2$ の元として $f=0$ である．
+以上より，これは内積である．
+\end{proof}
+
+\begin{theorem}
+\[
+L^2(X,m)
+\]
+は上の内積に関してHilbert空間である．
+\end{theorem}
+\begin{proof}
+直前の命題より，$L^2(X,m)$ は内積空間である．
+この内積が誘導するノルムは
+\[
+\|f\|=\sqrt{\langle f,f\rangle}
+=
+\left(\int_X |f|^2\,dm\right)^{1/2}
+=
+\|f\|_2
+\]
+である．
+前章の Riesz--Fischer の定理より，
+$L^2(X,m)$ はこのノルムに関して完備である．
+したがって $L^2(X,m)$ はHilbert空間である．
+\end{proof}
+
+\begin{example}
+$X=[0,1]$ とし $m$ をLebesgue測度とすると，
+\[
+L^2([0,1],m)
+\]
+はHilbert空間である．
+ここでの内積は
+\[
+\langle f,g\rangle=\int_0^1 f(x)g(x)\,dx
+\]
+である．
+確率論では，確率空間上の $L^2$ は「二乗平均が有限な確率変数全体」の空間になる．
+\end{example}
+
+\section{正規直交系と直交射影}
+
+\begin{definition}[直交と正規直交]
+内積空間 $H$ の $x,y\in H$ に対して
+\[
+\langle x,y\rangle=0
+\]
+のとき，$x$ と $y$ は直交するといい，
+\[
+x\perp y
+\]
+と書く．
+
+また $\|x\|=1$ を満たすベクトルを正規化されたベクトルという．
+互いに直交し，かつ各ベクトルが長さ $1$ をもつベクトル族を正規直交族という．
+\end{definition}
+
+\begin{definition}[正規直交系とCONS]
+Hilbert空間 $H$ の列
+\[
+\{e_n\}_{n=1}^{\infty}
+\]
+が正規直交系であるとは，
+任意の $m,n\in\NN$ に対して
+\[
+\langle e_n,e_m\rangle=
+\begin{cases}
+1 & (n=m),\\
+0 & (n\ne m)
+\end{cases}
+\]
+が成り立つことをいう．
+
+さらに
+\[
+\operatorname{span}\{e_1,e_2,\dots\}
+\]
+の閉包が $H$ 全体に一致するとき，
+この正規直交系を完全正規直交系
+（complete orthonormal system, CONS）という．
+\end{definition}
+
+\begin{proposition}
+正規直交族は線形独立である．
+\end{proposition}
+\begin{proof}
+\[
+\sum_{k=1}^N c_k e_k=0
+\]
+とする．
+両辺と $e_j$ との内積をとると
+\[
+0
+=
+\left\langle \sum_{k=1}^N c_k e_k,e_j\right\rangle
+=
+\sum_{k=1}^N c_k \langle e_k,e_j\rangle
+=
+c_j
+\]
+である．
+$j=1,\dots,N$ は任意だから，すべての係数 $c_j$ は $0$ である．
+\end{proof}
+
+\begin{definition}[Fourier係数と部分和]
+$\{e_n\}_{n=1}^{\infty}$ をHilbert空間 $H$ の正規直交系とする．
+$x\in H$ に対して
+\[
+\langle x,e_n\rangle
+\]
+を $x$ の $e_n$ に関するFourier係数という．
+
+また
+\[
+P_Nx:=\sum_{n=1}^N \langle x,e_n\rangle e_n
+\]
+を $x$ の第 $N$ 部分和という．
+\end{definition}
+
+\begin{theorem}[直交射影の基本性質]
+$\{e_n\}$ を正規直交系とし，
+\[
+M_N:=\operatorname{span}\{e_1,\dots,e_N\}
+\]
+とおく．
+このとき任意の $x\in H$ に対して次が成り立つ．
+\begin{enumerate}
+    \item
+    \[
+    x-P_Nx \perp e_j
+    \qquad (1\le j\le N)
+    \]
+    \item 任意の $y\in M_N$ に対して
+    \[
+    \|x-y\|^2
+    =
+    \|x-P_Nx\|^2
+    +
+    \|P_Nx-y\|^2
+    \]
+    が成り立つ．
+    特に
+    \[
+    \|x-P_Nx\|\le \|x-y\|
+    \]
+    である．
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\textbf{(1)}\quad
+$1\le j\le N$ に対して
+\begin{align*}
+\langle x-P_Nx,e_j\rangle
+&=
+\langle x,e_j\rangle
+-
+\left\langle \sum_{n=1}^N \langle x,e_n\rangle e_n,e_j\right\rangle \\
+&=
+\langle x,e_j\rangle
+-
+\sum_{n=1}^N \langle x,e_n\rangle \langle e_n,e_j\rangle \\
+&=
+\langle x,e_j\rangle-\langle x,e_j\rangle
+=0.
+\end{align*}
+
+\textbf{(2)}\quad
+$y\in M_N$ を任意に取る．
+すると
+\[
+P_Nx-y\in M_N
+\]
+であるから，(1) より
+\[
+x-P_Nx \perp P_Nx-y
+\]
+が成り立つ．
+さらに
+\[
+x-y=(x-P_Nx)+(P_Nx-y)
+\]
+だから，Pythagoras の定理より
+\[
+\|x-y\|^2
+=
+\|x-P_Nx\|^2+\|P_Nx-y\|^2
+\]
+を得る．
+特に第2項は非負だから
+\[
+\|x-P_Nx\|\le \|x-y\|
+\]
+である．
+\end{proof}
+
+\begin{corollary}[Besselの不等式]
+$\{e_n\}_{n=1}^{\infty}$ をHilbert空間 $H$ の正規直交系とする．
+このとき任意の $x\in H$ と任意の $N\in\NN$ に対して
+\[
+\sum_{n=1}^N |\langle x,e_n\rangle|^2\le \|x\|^2
+\]
+が成り立つ．
+特に級数
+\[
+\sum_{n=1}^{\infty} |\langle x,e_n\rangle|^2
+\]
+は収束する．
+\end{corollary}
+\begin{proof}
+直交射影の基本性質を $y=0$ に適用すると
+\[
+\|x\|^2=\|x-P_Nx\|^2+\|P_Nx\|^2
+\]
+を得る．
+一方，$\{e_1,\dots,e_N\}$ は正規直交族だから
+\[
+\|P_Nx\|^2
+=
+\left\|
+\sum_{n=1}^N \langle x,e_n\rangle e_n
+\right\|^2
+=
+\sum_{n=1}^N |\langle x,e_n\rangle|^2
+\]
+である．
+したがって
+\[
+\sum_{n=1}^N |\langle x,e_n\rangle|^2
+=
+\|P_Nx\|^2
+\le
+\|x\|^2
+\]
+である．
+左辺は $N$ に関して単調増加で上に有界だから収束する．
+\end{proof}
+
+\begin{theorem}[CONSの特徴づけ]
+$\{e_n\}_{n=1}^{\infty}$ をHilbert空間 $H$ の正規直交系とする．
+このとき次は同値である．
+\begin{enumerate}
+    \item $\{e_n\}$ は CONS である
+    \item 任意の $x\in H$ に対して
+    \[
+    \|x-P_Nx\|\to 0
+    \]
+    が成り立つ
+    \item 任意の $x\in H$ に対して
+    \[
+    \|x\|^2=\sum_{n=1}^{\infty}|\langle x,e_n\rangle|^2
+    \]
+    が成り立つ
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\textbf{(1) $\Rightarrow$ (2)}\quad
+$x\in H$ と $\eps>0$ を任意に取る．
+CONS であることから，ある有限和
+\[
+y=\sum_{n=1}^M a_n e_n
+\]
+が存在して
+\[
+\|x-y\|<\eps
+\]
+である．
+$N\ge M$ とすれば $y\in M_N$ であるから，直交射影の基本性質より
+\[
+\|x-P_Nx\|\le \|x-y\|<\eps.
+\]
+よって
+\[
+\|x-P_Nx\|\to 0
+\]
+である．
+
+\textbf{(2) $\Rightarrow$ (3)}\quad
+Bessel の不等式の証明で得た等式
+\[
+\|x\|^2=\|x-P_Nx\|^2+\sum_{n=1}^N |\langle x,e_n\rangle|^2
+\]
+で $N\to\infty$ とすれば，
+\[
+\|x\|^2=\sum_{n=1}^{\infty}|\langle x,e_n\rangle|^2
+\]
+を得る．
+
+\textbf{(3) $\Rightarrow$ (2)}\quad
+同じ等式に (3) を代入すると
+\[
+\|x-P_Nx\|^2
+=
+\sum_{n=N+1}^{\infty}|\langle x,e_n\rangle|^2
+\to 0
+\]
+である．
+したがって
+\[
+\|x-P_Nx\|\to 0.
+\]
+
+\textbf{(2) $\Rightarrow$ (1)}\quad
+各 $P_Nx$ は
+\[
+\operatorname{span}\{e_1,e_2,\dots\}
+\]
+に属する．
+(2) より $P_Nx\to x$ だから，
+$x$ はその閉包に属する．
+$x\in H$ は任意だから，この閉包は $H$ 全体に一致する．
+したがって $\{e_n\}$ は CONS である．
+\end{proof}
+
+\begin{example}[\texorpdfstring{$\RR^d$}{Rd} の標準基底]
+$\RR^d$ の標準基底
+\[
+e_1=(1,0,\dots,0),\ \dots,\ e_d=(0,\dots,0,1)
+\]
+は正規直交族であり，
+その線形包は $\RR^d$ 全体だから CONS である．
+このとき
+\[
+x=\sum_{k=1}^d \langle x,e_k\rangle e_k
+\]
+であり，
+Parseval の等式は
+\[
+\|x\|^2=\sum_{k=1}^d |x_k|^2
+\]
+に他ならない．
+\end{example}
+
+\section{Fourier関数系}
+
+\begin{definition}[実Fourier関数系]
+$L^2([0,1],m)$ において
+\[
+\varphi_0(x):=1,
+\qquad
+\varphi_n^c(x):=\sqrt{2}\cos(2\pi n x),
+\qquad
+\varphi_n^s(x):=\sqrt{2}\sin(2\pi n x)
+\quad (n\ge 1)
+\]
+を考える．
+これらをまとめて実Fourier関数系という．
+\end{definition}
+
+\begin{proposition}
+実Fourier関数系は $L^2([0,1],m)$ の正規直交系である．
+\end{proposition}
+\begin{proof}
+まず
+\[
+\int_0^1 1^2\,dx=1
+\]
+だから $\varphi_0$ は長さ $1$ をもつ．
+
+次に $n\ge 1$ とすると
+\[
+\int_0^1 \cos^2(2\pi n x)\,dx
+=
+\frac12\int_0^1 \bigl(1+\cos(4\pi n x)\bigr)\,dx
+=
+\frac12
+\]
+であるから
+\[
+\|\varphi_n^c\|_2^2=2\cdot \frac12=1.
+\]
+同様に
+\[
+\int_0^1 \sin^2(2\pi n x)\,dx
+=
+\frac12\int_0^1 \bigl(1-\cos(4\pi n x)\bigr)\,dx
+=
+\frac12
+\]
+より
+\[
+\|\varphi_n^s\|_2^2=1.
+\]
+
+また任意の非零整数 $k$ に対して
+\[
+\int_0^1 \cos(2\pi kx)\,dx=0,
+\qquad
+\int_0^1 \sin(2\pi kx)\,dx=0
+\]
+である．
+したがって
+\[
+\langle \varphi_0,\varphi_n^c\rangle
+=
+\sqrt{2}\int_0^1 \cos(2\pi n x)\,dx
+=0,
+\]
+\[
+\langle \varphi_0,\varphi_n^s\rangle
+=
+\sqrt{2}\int_0^1 \sin(2\pi n x)\,dx
+=0.
+\]
+
+さらに $m\ne n$ に対して積和公式
+\[
+\cos \alpha \cos \beta
+=
+\frac12\bigl(\cos(\alpha-\beta)+\cos(\alpha+\beta)\bigr)
+\]
+を用いると
+\begin{align*}
+\langle \varphi_n^c,\varphi_m^c\rangle
+&=
+2\int_0^1 \cos(2\pi n x)\cos(2\pi m x)\,dx \\
+&=
+\int_0^1 \cos(2\pi(n-m)x)\,dx
++
+\int_0^1 \cos(2\pi(n+m)x)\,dx \\
+&=0.
+\end{align*}
+$n=m$ のときはすでに長さ $1$ を確かめたので
+\[
+\langle \varphi_n^c,\varphi_n^c\rangle=1
+\]
+である．
+
+同様に
+\[
+\sin \alpha \sin \beta
+=
+\frac12\bigl(\cos(\alpha-\beta)-\cos(\alpha+\beta)\bigr)
+\]
+より
+\[
+\langle \varphi_n^s,\varphi_m^s\rangle
+=
+\delta_{nm}
+\]
+を得る．
+
+最後に
+\[
+\sin \alpha \cos \beta
+=
+\frac12\bigl(\sin(\alpha+\beta)+\sin(\alpha-\beta)\bigr)
+\]
+より
+\[
+\langle \varphi_n^s,\varphi_m^c\rangle=0
+\]
+である．
+したがって実Fourier関数系は正規直交系である．
+\end{proof}
+
+\begin{remark}
+実Fourier関数系に対するFourier係数は
+\[
+\langle f,\varphi_0\rangle=\int_0^1 f(x)\,dx,
+\]
+\[
+\langle f,\varphi_n^c\rangle
+=
+\sqrt{2}\int_0^1 f(x)\cos(2\pi n x)\,dx,
+\qquad
+\langle f,\varphi_n^s\rangle
+=
+\sqrt{2}\int_0^1 f(x)\sin(2\pi n x)\,dx
+\]
+で与えられる．
+つまり Fourier 係数は「関数と基本波との内積」である．
+
+古典的な Fourier 解析では，
+この正規直交系が実際に CONS であることを示す．
+その結果，$L^2([0,1])$ の関数をFourier級数で展開できる．
+\end{remark}
+
+\section{解釈とまとめ}
+
+Banach空間では長さだけを見ていたが，
+Hilbert空間では内積によって
+\[
+\text{長さ},\qquad \text{角度},\qquad \text{直交}
+\]
+が同時に扱えるようになった．
+
+特に重要なのは，
+\[
+L^2(X,m)
+\]
+がHilbert空間になることである．
+ここでは関数の直交性が積分
+\[
+\int_X f g\,dm
+\]
+で表されるため，
+積分論と線形代数が直接結びつく．
+
+さらに正規直交系を用いると，
+任意のベクトル $x$ を
+\[
+\langle x,e_n\rangle
+\]
+という係数で解析できる．
+Bessel の不等式と Parseval の等式は，
+この展開がエネルギー保存
+\[
+\|x\|^2
+\]
+と整合的であることを示している．
+次章では，こうした空間のあいだを結ぶ写像として
+線形作用素を導入する．

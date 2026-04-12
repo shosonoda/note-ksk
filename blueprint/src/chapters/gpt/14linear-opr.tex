@@ -1,0 +1,671 @@
+\chapter{線形作用素}
+
+\paragraph{本章の目標}
+Banach空間やHilbert空間を用意しただけでは，
+まだ「関数を関数へ送る操作」を体系的には扱えない．
+関数解析では
+\[
+\text{積分},\qquad \text{微分},\qquad \text{平均},\qquad \text{Fourier係数をとる操作}
+\]
+のような写像そのものを対象にする．
+その基本概念が線形作用素である．
+
+本章では
+\begin{enumerate}
+    \item 線形作用素と点列連続性の定義
+    \item 線形作用素では点列連続性とLipschitz連続性が同値であること
+    \item 有界線形作用素（BLO）の定義と作用素ノルム
+    \item $\mathcal B(X,Y)$ がBanach空間になること
+    \item 積分作用素の例と，微分作用素が非有界になる例
+\end{enumerate}
+を説明する．
+
+\section{動機づけ}
+
+関数解析で重要なのは，
+関数空間の中の点としての関数だけではない．
+関数を別の関数へ，あるいは実数へ送る写像も同じくらい重要である．
+
+例えば
+\[
+f\longmapsto \int_0^1 f(x)\,dx
+\]
+は関数を1つの数へ送る．
+また
+\[
+f\longmapsto \left(x\mapsto \int_0^x f(t)\,dt\right)
+\]
+は関数を別の関数へ送る．
+さらに
+\[
+f\longmapsto f'
+\]
+という微分作用素もある．
+
+これらはすべて線形であるが，
+極限に対する振る舞いは同じではない．
+積分作用素は安定であるのに対し，
+微分作用素はノルムの取り方によっては不安定になる．
+その違いを正確に言い表すのが「有界性」である．
+
+\section{線形作用素と連続性}
+
+以後，$X,Y$ をノルム空間とする．
+
+\begin{definition}[線形作用素]
+写像
+\[
+T:X\to Y
+\]
+が線形作用素であるとは，任意の $x,y\in X$ と任意の $a,b\in\RR$ に対して
+\[
+T(ax+by)=aT(x)+bT(y)
+\]
+が成り立つことをいう．
+\end{definition}
+
+\begin{definition}[点列連続]
+線形作用素 $T:X\to Y$ が点 $x_0\in X$ で点列連続であるとは，
+任意の点列 $\{x_n\}_{n=1}^{\infty}\subset X$ に対して
+\[
+x_n\to x_0 \text{ in } X
+\]
+ならば
+\[
+T(x_n)\to T(x_0) \text{ in } Y
+\]
+が成り立つことをいう．
+\end{definition}
+
+\begin{definition}[Lipschitz連続]
+写像 $T:X\to Y$ がLipschitz連続であるとは，
+ある定数 $C\ge 0$ が存在して
+\[
+\|T(x)-T(y)\|_Y\le C\|x-y\|_X
+\qquad (x,y\in X)
+\]
+が成り立つことをいう．
+\end{definition}
+
+\begin{theorem}[線形作用素の連続性の判定]
+線形作用素 $T:X\to Y$ に対して，次は同値である．
+\begin{enumerate}
+    \item $T$ は $0$ で点列連続である
+    \item ある定数 $C\ge 0$ が存在して
+    \[
+    \|T(x)\|_Y\le C\|x\|_X
+    \qquad (x\in X)
+    \]
+    が成り立つ
+    \item $T$ はLipschitz連続である
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\textbf{(2) $\Rightarrow$ (3)}\quad
+任意の $x,y\in X$ に対して，線形性より
+\[
+T(x)-T(y)=T(x-y)
+\]
+だから
+\[
+\|T(x)-T(y)\|_Y
+=
+\|T(x-y)\|_Y
+\le
+C\|x-y\|_X.
+\]
+したがって $T$ はLipschitz連続である．
+
+\textbf{(3) $\Rightarrow$ (1)}\quad
+$x_n\to 0$ とする．
+Lipschitz連続性より
+\[
+\|T(x_n)-T(0)\|_Y\le C\|x_n\|_X\to 0
+\]
+である．
+線形性から $T(0)=0$ だから
+\[
+T(x_n)\to 0.
+\]
+よって $T$ は $0$ で点列連続である．
+
+\textbf{(1) $\Rightarrow$ (2)}\quad
+背理法で示す．
+もし (2) が成り立たないなら，
+任意の $n\in\NN$ に対してある $x_n\in X$ が存在して
+\[
+\|T(x_n)\|_Y>n\|x_n\|_X
+\]
+となる．
+このとき $x_n\ne 0$ である．
+そこで
+\[
+y_n:=\frac{x_n}{n\|x_n\|_X}
+\]
+とおくと
+\[
+\|y_n\|_X=\frac{1}{n}\to 0
+\]
+である．
+一方，
+\[
+\|T(y_n)\|_Y
+=
+\frac{\|T(x_n)\|_Y}{n\|x_n\|_X}
+>1
+\]
+だから
+\[
+T(y_n)\not\to 0.
+\]
+これは $0$ での点列連続性に反する．
+したがって (2) が成り立つ．
+\end{proof}
+
+\begin{corollary}
+線形作用素 $T:X\to Y$ が $0$ で点列連続ならば，
+任意の点 $x_0\in X$ で点列連続である．
+\end{corollary}
+\begin{proof}
+前定理より，ある $C\ge 0$ が存在して
+\[
+\|T(x)\|_Y\le C\|x\|_X
+\qquad (x\in X)
+\]
+が成り立つ．
+$x_n\to x_0$ とすると
+\[
+\|T(x_n)-T(x_0)\|_Y
+=
+\|T(x_n-x_0)\|_Y
+\le
+C\|x_n-x_0\|_X\to 0
+\]
+である．
+したがって $T$ は $x_0$ で点列連続である．
+\end{proof}
+
+\begin{definition}[有界線形作用素]
+前定理の条件を満たす線形作用素を有界線形作用素
+（bounded linear operator, BLO）という．
+\end{definition}
+
+\begin{remark}
+線形作用素では，
+\[
+\text{点列連続} \iff \text{Lipschitz連続} \iff \text{有界}
+\]
+である．
+これは一般の非線形写像では成り立たない．
+線形性が入ることで，連続性の判定が非常に簡単になる．
+\end{remark}
+
+\section{作用素ノルム}
+
+\begin{definition}[作用素ノルム]
+有界線形作用素 $T:X\to Y$ に対して
+\[
+\|T\|
+:=
+\sup\{\|T(x)\|_Y \mid x\in X,\ \|x\|_X\le 1\}
+\]
+を $T$ の作用素ノルムという．
+\end{definition}
+
+\begin{proposition}
+有界線形作用素 $T:X\to Y$ に対して次が成り立つ．
+\begin{enumerate}
+    \item 任意の $x\in X$ に対して
+    \[
+    \|T(x)\|_Y\le \|T\|\,\|x\|_X
+    \]
+    \item もしある $C\ge 0$ が存在して
+    \[
+    \|T(x)\|_Y\le C\|x\|_X
+    \qquad (x\in X)
+    \]
+    ならば
+    \[
+    \|T\|\le C
+    \]
+    である
+\end{enumerate}
+特に $\|T\|$ は上の不等式を満たす最小の定数である．
+\end{proposition}
+\begin{proof}
+\textbf{(1)}\quad
+$x=0$ なら自明である．
+$x\ne 0$ のとき
+\[
+u:=\frac{x}{\|x\|_X}
+\]
+とおくと $\|u\|_X=1$ だから，作用素ノルムの定義より
+\[
+\|T(u)\|_Y\le \|T\|
+\]
+である．
+したがって
+\[
+\|T(x)\|_Y
+=
+\|x\|_X\|T(u)\|_Y
+\le
+\|T\|\,\|x\|_X.
+\]
+
+\textbf{(2)}\quad
+$\|x\|_X\le 1$ なら
+\[
+\|T(x)\|_Y\le C\|x\|_X\le C
+\]
+である．
+したがって単位球上で上限をとれば
+\[
+\|T\|\le C
+\]
+を得る．
+\end{proof}
+
+\begin{definition}
+有界線形作用素全体を
+\[
+\mathcal B(X,Y)
+\]
+と書く．
+\end{definition}
+
+\begin{proposition}
+作用素ノルムは $\mathcal B(X,Y)$ 上のノルムである．
+\end{proposition}
+\begin{proof}
+まず
+\[
+\|T\|\ge 0
+\]
+であり，
+\[
+\|T\|=0
+\]
+なら前命題より任意の $x\in X$ に対して
+\[
+\|T(x)\|_Y\le \|T\|\,\|x\|_X=0
+\]
+だから $T(x)=0$ である．
+したがって $T=0$ である．
+逆向きは明らかである．
+
+次に $a\in\RR$ に対して
+\[
+\|aT\|
+=
+\sup_{\|x\|_X\le 1}\|aT(x)\|_Y
+=
+|a|\sup_{\|x\|_X\le 1}\|T(x)\|_Y
+=
+|a|\,\|T\|
+\]
+である．
+
+最後に $S,T\in\mathcal B(X,Y)$ に対し，任意の $\|x\|_X\le 1$ について
+\[
+\|(S+T)(x)\|_Y
+\le
+\|S(x)\|_Y+\|T(x)\|_Y
+\le
+\|S\|+\|T\|
+\]
+である．
+上限をとれば
+\[
+\|S+T\|\le \|S\|+\|T\|
+\]
+を得る．
+したがって作用素ノルムはノルムである．
+\end{proof}
+
+\begin{proposition}[合成に関する評価]
+$X,Y,Z$ をノルム空間とし，
+$T\in\mathcal B(X,Y)$，
+$S\in\mathcal B(Y,Z)$ とする．
+このとき
+\[
+S\circ T\in\mathcal B(X,Z)
+\]
+であり，
+\[
+\|S\circ T\|\le \|S\|\,\|T\|
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+任意の $x\in X$ に対して
+\[
+\|(S\circ T)(x)\|_Z
+\le
+\|S\|\,\|T(x)\|_Y
+\le
+\|S\|\,\|T\|\,\|x\|_X
+\]
+である．
+したがって $S\circ T$ は有界線形であり，
+前命題より
+\[
+\|S\circ T\|\le \|S\|\,\|T\|
+\]
+を得る．
+\end{proof}
+
+\section{\texorpdfstring{$\mathcal B(X,Y)$}{B(X,Y)} の完備性}
+
+\begin{theorem}
+$Y$ がBanach空間ならば
+\[
+\mathcal B(X,Y)
+\]
+は作用素ノルムに関してBanach空間である．
+\end{theorem}
+\begin{proof}
+$\{T_n\}_{n=1}^{\infty}$ を $\mathcal B(X,Y)$ のCauchy列とする．
+すなわち任意の $\eps>0$ に対して，ある $N$ が存在して
+\[
+m,n\ge N
+\implies
+\|T_n-T_m\|<\eps
+\]
+である．
+
+まず各 $x\in X$ について $\{T_n(x)\}$ が $Y$ でCauchy列になることを示す．
+実際，
+\[
+\|T_n(x)-T_m(x)\|_Y
+\le
+\|T_n-T_m\|\,\|x\|_X
+\]
+だからである．
+$Y$ はBanach空間なので，極限
+\[
+T(x):=\lim_{n\to\infty}T_n(x)
+\]
+が存在する．
+こうして写像 $T:X\to Y$ が定まる．
+
+次に $T$ が線形であることを示す．
+$x,y\in X$，$a,b\in\RR$ に対して
+\[
+T_n(ax+by)=aT_n(x)+bT_n(y)
+\]
+であり，$n\to\infty$ とすれば
+\[
+T(ax+by)=aT(x)+bT(y)
+\]
+を得る．
+したがって $T$ は線形である．
+
+さらに $T$ が有界であることを示す．
+$\{T_n\}$ はCauchy列だから，ある $N_0$ が存在して
+\[
+n,m\ge N_0 \implies \|T_n-T_m\|\le 1
+\]
+である．
+特に $n\ge N_0$ とすると
+\[
+\|T_n\|\le \|T_{N_0}\|+\|T_n-T_{N_0}\|\le \|T_{N_0}\|+1.
+\]
+したがって
+\[
+M:=\max\{\|T_1\|,\dots,\|T_{N_0-1}\|,\|T_{N_0}\|+1\}
+\]
+とおけば，すべての $n$ とすべての $x\in X$ に対して
+\[
+\|T_n(x)\|_Y\le M\|x\|_X
+\]
+が成り立つ．
+$n\to\infty$ とすれば
+\[
+\|T(x)\|_Y\le M\|x\|_X
+\]
+を得る．
+よって $T\in\mathcal B(X,Y)$ である．
+
+最後に $T_n\to T$ が作用素ノルムで成り立つことを示す．
+$\eps>0$ を与え，上のCauchy条件を満たす $N$ を取る．
+$n\ge N$ とし，$\|x\|_X\le 1$ を満たす任意の $x$ を取る．
+すると任意の $m\ge N$ に対して
+\[
+\|(T_n-T_m)(x)\|_Y\le \|T_n-T_m\|<\eps
+\]
+である．
+$m\to\infty$ とすると
+\[
+\|(T_n-T)(x)\|_Y\le \eps
+\]
+を得る．
+これは $\|x\|_X\le 1$ の任意の $x$ に対して成り立つから
+\[
+\|T_n-T\|\le \eps
+\qquad (n\ge N)
+\]
+である．
+したがって
+\[
+\|T_n-T\|\to 0.
+\]
+よって $\mathcal B(X,Y)$ は完備である．
+\end{proof}
+
+\section{例}
+
+\begin{example}[積分型線形汎関数]
+$X=C([0,1])$ とし，
+\[
+I(f):=\int_0^1 f(x)\,dx
+\qquad (f\in C([0,1]))
+\]
+と定める．
+すると
+\[
+I:C([0,1])\to \RR
+\]
+は有界線形作用素であり，
+\[
+\|I\|=1
+\]
+である．
+\end{example}
+\begin{proof}
+線形性は積分の線形性から従う．
+また任意の $f\in C([0,1])$ に対して
+\[
+|I(f)|
+=
+\left|\int_0^1 f(x)\,dx\right|
+\le
+\int_0^1 |f(x)|\,dx
+\le
+\|f\|_\infty
+\]
+だから
+\[
+\|I\|\le 1.
+\]
+一方，定数関数 $f\equiv 1$ に対して
+\[
+\|f\|_\infty=1,
+\qquad
+I(f)=1
+\]
+であるから
+\[
+\|I\|\ge 1.
+\]
+したがって
+\[
+\|I\|=1
+\]
+である．
+\end{proof}
+
+\begin{example}[積分作用素]
+$X=C([0,1])$ とし，
+\[
+(Tf)(x):=\int_0^x f(t)\,dt
+\qquad (0\le x\le 1)
+\]
+と定める．
+すると
+\[
+T:C([0,1])\to C([0,1])
+\]
+は有界線形作用素であり，
+\[
+\|T\|=1
+\]
+である．
+\end{example}
+\begin{proof}
+まず線形性は積分の線形性から従う．
+
+次に $Tf$ が連続であることを示す．
+$x,y\in[0,1]$ とし，$x<y$ とすると
+\[
+Tf(y)-Tf(x)=\int_x^y f(t)\,dt
+\]
+だから
+\[
+|Tf(y)-Tf(x)|
+\le
+\int_x^y |f(t)|\,dt
+\le
+\|f\|_\infty |y-x|.
+\]
+よって $Tf$ は連続である．
+
+さらに任意の $x\in[0,1]$ に対して
+\[
+|Tf(x)|
+\le
+\int_0^x |f(t)|\,dt
+\le
+\|f\|_\infty x
+\le
+\|f\|_\infty
+\]
+であるから
+\[
+\|Tf\|_\infty\le \|f\|_\infty.
+\]
+したがって $T$ は有界線形作用素であり
+\[
+\|T\|\le 1
+\]
+である．
+
+一方，$f\equiv 1$ とすると
+\[
+(Tf)(x)=x
+\]
+だから
+\[
+\|Tf\|_\infty=1=\|f\|_\infty.
+\]
+したがって
+\[
+\|T\|=1
+\]
+を得る．
+\end{proof}
+
+\begin{example}[非有界な微分作用素]
+\[
+D:C^1([0,1])\to C([0,1]),
+\qquad
+Df:=f'
+\]
+を考える．
+ただし定義域 $C^1([0,1])$ には sup-norm
+\[
+\|f\|_\infty:=\sup_{x\in[0,1]}|f(x)|
+\]
+を入れる．
+このとき $D$ は線形だが有界ではない．
+\end{example}
+\begin{proof}
+線形性は微分の線形性から従う．
+
+有界でないことを示すため
+\[
+f_n(x):=x^n
+\qquad (n\in\NN)
+\]
+を考える．
+すると
+\[
+\|f_n\|_\infty=1
+\]
+である．
+一方，
+\[
+Df_n(x)=nx^{n-1}
+\]
+だから
+\[
+\|Df_n\|_\infty=n.
+\]
+もし $D$ が有界なら，ある定数 $C\ge 0$ が存在して
+\[
+\|Df_n\|_\infty\le C\|f_n\|_\infty=C
+\]
+がすべての $n$ で成り立つはずである．
+しかし
+\[
+\|Df_n\|_\infty=n\to\infty
+\]
+だから矛盾である．
+したがって $D$ は有界ではない．
+\end{proof}
+
+\begin{remark}
+同じ微分作用素でも，
+定義域に
+\[
+\|f\|_{C^1}:=\|f\|_\infty+\|f'\|_\infty
+\]
+というノルムを入れれば
+\[
+\|Df\|_\infty\le \|f\|_{C^1}
+\]
+となり，有界線形作用素になる．
+したがって「作用素が有界かどうか」は，
+作用素そのものだけでなく，定義域と値域にどのノルムを入れるかにも依存する．
+\end{remark}
+
+\section{解釈とまとめ}
+
+線形作用素の要点は，
+線形性があると連続性の判定が
+\[
+\|T(x)\|\le C\|x\|
+\]
+という1本の不等式に集約されることである．
+この不等式が成り立つと，
+極限をとっても
+\[
+x_n\to x \implies T(x_n)\to T(x)
+\]
+が自動的に従う．
+
+また有界線形作用素全体
+\[
+\mathcal B(X,Y)
+\]
+自身も，$Y$ がBanach空間ならBanach空間になる．
+したがって「空間の上の写像」をさらに1つの空間として扱えるようになる．
+
+積分作用素は有界線形作用素の典型例であり，
+微分作用素はノルムの取り方によっては非有界になる典型例である．
+この対比は，関数解析が
+\[
+\text{どの空間で},\qquad
+\text{どのノルムで}
+\]
+問題を見るかを非常に重視することを示している．

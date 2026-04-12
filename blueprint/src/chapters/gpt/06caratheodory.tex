@@ -768,6 +768,131 @@ Lebesgue測度のような具体的な幾何学の場面では
 外測度とCarathéodory条件である．
 \end{remark}
 
+\begin{theorem}[有界集合に対する内測度の別定義]
+$A \subset \RR^d$ を有界集合とし，
+$A \subset I$ を満たす有界閉区間 $I$ を1つ取る．
+このとき
+\[
+\lambda_*(A)=|I|-\lambda^*(I\setminus A)
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+まず
+\[
+\alpha(A):=|I|-\lambda^*(I\setminus A)
+\]
+とおく．
+
+$K \subset A$ を任意のコンパクト集合とする．
+第5章より $K$ はLebesgue可測であり，$I$ もコンパクトだからLebesgue可測である．
+また
+\[
+I\setminus K
+\]
+は可測集合の差だからLebesgue可測であり，
+\[
+I=K\sqcup(I\setminus K)
+\]
+である．
+したがって測度の加法性より
+\[
+|I|=\lambda(I)=\lambda(K)+\lambda(I\setminus K)=\lambda^*(K)+\lambda(I\setminus K)
+\]
+である．
+さらに
+\[
+I\setminus A \subset I\setminus K
+\]
+だから単調性より
+\[
+\lambda^*(I\setminus A)\le \lambda^*(I\setminus K)=\lambda(I\setminus K)
+\]
+である．
+よって
+\[
+\lambda^*(K)\le |I|-\lambda^*(I\setminus A)=\alpha(A)
+\]
+を得る．
+$K$ の取り方について上限を取れば
+\[
+\lambda_*(A)\le \alpha(A)
+\]
+である．
+
+逆向きの不等式を示す．
+$\eps>0$ を任意に取る．
+第3章の外正則性より，
+$I\setminus A \subset G$ を満たす開集合 $G$ で
+\[
+\lambda^*(G)<\lambda^*(I\setminus A)+\eps
+\]
+となるものが取れる．
+ここで
+\[
+K:=I\setminus G
+\]
+とおくと，$K$ はコンパクトであり，しかも
+\[
+K\subset A
+\]
+である．
+また $G$ は開集合だから第6章前半で示したようにLebesgue可測であり，
+$I\cap G$ も可測である．
+さらに
+\[
+I=K\sqcup(I\cap G)
+\]
+だから
+\[
+\lambda(K)=\lambda(I)-\lambda(I\cap G)=|I|-\lambda(I\cap G).
+\]
+いま
+\[
+I\cap G\subset G
+\]
+だから単調性より
+\[
+\lambda(I\cap G)\le \lambda(G)=\lambda^*(G)
+\]
+である．
+したがって
+\[
+\lambda^*(K)=\lambda(K)\ge |I|-\lambda^*(G)> |I|-\lambda^*(I\setminus A)-\eps=\alpha(A)-\eps.
+\]
+ゆえに
+\[
+\lambda_*(A)\ge \lambda^*(K)>\alpha(A)-\eps.
+\]
+$\eps>0$ は任意だから
+\[
+\lambda_*(A)\ge \alpha(A)
+\]
+である．
+
+以上より
+\[
+\lambda_*(A)=\alpha(A)=|I|-\lambda^*(I\setminus A)
+\]
+を得る．
+\end{proof}
+
+\begin{corollary}[区間の取り方によらない]
+$A$ を有界集合とし，
+\[
+A\subset I,\qquad A\subset J
+\]
+を満たす有界閉区間 $I,J$ を取る．
+このとき
+\[
+|I|-\lambda^*(I\setminus A)=|J|-\lambda^*(J\setminus A)
+\]
+が成り立つ．
+\end{corollary}
+\begin{proof}
+どちらも直前の定理により $\lambda_*(A)$ に等しい．
+\end{proof}
+
 \section{Borel集合と非可測集合}
 
 \begin{theorem}[Borel集合]
@@ -923,7 +1048,7 @@ Lebesgue測度は可算加法的であるが，
 「可算加法性」がちょうどよい強さである．
 \end{remark}
 
-\section{一般の構成法}
+\section{一般の測度の構成}
 
 \begin{definition}[有限加法族]
 集合 $X$ の部分集合族 $\mathcal A \subset \mathcal P(X)$ が
@@ -934,6 +1059,176 @@ $X$ 上の有限加法族であるとは，次の3条件を満たすことをい
     \item $A,B \in \mathcal A$ ならば $A \setminus B \in \mathcal A$
 \end{enumerate}
 \end{definition}
+
+\begin{definition}[半加法族]
+集合 $X$ の部分集合族 $\mathcal S \subset \mathcal P(X)$ が
+$X$ 上の半加法族であるとは，次の3条件を満たすことをいう．
+\begin{enumerate}
+    \item $\emptyset \in \mathcal S$
+    \item $A,B \in \mathcal S$ ならば $A \cap B \in \mathcal S$
+    \item $A,B \in \mathcal S$ ならば，ある有限個の互いに素な
+    $C_1,\dots,C_N \in \mathcal S$ が存在して
+    \[
+    A \setminus B = \bigsqcup_{j=1}^N C_j
+    \]
+    と書ける
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[半加法族が生成する有限加法族]
+半加法族 $\mathcal S$ に対し，
+\[
+\mathcal A(\mathcal S)
+:=
+\left\{
+\bigsqcup_{j=1}^N A_j
+\;\middle|\;
+N \in \NN,\ A_j \in \mathcal S,\ A_i \cap A_j = \emptyset\ (i \ne j)
+\right\}
+\cup \{\emptyset\}
+\]
+と定める．
+\end{definition}
+
+\begin{example}[半開区間の族]
+\[
+\mathcal S
+:=
+\left\{
+\prod_{k=1}^d [a_k,b_k)
+\;\middle|\;
+a_k \le b_k
+\right\}
+\]
+は $\RR^d$ 上の半加法族である．
+実際，共通部分は再び半開区間であり，
+差集合は有限個の半開区間に分割できる．
+第2章の基本集合は，ちょうどこの $\mathcal S$ から作った
+$\mathcal A(\mathcal S)$ にほかならない．
+\end{example}
+
+\begin{lemma}
+$A \in \mathcal S$，$E \in \mathcal A(\mathcal S)$ とする．
+このとき $A \setminus E$ は有限個の互いに素な
+$\mathcal S$ の元の合併として書ける．
+\end{lemma}
+\begin{proof}
+$E$ の表示に現れる部分集合の個数に関する帰納法で示す．
+
+$E=\emptyset$ のときは
+\[
+A \setminus E = A \in \mathcal S
+\]
+であり明らかである．
+
+次に
+\[
+E=\bigsqcup_{j=1}^N E_j
+\qquad
+(E_j \in \mathcal S)
+\]
+で $N \ge 1$ とする．
+\[
+F:=\bigsqcup_{j=1}^{N-1}E_j
+\]
+とおくと，帰納法の仮定より
+\[
+A \setminus F=\bigsqcup_{i=1}^M B_i
+\qquad
+(B_i \in \mathcal S)
+\]
+と書ける．
+ここで
+\[
+A \setminus E=(A \setminus F)\setminus E_N
+=
+\bigsqcup_{i=1}^M (B_i \setminus E_N)
+\]
+である．
+各 $B_i \setminus E_N$ は半加法族の定義より
+有限個の互いに素な $\mathcal S$ の元の合併として書ける．
+しかも異なる $i$ に属する部分集合は，
+それぞれ互いに素な $B_i$ の中に入っているから互いに素である．
+したがって $A \setminus E$ も有限個の互いに素な
+$\mathcal S$ の元の合併として書ける．
+\end{proof}
+
+\begin{proposition}
+$\mathcal A(\mathcal S)$ は $X$ 上の有限加法族である．
+\end{proposition}
+\begin{proof}
+\begin{enumerate}
+    \item 定義より $\emptyset \in \mathcal A(\mathcal S)$ である．
+
+    \item 差集合に関する閉性を示す．
+    \[
+    E=\bigsqcup_{i=1}^m A_i,
+    \qquad
+    F \in \mathcal A(\mathcal S)
+    \]
+    とする．
+    先の補題より，各 $i$ について
+    \[
+    A_i \setminus F
+    \]
+    は有限個の互いに素な $\mathcal S$ の元の合併として書ける．
+    しかも $A_i$ たちは互いに素だから，
+    それらの差集合
+    \[
+    A_i \setminus F
+    \]
+    も互いに素である．
+    よって
+    \[
+    E \setminus F
+    =
+    \bigsqcup_{i=1}^m (A_i \setminus F)
+    \]
+    は有限個の互いに素な $\mathcal S$ の元の合併であり，
+    $E \setminus F \in \mathcal A(\mathcal S)$ である．
+
+    \item 和集合に関する閉性を示す．
+    $E,F \in \mathcal A(\mathcal S)$ とすると
+    \[
+    E \cup F = E \sqcup (F \setminus E)
+    \]
+    である．
+    右辺の $F \setminus E$ はすでに示した差集合に関する閉性より
+    $\mathcal A(\mathcal S)$ に属する．
+    したがって $E \cup F$ も
+    $\mathcal A(\mathcal S)$ に属する．
+\end{enumerate}
+\end{proof}
+
+\begin{definition}[半加法族上の前測度]
+半加法族 $\mathcal S$ 上の写像
+\[
+\mu_0:\mathcal S \to [0,\infty]
+\]
+が前測度であるとは，次を満たすことをいう．
+\begin{enumerate}
+    \item $\mu_0(\emptyset)=0$
+    \item 互いに素な列 $\{A_n\}_{n=1}^{\infty}\subset \mathcal S$ で
+    \[
+    A=\bigsqcup_{n=1}^{\infty}A_n \in \mathcal S
+    \]
+    となるものに対して
+    \[
+    \mu_0(A)=\sum_{n=1}^{\infty}\mu_0(A_n)
+    \]
+    が成り立つ
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+この定義から有限加法性も従う．
+実際，
+\[
+A=\bigsqcup_{n=1}^N A_n
+\]
+ならば $A_{N+1}=A_{N+2}=\cdots=\emptyset$ とおいて
+可算加法性を適用すればよい．
+\end{remark}
 
 \begin{definition}[前測度]
 有限加法族 $\mathcal A$ 上の写像
@@ -963,6 +1258,163 @@ $X$ 上の有限加法族であるとは，次の3条件を満たすことをい
 可算個の分割と両立するための整合性が必要であり，
 それを形式化したものが前測度である．
 \end{remark}
+
+\begin{proposition}[半加法族上の前測度の延長]
+$\mathcal S$ を半加法族，$\mu_0$ をその上の前測度とする．
+各
+\[
+E=\bigsqcup_{j=1}^N A_j \in \mathcal A(\mathcal S)
+\qquad
+(A_j \in \mathcal S)
+\]
+に対して
+\[
+\overline{\mu}_0(E):=\sum_{j=1}^N \mu_0(A_j)
+\]
+と定めると，これは well-defined であり，
+$\mathcal A(\mathcal S)$ 上の前測度になる．
+\end{proposition}
+\begin{proof}
+まず well-defined であることを示す．
+\[
+E=\bigsqcup_{i=1}^m A_i=\bigsqcup_{j=1}^n B_j
+\qquad
+(A_i,B_j \in \mathcal S)
+\]
+とする．
+各 $i$ について
+\[
+A_i=\bigsqcup_{j=1}^n (A_i \cap B_j)
+\]
+であり，$A_i \cap B_j \in \mathcal S$ で互いに素である．
+したがって半加法族上の前測度の有限加法性より
+\[
+\mu_0(A_i)=\sum_{j=1}^n \mu_0(A_i \cap B_j)
+\]
+である．
+よって
+\[
+\sum_{i=1}^m \mu_0(A_i)
+=
+\sum_{i=1}^m \sum_{j=1}^n \mu_0(A_i \cap B_j).
+\]
+同様に，各 $j$ について
+\[
+B_j=\bigsqcup_{i=1}^m (A_i \cap B_j)
+\]
+だから
+\[
+\mu_0(B_j)=\sum_{i=1}^m \mu_0(A_i \cap B_j)
+\]
+であり，
+\[
+\sum_{j=1}^n \mu_0(B_j)
+=
+\sum_{j=1}^n \sum_{i=1}^m \mu_0(A_i \cap B_j).
+\]
+右辺はいずれも同じ有限和だから
+\[
+\sum_{i=1}^m \mu_0(A_i)=\sum_{j=1}^n \mu_0(B_j)
+\]
+となり，$\overline{\mu}_0(E)$ は表示に依らない．
+
+次に，$\overline{\mu}_0$ が $\mathcal A(\mathcal S)$ 上の前測度であることを示す．
+
+\begin{enumerate}
+    \item $\overline{\mu}_0(\emptyset)=0$ は定義から明らかである．
+
+    \item 有限加法性を示す．
+    $E,F \in \mathcal A(\mathcal S)$ が互いに素とし，
+    \[
+    E=\bigsqcup_{i=1}^m A_i,
+    \qquad
+    F=\bigsqcup_{j=1}^n B_j
+    \]
+    と書く．
+    $E$ と $F$ は互いに素であるから，
+    すべての $A_i$ と $B_j$ も互いに素である．
+    よって
+    \[
+    E \sqcup F
+    =
+    \left(\bigsqcup_{i=1}^m A_i\right)
+    \sqcup
+    \left(\bigsqcup_{j=1}^n B_j\right)
+    \]
+    は $\mathcal A(\mathcal S)$ の表示であり，
+    \[
+    \overline{\mu}_0(E \sqcup F)
+    =
+    \sum_{i=1}^m \mu_0(A_i)+\sum_{j=1}^n \mu_0(B_j)
+    =
+    \overline{\mu}_0(E)+\overline{\mu}_0(F)
+    \]
+    である．
+
+    \item 可算加法性を示す．
+    互いに素な列 $\{E_n\}_{n=1}^{\infty}\subset \mathcal A(\mathcal S)$ で
+    \[
+    E=\bigsqcup_{n=1}^{\infty}E_n \in \mathcal A(\mathcal S)
+    \]
+    となるものを取る．
+    \[
+    E=\bigsqcup_{i=1}^m A_i
+    \qquad
+    (A_i \in \mathcal S)
+    \]
+    と書く．
+    各 $n,i$ に対して
+    \[
+    F_{n,i}:=E_n \cap A_i
+    \]
+    とおくと，$F_{n,i}\in\mathcal A(\mathcal S)$ であり，
+    $n$ を動かすと互いに素で
+    \[
+    A_i=\bigsqcup_{n=1}^{\infty}F_{n,i}
+    \]
+    が成り立つ．
+
+    ここで各 $F_{n,i}$ を
+    \[
+    F_{n,i}=\bigsqcup_{k=1}^{r_{n,i}} C_{n,i,k}
+    \qquad
+    (C_{n,i,k}\in\mathcal S)
+    \]
+    と書けば，
+    \[
+    A_i
+    =
+    \bigsqcup_{n=1}^{\infty}\bigsqcup_{k=1}^{r_{n,i}} C_{n,i,k}
+    \]
+    である．
+    したがって半加法族上の前測度の可算加法性より
+    \[
+    \mu_0(A_i)
+    =
+    \sum_{n=1}^{\infty}\sum_{k=1}^{r_{n,i}}\mu_0(C_{n,i,k})
+    =
+    \sum_{n=1}^{\infty}\overline{\mu}_0(F_{n,i})
+    \]
+    を得る．
+    ゆえに
+    \begin{align*}
+    \overline{\mu}_0(E)
+    &=
+    \sum_{i=1}^m \mu_0(A_i) \\
+    &=
+    \sum_{i=1}^m \sum_{n=1}^{\infty}\overline{\mu}_0(F_{n,i}) \\
+    &=
+    \sum_{n=1}^{\infty}\sum_{i=1}^m \overline{\mu}_0(F_{n,i}) \\
+    &=
+    \sum_{n=1}^{\infty}\overline{\mu}_0(E_n).
+    \end{align*}
+    最後の等号は
+    \[
+    E_n=\bigsqcup_{i=1}^m F_{n,i}
+    \]
+    に $\overline{\mu}_0$ の有限加法性を適用したものである．
+\end{enumerate}
+\end{proof}
 
 \begin{definition}[外測度の生成]
 有限加法族 $\mathcal A$ 上の前測度 $\mu_0$ から，
@@ -1112,35 +1564,386 @@ Carathéodoryの定理により，
 Carathéodoryの定理と直前の命題を合わせればよい．
 \end{proof}
 
-\begin{example}[Lebesgue測度の構成]
-$X=\RR^d$ とし，
-$\mathcal A$ を有限個の互いに素な半開区間の合併全体とする．
-各
+\begin{definition}[$\sigma$-有限]
+有限加法族上の前測度 $\mu_0$，または $\sigma$-加法族上の測度 $\mu$ が
+$\sigma$-有限であるとは，ある増大列
 \[
-A=\bigsqcup_{j=1}^{N}I_j \in \mathcal A
+X_1 \subset X_2 \subset \cdots
 \]
-に対して
+で
 \[
-\mu_0(A):=\sum_{j=1}^{N}|I_j|
+X=\bigcup_{n=1}^{\infty}X_n
 \]
-と定める．
-これは $\mathcal A$ 上の前測度である．
-ここから生成される外測度は，第3章で導入したLebesgue外測度と一致し，
-Carathéodoryの定理により第5章のLebesgue測度が得られる．
-\end{example}
+かつ
+\[
+\mu_0(X_n)<\infty
+\qquad
+\text{または}
+\qquad
+\mu(X_n)<\infty
+\]
+を満たすものが存在することをいう．
+\end{definition}
+
+\begin{theorem}[Carathéodory-Hahnの拡張定理]
+$\mathcal S$ を集合 $X$ 上の半加法族，
+$\mu_0$ をその上の前測度とする．
+このとき，$\sigma(\mathcal S)$ 上の測度 $\mu$ で
+\[
+\mu(A)=\mu_0(A)\qquad (A\in\mathcal S)
+\]
+を満たすものが存在する．
+
+さらに，$\overline{\mu}_0$ が $\mathcal A(\mathcal S)$ 上で
+$\sigma$-有限ならば，この拡張は一意的である．
+\end{theorem}
+\begin{proof}
+存在を示す．
+$\mathcal A:=\mathcal A(\mathcal S)$ とおく．
+先の命題により $\mathcal A$ は有限加法族であり，
+$\overline{\mu}_0$ はその上の前測度である．
+そこで $\overline{\mu}_0$ から外測度 $\mu^*$ を作ると，
+Carathéodoryの定理により
+\[
+\widetilde{\mu}:=\mu^*|_{\mathcal M_{\mu^*}}
+\]
+は $\mathcal M_{\mu^*}$ 上の測度であり，
+\[
+\widetilde{\mu}(A)=\overline{\mu}_0(A)
+\qquad
+(A\in\mathcal A)
+\]
+である．
+
+ここで $\mathcal M_{\mu^*}$ は $\sigma$-加法族で
+$\mathcal A$ を含むから，
+\[
+\sigma(\mathcal S)=\sigma(\mathcal A)\subset \mathcal M_{\mu^*}
+\]
+である．
+したがって
+\[
+\mu:=\widetilde{\mu}|_{\sigma(\mathcal S)}
+\]
+と定めれば，これは $\sigma(\mathcal S)$ 上の測度である．
+また $\mathcal S \subset \mathcal A$ だから，
+$A \in \mathcal S$ に対して
+\[
+\mu(A)=\widetilde{\mu}(A)=\overline{\mu}_0(A)=\mu_0(A)
+\]
+が成り立つ．
+
+次に一意性を示す．
+$\overline{\mu}_0$ が $\sigma$-有限であるとし，
+$\sigma(\mathcal S)$ 上の別の測度 $\nu$ で
+\[
+\nu(A)=\mu_0(A)\qquad (A\in\mathcal S)
+\]
+を満たすものを取る．
+$\mathcal A$ 上では $\nu$ と $\overline{\mu}_0$ は一致する．
+実際，
+\[
+E=\bigsqcup_{j=1}^N A_j
+\qquad
+(A_j \in \mathcal S)
+\]
+ならば，$\nu$ の有限加法性より
+\[
+\nu(E)=\sum_{j=1}^N \nu(A_j)=\sum_{j=1}^N \mu_0(A_j)=\overline{\mu}_0(E)
+\]
+である．
+
+$\sigma$-有限性より，
+ある増大列 $\{X_n\}_{n=1}^{\infty}\subset\mathcal A$ が存在して
+\[
+X=\bigcup_{n=1}^{\infty}X_n,
+\qquad
+\overline{\mu}_0(X_n)<\infty
+\]
+を満たす．
+任意の $E \in \sigma(\mathcal S)$ を取る．
+各 $n$ に対して
+\[
+E_n:=E\cap X_n
+\]
+とおく．
+
+まず
+\[
+\nu(E_n)\le \mu^*(E_n)
+\]
+を示す．
+$E_n \subset \bigcup_{k=1}^{\infty}A_k$ を満たす任意の
+$A_k \in \mathcal A$ を取ると，$\nu$ の可算劣加法性より
+\[
+\nu(E_n)\le \sum_{k=1}^{\infty}\nu(A_k)
+=
+\sum_{k=1}^{\infty}\overline{\mu}_0(A_k)
+\]
+である．
+被覆について下限を取れば
+\[
+\nu(E_n)\le \mu^*(E_n)
+\]
+を得る．
+
+逆向きの不等式を示す．
+$X_n \setminus E$ を覆う任意の $A_k \in \mathcal A$ に対して
+\[
+X_n \subset E_n \cup \bigcup_{k=1}^{\infty}A_k
+\]
+だから
+\[
+\overline{\mu}_0(X_n)=\nu(X_n)\le \nu(E_n)+\sum_{k=1}^{\infty}\overline{\mu}_0(A_k).
+\]
+したがって
+\[
+\overline{\mu}_0(X_n)-\nu(E_n)\le \mu^*(X_n \setminus E).
+\]
+一方，$E_n \in \sigma(\mathcal S)\subset \mathcal M_{\mu^*}$ であり，
+$X_n \in \mathcal A \subset \mathcal M_{\mu^*}$ だから
+\[
+\mu^*(X_n)=\mu^*(E_n)+\mu^*(X_n \setminus E)
+\]
+が成り立つ．
+しかも $X_n \in \mathcal A$ なので
+\[
+\mu^*(X_n)=\overline{\mu}_0(X_n)
+\]
+である．
+よって
+\[
+\mu^*(E_n)=\overline{\mu}_0(X_n)-\mu^*(X_n \setminus E)\le \nu(E_n)
+\]
+を得る．
+以上より
+\[
+\nu(E_n)=\mu^*(E_n)
+\qquad
+(n \in \NN)
+\]
+である．
+
+最後に $n\to\infty$ とする．
+$E_n \uparrow E$ だから，$\nu$ の連続性より
+\[
+\nu(E)=\lim_{n\to\infty}\nu(E_n)
+\]
+である．
+また $E \in \sigma(\mathcal S)\subset \mathcal M_{\mu^*}$ であるから，
+$\mu^*|_{\mathcal M_{\mu^*}}$ は測度であり，
+\[
+\mu^*(E)=\lim_{n\to\infty}\mu^*(E_n)
+\]
+が成り立つ．
+したがって
+\[
+\nu(E)
+=
+\lim_{n\to\infty}\nu(E_n)
+=
+\lim_{n\to\infty}\mu^*(E_n)
+=
+\mu^*(E)
+=
+\mu(E)
+\]
+である．
+任意の $E \in \sigma(\mathcal S)$ に対して成り立つから，
+$\nu=\mu$ である．
+\end{proof}
 
 \begin{remark}
-この意味で，Lebesgue測度は
+存在の部分を Carathéodory-Hahn の拡張定理，
+$\sigma$-有限性のもとでの一意性まで含めて Hopf の拡張定理と呼ぶことがある．
+重要なのは，
 \[
-\text{区間の体積}
+\text{半加法族}
+\longrightarrow
+\text{有限加法族}
 \longrightarrow
 \text{外測度}
 \longrightarrow
 \sigma\text{-加法族上の測度}
 \]
-という3段階の拡張によって作られている．
-Jordan測度が有限加法的な図形の体積にとどまっていたのに対し，
-Lebesgue測度では可算分割に耐える形へ理論が完成される．
+という段階的な構成が一般に通用することである．
+\end{remark}
+
+\begin{example}[Lebesgue測度の構成]
+$X=\RR^d$ とし，
+\[
+\mathcal S
+:=
+\left\{
+\prod_{k=1}^d [a_k,b_k)
+\;\middle|\;
+a_k \le b_k
+\right\}
+\]
+を半開区間全体の半加法族とする．
+各 $I \in \mathcal S$ に対して
+\[
+\mu_0(I):=|I|
+\]
+と定める．
+
+まず，$\mu_0$ が $\mathcal S$ 上の前測度であることを示す．
+\[
+I=\bigsqcup_{n=1}^{\infty}I_n
+\qquad
+(I,I_n \in \mathcal S)
+\]
+とする．
+各 $N$ に対して
+\[
+\bigsqcup_{n=1}^N I_n \subset I
+\]
+だから，第2章の基本集合のJordan測度の単調性より
+\[
+\sum_{n=1}^N |I_n|
+=
+m_J\left(\bigsqcup_{n=1}^N I_n\right)
+\le
+|I|
+\]
+である．
+$N\to\infty$ として
+\[
+\sum_{n=1}^{\infty}|I_n|\le |I|
+\]
+を得る．
+
+逆向きの不等式は，第3章で示した
+\[
+\lambda^*(I)=|I|
+\]
+を用いれば
+\[
+|I|
+=
+\lambda^*(I)
+\le
+\sum_{n=1}^{\infty}\lambda^*(I_n)
+=
+\sum_{n=1}^{\infty}|I_n|
+\]
+と従う．
+したがって
+\[
+|I|=\sum_{n=1}^{\infty}|I_n|
+\]
+であり，$\mu_0$ は確かに前測度である．
+
+さらに $\mathcal A(\mathcal S)$ は，第2章で導入した基本集合全体である．
+また $\overline{\mu}_0$ から生成される外測度は，第3章の
+Lebesgue外測度 $\lambda^*$ と一致する．
+実際，第3章では有界区間による可算被覆の下限を取ったが，
+任意の有界区間は有限個の半開区間に分割でき，
+体積の総和は変わらないからである．
+よって，半開区間だけを使って被覆しても下限の値は変わらない．
+
+したがって，この一般構成は
+\[
+\text{半開区間}
+\longrightarrow
+\text{基本集合}
+\longrightarrow
+\text{Lebesgue外測度}
+\longrightarrow
+\text{Lebesgue測度}
+\]
+という第2章から第5章までの流れを抽象化したものになっている．
+また $\sigma(\mathcal S)=\mathcal B(\RR^d)$ であるから，
+Carathéodory-Hahnの定理はまずBorel測度を与え，
+その完備化としてLebesgue測度が得られる．
+\end{example}
+
+\begin{example}[数え上げ測度]
+任意の集合 $X$ に対して
+\[
+\#(A):=
+\begin{cases}
+\text{$A$ の元の個数} & (A \text{ が有限集合のとき}),\\
+\infty & (A \text{ が無限集合のとき})
+\end{cases}
+\qquad
+(A \subset X)
+\]
+と定める．
+これは $\mathcal P(X)$ 上の測度であり，数え上げ測度と呼ばれる．
+\end{example}
+\begin{proof}
+$\#(\emptyset)=0$ は明らかである．
+互いに素な列 $\{A_n\}_{n=1}^{\infty}\subset\mathcal P(X)$ を取る．
+
+\begin{enumerate}
+    \item ある $A_n$ が無限集合ならば
+    \[
+    \#\left(\bigcup_{n=1}^{\infty}A_n\right)=\infty
+    \]
+    であり，右辺も $\infty$ を含むから
+    \[
+    \sum_{n=1}^{\infty}\#(A_n)=\infty
+    \]
+    である．
+
+    \item すべての $A_n$ が有限集合で，しかも
+    非空なものが有限個しかなければ，
+    通常の有限個の個数の加法性より
+    \[
+    \#\left(\bigcup_{n=1}^{\infty}A_n\right)
+    =
+    \sum_{n=1}^{\infty}\#(A_n)
+    \]
+    である．
+
+    \item すべての $A_n$ が有限集合で，非空なものが無限個あるならば，
+    和集合は無限集合であるから左辺は $\infty$ である．
+    一方，各非空な $A_n$ について $\#(A_n)\ge 1$ だから
+    \[
+    \sum_{n=1}^{\infty}\#(A_n)=\infty
+    \]
+    である．
+\end{enumerate}
+
+以上により可算加法性が従う．
+\end{proof}
+
+\begin{example}[Dirac測度]
+集合 $X$ と点 $x_0 \in X$ を取る．
+$\mathcal P(X)$ 上の写像
+\[
+\delta_{x_0}(A)
+:=
+\begin{cases}
+1 & (x_0 \in A),\\
+0 & (x_0 \notin A)
+\end{cases}
+\qquad
+(A \subset X)
+\]
+を Dirac 測度という．
+\end{example}
+\begin{proof}
+$\delta_{x_0}(\emptyset)=0$ は明らかである．
+互いに素な列 $\{A_n\}_{n=1}^{\infty}$ を取る．
+$x_0$ を含む $A_n$ は高々1つしかないから，
+\[
+\delta_{x_0}\left(\bigcup_{n=1}^{\infty}A_n\right)
+=
+\sum_{n=1}^{\infty}\delta_{x_0}(A_n)
+\]
+が成り立つ．
+したがって $\delta_{x_0}$ は測度である．
+\end{proof}
+
+\begin{remark}
+Lebesgue測度は面積や体積を表す測度であるが，
+測度という概念そのものはもっと広い．
+数え上げ測度は「点の個数」を測り，
+Dirac測度は「ある1点にだけ質量が集中している」ことを表す．
+測度論の一般構成は，このように性質の異なる量を
+同じ言葉で統一的に扱えることに本質がある．
 \end{remark}
 
 \section{解釈}

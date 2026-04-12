@@ -1,0 +1,621 @@
+\chapter{収束定理}
+
+\paragraph{本章の目標}
+本章ではLebesgue積分論の中心である収束定理を学ぶ．
+特に
+\[
+\text{単調収束定理},\qquad
+\text{Fatouの補題},\qquad
+\text{優収束定理},\qquad
+\text{有界収束定理}
+\]
+を証明し，
+さらに
+\[
+\text{項別積分},\qquad \text{積分記号下の微分}
+\]
+へ応用する．
+これらは，確率論では期待値と極限の交換を，
+関数解析では級数・極限・積分の交換を支える基本定理である．
+
+\section{動機づけ}
+
+第1章で見たように，Riemann積分では極限と積分の交換は繊細である．
+例えば，Riemann可積分関数列が点ごとに収束しても，
+極限関数はRiemann可積分とは限らない．
+Dirichlet関数の例はその典型であった．
+
+Lebesgue積分の強みは，極限の交換を可能にする十分条件が明確である点にある．
+実際，現代数学では
+\[
+f_n \to f
+\]
+という極限に対して
+\[
+\int f_n\,dm \to \int f\,dm
+\]
+を言いたい場面が非常に多い．
+本章では，そのための代表的な4つの定理を学ぶ．
+
+\section{単調収束定理}
+
+\begin{theorem}[単調収束定理]
+$E \subset \RR^d$ を可測集合とし，
+$f_n:E \to [0,\infty]$ を非負可測関数列とする．
+もし
+\[
+f_1\le f_2\le \cdots,
+\qquad
+f_n(x)\to f(x)\quad (x \in E)
+\]
+ならば
+\[
+\int_E f_n\,dm \uparrow \int_E f\,dm
+\]
+すなわち
+\[
+\lim_{n\to\infty}\int_E f_n\,dm=\int_E f\,dm
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+まず $f_n \le f$ だから単調性より
+\[
+\int_E f_n\,dm\le \int_E f\,dm
+\]
+であり，列 $\left\{\int_E f_n\,dm\right\}$ は単調増加で上に有界である．
+したがって極限
+\[
+L:=\lim_{n\to\infty}\int_E f_n\,dm
+\]
+が存在して
+\[
+L\le \int_E f\,dm
+\]
+である．
+
+逆向きの不等式を示す．
+$s \le f$ を満たす任意の非負単関数
+\[
+s=\sum_{j=1}^m a_j1_{A_j}
+\]
+を取る．
+ここで $a_j\ge 0$，$A_j$ は互いに素な可測集合とする．
+任意の $0<\alpha<1$ に対して
+\[
+B_{j,n}:=A_j \cap \{x \in E \mid f_n(x)\ge \alpha a_j\}
+\]
+とおく．
+$f_n(x)\uparrow f(x)\ge a_j$ が $A_j$ 上で成り立つので
+\[
+B_{j,1}\subset B_{j,2}\subset \cdots,
+\qquad
+\bigcup_{n=1}^{\infty}B_{j,n}=A_j
+\]
+である．
+
+そこで
+\[
+u_n:=\sum_{j=1}^m \alpha a_j 1_{B_{j,n}}
+\]
+とおくと，$u_n$ は非負単関数で
+\[
+u_n\le f_n
+\]
+が成り立つ．
+したがって
+\[
+\int_E u_n\,dm\le \int_E f_n\,dm\le L.
+\]
+一方，測度の下からの連続性より
+\[
+m(B_{j,n})\to m(A_j)
+\]
+だから
+\[
+\int_E u_n\,dm
+=
+\sum_{j=1}^m \alpha a_j m(B_{j,n})
+\to
+\sum_{j=1}^m \alpha a_j m(A_j)
+=
+\alpha \int_E s\,dm.
+\]
+よって
+\[
+\alpha \int_E s\,dm\le L.
+\]
+$\alpha \uparrow 1$ とすれば
+\[
+\int_E s\,dm\le L.
+\]
+$s \le f$ を満たす単関数 $s$ は任意だから，
+$f$ の積分の定義より
+\[
+\int_E f\,dm\le L.
+\]
+したがって
+\[
+\int_E f\,dm=L
+\]
+である．
+\end{proof}
+
+\begin{corollary}[非負級数の項別積分]
+$f_n:E \to [0,\infty]$ を非負可測関数列とする．
+このとき
+\[
+\int_E \left(\sum_{n=1}^{\infty}f_n\right)\,dm
+=
+\sum_{n=1}^{\infty}\int_E f_n\,dm
+\]
+が成り立つ．
+\end{corollary}
+\begin{proof}
+部分和
+\[
+S_N:=\sum_{n=1}^N f_n
+\]
+を考えると
+\[
+S_1\le S_2\le \cdots,
+\qquad
+S_N \uparrow \sum_{n=1}^{\infty}f_n.
+\]
+したがって単調収束定理より
+\[
+\int_E \left(\sum_{n=1}^{\infty}f_n\right)\,dm
+=
+\lim_{N\to\infty}\int_E S_N\,dm.
+\]
+一方，有限和の線形性より
+\[
+\int_E S_N\,dm
+=
+\sum_{n=1}^N \int_E f_n\,dm.
+\]
+よって
+\[
+\int_E \left(\sum_{n=1}^{\infty}f_n\right)\,dm
+=
+\lim_{N\to\infty}\sum_{n=1}^N \int_E f_n\,dm
+=
+\sum_{n=1}^{\infty}\int_E f_n\,dm.
+\]
+\end{proof}
+
+\section{Fatouの補題}
+
+\begin{theorem}[Fatouの補題]
+$f_n:E \to [0,\infty]$ を非負可測関数列とする．
+このとき
+\[
+\int_E \liminf_{n\to\infty} f_n\,dm
+\le
+\liminf_{n\to\infty}\int_E f_n\,dm
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+各 $n$ に対して
+\[
+g_n:=\inf_{k\ge n}f_k
+\]
+とおく．
+すると $g_n$ は非負可測で，
+\[
+g_1\le g_2\le \cdots,
+\qquad
+g_n \uparrow \liminf_{n\to\infty} f_n.
+\]
+したがって単調収束定理より
+\[
+\int_E \liminf_{n\to\infty} f_n\,dm
+=
+\lim_{n\to\infty}\int_E g_n\,dm.
+\]
+しかも各 $n$ と各 $k\ge n$ に対して
+\[
+g_n\le f_k
+\]
+だから単調性より
+\[
+\int_E g_n\,dm\le \int_E f_k\,dm.
+\]
+ゆえに
+\[
+\int_E g_n\,dm\le \inf_{k\ge n}\int_E f_k\,dm.
+\]
+両辺で $n\to\infty$ とすると
+\[
+\int_E \liminf_{n\to\infty} f_n\,dm
+\le
+\lim_{n\to\infty}\inf_{k\ge n}\int_E f_k\,dm
+=
+\liminf_{n\to\infty}\int_E f_n\,dm.
+\]
+\end{proof}
+
+\begin{remark}
+Fatouの補題は，
+「極限の積分は積分の極限以下とは限らないが，
+少なくとも \(\liminf\) については不等式が成り立つ」
+という定理である．
+優収束定理の証明でも重要な役割を果たす．
+\end{remark}
+
+\section{優収束定理}
+
+\begin{theorem}[優収束定理]
+$f_n:E \to \eRR$ を可測関数列とし，
+$g:E \to [0,\infty]$ を可積分な関数とする．
+もし
+\[
+f_n(x)\to f(x) \quad \text{a.e.\ on } E
+\]
+かつ
+\[
+|f_n(x)|\le g(x) \quad \text{a.e.\ on } E
+\]
+がすべての $n$ について成り立つならば，
+$f$ は可積分であり，
+\[
+\lim_{n\to\infty}\int_E |f_n-f|\,dm=0
+\]
+したがって
+\[
+\lim_{n\to\infty}\int_E f_n\,dm=\int_E f\,dm
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+まず極限をとれば a.e.\ で
+\[
+|f|\le g
+\]
+である．
+したがって第8章の優関数による判定より $f$ は可積分である．
+
+次に
+\[
+h_n:=|f_n-f|
+\]
+とおくと，$h_n$ は非負可測で
+\[
+h_n\to 0 \quad \text{a.e.\ on } E
+\]
+かつ
+\[
+0\le h_n\le |f_n|+|f|\le 2g \quad \text{a.e.\ on } E
+\]
+が成り立つ．
+ここで
+\[
+2g-h_n \ge 0
+\]
+なので Fatou の補題を $\{2g-h_n\}$ に適用すると
+\[
+\int_E \liminf_{n\to\infty}(2g-h_n)\,dm
+\le
+\liminf_{n\to\infty}\int_E (2g-h_n)\,dm.
+\]
+左辺の integrand は a.e.\ で $2g$ に収束するから
+\[
+2\int_E g\,dm
+\le
+\liminf_{n\to\infty}\left(2\int_E g\,dm-\int_E h_n\,dm\right).
+\]
+すなわち
+\[
+2\int_E g\,dm
+\le
+2\int_E g\,dm-\limsup_{n\to\infty}\int_E h_n\,dm.
+\]
+よって
+\[
+\limsup_{n\to\infty}\int_E h_n\,dm\le 0.
+\]
+各 $\int_E h_n\,dm$ は非負だから
+\[
+\lim_{n\to\infty}\int_E h_n\,dm=0.
+\]
+すなわち
+\[
+\int_E |f_n-f|\,dm \to 0.
+\]
+
+最後に
+\[
+\left|\int_E f_n\,dm-\int_E f\,dm\right|
+=
+\left|\int_E (f_n-f)\,dm\right|
+\le
+\int_E |f_n-f|\,dm
+\to 0
+\]
+より
+\[
+\int_E f_n\,dm\to \int_E f\,dm
+\]
+を得る．
+\end{proof}
+
+\begin{corollary}[有界収束定理]
+$m(E)<\infty$ とし，
+$f_n:E \to \eRR$ を可測関数列とする．
+もし
+\[
+f_n(x)\to f(x)\quad \text{a.e.\ on } E
+\]
+かつある定数 $M>0$ が存在して
+\[
+|f_n(x)|\le M \quad \text{a.e.\ on } E
+\]
+がすべての $n$ について成り立つならば，
+$f$ は可積分で
+\[
+\int_E f_n\,dm\to \int_E f\,dm
+\]
+が成り立つ．
+\end{corollary}
+\begin{proof}
+\[
+g:=M1_E
+\]
+とおくと
+\[
+\int_E g\,dm=M\,m(E)<\infty
+\]
+だから $g$ は可積分である．
+しかも a.e.\ で
+\[
+|f_n|\le g
+\]
+であるから，優収束定理を適用すればよい．
+\end{proof}
+
+\section{項別積分}
+
+\begin{theorem}[優収束定理による項別積分]
+$f_n:E \to \eRR$ を可積分関数列とする．
+さらに，ある可積分関数 $g:E \to [0,\infty]$ が存在して
+\[
+\sum_{n=1}^{\infty}|f_n(x)|\le g(x) \quad \text{a.e.\ on } E
+\]
+を満たすとする．
+このとき級数
+\[
+\sum_{n=1}^{\infty}f_n(x)
+\]
+は a.e.\ で絶対収束し，その和を $f$ と書けば $f$ は可積分で，
+\[
+\int_E f\,dm
+=
+\sum_{n=1}^{\infty}\int_E f_n\,dm
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+部分和
+\[
+S_N:=\sum_{n=1}^N f_n
+\]
+を考える．
+a.e.\ で
+\[
+\sum_{n=1}^{\infty}|f_n(x)|\le g(x)<\infty
+\]
+だから，数列 $\sum f_n(x)$ は a.e.\ で絶対収束する．
+その和を $f(x)$ とおけば
+\[
+S_N(x)\to f(x) \quad \text{a.e.}
+\]
+である．
+
+さらに三角不等式より
+\[
+|S_N(x)|
+\le
+\sum_{n=1}^N |f_n(x)|
+\le
+\sum_{n=1}^{\infty}|f_n(x)|
+\le
+g(x)
+\quad \text{a.e.}
+\]
+だから，優収束定理より
+\[
+\int_E S_N\,dm\to \int_E f\,dm.
+\]
+一方，有限和の線形性より
+\[
+\int_E S_N\,dm
+=
+\sum_{n=1}^N \int_E f_n\,dm.
+\]
+したがって
+\[
+\int_E f\,dm
+=
+\lim_{N\to\infty}\sum_{n=1}^N \int_E f_n\,dm
+=
+\sum_{n=1}^{\infty}\int_E f_n\,dm.
+\]
+\end{proof}
+
+\begin{remark}
+非負項級数なら単調収束定理で，
+符号が混ざる級数でも絶対値で支配されていれば優収束定理で，
+項別積分が正当化される．
+これが「和と積分の交換」の基本形である．
+\end{remark}
+
+\section{積分記号下の微分}
+
+\begin{theorem}[積分記号下の微分]
+$I \subset \RR$ を開区間とし，$E \subset \RR^d$ を可測集合とする．
+関数
+\[
+F:I \times E \to \RR
+\]
+が次を満たすとする．
+\begin{enumerate}
+    \item ほとんどすべての $x \in E$ に対して，$t \mapsto F(t,x)$ は $I$ 上で $C^1$ 級である
+    \item 各 $t \in I$ に対して，$x \mapsto F(t,x)$ と $x \mapsto \partial_tF(t,x)$ は可測である
+    \item ある $t_0 \in I$ について $F(t_0,\cdot)$ は可積分である
+    \item ある可積分関数 $g:E \to [0,\infty]$ が存在して，
+    \[
+    |\partial_tF(t,x)|\le g(x)
+    \]
+    がすべての $t \in I$ と a.e.\ の $x \in E$ で成り立つ
+\end{enumerate}
+このとき
+\[
+G(t):=\int_E F(t,x)\,dm(x)
+\]
+は $I$ 上でよく定義されて微分可能であり，
+\[
+G'(t)=\int_E \partial_tF(t,x)\,dm(x)
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+まず $G(t)$ が well-defined であることを示す．
+任意の $t \in I$ と a.e.\ の $x \in E$ に対して，
+1変数の微分積分学の基本定理より
+\[
+F(t,x)-F(t_0,x)=\int_{t_0}^t \partial_sF(s,x)\,ds
+\]
+である．
+したがって
+\[
+|F(t,x)|
+\le
+|F(t_0,x)|+\int_{t_0}^t |\partial_sF(s,x)|\,ds
+\le
+|F(t_0,x)|+|t-t_0|\,g(x).
+\]
+右辺は可積分だから，$F(t,\cdot)$ も可積分である．
+よって $G(t)$ はよく定義される．
+
+次に $t \in I$ を固定し，
+$h$ を十分小さく取って $t+h \in I$ とする．
+差商
+\[
+Q_h(x):=\frac{F(t+h,x)-F(t,x)}{h}
+\]
+を考える．
+仮定 (1) と平均値の定理より，
+a.e.\ の $x$ に対してある $\theta=\theta(x,h)\in(0,1)$ が存在して
+\[
+Q_h(x)=\partial_tF(t+\theta h,x)
+\]
+となる．
+したがって仮定 (4) より
+\[
+|Q_h(x)|\le g(x)
+\]
+が a.e.\ で成り立つ．
+また $t \mapsto F(t,x)$ の微分可能性から
+\[
+Q_h(x)\to \partial_tF(t,x)
+\quad
+\text{a.e.\ on } E
+\]
+である．
+よって優収束定理を $Q_h$ に適用できて
+\[
+\lim_{h\to 0}\int_E Q_h(x)\,dm(x)
+=
+\int_E \partial_tF(t,x)\,dm(x)
+\]
+を得る．
+左辺は
+\[
+\int_E Q_h(x)\,dm(x)
+=
+\frac{1}{h}
+\left(
+\int_E F(t+h,x)\,dm(x)-\int_E F(t,x)\,dm(x)
+\right)
+=
+\frac{G(t+h)-G(t)}{h}
+\]
+だから
+\[
+G'(t)=\int_E \partial_tF(t,x)\,dm(x)
+\]
+が従う．
+\end{proof}
+
+\begin{example}
+$a>0$ を固定し，
+\[
+F(t,x):=e^{-tx}
+\qquad
+((t,x)\in (a,\infty)\times[0,\infty))
+\]
+を考える．
+このとき
+\[
+G(t):=\int_0^{\infty}e^{-tx}\,dx
+\]
+は微分可能で，
+\[
+G'(t)=\int_0^{\infty}(-x)e^{-tx}\,dx
+\]
+が成り立つ．
+\end{example}
+\begin{proof}
+各 $x\ge 0$ に対して $t\mapsto e^{-tx}$ は $C^1$ 級で，
+\[
+\partial_tF(t,x)=-xe^{-tx}.
+\]
+さらに $t\ge a$ なら
+\[
+|\partial_tF(t,x)|
+=
+xe^{-tx}
+\le
+xe^{-ax}
+.
+\]
+右辺は
+\[
+\int_0^{\infty}xe^{-ax}\,dx<\infty
+\]
+を満たすので可積分である．
+したがって前定理の仮定が成り立ち，
+\[
+G'(t)=\int_0^{\infty}(-x)e^{-tx}\,dx
+\]
+を得る．
+\end{proof}
+
+\section{解釈とまとめ}
+
+本章の主役は，極限と積分の交換である．
+結論だけを並べると次のようになる．
+\begin{enumerate}
+    \item $f_n \uparrow f$ なら
+    \[
+    \int f_n \to \int f
+    \]
+    \item 一般の非負列では
+    \[
+    \int \liminf f_n \le \liminf \int f_n
+    \]
+    \item $|f_n|\le g \in L^1$ なら
+    \[
+    \int f_n \to \int f
+    \]
+    \item 有限測度空間では，一様有界性だけで優関数を作れる
+\end{enumerate}
+
+この4つの定理により，
+\[
+\lim,\qquad \sum,\qquad \frac{d}{dt},\qquad \int
+\]
+の交換が厳密に扱えるようになった．
+これがLebesgue積分論の最重要部分であり，
+確率論・偏微分方程式・Fourier解析・関数解析へ進むための基礎になる．

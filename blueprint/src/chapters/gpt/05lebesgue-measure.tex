@@ -345,6 +345,61 @@ $A \in \mathcal L^d$ のとき，その共通値を
 と書き，$A$ のLebesgue測度という．
 \end{definition}
 
+\begin{proposition}[コンパクト集合はLebesgue可測]
+コンパクト集合 $K \subset \RR^d$ はLebesgue可測であり，
+\[
+\lambda(K)=\lambda^*(K)
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+第4章で
+\[
+\lambda_*(K)=\lambda^*(K)
+\]
+を示した．
+したがって定義より $K$ はLebesgue可測であり，
+その測度はこの共通値に等しい．
+\end{proof}
+
+\begin{corollary}[外測度零集合はLebesgue可測]
+$\lambda^*(A)=0$ ならば $A$ はLebesgue可測であり，
+\[
+\lambda(A)=0
+\]
+が成り立つ．
+\end{corollary}
+\begin{proof}
+第4章で
+\[
+\lambda_*(A)=0
+\]
+を示したから
+\[
+\lambda^*(A)=\lambda_*(A)=0
+\]
+である．
+したがって $A$ はLebesgue可測で，その測度も $0$ である．
+\end{proof}
+
+\begin{example}
+\begin{enumerate}
+    \item 任意の可算集合はLebesgue可測で，測度 $0$ をもつ
+    \item 特に
+    \[
+    \lambda(\QQ \cap [0,1])=0
+    \]
+    である
+\end{enumerate}
+\end{example}
+\begin{proof}
+\begin{enumerate}
+    \item 第3章で可算集合の外測度は $0$ であることを示したから，
+    直前の系より従う．
+    \item (1) を適用すればよい．
+\end{enumerate}
+\end{proof}
+
 \begin{theorem}[基本定理]
 第6章で証明するように，$\mathcal L^d$ は $\RR^d$ 上の $\sigma$-加法族であり，
 \[
@@ -360,17 +415,6 @@ Carathéodoryの定理によれば，Carathéodory可測集合全体は $\sigma$
 \end{proof}
 
 \section{区間の測度}
-
-\begin{proposition}[コンパクト集合]
-コンパクト集合 $K \subset \RR^d$ はLebesgue可測であり，
-\[
-\lambda(K)=\lambda^*(K)
-\]
-が成り立つ．
-\end{proposition}
-\begin{proof}
-第4章で既に示した．
-\end{proof}
 
 \begin{theorem}[閉区間の測度]
 有界閉区間
@@ -462,7 +506,7 @@ F
 \]
 だから，これを $\eps$ 未満にできる．
 よって $\lambda^*(F)=0$ であり，
-第4章より $F$ はLebesgue可測で
+前節の系より $F$ はLebesgue可測で
 \[
 \lambda(F)=0
 \]
@@ -522,7 +566,7 @@ $A \subset N$ だから，外測度の単調性より
 \]
 である．
 したがって $\lambda^*(A)=0$ であり，
-第4章より $A$ はLebesgue可測で
+前節の系より $A$ はLebesgue可測で
 \[
 \lambda(A)=0
 \]

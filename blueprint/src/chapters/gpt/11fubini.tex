@@ -1,0 +1,1224 @@
+\chapter{Fubiniと変数変換}
+
+\paragraph{本章の目標}
+本章では，多変数のLebesgue積分を実際に計算するための2つの道具を導入する．
+1つは積分順序を交換するFubiniの定理であり，
+もう1つは座標を取り替える変数変換である．
+特に
+\begin{enumerate}
+    \item 非負関数に対するTonelliの定理
+    \item 可積分関数に対するFubiniの定理
+    \item 平行移動・拡大縮小・せん断を用いた線形変数変換
+    \item affine 変換
+\end{enumerate}
+を証明する．
+
+\section{動機づけ}
+
+2変数関数 $f(x,y)$ を積分するとき，
+\[
+\iint f(x,y)\,dx\,dy
+\]
+を
+\[
+\int\left(\int f(x,y)\,dy\right)dx
+\]
+あるいは
+\[
+\int\left(\int f(x,y)\,dx\right)dy
+\]
+として計算したくなる．
+しかし，積分順序の交換はいつでも正しいわけではない．
+その正当化を与えるのがTonelliの定理とFubiniの定理である．
+
+また，積分を計算する際には
+\[
+x=au+b,\qquad
+\begin{pmatrix}x\\ y\end{pmatrix}
+=
+T\begin{pmatrix}u\\ v\end{pmatrix}
+\]
+のように座標を取り替えることも多い．
+変数変換公式は，
+「面積や体積がどう伸び縮みするか」
+を積分の中に正しく反映させる定理である．
+
+\section{積測度と切片}
+
+以後，$\RR^m$ 上のLebesgue測度を $m_m$，
+$\RR^n$ 上のLebesgue測度を $m_n$ と書く．
+
+\begin{definition}[積測度]
+$\RR^m\times\RR^n$ 上の積 $\sigma$-加法族
+\[
+\mathcal L^m\otimes \mathcal L^n
+\]
+に対し，第6章の前測度の拡張定理によって得られる測度
+\[
+m_m\otimes m_n
+\]
+で，
+任意の可測矩形 $A\times B$ に対して
+\[
+(m_m\otimes m_n)(A\times B)=m_m(A)m_n(B)
+\]
+を満たすものを積測度という．
+\end{definition}
+
+\begin{remark}
+本章では
+\[
+(\RR^m\times\RR^n,\mathcal L^m\otimes\mathcal L^n,m_m\otimes m_n)
+\]
+の上で積分を考える．
+直感的には
+\[
+dm_m(x)\,dm_n(y)
+\]
+と書いてよい．
+\end{remark}
+
+\begin{definition}[切片]
+$E\subset \RR^m\times\RR^n$ と
+$f:\RR^m\times\RR^n\to\eRR$ に対して，
+各 $x\in\RR^m$，$y\in\RR^n$ について
+\[
+E_x:=\{y\in\RR^n\mid (x,y)\in E\},
+\qquad
+E^y:=\{x\in\RR^m\mid (x,y)\in E\}
+\]
+を集合 $E$ の $x$-切片，$y$-切片という．
+また
+\[
+f_x(y):=f(x,y),
+\qquad
+f^y(x):=f(x,y)
+\]
+を関数 $f$ の切片という．
+\end{definition}
+
+\begin{proposition}[切片の可測性]
+$E\in \mathcal L^m\otimes\mathcal L^n$ とする．
+このとき任意の $x\in\RR^m$ と任意の $y\in\RR^n$ に対して
+\[
+E_x\in \mathcal L^n,
+\qquad
+E^y\in \mathcal L^m
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+$x\in\RR^m$ を固定し，
+\[
+\mathcal C_x:=\{E\in \mathcal L^m\otimes\mathcal L^n \mid E_x\in\mathcal L^n\}
+\]
+とおく．
+まず $\mathcal C_x$ は $\sigma$-加法族である．
+実際，
+\[
+\emptyset_x=\emptyset
+\]
+だから $\emptyset\in\mathcal C_x$ であり，
+\[
+(\RR^m\times\RR^n\setminus E)_x=\RR^n\setminus E_x
+\]
+だから補集合に関して閉じている．
+また
+\[
+\left(\bigcup_{k=1}^{\infty}E_k\right)_x=\bigcup_{k=1}^{\infty}(E_k)_x
+\]
+だから可算和に関しても閉じている．
+
+次に，任意の可測矩形 $A\times B$ に対して
+\[
+(A\times B)_x
+=
+\begin{cases}
+B & (x\in A),\\
+\emptyset & (x\notin A)
+\end{cases}
+\]
+であるから $A\times B\in\mathcal C_x$ である．
+したがって，矩形が生成する $\sigma$-加法族全体
+\[
+\mathcal L^m\otimes\mathcal L^n
+\]
+が $\mathcal C_x$ に含まれる．
+ゆえに $E_x$ は可測である．
+
+$E^y$ についても同様である．
+\end{proof}
+
+\begin{corollary}[切片関数の可測性]
+$f:\RR^m\times\RR^n\to\eRR$ を
+\[
+\mathcal L^m\otimes\mathcal L^n
+\]
+に関して可測とする．
+このとき任意の $x\in\RR^m$ と任意の $y\in\RR^n$ に対して
+\[
+f_x:\RR^n\to\eRR,
+\qquad
+f^y:\RR^m\to\eRR
+\]
+は可測である．
+\end{corollary}
+\begin{proof}
+任意の $a\in\RR$ に対して
+\[
+\{y\in\RR^n\mid f_x(y)>a\}
+=
+\{(u,v)\in\RR^m\times\RR^n\mid f(u,v)>a\}_x
+\]
+である．
+右辺に現れる集合は $f$ の可測性より
+\[
+\mathcal L^m\otimes\mathcal L^n
+\]
+に属するから，前命題よりその $x$-切片は可測である．
+したがって判定法より $f_x$ は可測である．
+
+$f^y$ についても同様である．
+\end{proof}
+
+\section{集合に対するFubini型公式}
+
+\begin{theorem}[有界矩形の中の集合]
+$I\subset\RR^m$，$J\subset\RR^n$ を有界閉区間とする．
+このとき，任意の
+\[
+E\in \mathcal L_I^m\otimes\mathcal L_J^n
+\]
+に対して
+\[
+x\longmapsto m_n(E_x)
+\]
+は $I$ 上可測であり，
+\[
+(m_m\otimes m_n)(E)=\int_I m_n(E_x)\,dm_m(x)
+\]
+が成り立つ．
+ただし
+\[
+\mathcal L_I^m:=\{A\cap I\mid A\in\mathcal L^m\},
+\qquad
+\mathcal L_J^n:=\{B\cap J\mid B\in\mathcal L^n\}
+\]
+とする．
+\end{theorem}
+\begin{proof}
+\[
+\mathcal C
+:=
+\left\{
+E\in \mathcal L_I^m\otimes\mathcal L_J^n
+\ \middle|\
+x\mapsto m_n(E_x)\text{ は }I\text{ 上可測で， }
+(m_m\otimes m_n)(E)=\int_I m_n(E_x)\,dm_m(x)
+\right\}
+\]
+とおく．
+まず $\mathcal C$ が $I\times J$ 上の $\sigma$-加法族であることを示す．
+
+\textbf{(1) 空集合}\quad
+\[
+\emptyset_x=\emptyset
+\]
+だから
+\[
+m_n(\emptyset_x)=0
+\]
+であり，
+\[
+(m_m\otimes m_n)(\emptyset)=0=\int_I 0\,dm_m(x)
+\]
+である．
+したがって $\emptyset\in\mathcal C$ である．
+
+\textbf{(2) 補集合}\quad
+$E\in\mathcal C$ とする．
+各 $x\in I$ に対して
+\[
+\bigl((I\times J)\setminus E\bigr)_x=J\setminus E_x
+\]
+だから
+\[
+m_n\bigl(((I\times J)\setminus E)_x\bigr)=m_n(J)-m_n(E_x)
+\]
+である．
+右辺は可測関数だから，左辺も可測である．
+さらに
+\begin{align*}
+\int_I m_n\bigl(((I\times J)\setminus E)_x\bigr)\,dm_m(x)
+&=
+\int_I \bigl(m_n(J)-m_n(E_x)\bigr)\,dm_m(x) \\
+&=
+m_m(I)m_n(J)-\int_I m_n(E_x)\,dm_m(x) \\
+&=
+(m_m\otimes m_n)(I\times J)-(m_m\otimes m_n)(E) \\
+&=
+(m_m\otimes m_n)\bigl((I\times J)\setminus E\bigr).
+\end{align*}
+したがって $(I\times J)\setminus E\in\mathcal C$ である．
+
+\textbf{(3) 互いに素な可算和}\quad
+$E_k\in\mathcal C$ が互いに素であるとする．
+すると各 $x\in I$ に対して
+\[
+\left(\bigcup_{k=1}^{\infty}E_k\right)_x=\bigcup_{k=1}^{\infty}(E_k)_x
+\]
+であり，右辺は互いに素である．
+よって
+\[
+m_n\left(\left(\bigcup_{k=1}^{\infty}E_k\right)_x\right)
+=
+\sum_{k=1}^{\infty}m_n((E_k)_x).
+\]
+右辺は可測関数列の和だから可測である．
+また単調収束定理より
+\begin{align*}
+\int_I m_n\left(\left(\bigcup_{k=1}^{\infty}E_k\right)_x\right)\,dm_m(x)
+&=
+\int_I \sum_{k=1}^{\infty}m_n((E_k)_x)\,dm_m(x) \\
+&=
+\sum_{k=1}^{\infty}\int_I m_n((E_k)_x)\,dm_m(x) \\
+&=
+\sum_{k=1}^{\infty}(m_m\otimes m_n)(E_k) \\
+&=
+(m_m\otimes m_n)\left(\bigcup_{k=1}^{\infty}E_k\right).
+\end{align*}
+したがって $\bigcup_k E_k\in\mathcal C$ である．
+
+以上より $\mathcal C$ は $\sigma$-加法族である．
+
+次に矩形 $A\times B$ で
+$A\in\mathcal L_I^m$，$B\in\mathcal L_J^n$ とする．
+このとき
+\[
+(A\times B)_x
+=
+\begin{cases}
+B & (x\in A),\\
+\emptyset & (x\notin A)
+\end{cases}
+\]
+だから
+\[
+m_n((A\times B)_x)=m_n(B)1_A(x)
+\]
+である．
+したがって
+\[
+\int_I m_n((A\times B)_x)\,dm_m(x)
+=
+m_n(B)m_m(A)
+=
+(m_m\otimes m_n)(A\times B).
+\]
+よって可測矩形はすべて $\mathcal C$ に属する．
+
+可測矩形は
+\[
+\mathcal L_I^m\otimes\mathcal L_J^n
+\]
+を生成するから，
+\[
+\mathcal C=\mathcal L_I^m\otimes\mathcal L_J^n
+\]
+である．
+\end{proof}
+
+\begin{theorem}[一般の集合]
+任意の
+\[
+E\in\mathcal L^m\otimes\mathcal L^n
+\]
+に対して
+\[
+x\longmapsto m_n(E_x)
+\]
+は $\RR^m$ 上可測であり，
+\[
+(m_m\otimes m_n)(E)=\int_{\RR^m}m_n(E_x)\,dm_m(x)
+\]
+が成り立つ．
+同様に
+\[
+y\longmapsto m_m(E^y)
+\]
+は $\RR^n$ 上可測であり，
+\[
+(m_m\otimes m_n)(E)=\int_{\RR^n}m_m(E^y)\,dm_n(y)
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+まず $x$ に関する式を示す．
+各 $k\in\NN$ に対して
+\[
+I_k:=[-k,k]^m,\qquad J_k:=[-k,k]^n,
+\qquad
+E_k:=E\cap (I_k\times J_k)
+\]
+とおく．
+すると
+\[
+E_1\subset E_2\subset \cdots,\qquad
+\bigcup_{k=1}^{\infty}E_k=E
+\]
+である．
+また各 $k$ に対して前定理より
+\[
+x\mapsto m_n((E_k)_x)
+\]
+は可測で，
+\[
+(m_m\otimes m_n)(E_k)=\int_{\RR^m}m_n((E_k)_x)\,dm_m(x)
+\]
+が成り立つ．
+
+固定した $x\in\RR^m$ に対して
+\[
+(E_k)_x=E_x\cap J_k
+\]
+だから
+\[
+m_n((E_k)_x)\uparrow m_n(E_x)
+\]
+である．
+したがって単調収束定理より
+\begin{align*}
+\int_{\RR^m}m_n(E_x)\,dm_m(x)
+&=
+\lim_{k\to\infty}\int_{\RR^m}m_n((E_k)_x)\,dm_m(x) \\
+&=
+\lim_{k\to\infty}(m_m\otimes m_n)(E_k) \\
+&=
+(m_m\otimes m_n)(E).
+\end{align*}
+可測性も極限として従う．
+
+$y$ に関する式も同様に示される．
+\end{proof}
+
+\section{Tonelliの定理}
+
+\begin{theorem}[単関数に対するTonelli]
+非負単関数
+\[
+s:\RR^m\times\RR^n\to[0,\infty)
+\]
+に対して，
+\[
+x\longmapsto \int_{\RR^n}s(x,y)\,dm_n(y)
+\]
+は可測であり，
+\[
+\int_{\RR^m\times\RR^n}s\,d(m_m\otimes m_n)
+=
+\int_{\RR^m}\left(\int_{\RR^n}s(x,y)\,dm_n(y)\right)\,dm_m(x)
+\]
+が成り立つ．
+同様に
+\[
+\int_{\RR^m\times\RR^n}s\,d(m_m\otimes m_n)
+=
+\int_{\RR^n}\left(\int_{\RR^m}s(x,y)\,dm_m(x)\right)\,dm_n(y)
+\]
+も成り立つ．
+\end{theorem}
+\begin{proof}
+$s$ は有限個の非負実数 $a_1,\dots,a_N$ と互いに素な可測集合
+$E_1,\dots,E_N\in\mathcal L^m\otimes\mathcal L^n$ を用いて
+\[
+s=\sum_{k=1}^N a_k1_{E_k}
+\]
+と書ける．
+すると各 $x\in\RR^m$ に対して
+\[
+s_x(y)=\sum_{k=1}^N a_k1_{(E_k)_x}(y)
+\]
+だから
+\[
+\int_{\RR^n}s(x,y)\,dm_n(y)
+=
+\sum_{k=1}^N a_k m_n((E_k)_x).
+\]
+右辺は可測関数の有限和だから可測である．
+
+また前節の集合に対する公式より
+\[
+(m_m\otimes m_n)(E_k)
+=
+\int_{\RR^m}m_n((E_k)_x)\,dm_m(x)
+\]
+だから
+\begin{align*}
+\int_{\RR^m\times\RR^n}s\,d(m_m\otimes m_n)
+&=
+\sum_{k=1}^N a_k(m_m\otimes m_n)(E_k) \\
+&=
+\sum_{k=1}^N a_k\int_{\RR^m}m_n((E_k)_x)\,dm_m(x) \\
+&=
+\int_{\RR^m}\sum_{k=1}^N a_km_n((E_k)_x)\,dm_m(x) \\
+&=
+\int_{\RR^m}\left(\int_{\RR^n}s(x,y)\,dm_n(y)\right)\,dm_m(x).
+\end{align*}
+$y$ についての式も同様である．
+\end{proof}
+
+\begin{theorem}[Tonelliの定理]
+$f:\RR^m\times\RR^n\to[0,\infty]$ を
+\[
+\mathcal L^m\otimes\mathcal L^n
+\]
+に関して可測な非負関数とする．
+このとき
+\[
+x\longmapsto \int_{\RR^n}f(x,y)\,dm_n(y)
+\]
+は可測であり，
+\[
+\int_{\RR^m\times\RR^n}f\,d(m_m\otimes m_n)
+=
+\int_{\RR^m}\left(\int_{\RR^n}f(x,y)\,dm_n(y)\right)\,dm_m(x)
+\]
+が成り立つ．
+同様に
+\[
+\int_{\RR^m\times\RR^n}f\,d(m_m\otimes m_n)
+=
+\int_{\RR^n}\left(\int_{\RR^m}f(x,y)\,dm_m(x)\right)\,dm_n(y)
+\]
+も成り立つ．
+\end{theorem}
+\begin{proof}
+第8章で示した単関数近似により，
+非負単関数列 $\{s_k\}$ で
+\[
+0\le s_1\le s_2\le\cdots,\qquad s_k(x,y)\uparrow f(x,y)
+\]
+を満たすものを取る．
+
+各 $x$ に対して
+\[
+(s_k)_x(y)\uparrow f_x(y)
+\]
+だから，第10章の単調収束定理より
+\[
+\int_{\RR^n}s_k(x,y)\,dm_n(y)
+\uparrow
+\int_{\RR^n}f(x,y)\,dm_n(y).
+\]
+左辺は前定理により可測関数だから，極限も可測である．
+
+さらに前定理より
+\[
+\int_{\RR^m\times\RR^n}s_k\,d(m_m\otimes m_n)
+=
+\int_{\RR^m}\left(\int_{\RR^n}s_k(x,y)\,dm_n(y)\right)\,dm_m(x)
+\]
+である．
+したがって再び単調収束定理より
+\begin{align*}
+\int_{\RR^m\times\RR^n}f\,d(m_m\otimes m_n)
+&=
+\lim_{k\to\infty}\int_{\RR^m\times\RR^n}s_k\,d(m_m\otimes m_n) \\
+&=
+\lim_{k\to\infty}
+\int_{\RR^m}\left(\int_{\RR^n}s_k(x,y)\,dm_n(y)\right)\,dm_m(x) \\
+&=
+\int_{\RR^m}
+\left(
+\lim_{k\to\infty}\int_{\RR^n}s_k(x,y)\,dm_n(y)
+\right)
+dm_m(x) \\
+&=
+\int_{\RR^m}\left(\int_{\RR^n}f(x,y)\,dm_n(y)\right)\,dm_m(x).
+\end{align*}
+$y$ についての式も同様である．
+\end{proof}
+
+\section{Fubiniの定理}
+
+\begin{theorem}[Fubiniの定理]
+$f:\RR^m\times\RR^n\to\eRR$ を
+\[
+\mathcal L^m\otimes\mathcal L^n
+\]
+に関して可測で，
+\[
+\int_{\RR^m\times\RR^n}|f|\,d(m_m\otimes m_n)<\infty
+\]
+を満たす可積分関数とする．
+このとき次が成り立つ．
+\begin{enumerate}
+    \item ほとんどすべての $x\in\RR^m$ に対して，$f_x$ は $\RR^n$ 上可積分である
+    \item
+    \[
+    g(x):=\int_{\RR^n}f(x,y)\,dm_n(y)
+    \]
+    は $m_m$-a.e.\ 定義される可積分関数である
+    \item
+    \[
+    \int_{\RR^m\times\RR^n}f\,d(m_m\otimes m_n)
+    =
+    \int_{\RR^m}g(x)\,dm_m(x)
+    \]
+    が成り立つ
+\end{enumerate}
+同様に，ほとんどすべての $y\in\RR^n$ に対して $f^y$ は可積分であり，
+\[
+\int_{\RR^m\times\RR^n}f\,d(m_m\otimes m_n)
+=
+\int_{\RR^n}\left(\int_{\RR^m}f(x,y)\,dm_m(x)\right)\,dm_n(y)
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+Tonelliの定理を $|f|$ に適用すると
+\[
+h(x):=\int_{\RR^n}|f(x,y)|\,dm_n(y)
+\]
+は可測で，
+\[
+\int_{\RR^m}h(x)\,dm_m(x)
+=
+\int_{\RR^m\times\RR^n}|f|\,d(m_m\otimes m_n)
+<
+\infty
+\]
+である．
+したがって
+\[
+h(x)<\infty
+\]
+がほとんどすべての $x$ で成り立つ．
+このときそのような $x$ では $f_x$ は可積分である．
+これで (1) が従う．
+
+次に
+\[
+g_+(x):=\int_{\RR^n}f^+(x,y)\,dm_n(y),
+\qquad
+g_-(x):=\int_{\RR^n}f^-(x,y)\,dm_n(y)
+\]
+とおく．
+Tonelliの定理より $g_+,g_-$ は可測であり，
+\[
+\int_{\RR^m}g_+(x)\,dm_m(x)=\int f^+\,d(m_m\otimes m_n),
+\qquad
+\int_{\RR^m}g_-(x)\,dm_m(x)=\int f^-\,d(m_m\otimes m_n)
+\]
+が成り立つ．
+しかも
+\[
+g_+(x)+g_-(x)=h(x)<\infty
+\]
+がほとんどすべての $x$ で成り立つから，
+\[
+g(x):=g_+(x)-g_-(x)
+\]
+は a.e.\ で意味をもち，可測である．
+また
+\[
+|g(x)|\le h(x)
+\]
+が a.e.\ で成り立つので，$g$ は可積分である．
+これで (2) が従う．
+
+最後に
+\begin{align*}
+\int_{\RR^m}g(x)\,dm_m(x)
+&=
+\int_{\RR^m}g_+(x)\,dm_m(x)-\int_{\RR^m}g_-(x)\,dm_m(x) \\
+&=
+\int_{\RR^m\times\RR^n}f^+\,d(m_m\otimes m_n)
+-\int_{\RR^m\times\RR^n}f^-\,d(m_m\otimes m_n) \\
+&=
+\int_{\RR^m\times\RR^n}f\,d(m_m\otimes m_n).
+\end{align*}
+これで (3) が従う．
+
+$y$ についての主張も全く同様である．
+\end{proof}
+
+\begin{corollary}[積分順序の交換]
+$f:\RR^m\times\RR^n\to\eRR$ が可測で，
+\[
+\int_{\RR^m}\left(\int_{\RR^n}|f(x,y)|\,dm_n(y)\right)\,dm_m(x)<\infty
+\]
+とする．
+このとき $f$ は積測度に関して可積分であり，
+\[
+\int_{\RR^m}\left(\int_{\RR^n}f(x,y)\,dm_n(y)\right)\,dm_m(x)
+=
+\int_{\RR^n}\left(\int_{\RR^m}f(x,y)\,dm_m(x)\right)\,dm_n(y)
+\]
+が成り立つ．
+\end{corollary}
+\begin{proof}
+左辺の仮定は Tonelli の定理により
+\[
+\int_{\RR^m\times\RR^n}|f|\,d(m_m\otimes m_n)<\infty
+\]
+と同値である．
+したがって Fubini の定理を適用すればよい．
+\end{proof}
+
+\begin{example}[三角形の面積]
+\[
+E:=\{(x,y)\in[0,1]^2\mid x+y\le 1\}
+\]
+とする．
+このとき
+\[
+(m_1\otimes m_1)(E)=\frac12
+\]
+である．
+\end{example}
+\begin{proof}
+各 $x\in[0,1]$ に対して
+\[
+E_x=[0,1-x]
+\]
+である．
+したがって
+\[
+m_1(E_x)=1-x.
+\]
+よって集合に対する公式より
+\[
+(m_1\otimes m_1)(E)
+=
+\int_0^1(1-x)\,dx
+=
+\frac12.
+\]
+\end{proof}
+
+\section{1変数の affine 変数変換}
+
+\begin{proposition}[1次元の集合の affine 変換]
+$A\subset\RR$ をLebesgue可測集合とし，$a\in\RR\setminus\{0\}$，$b\in\RR$ とする．
+このとき
+\[
+aA+b:=\{ax+b\mid x\in A\}
+\]
+はLebesgue可測であり，
+\[
+m_1(aA+b)=|a|\,m_1(A)
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+まず平行移動不変性より
+\[
+m_1(aA+b)=m_1(aA)
+\]
+であるから，$b=0$ の場合を示せば十分である．
+
+以後 $b=0$ とする．
+第3章の外測度の定義から，任意の集合 $B\subset\RR$ に対して
+\[
+\lambda^*(aB)=|a|\,\lambda^*(B)
+\]
+が成り立つ．
+実際，$B\subset\bigcup_n I_n$ なら
+\[
+aB\subset\bigcup_n aI_n
+\]
+であり，区間の長さは
+\[
+|aI_n|=|a|\,|I_n|
+\]
+だから
+\[
+\lambda^*(aB)\le |a|\sum_n |I_n|.
+\]
+被覆の取り方について下限を取れば
+\[
+\lambda^*(aB)\le |a|\lambda^*(B)
+\]
+を得る．
+逆向きの不等式は $B=a^{-1}(aB)$ に同じ議論を適用すれば
+\[
+\lambda^*(B)\le \frac1{|a|}\lambda^*(aB)
+\]
+となることから従う．
+
+次に $A$ が可測であることから，任意の $S\subset\RR$ に対して
+\[
+\lambda^*(S)=\lambda^*(S\cap A)+\lambda^*(S\setminus A)
+\]
+である．
+ここで任意の $T\subset\RR$ に対して $S=a^{-1}T$ と置くと
+\[
+\lambda^*(a^{-1}T)
+=
+\lambda^*(a^{-1}T\cap A)+\lambda^*(a^{-1}T\setminus A).
+\]
+両辺に $|a|$ を掛けて外測度の拡大縮小公式を用いると
+\[
+\lambda^*(T)
+=
+\lambda^*(T\cap aA)+\lambda^*(T\setminus aA)
+\]
+を得る．
+したがって $aA$ はLebesgue可測である．
+
+最後に可測集合上では測度と外測度が一致するから
+\[
+m_1(aA)=\lambda^*(aA)=|a|\,\lambda^*(A)=|a|\,m_1(A)
+\]
+である．
+\end{proof}
+
+\begin{theorem}[1変数の affine 変数変換]
+$f:\RR\to[0,\infty]$ を非負可測関数とし，
+$a\in\RR\setminus\{0\}$，$b\in\RR$ とする．
+このとき
+\[
+\int_{\RR}f(au+b)\,dm_1(u)
+=
+\frac{1}{|a|}\int_{\RR}f(x)\,dm_1(x)
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+まず指示関数
+\[
+f=1_A
+\]
+について示す．
+このとき
+\[
+1_A(au+b)=1_{(A-b)/a}(u)
+\]
+だから
+\[
+\int_{\RR}1_A(au+b)\,dm_1(u)
+=
+m_1\left(\frac{A-b}{a}\right)
+=
+\frac{1}{|a|}m_1(A)
+=
+\frac{1}{|a|}\int_{\RR}1_A(x)\,dm_1(x).
+\]
+
+次に非負単関数
+\[
+s=\sum_{k=1}^N c_k1_{A_k}
+\]
+については，線形性より
+\[
+\int_{\RR}s(au+b)\,dm_1(u)
+=
+\sum_{k=1}^N c_k\int_{\RR}1_{A_k}(au+b)\,dm_1(u)
+=
+\frac{1}{|a|}\sum_{k=1}^N c_km_1(A_k)
+=
+\frac{1}{|a|}\int_{\RR}s(x)\,dm_1(x).
+\]
+
+最後に一般の非負可測関数 $f$ を取る．
+単関数列 $s_N\uparrow f$ を取れば
+\[
+s_N(au+b)\uparrow f(au+b).
+\]
+したがって単調収束定理より
+\begin{align*}
+\int_{\RR}f(au+b)\,dm_1(u)
+&=
+\lim_{N\to\infty}\int_{\RR}s_N(au+b)\,dm_1(u) \\
+&=
+\lim_{N\to\infty}\frac{1}{|a|}\int_{\RR}s_N(x)\,dm_1(x) \\
+&=
+\frac{1}{|a|}\int_{\RR}f(x)\,dm_1(x).
+\end{align*}
+\end{proof}
+
+\begin{corollary}
+$f:\RR\to\eRR$ が可積分ならば
+\[
+\int_{\RR}f(au+b)\,dm_1(u)
+=
+\frac{1}{|a|}\int_{\RR}f(x)\,dm_1(x)
+\]
+が成り立つ．
+\end{corollary}
+\begin{proof}
+前定理を $f^+$ と $f^-$ に適用して差を取ればよい．
+\end{proof}
+
+\section{基本的な線形変数変換}
+
+\begin{lemma}[座標の入れ替え]
+$f:\RR^d\to[0,\infty]$ を非負可測関数とし，
+$P$ を座標の置換に対応する置換行列とする．
+このとき
+\[
+\int_{\RR^d}f(Pu)\,dm_d(u)=\int_{\RR^d}f(x)\,dm_d(x)
+\]
+が成り立つ．
+\end{lemma}
+\begin{proof}
+置換は隣り合う2座標の交換の合成で書けるから，
+第1座標と第2座標を交換する場合を示せば十分である．
+
+$u=(u_1,u_2,u')$ と書く．
+Tonelliの定理より
+\begin{align*}
+\int_{\RR^d}f(u_2,u_1,u')\,dm_d(u)
+&=
+\int_{\RR^{d-2}}\int_{\RR}\int_{\RR}f(u_2,u_1,u')\,dm_1(u_1)\,dm_1(u_2)\,dm_{d-2}(u') \\
+&=
+\int_{\RR^{d-2}}\int_{\RR}\int_{\RR}f(v,u,u')\,dm_1(u)\,dm_1(v)\,dm_{d-2}(u').
+\end{align*}
+ここで積分変数 $u,v$ はダミー変数だから，名前を入れ替えて
+\[
+\int_{\RR^{d-2}}\int_{\RR}\int_{\RR}f(u,v,u')\,dm_1(v)\,dm_1(u)\,dm_{d-2}(u')
+\]
+となる．
+これは再び Tonelli の定理より
+\[
+\int_{\RR^d}f(x)\,dm_d(x)
+\]
+に等しい．
+\end{proof}
+
+\begin{lemma}[対角行列]
+$f:\RR^d\to[0,\infty]$ を非負可測関数とし，
+\[
+D=\mathrm{diag}(a_1,\dots,a_d)
+\]
+を対角行列とする．
+ここで $a_i\ne 0$ とする．
+このとき
+\[
+\int_{\RR^d}f(Du)\,dm_d(u)
+=
+\frac{1}{|a_1\cdots a_d|}\int_{\RR^d}f(x)\,dm_d(x)
+\]
+が成り立つ．
+\end{lemma}
+\begin{proof}
+Tonelliの定理により
+\[
+\int_{\RR^d}f(a_1u_1,\dots,a_du_d)\,dm_d(u)
+\]
+を反復積分として計算できる．
+まず $u_1$ について1変数の affine 変数変換を適用すると
+\begin{align*}
+\int_{\RR}f(a_1u_1,a_2u_2,\dots,a_du_d)\,dm_1(u_1)
+=
+\frac1{|a_1|}
+\int_{\RR}f(x_1,a_2u_2,\dots,a_du_d)\,dm_1(x_1).
+\end{align*}
+これを $u_2,\dots,u_d$ に関する外側の積分に代入する．
+同じ操作を $u_2,\dots,u_d$ について順に繰り返すと
+\[
+\int_{\RR^d}f(Du)\,dm_d(u)
+=
+\frac{1}{|a_1\cdots a_d|}\int_{\RR^d}f(x)\,dm_d(x)
+\]
+を得る．
+\end{proof}
+
+\begin{lemma}[せん断変換]
+$f:\RR^d\to[0,\infty]$ を非負可測関数とし，
+\[
+S(u_1,\dots,u_d)=(u_1+cu_2,u_2,\dots,u_d)
+\]
+とする．
+このとき
+\[
+\int_{\RR^d}f(Su)\,dm_d(u)=\int_{\RR^d}f(x)\,dm_d(x)
+\]
+が成り立つ．
+\end{lemma}
+\begin{proof}
+Tonelliの定理より
+\begin{align*}
+\int_{\RR^d}f(u_1+cu_2,u_2,\dots,u_d)\,dm_d(u)
+=
+\int_{\RR^{d-1}}
+\left(
+\int_{\RR}f(u_1+cu_2,u_2,\dots,u_d)\,dm_1(u_1)
+\right)
+dm_{d-1}(u_2,\dots,u_d).
+\end{align*}
+内側の積分に1変数の affine 変数変換を $a=1$, $b=cu_2$ として適用すると
+\[
+\int_{\RR}f(u_1+cu_2,u_2,\dots,u_d)\,dm_1(u_1)
+=
+\int_{\RR}f(x_1,u_2,\dots,u_d)\,dm_1(x_1)
+\]
+である．
+したがって右辺は
+\[
+\int_{\RR^d}f(x)\,dm_d(x)
+\]
+に等しい．
+\end{proof}
+
+\begin{proposition}[可逆行列の分解]
+任意の可逆行列 $T\in GL(d,\RR)$ は，
+有限個の
+\begin{enumerate}
+    \item 座標の置換
+    \item 対角行列
+    \item せん断変換
+\end{enumerate}
+に対応する行列の積として表せる．
+\end{proposition}
+\begin{proof}
+Gaussian 消去法を $T$ に施すと，
+有限回の基本行列操作によって単位行列 $I$ に変形できる．
+すなわち，ある基本行列 $E_1,\dots,E_N$ が存在して
+\[
+E_N\cdots E_1T=I
+\]
+となる．
+したがって
+\[
+T=E_1^{-1}\cdots E_N^{-1}.
+\]
+ここで基本行列の逆行列は，再び同じ3種類のいずれかである．
+実際，
+\begin{enumerate}
+    \item 行の交換の逆は同じ交換
+    \item 行の非零倍の逆は逆数倍
+    \item 1行に他の行の定数倍を加える操作の逆は，その符号を反転した操作
+\end{enumerate}
+である．
+よって主張が従う．
+\end{proof}
+
+\section{一般の線形変数変換}
+
+\begin{theorem}[線形変数変換]
+$T\in GL(d,\RR)$ とし，
+$f:\RR^d\to[0,\infty]$ を非負可測関数とする．
+このとき
+\[
+\int_{\RR^d}f(Tu)\,dm_d(u)
+=
+\frac{1}{|\det T|}\int_{\RR^d}f(x)\,dm_d(x)
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+前節の分解定理により
+\[
+T=E_1E_2\cdots E_N
+\]
+と書ける．
+ここで各 $E_j$ は置換行列，対角行列，せん断変換のいずれかとする．
+
+$N=1$ の場合は前節の3つの補題で証明済みである．
+一般の $N$ については帰納法で示す．
+すでに
+\[
+R:=E_2\cdots E_N
+\]
+に対して
+\[
+\int_{\RR^d}f(E_1Ru)\,dm_d(u)
+\]
+を考える．
+関数
+\[
+g(v):=f(E_1v)
+\]
+は非負可測である．
+帰納法の仮定を $g$ と $R$ に適用すると
+\[
+\int_{\RR^d}f(E_1Ru)\,dm_d(u)
+=
+\frac{1}{|\det R|}\int_{\RR^d}f(E_1v)\,dm_d(v).
+\]
+さらに $E_1$ に対する補題を適用すれば
+\[
+\int_{\RR^d}f(E_1v)\,dm_d(v)
+=
+\frac{1}{|\det E_1|}\int_{\RR^d}f(x)\,dm_d(x).
+\]
+両式を合わせると
+\[
+\int_{\RR^d}f(Tu)\,dm_d(u)
+=
+\frac{1}{|\det E_1||\det R|}\int_{\RR^d}f(x)\,dm_d(x)
+=
+\frac{1}{|\det T|}\int_{\RR^d}f(x)\,dm_d(x).
+\]
+\end{proof}
+
+\begin{corollary}[可積分関数に対する線形変数変換]
+$T\in GL(d,\RR)$ とし，
+$f:\RR^d\to\eRR$ を可積分関数とする．
+このとき
+\[
+\int_{\RR^d}f(Tu)\,dm_d(u)
+=
+\frac{1}{|\det T|}\int_{\RR^d}f(x)\,dm_d(x)
+\]
+が成り立つ．
+\end{corollary}
+\begin{proof}
+前定理を $f^+$ と $f^-$ に適用して差を取ればよい．
+\end{proof}
+
+\begin{corollary}[affine 変数変換]
+$T\in GL(d,\RR)$，$b\in\RR^d$ とし，
+$f:\RR^d\to\eRR$ を可積分関数とする．
+このとき
+\[
+\int_{\RR^d}f(Tu+b)\,|\det T|\,dm_d(u)
+=
+\int_{\RR^d}f(x)\,dm_d(x)
+\]
+が成り立つ．
+\end{corollary}
+\begin{proof}
+まず
+\[
+g(x):=f(x+b)
+\]
+とおくと，平行移動不変性の積分版
+\[
+\int_{\RR^d}g(x)\,dm_d(x)=\int_{\RR^d}f(x)\,dm_d(x)
+\]
+が成り立つ．
+これは1変数の affine 変数変換を各座標に順に適用し，Fubiniの定理を用いれば従う．
+
+したがって線形変数変換を $g$ に適用して
+\[
+\int_{\RR^d}f(Tu+b)\,dm_d(u)
+=
+\int_{\RR^d}g(Tu)\,dm_d(u)
+=
+\frac1{|\det T|}\int_{\RR^d}g(x)\,dm_d(x)
+=
+\frac1{|\det T|}\int_{\RR^d}f(x)\,dm_d(x)
+\]
+を得る．
+両辺に $|\det T|$ を掛ければよい．
+\end{proof}
+
+\begin{corollary}[集合の体積の変換]
+$T\in GL(d,\RR)$，$b\in\RR^d$ とし，
+$A\subset\RR^d$ をLebesgue可測集合とする．
+このとき
+\[
+m_d(TA+b)=|\det T|\,m_d(A)
+\]
+が成り立つ．
+\end{corollary}
+\begin{proof}
+前系を
+\[
+f=1_A
+\]
+に適用すれば
+\[
+\int_{\RR^d}1_A(Tu+b)\,|\det T|\,dm_d(u)
+=
+\int_{\RR^d}1_A(x)\,dm_d(x)
+=
+m_d(A).
+\]
+一方，
+\[
+1_A(Tu+b)=1_{T^{-1}(A-b)}(u)
+\]
+だから左辺は
+\[
+|\det T|\,m_d(T^{-1}(A-b)).
+\]
+ここで
+\[
+T^{-1}(A-b)
+\]
+を $B$ とおけば $A=TB+b$ であるから
+\[
+m_d(A)=|\det T|\,m_d(B).
+\]
+すなわち
+\[
+m_d(TA+b)=|\det T|\,m_d(A)
+\]
+である．
+\end{proof}
+
+\begin{example}[平行四辺形の面積]
+\[
+T=
+\begin{pmatrix}
+a & c\\
+b & d
+\end{pmatrix}
+\]
+とし，
+\[
+Q:=[0,1]^2
+\]
+とする．
+このとき $TQ$ は原点を頂点にもつ平行四辺形であり，
+その面積は
+\[
+m_2(TQ)=|ad-bc|
+\]
+である．
+\end{example}
+\begin{proof}
+直前の系より
+\[
+m_2(TQ)=|\det T|\,m_2(Q)=|ad-bc|\cdot 1=|ad-bc|.
+\]
+\end{proof}
+
+\section{解釈とまとめ}
+
+Fubiniの定理は，
+\[
+\iint f(x,y)\,dx\,dy
+\]
+を
+\[
+\int\left(\int f(x,y)\,dy\right)dx
+\]
+として計算してよい条件を与える定理であった．
+非負関数ならTonelliの定理，
+符号付き関数なら
+\[
+\iint |f|<\infty
+\]
+という絶対可積分性の仮定のもとでFubiniの定理が使える．
+
+また変数変換公式は，
+\[
+\text{図形の面積・体積がどれだけ伸び縮みするか}
+\]
+を
+\[
+|\det T|
+\]
+で表す定理であった．
+特に affine 変換
+\[
+x=Tu+b
+\]
+に対して
+\[
+dx=|\det T|\,du
+\]
+と見なしてよいことが，厳密に証明された．
+
+これら2つの道具は，多変数積分を実際に計算する際の標準手順である．
+今後は
+\[
+\text{積分順序を変える},\qquad \text{変数を取り替える}
+\]
+という操作を，単なる計算テクニックではなく，
+Lebesgue積分論の定理として正当化して使えるようになる．

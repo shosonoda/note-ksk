@@ -1,0 +1,737 @@
+\chapter{Lebesgue可測関数}
+
+\paragraph{本章の目標}
+ここまでで，どの集合に面積を与えられるかが分かった．
+次は，その上でどの関数を積分できるかを決める必要がある．
+そのための基本概念がLebesgue可測関数である．
+本章では
+\begin{enumerate}
+    \item Lebesgue可測関数の定義
+    \item 可測写像の定義が逆像で書かれる理由
+    \item 連続関数・指示関数などの典型例
+    \item 和・積・逆数・合成・sup/inf/limsup/liminf/lim などの可測性
+    \item almost everywhere による同値関係
+\end{enumerate}
+を証明する．
+
+\section{動機づけ}
+
+積分をしたいのは関数である．
+しかしLebesgue積分では，まず集合に測度を与え，そのあとで関数を積分する．
+したがって関数についても，
+\[
+\{x \mid f(x)>a\},\qquad
+\{x \mid f(x)\ge a\}
+\]
+のようなレベル集合がちゃんと測れることが必要になる．
+
+Riemann積分では，定義域を細かく分割して関数値を調べた．
+それに対してLebesgue積分では，
+まず関数値 $a$ を固定し，
+\[
+f(x)>a
+\]
+となる点の集まりを調べる．
+つまり，関数そのものではなく，
+関数がどの集合の上でどのような値をとるかを
+測度論の言葉で記述するのである．
+
+\section{可測写像}
+
+\begin{definition}[可測空間]
+集合 $X$ とその部分集合族 $\mathcal M$ の組
+\[
+(X,\mathcal M)
+\]
+で，$\mathcal M$ が $X$ 上の $\sigma$-加法族であるものを可測空間という．
+\end{definition}
+
+\begin{definition}[可測写像]
+可測空間 $(X,\mathcal M)$ と $(Y,\mathcal N)$ の間の写像
+\[
+f:X\to Y
+\]
+が可測であるとは，任意の $B \in \mathcal N$ に対して
+\[
+f^{-1}(B)\in \mathcal M
+\]
+が成り立つことをいう．
+\end{definition}
+
+\begin{proposition}[逆像の基本性質]
+任意の写像 $f:X\to Y$ と部分集合族 $\{B_\alpha\}_{\alpha\in\Gamma}\subset \mathcal P(Y)$ に対して
+次が成り立つ．
+\begin{enumerate}
+    \item
+    \[
+    f^{-1}(Y\setminus B)=X\setminus f^{-1}(B)
+    \]
+    \item
+    \[
+    f^{-1}\left(\bigcup_{\alpha\in\Gamma}B_\alpha\right)
+    =
+    \bigcup_{\alpha\in\Gamma}f^{-1}(B_\alpha)
+    \]
+    \item
+    \[
+    f^{-1}\left(\bigcap_{\alpha\in\Gamma}B_\alpha\right)
+    =
+    \bigcap_{\alpha\in\Gamma}f^{-1}(B_\alpha)
+    \]
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\textbf{(1)}\quad
+$x\in f^{-1}(Y\setminus B)$ であることは
+\[
+f(x)\in Y\setminus B
+\]
+と同値であり，これは
+\[
+f(x)\notin B
+\]
+と同値である．
+さらにこれは
+\[
+x\notin f^{-1}(B)
+\]
+と同値だから
+\[
+x\in X\setminus f^{-1}(B)
+\]
+である．
+したがって
+\[
+f^{-1}(Y\setminus B)=X\setminus f^{-1}(B).
+\]
+
+\textbf{(2)}\quad
+$x\in f^{-1}(\bigcup_\alpha B_\alpha)$ であることは
+\[
+f(x)\in \bigcup_{\alpha\in\Gamma}B_\alpha
+\]
+と同値であり，これは
+ある $\alpha$ が存在して
+\[
+f(x)\in B_\alpha
+\]
+となることと同値である．
+さらにこれは
+ある $\alpha$ が存在して
+\[
+x\in f^{-1}(B_\alpha)
+\]
+となることと同値である．
+したがって
+\[
+x\in \bigcup_{\alpha\in\Gamma}f^{-1}(B_\alpha)
+\]
+である．
+
+\textbf{(3)}\quad
+(1), (2) と De Morgan の法則から従う．
+\end{proof}
+
+\begin{remark}[可測写像の定義が逆なのはなぜか]
+連続写像も可測写像も，
+定義はどちらも像ではなく逆像で書かれる．
+その理由は，逆像が
+\[
+\text{補集合},\qquad \text{可算和},\qquad \text{可算共通部分}
+\]
+を正確に保つからである．
+実際，直前の命題より
+\[
+f^{-1}(Y\setminus B)=X\setminus f^{-1}(B),
+\qquad
+f^{-1}\left(\bigcup_n B_n\right)=\bigcup_n f^{-1}(B_n)
+\]
+が成り立つ．
+したがって，$Y$ 側の $\sigma$-加法族の構造が
+$X$ 側へそのまま引き戻される．
+
+これに対して像 $f(B)$ は，一般には
+\[
+f(X\setminus A)=Y\setminus f(A)
+\]
+も
+\[
+f\left(\bigcap_n A_n\right)=\bigcap_n f(A_n)
+\]
+も満たさない．
+したがって「構造を保つ」という意味で自然なのは像ではなく逆像なのである．
+\end{remark}
+
+\section{Lebesgue可測関数の定義}
+
+\begin{definition}[制限された $\sigma$-加法族]
+$E \subset \RR^d$ をLebesgue可測集合とする．
+\[
+\mathcal L_E^d:=\{E\cap A \mid A\in \mathcal L^d\}
+\]
+を $E$ 上の制限Lebesgue $\sigma$-加法族という．
+\end{definition}
+
+\begin{definition}[Borel集合族]
+\[
+\mathcal B(\eRR)
+\]
+を拡大実数直線 $\eRR$ のBorel集合族とする．
+すなわち，開集合全体が生成する $\sigma$-加法族である．
+\end{definition}
+
+\begin{definition}[Lebesgue可測関数]
+$E \subset \RR^d$ をLebesgue可測集合とする．
+写像
+\[
+f:E\to \eRR
+\]
+がLebesgue可測であるとは，
+\[
+f:(E,\mathcal L_E^d)\to (\eRR,\mathcal B(\eRR))
+\]
+が可測写像であることをいう．
+\end{definition}
+
+\begin{theorem}[判定法]
+$f:E\to\eRR$ に対して，次は同値である．
+\begin{enumerate}
+    \item $f$ はLebesgue可測である
+    \item 任意の $a\in\RR$ に対して
+    \[
+    \{x\in E \mid f(x)>a\}
+    \]
+    は可測である
+    \item 任意の $a\in\RR$ に対して
+    \[
+    \{x\in E \mid f(x)\ge a\}
+    \]
+    は可測である
+    \item 任意の $a\in\RR$ に対して
+    \[
+    \{x\in E \mid f(x)<a\}
+    \]
+    は可測である
+    \item 任意の $a\in\RR$ に対して
+    \[
+    \{x\in E \mid f(x)\le a\}
+    \]
+    は可測である
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\textbf{(1) $\Rightarrow$ (2)}\quad
+\[
+(a,\infty]\in \mathcal B(\eRR)
+\]
+だから，可測性の定義より
+\[
+f^{-1}((a,\infty])
+=
+\{x\in E \mid f(x)>a\}
+\]
+は可測である．
+
+\textbf{(2) $\Rightarrow$ (3)}\quad
+任意の $a\in\RR$ に対して
+\[
+\{f\ge a\}
+=
+\bigcap_{n=1}^{\infty}\left\{f>a-\frac1n\right\}
+\]
+である．
+右辺は可測集合の可算共通部分だから可測である．
+
+\textbf{(3) $\Rightarrow$ (4)}\quad
+\[
+\{f<a\}=E\setminus\{f\ge a\}
+\]
+だから可測である．
+
+\textbf{(4) $\Rightarrow$ (5)}\quad
+\[
+\{f\le a\}
+=
+\bigcap_{n=1}^{\infty}\left\{f<a+\frac1n\right\}
+\]
+だから可測である．
+
+\textbf{(5) $\Rightarrow$ (1)}\quad
+\[
+\mathcal C:=\{B\subset \eRR \mid f^{-1}(B)\in \mathcal L_E^d\}
+\]
+とおく．
+逆像の基本性質より，$\mathcal C$ は $\eRR$ 上の $\sigma$-加法族である．
+仮定より
+\[
+(-\infty,a]\in \mathcal C
+\qquad (a\in\RR)
+\]
+である．
+ところが
+\[
+\mathcal B(\eRR)=\sigma(\{(-\infty,a]\mid a\in\RR\})
+\]
+だから
+\[
+\mathcal B(\eRR)\subset \mathcal C
+\]
+である．
+したがって $f$ は可測である．
+\end{proof}
+
+\section{基本例}
+
+\begin{example}[連続関数]
+$E \subset \RR^d$ 上の連続関数
+\[
+f:E\to\RR
+\]
+はLebesgue可測である．
+\end{example}
+\begin{proof}
+任意の $a\in\RR$ に対して
+\[
+\{x\in E \mid f(x)>a\}=E\cap f^{-1}((a,\infty))
+\]
+である．
+$f$ が連続だから $f^{-1}((a,\infty))$ は $\RR^d$ の開集合である．
+したがって右辺は $E$ の可測部分集合である．
+よって判定法より $f$ は可測である．
+\end{proof}
+
+\begin{example}[指示関数]
+$A \subset E$ が可測なら
+\[
+1_A:E\to\RR
+\]
+はLebesgue可測である．
+\end{example}
+\begin{proof}
+任意の $a\in\RR$ に対して
+\[
+\{1_A>a\}
+=
+\begin{cases}
+\emptyset & (a\ge 1),\\
+A & (0\le a<1),\\
+E & (a<0).
+\end{cases}
+\]
+いずれも可測だから，判定法より $1_A$ は可測である．
+\end{proof}
+
+\begin{example}[Dirichlet関数]
+\[
+f=1_{\QQ\cap[0,1]}
+\]
+は $[0,1]$ 上Lebesgue可測である．
+\end{example}
+\begin{proof}
+第5章で
+\[
+\QQ\cap[0,1]
+\]
+はLebesgue可測であることを示した．
+したがって直前の例より $f$ は可測である．
+\end{proof}
+
+\begin{remark}
+Dirichlet関数はRiemann積分できなかったが，
+Lebesgue積分論ではまず「可測である」ことが分かる．
+積分できるかどうかは次章で考える．
+\end{remark}
+
+\section{ベクトル値可測写像と合成}
+
+\begin{proposition}[有限個の可測関数をまとめた写像]
+$f_1,\dots,f_n:E\to\RR$ を可測関数とする．
+このとき
+\[
+F:E\to\RR^n,
+\qquad
+F(x):=(f_1(x),\dots,f_n(x))
+\]
+はBorel可測である．
+\end{proposition}
+\begin{proof}
+\[
+\mathcal C:=\{B\in\mathcal B(\RR^n)\mid F^{-1}(B)\in \mathcal L_E^d\}
+\]
+とおく．
+逆像の基本性質より $\mathcal C$ は $\sigma$-加法族である．
+
+任意の $a_1,\dots,a_n\in\RR$ に対して
+\begin{align*}
+F^{-1}\bigl((-\infty,a_1]\times\cdots\times(-\infty,a_n]\bigr)
+=
+\bigcap_{k=1}^n \{x\in E\mid f_k(x)\le a_k\}
+\end{align*}
+であり，右辺は可測である．
+したがって
+\[
+(-\infty,a_1]\times\cdots\times(-\infty,a_n]\in\mathcal C.
+\]
+ところが，このような直方体は $\mathcal B(\RR^n)$ を生成するから
+\[
+\mathcal B(\RR^n)\subset \mathcal C
+\]
+である．
+よって $F$ は可測である．
+\end{proof}
+
+\begin{theorem}[連続写像との合成]
+$F:E\to\RR^n$ を可測写像，
+\[
+\Phi:\RR^n\to\RR
+\]
+を連続関数とする．
+このとき
+\[
+\Phi\circ F:E\to\RR
+\]
+は可測である．
+\end{theorem}
+\begin{proof}
+任意のBorel集合 $B\subset\RR$ に対して，
+$\Phi$ の連続性より
+\[
+\Phi^{-1}(B)\in\mathcal B(\RR^n)
+\]
+である．
+したがって
+\[
+(\Phi\circ F)^{-1}(B)=F^{-1}(\Phi^{-1}(B))
+\]
+は可測である．
+よって $\Phi\circ F$ は可測である．
+\end{proof}
+
+\begin{corollary}[代数演算と合成]
+$f,g:E\to\RR$ を可測関数とする．
+このとき次が成り立つ．
+\begin{enumerate}
+    \item 任意の $c\in\RR$ に対して $cf$ は可測である
+    \item $f+g$ と $fg$ は可測である
+    \item $\max(f,g)$ と $\min(f,g)$ は可測である
+    \item $p>0$ に対して $|f|^p$ は可測である
+    \item $\phi:\RR\to\RR$ が連続なら $\phi\circ f$ は可測である
+\end{enumerate}
+\end{corollary}
+\begin{proof}
+\begin{enumerate}
+    \item
+    \[
+    \Phi(t):=ct
+    \]
+    は連続だから，直前の定理を $n=1$ に適用すればよい．
+
+    \item
+    \[
+    \Phi(u,v):=u+v,\qquad \Psi(u,v):=uv
+    \]
+    は $\RR^2$ 上連続である．
+    また $(f,g):E\to\RR^2$ は前命題より可測である．
+    よって
+    \[
+    f+g=\Phi\circ(f,g),\qquad fg=\Psi\circ(f,g)
+    \]
+    は可測である．
+
+    \item
+    \[
+    \Phi(u,v):=\max(u,v),\qquad \Psi(u,v):=\min(u,v)
+    \]
+    は連続だから，同様に従う．
+
+    \item
+    \[
+    \phi(t):=|t|^p
+    \]
+    は連続だから従う．
+
+    \item 直前の定理そのものである．
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}[逆数]
+$f:E\to\RR$ を可測関数とする．
+このとき
+\[
+E_0:=\{x\in E\mid f(x)\ne 0\}
+\]
+は可測であり，
+\[
+\frac{1}{f}:E_0\to\RR
+\]
+は可測である．
+特に $f(x)\ne 0$ がすべての $x\in E$ で成り立つなら，
+\[
+1/f
+\]
+は $E$ 上可測である．
+\end{proposition}
+\begin{proof}
+まず
+\[
+E_0=E\setminus\{f=0\}
+\]
+だから可測である．
+
+次に
+\[
+\phi:\RR\setminus\{0\}\to\RR,
+\qquad
+\phi(t)=\frac1t
+\]
+は連続である．
+$f$ を $E_0$ に制限した写像
+\[
+f|_{E_0}:E_0\to \RR\setminus\{0\}
+\]
+は可測であるから，連続写像との合成より
+\[
+\phi\circ f|_{E_0}=\frac1f
+\]
+は可測である．
+\end{proof}
+
+\section{不等式・極限で作られる関数}
+
+\begin{proposition}[比較からできる集合]
+$f,g:E\to\eRR$ を可測関数とする．
+このとき次の集合はすべて可測である．
+\begin{enumerate}
+    \item
+    \[
+    \{x\in E \mid f(x)>g(x)\}
+    \]
+    \item
+    \[
+    \{x\in E \mid f(x)\ge g(x)\}
+    \]
+    \item
+    \[
+    \{x\in E \mid f(x)=g(x)\}
+    \]
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\textbf{(1)}\quad
+まず
+\[
+\{f>g\}
+=
+\bigcup_{q\in\QQ}\bigl(\{f>q\}\cap\{g<q\}\bigr)
+\]
+を示す．
+左辺に $x$ が属するとする．
+すると $f(x)>g(x)$ だから，有理数の稠密性より
+\[
+g(x)<q<f(x)
+\]
+を満たす $q\in\QQ$ が存在する．
+したがって $x$ は右辺に属する．
+逆向きは明らかである．
+右辺は可測集合の可算和だから可測である．
+
+\textbf{(2)}\quad
+\[
+\{f\ge g\}=E\setminus\{g>f\}
+\]
+だから可測である．
+
+\textbf{(3)}\quad
+\[
+\{f=g\}=\{f\ge g\}\cap\{g\ge f\}
+\]
+だから可測である．
+\end{proof}
+
+\begin{proposition}[可算個の上限と下限]
+$f_n:E\to\eRR$ を可測関数列とする．
+このとき
+\[
+\sup_{n}f_n,\qquad \inf_{n}f_n
+\]
+は可測である．
+\end{proposition}
+\begin{proof}
+任意の $a\in\RR$ に対して
+\[
+\left\{\sup_n f_n>a\right\}
+=
+\bigcup_{n=1}^{\infty}\{f_n>a\}
+\]
+である．
+右辺は可測集合の可算和だから可測である．
+よって $\sup_n f_n$ は可測である．
+
+また
+\[
+\inf_n f_n=-\sup_n(-f_n)
+\]
+であり，各 $-f_n$ も可測だから，$\inf_n f_n$ も可測である．
+\end{proof}
+
+\begin{proposition}[limsup, liminf, limit]
+$f_n:E\to\eRR$ を可測関数列とする．
+このとき
+\[
+\limsup_{n\to\infty}f_n,\qquad
+\liminf_{n\to\infty}f_n
+\]
+は可測である．
+さらに，もし各点で極限
+\[
+f(x)=\lim_{n\to\infty}f_n(x)
+\]
+が存在するなら，$f$ も可測である．
+\end{proposition}
+\begin{proof}
+定義により
+\[
+\limsup_{n\to\infty}f_n
+=
+\inf_{n\in\NN}\sup_{k\ge n}f_k,
+\qquad
+\liminf_{n\to\infty}f_n
+=
+\sup_{n\in\NN}\inf_{k\ge n}f_k.
+\]
+右辺は可測関数に対する可算上限・可算下限で作られているから可測である．
+
+さらに各点で極限が存在するなら
+\[
+f=\limsup_{n\to\infty}f_n=\liminf_{n\to\infty}f_n
+\]
+だから $f$ は可測である．
+\end{proof}
+
+\section{almost everywhere}
+
+\begin{definition}[almost everywhere]
+$E \subset \RR^d$ を可測集合とし，$f,g:E\to\eRR$ を関数とする．
+\[
+f=g \quad \text{a.e.\ on } E
+\]
+とは
+\[
+\{x\in E\mid f(x)\ne g(x)\}
+\]
+がLebesgue零集合であることをいう．
+\end{definition}
+
+\begin{proposition}
+$E$ 上の関数全体において，
+\[
+f\sim g \iff f=g \text{ a.e.\ on } E
+\]
+で定める関係 $\sim$ は同値関係である．
+\end{proposition}
+\begin{proof}
+\textbf{反射律}\quad
+\[
+\{f\ne f\}=\emptyset
+\]
+だから $f\sim f$ である．
+
+\textbf{対称律}\quad
+\[
+\{f\ne g\}=\{g\ne f\}
+\]
+だから $f\sim g$ なら $g\sim f$ である．
+
+\textbf{推移律}\quad
+$f\sim g$ かつ $g\sim h$ とする．
+すると
+\[
+\{f\ne h\}\subset \{f\ne g\}\cup\{g\ne h\}
+\]
+である．
+右辺は零集合の可算和だから零集合である．
+したがって $f\sim h$ である．
+\end{proof}
+
+\begin{proposition}[a.e.\ 修正による可測性]
+$f:E\to\eRR$ を可測関数とし，
+$g:E\to\eRR$ が
+\[
+f=g \quad \text{a.e.\ on } E
+\]
+を満たすとする．
+このとき $g$ も可測である．
+\end{proposition}
+\begin{proof}
+\[
+N:=\{x\in E\mid f(x)\ne g(x)\}
+\]
+とおくと，$N$ は零集合である．
+Lebesgue測度は完備だから，$N$ の任意の部分集合は可測である．
+
+任意の $a\in\RR$ に対して
+\[
+\{g>a\}
+=
+\bigl(\{f>a\}\cap(E\setminus N)\bigr)\cup\bigl(\{g>a\}\cap N\bigr)
+\]
+である．
+右辺第1項は可測であり，
+第2項は $N$ の部分集合だから可測である．
+よって
+\[
+\{g>a\}
+\]
+は可測である．
+したがって判定法より $g$ は可測である．
+\end{proof}
+
+\begin{corollary}[a.e.\ 極限の可測性]
+$f_n:E\to\eRR$ を可測関数列とし，
+\[
+f_n(x)\to f(x)\quad \text{a.e.\ on } E
+\]
+とする．
+このとき $f$ は可測である．
+\end{corollary}
+\begin{proof}
+\[
+g:=\limsup_{n\to\infty}f_n
+\]
+とおくと，前節より $g$ は可測である．
+また極限が存在する点では
+\[
+g(x)=\lim_{n\to\infty}f_n(x)=f(x)
+\]
+である．
+したがって
+\[
+f=g \quad \text{a.e.\ on } E.
+\]
+ゆえに直前の命題より $f$ は可測である．
+\end{proof}
+
+\section{解釈とまとめ}
+
+Lebesgue可測関数とは，
+\[
+\{f>a\}
+\]
+のようなレベル集合が可測である関数であった．
+つまり，関数の値そのものより，
+その値をとる領域の幾何学が測度で追えることが本質である．
+
+本章で得た重要な事実は次の通りである．
+\begin{enumerate}
+    \item 連続関数と指示関数は可測である
+    \item 可測関数は和・積・逆数・合成で閉じている
+    \item $\sup,\inf,\limsup,\liminf,\lim$ をとっても可測性は保たれる
+    \item 零集合上で値を変えても可測性は変わらない
+\end{enumerate}
+
+次章では，この可測関数に対してLebesgue積分を定義する．
+その出発点は，
+\[
+\text{指示関数} \to \text{単関数} \to \text{一般の可測関数}
+\]
+という拡張である．
