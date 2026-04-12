@@ -1,0 +1,382 @@
+\setcounter{chapter}{4}
+\chapter{Lebesgue測度}\label{chap:lebesgue-measure}
+
+\paragraph{本章の目標}
+Lebesgue可測集合，Lebesgue測度，$\sigma$-加法族
+
+第3章・第4章でLebesgue外測度 $m^*$ と内測度 $m_*$ を定義し，
+常に $m_*(A) \le m^*(A)$ が成り立つことを示した．
+Riemann積分論・Jordan測度論と同じ発想で，
+内側と外側からの評価が一致する集合を「可測」と定義する：
+
+\[
+A \text{ がLebesgue可測}
+\quad\overset{\text{def}}{\iff}\quad
+m_*(A) = m^*(A).
+\]
+
+本章では，この定義のもとで
+\begin{itemize}
+\item Lebesgue可測集合が十分広いクラスを成すこと，
+\item そのクラスが\textbf{$\sigma$-加法族}（可算回の集合演算で閉じる）を成すこと，
+\item Lebesgue測度 $m$ が\textbf{完全加法的}（可算加法的）であること
+\end{itemize}
+を述べる．
+$\sigma$-加法族と完全加法性の完全な証明は，
+第6章のCarath\'eodory流のアプローチにより与える．
+
+% ==================================================================
+\section{Lebesgue可測集合の定義}\label{sec:lebesgue-measurable-def}
+% ==================================================================
+
+\begin{definition}[Lebesgue可測集合]\label{def:lebesgue-measurable}
+有界集合 $A \subset \RR^d$ が\textbf{Lebesgue可測}であるとは
+\[
+m_*(A) = m^*(A)
+\]
+が成り立つことをいう．
+共通の値を $A$ の\textbf{Lebesgue測度}と呼び，$m(A)$ で表す．
+
+非有界集合 $A \subset \RR^d$ がLebesgue可測であるとは，
+すべての有界閉長方体 $I$ に対して
+$A \cap I$ がLebesgue可測であることをいう．
+このとき $m(A) := \sup_I m(A \cap I)$（$\infty$ も許す）と定める．
+\end{definition}
+
+\begin{remark}\label{rem:measurability-condition}
+$A$ を含む有界閉長方体 $I$ を取ると，
+$m_*(A) = |I| - m^*(I \setminus A)$ であったから，
+$A$ がLebesgue可測であることは
+\[
+m^*(A) + m^*(I \setminus A) = |I|
+\]
+と同値である．
+つまり $A$ とその（$I$ 内での）補集合への分割で
+外測度が\textbf{加法的}に振る舞うことが可測性の本質である．
+\end{remark}
+
+\begin{definition}[Lebesgue零集合]\label{def:lebesgue-null}
+$m^*(N) = 0$ を満たす集合 $N$ を\textbf{Lebesgue零集合}という．
+\end{definition}
+
+% ==================================================================
+\section{基本的な可測集合}\label{sec:measurable-basic}
+% ==================================================================
+
+まず，容易に可測性が確認できるクラスの集合を挙げる．
+
+\begin{theorem}[零集合の可測性]\label{thm:null-measurable}
+Lebesgue零集合はLebesgue可測であり，$m(N) = 0$．
+\end{theorem}
+\begin{proof}
+$m^*(N) = 0$ ならば
+$0 \le m_*(N) \le m^*(N) = 0$ だから
+$m_*(N) = m^*(N) = 0$．
+\end{proof}
+
+\begin{theorem}[補集合の可測性]\label{thm:complement-measurable}
+有界集合 $A$ がLebesgue可測ならば，
+$A$ を含む有界閉長方体 $I$ に対して
+$I \setminus A$ もLebesgue可測である．
+\end{theorem}
+\begin{proof}
+$A$ の可測性より $m^*(A) + m^*(I \setminus A) = |I|$
+（注意\ref{rem:measurability-condition}）．
+$B := I \setminus A$ とおくと $I \setminus B = A$ であり，
+$m^*(B) + m^*(I \setminus B) = m^*(I \setminus A) + m^*(A) = |I|$．
+よって $B$ も可測である．
+\end{proof}
+
+\begin{theorem}[Jordan可測集合の可測性]\label{thm:jordan-implies-measurable}
+Jordan可測集合はLebesgue可測であり，
+Lebesgue測度はJordan測度に一致する．
+\end{theorem}
+\begin{proof}
+系\ref{cor:jordan-implies-lebesgue}（第4章）そのものである．
+\end{proof}
+
+% ==================================================================
+\section{具体例}\label{sec:measurable-examples}
+% ==================================================================
+
+\begin{example}[可算集合]\label{ex:countable-measurable}
+可算集合 $A$ は $m^*(A) = 0$（例\ref{ex:countable-null}）だから
+零集合であり，Lebesgue可測で $m(A) = 0$．
+\end{example}
+
+\begin{example}[{$\QQ \cap [0,1]$}]\label{ex:rationals-measurable}
+$m_*(\QQ \cap [0,1]) = m^*(\QQ \cap [0,1]) = 0$
+（例\ref{ex:rationals-inner}）．
+したがって $\QQ \cap [0,1]$ はLebesgue可測で $m(\QQ \cap [0,1]) = 0$．
+
+Jordan測度では $m_{J,*}(\QQ \cap [0,1]) = 0 \neq 1 = m_J^*(\QQ \cap [0,1])$
+であったからJordan非可測であった．
+Lebesgue理論はこの集合を正しく「測度 $0$」と評価できる．
+\end{example}
+
+\begin{example}[Cantor集合]\label{ex:cantor-measurable}
+$m^*(C) = 0$（例\ref{ex:cantor-outer}）だから
+$C$ はLebesgue可測で $m(C) = 0$．
+$C$ は非可算であるが零集合である：
+零集合は必ずしも可算ではない．
+\end{example}
+
+\begin{example}[無理数の集合]\label{ex:irrationals-measurable}
+$[0,1] \setminus \QQ$（$[0,1]$ 内の無理数全体）は，
+$[0,1]$ と $\QQ \cap [0,1]$ がいずれも可測であることから
+$[0,1] \setminus \QQ$ も可測であり（補集合の可測性），
+\[
+m([0,1] \setminus \QQ) = m([0,1]) - m(\QQ \cap [0,1]) = 1 - 0 = 1.
+\]
+$[0,1]$ の「ほとんどすべての点」は無理数である．
+\end{example}
+
+\begin{example}[基本集合・区間]\label{ex:elementary-measurable}
+基本集合はJordan可測だから Lebesgue可測であり，
+Lebesgue測度はJordan測度（体積）に一致する．
+特に有界区間 $I$ は可測で $m(I) = |I|$（長さ）．
+\end{example}
+
+\begin{example}[太いCantor集合]\label{ex:fat-cantor}
+Cantor集合の構成で，各段階で除去する区間の長さを調整すると，
+正の測度をもつ閉集合で内部が空（稠密な開集合の補集合）な集合が作れる．
+例えば $[0,1]$ の中で，第 $n$ 段階で除去する各開区間の長さを
+$\alpha \cdot 3^{-n}$（$0 < \alpha < 1$）とすれば，
+得られる Cantor型集合 $C_\alpha$ の測度は
+\[
+m(C_\alpha) = 1 - \alpha > 0.
+\]
+$C_\alpha$ は閉集合だからJordan可測でもあり，Lebesgue可測である．
+このような「太いCantor集合」は $\intr C_\alpha = \emptyset$
+にもかかわらず正の測度をもつ点が興味深い．
+\end{example}
+
+% ==================================================================
+\section{\texorpdfstring{$\sigma$}{σ}-加法族と完全加法性}
+\label{sec:sigma-algebra}
+% ==================================================================
+
+Jordan可測集合の全体は有限加法族を成し
+（第2章），Jordan測度は有限加法的であった．
+Lebesgue可測集合では，
+有限加法族から $\sigma$-加法族へ，
+有限加法性から完全加法性（$\sigma$-加法性）へと拡張される．
+
+\begin{definition}[$\sigma$-加法族]\label{def:sigma-algebra}
+$X$ を集合とする．
+$X$ の部分集合族 $\calM \subset \calP(X)$ が
+\textbf{$\sigma$-加法族}（$\sigma$-algebra）であるとは
+次の3条件を満たすことをいう：
+\begin{enumerate}
+\item $\emptyset \in \calM$．
+\item $A \in \calM \Rightarrow X \setminus A \in \calM$
+\quad（補集合で閉じる）．
+\item $A_1, A_2, \ldots \in \calM
+\Rightarrow \bigcup_{n=1}^{\infty} A_n \in \calM$
+\quad（可算和で閉じる）．
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+第2章で定義した有限加法族は条件 (3) を「有限和で閉じる」に
+弱めたものである．
+$\sigma$-加法族は有限加法族でもある：
+$A_{n} = \emptyset$（$n > N$）とすれば有限和に帰着する．
+
+De Morganの法則により，$\sigma$-加法族は
+可算共通部分でも閉じる：
+$A_n \in \calM$ ならば
+$\bigcap_n A_n = X \setminus \bigcup_n (X \setminus A_n) \in \calM$．
+したがって差集合 $A \setminus B = A \cap (X \setminus B) \in \calM$ でも閉じる．
+\end{remark}
+
+\begin{definition}[完全加法的測度]\label{def:countably-additive-measure}
+$\sigma$-加法族 $\calM$ 上の関数
+$\mu : \calM \to [0,\infty]$ が\textbf{完全加法的測度}
+（$\sigma$-加法的測度）であるとは
+\begin{enumerate}
+\item $\mu(\emptyset) = 0$，
+\item 互いに素な列 $\{A_n\}_{n=1}^{\infty} \subset \calM$
+（$A_i \cap A_j = \emptyset$, $i \neq j$）に対して
+\[
+\mu\!\left(\bigsqcup_{n=1}^{\infty} A_n\right)
+= \sum_{n=1}^{\infty} \mu(A_n)
+\]
+\end{enumerate}
+が成り立つことをいう．
+組 $(X, \calM, \mu)$ を\textbf{測度空間}と呼ぶ．
+\end{definition}
+
+\begin{remark}
+有限加法族上の有限加法的集合関数（第2章）との対比：
+\begin{center}
+\begin{tabular}{l|l|l}
+ & Jordan測度 & Lebesgue測度 \\
+\hline
+集合族 & 有限加法族 & $\sigma$-加法族 \\
+加法性 & 有限加法的 & 完全加法的（$\sigma$-加法的） \\
+極限操作 & 不安定 & 安定
+\end{tabular}
+\end{center}
+完全加法性は，可算無限回の集合操作の下での安定性を保証する．
+これが確率論・関数解析・偏微分方程式の基盤となる．
+\end{remark}
+
+以下が本章（および本書第3--6章）の中心定理である．
+
+\begin{theorem}[Lebesgue測度の基本定理]\label{thm:lebesgue-main}
+\begin{enumerate}
+\item Lebesgue可測集合の全体 $\calM \subset \calP(\RR^d)$ は
+$\sigma$-加法族を成す．
+\item $m : \calM \to [0,\infty]$ は完全加法的測度であり，
+\begin{itemize}
+\item 半開長方体 $Q$ に対して $m(Q) = |Q|$（体積に一致），
+\item 平行移動不変：$m(A+c) = m(A)$，
+\item 完備：$m(N) = 0$ かつ $A \subset N$ ならば $A \in \calM$
+（零集合の部分集合も可測）．
+\end{itemize}
+\end{enumerate}
+\end{theorem}
+
+$\sigma$-加法族であることの各条件を確認しよう．
+
+\paragraph{$\emptyset \in \calM$ について}
+$m^*(\emptyset) = m_*(\emptyset) = 0$ だから $\emptyset$ は可測．
+
+\paragraph{補集合で閉じることについて}
+有界集合の場合は定理\ref{thm:complement-measurable}で示した．
+非有界集合の場合も，定義に基づいて
+各有界長方体 $I$ との共通部分を調べれば同様に従う．
+
+\paragraph{可算和で閉じることについて}
+ここが核心であり，直接の証明には技術的な困難を伴う．
+可測性の条件 $m^*(A) + m^*(I \setminus A) = |I|$ は
+$A$ と $I \setminus A$ という\emph{特定の一組の分割}に対する
+加法性を述べるだけであり，
+二つの可測集合の合併 $A \cup B$ に対して
+同種の加法性を導くには
+$A \cup B$ と $I \setminus (A \cup B)$ の外測度を
+$A$, $B$ の可測性のみから制御する必要がある．
+
+この困難は，Carath\'eodory条件（第6章）の導入によって
+解消される．
+Carath\'eodory条件は
+「\emph{すべての集合} $E$ に対する分割で外測度が加法的」
+と要求するものであり，その強い条件から
+$\sigma$-加法族の性質と完全加法性が統一的に導かれる．
+第6章で，Carath\'eodory条件と本章の
+$m_* = m^*$ という条件が同値であることを示し，
+定理\ref{thm:lebesgue-main}の証明を完成させる．
+
+\paragraph{完全加法性の直観的説明}
+互いに素な可測集合 $A_1, A_2, \ldots$ に対し，
+\[
+\sum_{n=1}^{N} m(A_n)
+= m\!\left(\bigsqcup_{n=1}^{N} A_n\right)
+\le m^*\!\left(\bigsqcup_{n=1}^{\infty} A_n\right)
+\le \sum_{n=1}^{\infty} m^*(A_n)
+= \sum_{n=1}^{\infty} m(A_n).
+\]
+$N \to \infty$ とすれば
+$m_*(\bigsqcup_n A_n) = m^*(\bigsqcup_n A_n) = \sum_n m(A_n)$
+が得られ，可測性と完全加法性が同時に従う．
+ただし最初の等号（有限和の加法性）を
+$m_* = m^*$ の定義だけから証明するのが
+前述の困難にあたる部分であり，
+ここに Carath\'eodory 条件が必要となる．
+
+% ==================================================================
+\section{Lebesgue可測でない集合}\label{sec:non-measurable}
+% ==================================================================
+
+$m^*$ は $\calP(\RR^d)$ 全体で定義されるが，
+すべての集合がLebesgue可測であるわけではない．
+次はLebesgue可測でない集合の古典的な構成
+（Vitali, 1905）である．
+
+\begin{theorem}[非可測集合の存在]\label{thm:vitali}
+選択公理を仮定する．
+$\RR$ にはLebesgue可測でない集合が存在する．
+\end{theorem}
+\begin{proof}
+$[0,1)$ 上に同値関係 $x \sim y \iff x - y \in \QQ$ を定める．
+同値類 $[x] = \{y \in [0,1) : x - y \in \QQ\}$ は
+$[0,1)$ を互いに素なクラスに分割する．
+選択公理により，各同値類からちょうど1つの代表元を選び，
+その全体を $V \subset [0,1)$ とする．
+
+$\QQ \cap [0,1)$ の元を $r_1, r_2, \ldots$ と番号付け，
+$V_n := V \oplus r_n := \{v + r_n \bmod 1 : v \in V\}$
+（$\bmod 1$ は $[0,1)$ への射影）とする．
+
+\textbf{主張1：} $V_n$ は互いに素．\quad
+$V_i \cap V_j \neq \emptyset$ とすると
+$v + r_i \equiv w + r_j \pmod{1}$
+なる $v, w \in V$ が存在する．
+$v - w \in \QQ$ だから $v \sim w$，
+$V$ の定義より $v = w$，よって $r_i \equiv r_j$ で $i = j$．
+
+\textbf{主張2：} $[0,1) = \bigsqcup_n V_n$．\quad
+任意の $x \in [0,1)$ に対し，$[x]$ の代表元 $v \in V$ が存在し
+$x - v \in \QQ$ だから $x \in V_n$（$r_n \equiv x - v$）．
+
+\textbf{主張3：} $V$ が可測ならば矛盾が生じる．\quad
+$V_n$ は $V$ の平行移動（$\bmod 1$）だから
+可測ならば $m(V_n) = m(V) =: c$ （平行移動不変性）．
+完全加法性より
+\[
+1 = m([0,1)) = \sum_{n=1}^{\infty} m(V_n)
+= \sum_{n=1}^{\infty} c.
+\]
+$c = 0$ ならば右辺 $= 0 \neq 1$（矛盾）．
+$c > 0$ ならば右辺 $= \infty \neq 1$（矛盾）．
+
+したがって $V$ はLebesgue可測ではない．
+\end{proof}
+
+\begin{remark}
+この証明は\textbf{選択公理}に本質的に依存する．
+Solovayの定理（1970）により，
+ZF + 到達不能基数の無矛盾性を仮定すれば，
+「$\RR$ のすべての部分集合がLebesgue可測」であるモデルが
+（選択公理なしで）構成できることが知られている．
+すなわち，非可測集合の存在は選択公理の帰結であり，
+測度論の内在的な障害ではない．
+\end{remark}
+
+\begin{remark}
+Vitali集合の存在は，
+Lebesgue外測度 $m^*$ が $\calP(\RR)$ 全体では完全加法的になりえない
+ことを示している．
+すなわち，平行移動不変性と完全加法性を同時に満たす測度は
+$\calP(\RR)$ 全体には定義できない．
+Lebesgue可測集合という「適切なクラス」に制限することで初めて
+完全加法性が成立する．
+\end{remark}
+
+% ==================================================================
+\section{まとめ：Riemann--Jordan--Lebesgue}\label{sec:summary-rjl}
+% ==================================================================
+
+ここまでの3つの理論を比較する．
+
+\begin{center}
+\renewcommand{\arraystretch}{1.3}
+\begin{tabular}{l|c|c|c}
+ & Riemann積分 & Jordan測度 & Lebesgue測度 \\ \hline
+被覆 & 有限分割 & 有限個の長方体 & 可算個の長方体 \\
+加法族 & --- & 有限加法族 & $\sigma$-加法族 \\
+加法性 & --- & 有限加法的 & 完全加法的 \\
+$\QQ \cap [0,1]$ & 非可積分 & 非可測 & 可測（$m=0$）\\
+Cantor集合 & --- & 可測（$m_J=0$） & 可測（$m=0$） \\
+一様収束 & 必要 & --- & 不要（各点収束で十分な場合あり）\\
+非有界領域 & 不可 & 不可 & 可
+\end{tabular}
+\end{center}
+
+Lebesgue理論の核心は「有限 $\to$ 可算」の拡張である．
+この拡張により，
+可算回の集合演算や極限操作に対して安定な測度論が得られ，
+解析学の強力な基盤が整う．
+次章では Carath\'eodory の手法によってこの理論を完成させ，
+さらに一般的な測度の構成法を紹介する．

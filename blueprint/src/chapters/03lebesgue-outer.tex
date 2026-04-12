@@ -1,0 +1,403 @@
+\setcounter{chapter}{2}
+\chapter{Lebesgue外測度}\label{chap:lebesgue-outer}
+
+\paragraph{本章の目標}
+Lebesgue外測度，可算劣加法性
+
+第2章で定義したJordan外測度
+\[
+m_J^*(A) = \inf\{m_J(E) : A \subset E,\ E \text{ は基本集合}\}
+\]
+は有限個の半開長方体の合併（基本集合）で $A$ を覆い，
+体積の下限を取るものであった．
+この有限被覆の制約により，
+$\QQ \cap [0,1]$ のように稠密に散らばった集合に対しては
+$m_J^*(\QQ \cap [0,1]) = 1$ となり，
+「薄い」集合であることを検出できなかった．
+
+Lebesgue外測度は，被覆に使える長方体の個数を
+可算無限個に拡張する：
+\[
+m^*(A)
+= \inf\!\left\{
+\sum_{j=1}^{\infty} |Q_j|
+: A \subset \bigcup_{j=1}^{\infty} Q_j,\
+Q_j \text{ は半開長方体}
+\right\}.
+\]
+被覆の自由度が増えた分，より精密な評価が可能になり，
+$m^*(\QQ \cap [0,1]) = 0$ が示せるようになる．
+代償として有限加法性は失われるが，
+代わりに\textbf{可算劣加法性}
+（可算個の和で上から抑えられる）が成り立つ．
+
+% ==================================================================
+\section{Lebesgue外測度の定義}\label{sec:lebesgue-outer-def}
+% ==================================================================
+
+\begin{definition}[可算被覆]\label{def:countable-cover}
+集合 $A \subset \RR^d$ に対し，
+半開長方体の列 $\{Q_j\}_{j=1}^{\infty}$ が
+$A$ の\textbf{可算被覆}であるとは
+\[
+A \subset \bigcup_{j=1}^{\infty} Q_j
+\]
+が成り立つことをいう．
+\end{definition}
+
+\begin{remark}
+有限個の長方体 $Q_1,\ldots,Q_n$ による被覆は，
+$Q_j = \emptyset$（$j > n$）とすれば
+可算被覆の特別な場合とみなせる．
+また $\RR^d = \bigcup_{n=1}^{\infty} [-n,n)^d$ だから，
+任意の集合は可算被覆をもつ．
+\end{remark}
+
+\begin{definition}[Lebesgue外測度]\label{def:lebesgue-outer-measure}
+集合 $A \subset \RR^d$ の\textbf{Lebesgue外測度}を
+\[
+m^*(A)
+:= \inf\!\left\{
+\sum_{j=1}^{\infty} |Q_j|
+: \{Q_j\}_{j=1}^{\infty} \text{ は } A \text{ の可算被覆}
+\right\}
+\]
+で定める．値は $[0,\infty]$ を取りうる．
+\end{definition}
+
+\begin{remark}\label{rem:jordan-vs-lebesgue-outer}
+Jordan外測度との対比を整理する．
+\begin{center}
+\begin{tabular}{l|l|l}
+ & Jordan外測度 $m_J^*$ & Lebesgue外測度 $m^*$ \\
+\hline
+被覆 & 有限個の長方体の合併（基本集合） & 可算個の長方体 \\
+加法性 & 有限加法的 & 可算劣加法的 \\
+定義域 & 有界集合 & すべての集合
+\end{tabular}
+\end{center}
+可算被覆は有限被覆を含むから，
+下限の候補が増え，
+$m^*(A) \le m_J^*(A)$ が常に成り立つ．
+\end{remark}
+
+% ==================================================================
+\section{基本性質}\label{sec:lebesgue-outer-prop}
+% ==================================================================
+
+\begin{theorem}[Lebesgue外測度の基本性質]\label{thm:lebesgue-outer-properties}
+\begin{enumerate}
+\item （非負性）任意の $A \subset \RR^d$ に対し
+$m^*(A) \ge 0$．また $m^*(\emptyset) = 0$．
+\item （単調性）$A \subset B \Rightarrow m^*(A) \le m^*(B)$．
+\item （可算劣加法性）
+\[
+m^*\!\left(\bigcup_{n=1}^{\infty} A_n\right)
+\le \sum_{n=1}^{\infty} m^*(A_n).
+\]
+\item （平行移動不変性）
+$c \in \RR^d$ に対し $m^*(A+c) = m^*(A)$．
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\textbf{(1)}\quad
+体積は非負だから $m^*(A) \ge 0$．
+$\emptyset$ は $Q_j = \emptyset$ で覆えるので $m^*(\emptyset) = 0$．
+
+\textbf{(2)}\quad
+$B$ の任意の可算被覆は $A$ の可算被覆でもある．
+下限の候補が増えるから $m^*(A) \le m^*(B)$．
+
+\textbf{(3)}\quad
+いずれかの $m^*(A_n) = \infty$ なら右辺 $= \infty$ で自明．
+すべて有限とする．
+$\eps > 0$ を固定し，各 $n$ に対して
+$A_n$ の可算被覆 $\{Q_{n,j}\}_{j=1}^{\infty}$ を
+\[
+\sum_{j=1}^{\infty} |Q_{n,j}| < m^*(A_n) + \frac{\eps}{2^n}
+\]
+となるように取る（下限の定義より可能）．
+$\{Q_{n,j}\}_{n,j=1}^{\infty}$ は
+$\bigcup_n A_n$ の可算被覆だから
+\[
+m^*\!\left(\bigcup_{n=1}^{\infty} A_n\right)
+\le
+\sum_{n=1}^{\infty}\sum_{j=1}^{\infty} |Q_{n,j}|
+<
+\sum_{n=1}^{\infty}\!\left(m^*(A_n) + \frac{\eps}{2^n}\right)
+=
+\sum_{n=1}^{\infty} m^*(A_n) + \eps.
+\]
+$\eps > 0$ は任意だったので結論を得る．
+
+\textbf{(4)}\quad
+$\{Q_j\}$ が $A$ の被覆ならば $\{Q_j + c\}$ は $A+c$ の被覆であり，
+$|Q_j + c| = |Q_j|$．逆も同様であるから $m^*(A+c) = m^*(A)$．
+\end{proof}
+
+\begin{remark}\label{rem:subadditivity-technique}
+(3) の証明で用いた
+「各 $A_n$ の被覆に $\eps/2^n$ の余裕を持たせて足し上げる」
+という手法は，Lebesgue測度論の随所に現れる基本的な技法である．
+
+可算劣加法性は $A_j = \emptyset$（$j > N$）とすれば
+有限劣加法性を含む．
+一般には等号は成り立たない（加法性ではなく劣加法性）．
+加法性を回復するには，
+適切な「可測集合」のクラスに制限する必要がある（第5章以降）．
+\end{remark}
+
+ここまでの性質は外測度の定義から比較的容易に従う．
+次の定理は非自明であり，
+Lebesgue外測度が長方体の体積と整合することを保証する．
+
+\begin{theorem}[長方体の外測度]\label{thm:outer-measure-rectangle}
+半開長方体 $Q = \prod_{k=1}^d [a_k, b_k)$ に対して
+\[
+m^*(Q) = |Q| = \prod_{k=1}^d (b_k - a_k).
+\]
+\end{theorem}
+\begin{proof}
+\textbf{上界}\quad
+$Q$ 自身（と空集合の列）が $Q$ の可算被覆だから
+$m^*(Q) \le |Q|$．
+
+\textbf{下界}\quad
+$Q$ の任意の可算被覆 $\{Q_j\}_{j=1}^{\infty}$ に対して
+$\sum_{j=1}^{\infty} |Q_j| \ge |Q|$ を示す．
+
+$\eps > 0$ を取る．$Q$ をわずかに縮めた閉長方体
+\[
+\overline{Q}_\delta
+= \prod_{k=1}^d [a_k + \delta,\ b_k - \delta]
+\qquad (\delta > 0 \text{ は十分小さく取る})
+\]
+を考え，各 $Q_j$ をわずかに膨らませた開長方体 $Q_j^\circ$ を
+\[
+|Q_j^\circ| < |Q_j| + \frac{\eps}{2^j}
+\]
+となるように取る（各辺を少しずつ広げればよい）．
+すると
+$\overline{Q}_\delta \subset Q
+\subset \bigcup_j Q_j
+\subset \bigcup_j Q_j^\circ$
+であり，$\overline{Q}_\delta$ はコンパクト（有界閉集合）だから，
+\textbf{Heine--Borelの被覆定理}により
+有限部分被覆が取れる：
+\[
+\overline{Q}_\delta
+\subset Q_{j_1}^\circ \cup \cdots \cup Q_{j_N}^\circ.
+\]
+第2章の基本集合に対する有限劣加法性（Jordan外測度の単調性）より
+\[
+|\overline{Q}_\delta|
+\le \sum_{i=1}^N |Q_{j_i}^\circ|
+\le \sum_{j=1}^{\infty} |Q_j^\circ|
+< \sum_{j=1}^{\infty} |Q_j| + \eps.
+\]
+$\delta \to 0$ で $|\overline{Q}_\delta| \to |Q|$ だから
+$|Q| \le \sum_{j=1}^{\infty} |Q_j| + \eps$．
+$\eps > 0$ は任意だったので
+$|Q| \le \sum_{j=1}^{\infty} |Q_j|$．
+
+以上の被覆が任意だったので $m^*(Q) \ge |Q|$．
+\end{proof}
+
+\begin{remark}
+下界の証明で\textbf{Heine--Borelの定理}（コンパクト性）が
+本質的に使われている．
+半開長方体を閉長方体で内側から近似し（コンパクト性を確保），
+被覆の長方体を開長方体で外側から近似して（開被覆を構成），
+有限部分被覆に帰着させる．
+この「$\eps$ だけ余裕を持たせる」技法は
+可算と有限の橋渡しとして測度論の基本的な道具である．
+\end{remark}
+
+\begin{lemma}[基本集合に対する加法性]\label{lem:outer-additive-elementary}
+基本集合 $E$ と任意の集合 $S \subset \RR^d$ が互いに素
+（$E \cap S = \emptyset$）ならば
+\[
+m^*(E \sqcup S) = m^*(E) + m^*(S) = m_J(E) + m^*(S).
+\]
+\end{lemma}
+\begin{proof}
+$m^*(E \sqcup S) \le m^*(E) + m^*(S)$
+は可算劣加法性から従う．
+
+逆に $E \sqcup S$ の任意の可算被覆 $\{R_k\}$ を取る．
+$E = \bigsqcup_{l=1}^n P_l$（$P_l$ は半開長方体）と書く．
+各 $R_k$ と $P_l$ の交差 $R_k \cap P_l$ は半開長方体であり，
+$\{R_k \cap P_l\}_k$ は $P_l$ の可算被覆を与える．
+定理\ref{thm:outer-measure-rectangle}より
+$|P_l| \le \sum_k |R_k \cap P_l|$．
+
+$P_1,\ldots,P_n$ は互いに素で
+$\bigsqcup_l (R_k \cap P_l) \subset R_k$ だから
+\[
+\sum_l |R_k \cap P_l| \le |R_k|.
+\]
+したがって
+\[
+m_J(E) = \sum_l |P_l|
+\le \sum_l \sum_k |R_k \cap P_l|
+= \sum_k \sum_l |R_k \cap P_l|
+\le \sum_k |R_k|.
+\]
+同様に $\{R_k \cap (E \sqcup S) \setminus E\}_k = \{R_k \setminus E\}_k$
+は $S$ を覆うから $m^*(S) \le \sum_k |R_k \setminus E|$．
+$|R_k| \ge |R_k \cap E| + |R_k \setminus E|$
+（ただし $R_k \cap E$ は基本集合で，
+$|R_k \cap E| = \sum_l |R_k \cap P_l|$）であるから，
+結局
+\[
+\sum_k |R_k| \ge m_J(E) + m^*(S).
+\]
+被覆 $\{R_k\}$ は任意だったので
+$m^*(E \sqcup S) \ge m_J(E) + m^*(S)$．
+\end{proof}
+
+\begin{corollary}\label{cor:outer-measure-elementary}
+基本集合 $E = \bigsqcup_{j=1}^n Q_j$ に対して
+\[
+m^*(E) = m_J(E) = \sum_{j=1}^n |Q_j|.
+\]
+\end{corollary}
+\begin{proof}
+$E$ を被覆 $\{Q_1,\ldots,Q_n,\emptyset,\emptyset,\ldots\}$ で覆えば
+$m^*(E) \le m_J(E)$．
+逆は補題\ref{lem:outer-additive-elementary}を
+$E$ 自身と $S = \emptyset$ に適用して
+$m^*(E) = m_J(E) + 0 = m_J(E)$．
+（あるいは定理\ref{thm:outer-measure-rectangle}の証明と同様の
+Heine--Borelの議論を $\overline{E}$ に適用してもよい．）
+\end{proof}
+
+% ==================================================================
+\section{具体例}\label{sec:lebesgue-outer-examples}
+% ==================================================================
+
+\begin{example}[有限集合]\label{ex:finite-null}
+有限集合 $A = \{a_1,\ldots,a_n\} \subset \RR^d$ に対して $m^*(A) = 0$．
+\end{example}
+\begin{proof}
+$\eps > 0$ を取る．
+各 $a_j$ を一辺の長さ $(\eps/n)^{1/d}$ の半開長方体 $Q_j$ で覆えば
+$|Q_j| = \eps/n$ であり，$\sum_{j=1}^n |Q_j| = \eps$．
+$\eps$ は任意だったので $m^*(A) = 0$．
+\end{proof}
+
+\begin{example}[可算集合]\label{ex:countable-null}
+可算集合 $A = \{a_1, a_2, \ldots\} \subset \RR^d$ に対して $m^*(A) = 0$．
+\end{example}
+\begin{proof}
+$\eps > 0$ を固定する．
+各 $a_n$ を一辺の長さ $(\eps/2^n)^{1/d}$ の半開長方体 $Q_n$ で覆えば
+$|Q_n| = \eps/2^n$ であり
+\[
+\sum_{n=1}^{\infty} |Q_n| = \sum_{n=1}^{\infty} \frac{\eps}{2^n} = \eps.
+\]
+$\{Q_n\}$ は $A$ の可算被覆だから $m^*(A) \le \eps$．
+$\eps$ は任意なので $m^*(A) = 0$．
+\end{proof}
+
+\begin{example}[{$\QQ \cap [0,1]$ の外測度}]\label{ex:rationals-outer}
+$\QQ$ は可算集合であるから，
+$\QQ \cap [0,1] \subset \QQ$ の可算劣加法性と単調性より
+\[
+m^*(\QQ \cap [0,1]) = 0.
+\]
+一方 Jordan外測度は $m_J^*(\QQ \cap [0,1]) = 1$ であった（第2章）．
+Lebesgue外測度は
+「有理数の集合は $[0,1]$ の中で薄い」ことを正しく検出している．
+\end{example}
+
+\begin{example}[Cantor集合]\label{ex:cantor-outer}
+Cantor集合 $C$ を次のように構成する．
+\begin{itemize}
+\item $C_0 = [0,1]$．
+\item $C_1 = [0,\frac{1}{3}] \cup [\frac{2}{3},1]$：
+$C_0$ の中央 $\frac{1}{3}$ を除去．
+\item $C_n$：$C_{n-1}$ の各閉区間から中央 $\frac{1}{3}$ を除去．
+$2^n$ 個の閉区間で，各長さ $3^{-n}$．
+\item $C = \bigcap_{n=0}^{\infty} C_n$（Cantor集合）．
+\end{itemize}
+$C \subset C_n$ であり，
+$C_n$ は $2^n$ 個の長さ $3^{-n}$ の区間で覆えるから
+\[
+m^*(C) \le m^*(C_n) \le 2^n \cdot 3^{-n} = \left(\frac{2}{3}\right)^n.
+\]
+$n \to \infty$ で $(2/3)^n \to 0$ だから $m^*(C) = 0$．
+
+Cantor集合は\textbf{非可算}
+（3進展開により $[0,1]$ と同じ濃度をもつ）にもかかわらず
+外測度が $0$ である．
+可算集合でなくとも外測度 $0$ になりうることの顕著な例である．
+\end{example}
+
+\begin{example}[区間の外測度]\label{ex:interval-outer}
+任意の有界区間 $I \subset \RR$（開・閉・半開を問わず）の外測度は
+$m^*(I) = |I|$（長さ）に一致する．
+\end{example}
+\begin{proof}
+半開区間 $[a,b)$ については
+定理\ref{thm:outer-measure-rectangle}より
+$m^*([a,b)) = b - a$．
+
+閉区間：$[a,b) \subset [a,b] \subset [a,b+\eps)$ より
+$b - a \le m^*([a,b]) \le b - a + \eps$．
+$\eps \to 0$ で $m^*([a,b]) = b - a$．
+
+開区間も同様に
+$(a,b) \subset [a,b)$ と $[a-\eps,b) \subset$ を組み合わせて
+$m^*((a,b)) = b - a$．
+\end{proof}
+
+% ==================================================================
+\section{Jordan外測度との比較}\label{sec:jordan-lebesgue-outer}
+% ==================================================================
+
+第2章のJordan外測度と本章のLebesgue外測度の関係を
+まとめておく．
+
+\begin{theorem}\label{thm:jordan-lebesgue-outer}
+任意の $A \subset \RR^d$ に対して $m^*(A) \le m_J^*(A)$．
+\end{theorem}
+\begin{proof}
+$A$ を含む基本集合 $E$ は $A$ の（有限）可算被覆を与える．
+系\ref{cor:outer-measure-elementary}より
+$m^*(A) \le m^*(E) = m_J(E)$．
+$E$ について下限を取れば $m^*(A) \le m_J^*(A)$．
+\end{proof}
+
+\begin{example}\label{ex:strict-inequality}
+等号が成り立たない例は既にある：
+$m^*(\QQ \cap [0,1]) = 0 < 1 = m_J^*(\QQ \cap [0,1])$．
+一般に可算集合は常に $m^* = 0$ であるが，
+稠密であれば $m_J^* > 0$ を取りうる．
+\end{example}
+
+\begin{remark}
+一方，Jordan外測度が有限な集合については
+$m^*(A) \le m_J^*(A) < \infty$ であり，
+特に有界な基本集合については
+$m^*(E) = m_J^*(E) = m_J(E)$ が成り立つ（系\ref{cor:outer-measure-elementary}）．
+すなわち，Lebesgue外測度はJordan外測度の「改良版」であり，
+基本集合の上では一致しつつ，
+より広いクラスの集合に対して精密な値を与える．
+\end{remark}
+
+\begin{remark}[外測度の限界]\label{rem:outer-limitation}
+Lebesgue外測度 $m^*$ は $\calP(\RR^d)$ 全体で定義されるが，
+一般には\textbf{加法性}が成り立たない：
+互いに素な $A, B$ に対して
+$m^*(A \sqcup B) \le m^*(A) + m^*(B)$
+は成り立つ（劣加法性）が，逆向きの不等式
+$m^*(A \sqcup B) \ge m^*(A) + m^*(B)$
+は一般には成り立たない．
+（非可測集合の存在は第5章で示す．）
+
+補題\ref{lem:outer-additive-elementary}が示すように，
+一方が基本集合であれば加法性が成り立つ．
+次章以降では，加法性が回復する集合のクラス
+（Lebesgue可測集合）を特定する．
+\end{remark}

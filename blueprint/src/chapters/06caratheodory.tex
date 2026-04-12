@@ -1,0 +1,647 @@
+\setcounter{chapter}{5}
+\chapter{Carath\'eodory流の測度論}\label{chap:caratheodory}
+
+\paragraph{本章の目標}
+Carath\'eodory条件，$\sigma$-加法族の証明，
+一般の外測度と測度の構成
+
+第5章では，Lebesgue可測集合（$m_* = m^*$）の全体が
+$\sigma$-加法族を成し，Lebesgue測度が完全加法的であることを
+述べたが，$\sigma$-加法族であることの証明
+（特に可算和で閉じること）には技術的な困難が伴った．
+
+Carath\'eodory（1914）は，
+内測度を用いず\textbf{外測度のみ}から可測性を定義する
+画期的な方法を提案した：
+\[
+A \text{ がCarath\'eodory可測}
+\quad\overset{\text{def}}{\iff}\quad
+m^*(E) = m^*(E \cap A) + m^*(E \setminus A)
+\quad \forall E \subset \RR^d.
+\]
+この条件は $m_* = m^*$ より一見強いが，
+Lebesgue外測度に対しては両者が同値であることが示される．
+さらにCarath\'eodory条件からは
+$\sigma$-加法族と完全加法性が統一的に導かれるため，
+第5章の定理\ref{thm:lebesgue-main}の証明が完成する．
+
+後半では，この枠組みを一般化し，
+任意の「基本集合と有限加法測度」の組から出発して
+完全加法的測度を構成する方法（Carath\'eodory拡張）を紹介する．
+
+% ==================================================================
+\section{Carath\'eodory条件}\label{sec:caratheodory-condition}
+% ==================================================================
+
+\begin{definition}[Carath\'eodory条件]\label{def:caratheodory-condition}
+集合 $A \subset \RR^d$ が\textbf{Carath\'eodory条件}を満たすとは，
+任意の $E \subset \RR^d$ に対して
+\[
+m^*(E) = m^*(E \cap A) + m^*(E \setminus A)
+\]
+が成り立つことをいう．
+\end{definition}
+
+\begin{remark}\label{rem:caratheodory-intuition}
+可算劣加法性により
+$m^*(E) \le m^*(E \cap A) + m^*(E \setminus A)$
+は常に成り立つ．
+したがってCarath\'eodory条件は
+\[
+m^*(E) \ge m^*(E \cap A) + m^*(E \setminus A)
+\quad \forall E \subset \RR^d
+\]
+と同値である．
+
+直観的には，「$A$ がすべての集合 $E$ を
+$E \cap A$ と $E \setminus A$ に\textbf{加法的に}分割する」ことを要求している．
+第5章の条件 $m^*(A) + m^*(I \setminus A) = |I|$
+が特定の長方体 $I$ に対する分割のみを検査するのに対し，
+Carath\'eodory条件は\textbf{すべての}集合 $E$ で検査する．
+この「検査の網羅性」が $\sigma$-加法族の証明を可能にする．
+\end{remark}
+
+\begin{remark}
+Carath\'eodory条件は $m^*(E) = \infty$ の場合も含めて
+すべての $E$ に対して成り立つことを要求する．
+$m^*(E) = \infty$ のとき右辺の少なくとも一方も $\infty$ だから
+条件は自動的に満たされる．
+したがって実質的には $m^*(E) < \infty$ の場合を確認すればよい．
+\end{remark}
+
+% ==================================================================
+\section{Carath\'eodory可測集合は\texorpdfstring{$\sigma$}{σ}-加法族を成す}
+\label{sec:caratheodory-sigma}
+% ==================================================================
+
+\begin{theorem}[Carath\'eodory]\label{thm:caratheodory-sigma}
+Carath\'eodory条件を満たす集合の全体を
+$\calM^* \subset \calP(\RR^d)$ とする．
+\begin{enumerate}
+\item $\calM^*$ は $\sigma$-加法族である．
+\item $m^*$ の $\calM^*$ への制限は完全加法的測度である．
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\textbf{(1a) $\emptyset \in \calM^*$:}\quad
+$m^*(E \cap \emptyset) + m^*(E \setminus \emptyset)
+= m^*(\emptyset) + m^*(E)
+= 0 + m^*(E) = m^*(E)$．
+
+\textbf{(1b) 補集合で閉じる:}\quad
+$A \in \calM^*$ ならば
+$m^*(E \cap A) + m^*(E \setminus A) = m^*(E)$．
+$B = \RR^d \setminus A$ とおくと
+$E \cap B = E \setminus A$，$E \setminus B = E \cap A$ だから
+$m^*(E \cap B) + m^*(E \setminus B)
+= m^*(E \setminus A) + m^*(E \cap A) = m^*(E)$．
+よって $B \in \calM^*$．
+
+\textbf{(1c) 有限和で閉じる:}\quad
+$A, B \in \calM^*$ ならば $A \cup B \in \calM^*$ を示す．
+任意の $E \subset \RR^d$ に対して
+\begin{align*}
+m^*(E)
+&= m^*(E \cap A) + m^*(E \setminus A)
+&& (A \in \calM^*) \\
+&= m^*(E \cap A) + m^*((E \setminus A) \cap B) + m^*((E \setminus A) \setminus B)
+&& (B \in \calM^*)
+\end{align*}
+ここで $(E \setminus A) \setminus B = E \setminus (A \cup B)$．
+また
+\[
+(E \cap A) \cup ((E \setminus A) \cap B)
+= (E \cap A) \cup (E \cap A^c \cap B)
+= E \cap (A \cup B).
+\]
+可算劣加法性より
+\[
+m^*(E \cap (A \cup B))
+\le m^*(E \cap A) + m^*((E \setminus A) \cap B).
+\]
+したがって
+\[
+m^*(E) \ge m^*(E \cap (A \cup B)) + m^*(E \setminus (A \cup B)).
+\]
+逆の不等号は劣加法性から常に成り立つので
+$A \cup B \in \calM^*$．
+
+\textbf{(1d) 有限和での加法性:}\quad
+互いに素な $A, B \in \calM^*$ に対して
+$m^*(E \cap (A \sqcup B))
+= m^*(E \cap A) + m^*(E \cap B)$ を示す．
+$A \in \calM^*$ を
+集合 $E' := E \cap (A \sqcup B)$ に適用すると
+\[
+m^*(E \cap (A \sqcup B))
+= m^*(E' \cap A) + m^*(E' \setminus A)
+= m^*(E \cap A) + m^*(E \cap B).
+\]
+
+帰納的に，互いに素な $A_1,\ldots,A_N \in \calM^*$ に対して
+$B_N := \bigsqcup_{n=1}^N A_n \in \calM^*$ かつ
+\begin{equation}\label{eq:finite-additivity}
+m^*\!\left(E \cap B_N\right) = \sum_{n=1}^{N} m^*(E \cap A_n).
+\end{equation}
+
+\textbf{(1e) 可算和で閉じる（$\sigma$-加法族）:}\quad
+互いに素な $A_n \in \calM^*$（$n = 1, 2, \ldots$）を取り，
+$A := \bigsqcup_{n=1}^{\infty} A_n$ とする．
+
+$B_N = \bigsqcup_{n=1}^N A_n \in \calM^*$ だから
+\[
+m^*(E)
+= m^*(E \cap B_N) + m^*(E \setminus B_N)
+\ge m^*(E \cap B_N) + m^*(E \setminus A)
+\]
+（$E \setminus A \subset E \setminus B_N$ より）．
+
+\eqref{eq:finite-additivity}を用いて
+\[
+m^*(E) \ge \sum_{n=1}^{N} m^*(E \cap A_n) + m^*(E \setminus A).
+\]
+$N \to \infty$ とすると
+\begin{equation}\label{eq:count-lower}
+m^*(E) \ge \sum_{n=1}^{\infty} m^*(E \cap A_n) + m^*(E \setminus A).
+\end{equation}
+一方，可算劣加法性より
+\[
+m^*(E \cap A)
+= m^*\!\left(\bigcup_n (E \cap A_n)\right)
+\le \sum_{n=1}^{\infty} m^*(E \cap A_n).
+\]
+これと\eqref{eq:count-lower}を合わせると
+\[
+m^*(E) \ge m^*(E \cap A) + m^*(E \setminus A).
+\]
+逆は劣加法性から常に成り立つので $A \in \calM^*$．
+
+一般の（互いに素とは限らない）$A_n \in \calM^*$ に対しては，
+$A_1' := A_1$，
+$A_n' := A_n \setminus (A_1 \cup \cdots \cup A_{n-1})$
+とすれば $A_n' \in \calM^*$（(1b), (1c) より），
+$\{A_n'\}$ は互いに素で
+$\bigcup_n A_n = \bigsqcup_n A_n'$ だから
+$\bigcup_n A_n \in \calM^*$．
+
+\bigskip
+
+\textbf{(2) 完全加法性:}\quad
+$E = A$ を\eqref{eq:count-lower}に代入し，
+$A \setminus A = \emptyset$ を用いると
+\[
+m^*(A) \ge \sum_{n=1}^{\infty} m^*(A_n).
+\]
+逆は可算劣加法性 $m^*(A) \le \sum_n m^*(A_n)$ から従う．
+よって
+\[
+m^*(A) = m\!\left(\bigsqcup_{n=1}^{\infty} A_n\right)
+= \sum_{n=1}^{\infty} m(A_n). \qedhere
+\]
+\end{proof}
+
+\begin{remark}
+証明のポイントは (1e) にある．
+有限和 $B_N \in \calM^*$ でのCarath\'eodory条件を
+$A \setminus A = \emptyset$ から来る「余り」の評価と組み合わせ，
+$N \to \infty$ の極限を取る．
+この議論が成立するのは，
+Carath\'eodory条件が\emph{すべての} $E$ に対して
+加法性を要求するからである．
+$m_* = m^*$ という条件（特定の $I$ のみ）では
+この極限操作が直接は行えない．
+\end{remark}
+
+% ==================================================================
+\section{Lebesgue流の定義との同値性}\label{sec:caratheodory-equiv}
+% ==================================================================
+
+Carath\'eodory条件がLebesgue流の
+$m_*(A) = m^*(A)$ と同値であることを示す．
+
+\begin{theorem}\label{thm:caratheodory-equiv-lebesgue}
+有界集合 $A \subset \RR^d$ に対して次は同値である：
+\begin{enumerate}
+\item $A$ はCarath\'eodory条件を満たす
+（$m^*(E) = m^*(E \cap A) + m^*(E \setminus A)$，$\forall E$）
+\item $A$ はLebesgue可測である
+（$m_*(A) = m^*(A)$）
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\textbf{(1) $\Rightarrow$ (2):}\quad
+$A \subset I$（有界閉長方体）に対して
+$E = I$ を代入すると
+$|I| = m^*(I) = m^*(I \cap A) + m^*(I \setminus A)
+= m^*(A) + m^*(I \setminus A)$．
+よって $m_*(A) = |I| - m^*(I \setminus A) = m^*(A)$．
+
+\textbf{(2) $\Rightarrow$ (1):}\quad
+$A$ が Lebesgue可測とする．
+任意の $E \subset \RR^d$ に対して
+$m^*(E) \ge m^*(E \cap A) + m^*(E \setminus A)$
+を示す（逆は劣加法性で自明）．
+
+$m^*(E) = \infty$ なら自明．$m^*(E) < \infty$ とする．
+
+$\eps > 0$ を取り，$E$ の可算被覆 $\{Q_j\}$ を
+$\sum_j |Q_j| < m^*(E) + \eps$
+となるように取る．$G = \bigcup_j Q_j$ とおく．
+$A$ はCarath\'eodory可測集合の可算和・共通部分で表せることを利用する
+のではなく，直接示す．
+
+各 $Q_j$ に対して
+$Q_j = (Q_j \cap A) \cup (Q_j \setminus A)$ だから
+\begin{align*}
+m^*(E \cap A) + m^*(E \setminus A)
+&\le m^*(G \cap A) + m^*(G \setminus A) \\
+&\le \sum_j m^*(Q_j \cap A) + \sum_j m^*(Q_j \setminus A)
+\quad \text{（劣加法性）} \\
+&= \sum_j \bigl[m^*(Q_j \cap A) + m^*(Q_j \setminus A)\bigr].
+\end{align*}
+各項について $Q_j \supset (Q_j \cap A)$ かつ
+$Q_j \supset (Q_j \setminus A)$ であり，
+補題\ref{lem:cara-rectangle}（下記）より
+\[
+m^*(Q_j \cap A) + m^*(Q_j \setminus A) = |Q_j|.
+\]
+したがって
+$m^*(E \cap A) + m^*(E \setminus A) \le \sum_j |Q_j| < m^*(E) + \eps$．
+
+$\eps > 0$ は任意だったので
+$m^*(E \cap A) + m^*(E \setminus A) \le m^*(E)$．
+\end{proof}
+
+\begin{lemma}\label{lem:cara-rectangle}
+$A$ がLebesgue可測（$m_*(A) = m^*(A)$）ならば，
+任意の半開長方体 $Q$ に対して
+\[
+m^*(Q \cap A) + m^*(Q \setminus A) = |Q|.
+\]
+\end{lemma}
+\begin{proof}
+$Q \supset (Q \cap A)$ と $Q \supset (Q \setminus A)$ であり，
+$Q = (Q \cap A) \sqcup (Q \setminus A)$ だから
+劣加法性より $|Q| \le m^*(Q \cap A) + m^*(Q \setminus A)$．
+
+逆を示す．$I$ を $A$ と $Q$ の双方を含む有界閉長方体とする．
+$A$ の可測性より $m^*(A) + m^*(I \setminus A) = |I|$．
+
+$I = Q \sqcup (I \setminus Q)$（$I \setminus Q$ は基本集合）であるから，
+補題\ref{lem:outer-additive-elementary}（第3章）より
+\begin{align*}
+m^*(A) &\le m^*(Q \cap A) + m^*((I \setminus Q) \cap A), \\
+m^*(I \setminus A)
+&\le m^*(Q \setminus A) + m^*((I \setminus Q) \setminus A).
+\end{align*}
+左辺の和は $|I|$ であり，
+右辺第2項の和は
+$m^*((I \setminus Q) \cap A) + m^*((I \setminus Q) \setminus A)
+\ge m^*(I \setminus Q) = |I| - |Q|$
+（劣加法性の逆は使えないが，
+$I \setminus Q$ は基本集合だから
+補題\ref{lem:outer-additive-elementary}の精神で）．
+
+より直接的に：
+$I \setminus Q$ は基本集合で
+$(I \setminus Q) = ((I \setminus Q) \cap A) \sqcup ((I \setminus Q) \setminus A)$
+だから劣加法性より
+$|I| - |Q| = m^*(I \setminus Q)
+\le m^*((I \setminus Q) \cap A) + m^*((I \setminus Q) \setminus A)$．
+
+上の2つの不等式を足すと
+\[
+|I| = m^*(A) + m^*(I \setminus A)
+\le m^*(Q \cap A) + m^*(Q \setminus A) + (|I| - |Q|).
+\]
+すなわち $m^*(Q \cap A) + m^*(Q \setminus A) \ge |Q|$．
+
+逆の不等式は劣加法性で得られるから等号が成り立つ．
+\end{proof}
+
+\begin{corollary}[定理\ref{thm:lebesgue-main}の証明の完成]
+\label{cor:lebesgue-main-proof}
+定理\ref{thm:caratheodory-equiv-lebesgue}より，
+Lebesgue可測集合の全体は
+Carath\'eodory可測集合の全体 $\calM^*$ に一致する．
+定理\ref{thm:caratheodory-sigma}より
+$\calM^*$ は $\sigma$-加法族であり，$m = m^*|_{\calM^*}$ は完全加法的測度である．
+これにより定理\ref{thm:lebesgue-main}が証明された．
+\end{corollary}
+
+\begin{remark}
+Carath\'eodory条件の「すべての $E$ で検査する」という
+一見過剰な要求が，$\sigma$-加法族の証明
+（特に可算和での閉包）を可能にした．
+$m_* = m^*$ という条件は直観的だが
+証明の道具としては不十分であり，
+Carath\'eodory条件への言い換えが本質的に必要であった．
+\end{remark}
+
+% ==================================================================
+\section{Lebesgue可測集合の追加の性質}\label{sec:additional-properties}
+% ==================================================================
+
+$\sigma$-加法族と完全加法性が確立されたことで，
+さらに多くの集合がLebesgue可測であることが示される．
+
+\begin{theorem}[開集合・閉集合の可測性]\label{thm:open-closed-measurable}
+$\RR^d$ の開集合と閉集合はすべてLebesgue可測である．
+\end{theorem}
+\begin{proof}
+まず開集合 $G \subset \RR^d$ がCarath\'eodory条件を満たすことを示す．
+
+任意の $E \subset \RR^d$（$m^*(E) < \infty$）と $\eps > 0$ に対し，
+$E$ の可算被覆 $\{Q_j\}$ を
+$\sum_j |Q_j| < m^*(E) + \eps$ となるように取る．
+各 $Q_j$ を十分小さく分割して，
+各小長方体が $G$ に含まれるか $G$ と交わらないかの
+いずれかになるようにできる（$G$ が開集合であることを使う）．
+
+より正確には：
+$G$ は $\RR^d$ の開集合だから，任意の $x \in G$ の周りに
+$x$ を含む十分小さな半開長方体で $G$ に含まれるものが取れる．
+したがって $G$ は半開長方体の可算和で書ける：
+$G = \bigcup_{k=1}^{\infty} P_k$（$P_k$ は互いに素な半開長方体）．
+
+各 $P_k$ は半開長方体だから基本集合であり，
+系\ref{cor:lebesgue-main-proof}と定理\ref{thm:jordan-implies-measurable}より
+Lebesgue可測である．
+$G = \bigcup_k P_k$ は可測集合の可算和だから
+$G \in \calM^*$（$\sigma$-加法族）．
+
+閉集合 $F$ は開集合の補集合だから $F \in \calM^*$．
+\end{proof}
+
+\begin{definition}[Borel集合族]\label{def:borel-sigma}
+$\RR^d$ のすべての開集合を含む最小の $\sigma$-加法族を
+\textbf{Borel $\sigma$-加法族}と呼び，$\calB(\RR^d)$ で表す．
+$\calB(\RR^d)$ の元を\textbf{Borel集合}という．
+\end{definition}
+
+\begin{corollary}\label{cor:borel-measurable}
+Borel集合はすべてLebesgue可測である：
+$\calB(\RR^d) \subset \calM^*$．
+\end{corollary}
+\begin{proof}
+$\calM^*$ は $\sigma$-加法族であり，
+すべての開集合を含む（定理\ref{thm:open-closed-measurable}）．
+$\calB(\RR^d)$ はそのような $\sigma$-加法族の中で最小だから
+$\calB(\RR^d) \subset \calM^*$．
+\end{proof}
+
+\begin{remark}
+一般に $\calB(\RR^d) \subsetneq \calM^*$ である
+（Lebesgue可測だがBorel集合でない集合が存在する）．
+$\calM^*$ がBorel $\sigma$-加法族より真に大きいのは，
+Lebesgue測度の\textbf{完備性}による：
+零集合の部分集合は常にLebesgue可測であるが，
+Borel集合とは限らない．
+\end{remark}
+
+\begin{theorem}[測度の連続性]\label{thm:measure-continuity}
+\begin{enumerate}
+\item （下からの連続性）$A_1 \subset A_2 \subset \cdots$
+（単調増大列），各 $A_n$ が可測ならば
+$\bigcup_n A_n$ は可測で
+$m\!\left(\bigcup_n A_n\right) = \lim_{n \to \infty} m(A_n)$．
+\item （上からの連続性）$A_1 \supset A_2 \supset \cdots$
+（単調減少列），各 $A_n$ が可測で $m(A_1) < \infty$ ならば
+$\bigcap_n A_n$ は可測で
+$m\!\left(\bigcap_n A_n\right) = \lim_{n \to \infty} m(A_n)$．
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\textbf{(1)}\quad
+$B_1 := A_1$，$B_n := A_n \setminus A_{n-1}$（$n \ge 2$）
+とすれば $\{B_n\}$ は互いに素で
+$\bigcup_n A_n = \bigsqcup_n B_n$．
+完全加法性より
+$m(\bigcup_n A_n) = \sum_n m(B_n)
+= \lim_{N \to \infty} \sum_{n=1}^N m(B_n)
+= \lim_{N \to \infty} m(A_N)$．
+
+\textbf{(2)}\quad
+$C_n := A_1 \setminus A_n$ は単調増大列で
+$\bigcup_n C_n = A_1 \setminus \bigcap_n A_n$．
+(1) より
+$m(A_1 \setminus \bigcap_n A_n) = \lim_n m(A_1 \setminus A_n)
+= m(A_1) - \lim_n m(A_n)$．
+$m(A_1) < \infty$ だから
+$m(\bigcap_n A_n) = \lim_n m(A_n)$．
+\end{proof}
+
+% ==================================================================
+\section{一般の外測度と測度の構成}\label{sec:general-outer-measure}
+% ==================================================================
+
+ここまでの議論はLebesgue外測度 $m^*$ に特化していたが，
+Carath\'eodory の方法はもっと一般的な枠組みで機能する．
+以下では，基本集合と有限加法測度の組から
+完全加法的測度を構成する一般論を紹介する．
+
+\begin{definition}[外測度（一般）]\label{def:general-outer-measure}
+集合 $X$ 上の関数 $\mu^* : \calP(X) \to [0,\infty]$ が
+\textbf{外測度}であるとは次の3条件を満たすことをいう：
+\begin{enumerate}
+\item $\mu^*(\emptyset) = 0$．
+\item （単調性）$A \subset B \Rightarrow \mu^*(A) \le \mu^*(B)$．
+\item （可算劣加法性）
+$\mu^*(\bigcup_n A_n) \le \sum_n \mu^*(A_n)$．
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+Lebesgue外測度 $m^*$ は
+$X = \RR^d$ 上の外測度の例である
+（定理\ref{thm:lebesgue-outer-properties}）．
+\end{remark}
+
+\begin{theorem}[Carath\'eodoryの定理（一般版）]\label{thm:caratheodory-general}
+$\mu^*$ を集合 $X$ 上の外測度とする．
+\[
+\calM_{\mu^*} :=
+\{A \subset X : \mu^*(E) = \mu^*(E \cap A) + \mu^*(E \setminus A),\ \forall E \subset X\}
+\]
+とおくと
+\begin{enumerate}
+\item $\calM_{\mu^*}$ は $\sigma$-加法族である．
+\item $\mu := \mu^*|_{\calM_{\mu^*}}$ は完全加法的測度である．
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+定理\ref{thm:caratheodory-sigma}の証明は
+$m^*$ の具体的な構造（長方体の体積）を一切使わず，
+外測度の3つの公理（非負性，単調性，可算劣加法性）のみから
+行われていた．したがって同じ証明が任意の外測度 $\mu^*$ に適用できる．
+\end{proof}
+
+% ==================================================================
+\section{前測度からの測度の構成}\label{sec:premeasure}
+% ==================================================================
+
+Carath\'eodoryの定理を応用するには，
+まず外測度を構成する必要がある．
+典型的な構成法は「前測度からの拡張」である．
+
+\begin{definition}[前測度]\label{def:premeasure}
+$X$ 上の有限加法族 $\calA \subset \calP(X)$ 上の
+関数 $\mu_0 : \calA \to [0,\infty]$ が\textbf{前測度}であるとは
+次の2条件を満たすことをいう：
+\begin{enumerate}
+\item $\mu_0(\emptyset) = 0$．
+\item （$\calA$ 上の完全加法性）
+$A_n \in \calA$（互いに素）で
+$\bigsqcup_n A_n \in \calA$ ならば
+$\mu_0(\bigsqcup_n A_n) = \sum_n \mu_0(A_n)$．
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+前測度は $\calA$ 上では完全加法的であるが，
+$\calA$ 自体は有限加法族であって $\sigma$-加法族とは限らない．
+条件 (2) の「$\bigsqcup_n A_n \in \calA$ ならば」という
+限定が重要で，可算和が $\calA$ に属するときのみ等号を要求する．
+\end{remark}
+
+\begin{definition}[誘導外測度]\label{def:induced-outer-measure}
+前測度 $(\calA, \mu_0)$ から誘導される外測度を
+\[
+\mu^*(A)
+:= \inf\!\left\{
+\sum_{n=1}^{\infty} \mu_0(A_n)
+: A_n \in \calA,\ A \subset \bigcup_{n=1}^{\infty} A_n
+\right\}
+\]
+で定める．$A$ を覆う列が存在しなければ $\mu^*(A) := \infty$．
+\end{definition}
+
+\begin{proposition}\label{prop:induced-is-outer}
+$\mu^*$ は $X$ 上の外測度であり，
+$\calA$ 上では $\mu_0$ に一致する：
+$\mu^*(A) = \mu_0(A)$（$A \in \calA$）．
+\end{proposition}
+\begin{proof}
+$\mu^*(\emptyset) = 0$，単調性，可算劣加法性の検証は
+Lebesgue外測度の場合（定理\ref{thm:lebesgue-outer-properties}）と
+全く同様である．
+
+$A \in \calA$ に対して
+$\mu^*(A) \le \mu_0(A)$ は $A$ 自身を被覆に使えばよい．
+逆の $\mu^*(A) \ge \mu_0(A)$ は前測度の完全加法性から導かれる
+（Lebesgue外測度に対する定理\ref{thm:outer-measure-rectangle}の
+一般化に相当する）．
+\end{proof}
+
+\begin{theorem}[Carath\'eodory拡張定理]\label{thm:caratheodory-extension}
+$\calA$ を $X$ 上の有限加法族，
+$\mu_0 : \calA \to [0, \infty]$ を前測度とする．
+\begin{enumerate}
+\item 誘導外測度 $\mu^*$ にCarath\'eodoryの定理を適用して得られる
+測度空間 $(X, \calM_{\mu^*}, \mu)$ は
+$\calA \subset \calM_{\mu^*}$
+かつ $\mu|_{\calA} = \mu_0$ を満たす．
+\item （$\sigma$-加法族への拡張）
+$\sigma(\calA)$（$\calA$ を含む最小の $\sigma$-加法族）に対して
+$\sigma(\calA) \subset \calM_{\mu^*}$
+だから $\mu|_{\sigma(\calA)}$ は完全加法的測度である．
+\item （一意性）$\mu_0$ が $\sigma$-有限
+（$X = \bigcup_n A_n$，$A_n \in \calA$，$\mu_0(A_n) < \infty$）
+ならば，$\sigma(\calA)$ 上の拡張は一意である：
+$\sigma(\calA)$ 上の完全加法的測度で $\calA$ 上 $\mu_0$ に一致するものは
+$\mu|_{\sigma(\calA)}$ に限る．
+\end{enumerate}
+\end{theorem}
+\begin{proof}[証明の概略]
+(1) $A \in \calA$ がCarath\'eodory条件を満たすことは，
+補題\ref{lem:outer-additive-elementary}の証明と同様に，
+被覆を $A$ と $A^c$ に分割する議論で示される．
+
+(2) $\calM_{\mu^*}$ は $\sigma$-加法族であり $\calA \subset \calM_{\mu^*}$ だから，
+$\sigma(\calA) \subset \calM_{\mu^*}$．
+
+(3) 一意性は
+「2つの有限測度が生成系で一致すれば $\sigma$-加法族上でも一致する」
+（Dynkinの $\pi$-$\lambda$ 定理）から従う．
+$\sigma$-有限性は有限測度の場合に帰着するために使う．
+\end{proof}
+
+% ==================================================================
+\section{Lebesgue測度のCarath\'eodory構成}\label{sec:lebesgue-caratheodory}
+% ==================================================================
+
+一般論をLebesgue測度に適用する．
+
+\begin{itemize}
+\item $X = \RR^d$．
+\item $\calA$ = $\RR^d$ の基本集合の全体
+（有限個の互いに素な半開長方体の合併）．
+これは第2章で示したように有限加法族である．
+\item $\mu_0 = m_J$：基本集合の体積（Jordan測度）．
+\end{itemize}
+
+第2章で $m_J$ は有限加法的であることを示した．
+$m_J$ が前測度（$\calA$ 上で完全加法的）であることは次のように確かめられる：
+
+\begin{proposition}\label{prop:jordan-premeasure}
+基本集合の体積 $m_J : \calA \to [0,\infty)$ は前測度である．
+\end{proposition}
+\begin{proof}
+互いに素な基本集合 $E_n \in \calA$ で
+$E := \bigsqcup_{n=1}^{\infty} E_n \in \calA$（有限加法族の元）
+とする．$E \in \calA$ だから $E$ は有限個の半開長方体の合併であり
+$m_J(E)$ は有限値を取る．
+
+有限加法性より $m_J(E) \ge \sum_{n=1}^N m_J(E_n)$（$\forall N$），
+したがって $m_J(E) \ge \sum_{n=1}^{\infty} m_J(E_n)$．
+
+逆に $E = \bigsqcup_n E_n$ で
+各 $E_n$ は基本集合の列だから，
+$E_n$ は $E$ の可算被覆を与える．
+第3章の議論（定理\ref{thm:outer-measure-rectangle}のHeine--Borel論法）
+と同様にして
+$m_J(E) \le \sum_n m_J(E_n)$ が示される．
+\end{proof}
+
+Carath\'eodory拡張定理を適用すると，
+誘導外測度 $\mu^*$ は $m^*$（Lebesgue外測度）に一致し，
+Carath\'eodory可測集合の全体 $\calM_{\mu^*}$ 上の測度は
+Lebesgue測度 $m$ に一致する．
+$\sigma(\calA)$ はBorel $\sigma$-加法族 $\calB(\RR^d)$ を含み，
+$\calB(\RR^d) \subset \calM_{\mu^*}$
+が再確認される．
+
+このようにLebesgue測度は
+「基本集合と体積」という素朴な出発点から，
+Carath\'eodory拡張によって系統的に構成される．
+
+% ==================================================================
+\section{まとめ}\label{sec:caratheodory-summary}
+% ==================================================================
+
+本章の成果を整理する．
+
+\begin{enumerate}
+\item \textbf{Carath\'eodory条件}は
+外測度のみから可測性を定義する方法であり，
+$\sigma$-加法族と完全加法性の証明を統一的に与える．
+
+\item $\RR^d$ のLebesgue外測度に対して，
+\textbf{Carath\'eodory条件 $\iff$ $m_* = m^*$}
+が成り立つ（定理\ref{thm:caratheodory-equiv-lebesgue}）．
+したがって第5章のLebesgue可測集合は
+Carath\'eodory可測集合に一致する．
+
+\item Carath\'eodoryの方法は
+任意の外測度 $\mu^*$ に対して $\sigma$-加法族と測度を構成する
+一般的な枠組みを提供する（定理\ref{thm:caratheodory-general}）．
+
+\item \textbf{前測度 $\to$ 誘導外測度 $\to$ Carath\'eodory構成}
+のパイプラインにより，
+「基本集合と有限加法測度」から出発して
+完全加法的測度を系統的に構成できる
+（定理\ref{thm:caratheodory-extension}）．
+
+\item Lebesgue測度はこのパイプラインの特殊な場合であり，
+基本集合の体積 $m_J$（前測度）から構成される．
+\end{enumerate}

@@ -1,0 +1,288 @@
+\setcounter{chapter}{3}
+\chapter{Lebesgue内測度}\label{chap:lebesgue-inner}
+
+\paragraph{本章の目標}
+Lebesgue内測度，4つの測度の大小関係
+
+前章ではLebesgue外測度 $m^*$ を定義し，
+あらゆる集合に対して「外からの体積評価」を与えた．
+しかし $m^*$ 単体では加法性が成り立たず，
+測度としては不十分であった．
+
+Riemann積分やJordan測度では，
+上からの評価（上和，外測度）と
+下からの評価（下和，内測度）が一致するとき
+「積分可能」あるいは「可測」と定義した．
+Lebesgue理論でも同じ戦略を取る：
+外測度 $m^*(A)$ と内測度 $m_*(A)$ を比較し，
+両者が一致する集合を「Lebesgue可測」と定義する．
+
+本章ではLebesgue内測度を定義し，
+外測度との関係およびJordan内測度との関係を調べる．
+
+% ==================================================================
+\section{Lebesgue内測度の定義}\label{sec:lebesgue-inner-def}
+% ==================================================================
+
+\begin{definition}[Lebesgue内測度]\label{def:lebesgue-inner-measure}
+有界集合 $A \subset \RR^d$ に対し，
+$A$ を含む有界閉長方体 $I \supset A$ を取り，
+\[
+m_*(A) := |I| - m^*(I \setminus A)
+\]
+を $A$ の\textbf{Lebesgue内測度}と定める．
+\end{definition}
+
+この定義が $I$ の取り方に依らないことを確かめる．
+
+\begin{proposition}[well-definedness]\label{prop:inner-well-defined}
+上の定義は $I$ の選び方に依存しない．
+\end{proposition}
+\begin{proof}
+$A \subset I \subset J$ を満たす
+有界閉長方体 $I, J$ を取る．
+$J \setminus A = (J \setminus I) \sqcup (I \setminus A)$
+であり，$J \setminus I$ は基本集合だから
+補題\ref{lem:outer-additive-elementary}（第3章）より
+\[
+m^*(J \setminus A)
+= m^*(J \setminus I) + m^*(I \setminus A)
+= (|J| - |I|) + m^*(I \setminus A).
+\]
+したがって
+\[
+|J| - m^*(J \setminus A)
+= |J| - (|J| - |I|) - m^*(I \setminus A)
+= |I| - m^*(I \setminus A).
+\]
+すなわち $I$ を $J$ に取り替えても値は変わらない．
+任意の二つの長方体 $I_1, I_2 \supset A$ に対しては，
+共通の長方体 $J \supset I_1 \cup I_2$ を取って
+$I_1, I_2$ の両方について上の議論を適用すればよい．
+\end{proof}
+
+\begin{remark}
+Jordan内測度
+$m_{J,*}(A) = \sup\{m_J(E) : E \subset A,\ E \text{ は基本集合}\}$
+が「$A$ の中に入る基本集合の体積の上限」であったのに対し，
+Lebesgue内測度は「$I$ の体積から $A$ の補集合の外測度を引いたもの」である．
+表現は異なるが，
+いずれも「$A$ の内側からの体積評価」を与えるという動機は共通している．
+\end{remark}
+
+\begin{remark}[非有界集合への拡張]\label{rem:inner-unbounded}
+非有界集合 $A \subset \RR^d$ に対しては
+\[
+m_*(A) := \sup\{m_*(A \cap I) : I \text{ は有界閉長方体}\}
+\]
+と定義すれば，Lebesgue内測度を $\calP(\RR^d)$ 全体に拡張できる．
+以下では主に有界集合を扱う．
+\end{remark}
+
+% ==================================================================
+\section{基本性質}\label{sec:lebesgue-inner-prop}
+% ==================================================================
+
+\begin{theorem}[Lebesgue内測度の性質]\label{thm:lebesgue-inner-properties}
+有界集合 $A, B \subset \RR^d$ に対して次が成り立つ．
+\begin{enumerate}
+\item （非負性）$m_*(A) \ge 0$．$m_*(\emptyset) = 0$．
+\item （内・外の関係）$m_*(A) \le m^*(A)$．
+\item （単調性）$A \subset B \Rightarrow m_*(A) \le m_*(B)$．
+\item （補集合との関係）$A \subset I$（有界閉長方体）ならば
+$m_*(A) + m^*(I \setminus A) = |I|$．
+\item （平行移動不変性）$m_*(A + c) = m_*(A)$．
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+$A$ を含む有界閉長方体 $I$ を固定する．
+
+\textbf{(1)}\quad
+$m^*(I \setminus A) \le m^*(I) = |I|$ だから
+$m_*(A) = |I| - m^*(I \setminus A) \ge 0$．
+$m_*(\emptyset) = |I| - m^*(I) = 0$．
+
+\textbf{(2)}\quad
+$I = A \sqcup (I \setminus A)$ であり，
+可算劣加法性から
+$|I| = m^*(I) \le m^*(A) + m^*(I \setminus A)$．
+したがって
+$m_*(A) = |I| - m^*(I \setminus A) \le m^*(A)$．
+
+\textbf{(3)}\quad
+$A \subset B$ ならば $I \setminus B \subset I \setminus A$，
+よって $m^*(I \setminus B) \le m^*(I \setminus A)$ であり
+$m_*(A) = |I| - m^*(I \setminus A) \le |I| - m^*(I \setminus B) = m_*(B)$．
+
+\textbf{(4)}\quad 定義そのものである．
+
+\textbf{(5)}\quad
+$m^*$ の平行移動不変性から
+$m^*((I+c) \setminus (A+c)) = m^*(I \setminus A)$，
+$|I + c| = |I|$ であるから
+$m_*(A+c) = |I+c| - m^*((I+c) \setminus (A+c))
+= |I| - m^*(I \setminus A) = m_*(A)$．
+\end{proof}
+
+\begin{remark}
+性質 (4) は Lebesgue内測度の定義を言い換えたものであるが，
+測度論において本質的な役割を果たす：
+集合 $A$ が可測であることの条件
+「$m_*(A) = m^*(A)$」は，(4) により
+「$m^*(A) + m^*(I \setminus A) = |I|$」と同値になる．
+つまり $A$ とその補集合 $I \setminus A$ への分割で
+外測度の加法性が成り立つことが可測性の本質である．
+\end{remark}
+
+\begin{theorem}[長方体・基本集合の内測度]\label{thm:inner-elementary}
+\begin{enumerate}
+\item 半開長方体 $Q$ に対して $m_*(Q) = |Q|$．
+\item 基本集合 $E$ に対して $m_*(E) = m_J(E)$．
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+$I \supset E$ を有界閉長方体とする．
+$I \setminus E$ は基本集合であり，
+系\ref{cor:outer-measure-elementary}より
+$m^*(I \setminus E) = m_J(I \setminus E) = |I| - m_J(E)$．
+したがって
+$m_*(E) = |I| - m^*(I \setminus E) = m_J(E)$．
+半開長方体は基本集合の特別な場合である．
+\end{proof}
+
+% ==================================================================
+\section{具体例}\label{sec:lebesgue-inner-examples}
+% ==================================================================
+
+\begin{example}[{$\QQ \cap [0,1]$ の内測度}]\label{ex:rationals-inner}
+$I = [0,1]$ とする．
+$I \setminus (\QQ \cap [0,1])$
+は $[0,1]$ 内の無理数全体であり，
+$\QQ \cap [0,1]$ は可算だから
+$m^*(\QQ \cap [0,1]) = 0$（例\ref{ex:rationals-outer}）．
+可算劣加法性より
+\[
+1 = m^*([0,1])
+\le m^*(\QQ \cap [0,1]) + m^*([0,1] \setminus \QQ)
+= 0 + m^*([0,1] \setminus \QQ),
+\]
+かつ $m^*([0,1] \setminus \QQ) \le m^*([0,1]) = 1$ だから
+$m^*([0,1] \setminus \QQ) = 1$．
+
+したがって
+\[
+m_*(\QQ \cap [0,1])
+= |[0,1]| - m^*([0,1] \setminus \QQ)
+= 1 - 1 = 0.
+\]
+
+外測度 $m^*(\QQ \cap [0,1]) = 0$ と一致するから，
+$\QQ \cap [0,1]$ はLebesgue可測であり，
+そのLebesgue測度は $0$ である（第5章で正式に定義する）．
+\end{example}
+
+\begin{example}[Cantor集合の内測度]\label{ex:cantor-inner}
+Cantor集合 $C$ に対して
+$m^*(C) = 0$（例\ref{ex:cantor-outer}）だから
+$0 \le m_*(C) \le m^*(C) = 0$
+より $m_*(C) = 0$．
+したがって $C$ もLebesgue可測で測度 $0$ であることが予想される
+（第5章で確認する）．
+\end{example}
+
+\begin{example}[区間の内測度]\label{ex:interval-inner}
+有界区間 $I = [a,b]$ に対して
+$m_*(I) = m^*(I) = b - a$．
+実際，$m_*(I) \le m^*(I) = b-a$ であり，
+$J = [a,b]$ を取れば
+$m_*(I) = |J| - m^*(J \setminus I) = (b-a) - 0 = b-a$．
+\end{example}
+
+\begin{example}[Jordan非可測だがLebesgue可測な集合]\label{ex:jordan-no-lebesgue-yes}
+$\QQ \cap [0,1]$ は
+Jordan内測度 $m_{J,*}(\QQ \cap [0,1]) = 0$ と
+Jordan外測度 $m_J^*(\QQ \cap [0,1]) = 1$ が一致しないので
+Jordan非可測であった．
+しかし上で見たように
+$m_*(\QQ \cap [0,1]) = m^*(\QQ \cap [0,1]) = 0$
+だからLebesgue可測である．
+Lebesgue理論はJordan理論より厳密に広いクラスの集合を扱える．
+\end{example}
+
+% ==================================================================
+\section{4つの測度の大小関係}\label{sec:four-measures}
+% ==================================================================
+
+Jordan内測度・Lebesgue内測度・Lebesgue外測度・Jordan外測度の
+間には，次の大小関係がある．
+
+\begin{theorem}[4つの測度の大小関係]\label{thm:four-measures}
+有界集合 $A \subset \RR^d$ に対して
+\[
+m_{J,*}(A) \le m_*(A) \le m^*(A) \le m_J^*(A).
+\]
+\end{theorem}
+\begin{proof}
+$m^*(A) \le m_J^*(A)$ は定理\ref{thm:jordan-lebesgue-outer}で示した．
+$m_*(A) \le m^*(A)$ は定理\ref{thm:lebesgue-inner-properties}\,(2) で示した．
+$m_{J,*}(A) \le m_*(A)$ を示す．
+
+$I \supset A$ を有界閉長方体，
+$E \subset A$ を任意の基本集合とする．
+$I \setminus A \subset I \setminus E$ であり
+$I \setminus E$ は基本集合だから
+\[
+m^*(I \setminus A)
+\le m^*(I \setminus E)
+= m_J(I \setminus E)
+= |I| - m_J(E).
+\]
+したがって
+\[
+m_*(A) = |I| - m^*(I \setminus A)
+\ge |I| - (|I| - m_J(E))
+= m_J(E).
+\]
+$E \subset A$ なる基本集合 $E$ について上限を取れば
+$m_*(A) \ge m_{J,*}(A)$．
+\end{proof}
+
+\begin{corollary}\label{cor:jordan-implies-lebesgue}
+$A$ がJordan可測（$m_{J,*}(A) = m_J^*(A)$）ならば，
+$A$ はLebesgue可測（$m_*(A) = m^*(A)$）であり，
+$m(A) = m_J(A)$．
+\end{corollary}
+\begin{proof}
+$m_{J,*}(A) = m_J^*(A) =: c$ とすれば
+$c \le m_*(A) \le m^*(A) \le c$
+だから $m_*(A) = m^*(A) = c = m_J(A)$．
+\end{proof}
+
+\begin{remark}[解釈]
+4つの測度の大小関係
+\[
+m_{J,*}(A) \le m_*(A) \le m^*(A) \le m_J^*(A)
+\]
+は，次のように解釈できる：
+\begin{itemize}
+\item 内測度は「内側からの評価」，外測度は「外側からの評価」であり，
+常に内 $\le$ 外である．
+\item Lebesgue版は可算被覆を用いるため，Jordan版より精密な評価を与える：
+外測度は小さく（上からの評価が改善），
+内測度は大きくなる（下からの評価が改善）．
+\item Jordan可測ならば4つの値がすべて一致する．
+\item 「Jordan可測でないがLebesgue可測」な集合
+（例：$\QQ \cap [0,1]$）では，
+中央の2つ（Lebesgue内外）は一致するが，
+外側の2つ（Jordan内外）は一致しない．
+\end{itemize}
+
+\begin{center}
+\begin{tabular}{l|cccc}
+& $m_{J,*}$ & $m_*$ & $m^*$ & $m_J^*$ \\ \hline
+$[0,1]$            & 1 & 1 & 1 & 1 \\
+$\QQ \cap [0,1]$   & 0 & 0 & 0 & 1 \\
+Cantor集合 $C$      & 0 & 0 & 0 & 0
+\end{tabular}
+\end{center}
+\end{remark}
