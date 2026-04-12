@@ -1,0 +1,169 @@
+\chapter{Lebesgue内測度}
+
+\paragraph{本章の目標}
+Lebesgue外測度を内側から見る量としてLebesgue内測度を導入し，
+\[
+\text{外測度}=\text{内測度}
+\]
+というLebesgue流の可測性を定式化する．
+ただし，内測度は補助的な概念であり，
+本格的な抽象理論では外測度の方が主役になることを後に説明する．
+
+\section{動機づけ}
+
+外測度 $\lambda_d^*(A)$ は，
+集合 $A$ を外側から可算個の区間で覆うために必要な最小コストであった．
+これは「上から見た面積」である．
+しかし，本当に面積を表しているなら，
+集合を内側から近似したときにも同じ値が出てほしい．
+
+$\RR^d$ で内側近似に最も適しているのはコンパクト集合である．
+コンパクト集合は「閉じていて有界な，逃げ場のない集合」であり，
+実際の図形を有限の情報で近似する際に扱いやすい．
+そこで，$A$ に含まれるコンパクト集合の外測度をできるだけ大きくしたものを
+内測度と呼ぶ．
+
+\section{定義}
+
+\begin{definition}[Lebesgue内測度]
+集合 $A \subset \RR^d$ に対し，Lebesgue内測度 $\lambda_{d,*}(A)$ を
+\[
+\lambda_{d,*}(A)
+:=
+\sup\{\lambda_d^*(K) \mid K \subset A,\ K \text{ はコンパクト}\}
+\]
+で定める．
+\end{definition}
+
+\begin{remark}
+この定義は，$\RR^d$ の位相，すなわち開集合・閉集合・コンパクト集合という概念を用いている．
+したがって，内測度は外測度よりも幾何学的である一方，
+抽象的な集合論だけでは定義できない．
+この点が後でCarathéodory流へ移る理由の1つになる．
+\end{remark}
+
+\begin{definition}[Lebesgue可測集合の第1定義]
+集合 $A \subset \RR^d$ がLebesgue可測であるとは
+\[
+\lambda_d^*(A)=\lambda_{d,*}(A)
+\]
+が成り立つことをいう．
+\end{definition}
+
+\section{基本性質}
+
+\begin{proposition}
+任意の $A,B \subset \RR^d$ に対して次が成り立つ．
+\begin{enumerate}
+    \item $0 \le \lambda_{d,*}(A) \le \lambda_d^*(A)$
+    \item $A \subset B$ ならば $\lambda_{d,*}(A) \le \lambda_{d,*}(B)$
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}
+    \item コンパクト集合 $K \subset A$ に対して，外測度の単調性より
+    \[
+    \lambda_d^*(K) \le \lambda_d^*(A)
+    \]
+    である．
+    左辺について上限を取れば
+    \[
+    \lambda_{d,*}(A) \le \lambda_d^*(A)
+    \]
+    を得る．
+    また外測度は常に非負なので，その上限である $\lambda_{d,*}(A)$ も非負である．
+
+    \item $A \subset B$ とする．
+    $K \subset A$ なる任意のコンパクト集合は，そのまま $K \subset B$ も満たす．
+    したがって，$A$ に対して取る上限は $B$ に対して取る上限以下である．
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}[コンパクト集合は可測]
+コンパクト集合 $K \subset \RR^d$ はLebesgue可測であり，
+\[
+\lambda_{d,*}(K)=\lambda_d^*(K)
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+$K$ 自身がコンパクトだから，
+内測度の上限を取る集合の中に $K$ そのものが含まれている．
+したがって
+\[
+\lambda_{d,*}(K) \ge \lambda_d^*(K)
+\]
+である．
+逆向きの不等式は前命題から従う．
+\end{proof}
+
+\begin{corollary}[外測度零集合は可測]
+$\lambda_d^*(A)=0$ ならば $A$ はLebesgue可測であり，
+\[
+\lambda_{d,*}(A)=0
+\]
+である．
+\end{corollary}
+\begin{proof}
+前命題より
+\[
+0 \le \lambda_{d,*}(A) \le \lambda_d^*(A)=0
+\]
+だからである．
+\end{proof}
+
+\section{具体例}
+
+\begin{example}
+\begin{enumerate}
+    \item 任意のコンパクト集合はLebesgue可測である
+    \item 任意の可算集合はLebesgue可測で，測度 $0$ をもつ
+    \item 特に
+    \[
+    \QQ \cap [0,1]
+    \]
+    はLebesgue可測で，しかも長さ $0$ である
+\end{enumerate}
+\end{example}
+
+\begin{remark}
+第2章では
+\[
+\QQ \cap [0,1]
+\]
+はJordan可測でなかった．
+ところがLebesgue流では，
+第3章で外測度が $0$ だと分かり，
+この章でただちに可測だと結論できる．
+これは可算被覆が許されることの直接の効果である．
+\end{remark}
+
+\section{解釈}
+
+Lebesgue内測度 $\lambda_{d,*}(A)$ は，
+「$A$ の中に入るコンパクト集合のうち，どこまで大きな面積を確保できるか」
+を表している．
+したがって
+\[
+\lambda_d^*(A)=\lambda_{d,*}(A)
+\]
+とは，
+外から見た大きさと内から見た大きさが一致して，
+その集合の面積がぶれないことを意味している．
+
+ただし，この定義はまだ補助的なものである．
+理由は2つある．
+\begin{enumerate}
+    \item コンパクト集合という位相的概念に依存している
+    \item この定義だけから可測集合全体の構造を調べるのは難しい
+\end{enumerate}
+第5章では，Lebesgue測度が実際にどのような性質をもつか，
+特に正則性
+\[
+\lambda_d(A)
+=
+\sup\{\lambda_d(K)\mid K \subset A,\ K \text{ compact}\}
+\]
+がどのように内測度と結びつくかを見る．
+そして第6章では，内測度を使わずに測度を構成できる
+Carathéodory流の定義へ進む．

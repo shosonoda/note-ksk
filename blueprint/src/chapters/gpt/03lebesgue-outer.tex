@@ -115,15 +115,15 @@ $\lambda_d^*$ は $\RR^d$ 上の外測度である．
 \begin{enumerate}
     \item $\lambda_d^*(\emptyset)=0$：
     まず外測度は定義から非負なので $\lambda_d^*(\emptyset)\ge 0$ である．
-    一方，任意の点 $a \in \RR^d$ に対して
+    一方，任意の $\eps > 0$ に対して体積が $\eps$ 未満の有界区間 $R$ を1つ取れば
     \[
-    \emptyset \subset \bigcup_{n=1}^{\infty} \{a\}
+    \emptyset \subset R
     \]
-    であり，$\{a\}$ は体積 $0$ の区間だから
+    であるから
     \[
-    \lambda_d^*(\emptyset) \le \sum_{n=1}^{\infty} 0 = 0.
+    \lambda_d^*(\emptyset) \le |R| < \eps.
     \]
-    よって $\lambda_d^*(\emptyset)=0$ である．
+    $\eps$ は任意なので $\lambda_d^*(\emptyset)=0$ である．
 
     \item 単調性：
     $A \subset B$ とする．

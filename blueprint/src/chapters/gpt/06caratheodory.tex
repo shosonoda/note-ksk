@@ -1,0 +1,248 @@
+\chapter{Carathéodory流の測度論}
+
+\paragraph{本章の目標}
+これまでのLebesgue流
+\[
+\text{外測度}=\text{内測度}
+\]
+という定義を，より抽象的で構造的なCarathéodory流の定義へ結びつける．
+さらに，区間上の体積から外測度を作り，
+そこから測度を得る一般的な構成法を見る．
+
+\section{動機づけ}
+
+第4章で導入した内測度は，
+幾何学的には非常に自然であった．
+実際，
+\[
+\lambda_{d,*}(A)
+=
+\sup\{\lambda_d(K)\mid K \subset A,\ K \text{ compact}\}
+\]
+という式は，
+「$A$ の中にどれだけ大きなコンパクト集合が入るか」
+という直観そのものである．
+
+しかし，この定義には限界がある．
+\begin{enumerate}
+    \item コンパクト集合という位相的概念に依存している
+    \item 一般の集合 $X$ 上では同じ定義ができない
+    \item 可測集合全体が $\sigma$-加法族になることを直接示すのは難しい
+\end{enumerate}
+
+そこでCarathéodoryは，
+内測度を使わず，外測度だけから可測集合を取り出す判定条件を与えた．
+この方法の利点は，位相を持たない一般の集合 $X$ に対しても
+そのまま適用できることにある．
+
+\section{Carathéodory可測性}
+
+\begin{definition}[Carathéodory可測]
+集合 $X$ 上の外測度 $\mu^*$ を取る．
+集合 $A \subset X$ がCarathéodory可測であるとは，
+任意の $E \subset X$ に対して
+\[
+\mu^*(E)
+=
+\mu^*(E \cap A)+\mu^*(E \setminus A)
+\]
+が成り立つことをいう．
+\end{definition}
+
+\begin{remark}
+外測度の劣加法性から
+\[
+\mu^*(E)
+\le
+\mu^*(E \cap A)+\mu^*(E \setminus A)
+\]
+は常に成り立つ．
+したがってCarathéodory条件は，
+集合 $A$ で切り分けても余計なコストが発生しないことを意味している．
+すなわち，$A$ の境界が外測度にとって「余分な厚み」を持たないという条件である．
+\end{remark}
+
+\begin{theorem}[Carathéodory]
+外測度 $\mu^*$ に関するCarathéodory可測集合全体を $\mathcal M_{\mu^*}$ と書くとき，
+\begin{enumerate}
+    \item $\mathcal M_{\mu^*}$ は $X$ 上の $\sigma$-加法族である
+    \item 制限
+    \[
+    \mu := \mu^*|_{\mathcal M_{\mu^*}}
+    \]
+    は $(X,\mathcal M_{\mu^*})$ 上の完全測度である
+\end{enumerate}
+が成り立つ．
+\end{theorem}
+
+\begin{remark}
+この定理の重要な点は，
+「外測度から測度が作れる」ことである．
+第5章で使ったLebesgue測度の基本定理は，
+Lebesgue外測度にこの一般定理を適用したものと理解できる．
+\end{remark}
+
+\section{Lebesgue流との関係}
+
+\begin{theorem}[2つの定義の一致]
+$\RR^d$ 上のLebesgue外測度 $\lambda_d^*$ に対して，
+次の2条件は同値である．
+\begin{enumerate}
+    \item $\lambda_d^*(A)=\lambda_{d,*}(A)$
+    \item $A$ は $\lambda_d^*$ に関してCarathéodory可測である
+\end{enumerate}
+\end{theorem}
+
+\begin{proof}[説明]
+第5章で見た正則性により，
+Lebesgue可測集合はコンパクト集合と開集合で内外から近似できる．
+この近似を用いると，
+外測度と内測度の一致は
+Carathéodory条件
+\[
+\lambda_d^*(E)
+=
+\lambda_d^*(E \cap A)+\lambda_d^*(E \setminus A)
+\]
+と同値になる．
+したがって，第4章のLebesgue流の定義と，
+この章のCarathéodory流の定義は同じ可測集合を与える．
+\end{proof}
+
+\begin{remark}
+ここで初めて，
+第4章の内測度が「補助的」であった理由がはっきりする．
+Lebesgue測度のような具体的な幾何学の場面では
+内測度は非常に有用であるが，
+測度論そのものを組み立てるときの主役は
+外測度とCarathéodory条件である．
+\end{remark}
+
+\section{一般の構成法}
+
+\begin{definition}[有限加法族と前測度]
+集合 $X$ 上の有限加法族 $\mathcal A$ を取る．
+写像
+\[
+\mu_0 : \mathcal A \to [0,\infty]
+\]
+が前測度であるとは，次を満たすことをいう．
+\begin{enumerate}
+    \item $\mu_0(\emptyset)=0$
+    \item $\mu_0$ は有限加法的である
+    \item 互いに素な列 $\{A_n\}_{n=1}^{\infty} \subset \mathcal A$ で，
+    \[
+    \bigcup_{n=1}^{\infty} A_n \in \mathcal A
+    \]
+    となるものに対して
+    \[
+    \mu_0\left(\bigcup_{n=1}^{\infty} A_n\right)
+    =
+    \sum_{n=1}^{\infty} \mu_0(A_n)
+    \]
+    が成り立つ
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+ここで注意すべきなのは，
+単なる有限加法性だけでは一般に測度は構成できないことである．
+可算個の分割と両立するための整合性が必要であり，
+それを形式化したものが前測度である．
+\end{remark}
+
+\begin{definition}[外測度の生成]
+有限加法族 $\mathcal A$ 上の前測度 $\mu_0$ から，
+$X$ の任意の部分集合 $E \subset X$ に対して
+\[
+\mu^*(E)
+:=
+\inf\left\{
+\sum_{n=1}^{\infty}\mu_0(A_n)
+\;\middle|\;
+E \subset \bigcup_{n=1}^{\infty} A_n,\ 
+A_n \in \mathcal A
+\right\}
+\]
+と定める．
+\end{definition}
+
+\begin{theorem}[外測度から測度へ]
+上で定めた $\mu^*$ は外測度であり，
+Carathéodoryの定理によって測度
+\[
+\mu=\mu^*|_{\mathcal M_{\mu^*}}
+\]
+が得られる．
+さらに，$\mu$ はもとの前測度 $\mu_0$ を拡張する．
+\end{theorem}
+
+\begin{remark}
+これが測度構成の基本スキームである．
+まず「基本図形の上で定義された体積」から出発し，
+それを可算被覆によって外測度に延長し，
+最後にCarathéodory可測集合へ制限して真の測度を得る．
+\end{remark}
+
+\begin{example}[Lebesgue測度の構成]
+$X=\RR^d$ とし，
+$\mathcal A$ を有限個の互いに素な半開区間の合併全体とする．
+各
+\[
+A=\bigsqcup_{j=1}^N I_j \in \mathcal A
+\]
+に対して
+\[
+\mu_0(A):=\sum_{j=1}^N |I_j|
+\]
+と定める．
+これは $\mathcal A$ 上の前測度であり，
+上の一般構成から得られる外測度が第3章のLebesgue外測度である．
+したがって，Carathéodoryの定理によって
+第5章のLebesgue測度が得られる．
+\end{example}
+
+\begin{remark}
+第2章のJordan測度 $m_J$ は，
+この $\mu_0$ が定義されている基本図形の上では
+体積を与えるという意味で同じ役割を果たしている．
+Lebesgue測度は，その有限加法的な図形の体積を
+可算被覆に耐える形へ拡張したものと見ることができる．
+\end{remark}
+
+\begin{remark}
+この意味で，Lebesgue測度は
+「区間の体積を可算分割に耐えるように修正したもの」
+である．
+Jordan測度は有限加法族の上の有限加法的な内容積にとどまっていたが，
+Lebesgue測度では
+\[
+\text{有限加法族}
+\longrightarrow
+\text{外測度}
+\longrightarrow
+\sigma\text{-加法族上の測度}
+\]
+という3段階の拡張が起こっている．
+\end{remark}
+
+\section{解釈}
+
+Carathéodory流の測度論は，
+「面積を与える」という幾何学的問題を，
+外測度と可測性という抽象的な言葉に翻訳したものである．
+その利点は，
+\begin{enumerate}
+    \item 位相に依存しない
+    \item 一般の集合 $X$ で使える
+    \item 測度の存在を系統的に証明できる
+\end{enumerate}
+という点にある．
+
+したがって，
+Lebesgue流の
+\[
+\text{外測度}=\text{内測度}
+\]
+という定義は幾何学的直観を与え，
+Carathéodory流の定義はその直観を抽象理論として完成させる役割を果たしている．

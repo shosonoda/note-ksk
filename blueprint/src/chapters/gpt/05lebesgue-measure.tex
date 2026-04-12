@@ -1,0 +1,347 @@
+\chapter{Lebesgue測度}
+
+\paragraph{本章の目標}
+前章の
+\[
+\lambda_d^*(A)=\lambda_{d,*}(A)
+\]
+という条件を用いてLebesgue可測集合とLebesgue測度を定義し，
+その基本的な振る舞いを眺める．
+この章では「面積を数理モデル化する」とは何を意味するかを
+具体例とともに確認する．
+
+\section{動機づけ}
+
+面積や体積を表す量であるためには，
+集合を外から測っても内から測っても同じ値になってほしい．
+そこで，外測度と内測度が一致する集合だけを
+「本当に面積が定まる集合」とみなす．
+
+これはJordan測度のときと同じ発想である．
+違いは，外側近似・内側近似のどちらにも
+可算という自由度が入ったことである．
+このおかげで，可算集合のような薄い集合を除外せずに
+面積論を展開できる．
+
+\section{定義}
+
+\begin{definition}[Lebesgue可測集合とLebesgue測度]
+\[
+\mathcal L^d
+:=
+\{A \subset \RR^d \mid \lambda_d^*(A)=\lambda_{d,*}(A)\}
+\]
+とおく．
+$A \in \mathcal L^d$ のとき，その共通値を
+\[
+\lambda_d(A)
+:=
+\lambda_d^*(A)=\lambda_{d,*}(A)
+\]
+と書き，$A$ のLebesgue測度という．
+\end{definition}
+
+\begin{theorem}[Lebesgue測度の基本定理]
+\begin{enumerate}
+    \item $\mathcal L^d$ は $\RR^d$ の部分集合の $\sigma$-加法族である
+    \item $\lambda_d : \mathcal L^d \to [0,\infty]$ は完全測度である
+\end{enumerate}
+\end{theorem}
+\begin{proof}[証明の方針]
+この定理の本質は，
+外測度と内測度の一致という幾何学的な定義が，
+次章で導入するCarathéodory条件と一致することにある．
+Carathéodory条件からは
+$\sigma$-加法族と可算加法性が抽象的に導かれるので，
+その一般定理をLebesgue外測度へ適用すればよい．
+\end{proof}
+
+\section{区間の測度}
+
+\begin{theorem}[閉区間の測度]
+有界閉区間
+\[
+I = [a_1,b_1] \times \cdots \times [a_d,b_d]
+\]
+に対して
+\[
+\lambda_d(I)=|I|
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+第4章より，$I$ はコンパクトだからLebesgue可測であり，
+\[
+\lambda_d(I)=\lambda_d^*(I)
+\]
+である．
+第3章より $I$ 自身による被覆を使えば
+\[
+\lambda_d^*(I)\le |I|
+\]
+である．
+
+逆向きの不等式を示す．
+$I \subset \bigcup_{n=1}^{\infty} R_n$ を任意の可算被覆とし，
+$\eps>0$ を取る．
+各 $n$ に対し，$R_n \subset U_n$ を満たす開区間 $U_n$ を
+\[
+|U_n|<|R_n|+\frac{\eps}{2^n}
+\]
+となるように取る．
+すると $\{U_n\}_{n=1}^{\infty}$ は $I$ の開被覆だから，
+$I$ のコンパクト性より有限部分被覆
+\[
+I \subset U_1 \cup \cdots \cup U_N
+\]
+が取れる．
+第2章で扱ったJordan測度を $m_J$ と書けば，
+$I$ はJordan可測で $m_J(I)=|I|$ であり，
+さらに有限劣加法性より
+\[
+|I| = m_J(I)
+\le \sum_{n=1}^N |U_n|
+< \sum_{n=1}^N |R_n|+\sum_{n=1}^N \frac{\eps}{2^n}
+\le \sum_{n=1}^{\infty} |R_n|+\eps
+\]
+が成り立つ．
+いま $\eps>0$ は任意だから
+\[
+|I| \le \sum_{n=1}^{\infty} |R_n|
+\]
+を得る．
+被覆の取り方について下限を取ると
+\[
+|I| \le \lambda_d^*(I)
+\]
+を得る．
+したがって $\lambda_d(I)=|I|$ である．
+\end{proof}
+
+\begin{proposition}[座標超平面片は零集合]
+各 $i \in \{1,\dots,d\}$ と実数 $c$ に対して，
+\[
+F
+:=
+\{x \in [a_1,b_1]\times\cdots\times[a_d,b_d] \mid x_i=c\}
+\]
+はLebesgue零集合である．
+\end{proposition}
+\begin{proof}
+任意の $\eps>0$ に対して，$\delta>0$ を十分小さく取れば
+\[
+F
+\subset
+[a_1,b_1]\times\cdots\times[c-\delta,c+\delta]\times\cdots\times[a_d,b_d]
+\]
+であり，右辺の体積は
+\[
+2\delta \prod_{j\ne i}(b_j-a_j)
+\]
+だから，これを $\eps$ 未満にできる．
+よって $\lambda_d^*(F)=0$ であり，したがって $\lambda_d(F)=0$ である．
+\end{proof}
+
+\begin{corollary}[有界区間の測度]
+任意の有界区間 $I \subset \RR^d$ に対して
+\[
+\lambda_d(I)=|I|
+\]
+が成り立つ．
+\end{corollary}
+\begin{proof}
+任意の有界区間は，同じ端点をもつ閉区間と
+有限個の座標超平面片だけ異なる．
+その差は零集合だから測度に影響しない．
+\end{proof}
+
+\begin{proposition}[平行移動不変性]
+任意のLebesgue可測集合 $A \subset \RR^d$ と $c \in \RR^d$ に対して
+\[
+\lambda_d(A+c)=\lambda_d(A)
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+第3章より外測度は平行移動不変であり，
+第4章の定義から内測度も平行移動不変である．
+したがって $A$ が可測なら $A+c$ も可測であり，
+共通値は変わらない．
+\end{proof}
+
+\section{正則性とBorel集合}
+
+\begin{theorem}[内正則性]
+任意のLebesgue可測集合 $A \subset \RR^d$ に対して
+\[
+\lambda_d(A)
+=
+\sup\{\lambda_d(K)\mid K \subset A,\ K \text{ はコンパクト}\}
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+$A$ が可測なら $\lambda_d(A)=\lambda_{d,*}(A)$ である．
+またコンパクト集合は可測だから，
+内測度の定義に現れる $\lambda_d^*(K)$ は $\lambda_d(K)$ と書き直せる．
+\end{proof}
+
+\begin{theorem}[外正則性]
+任意のLebesgue可測集合 $A \subset \RR^d$ に対して
+\[
+\lambda_d(A)
+=
+\inf\{\lambda_d(U)\mid A \subset U,\ U \text{ は開集合}\}
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}[説明]
+区間による可算被覆は，各区間をわずかに膨らませることで
+開集合による外側近似へ直せる．
+この事実を可測集合に対して整理すると，上の公式が得られる．
+詳しい証明は標準的だが少し長いので省略する．
+\end{proof}
+
+\begin{theorem}[開集合は可測]
+任意の開集合 $U \subset \RR^d$ はLebesgue可測である．
+\end{theorem}
+\begin{proof}[説明]
+開集合は内部からコンパクト集合列で近似できる．
+そのとき内測度が外測度まで達するので，$U$ は可測になる．
+\end{proof}
+
+\begin{corollary}[Borel集合]
+すべてのBorel集合はLebesgue可測である．
+\end{corollary}
+\begin{proof}
+開集合は上の定理からLebesgue可測であり，
+Lebesgue可測集合全体は $\sigma$-加法族だから，
+開集合が生成するBorel $\sigma$-加法族全体が可測になる．
+\end{proof}
+
+\begin{corollary}[完備性]
+$N \in \mathcal L^d$ で $\lambda_d(N)=0$ とする．
+このとき任意の $A \subset N$ もLebesgue可測であり，
+\[
+\lambda_d(A)=0
+\]
+が成り立つ．
+\end{corollary}
+\begin{proof}
+完全測度の定義そのものである．
+\end{proof}
+
+\begin{theorem}[Borel測度の完備化]
+任意のLebesgue可測集合 $A$ は，
+あるBorel集合 $B$ とあるLebesgue零集合 $N$ を用いて
+\[
+A = B \triangle N
+\]
+と書ける．
+したがって，Lebesgue測度はBorel測度の完備化として得られる．
+\end{theorem}
+
+\section{具体例}
+
+\begin{example}
+\begin{enumerate}
+    \item $\QQ^d$ は可算だから $\lambda_d(\QQ^d)=0$
+    \item 特に
+    \[
+    \lambda_1(\QQ \cap [0,1])=0
+    \]
+    である
+    \item したがって
+    \[
+    \lambda_1([0,1]\setminus \QQ)=1
+    \]
+    である
+\end{enumerate}
+\end{example}
+
+\begin{remark}
+有理数は $[0,1]$ の中で稠密であるにもかかわらず長さ $0$ であり，
+その補集合である無理数全体が長さ $1$ をもつ．
+Lebesgue測度は「どれだけ隙間なく散らばっているか」ではなく，
+「どれだけの面積コストで覆う必要があるか」を測っている．
+\end{remark}
+
+\section{非可測集合と限界}
+
+\begin{theorem}[Vitali]
+$[0,1]$ にはLebesgue非可測集合が存在する．
+\end{theorem}
+\begin{proof}[考え方]
+$x-y \in \QQ$ で同値関係を入れ，
+各同値類からちょうど1点ずつ選んだ集合を $V \subset [0,1]$ とする．
+有理数 $q \in [-1,1] \cap \QQ$ に対する平行移動 $V+q$ を考えると，
+これらは互いに素で，
+\[
+[0,1] \subset \bigcup_{q \in [-1,1]\cap\QQ}(V+q) \subset [-1,2]
+\]
+が成り立つ．
+もし $V$ が可測なら，平行移動不変性により
+\[
+\lambda_1(V+q)=\lambda_1(V)
+\qquad
+(q \in [-1,1]\cap\QQ)
+\]
+である．
+そこで可算加法性を用いると，
+$\lambda_1(V)>0$ なら右辺の和は発散して
+$[-1,2]$ の有限測度と矛盾し，
+$\lambda_1(V)=0$ なら合併全体の測度も $0$ となって
+$[0,1]$ を覆えない．
+したがって $V$ は可測でない．
+\end{proof}
+
+\begin{remark}
+この構成には選択公理が使われている．
+非可測集合の存在は，
+「すべての部分集合に面積を与える」ことができないという
+Lebesgue測度の本質的な限界を表している．
+\end{remark}
+
+\begin{remark}[任意加法性は強すぎる]
+Lebesgue測度は $\sigma$-加法的であるが，
+任意個の互いに素な集合族に対してまで加法性を要求することはできない．
+実際，すべての1点集合は測度 $0$ であるから，
+もし任意加法性
+\[
+\lambda_d\left(\bigsqcup_{\alpha \in \Gamma} A_\alpha\right)
+=
+\sum_{\alpha \in \Gamma} \lambda_d(A_\alpha)
+\]
+が常に成り立つとする
+（右辺は有限部分和の上限として解釈する）．
+すると
+\[
+[0,1] = \bigsqcup_{x \in [0,1]} \{x\}
+\]
+より
+\[
+\lambda_1([0,1]) = \sum_{x \in [0,1]} 0 = 0
+\]
+となってしまう．
+これは明らかに矛盾である．
+したがって，面積を正しくモデル化するには
+「可算加法性」がちょうどよい強さである．
+\end{remark}
+
+\section{解釈}
+
+Lebesgue測度は，
+区間の体積を保ちつつ，
+可算個の近似を許すことで面積論を大幅に安定化したものである．
+その結果，
+\begin{enumerate}
+    \item 区間の体積は従来通り保たれる
+    \item 可算集合や境界の薄い集合を自然に無視できる
+    \item Borel集合を超える広いクラスの集合を扱える
+    \item それでもなお，非可測集合の存在によって「全ての部分集合」を測ることはできない
+\end{enumerate}
+という姿が見えてくる．
+
+次章では，この理論を支えているCarathéodory流の測度論を述べる．
+そこでは，Lebesgue測度だけでなく，
+一般の外測度から測度を構成する枠組みが明確になる．
