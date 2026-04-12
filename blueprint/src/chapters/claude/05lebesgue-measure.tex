@@ -38,13 +38,13 @@ m_*(A) = m^*(A)
 共通の値を $A$ の\textbf{Lebesgue測度}と呼び，$m(A)$ で表す．
 
 非有界集合 $A \subset \RR^d$ がLebesgue可測であるとは，
-すべての有界閉長方体 $I$ に対して
+すべての有界閉区間 $I$ に対して
 $A \cap I$ がLebesgue可測であることをいう．
 このとき $m(A) := \sup_I m(A \cap I)$（$\infty$ も許す）と定める．
 \end{definition}
 
 \begin{remark}\label{rem:measurability-condition}
-$A$ を含む有界閉長方体 $I$ を取ると，
+$A$ を含む有界閉区間 $I$ を取ると，
 $m_*(A) = |I| - m^*(I \setminus A)$ であったから，
 $A$ がLebesgue可測であることは
 \[
@@ -76,7 +76,7 @@ $m_*(N) = m^*(N) = 0$．
 
 \begin{theorem}[補集合の可測性]\label{thm:complement-measurable}
 有界集合 $A$ がLebesgue可測ならば，
-$A$ を含む有界閉長方体 $I$ に対して
+$A$ を含む有界閉区間 $I$ に対して
 $I \setminus A$ もLebesgue可測である．
 \end{theorem}
 \begin{proof}
@@ -230,7 +230,7 @@ $\mu : \calM \to [0,\infty]$ が\textbf{完全加法的測度}
 $\sigma$-加法族を成す．
 \item $m : \calM \to [0,\infty]$ は完全加法的測度であり，
 \begin{itemize}
-\item 半開長方体 $Q$ に対して $m(Q) = |Q|$（体積に一致），
+\item 半開区間 $Q$ に対して $m(Q) = |Q|$（体積に一致），
 \item 平行移動不変：$m(A+c) = m(A)$，
 \item 完備：$m(N) = 0$ かつ $A \subset N$ ならば $A \in \calM$
 （零集合の部分集合も可測）．
@@ -246,7 +246,7 @@ $m^*(\emptyset) = m_*(\emptyset) = 0$ だから $\emptyset$ は可測．
 \paragraph{補集合で閉じることについて}
 有界集合の場合は定理\ref{thm:complement-measurable}で示した．
 非有界集合の場合も，定義に基づいて
-各有界長方体 $I$ との共通部分を調べれば同様に従う．
+各有界区間 $I$ との共通部分を調べれば同様に従う．
 
 \paragraph{可算和で閉じることについて}
 ここが核心であり，直接の証明には技術的な困難を伴う．
@@ -364,7 +364,7 @@ Lebesgue可測集合という「適切なクラス」に制限することで初
 \renewcommand{\arraystretch}{1.3}
 \begin{tabular}{l|c|c|c}
  & Riemann積分 & Jordan測度 & Lebesgue測度 \\ \hline
-被覆 & 有限分割 & 有限個の長方体 & 可算個の長方体 \\
+被覆 & 有限分割 & 有限個の区間 & 可算個の区間 \\
 加法族 & --- & 有限加法族 & $\sigma$-加法族 \\
 加法性 & --- & 有限加法的 & 完全加法的 \\
 $\QQ \cap [0,1]$ & 非可積分 & 非可測 & 可測（$m=0$）\\

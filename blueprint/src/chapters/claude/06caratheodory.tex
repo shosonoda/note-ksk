@@ -56,7 +56,7 @@ m^*(E) \ge m^*(E \cap A) + m^*(E \setminus A)
 直観的には，「$A$ がすべての集合 $E$ を
 $E \cap A$ と $E \setminus A$ に\textbf{加法的に}分割する」ことを要求している．
 第5章の条件 $m^*(A) + m^*(I \setminus A) = |I|$
-が特定の長方体 $I$ に対する分割のみを検査するのに対し，
+が特定の区間 $I$ に対する分割のみを検査するのに対し，
 Carath\'eodory条件は\textbf{すべての}集合 $E$ で検査する．
 この「検査の網羅性」が $\sigma$-加法族の証明を可能にする．
 \end{remark}
@@ -230,7 +230,7 @@ $m_*(A) = m^*(A)$ と同値であることを示す．
 \end{theorem}
 \begin{proof}
 \textbf{(1) $\Rightarrow$ (2):}\quad
-$A \subset I$（有界閉長方体）に対して
+$A \subset I$（有界閉区間）に対して
 $E = I$ を代入すると
 $|I| = m^*(I) = m^*(I \cap A) + m^*(I \setminus A)
 = m^*(A) + m^*(I \setminus A)$．
@@ -274,7 +274,7 @@ $m^*(E \cap A) + m^*(E \setminus A) \le m^*(E)$．
 
 \begin{lemma}\label{lem:cara-rectangle}
 $A$ がLebesgue可測（$m_*(A) = m^*(A)$）ならば，
-任意の半開長方体 $Q$ に対して
+任意の半開区間 $Q$ に対して
 \[
 m^*(Q \cap A) + m^*(Q \setminus A) = |Q|.
 \]
@@ -284,7 +284,7 @@ $Q \supset (Q \cap A)$ と $Q \supset (Q \setminus A)$ であり，
 $Q = (Q \cap A) \sqcup (Q \setminus A)$ だから
 劣加法性より $|Q| \le m^*(Q \cap A) + m^*(Q \setminus A)$．
 
-逆を示す．$I$ を $A$ と $Q$ の双方を含む有界閉長方体とする．
+逆を示す．$I$ を $A$ と $Q$ の双方を含む有界閉区間とする．
 $A$ の可測性より $m^*(A) + m^*(I \setminus A) = |I|$．
 
 $I = Q \sqcup (I \setminus Q)$（$I \setminus Q$ は基本集合）であるから，
@@ -355,16 +355,16 @@ $\RR^d$ の開集合と閉集合はすべてLebesgue可測である．
 $E$ の可算被覆 $\{Q_j\}$ を
 $\sum_j |Q_j| < m^*(E) + \eps$ となるように取る．
 各 $Q_j$ を十分小さく分割して，
-各小長方体が $G$ に含まれるか $G$ と交わらないかの
+各小区間が $G$ に含まれるか $G$ と交わらないかの
 いずれかになるようにできる（$G$ が開集合であることを使う）．
 
 より正確には：
 $G$ は $\RR^d$ の開集合だから，任意の $x \in G$ の周りに
-$x$ を含む十分小さな半開長方体で $G$ に含まれるものが取れる．
-したがって $G$ は半開長方体の可算和で書ける：
-$G = \bigcup_{k=1}^{\infty} P_k$（$P_k$ は互いに素な半開長方体）．
+$x$ を含む十分小さな半開区間で $G$ に含まれるものが取れる．
+したがって $G$ は半開区間の可算和で書ける：
+$G = \bigcup_{k=1}^{\infty} P_k$（$P_k$ は互いに素な半開区間）．
 
-各 $P_k$ は半開長方体だから基本集合であり，
+各 $P_k$ は半開区間だから基本集合であり，
 系\ref{cor:lebesgue-main-proof}と定理\ref{thm:jordan-implies-measurable}より
 Lebesgue可測である．
 $G = \bigcup_k P_k$ は可測集合の可算和だから
@@ -471,7 +471,7 @@ $\mu^*$ を集合 $X$ 上の外測度とする．
 \end{theorem}
 \begin{proof}
 定理\ref{thm:caratheodory-sigma}の証明は
-$m^*$ の具体的な構造（長方体の体積）を一切使わず，
+$m^*$ の具体的な構造（区間の体積）を一切使わず，
 外測度の3つの公理（非負性，単調性，可算劣加法性）のみから
 行われていた．したがって同じ証明が任意の外測度 $\mu^*$ に適用できる．
 \end{proof}
@@ -575,7 +575,7 @@ $\sigma$-有限性は有限測度の場合に帰着するために使う．
 \begin{itemize}
 \item $X = \RR^d$．
 \item $\calA$ = $\RR^d$ の基本集合の全体
-（有限個の互いに素な半開長方体の合併）．
+（有限個の互いに素な半開区間の合併）．
 これは第2章で示したように有限加法族である．
 \item $\mu_0 = m_J$：基本集合の体積（Jordan測度）．
 \end{itemize}
@@ -589,7 +589,7 @@ $m_J$ が前測度（$\calA$ 上で完全加法的）であることは次のよ
 \begin{proof}
 互いに素な基本集合 $E_n \in \calA$ で
 $E := \bigsqcup_{n=1}^{\infty} E_n \in \calA$（有限加法族の元）
-とする．$E \in \calA$ だから $E$ は有限個の半開長方体の合併であり
+とする．$E \in \calA$ だから $E$ は有限個の半開区間の合併であり
 $m_J(E)$ は有限値を取る．
 
 有限加法性より $m_J(E) \ge \sum_{n=1}^N m_J(E_n)$（$\forall N$），

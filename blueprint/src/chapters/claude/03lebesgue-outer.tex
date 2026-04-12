@@ -8,21 +8,21 @@ Lebesgue外測度，可算劣加法性
 \[
 m_J^*(A) = \inf\{m_J(E) : A \subset E,\ E \text{ は基本集合}\}
 \]
-は有限個の半開長方体の合併（基本集合）で $A$ を覆い，
+は有限個の半開区間の合併（基本集合）で $A$ を覆い，
 体積の下限を取るものであった．
 この有限被覆の制約により，
 $\QQ \cap [0,1]$ のように稠密に散らばった集合に対しては
 $m_J^*(\QQ \cap [0,1]) = 1$ となり，
 「薄い」集合であることを検出できなかった．
 
-Lebesgue外測度は，被覆に使える長方体の個数を
+Lebesgue外測度は，被覆に使える区間の個数を
 可算無限個に拡張する：
 \[
 m^*(A)
 = \inf\!\left\{
 \sum_{j=1}^{\infty} |Q_j|
 : A \subset \bigcup_{j=1}^{\infty} Q_j,\
-Q_j \text{ は半開長方体}
+Q_j \text{ は半開区間}
 \right\}.
 \]
 被覆の自由度が増えた分，より精密な評価が可能になり，
@@ -37,7 +37,7 @@ $m^*(\QQ \cap [0,1]) = 0$ が示せるようになる．
 
 \begin{definition}[可算被覆]\label{def:countable-cover}
 集合 $A \subset \RR^d$ に対し，
-半開長方体の列 $\{Q_j\}_{j=1}^{\infty}$ が
+半開区間の列 $\{Q_j\}_{j=1}^{\infty}$ が
 $A$ の\textbf{可算被覆}であるとは
 \[
 A \subset \bigcup_{j=1}^{\infty} Q_j
@@ -46,7 +46,7 @@ A \subset \bigcup_{j=1}^{\infty} Q_j
 \end{definition}
 
 \begin{remark}
-有限個の長方体 $Q_1,\ldots,Q_n$ による被覆は，
+有限個の区間 $Q_1,\ldots,Q_n$ による被覆は，
 $Q_j = \emptyset$（$j > n$）とすれば
 可算被覆の特別な場合とみなせる．
 また $\RR^d = \bigcup_{n=1}^{\infty} [-n,n)^d$ だから，
@@ -71,7 +71,7 @@ Jordan外測度との対比を整理する．
 \begin{tabular}{l|l|l}
  & Jordan外測度 $m_J^*$ & Lebesgue外測度 $m^*$ \\
 \hline
-被覆 & 有限個の長方体の合併（基本集合） & 可算個の長方体 \\
+被覆 & 有限個の区間の合併（基本集合） & 可算個の区間 \\
 加法性 & 有限加法的 & 可算劣加法的 \\
 定義域 & 有界集合 & すべての集合
 \end{tabular}
@@ -149,10 +149,10 @@ $|Q_j + c| = |Q_j|$．逆も同様であるから $m^*(A+c) = m^*(A)$．
 
 ここまでの性質は外測度の定義から比較的容易に従う．
 次の定理は非自明であり，
-Lebesgue外測度が長方体の体積と整合することを保証する．
+Lebesgue外測度が区間の体積と整合することを保証する．
 
-\begin{theorem}[長方体の外測度]\label{thm:outer-measure-rectangle}
-半開長方体 $Q = \prod_{k=1}^d [a_k, b_k)$ に対して
+\begin{theorem}[区間の外測度]\label{thm:outer-measure-rectangle}
+半開区間 $Q = \prod_{k=1}^d [a_k, b_k)$ に対して
 \[
 m^*(Q) = |Q| = \prod_{k=1}^d (b_k - a_k).
 \]
@@ -166,13 +166,13 @@ $m^*(Q) \le |Q|$．
 $Q$ の任意の可算被覆 $\{Q_j\}_{j=1}^{\infty}$ に対して
 $\sum_{j=1}^{\infty} |Q_j| \ge |Q|$ を示す．
 
-$\eps > 0$ を取る．$Q$ をわずかに縮めた閉長方体
+$\eps > 0$ を取る．$Q$ をわずかに縮めた閉区間
 \[
 \overline{Q}_\delta
 = \prod_{k=1}^d [a_k + \delta,\ b_k - \delta]
 \qquad (\delta > 0 \text{ は十分小さく取る})
 \]
-を考え，各 $Q_j$ をわずかに膨らませた開長方体 $Q_j^\circ$ を
+を考え，各 $Q_j$ をわずかに膨らませた開区間 $Q_j^\circ$ を
 \[
 |Q_j^\circ| < |Q_j| + \frac{\eps}{2^j}
 \]
@@ -206,8 +206,8 @@ $|Q| \le \sum_{j=1}^{\infty} |Q_j|$．
 \begin{remark}
 下界の証明で\textbf{Heine--Borelの定理}（コンパクト性）が
 本質的に使われている．
-半開長方体を閉長方体で内側から近似し（コンパクト性を確保），
-被覆の長方体を開長方体で外側から近似して（開被覆を構成），
+半開区間を閉区間で内側から近似し（コンパクト性を確保），
+被覆の区間を開区間で外側から近似して（開被覆を構成），
 有限部分被覆に帰着させる．
 この「$\eps$ だけ余裕を持たせる」技法は
 可算と有限の橋渡しとして測度論の基本的な道具である．
@@ -225,8 +225,8 @@ $m^*(E \sqcup S) \le m^*(E) + m^*(S)$
 は可算劣加法性から従う．
 
 逆に $E \sqcup S$ の任意の可算被覆 $\{R_k\}$ を取る．
-$E = \bigsqcup_{l=1}^n P_l$（$P_l$ は半開長方体）と書く．
-各 $R_k$ と $P_l$ の交差 $R_k \cap P_l$ は半開長方体であり，
+$E = \bigsqcup_{l=1}^n P_l$（$P_l$ は半開区間）と書く．
+各 $R_k$ と $P_l$ の交差 $R_k \cap P_l$ は半開区間であり，
 $\{R_k \cap P_l\}_k$ は $P_l$ の可算被覆を与える．
 定理\ref{thm:outer-measure-rectangle}より
 $|P_l| \le \sum_k |R_k \cap P_l|$．
@@ -281,7 +281,7 @@ Heine--Borelの議論を $\overline{E}$ に適用してもよい．）
 \end{example}
 \begin{proof}
 $\eps > 0$ を取る．
-各 $a_j$ を一辺の長さ $(\eps/n)^{1/d}$ の半開長方体 $Q_j$ で覆えば
+各 $a_j$ を一辺の長さ $(\eps/n)^{1/d}$ の半開区間 $Q_j$ で覆えば
 $|Q_j| = \eps/n$ であり，$\sum_{j=1}^n |Q_j| = \eps$．
 $\eps$ は任意だったので $m^*(A) = 0$．
 \end{proof}
@@ -291,7 +291,7 @@ $\eps$ は任意だったので $m^*(A) = 0$．
 \end{example}
 \begin{proof}
 $\eps > 0$ を固定する．
-各 $a_n$ を一辺の長さ $(\eps/2^n)^{1/d}$ の半開長方体 $Q_n$ で覆えば
+各 $a_n$ を一辺の長さ $(\eps/2^n)^{1/d}$ の半開区間 $Q_n$ で覆えば
 $|Q_n| = \eps/2^n$ であり
 \[
 \sum_{n=1}^{\infty} |Q_n| = \sum_{n=1}^{\infty} \frac{\eps}{2^n} = \eps.

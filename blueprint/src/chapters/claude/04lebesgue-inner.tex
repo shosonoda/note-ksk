@@ -26,7 +26,7 @@ Lebesgue理論でも同じ戦略を取る：
 
 \begin{definition}[Lebesgue内測度]\label{def:lebesgue-inner-measure}
 有界集合 $A \subset \RR^d$ に対し，
-$A$ を含む有界閉長方体 $I \supset A$ を取り，
+$A$ を含む有界閉区間 $I \supset A$ を取り，
 \[
 m_*(A) := |I| - m^*(I \setminus A)
 \]
@@ -40,7 +40,7 @@ m_*(A) := |I| - m^*(I \setminus A)
 \end{proposition}
 \begin{proof}
 $A \subset I \subset J$ を満たす
-有界閉長方体 $I, J$ を取る．
+有界閉区間 $I, J$ を取る．
 $J \setminus A = (J \setminus I) \sqcup (I \setminus A)$
 であり，$J \setminus I$ は基本集合だから
 補題\ref{lem:outer-additive-elementary}（第3章）より
@@ -56,8 +56,8 @@ m^*(J \setminus A)
 = |I| - m^*(I \setminus A).
 \]
 すなわち $I$ を $J$ に取り替えても値は変わらない．
-任意の二つの長方体 $I_1, I_2 \supset A$ に対しては，
-共通の長方体 $J \supset I_1 \cup I_2$ を取って
+任意の二つの区間 $I_1, I_2 \supset A$ に対しては，
+共通の区間 $J \supset I_1 \cup I_2$ を取って
 $I_1, I_2$ の両方について上の議論を適用すればよい．
 \end{proof}
 
@@ -73,7 +73,7 @@ Lebesgue内測度は「$I$ の体積から $A$ の補集合の外測度を引い
 \begin{remark}[非有界集合への拡張]\label{rem:inner-unbounded}
 非有界集合 $A \subset \RR^d$ に対しては
 \[
-m_*(A) := \sup\{m_*(A \cap I) : I \text{ は有界閉長方体}\}
+m_*(A) := \sup\{m_*(A \cap I) : I \text{ は有界閉区間}\}
 \]
 と定義すれば，Lebesgue内測度を $\calP(\RR^d)$ 全体に拡張できる．
 以下では主に有界集合を扱う．
@@ -89,13 +89,13 @@ m_*(A) := \sup\{m_*(A \cap I) : I \text{ は有界閉長方体}\}
 \item （非負性）$m_*(A) \ge 0$．$m_*(\emptyset) = 0$．
 \item （内・外の関係）$m_*(A) \le m^*(A)$．
 \item （単調性）$A \subset B \Rightarrow m_*(A) \le m_*(B)$．
-\item （補集合との関係）$A \subset I$（有界閉長方体）ならば
+\item （補集合との関係）$A \subset I$（有界閉区間）ならば
 $m_*(A) + m^*(I \setminus A) = |I|$．
 \item （平行移動不変性）$m_*(A + c) = m_*(A)$．
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-$A$ を含む有界閉長方体 $I$ を固定する．
+$A$ を含む有界閉区間 $I$ を固定する．
 
 \textbf{(1)}\quad
 $m^*(I \setminus A) \le m^*(I) = |I|$ だから
@@ -134,20 +134,20 @@ $m_*(A+c) = |I+c| - m^*((I+c) \setminus (A+c))
 外測度の加法性が成り立つことが可測性の本質である．
 \end{remark}
 
-\begin{theorem}[長方体・基本集合の内測度]\label{thm:inner-elementary}
+\begin{theorem}[区間・基本集合の内測度]\label{thm:inner-elementary}
 \begin{enumerate}
-\item 半開長方体 $Q$ に対して $m_*(Q) = |Q|$．
+\item 半開区間 $Q$ に対して $m_*(Q) = |Q|$．
 \item 基本集合 $E$ に対して $m_*(E) = m_J(E)$．
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-$I \supset E$ を有界閉長方体とする．
+$I \supset E$ を有界閉区間とする．
 $I \setminus E$ は基本集合であり，
 系\ref{cor:outer-measure-elementary}より
 $m^*(I \setminus E) = m_J(I \setminus E) = |I| - m_J(E)$．
 したがって
 $m_*(E) = |I| - m^*(I \setminus E) = m_J(E)$．
-半開長方体は基本集合の特別な場合である．
+半開区間は基本集合の特別な場合である．
 \end{proof}
 
 % ==================================================================
@@ -227,7 +227,7 @@ $m^*(A) \le m_J^*(A)$ は定理\ref{thm:jordan-lebesgue-outer}で示した．
 $m_*(A) \le m^*(A)$ は定理\ref{thm:lebesgue-inner-properties}\,(2) で示した．
 $m_{J,*}(A) \le m_*(A)$ を示す．
 
-$I \supset A$ を有界閉長方体，
+$I \supset A$ を有界閉区間，
 $E \subset A$ を任意の基本集合とする．
 $I \setminus A \subset I \setminus E$ であり
 $I \setminus E$ は基本集合だから
