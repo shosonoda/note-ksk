@@ -15,9 +15,9 @@
 幾何学的には非常に自然であった．
 実際，
 \[
-\lambda_{d,*}(A)
+\lambda_*(A)
 =
-\sup\{\lambda_d(K)\mid K \subset A,\ K \text{ compact}\}
+\sup\{\lambda^*(K)\mid K \subset A,\ K \text{ はコンパクト}\}
 \]
 という式は，
 「$A$ の中にどれだけ大きなコンパクト集合が入るか」
@@ -50,63 +50,713 @@
 \end{definition}
 
 \begin{remark}
-外測度の劣加法性から
+外測度の可算劣加法性から
 \[
 \mu^*(E)
 \le
 \mu^*(E \cap A)+\mu^*(E \setminus A)
 \]
 は常に成り立つ．
-したがってCarathéodory条件は，
-集合 $A$ で切り分けても余計なコストが発生しないことを意味している．
-すなわち，$A$ の境界が外測度にとって「余分な厚み」を持たないという条件である．
+したがってCarathéodory条件で本質的なのは逆向きの不等式である．
+これは，$A$ で切り分けても外測度が余計に増えないことを表している．
 \end{remark}
+
+\begin{definition}
+外測度 $\mu^*$ に関するCarathéodory可測集合全体を
+\[
+\mathcal M_{\mu^*}
+\]
+と書く．
+\end{definition}
+
+\begin{lemma}
+\[
+\emptyset \in \mathcal M_{\mu^*},\qquad X \in \mathcal M_{\mu^*}
+\]
+が成り立つ．
+\end{lemma}
+\begin{proof}
+任意の $E \subset X$ に対して
+\[
+E \cap \emptyset = \emptyset,\qquad E \setminus \emptyset = E
+\]
+だから
+\[
+\mu^*(E)=0+\mu^*(E)
+\]
+である．
+したがって $\emptyset \in \mathcal M_{\mu^*}$ である．
+
+また
+\[
+E \cap X = E,\qquad E \setminus X = \emptyset
+\]
+だから同様に $X \in \mathcal M_{\mu^*}$ である．
+\end{proof}
+
+\begin{lemma}[補集合に関する閉性]
+$A \in \mathcal M_{\mu^*}$ ならば $X \setminus A \in \mathcal M_{\mu^*}$ である．
+\end{lemma}
+\begin{proof}
+任意の $E \subset X$ に対して
+\[
+E \cap (X\setminus A)=E\setminus A,\qquad
+E\setminus (X\setminus A)=E\cap A
+\]
+だから，
+$A$ の可測性より
+\[
+\mu^*(E)
+=
+\mu^*(E\cap A)+\mu^*(E\setminus A)
+=
+\mu^*(E\setminus (X\setminus A))+\mu^*(E\cap (X\setminus A)).
+\]
+したがって $X\setminus A \in \mathcal M_{\mu^*}$ である．
+\end{proof}
+
+\begin{lemma}[有限和に関する閉性]
+$A,B \in \mathcal M_{\mu^*}$ ならば $A \cup B \in \mathcal M_{\mu^*}$ である．
+\end{lemma}
+\begin{proof}
+任意の $E \subset X$ を取る．
+まず $A$ の可測性より
+\[
+\mu^*(E)=\mu^*(E\cap A)+\mu^*(E\setminus A)
+\]
+である．
+ここで $B$ の可測性を $E\cap A$ と $E\setminus A$ に適用すると
+\[
+\mu^*(E\cap A)
+=
+\mu^*(E\cap A\cap B)+\mu^*(E\cap A\setminus B)
+\]
+および
+\[
+\mu^*(E\setminus A)
+=
+\mu^*(E\cap B\setminus A)+\mu^*(E\setminus (A\cup B))
+\]
+を得る．
+したがって
+\begin{align*}
+\mu^*(E)
+=\,&
+\mu^*(E\cap A\cap B)
++\mu^*(E\cap A\setminus B) \\
+&+\mu^*(E\cap B\setminus A)
++\mu^*(E\setminus (A\cup B)).
+\end{align*}
+一方，
+\[
+E\cap (A\cup B)
+=
+(E\cap A\cap B)\sqcup(E\cap A\setminus B)\sqcup(E\cap B\setminus A)
+\]
+だから，外測度の可算劣加法性より
+\[
+\mu^*(E\cap (A\cup B))
+\le
+\mu^*(E\cap A\cap B)
++\mu^*(E\cap A\setminus B)
++\mu^*(E\cap B\setminus A).
+\]
+ゆえに
+\[
+\mu^*(E)
+\ge
+\mu^*(E\cap (A\cup B))+\mu^*(E\setminus (A\cup B)).
+\]
+逆向きの不等式は外測度の劣加法性から常に成り立つので，
+\[
+\mu^*(E)
+=
+\mu^*(E\cap (A\cup B))+\mu^*(E\setminus (A\cup B))
+\]
+である．
+したがって $A\cup B \in \mathcal M_{\mu^*}$ である．
+\end{proof}
+
+\begin{lemma}
+$\mathcal M_{\mu^*}$ は有限共通部分と差集合に関して閉じている．
+\end{lemma}
+\begin{proof}
+補集合と有限和に関する閉性から
+\[
+A\cap B = X\setminus\bigl((X\setminus A)\cup(X\setminus B)\bigr)
+\]
+および
+\[
+A\setminus B=A\cap(X\setminus B)
+\]
+により従う．
+\end{proof}
+
+\begin{lemma}[可算和に関する閉性]
+$\{A_n\}_{n=1}^{\infty}\subset \mathcal M_{\mu^*}$ ならば
+\[
+\bigcup_{n=1}^{\infty}A_n \in \mathcal M_{\mu^*}
+\]
+である．
+\end{lemma}
+\begin{proof}
+まず
+\[
+B_1:=A_1,\qquad
+B_n:=A_n\setminus \bigcup_{k=1}^{n-1}A_k\quad(n\ge 2)
+\]
+とおく．
+前の補題より各 $B_n$ は可測であり，
+さらに $\{B_n\}$ は互いに素で
+\[
+\bigcup_{n=1}^{\infty}B_n=\bigcup_{n=1}^{\infty}A_n
+\]
+である．
+したがって，互いに素な可測集合列の場合を示せば十分である．
+
+そこで $\{B_n\}$ を互いに素な可測集合列とし，
+\[
+B:=\bigcup_{n=1}^{\infty}B_n
+\]
+とおく．
+任意の $E \subset X$ と $N \in \NN$ に対して，有限和に関する閉性を繰り返し用いると
+\[
+\mu^*(E)
+=
+\sum_{n=1}^{N}\mu^*(E\cap B_n)
++\mu^*\left(E\setminus \bigcup_{n=1}^{N}B_n\right)
+\]
+を得る．
+ここで
+\[
+E\setminus B \subset E\setminus \bigcup_{n=1}^{N}B_n
+\]
+だから単調性より
+\[
+\mu^*(E\setminus B)
+\le
+\mu^*\left(E\setminus \bigcup_{n=1}^{N}B_n\right).
+\]
+したがって
+\[
+\mu^*(E)
+\ge
+\sum_{n=1}^{N}\mu^*(E\cap B_n)+\mu^*(E\setminus B)
+\]
+が成り立つ．
+$N$ について上限を取ると
+\[
+\mu^*(E)
+\ge
+\sum_{n=1}^{\infty}\mu^*(E\cap B_n)+\mu^*(E\setminus B)
+\]
+を得る．
+
+一方，
+\[
+E\cap B=\bigcup_{n=1}^{\infty}(E\cap B_n)
+\]
+だから可算劣加法性より
+\[
+\mu^*(E\cap B)
+\le
+\sum_{n=1}^{\infty}\mu^*(E\cap B_n).
+\]
+よって
+\[
+\mu^*(E)
+\ge
+\mu^*(E\cap B)+\mu^*(E\setminus B).
+\]
+逆向きの不等式は外測度の劣加法性から常に成り立つので，
+\[
+\mu^*(E)
+=
+\mu^*(E\cap B)+\mu^*(E\setminus B)
+\]
+である．
+したがって $B \in \mathcal M_{\mu^*}$ である．
+\end{proof}
 
 \begin{theorem}[Carathéodory]
-外測度 $\mu^*$ に関するCarathéodory可測集合全体を $\mathcal M_{\mu^*}$ と書くとき，
-\begin{enumerate}
-    \item $\mathcal M_{\mu^*}$ は $X$ 上の $\sigma$-加法族である
-    \item 制限
-    \[
-    \mu := \mu^*|_{\mathcal M_{\mu^*}}
-    \]
-    は $(X,\mathcal M_{\mu^*})$ 上の完全測度である
-\end{enumerate}
-が成り立つ．
+$\mathcal M_{\mu^*}$ は $X$ 上の $\sigma$-加法族である．
+さらに，制限
+\[
+\mu:=\mu^*|_{\mathcal M_{\mu^*}}
+\]
+は $(X,\mathcal M_{\mu^*})$ 上の測度であり，
+零集合の部分集合も再び可測である．
 \end{theorem}
+\begin{proof}
+前の補題たちにより，$\mathcal M_{\mu^*}$ は $X$ を含み，
+補集合と可算和に関して閉じている．
+したがって $\sigma$-加法族である．
 
-\begin{remark}
-この定理の重要な点は，
-「外測度から測度が作れる」ことである．
-第5章で使ったLebesgue測度の基本定理は，
-Lebesgue外測度にこの一般定理を適用したものと理解できる．
-\end{remark}
+次に $\mu$ が測度であることを示す．
+$\{A_n\}_{n=1}^{\infty}\subset \mathcal M_{\mu^*}$ を互いに素な列とし，
+\[
+A:=\bigcup_{n=1}^{\infty}A_n
+\]
+とおく．
+上で示した可算和の証明の途中式を $E=A$ に適用すると，
+任意の $N$ に対して
+\[
+\mu(A)
+=
+\sum_{n=1}^{N}\mu(A_n)
++\mu\left(\bigcup_{n=N+1}^{\infty}A_n\right)
+\]
+である．
+特に
+\[
+\mu(A)\ge \sum_{n=1}^{N}\mu(A_n)
+\]
+がすべての $N$ に対して成り立つから
+\[
+\mu(A)\ge \sum_{n=1}^{\infty}\mu(A_n)
+\]
+である．
+逆向きの不等式は外測度の可算劣加法性から
+\[
+\mu(A)=\mu^*(A)\le \sum_{n=1}^{\infty}\mu^*(A_n)=\sum_{n=1}^{\infty}\mu(A_n)
+\]
+である．
+したがって
+\[
+\mu(A)=\sum_{n=1}^{\infty}\mu(A_n)
+\]
+を得る．
+また $\mu(\emptyset)=\mu^*(\emptyset)=0$ だから，$\mu$ は測度である．
+
+最後に，$N \in \mathcal M_{\mu^*}$ で $\mu(N)=0$ とし，
+$A \subset N$ を任意に取る．
+任意の $E \subset X$ に対して，
+外測度の劣加法性より
+\[
+\mu^*(E)\le \mu^*(E\cap A)+\mu^*(E\setminus A)
+\]
+である．
+一方，
+\[
+E\cap A \subset N
+\]
+だから単調性より
+\[
+\mu^*(E\cap A)\le \mu^*(N)=\mu(N)=0
+\]
+であり，
+\[
+\mu^*(E\cap A)=0
+\]
+を得る．
+さらに
+\[
+E\setminus A \subset E
+\]
+より
+\[
+\mu^*(E\setminus A)\le \mu^*(E)
+\]
+である．
+したがって
+\[
+\mu^*(E\cap A)+\mu^*(E\setminus A)\le \mu^*(E)
+\]
+となる．
+両側の不等式を合わせると
+\[
+\mu^*(E)=\mu^*(E\cap A)+\mu^*(E\setminus A)
+\]
+である．
+よって $A \in \mathcal M_{\mu^*}$ である．
+\end{proof}
 
 \section{Lebesgue流との関係}
 
-\begin{theorem}[2つの定義の一致]
-$\RR^d$ 上のLebesgue外測度 $\lambda_d^*$ に対して，
-次の2条件は同値である．
-\begin{enumerate}
-    \item $\lambda_d^*(A)=\lambda_{d,*}(A)$
-    \item $A$ は $\lambda_d^*$ に関してCarathéodory可測である
-\end{enumerate}
-\end{theorem}
-
-\begin{proof}[説明]
-第5章で見た正則性により，
-Lebesgue可測集合はコンパクト集合と開集合で内外から近似できる．
-この近似を用いると，
-外測度と内測度の一致は
-Carathéodory条件
+\begin{proposition}[閉区間はCarathéodory可測]
+有界閉区間
 \[
-\lambda_d^*(E)
-=
-\lambda_d^*(E \cap A)+\lambda_d^*(E \setminus A)
+I=[a_1,b_1]\times\cdots\times[a_d,b_d]
 \]
-と同値になる．
-したがって，第4章のLebesgue流の定義と，
-この章のCarathéodory流の定義は同じ可測集合を与える．
+は $\lambda^*$ に関してCarathéodory可測である．
+\end{proposition}
+\begin{proof}
+任意の $E \subset \RR^d$ と $\eps>0$ を取る．
+第3章の開区間被覆の定理より，
+$E$ を覆う有界開区間列 $\{U_n\}_{n=1}^{\infty}$ で
+\[
+\sum_{n=1}^{\infty}|U_n|<\lambda^*(E)+\eps
+\]
+を満たすものが取れる．
+
+各 $n$ について
+\[
+U_n=(\alpha_1^{(n)},\beta_1^{(n)})\times\cdots\times(\alpha_d^{(n)},\beta_d^{(n)})
+\]
+と書く．
+各座標方向で区間
+\[
+(\alpha_i^{(n)},a_i),\qquad
+(a_i,b_i),\qquad
+(b_i,\beta_i^{(n)})
+\]
+のうち空でないものだけを取り出すと，
+$U_n$ は有限個の互いに素な有界開区間に分割される．
+そのうち $I$ と交わる部分の合併は $U_n\cap I$ であり，
+残りの合併は $U_n\setminus I$ である．
+したがって $U_n\cap I$ と $U_n\setminus I$ はそれぞれ有限個の有界開区間の合併であり，
+その体積の総和は
+\[
+|U_n|
+\]
+に等しい．
+
+ゆえに $E\cap I$ と $E\setminus I$ は，それぞれこれらの開区間族で覆われるから
+\[
+\lambda^*(E\cap I)+\lambda^*(E\setminus I)
+\le
+\sum_{n=1}^{\infty}|U_n|
+<
+\lambda^*(E)+\eps
+\]
+である．
+$\eps>0$ は任意だから
+\[
+\lambda^*(E\cap I)+\lambda^*(E\setminus I)\le \lambda^*(E)
+\]
+を得る．
+逆向きの不等式は外測度の劣加法性から常に成り立つので
+\[
+\lambda^*(E)
+=
+\lambda^*(E\cap I)+\lambda^*(E\setminus I)
+\]
+である．
+したがって $I$ はCarathéodory可測である．
+\end{proof}
+
+\begin{proposition}[開集合の可測性]
+任意の開集合 $G \subset \RR^d$ は $\lambda^*$ に関してCarathéodory可測である．
+\end{proposition}
+\begin{proof}
+まず第5章で示したように，座標超平面片は外測度 $0$ をもつ．
+したがってCarathéodoryの定理より，
+それらの部分集合はすべてCarathéodory可測である．
+
+次に任意の有界開区間
+\[
+J=(a_1,b_1)\times\cdots\times(a_d,b_d)
+\]
+を取る．
+同じ端点をもつ閉区間
+\[
+\overline J=[a_1,b_1]\times\cdots\times[a_d,b_d]
+\]
+との差
+\[
+\overline J\setminus J
+\]
+は有限個の座標超平面片の合併に含まれるからCarathéodory可測である．
+閉区間 $\overline J$ も前命題よりCarathéodory可測だから，
+\[
+J=\overline J\setminus(\overline J\setminus J)
+\]
+もCarathéodory可測である．
+
+次に，端点がすべて有理数である有界開区間全体の族を $\mathcal J$ とする．
+$\mathcal J$ は $\QQ^{2d}$ と1対1に対応するので可算集合である．
+開集合 $G$ を任意に取る．
+各 $x \in G$ に対して，$G$ の開性より $r>0$ で
+\[
+[x_1-r,x_1+r]\times\cdots\times[x_d-r,x_d+r]\subset G
+\]
+を満たすものが取れる．
+有理数の稠密性により，各 $i$ について
+\[
+x_i \in (p_i,q_i)\subset [x_i-r,x_i+r]
+\]
+を満たす有理数 $p_i,q_i$ が取れる．
+すると
+\[
+J_x:=(p_1,q_1)\times\cdots\times(p_d,q_d)
+\]
+は $\mathcal J$ の元で
+\[
+x\in J_x\subset G
+\]
+を満たす．
+よって
+\[
+G=\bigcup\{J \in \mathcal J\mid J\subset G\}
+\]
+である．
+右辺は可算個のCarathéodory可測集合の合併だから，Carathéodory可測である．
+\end{proof}
+
+\begin{corollary}[Borel集合]
+すべてのBorel集合は $\lambda^*$ に関してCarathéodory可測である．
+\end{corollary}
+\begin{proof}
+Carathéodory可測集合全体はCarathéodoryの定理により $\sigma$-加法族であり，
+前命題よりすべての開集合を含む．
+したがって，開集合が生成するBorel集合族全体を含む．
+\end{proof}
+
+\begin{proposition}[開集合の内正則性]
+任意の開集合 $G \subset \RR^d$ に対して
+\[
+\lambda^*(G)
+=
+\sup\{\lambda^*(K)\mid K \subset G,\ K \text{ はコンパクト}\}
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+前命題の証明で用いた可算集合
+\[
+\mathcal J_G:=\{J \in \mathcal J\mid \overline J\subset G\}
+\]
+を列
+\[
+\mathcal J_G=\{J_1,J_2,\dots\}
+\]
+と書く．
+すると
+\[
+G=\bigcup_{n=1}^{\infty}J_n
+\]
+である．
+各 $N$ に対して
+\[
+U_N:=\bigcup_{n=1}^{N}J_n,\qquad
+K_N:=\bigcup_{n=1}^{N}\overline{J_n}
+\]
+とおく．
+$K_N$ は有限個のコンパクト集合の合併だからコンパクトであり，
+\[
+K_N\subset G
+\]
+である．
+
+また各 $\overline{J_n}\setminus J_n$ は有限個の座標超平面片の合併に含まれるから外測度 $0$ をもつ．
+したがって
+\[
+\lambda^*(\overline{J_n})=\lambda^*(J_n)
+\]
+である．
+さらに有限個の互いに素な有界開区間の合併に対しては，
+Carathéodoryの定理から得られた測度の有限加法性により
+\[
+\lambda^*(K_N)=\lambda^*(U_N)
+\]
+が成り立つ．
+
+いま
+\[
+U_1\subset U_2\subset \cdots,\qquad
+G=\bigcup_{N=1}^{\infty}U_N
+\]
+だから，Carathéodoryの定理から得られた測度の下からの連続性より
+\[
+\lambda^*(G)=\lim_{N\to\infty}\lambda^*(U_N)=\lim_{N\to\infty}\lambda^*(K_N).
+\]
+したがって
+\[
+\lambda^*(G)\le \sup\{\lambda^*(K)\mid K\subset G,\ K\text{ はコンパクト}\}
+\]
+である．
+逆向きの不等式は外測度の単調性から明らかである．
+\end{proof}
+
+\begin{theorem}[Carathéodory可測ならLebesgue可測]
+$A \subset \RR^d$ が $\lambda^*$ に関してCarathéodory可測ならば
+\[
+\lambda^*(A)=\lambda_*(A)
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+$A$ がCarathéodory可測であるとする．
+第3章の外正則性より，任意の $\eps>0$ に対して
+$A \subset G$ を満たす開集合 $G$ で
+\[
+\lambda^*(G)<\lambda^*(A)+\eps
+\]
+を満たすものが取れる．
+開集合 $G$ はCarathéodory可測だから，
+Carathéodoryの定理から得られる測度を再び $\lambda^*$ と書くことにすれば
+\[
+\lambda^*(G\setminus A)=\lambda^*(G)-\lambda^*(A)<\eps
+\]
+である．
+
+さらに前命題より，$G$ の中にコンパクト集合 $K$ で
+\[
+\lambda^*(G)-\lambda^*(K)<\eps
+\]
+を満たすものが取れる．
+また第3章の外正則性を $G\setminus A$ に適用すると，
+$G\setminus A \subset O$ を満たす開集合 $O$ で
+\[
+\lambda^*(O)<\lambda^*(G\setminus A)+\eps<2\eps
+\]
+となるものが取れる．
+
+\[
+F:=K\setminus O
+\]
+とおくと，$F$ はコンパクトであり，
+さらに
+\[
+F\subset G\setminus O\subset A
+\]
+である．
+したがって
+\[
+\lambda_*(A)\ge \lambda^*(F)
+\]
+である．
+一方，$F\subset K$ だから
+\[
+K=(K\cap O)\sqcup F
+\]
+であり，加法性より
+\[
+\lambda^*(K)=\lambda^*(K\cap O)+\lambda^*(F)\le \lambda^*(O)+\lambda^*(F)
+\]
+となる．
+したがって
+\[
+\lambda^*(F)\ge \lambda^*(K)-\lambda^*(O).
+\]
+以上をまとめると
+\[
+\lambda_*(A)\ge \lambda^*(K)-\lambda^*(O)>\lambda^*(G)-3\eps>\lambda^*(A)-3\eps.
+\]
+もともと常に
+\[
+\lambda_*(A)\le \lambda^*(A)
+\]
+だから，$\eps>0$ は任意であることより
+\[
+\lambda_*(A)=\lambda^*(A)
+\]
+を得る．
+\end{proof}
+
+\begin{theorem}[Lebesgue可測ならCarathéodory可測]
+$A \subset \RR^d$ が
+\[
+\lambda^*(A)=\lambda_*(A)
+\]
+を満たすならば，$A$ は $\lambda^*$ に関してCarathéodory可測である．
+\end{theorem}
+\begin{proof}
+$A$ がLebesgue可測であるとする．
+任意の $\eps>0$ に対して，
+第3章の外正則性より $A \subset G$ を満たす開集合 $G$ で
+\[
+\lambda^*(G)<\lambda^*(A)+\eps
+\]
+となるものが取れる．
+また内測度の定義より，コンパクト集合 $K \subset A$ で
+\[
+\lambda^*(K)>\lambda_*(A)-\eps=\lambda^*(A)-\eps
+\]
+を満たすものが取れる．
+
+開集合 $G$ とコンパクト集合 $K$ はいずれもCarathéodory可測だから，
+\[
+G\setminus K
+\]
+もCarathéodory可測であり，
+\[
+\lambda^*(G\setminus K)=\lambda^*(G)-\lambda^*(K)<2\eps
+\]
+である．
+
+任意の $E \subset \RR^d$ を取る．
+$K$ のCarathéodory可測性より
+\[
+\lambda^*(E)=\lambda^*(E\cap K)+\lambda^*(E\setminus K)
+\]
+である．
+ここで
+\[
+E\cap A \subset (E\cap K)\cup(A\setminus K)
+\]
+だから劣加法性より
+\[
+\lambda^*(E\cap A)\le \lambda^*(E\cap K)+\lambda^*(A\setminus K).
+\]
+また
+\[
+A\setminus K \subset G\setminus K
+\]
+だから
+\[
+\lambda^*(A\setminus K)\le \lambda^*(G\setminus K)<2\eps.
+\]
+したがって
+\[
+\lambda^*(E\cap K)>\lambda^*(E\cap A)-2\eps.
+\]
+さらに
+\[
+E\setminus A \subset E\setminus K
+\]
+だから単調性より
+\[
+\lambda^*(E\setminus K)\ge \lambda^*(E\setminus A).
+\]
+以上を合わせると
+\[
+\lambda^*(E)
+>
+\lambda^*(E\cap A)+\lambda^*(E\setminus A)-2\eps
+\]
+を得る．
+$\eps>0$ は任意だから
+\[
+\lambda^*(E)\ge \lambda^*(E\cap A)+\lambda^*(E\setminus A)
+\]
+である．
+逆向きの不等式は外測度の劣加法性から常に成り立つので，
+\[
+\lambda^*(E)
+=
+\lambda^*(E\cap A)+\lambda^*(E\setminus A)
+\]
+となる．
+したがって $A$ はCarathéodory可測である．
+\end{proof}
+
+\begin{corollary}[2つの定義の一致]
+$\RR^d$ 上では，Lebesgue流の可測性
+\[
+\lambda^*(A)=\lambda_*(A)
+\]
+と，Carathéodory流の可測性とは同値である．
+\end{corollary}
+\begin{proof}
+直前の2つの定理を合わせればよい．
+\end{proof}
+
+\begin{corollary}[第5章の基本定理]
+\[
+\mathcal L^d
+=
+\mathcal M_{\lambda^*}
+\]
+である．
+したがって $\mathcal L^d$ は $\RR^d$ 上の $\sigma$-加法族であり，
+\[
+\lambda:\mathcal L^d\to[0,\infty]
+\]
+は測度である．
+\end{corollary}
+\begin{proof}
+前系とCarathéodoryの定理より直ちに従う．
 \end{proof}
 
 \begin{remark}
@@ -118,35 +768,198 @@ Lebesgue測度のような具体的な幾何学の場面では
 外測度とCarathéodory条件である．
 \end{remark}
 
+\section{Borel集合と非可測集合}
+
+\begin{theorem}[Borel集合]
+すべてのBorel集合はLebesgue可測である．
+\end{theorem}
+\begin{proof}
+前節で，すべてのBorel集合は $\lambda^*$ に関してCarathéodory可測であることを示した．
+またLebesgue可測性とCarathéodory可測性は一致するから，主張が従う．
+\end{proof}
+
+\begin{theorem}[Borel測度の完備化]
+任意のLebesgue可測集合 $A$ は，
+あるBorel集合 $B$ とあるLebesgue零集合 $N$ を用いて
+\[
+A=B\triangle N
+\]
+と書ける．
+したがって，Lebesgue測度はBorel測度の完備化として得られる．
+\end{theorem}
+\begin{proof}
+$A$ をLebesgue可測集合とする．
+各 $n\in\NN$ に対して，第3章の外正則性より
+$A \subset G_n$ を満たす開集合 $G_n$ で
+\[
+\lambda(G_n\setminus A)<\frac1n
+\]
+を満たすものが取れる．
+ここで
+\[
+B:=\bigcap_{n=1}^{\infty}G_n
+\]
+とおく．
+$B$ は開集合の可算共通部分だからBorel集合であり，
+しかも $A \subset B$ である．
+
+いま
+\[
+B\setminus A \subset G_n\setminus A
+\]
+がすべての $n$ について成り立つから，単調性より
+\[
+0\le \lambda(B\setminus A)\le \lambda(G_n\setminus A)<\frac1n
+\]
+である．
+したがって
+\[
+\lambda(B\setminus A)=0.
+\]
+$N:=B\setminus A$ とおけば
+\[
+A=B\setminus N=B\triangle N
+\]
+であり，しかも $N$ は零集合である．
+\end{proof}
+
+\begin{theorem}[Vitali]
+$[0,1]$ にはLebesgue非可測集合が存在する．
+\end{theorem}
+\begin{proof}
+$x-y \in \QQ$ によって $[0,1]$ 上に同値関係を定める．
+選択公理を用いて，各同値類からちょうど1点ずつ選んだ集合を $V \subset [0,1]$ とする．
+
+有理数
+\[
+q\in [-1,1]\cap\QQ
+\]
+に対して
+\[
+V+q:=\{v+q\mid v\in V\}
+\]
+を考える．
+まず，$q_1\ne q_2$ なら $(V+q_1)\cap(V+q_2)=\emptyset$ である．
+実際，もし
+\[
+x=v_1+q_1=v_2+q_2
+\]
+となる $v_1,v_2\in V$ があれば
+\[
+v_1-v_2=q_2-q_1\in\QQ
+\]
+だから $v_1,v_2$ は同じ同値類に属する．
+しかし $V$ は各同値類から1点しか選んでいないので $v_1=v_2$ であり，
+従って $q_1=q_2$ となる．
+これは仮定に反する．
+
+次に
+\[
+[0,1]\subset \bigcup_{q\in[-1,1]\cap\QQ}(V+q)\subset [-1,2]
+\]
+が成り立つ．
+左側の包含は，任意の $x\in[0,1]$ に対して，$x$ と同じ同値類に属する代表元 $v\in V$ が存在し，
+\[
+x-v\in\QQ\cap[-1,1]
+\]
+となることから従う．
+右側の包含は $V\subset [0,1]$ だから明らかである．
+
+もし $V$ がLebesgue可測なら，各 $V+q$ も平行移動不変性によりLebesgue可測で，
+\[
+\lambda_1(V+q)=\lambda_1(V)
+\qquad
+(q\in[-1,1]\cap\QQ)
+\]
+である．
+すると可算加法性より
+\[
+\lambda_1\left(\bigcup_{q\in[-1,1]\cap\QQ}(V+q)\right)
+=
+\sum_{q\in[-1,1]\cap\QQ}\lambda_1(V).
+\]
+
+\begin{enumerate}
+    \item $\lambda_1(V)>0$ なら右辺は $\infty$ になるが，
+    左辺は $[-1,2]$ に含まれるので高々 $3$ である．
+    これは矛盾である．
+    \item $\lambda_1(V)=0$ なら右辺は $0$ になるが，
+    左辺は $[0,1]$ を含むので少なくとも $1$ である．
+    これも矛盾である．
+\end{enumerate}
+
+したがって $V$ はLebesgue可測ではない．
+\end{proof}
+
+\begin{remark}
+この定理は，「すべての部分集合に面積を与える」ことはできないことを示している．
+Lebesgue測度は非常に広いクラスの集合を扱えるが，
+それでもなお全能ではない．
+\end{remark}
+
+\begin{remark}[任意加法性は強すぎる]
+Lebesgue測度は可算加法的であるが，
+任意個の互いに素な集合族に対してまで加法性を要求することはできない．
+実際，すべての1点集合は測度 $0$ であるから，
+もし任意加法性
+\[
+\lambda\left(\bigsqcup_{\alpha \in \Gamma} A_\alpha\right)
+=
+\sum_{\alpha \in \Gamma} \lambda(A_\alpha)
+\]
+が常に成り立つとする
+（右辺は有限部分和の上限として解釈する）．
+すると
+\[
+[0,1] = \bigsqcup_{x \in [0,1]} \{x\}
+\]
+より
+\[
+\lambda_1([0,1]) = \sum_{x \in [0,1]} 0 = 0
+\]
+となってしまう．
+これは明らかに矛盾である．
+したがって，面積を正しくモデル化するには
+「可算加法性」がちょうどよい強さである．
+\end{remark}
+
 \section{一般の構成法}
 
-\begin{definition}[有限加法族と前測度]
-集合 $X$ 上の有限加法族 $\mathcal A$ を取る．
-写像
+\begin{definition}[有限加法族]
+集合 $X$ の部分集合族 $\mathcal A \subset \mathcal P(X)$ が
+$X$ 上の有限加法族であるとは，次の3条件を満たすことをいう．
+\begin{enumerate}
+    \item $\emptyset \in \mathcal A$
+    \item $A,B \in \mathcal A$ ならば $A \cup B \in \mathcal A$
+    \item $A,B \in \mathcal A$ ならば $A \setminus B \in \mathcal A$
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[前測度]
+有限加法族 $\mathcal A$ 上の写像
 \[
-\mu_0 : \mathcal A \to [0,\infty]
+\mu_0:\mathcal A\to[0,\infty]
 \]
 が前測度であるとは，次を満たすことをいう．
 \begin{enumerate}
     \item $\mu_0(\emptyset)=0$
     \item $\mu_0$ は有限加法的である
-    \item 互いに素な列 $\{A_n\}_{n=1}^{\infty} \subset \mathcal A$ で，
+    \item 互いに素な列 $\{A_n\}_{n=1}^{\infty}\subset \mathcal A$ で
     \[
-    \bigcup_{n=1}^{\infty} A_n \in \mathcal A
+    \bigcup_{n=1}^{\infty}A_n\in\mathcal A
     \]
     となるものに対して
     \[
-    \mu_0\left(\bigcup_{n=1}^{\infty} A_n\right)
+    \mu_0\left(\bigcup_{n=1}^{\infty}A_n\right)
     =
-    \sum_{n=1}^{\infty} \mu_0(A_n)
+    \sum_{n=1}^{\infty}\mu_0(A_n)
     \]
     が成り立つ
 \end{enumerate}
 \end{definition}
 
 \begin{remark}
-ここで注意すべきなのは，
-単なる有限加法性だけでは一般に測度は構成できないことである．
+単なる有限加法性だけでは一般に測度は構成できない．
 可算個の分割と両立するための整合性が必要であり，
 それを形式化したものが前測度である．
 \end{remark}
@@ -160,70 +973,174 @@ $X$ の任意の部分集合 $E \subset X$ に対して
 \inf\left\{
 \sum_{n=1}^{\infty}\mu_0(A_n)
 \;\middle|\;
-E \subset \bigcup_{n=1}^{\infty} A_n,\ 
+E \subset \bigcup_{n=1}^{\infty}A_n,\ 
 A_n \in \mathcal A
 \right\}
 \]
 と定める．
 \end{definition}
 
-\begin{theorem}[外測度から測度へ]
-上で定めた $\mu^*$ は外測度であり，
-Carathéodoryの定理によって測度
-\[
-\mu=\mu^*|_{\mathcal M_{\mu^*}}
-\]
-が得られる．
-さらに，$\mu$ はもとの前測度 $\mu_0$ を拡張する．
-\end{theorem}
+\begin{proposition}
+上で定めた $\mu^*$ は $X$ 上の外測度である．
+\end{proposition}
+\begin{proof}
+\begin{enumerate}
+    \item $\mu^*(\emptyset)=0$：
+    まず $\mu^*(\emptyset)\ge 0$ である．
+    一方，
+    \[
+    \emptyset \subset \emptyset
+    \]
+    かつ $\emptyset \in \mathcal A$，$\mu_0(\emptyset)=0$ だから
+    \[
+    \mu^*(\emptyset)\le 0.
+    \]
+    よって $\mu^*(\emptyset)=0$ である．
 
-\begin{remark}
-これが測度構成の基本スキームである．
-まず「基本図形の上で定義された体積」から出発し，
-それを可算被覆によって外測度に延長し，
-最後にCarathéodory可測集合へ制限して真の測度を得る．
-\end{remark}
+    \item 単調性：
+    $E \subset F$ とする．
+    $F$ の任意の可算被覆はそのまま $E$ の可算被覆でもあるから，
+    \[
+    \mu^*(E)\le \mu^*(F)
+    \]
+    である．
+
+    \item 可算劣加法性：
+    集合列 $\{E_n\}_{n=1}^{\infty}$ を取る．
+    右辺が $\infty$ なら不等式は自明であるから有限とし，
+    $\eps>0$ を任意に取る．
+    各 $n$ に対して，$\mu^*(E_n)$ の定義より
+    \[
+    E_n\subset \bigcup_{k=1}^{\infty}A_{n,k},
+    \qquad
+    \sum_{k=1}^{\infty}\mu_0(A_{n,k})
+    <
+    \mu^*(E_n)+\frac{\eps}{2^n}
+    \]
+    となる $A_{n,k}\in\mathcal A$ が取れる．
+    すると
+    \[
+    \bigcup_{n=1}^{\infty}E_n
+    \subset
+    \bigcup_{n=1}^{\infty}\bigcup_{k=1}^{\infty}A_{n,k}
+    \]
+    だから
+    \begin{align*}
+    \mu^*\left(\bigcup_{n=1}^{\infty}E_n\right)
+    &\le
+    \sum_{n=1}^{\infty}\sum_{k=1}^{\infty}\mu_0(A_{n,k}) \\
+    &<
+    \sum_{n=1}^{\infty}
+    \left(
+    \mu^*(E_n)+\frac{\eps}{2^n}
+    \right) \\
+    &=
+    \sum_{n=1}^{\infty}\mu^*(E_n)+\eps.
+    \end{align*}
+    $\eps>0$ は任意だから
+    \[
+    \mu^*\left(\bigcup_{n=1}^{\infty}E_n\right)
+    \le
+    \sum_{n=1}^{\infty}\mu^*(E_n)
+    \]
+    である．
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}[前測度の拡張]
+任意の $A \in \mathcal A$ に対して
+\[
+\mu^*(A)=\mu_0(A)
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+$A \in \mathcal A$ とする．
+$A$ 自身による1項被覆を使えば
+\[
+\mu^*(A)\le \mu_0(A)
+\]
+である．
+
+逆向きの不等式を示す．
+$A \subset \bigcup_{n=1}^{\infty}A_n$ を満たす任意の被覆 $\{A_n\}\subset\mathcal A$ を取る．
+各 $n$ に対して
+\[
+B_1:=A\cap A_1,\qquad
+B_n:=A\cap\left(A_n\setminus\bigcup_{k=1}^{n-1}A_k\right)\quad(n\ge 2)
+\]
+とおく．
+有限加法族の閉性より各 $B_n$ は $\mathcal A$ に属する．
+また $\{B_n\}$ は互いに素で，
+\[
+A=\bigsqcup_{n=1}^{\infty}B_n
+\]
+である．
+しかも各 $B_n \subset A_n$ だから単調性より
+\[
+\mu_0(B_n)\le \mu_0(A_n)
+\]
+である．
+前測度の可算加法性より
+\[
+\mu_0(A)
+=
+\sum_{n=1}^{\infty}\mu_0(B_n)
+\le
+\sum_{n=1}^{\infty}\mu_0(A_n).
+\]
+被覆の取り方について下限を取れば
+\[
+\mu_0(A)\le \mu^*(A)
+\]
+を得る．
+\end{proof}
+
+\begin{corollary}[外測度から測度へ]
+Carathéodoryの定理により，
+\[
+\mu:=\mu^*|_{\mathcal M_{\mu^*}}
+\]
+は測度であり，
+しかも
+\[
+\mu(A)=\mu_0(A)\qquad (A\in\mathcal A)
+\]
+である．
+\end{corollary}
+\begin{proof}
+Carathéodoryの定理と直前の命題を合わせればよい．
+\end{proof}
 
 \begin{example}[Lebesgue測度の構成]
 $X=\RR^d$ とし，
 $\mathcal A$ を有限個の互いに素な半開区間の合併全体とする．
 各
 \[
-A=\bigsqcup_{j=1}^N I_j \in \mathcal A
+A=\bigsqcup_{j=1}^{N}I_j \in \mathcal A
 \]
 に対して
 \[
-\mu_0(A):=\sum_{j=1}^N |I_j|
+\mu_0(A):=\sum_{j=1}^{N}|I_j|
 \]
 と定める．
-これは $\mathcal A$ 上の前測度であり，
-上の一般構成から得られる外測度が第3章のLebesgue外測度である．
-したがって，Carathéodoryの定理によって
-第5章のLebesgue測度が得られる．
+これは $\mathcal A$ 上の前測度である．
+ここから生成される外測度は，第3章で導入したLebesgue外測度と一致し，
+Carathéodoryの定理により第5章のLebesgue測度が得られる．
 \end{example}
 
 \begin{remark}
-第2章のJordan測度 $m_J$ は，
-この $\mu_0$ が定義されている基本図形の上では
-体積を与えるという意味で同じ役割を果たしている．
-Lebesgue測度は，その有限加法的な図形の体積を
-可算被覆に耐える形へ拡張したものと見ることができる．
-\end{remark}
-
-\begin{remark}
 この意味で，Lebesgue測度は
-「区間の体積を可算分割に耐えるように修正したもの」
-である．
-Jordan測度は有限加法族の上の有限加法的な内容積にとどまっていたが，
-Lebesgue測度では
 \[
-\text{有限加法族}
+\text{区間の体積}
 \longrightarrow
 \text{外測度}
 \longrightarrow
 \sigma\text{-加法族上の測度}
 \]
-という3段階の拡張が起こっている．
+という3段階の拡張によって作られている．
+Jordan測度が有限加法的な図形の体積にとどまっていたのに対し，
+Lebesgue測度では可算分割に耐える形へ理論が完成される．
 \end{remark}
 
 \section{解釈}

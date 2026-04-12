@@ -2,10 +2,11 @@
 
 \paragraph{本章の目標}
 Jordan外測度の「有限被覆」を「可算被覆」に置き換えて
-Lebesgue外測度 $\lambda_d^*$ を定義し，
+Lebesgue外測度 $\lambda^*$ を定義し，
 それが $\RR^d$ 上の外測度になることを示す．
+さらに，Lebesgue外測度が開被覆によっても同じように記述できることを証明する．
 本章ではまだ可測集合を選別しない．
-$\lambda_d^*$ は全ての部分集合に定義されるが，
+$\lambda^*$ はすべての部分集合に定義されるが，
 現時点で分かるのは可算劣加法性までである．
 
 \section{動機づけ}
@@ -35,15 +36,84 @@ $A=\{q_1,q_2,\dots\}$ と番号づけて，
 そこで，有限被覆を可算被覆に置き換えて得られる量を
 Lebesgue外測度と呼ぶ．
 
+\section{拡大実数}
+
+Lebesgue外測度では，下限や無限和を頻繁に扱う．
+そのため，値域として拡大実数を用いる．
+
+\begin{definition}[拡大実数]
+\[
+\overline{\RR}:=\RR \cup \{-\infty,\infty\}
+\]
+を拡大実数全体と呼ぶ．
+特に測度論では
+\[
+[0,\infty]:=[0,\infty)\cup\{\infty\}
+\]
+を主に用いる．
+\end{definition}
+
+\begin{remark}
+非負の拡大実数列 $\{a_n\}_{n=1}^{\infty}$ に対して
+\[
+\sum_{n=1}^{\infty} a_n
+\]
+は部分和
+\[
+s_N:=\sum_{n=1}^N a_n
+\]
+の上限
+\[
+\sup_{N \in \NN} s_N
+\]
+として定める．
+非負項しか扱わないので，この和は常に意味をもつ．
+\end{remark}
+
+\begin{proposition}
+非負の拡大実数列 $\{a_n\}_{n=1}^{\infty}$ に対して，部分和列
+\[
+s_N:=\sum_{n=1}^N a_n
+\]
+は単調増加であり，
+\[
+\sum_{n=1}^{\infty} a_n=\sup_{N \in \NN} s_N
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+各 $a_n$ は非負だから
+\[
+s_{N+1}=s_N+a_{N+1}\ge s_N
+\]
+である．
+したがって $\{s_N\}$ は単調増加列である．
+また無限和の定義そのものが
+\[
+\sum_{n=1}^{\infty} a_n:=\sup_{N \in \NN} s_N
+\]
+である．
+\end{proof}
+
+\begin{remark}
+拡大実数では
+\[
+\infty-\infty,\qquad 0\cdot\infty,\qquad \frac{\infty}{\infty}
+\]
+のような式は一般に定義しない．
+測度論では，不定形を避けるため，
+非負値の和・上限・下限だけを使って議論を進めることが多い．
+\end{remark}
+
 \section{定義}
 
 以後，次元 $d \in \NN$ を固定する．
-前章と同様に，$\RR^d$ の有界区間 $R$ の体積を $|R|$ で表す．
+第2章と同様に，$\RR^d$ の有界区間 $R$ の体積を $|R|$ で表す．
 
 \begin{definition}[Lebesgue外測度]
-集合 $A \subset \RR^d$ に対し，$A$ のLebesgue外測度 $\lambda_d^*(A)$ を
+集合 $A \subset \RR^d$ に対し，$A$ のLebesgue外測度 $\lambda^*(A)$ を
 \[
-\lambda_d^*(A)
+\lambda^*(A)
 :=
 \inf\left\{
 \sum_{n=1}^{\infty} |R_n|
@@ -64,7 +134,7 @@ R_n \text{ は有界区間}
 \begin{proposition}[Jordan外測度との比較]
 有界集合 $A \subset \RR^d$ に対して
 \[
-\lambda_d^*(A) \le m_J^*(A)
+\lambda^*(A) \le m_J^*(A)
 \]
 が成り立つ．
 \end{proposition}
@@ -81,13 +151,13 @@ m_J(E) = \sum_{j=1}^N |Q_j|
 であった．
 この有限個の区間の族は $A$ の可算被覆でもあるから，
 \[
-\lambda_d^*(A) \le \sum_{j=1}^N |Q_j| = m_J(E)
+\lambda^*(A) \le \sum_{j=1}^N |Q_j| = m_J(E)
 \]
 を得る．
 $E$ の取り方について下限を取ればよい．
 \end{proof}
 
-\section{基本定理}
+\section{外測度}
 
 \begin{definition}[外測度]
 集合 $X$ 上の写像
@@ -109,21 +179,21 @@ $E$ の取り方について下限を取ればよい．
 \end{definition}
 
 \begin{theorem}[Lebesgue外測度は外測度]
-$\lambda_d^*$ は $\RR^d$ 上の外測度である．
+$\lambda^*$ は $\RR^d$ 上の外測度である．
 \end{theorem}
 \begin{proof}
 \begin{enumerate}
-    \item $\lambda_d^*(\emptyset)=0$：
-    まず外測度は定義から非負なので $\lambda_d^*(\emptyset)\ge 0$ である．
+    \item $\lambda^*(\emptyset)=0$：
+    まず定義から $\lambda^*(\emptyset)\ge 0$ である．
     一方，任意の $\eps > 0$ に対して体積が $\eps$ 未満の有界区間 $R$ を1つ取れば
     \[
     \emptyset \subset R
     \]
     であるから
     \[
-    \lambda_d^*(\emptyset) \le |R| < \eps.
+    \lambda^*(\emptyset) \le |R| < \eps.
     \]
-    $\eps$ は任意なので $\lambda_d^*(\emptyset)=0$ である．
+    $\eps$ は任意なので $\lambda^*(\emptyset)=0$ である．
 
     \item 単調性：
     $A \subset B$ とする．
@@ -134,22 +204,26 @@ $\lambda_d^*$ は $\RR^d$ 上の外測度である．
     はそのまま $A$ の可算被覆でもある．
     したがって，$A$ に対する下限は $B$ に対する下限以下であり，
     \[
-    \lambda_d^*(A) \le \lambda_d^*(B)
+    \lambda^*(A) \le \lambda^*(B)
     \]
     を得る．
 
     \item 可算劣加法性：
     集合列 $\{A_n\}_{n=1}^{\infty}$ を取る．
-    もし右辺が $\infty$ なら不等式は自明である．
-    右辺が有限であるとし，$\eps > 0$ を任意に取る．
-    各 $n$ に対して，$\lambda_d^*(A_n)$ の定義より
+    もし
+    \[
+    \sum_{n=1}^{\infty}\lambda^*(A_n)=\infty
+    \]
+    なら不等式は自明である．
+    したがって右辺が有限であるとし，$\eps > 0$ を任意に取る．
+    各 $n$ に対して，$\lambda^*(A_n)$ の定義より
     $A_n$ を覆う可算個の区間 $\{R_{n,k}\}_{k=1}^{\infty}$ を
     \[
     A_n \subset \bigcup_{k=1}^{\infty} R_{n,k},
     \qquad
     \sum_{k=1}^{\infty} |R_{n,k}|
     <
-    \lambda_d^*(A_n) + \frac{\eps}{2^n}
+    \lambda^*(A_n) + \frac{\eps}{2^n}
     \]
     となるように取れる．
     すると二重列 $\{R_{n,k}\}_{n,k}$ は可算個の区間からなり，
@@ -160,22 +234,22 @@ $\lambda_d^*$ は $\RR^d$ 上の外測度である．
     \]
     であるから，
     \begin{align*}
-    \lambda_d^*\left(\bigcup_{n=1}^{\infty} A_n\right)
+    \lambda^*\left(\bigcup_{n=1}^{\infty} A_n\right)
     &\le
     \sum_{n=1}^{\infty}\sum_{k=1}^{\infty} |R_{n,k}| \\
     &<
     \sum_{n=1}^{\infty}
     \left(
-    \lambda_d^*(A_n)+\frac{\eps}{2^n}
+    \lambda^*(A_n)+\frac{\eps}{2^n}
     \right) \\
     &=
-    \sum_{n=1}^{\infty}\lambda_d^*(A_n)+\eps.
+    \sum_{n=1}^{\infty}\lambda^*(A_n)+\eps.
     \end{align*}
     $\eps > 0$ は任意だから
     \[
-    \lambda_d^*\left(\bigcup_{n=1}^{\infty} A_n\right)
+    \lambda^*\left(\bigcup_{n=1}^{\infty} A_n\right)
     \le
-    \sum_{n=1}^{\infty}\lambda_d^*(A_n)
+    \sum_{n=1}^{\infty}\lambda^*(A_n)
     \]
     が従う．
 \end{enumerate}
@@ -184,7 +258,7 @@ $\lambda_d^*$ は $\RR^d$ 上の外測度である．
 \begin{corollary}[有限劣加法性]
 任意の $A,B \subset \RR^d$ に対して
 \[
-\lambda_d^*(A \cup B) \le \lambda_d^*(A) + \lambda_d^*(B)
+\lambda^*(A \cup B) \le \lambda^*(A) + \lambda^*(B)
 \]
 が成り立つ．
 \end{corollary}
@@ -199,7 +273,7 @@ A_1=A,\qquad A_2=B,\qquad A_n=\emptyset\ (n \ge 3)
 \begin{proposition}[平行移動不変性]
 任意の $A \subset \RR^d$ と $c \in \RR^d$ に対して
 \[
-\lambda_d^*(A+c)=\lambda_d^*(A)
+\lambda^*(A+c)=\lambda^*(A)
 \]
 が成り立つ．
 \end{proposition}
@@ -215,14 +289,118 @@ A+c \subset \bigcup_{n=1}^{\infty} (R_n+c)
 である．
 したがって
 \[
-\lambda_d^*(A+c) \le \sum_{n=1}^{\infty} |R_n|
+\lambda^*(A+c) \le \sum_{n=1}^{\infty} |R_n|
 \]
 となるから，$A$ の被覆について下限を取って
 \[
-\lambda_d^*(A+c) \le \lambda_d^*(A)
+\lambda^*(A+c) \le \lambda^*(A)
 \]
 を得る．
 逆向きの不等式は $-c$ だけ平行移動すれば従う．
+\end{proof}
+
+\section{開被覆による記述}
+
+\begin{theorem}[開区間被覆による記述]
+任意の $A \subset \RR^d$ に対して
+\[
+\lambda^*(A)
+=
+\inf\left\{
+\sum_{n=1}^{\infty} |U_n|
+\;\middle|\;
+A \subset \bigcup_{n=1}^{\infty} U_n,\ 
+U_n \text{ は有界開区間}
+\right\}
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+右辺を $\alpha(A)$ とおく．
+有界開区間は有界区間の特別な場合だから
+\[
+\lambda^*(A)\le \alpha(A)
+\]
+である．
+
+逆向きの不等式を示す．
+$\eps>0$ を取る．
+Lebesgue外測度の定義より，
+$A$ を覆う有界区間列 $\{R_n\}_{n=1}^{\infty}$ で
+\[
+\sum_{n=1}^{\infty}|R_n|<\lambda^*(A)+\eps
+\]
+を満たすものが取れる．
+各 $n$ に対して，$R_n \subset U_n$ を満たす有界開区間 $U_n$ を
+\[
+|U_n|<|R_n|+\frac{\eps}{2^n}
+\]
+となるように選ぶ．
+すると $\{U_n\}$ は $A$ の有界開区間被覆であり，
+\begin{align*}
+\sum_{n=1}^{\infty}|U_n|
+&<
+\sum_{n=1}^{\infty}\left(|R_n|+\frac{\eps}{2^n}\right) \\
+&=
+\sum_{n=1}^{\infty}|R_n|+\eps \\
+&<
+\lambda^*(A)+2\eps.
+\end{align*}
+したがって
+\[
+\alpha(A)\le \lambda^*(A)+2\eps
+\]
+を得る．
+$\eps>0$ は任意だから $\alpha(A)\le \lambda^*(A)$ である．
+\end{proof}
+
+\begin{corollary}[開集合による外正則性]
+任意の $A \subset \RR^d$ に対して
+\[
+\lambda^*(A)
+=
+\inf\{\lambda^*(G)\mid A \subset G,\ G \text{ は開集合}\}
+\]
+が成り立つ．
+\end{corollary}
+\begin{proof}
+右辺を $\beta(A)$ とおく．
+$A \subset G$ なら単調性より
+\[
+\lambda^*(A)\le \lambda^*(G)
+\]
+だから
+\[
+\lambda^*(A)\le \beta(A)
+\]
+である．
+
+逆向きの不等式を示す．
+$\eps>0$ を取る．
+前定理より，$A$ を覆う有界開区間列 $\{U_n\}_{n=1}^{\infty}$ で
+\[
+\sum_{n=1}^{\infty}|U_n|<\lambda^*(A)+\eps
+\]
+を満たすものが取れる．
+\[
+G:=\bigcup_{n=1}^{\infty}U_n
+\]
+とおけば，$G$ は開集合で $A \subset G$ である．
+また外測度の可算劣加法性より
+\[
+\lambda^*(G)
+\le
+\sum_{n=1}^{\infty}\lambda^*(U_n)
+\le
+\sum_{n=1}^{\infty}|U_n|
+<
+\lambda^*(A)+\eps.
+\]
+したがって
+\[
+\beta(A)\le \lambda^*(A)+\eps.
+\]
+$\eps>0$ は任意だから $\beta(A)\le \lambda^*(A)$ である．
 \end{proof}
 
 \section{具体例}
@@ -230,7 +408,7 @@ A+c \subset \bigcup_{n=1}^{\infty} (R_n+c)
 \begin{proposition}[区間による上からの評価]
 $A \subset R$ を満たす有界区間 $R$ に対して
 \[
-\lambda_d^*(A) \le |R|
+\lambda^*(A) \le |R|
 \]
 が成り立つ．
 特に，有界集合のLebesgue外測度は有限である．
@@ -242,12 +420,12 @@ $R$ 自身による1個の被覆を考えればよい．
 \begin{proposition}[1点集合は零集合]
 任意の $a \in \RR^d$ に対して
 \[
-\lambda_d^*(\{a\})=0
+\lambda^*(\{a\})=0
 \]
 が成り立つ．
 \end{proposition}
 \begin{proof}
-非負性より $\lambda_d^*(\{a\}) \ge 0$ である．
+非負性より $\lambda^*(\{a\}) \ge 0$ である．
 任意の $\eps > 0$ に対し，$\delta > 0$ を十分小さく取って
 \[
 (2\delta)^d < \eps
@@ -261,41 +439,41 @@ $R$ 自身による1個の被覆を考えればよい．
 \]
 であり，右辺の体積は $(2\delta)^d$ だから
 \[
-\lambda_d^*(\{a\}) \le (2\delta)^d < \eps.
+\lambda^*(\{a\}) \le (2\delta)^d < \eps.
 \]
-$\eps$ は任意なので $\lambda_d^*(\{a\})=0$ である．
+$\eps$ は任意なので $\lambda^*(\{a\})=0$ である．
 \end{proof}
 
 \begin{theorem}[可算集合は零集合]
 可算集合 $A \subset \RR^d$ に対して
 \[
-\lambda_d^*(A)=0
+\lambda^*(A)=0
 \]
 が成り立つ．
 \end{theorem}
 \begin{proof}
 $A=\{a_1,a_2,\dots\}$ と書く．
-上の命題と可算劣加法性より
+可算劣加法性より
 \[
-\lambda_d^*(A)
+\lambda^*(A)
 \le
-\sum_{n=1}^{\infty} \lambda_d^*(\{a_n\})
+\sum_{n=1}^{\infty} \lambda^*(\{a_n\})
 =
 \sum_{n=1}^{\infty} 0
 =0.
 \]
-非負性と合わせて $\lambda_d^*(A)=0$ を得る．
+非負性と合わせて $\lambda^*(A)=0$ を得る．
 \end{proof}
 
 \begin{example}
 \begin{enumerate}
-    \item $\QQ^d$ は可算だから $\lambda_d^*(\QQ^d)=0$
+    \item $\QQ^d$ は可算だから $\lambda^*(\QQ^d)=0$
     \item 特に
     \[
     \lambda_1^*(\QQ \cap [0,1]) = 0
     \]
     である
-    \item $\ZZ^d$ も可算だから $\lambda_d^*(\ZZ^d)=0$
+    \item $\ZZ^d$ も可算だから $\lambda^*(\ZZ^d)=0$
 \end{enumerate}
 \end{example}
 
@@ -308,21 +486,6 @@ $A=\{a_1,a_2,\dots\}$ と書く．
 ここに「有限被覆」と「可算被覆」の差が最もはっきり現れる．
 \end{remark}
 
-\begin{remark}
-一方で，この段階ではまだ
-\[
-\lambda_d^*(R)=|R|
-\]
-を一般の区間 $R$ について証明したわけではない．
-今示したのは，上からの評価
-\[
-\lambda_d^*(R) \le |R|
-\]
-だけである．
-逆向きの評価や，加法性の成立は，
-次章以降で内測度や可測性を導入して初めて明確になる．
-\end{remark}
-
 \section{解釈}
 
 Lebesgue外測度の本質は，
@@ -330,12 +493,12 @@ Jordan外測度の有限被覆を可算被覆へ緩めたことにある．
 この1つの変更によって，
 \begin{enumerate}
     \item 可算集合のような「薄い集合」を体積 $0$ として扱える
-    \item 有界性を仮定せず，全ての部分集合に量を割り当てられる
+    \item 有界性を仮定せず，すべての部分集合に量を割り当てられる
     \item しかしその代わり，現時点では加法性は失われ，劣加法性しか残らない
 \end{enumerate}
 という新しい状況が生じる．
 
-したがって $\lambda_d^*$ は，まだ「測度」ではなく「外測度」である．
+したがって $\lambda^*$ は，まだ「測度」ではなく「外測度」である．
 次章ではこれに対応する内測度を導入し，
 \[
 \text{外測度}=\text{内測度}

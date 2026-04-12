@@ -3,12 +3,15 @@
 \paragraph{本章の目標}
 前章の
 \[
-\lambda_d^*(A)=\lambda_{d,*}(A)
+\lambda^*(A)=\lambda_*(A)
 \]
-という条件を用いてLebesgue可測集合とLebesgue測度を定義し，
-その基本的な振る舞いを眺める．
-この章では「面積を数理モデル化する」とは何を意味するかを
-具体例とともに確認する．
+という条件を用いてLebesgue可測集合とLebesgue測度を定義する．
+また，この章では測度論で使う基本的な言葉
+\[
+\sigma\text{-加法族},\qquad \text{測度},\qquad \text{Borel集合族}
+\]
+をまとめて導入する．
+Lebesgue測度は，区間の体積を保ちながら「面積」を数理モデル化する代表例である．
 
 \section{動機づけ}
 
@@ -23,40 +26,351 @@
 このおかげで，可算集合のような薄い集合を除外せずに
 面積論を展開できる．
 
-\section{定義}
+\section{シグマ加法族}
+
+\begin{definition}[$\sigma$-加法族]
+集合 $X$ の部分集合族 $\mathcal M \subset \mathcal P(X)$ が
+$X$ 上の $\sigma$-加法族であるとは，次の3条件を満たすことをいう．
+\begin{enumerate}
+    \item $X \in \mathcal M$
+    \item $A \in \mathcal M$ ならば $X \setminus A \in \mathcal M$
+    \item $\{A_n\}_{n=1}^{\infty} \subset \mathcal M$ ならば
+    \[
+    \bigcup_{n=1}^{\infty} A_n \in \mathcal M
+    \]
+\end{enumerate}
+\end{definition}
+
+\begin{proposition}[基本性質]
+$\mathcal M$ を $X$ 上の $\sigma$-加法族とする．
+このとき次が成り立つ．
+\begin{enumerate}
+    \item $\emptyset \in \mathcal M$
+    \item $A,B \in \mathcal M$ ならば $A \cup B \in \mathcal M$
+    \item $A,B \in \mathcal M$ ならば $A \cap B \in \mathcal M$
+    \item $A,B \in \mathcal M$ ならば $A \setminus B \in \mathcal M$
+    \item $\{A_n\}_{n=1}^{\infty} \subset \mathcal M$ ならば
+    \[
+    \bigcap_{n=1}^{\infty} A_n \in \mathcal M
+    \]
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}
+    \item
+    \[
+    \emptyset = X \setminus X
+    \]
+    だから，補集合に関する閉性より $\emptyset \in \mathcal M$ である．
+
+    \item 可算和に関する閉性を
+    \[
+    A_1=A,\qquad A_2=B,\qquad A_n=\emptyset\ (n\ge 3)
+    \]
+    に適用すればよい．
+
+    \item De Morganの法則
+    \[
+    A \cap B = X \setminus ((X \setminus A)\cup(X \setminus B))
+    \]
+    より従う．
+
+    \item
+    \[
+    A\setminus B=A\cap(X\setminus B)
+    \]
+    だから (2), (3) より従う．
+
+    \item De Morganの法則
+    \[
+    \bigcap_{n=1}^{\infty}A_n
+    =
+    X\setminus\left(\bigcup_{n=1}^{\infty}(X\setminus A_n)\right)
+    \]
+    より従う．
+\end{enumerate}
+\end{proof}
+
+\begin{proposition}[共通部分]
+$X$ 上の $\sigma$-加法族の族 $\{\mathcal M_\alpha\}_{\alpha \in \Gamma}$ に対して
+\[
+\bigcap_{\alpha \in \Gamma}\mathcal M_\alpha
+\]
+も $X$ 上の $\sigma$-加法族である．
+\end{proposition}
+\begin{proof}
+\[
+\mathcal M:=\bigcap_{\alpha \in \Gamma}\mathcal M_\alpha
+\]
+とおく．
+各 $\mathcal M_\alpha$ は $\sigma$-加法族だから，まず $X \in \mathcal M_\alpha$ がすべての $\alpha$ について成り立つ．
+したがって $X \in \mathcal M$ である．
+
+次に $A \in \mathcal M$ とする．
+すると $A \in \mathcal M_\alpha$ がすべての $\alpha$ について成り立つ．
+各 $\mathcal M_\alpha$ は補集合に関して閉じているから
+\[
+X\setminus A \in \mathcal M_\alpha
+\]
+がすべての $\alpha$ について成り立つ．
+よって $X\setminus A \in \mathcal M$ である．
+
+最後に $\{A_n\}_{n=1}^{\infty}\subset \mathcal M$ とする．
+すると各 $n$ と各 $\alpha$ に対して $A_n \in \mathcal M_\alpha$ である．
+各 $\mathcal M_\alpha$ は可算和に関して閉じているから
+\[
+\bigcup_{n=1}^{\infty}A_n \in \mathcal M_\alpha
+\]
+がすべての $\alpha$ について成り立つ．
+よって
+\[
+\bigcup_{n=1}^{\infty}A_n \in \mathcal M
+\]
+である．
+\end{proof}
+
+\begin{definition}[生成される $\sigma$-加法族]
+集合族 $\mathcal E \subset \mathcal P(X)$ に対して，
+$\mathcal E$ を含む $X$ 上のすべての $\sigma$-加法族の共通部分を
+\[
+\sigma(\mathcal E)
+\]
+と書き，$\mathcal E$ が生成する $\sigma$-加法族という．
+\end{definition}
+
+\begin{proposition}
+$\sigma(\mathcal E)$ は $X$ 上の $\sigma$-加法族であり，
+$\mathcal E \subset \sigma(\mathcal E)$ を満たす．
+さらに，$\mathcal E \subset \mathcal M$ を満たす任意の $\sigma$-加法族 $\mathcal M$ に対して
+\[
+\sigma(\mathcal E) \subset \mathcal M
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+$\mathcal E$ を含む $\sigma$-加法族全体の共通部分として $\sigma(\mathcal E)$ を定めたので，
+前命題より $\sigma(\mathcal E)$ 自身が $\sigma$-加法族である．
+また，各候補は $\mathcal E$ を含むから，共通部分 $\sigma(\mathcal E)$ も $\mathcal E$ を含む．
+最後の主張は，共通部分が各候補の部分集合であることから直ちに従う．
+\end{proof}
+
+\begin{definition}[Borel集合族]
+$\RR^d$ の開集合全体の族を $\mathcal G$ とする．
+\[
+\mathcal B(\RR^d):=\sigma(\mathcal G)
+\]
+を $\RR^d$ のBorel集合族という．
+$\mathcal B(\RR^d)$ の元をBorel集合という．
+\end{definition}
+
+\section{測度}
+
+\begin{definition}[測度]
+$X$ 上の $\sigma$-加法族 $\mathcal M$ に対して，写像
+\[
+\mu:\mathcal M \to [0,\infty]
+\]
+が測度であるとは，次の2条件を満たすことをいう．
+\begin{enumerate}
+    \item $\mu(\emptyset)=0$
+    \item 互いに素な列 $\{A_n\}_{n=1}^{\infty}\subset \mathcal M$ に対して
+    \[
+    \mu\left(\bigcup_{n=1}^{\infty}A_n\right)
+    =
+    \sum_{n=1}^{\infty}\mu(A_n)
+    \]
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+上の性質 (2) を完全加法性，あるいは可算加法性という．
+この性質をもつ写像を測度と呼ぶ．
+\end{remark}
+
+\begin{proposition}[測度の基本性質]
+$\mu$ を $(X,\mathcal M)$ 上の測度とする．
+このとき次が成り立つ．
+\begin{enumerate}
+    \item 有限加法性：
+    $A,B \in \mathcal M$ が互いに素なら
+    \[
+    \mu(A\cup B)=\mu(A)+\mu(B)
+    \]
+    \item 単調性：
+    $A,B \in \mathcal M$ で $A \subset B$ なら
+    \[
+    \mu(A)\le \mu(B)
+    \]
+    \item 可算劣加法性：
+    $\{A_n\}_{n=1}^{\infty}\subset\mathcal M$ に対して
+    \[
+    \mu\left(\bigcup_{n=1}^{\infty}A_n\right)
+    \le
+    \sum_{n=1}^{\infty}\mu(A_n)
+    \]
+    \item 下からの連続性：
+    \[
+    A_1\subset A_2\subset \cdots,\qquad A=\bigcup_{n=1}^{\infty}A_n
+    \]
+    なら
+    \[
+    \mu(A)=\lim_{n\to\infty}\mu(A_n)
+    \]
+    \item 上からの連続性：
+    \[
+    A_1\supset A_2\supset \cdots,\qquad A=\bigcap_{n=1}^{\infty}A_n
+    \]
+    かつ $\mu(A_1)<\infty$ なら
+    \[
+    \mu(A)=\lim_{n\to\infty}\mu(A_n)
+    \]
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+\begin{enumerate}
+    \item
+    \[
+    A_1=A,\qquad A_2=B,\qquad A_n=\emptyset\ (n\ge 3)
+    \]
+    とおいて可算加法性を適用すればよい．
+
+    \item $A \subset B$ とする．
+    このとき
+    \[
+    B=A \sqcup (B\setminus A)
+    \]
+    だから有限加法性より
+    \[
+    \mu(B)=\mu(A)+\mu(B\setminus A)\ge \mu(A)
+    \]
+    を得る．
+
+    \item 一般の列 $\{A_n\}$ に対して
+    \[
+    B_1:=A_1,\qquad
+    B_n:=A_n\setminus\bigcup_{k=1}^{n-1}A_k\quad(n\ge 2)
+    \]
+    とおく．
+    すると $\{B_n\}$ は互いに素で，
+    \[
+    \bigcup_{n=1}^{\infty}A_n=\bigcup_{n=1}^{\infty}B_n
+    \]
+    かつ $B_n \subset A_n$ である．
+    よって可算加法性と単調性より
+    \[
+    \mu\left(\bigcup_{n=1}^{\infty}A_n\right)
+    =
+    \sum_{n=1}^{\infty}\mu(B_n)
+    \le
+    \sum_{n=1}^{\infty}\mu(A_n)
+    \]
+    を得る．
+
+    \item
+    \[
+    B_1:=A_1,\qquad B_n:=A_n\setminus A_{n-1}\quad(n\ge 2)
+    \]
+    とおくと，$\{B_n\}$ は互いに素で
+    \[
+    A=\bigsqcup_{n=1}^{\infty}B_n,\qquad
+    A_N=\bigsqcup_{n=1}^{N}B_n
+    \]
+    である．
+    したがって
+    \[
+    \mu(A)=\sum_{n=1}^{\infty}\mu(B_n),\qquad
+    \mu(A_N)=\sum_{n=1}^{N}\mu(B_n)
+    \]
+    となるので，
+    部分和の極限として
+    \[
+    \lim_{N\to\infty}\mu(A_N)=\mu(A)
+    \]
+    を得る．
+
+    \item
+    \[
+    B_n:=A_1\setminus A_n
+    \]
+    とおくと
+    \[
+    B_1\subset B_2\subset \cdots,\qquad
+    \bigcup_{n=1}^{\infty}B_n=A_1\setminus A
+    \]
+    である．
+    さらに
+    \[
+    A_1=A_n\sqcup B_n,\qquad
+    A_1=A\sqcup(A_1\setminus A)
+    \]
+    だから有限加法性より
+    \[
+    \mu(A_n)=\mu(A_1)-\mu(B_n),\qquad
+    \mu(A)=\mu(A_1)-\mu(A_1\setminus A)
+    \]
+    である．
+    (4) を $B_n$ に適用すると
+    \[
+    \mu(A_1\setminus A)=\lim_{n\to\infty}\mu(B_n)
+    \]
+    だから
+    \[
+    \mu(A)
+    =
+    \mu(A_1)-\lim_{n\to\infty}\mu(B_n)
+    =
+    \lim_{n\to\infty}\bigl(\mu(A_1)-\mu(B_n)\bigr)
+    =
+    \lim_{n\to\infty}\mu(A_n)
+    \]
+    を得る．
+\end{enumerate}
+\end{proof}
+
+\section{Lebesgue可測集合とLebesgue測度}
 
 \begin{definition}[Lebesgue可測集合とLebesgue測度]
 \[
 \mathcal L^d
 :=
-\{A \subset \RR^d \mid \lambda_d^*(A)=\lambda_{d,*}(A)\}
+\{A \subset \RR^d \mid \lambda^*(A)=\lambda_*(A)\}
 \]
 とおく．
 $A \in \mathcal L^d$ のとき，その共通値を
 \[
-\lambda_d(A)
+\lambda(A)
 :=
-\lambda_d^*(A)=\lambda_{d,*}(A)
+\lambda^*(A)=\lambda_*(A)
 \]
 と書き，$A$ のLebesgue測度という．
 \end{definition}
 
-\begin{theorem}[Lebesgue測度の基本定理]
-\begin{enumerate}
-    \item $\mathcal L^d$ は $\RR^d$ の部分集合の $\sigma$-加法族である
-    \item $\lambda_d : \mathcal L^d \to [0,\infty]$ は完全測度である
-\end{enumerate}
+\begin{theorem}[基本定理]
+第6章で証明するように，$\mathcal L^d$ は $\RR^d$ 上の $\sigma$-加法族であり，
+\[
+\lambda:\mathcal L^d\to[0,\infty]
+\]
+は測度である．
 \end{theorem}
-\begin{proof}[証明の方針]
-この定理の本質は，
-外測度と内測度の一致という幾何学的な定義が，
-次章で導入するCarathéodory条件と一致することにある．
-Carathéodory条件からは
-$\sigma$-加法族と可算加法性が抽象的に導かれるので，
-その一般定理をLebesgue外測度へ適用すればよい．
+\begin{proof}
+第6章でLebesgue流の定義とCarathéodory流の定義が一致することを示す．
+Carathéodoryの定理によれば，Carathéodory可測集合全体は $\sigma$-加法族をなし，
+外測度のその上への制限は測度になる．
+したがって同じことが $\mathcal L^d$ と $\lambda$ に対しても成り立つ．
 \end{proof}
 
 \section{区間の測度}
+
+\begin{proposition}[コンパクト集合]
+コンパクト集合 $K \subset \RR^d$ はLebesgue可測であり，
+\[
+\lambda(K)=\lambda^*(K)
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+第4章で既に示した．
+\end{proof}
 
 \begin{theorem}[閉区間の測度]
 有界閉区間
@@ -65,26 +379,26 @@ I = [a_1,b_1] \times \cdots \times [a_d,b_d]
 \]
 に対して
 \[
-\lambda_d(I)=|I|
+\lambda(I)=|I|
 \]
 が成り立つ．
 \end{theorem}
 \begin{proof}
-第4章より，$I$ はコンパクトだからLebesgue可測であり，
+$I$ はコンパクトだからLebesgue可測であり，
 \[
-\lambda_d(I)=\lambda_d^*(I)
+\lambda(I)=\lambda^*(I)
 \]
 である．
 第3章より $I$ 自身による被覆を使えば
 \[
-\lambda_d^*(I)\le |I|
+\lambda^*(I)\le |I|
 \]
 である．
 
 逆向きの不等式を示す．
 $I \subset \bigcup_{n=1}^{\infty} R_n$ を任意の可算被覆とし，
 $\eps>0$ を取る．
-各 $n$ に対し，$R_n \subset U_n$ を満たす開区間 $U_n$ を
+各 $n$ に対し，$R_n \subset U_n$ を満たす有界開区間 $U_n$ を
 \[
 |U_n|<|R_n|+\frac{\eps}{2^n}
 \]
@@ -95,27 +409,35 @@ $I$ のコンパクト性より有限部分被覆
 I \subset U_1 \cup \cdots \cup U_N
 \]
 が取れる．
+
 第2章で扱ったJordan測度を $m_J$ と書けば，
 $I$ はJordan可測で $m_J(I)=|I|$ であり，
-さらに有限劣加法性より
+有限劣加法性より
 \[
-|I| = m_J(I)
-\le \sum_{n=1}^N |U_n|
-< \sum_{n=1}^N |R_n|+\sum_{n=1}^N \frac{\eps}{2^n}
-\le \sum_{n=1}^{\infty} |R_n|+\eps
+|I|
+=
+m_J(I)
+\le
+\sum_{n=1}^N |U_n|
+<
+\sum_{n=1}^{\infty}|R_n|+\eps
 \]
 が成り立つ．
-いま $\eps>0$ は任意だから
+$\eps>0$ は任意だから
 \[
-|I| \le \sum_{n=1}^{\infty} |R_n|
+|I|\le \sum_{n=1}^{\infty}|R_n|
 \]
 を得る．
-被覆の取り方について下限を取ると
+被覆の取り方について下限を取れば
 \[
-|I| \le \lambda_d^*(I)
+|I| \le \lambda^*(I)
+\]
+である．
+したがって
+\[
+\lambda(I)=\lambda^*(I)=|I|
 \]
 を得る．
-したがって $\lambda_d(I)=|I|$ である．
 \end{proof}
 
 \begin{proposition}[座標超平面片は零集合]
@@ -139,113 +461,144 @@ F
 2\delta \prod_{j\ne i}(b_j-a_j)
 \]
 だから，これを $\eps$ 未満にできる．
-よって $\lambda_d^*(F)=0$ であり，したがって $\lambda_d(F)=0$ である．
+よって $\lambda^*(F)=0$ であり，
+第4章より $F$ はLebesgue可測で
+\[
+\lambda(F)=0
+\]
+である．
 \end{proof}
 
 \begin{corollary}[有界区間の測度]
 任意の有界区間 $I \subset \RR^d$ に対して
 \[
-\lambda_d(I)=|I|
+\lambda(I)=|I|
 \]
 が成り立つ．
 \end{corollary}
 \begin{proof}
-任意の有界区間は，同じ端点をもつ閉区間と
-有限個の座標超平面片だけ異なる．
-その差は零集合だから測度に影響しない．
+$I$ と同じ端点をもつ閉区間を $\overline I$ とする．
+すると $\overline I \setminus I$ は有限個の座標超平面片の合併に含まれるから，
+前命題より零集合である．
+したがって
+\[
+\lambda(I)=\lambda(\overline I)=|\overline I|=|I|
+\]
+を得る．
 \end{proof}
 
 \begin{proposition}[平行移動不変性]
 任意のLebesgue可測集合 $A \subset \RR^d$ と $c \in \RR^d$ に対して
 \[
-\lambda_d(A+c)=\lambda_d(A)
+\lambda(A+c)=\lambda(A)
 \]
 が成り立つ．
 \end{proposition}
 \begin{proof}
 第3章より外測度は平行移動不変であり，
 第4章の定義から内測度も平行移動不変である．
-したがって $A$ が可測なら $A+c$ も可測であり，
+したがって
+\[
+\lambda^*(A+c)=\lambda^*(A),\qquad
+\lambda_*(A+c)=\lambda_*(A)
+\]
+が成り立つ．
+$A$ が可測なら $A+c$ も可測であり，
 共通値は変わらない．
 \end{proof}
 
-\section{正則性とBorel集合}
+\begin{corollary}[零集合の部分集合]
+$N \in \mathcal L^d$ で $\lambda(N)=0$ とする．
+このとき任意の $A \subset N$ もLebesgue可測であり，
+\[
+\lambda(A)=0
+\]
+が成り立つ．
+\end{corollary}
+\begin{proof}
+$A \subset N$ だから，外測度の単調性より
+\[
+0\le \lambda^*(A)\le \lambda^*(N)=\lambda(N)=0
+\]
+である．
+したがって $\lambda^*(A)=0$ であり，
+第4章より $A$ はLebesgue可測で
+\[
+\lambda(A)=0
+\]
+となる．
+\end{proof}
+
+\section{正則性}
 
 \begin{theorem}[内正則性]
 任意のLebesgue可測集合 $A \subset \RR^d$ に対して
 \[
-\lambda_d(A)
+\lambda(A)
 =
-\sup\{\lambda_d(K)\mid K \subset A,\ K \text{ はコンパクト}\}
+\sup\{\lambda(K)\mid K \subset A,\ K \text{ はコンパクト}\}
 \]
 が成り立つ．
 \end{theorem}
 \begin{proof}
-$A$ が可測なら $\lambda_d(A)=\lambda_{d,*}(A)$ である．
+$A$ が可測なら
+\[
+\lambda(A)=\lambda_*(A)
+\]
+である．
 またコンパクト集合は可測だから，
-内測度の定義に現れる $\lambda_d^*(K)$ は $\lambda_d(K)$ と書き直せる．
+内測度の定義に現れる $\lambda^*(K)$ は $\lambda(K)$ と書き直せる．
+したがって
+\[
+\lambda(A)
+=
+\sup\{\lambda(K)\mid K \subset A,\ K \text{ はコンパクト}\}
+\]
+を得る．
 \end{proof}
 
 \begin{theorem}[外正則性]
 任意のLebesgue可測集合 $A \subset \RR^d$ に対して
 \[
-\lambda_d(A)
+\lambda(A)
 =
-\inf\{\lambda_d(U)\mid A \subset U,\ U \text{ は開集合}\}
+\inf\{\lambda^*(G)\mid A \subset G,\ G \text{ は開集合}\}
 \]
 が成り立つ．
 \end{theorem}
-\begin{proof}[説明]
-区間による可算被覆は，各区間をわずかに膨らませることで
-開集合による外側近似へ直せる．
-この事実を可測集合に対して整理すると，上の公式が得られる．
-詳しい証明は標準的だが少し長いので省略する．
-\end{proof}
-
-\begin{theorem}[開集合は可測]
-任意の開集合 $U \subset \RR^d$ はLebesgue可測である．
-\end{theorem}
-\begin{proof}[説明]
-開集合は内部からコンパクト集合列で近似できる．
-そのとき内測度が外測度まで達するので，$U$ は可測になる．
-\end{proof}
-
-\begin{corollary}[Borel集合]
-すべてのBorel集合はLebesgue可測である．
-\end{corollary}
 \begin{proof}
-開集合は上の定理からLebesgue可測であり，
-Lebesgue可測集合全体は $\sigma$-加法族だから，
-開集合が生成するBorel $\sigma$-加法族全体が可測になる．
+$A$ が可測なら
+\[
+\lambda(A)=\lambda^*(A)
+\]
+である．
+一方，第3章で
+\[
+\lambda^*(A)
+=
+\inf\{\lambda^*(G)\mid A \subset G,\ G \text{ は開集合}\}
+\]
+を証明した．
+両式を合わせれば主張が従う．
 \end{proof}
 
-\begin{corollary}[完備性]
-$N \in \mathcal L^d$ で $\lambda_d(N)=0$ とする．
-このとき任意の $A \subset N$ もLebesgue可測であり，
+\begin{remark}
+第6章で開集合がLebesgue可測であることを示すと，
+上の式は通常の形
 \[
-\lambda_d(A)=0
+\lambda(A)
+=
+\inf\{\lambda(G)\mid A \subset G,\ G \text{ は開集合}\}
 \]
-が成り立つ．
-\end{corollary}
-\begin{proof}
-完全測度の定義そのものである．
-\end{proof}
-
-\begin{theorem}[Borel測度の完備化]
-任意のLebesgue可測集合 $A$ は，
-あるBorel集合 $B$ とあるLebesgue零集合 $N$ を用いて
-\[
-A = B \triangle N
-\]
-と書ける．
-したがって，Lebesgue測度はBorel測度の完備化として得られる．
-\end{theorem}
+と書き直せる．
+この意味で，Lebesgue測度は外側からも内側からもよく近似できる．
+\end{remark}
 
 \section{具体例}
 
 \begin{example}
 \begin{enumerate}
-    \item $\QQ^d$ は可算だから $\lambda_d(\QQ^d)=0$
+    \item $\QQ^d$ は可算だから $\lambda(\QQ^d)=0$
     \item 特に
     \[
     \lambda_1(\QQ \cap [0,1])=0
@@ -266,82 +619,23 @@ Lebesgue測度は「どれだけ隙間なく散らばっているか」ではな
 「どれだけの面積コストで覆う必要があるか」を測っている．
 \end{remark}
 
-\section{非可測集合と限界}
-
-\begin{theorem}[Vitali]
-$[0,1]$ にはLebesgue非可測集合が存在する．
-\end{theorem}
-\begin{proof}[考え方]
-$x-y \in \QQ$ で同値関係を入れ，
-各同値類からちょうど1点ずつ選んだ集合を $V \subset [0,1]$ とする．
-有理数 $q \in [-1,1] \cap \QQ$ に対する平行移動 $V+q$ を考えると，
-これらは互いに素で，
-\[
-[0,1] \subset \bigcup_{q \in [-1,1]\cap\QQ}(V+q) \subset [-1,2]
-\]
-が成り立つ．
-もし $V$ が可測なら，平行移動不変性により
-\[
-\lambda_1(V+q)=\lambda_1(V)
-\qquad
-(q \in [-1,1]\cap\QQ)
-\]
-である．
-そこで可算加法性を用いると，
-$\lambda_1(V)>0$ なら右辺の和は発散して
-$[-1,2]$ の有限測度と矛盾し，
-$\lambda_1(V)=0$ なら合併全体の測度も $0$ となって
-$[0,1]$ を覆えない．
-したがって $V$ は可測でない．
-\end{proof}
-
-\begin{remark}
-この構成には選択公理が使われている．
-非可測集合の存在は，
-「すべての部分集合に面積を与える」ことができないという
-Lebesgue測度の本質的な限界を表している．
-\end{remark}
-
-\begin{remark}[任意加法性は強すぎる]
-Lebesgue測度は $\sigma$-加法的であるが，
-任意個の互いに素な集合族に対してまで加法性を要求することはできない．
-実際，すべての1点集合は測度 $0$ であるから，
-もし任意加法性
-\[
-\lambda_d\left(\bigsqcup_{\alpha \in \Gamma} A_\alpha\right)
-=
-\sum_{\alpha \in \Gamma} \lambda_d(A_\alpha)
-\]
-が常に成り立つとする
-（右辺は有限部分和の上限として解釈する）．
-すると
-\[
-[0,1] = \bigsqcup_{x \in [0,1]} \{x\}
-\]
-より
-\[
-\lambda_1([0,1]) = \sum_{x \in [0,1]} 0 = 0
-\]
-となってしまう．
-これは明らかに矛盾である．
-したがって，面積を正しくモデル化するには
-「可算加法性」がちょうどよい強さである．
-\end{remark}
-
 \section{解釈}
 
 Lebesgue測度は，
 区間の体積を保ちつつ，
 可算個の近似を許すことで面積論を大幅に安定化したものである．
-その結果，
+この章ではまだ
+\[
+\mathcal L^d
+\]
+が本当に $\sigma$-加法族をなし，
+$\lambda$ が本当に測度になることの証明を与えていない．
+その抽象的な部分は第6章でCarathéodory流の測度論として扱う．
+
+しかし，この段階でも既に，
 \begin{enumerate}
     \item 区間の体積は従来通り保たれる
     \item 可算集合や境界の薄い集合を自然に無視できる
-    \item Borel集合を超える広いクラスの集合を扱える
-    \item それでもなお，非可測集合の存在によって「全ての部分集合」を測ることはできない
+    \item 内側・外側の近似によって面積が安定している
 \end{enumerate}
-という姿が見えてくる．
-
-次章では，この理論を支えているCarathéodory流の測度論を述べる．
-そこでは，Lebesgue測度だけでなく，
-一般の外測度から測度を構成する枠組みが明確になる．
+という，Lebesgue測度の幾何学的な姿は十分見えている．
