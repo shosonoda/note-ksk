@@ -10,7 +10,7 @@ $\lambda_d^*$ は全ての部分集合に定義されるが，
 
 \section{動機づけ}
 
-第2章では，Jordan測度は有限個の長方体による近似に基づく理論であることを見た．
+第2章では，Jordan測度は有限個の区間による近似に基づく理論であることを見た．
 そのため
 \[
 A = \QQ \cap [0,1]
@@ -38,7 +38,7 @@ Lebesgue外測度と呼ぶ．
 \section{定義}
 
 以後，次元 $d \in \NN$ を固定する．
-前章と同様に，$\RR^d$ の有界長方体 $R$ の体積を $|R|$ で表す．
+前章と同様に，$\RR^d$ の有界区間 $R$ の体積を $|R|$ で表す．
 
 \begin{definition}[Lebesgue外測度]
 集合 $A \subset \RR^d$ に対し，$A$ のLebesgue外測度 $\lambda_d^*(A)$ を
@@ -49,7 +49,7 @@ Lebesgue外測度と呼ぶ．
 \sum_{n=1}^{\infty} |R_n|
 \;\middle|\;
 A \subset \bigcup_{n=1}^{\infty} R_n,\ 
-R_n \text{ は有界長方体}
+R_n \text{ は有界区間}
 \right\}
 \]
 で定める．
@@ -70,7 +70,7 @@ R_n \text{ は有界長方体}
 \end{proposition}
 \begin{proof}
 $A \subset E$ を満たす基本集合 $E$ を取る．
-第2章より，$E$ は有限個の互いに素な半開長方体の合併
+第2章より，$E$ は有限個の互いに素な半開区間の合併
 \[
 E = \bigsqcup_{j=1}^N Q_j
 \]
@@ -79,7 +79,7 @@ E = \bigsqcup_{j=1}^N Q_j
 m_J(E) = \sum_{j=1}^N |Q_j|
 \]
 であった．
-この有限個の長方体の族は $A$ の可算被覆でもあるから，
+この有限個の区間の族は $A$ の可算被覆でもあるから，
 \[
 \lambda_d^*(A) \le \sum_{j=1}^N |Q_j| = m_J(E)
 \]
@@ -119,7 +119,7 @@ $\lambda_d^*$ は $\RR^d$ 上の外測度である．
     \[
     \emptyset \subset \bigcup_{n=1}^{\infty} \{a\}
     \]
-    であり，$\{a\}$ は体積 $0$ の長方体だから
+    であり，$\{a\}$ は体積 $0$ の区間だから
     \[
     \lambda_d^*(\emptyset) \le \sum_{n=1}^{\infty} 0 = 0.
     \]
@@ -143,7 +143,7 @@ $\lambda_d^*$ は $\RR^d$ 上の外測度である．
     もし右辺が $\infty$ なら不等式は自明である．
     右辺が有限であるとし，$\eps > 0$ を任意に取る．
     各 $n$ に対して，$\lambda_d^*(A_n)$ の定義より
-    $A_n$ を覆う可算個の長方体 $\{R_{n,k}\}_{k=1}^{\infty}$ を
+    $A_n$ を覆う可算個の区間 $\{R_{n,k}\}_{k=1}^{\infty}$ を
     \[
     A_n \subset \bigcup_{k=1}^{\infty} R_{n,k},
     \qquad
@@ -152,7 +152,7 @@ $\lambda_d^*$ は $\RR^d$ 上の外測度である．
     \lambda_d^*(A_n) + \frac{\eps}{2^n}
     \]
     となるように取れる．
-    すると二重列 $\{R_{n,k}\}_{n,k}$ は可算個の長方体からなり，
+    すると二重列 $\{R_{n,k}\}_{n,k}$ は可算個の区間からなり，
     \[
     \bigcup_{n=1}^{\infty} A_n
     \subset
@@ -227,8 +227,8 @@ A+c \subset \bigcup_{n=1}^{\infty} (R_n+c)
 
 \section{具体例}
 
-\begin{proposition}[長方体による上からの評価]
-$A \subset R$ を満たす有界長方体 $R$ に対して
+\begin{proposition}[区間による上からの評価]
+$A \subset R$ を満たす有界区間 $R$ に対して
 \[
 \lambda_d^*(A) \le |R|
 \]
@@ -313,7 +313,7 @@ $A=\{a_1,a_2,\dots\}$ と書く．
 \[
 \lambda_d^*(R)=|R|
 \]
-を一般の長方体 $R$ について証明したわけではない．
+を一般の区間 $R$ について証明したわけではない．
 今示したのは，上からの評価
 \[
 \lambda_d^*(R) \le |R|
