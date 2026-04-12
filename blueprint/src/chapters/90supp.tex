@@ -2,28 +2,41 @@
 
 \section{上限と下限}
 
-\subsection{実数の上限と下限}
+\subsection{順序集合の上限と下限}
 
-集合の上限と下限は，それぞれ最小上界と最大下界である．
+一般の順序集合$(X,\le)$の上限と下限は，それぞれ最小上界と最大下界である．
 \begin{definition}
-    集合$A \subset \RR$の上限（下限）とは，$A$の上界（下界）であって，$A$の任意の上界（下界）よりも小さい（大きい）ものをいう．
+    集合$A \subset X$の上限（下限）とは，$A$の上界（下界）であって，$A$の任意の上界（下界）よりも小さい（大きい）ものをいう．
 \end{definition}
 
-\begin{proposition}
-    $c \in \RR$に対して，$c = \sup A$（$c = \inf A$）であることと，以下の条件が成り立つことは同値である．
+\subsection{実数の上限と下限}
+
+\begin{remark}
+    一般の順序集合$(X,\le)$において，上限（下限）は常に定義できるが，存在するとは限らない．例えば，有理数体$\QQ$の部分集合$A := \{x \in \QQ \mid x^2 < 2\}$は上（下）に有界だが，$X=\QQ$において上限（下限）は存在しない．
+
+    ところが，実数体$\RR$においては，\textbf{実数の連続性}により，上（下）に有界な非空集合$A$は常に（実数$X=\RR$において）上限（下限）をもつ．Lebesgue測度論ではこの性質を度々使う．
+
+    実数の連続性は，実数の完備性（completeness），Weierstrassの公理とも呼ばれる．解析学では，実数を完備順序体として定義することが多く，このとき実数の連続性は定義（実数の公理）の一部である．集合論や基礎論では，実数を有理数体$\QQ$からDedekind切断またはCauchy列の同値類として定義することが多く，このとき実数の連続性は定理の1つである．なお，証明支援系LeanのライブラリMathlibでは，後者の立場を採用している．
+\end{remark}
+
+\begin{proposition}[上限の特徴付け]
+    実数の部分集合$A \subset \RR$に対し，$c \in \RR$が$A$の上限であることは，以下の条件と同値
     \begin{itemize}
-        \item $c$は$A$の上界（下界）である．
-        \item 任意の$\varepsilon > 0$に対して，$c - \varepsilon$（$c + \varepsilon$）は$A$の上界（下界）でない．つまり，ある$a \in A$が存在して，$a > c - \varepsilon$（$a < c + \varepsilon$）が成り立つ．
+        \item $c$は$A$の上界である．つまり，任意の$a \in A$に対し，$a \le c$．
+        \item $c$より小さい数は$A$の上界でない．つまり， 任意の$\varepsilon > 0$に対し，ある$a \in A$が存在して，$a > c - \varepsilon$．
+    \end{itemize}
+\end{proposition}
+
+\begin{proposition}[下限の特徴付け]
+    実数の部分集合$A \subset \RR$に対し，$c \in \RR$が$A$の下限であることは，以下の条件と同値
+    \begin{itemize}
+        \item $c$は$A$の下界である．つまり，任意の$a \in A$に対し，$a \ge c$．
+        \item $c$より大きい数は$A$の下界でない．つまり， 任意の$\varepsilon > 0$に対し，ある$a \in A$が存在して，$a < c + \varepsilon$．
     \end{itemize}
 \end{proposition}
 
 \begin{proposition}
     非空集合$A,B \subset \RR$に対し，$A \subset B$ならば$\sup A \le \sup B$かつ$\inf A \ge \inf B$が成り立つ．
-\end{proposition}
-
-\begin{proposition}
-    $c>0$に対し，\[\sup_{x \in A} cf(x) = c \sup_{x \in A} f(x), \quad \inf_{x \in A} cf(x) = c \inf_{x \in A} f(x)\]
-    $c<0$に対し，\[\sup_{x \in A} cf(x) = c \inf_{x \in A} f(x), \quad \inf_{x \in A} cf(x) = c \sup_{x \in A} f(x)\]
 \end{proposition}
 
 \begin{proposition}
