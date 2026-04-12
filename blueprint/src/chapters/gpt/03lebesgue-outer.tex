@@ -1,0 +1,343 @@
+\chapter{Lebesgue外測度}
+
+\paragraph{本章の目標}
+Jordan外測度の「有限被覆」を「可算被覆」に置き換えて
+Lebesgue外測度 $\lambda_d^*$ を定義し，
+それが $\RR^d$ 上の外測度になることを示す．
+本章ではまだ可測集合を選別しない．
+$\lambda_d^*$ は全ての部分集合に定義されるが，
+現時点で分かるのは可算劣加法性までである．
+
+\section{動機づけ}
+
+第2章では，Jordan測度は有限個の長方体による近似に基づく理論であることを見た．
+そのため
+\[
+A = \QQ \cap [0,1]
+\]
+のような集合はJordan可測にならなかった．
+有限個の区間で $A$ を覆おうとすると，
+$A$ が $[0,1]$ に稠密であるため，
+結局 $[0,1]$ 全体に近い長さを支払わされるからである．
+
+しかし，もし可算個の区間を使ってよいなら事情は変わる．
+$A=\{q_1,q_2,\dots\}$ と番号づけて，
+各点 $q_n$ を長さ $\eps 2^{-n}$ の区間で覆えば，
+全体の長さの和は
+\[
+\sum_{n=1}^{\infty} \eps 2^{-n} = \eps
+\]
+になる．
+したがって，$\QQ \cap [0,1]$ は「長さ $0$ の集合」と見なすのが自然である．
+
+この観察は，Jordan理論の限界が
+「被覆が有限個に制限されていること」にあることを示している．
+そこで，有限被覆を可算被覆に置き換えて得られる量を
+Lebesgue外測度と呼ぶ．
+
+\section{定義}
+
+以後，次元 $d \in \NN$ を固定する．
+前章と同様に，$\RR^d$ の有界長方体 $R$ の体積を $|R|$ で表す．
+
+\begin{definition}[Lebesgue外測度]
+集合 $A \subset \RR^d$ に対し，$A$ のLebesgue外測度 $\lambda_d^*(A)$ を
+\[
+\lambda_d^*(A)
+:=
+\inf\left\{
+\sum_{n=1}^{\infty} |R_n|
+\;\middle|\;
+A \subset \bigcup_{n=1}^{\infty} R_n,\ 
+R_n \text{ は有界長方体}
+\right\}
+\]
+で定める．
+\end{definition}
+
+\begin{remark}
+有限個の被覆は可算個の被覆の特別な場合である．
+したがって，Lebesgue外測度はJordan外測度よりも
+柔軟な近似を許している．
+\end{remark}
+
+\begin{proposition}[Jordan外測度との比較]
+有界集合 $A \subset \RR^d$ に対して
+\[
+\lambda_d^*(A) \le m_J^*(A)
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+$A \subset E$ を満たす基本集合 $E$ を取る．
+第2章より，$E$ は有限個の互いに素な半開長方体の合併
+\[
+E = \bigsqcup_{j=1}^N Q_j
+\]
+と書け，
+\[
+m_J(E) = \sum_{j=1}^N |Q_j|
+\]
+であった．
+この有限個の長方体の族は $A$ の可算被覆でもあるから，
+\[
+\lambda_d^*(A) \le \sum_{j=1}^N |Q_j| = m_J(E)
+\]
+を得る．
+$E$ の取り方について下限を取ればよい．
+\end{proof}
+
+\section{基本定理}
+
+\begin{definition}[外測度]
+集合 $X$ 上の写像
+\[
+\mu^* : \mathcal P(X) \to [0,\infty]
+\]
+が外測度であるとは，次の3条件を満たすことをいう．
+\begin{enumerate}
+    \item $\mu^*(\emptyset)=0$
+    \item $A \subset B$ ならば $\mu^*(A) \le \mu^*(B)$
+    \item 任意の集合列 $\{A_n\}_{n=1}^{\infty}$ に対して
+    \[
+    \mu^*\left(\bigcup_{n=1}^{\infty} A_n\right)
+    \le
+    \sum_{n=1}^{\infty} \mu^*(A_n)
+    \]
+    が成り立つ
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Lebesgue外測度は外測度]
+$\lambda_d^*$ は $\RR^d$ 上の外測度である．
+\end{theorem}
+\begin{proof}
+\begin{enumerate}
+    \item $\lambda_d^*(\emptyset)=0$：
+    まず外測度は定義から非負なので $\lambda_d^*(\emptyset)\ge 0$ である．
+    一方，任意の点 $a \in \RR^d$ に対して
+    \[
+    \emptyset \subset \bigcup_{n=1}^{\infty} \{a\}
+    \]
+    であり，$\{a\}$ は体積 $0$ の長方体だから
+    \[
+    \lambda_d^*(\emptyset) \le \sum_{n=1}^{\infty} 0 = 0.
+    \]
+    よって $\lambda_d^*(\emptyset)=0$ である．
+
+    \item 単調性：
+    $A \subset B$ とする．
+    $B$ の任意の可算被覆
+    \[
+    B \subset \bigcup_{n=1}^{\infty} R_n
+    \]
+    はそのまま $A$ の可算被覆でもある．
+    したがって，$A$ に対する下限は $B$ に対する下限以下であり，
+    \[
+    \lambda_d^*(A) \le \lambda_d^*(B)
+    \]
+    を得る．
+
+    \item 可算劣加法性：
+    集合列 $\{A_n\}_{n=1}^{\infty}$ を取る．
+    もし右辺が $\infty$ なら不等式は自明である．
+    右辺が有限であるとし，$\eps > 0$ を任意に取る．
+    各 $n$ に対して，$\lambda_d^*(A_n)$ の定義より
+    $A_n$ を覆う可算個の長方体 $\{R_{n,k}\}_{k=1}^{\infty}$ を
+    \[
+    A_n \subset \bigcup_{k=1}^{\infty} R_{n,k},
+    \qquad
+    \sum_{k=1}^{\infty} |R_{n,k}|
+    <
+    \lambda_d^*(A_n) + \frac{\eps}{2^n}
+    \]
+    となるように取れる．
+    すると二重列 $\{R_{n,k}\}_{n,k}$ は可算個の長方体からなり，
+    \[
+    \bigcup_{n=1}^{\infty} A_n
+    \subset
+    \bigcup_{n=1}^{\infty}\bigcup_{k=1}^{\infty} R_{n,k}
+    \]
+    であるから，
+    \begin{align*}
+    \lambda_d^*\left(\bigcup_{n=1}^{\infty} A_n\right)
+    &\le
+    \sum_{n=1}^{\infty}\sum_{k=1}^{\infty} |R_{n,k}| \\
+    &<
+    \sum_{n=1}^{\infty}
+    \left(
+    \lambda_d^*(A_n)+\frac{\eps}{2^n}
+    \right) \\
+    &=
+    \sum_{n=1}^{\infty}\lambda_d^*(A_n)+\eps.
+    \end{align*}
+    $\eps > 0$ は任意だから
+    \[
+    \lambda_d^*\left(\bigcup_{n=1}^{\infty} A_n\right)
+    \le
+    \sum_{n=1}^{\infty}\lambda_d^*(A_n)
+    \]
+    が従う．
+\end{enumerate}
+\end{proof}
+
+\begin{corollary}[有限劣加法性]
+任意の $A,B \subset \RR^d$ に対して
+\[
+\lambda_d^*(A \cup B) \le \lambda_d^*(A) + \lambda_d^*(B)
+\]
+が成り立つ．
+\end{corollary}
+\begin{proof}
+上の定理で
+\[
+A_1=A,\qquad A_2=B,\qquad A_n=\emptyset\ (n \ge 3)
+\]
+とおけばよい．
+\end{proof}
+
+\begin{proposition}[平行移動不変性]
+任意の $A \subset \RR^d$ と $c \in \RR^d$ に対して
+\[
+\lambda_d^*(A+c)=\lambda_d^*(A)
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+$A \subset \bigcup_{n=1}^{\infty} R_n$ ならば
+\[
+A+c \subset \bigcup_{n=1}^{\infty} (R_n+c)
+\]
+であり，平行移動は各辺の長さを変えないので
+\[
+|R_n+c| = |R_n|
+\]
+である．
+したがって
+\[
+\lambda_d^*(A+c) \le \sum_{n=1}^{\infty} |R_n|
+\]
+となるから，$A$ の被覆について下限を取って
+\[
+\lambda_d^*(A+c) \le \lambda_d^*(A)
+\]
+を得る．
+逆向きの不等式は $-c$ だけ平行移動すれば従う．
+\end{proof}
+
+\section{具体例}
+
+\begin{proposition}[長方体による上からの評価]
+$A \subset R$ を満たす有界長方体 $R$ に対して
+\[
+\lambda_d^*(A) \le |R|
+\]
+が成り立つ．
+特に，有界集合のLebesgue外測度は有限である．
+\end{proposition}
+\begin{proof}
+$R$ 自身による1個の被覆を考えればよい．
+\end{proof}
+
+\begin{proposition}[1点集合は零集合]
+任意の $a \in \RR^d$ に対して
+\[
+\lambda_d^*(\{a\})=0
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+非負性より $\lambda_d^*(\{a\}) \ge 0$ である．
+任意の $\eps > 0$ に対し，$\delta > 0$ を十分小さく取って
+\[
+(2\delta)^d < \eps
+\]
+とする．
+すると
+\[
+\{a\}
+\subset
+\prod_{j=1}^d (a_j-\delta,a_j+\delta)
+\]
+であり，右辺の体積は $(2\delta)^d$ だから
+\[
+\lambda_d^*(\{a\}) \le (2\delta)^d < \eps.
+\]
+$\eps$ は任意なので $\lambda_d^*(\{a\})=0$ である．
+\end{proof}
+
+\begin{theorem}[可算集合は零集合]
+可算集合 $A \subset \RR^d$ に対して
+\[
+\lambda_d^*(A)=0
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+$A=\{a_1,a_2,\dots\}$ と書く．
+上の命題と可算劣加法性より
+\[
+\lambda_d^*(A)
+\le
+\sum_{n=1}^{\infty} \lambda_d^*(\{a_n\})
+=
+\sum_{n=1}^{\infty} 0
+=0.
+\]
+非負性と合わせて $\lambda_d^*(A)=0$ を得る．
+\end{proof}
+
+\begin{example}
+\begin{enumerate}
+    \item $\QQ^d$ は可算だから $\lambda_d^*(\QQ^d)=0$
+    \item 特に
+    \[
+    \lambda_1^*(\QQ \cap [0,1]) = 0
+    \]
+    である
+    \item $\ZZ^d$ も可算だから $\lambda_d^*(\ZZ^d)=0$
+\end{enumerate}
+\end{example}
+
+\begin{remark}
+第2章でJordan可測でなかった
+\[
+\QQ \cap [0,1]
+\]
+が，Lebesgue外測度では長さ $0$ になる．
+ここに「有限被覆」と「可算被覆」の差が最もはっきり現れる．
+\end{remark}
+
+\begin{remark}
+一方で，この段階ではまだ
+\[
+\lambda_d^*(R)=|R|
+\]
+を一般の長方体 $R$ について証明したわけではない．
+今示したのは，上からの評価
+\[
+\lambda_d^*(R) \le |R|
+\]
+だけである．
+逆向きの評価や，加法性の成立は，
+次章以降で内測度や可測性を導入して初めて明確になる．
+\end{remark}
+
+\section{解釈}
+
+Lebesgue外測度の本質は，
+Jordan外測度の有限被覆を可算被覆へ緩めたことにある．
+この1つの変更によって，
+\begin{enumerate}
+    \item 可算集合のような「薄い集合」を体積 $0$ として扱える
+    \item 有界性を仮定せず，全ての部分集合に量を割り当てられる
+    \item しかしその代わり，現時点では加法性は失われ，劣加法性しか残らない
+\end{enumerate}
+という新しい状況が生じる．
+
+したがって $\lambda_d^*$ は，まだ「測度」ではなく「外測度」である．
+次章ではこれに対応する内測度を導入し，
+\[
+\text{外測度}=\text{内測度}
+\]
+が成り立つ集合をLebesgue可測集合として定義する．
