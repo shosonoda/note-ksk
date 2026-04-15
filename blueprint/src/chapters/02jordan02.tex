@@ -6,10 +6,9 @@ Jordan測度，Jordan可測集合，有限加法族（集合代数）
 
 第1章では1次元のRiemann積分を導入し，Dirichlet関数によって
 Riemann積分が常には定義できないことを見た．
-その障害は，関数の不連続性だけでなく，
-集合の「境界の大きさ」にも由来している．
-本章では，その背後にある集合論的な構成を
-Jordan測度の立場から整理する．
+その障害は，関数の不連続性だけではなく，
+集合の「境界の大きさ」に由来している．
+本章では，そのことをJordan測度の観点から整理する．
 
 有界集合 $A \subset \RR^d$ の指示関数
 \[
@@ -22,7 +21,7 @@ Jordan測度の立場から整理する．
 を考えると，$1_A$ がRiemann可積分であるかどうかは，
 $A$ を有限個の直方体でどこまでうまく近似できるかという問題になる．
 この「有限個」という条件が，
-後のLebesgue理論との違いを最も早く露わにする．
+後のLebesgue理論との顕著な差である．
 
 \section{\texorpdfstring{$\RR^d$}{Rd}の基本集合}
 
@@ -83,40 +82,99 @@ m_J(E) := \sum_{j=1}^n |Q_j|
 \end{definition}
 
 \begin{lemma}[格子分割]
-有限個の有界区間の合併は，基本集合として書き直せる．
-特に，基本集合の表示に現れる区間の端点を全て集めて格子分割を取れば，
-その各小区間は元の集合に含まれるか，さもなくば交わらないかのいずれかである．
+有限個の有界区間の合併 $A = \sum_{i=1}^n B_i$は，基本集合$\sum_{j=1}^m Q_j$として書き直せる．
+特に，書き換え後の体積$\sum_{j=1}^m |Q_j|$は分割の方法に依らない．
 \end{lemma}
 \begin{proof}
-各座標方向ごとに，もとの区間に現れる全ての端点を
-\[
-a_k = t_{k,0} < t_{k,1} < \cdots < t_{k,N_k} = b_k
-\]
-と並べる．
-すると格子の小区間
-\[
-\prod_{k=1}^d [t_{k,i_k-1},t_{k,i_k})
-\]
-は，各座標方向で元の端点をまたがないので，
-もとの各区間に対して「丸ごと含まれる」か「全く交わらない」かのどちらかである．
-したがって，有限個の区間の合併は，そのうち必要な小区間だけを集めた基本集合として表せる．
+    （演習）
 \end{proof}
+%\input{chapters/02jordan-proof01.tex}
 
 \begin{theorem}[基本集合の測度の性質]
 基本集合 $E,F \subset \RR^d$ に対して次が成り立つ．
 \begin{enumerate}
-    \item $m_J(E) \ge 0$，特に $m_J(\emptyset)=0$
-    \item $E \subset F$ ならば $m_J(E) \le m_J(F)$
-    \item $E \cap F = \emptyset$ ならば $m_J(E \sqcup F) = m_J(E) + m_J(F)$
-    \item 任意の $c \in \RR^d$ に対して $m_J(E+c) = m_J(E)$
+    \item （非負性）$m_J(E) \ge 0$，特に $m_J(\emptyset)=0$
+    \item （単調性）$E \subset F$ ならば $m_J(E) \le m_J(F)$
+    \item （加法性）$E \cap F = \emptyset$ ならば $m_J(E \sqcup F) = m_J(E) + m_J(F)$
+    \item （平行移動不変性）任意の $c \in \RR^d$ に対して $m_J(E+c) = m_J(E)$
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-$E,F$ を共通の格子分割で書き直せば，
-どちらも同じ小半開区間の有限個の合併として表せる．
-すると $m_J$ は「含まれている小区間の体積を足し上げる」という形になるので，
-非負性，単調性，有限加法性は直ちに従う．
-また平行移動は各小区間の辺の長さを変えないから，体積も変わらない．
+補題より，$E,F$ に現れる全ての端点を集めた共通の格子分割
+\[
+\calP=\{R_1,\dots,R_N\}
+\]
+を取れば，ある添字集合 $I,J \subset \{1,\dots,N\}$ が存在して
+\[
+E=\bigsqcup_{i\in I} R_i,
+\qquad
+F=\bigsqcup_{i\in J} R_i
+\]
+と書ける．
+このとき
+\[
+m_J(E)=\sum_{i\in I}|R_i|,
+\qquad
+m_J(F)=\sum_{i\in J}|R_i|
+\]
+である．
+
+\begin{enumerate}
+    \item 各 $|R_i| \ge 0$ であるから
+    \[
+    m_J(E)=\sum_{i\in I}|R_i| \ge 0.
+    \]
+    また $\emptyset=\bigsqcup_{i\in\emptyset}R_i$ だから
+    \[
+    m_J(\emptyset)=\sum_{i\in\emptyset}|R_i|=0.
+    \]
+
+    \item $E \subset F$ ならば，各 $R_i$ は互いに素であるから $I \subset J$ である．
+    したがって
+    \[
+    m_J(F)-m_J(E)
+    =\sum_{i\in J}|R_i|-\sum_{i\in I}|R_i|
+    =\sum_{i\in J\setminus I}|R_i|
+    \ge 0,
+    \]
+    よって $m_J(E)\le m_J(F)$ である．
+
+    \item $E \cap F=\emptyset$ ならば $I\cap J=\emptyset$ であり，
+    \[
+    E\sqcup F=\bigsqcup_{i\in I\cup J}R_i
+    \]
+    だから
+    \[
+    m_J(E\sqcup F)
+    =\sum_{i\in I\cup J}|R_i|
+    =\sum_{i\in I}|R_i|+\sum_{i\in J}|R_i|
+    =m_J(E)+m_J(F).
+    \]
+
+    \item $c=(c_1,\dots,c_d)\in\RR^d$ とする．
+    各 $R_i=\prod_{k=1}^d[a_{i,k},b_{i,k})$ に対して
+    \[
+    R_i+c=\prod_{k=1}^d[a_{i,k}+c_k,b_{i,k}+c_k)
+    \]
+    であり，
+    \[
+    |R_i+c|
+    =\prod_{k=1}^d\bigl((b_{i,k}+c_k)-(a_{i,k}+c_k)\bigr)
+    =\prod_{k=1}^d(b_{i,k}-a_{i,k})
+    =|R_i|.
+    \]
+    ゆえに
+    \[
+    E+c=\bigsqcup_{i\in I}(R_i+c)
+    \]
+    かつ
+    \[
+    m_J(E+c)
+    =\sum_{i\in I}|R_i+c|
+    =\sum_{i\in I}|R_i|
+    =m_J(E).
+    \]
+\end{enumerate}
 \end{proof}
 
 \section{\texorpdfstring{$\RR^d$}{Rd}のRiemann積分}
@@ -149,8 +207,30 @@ U(f,\calP) := \sum_{j=1}^N \sup_{x \in R_j} f(x)\,|R_j|,
 L(f,\calP) := \sum_{j=1}^N \inf_{x \in R_j} f(x)\,|R_j|
 \]
 で定める．
+1次元の場合と同様に，Darboux上積分・下積分を
+\[
+\uint{I}{} f(x)\,dx := \inf_{\calP} U(f,\calP),
+\qquad
+\lint{I}{} f(x)\,dx := \sup_{\calP} L(f,\calP)
+\]
+で定める．
+さらに
+\[
+\uint{I}{} f(x)\,dx = \lint{I}{} f(x)\,dx
+\]
+が成り立つとき，$f$ は $I$ 上Riemann可積分であるといい，
+その共通値を
+\[
+\int_I f(x)\,dx
+\]
+と書く．
+このことは，任意の $\eps > 0$ に対して
+\[
+U(f,\calP)-L(f,\calP)<\eps
+\]
+を満たす分割 $\calP$ が存在することと同値である．
 
-特に $f = 1_A$ のとき，各小区間上での上限と下限は $0$ か $1$ しか取らないので，
+特に $f = 1_A$ （指示関数）のとき，各小区間上での上限と下限は $0$ か $1$ しか取らないので，
 \[
 U(1_A,\calP)
 = \sum_{R_j \cap A \neq \emptyset} |R_j|,
@@ -214,6 +294,94 @@ m_{J,*}(A) = m_J^*(A)
 また $m_J^*(N)=0$ を満たす集合 $N$ をJordan零集合という．
 \end{definition}
 
+\begin{remark}
+厳密には，Darboux 上下積分は「固定した$I$の分割」による上和・下和で定義され，
+Jordan 外測度・内測度は「任意の基本集合 $E,F$」で定義されているため，量化の範囲が異なる．
+格子分割の補題を使うと，分割から基本集合が作れ，逆に基本集合は共通細分で分割の和として書けるので，両者が一致することが言える．
+\end{remark}
+
+\begin{lemma}
+有界集合 $A \subset I$ に対して
+\[
+\uint{I}{} 1_A(x)\,dx = m_J^*(A),
+\qquad
+\lint{I}{} 1_A(x)\,dx = m_{J,*}(A)
+\]
+が成り立つ．
+\end{lemma}
+\begin{proof}
+任意の分割 $\calP=\{R_1,\dots,R_N\}$ に対し
+\[
+G_{\calP}:=\bigcup_{R_j\cap A\neq\emptyset}R_j,
+\qquad
+F_{\calP}:=\bigcup_{R_j\subset A}R_j
+\]
+とおくと，$G_{\calP},F_{\calP}$ は基本集合で
+\[
+A\subset G_{\calP}\subset I,
+\qquad
+F_{\calP}\subset A
+\]
+を満たし，
+\[
+U(1_A,\calP)=m_J(G_{\calP}),
+\qquad
+L(1_A,\calP)=m_J(F_{\calP})
+\]
+である．
+したがって任意の $\calP$ に対して
+\[
+m_J^*(A)\le U(1_A,\calP),
+\qquad
+L(1_A,\calP)\le m_{J,*}(A)
+\]
+となるから
+\[
+m_J^*(A)\le \uint{I}{}1_A(x)\,dx,
+\qquad
+\lint{I}{}1_A(x)\,dx\le m_{J,*}(A)
+\]
+を得る．
+
+逆向きを示す．
+まず $A\subset G$ を満たす基本集合 $G$ を取る．
+$A\subset I$ だから $A\subset G\cap I$ であり，格子分割の補題により $G\cap I$ も基本集合である．
+$G\cap I$ に現れる端点で $I$ を分割すると，各小区間は $G\cap I$ に含まれるか，さもなくば交わらないかのいずれかである．
+この分割を $\calP$ とすると，$R_j\cap A\neq\emptyset$ ならば $R_j\subset G\cap I$ であるから
+\[
+U(1_A,\calP)
+=m_J(G_{\calP})
+\le m_J(G\cap I)
+\le m_J(G).
+\]
+よって
+\[
+\uint{I}{}1_A(x)\,dx\le m_J(G)
+\]
+であり，右辺で $G$ に関する下限を取って
+\[
+\uint{I}{}1_A(x)\,dx\le m_J^*(A)
+\]
+を得る．
+
+次に基本集合 $F\subset A$ を取る．
+$F$ に現れる端点で $I$ を分割すると，$F$ はその分割の小区間の合併になる．
+この分割を $\calP$ とすると，$F$ を構成する各小区間は $A$ に含まれるから
+\[
+L(1_A,\calP)\ge m_J(F).
+\]
+したがって
+\[
+\lint{I}{}1_A(x)\,dx\ge m_J(F)
+\]
+であり，右辺で $F$ に関する上限を取って
+\[
+\lint{I}{}1_A(x)\,dx\ge m_{J,*}(A)
+\]
+を得る．
+以上より結論が従う．
+\end{proof}
+
 \begin{lemma}
 基本集合の境界はJordan零集合である．
 \end{lemma}
@@ -258,7 +426,38 @@ $\partial Q$ は有限個の座標超平面片の合併に含まれる：
     \item 境界 $\partial A := \cl A \setminus \intr A$ はJordan零集合である
 \end{enumerate}
 \end{theorem}
+
+\begin{remark}
+閉包 $\cl A$ とは $A$ を含む最小の閉集合 $\bigcap \{ F \mid A \subset F, F \text { closed} \}$ であり，
+内部 $\intr A$ とは $A$ に含まれる最大の開集合 $\bigcup \{ U \mid U \subset A, \text{ open} \}$である．
+同値な言い方をすれば，
+$x \in \cl A$ とは $x$ の任意の近傍が $A$ と交わること，
+$x \in \intr A$ とは $x$ のある近傍が $A$ に含まれることをいう．
+\end{remark}
+
 \begin{proof}
+\textbf{(1) $\Leftrightarrow$ (2)}\quad
+直前の補題より
+\[
+\uint{I}{}1_A(x)\,dx = m_J^*(A),
+\qquad
+\lint{I}{}1_A(x)\,dx = m_{J,*}(A)
+\]
+である．
+したがって
+\[
+1_A \text{ が } I \text{ 上Riemann可積分}
+\]
+であること，すなわち
+\[
+\uint{I}{}1_A(x)\,dx = \lint{I}{}1_A(x)\,dx
+\]
+であることは，
+\[
+m_J^*(A)=m_{J,*}(A)
+\]
+すなわち $A$ がJordan可測であることと同値である．
+
 \textbf{(1) $\Rightarrow$ (3)}\quad
 $1_A$ がRiemann可積分なら，Darbouxの判定法により，
 任意の $\eps > 0$ に対して
@@ -282,47 +481,28 @@ U(1_A,\calP) - L(1_A,\calP)
 \]
 である．
 
-\textbf{(3) $\Rightarrow$ (1)}\quad
-$F \subset A \subset G$ を満たす基本集合 $F,G$ を取る．
-格子分割を共通に細分すれば，$F$ と $G$ がいずれも分割の小区間の合併になる分割 $\calP$ が作れる．
-そのとき
-\[
-L(1_A,\calP) \ge m_J(F),
-\qquad
-U(1_A,\calP) \le m_J(G)
-\]
-だから
-\[
-U(1_A,\calP) - L(1_A,\calP)
-\le m_J(G \setminus F)
-< \eps.
-\]
-ゆえに $1_A$ はRiemann可積分である．
-
-\textbf{(2) $\Leftrightarrow$ (3)}\quad
-$A$ がJordan可測で，共通値を $m_J(A)$ とする．
-定義より，任意の $\eps > 0$ に対して基本集合 $F,G$ を
+\textbf{(3) $\Rightarrow$ (2)}\quad
+任意の $\eps > 0$ に対して
 \[
 F \subset A \subset G,
 \qquad
-m_J(F) > m_J(A)-\frac{\eps}{2},
+m_J(G \setminus F) < \eps
+\]
+を満たす基本集合 $F,G$ が存在するとする．
+このとき
+\[
+m_{J,*}(A)\ge m_J(F),
 \qquad
-m_J(G) < m_J(A)+\frac{\eps}{2}
+m_J^*(A)\le m_J(G)
 \]
-となるように取れる．
-すると
+だから
 \[
-m_J(G \setminus F) = m_J(G)-m_J(F) < \eps
-\]
-である．
-逆に (3) が成り立てば
-\[
-m_J^*(A)-m_{J,*}(A)
+0 \le m_J^*(A)-m_{J,*}(A)
 \le m_J(G)-m_J(F)
 = m_J(G \setminus F)
-< \eps
+< \eps.
 \]
-となるので，$\eps$ の任意性から $m_J^*(A)=m_{J,*}(A)$ である．
+$\eps$ の任意性より $m_J^*(A)=m_{J,*}(A)$ である．
 
 \textbf{(3) $\Rightarrow$ (4)}\quad
 $F \subset A \subset G$ とすると
@@ -442,7 +622,7 @@ Jordan可測性の本質は，開閉ではなく
 
 \section{Jordan測度の性質}
 
-\begin{theorem}[Jordan可測集合の閉性]
+\begin{theorem}[Jordan可測集合の集合代数的閉性]
 Jordan可測集合 $A,B \subset \RR^d$ と $c \in \RR^d$ に対して，
 \[
 A \cup B,\qquad
@@ -542,6 +722,55 @@ Jordan測度は，Jordan可測集合の上では
 可算個の集合を同時に扱うところで理論が止まる．
 ここが後のLebesgue測度との最大の違いである．
 \end{remark}
+
+\begin{example}
+\begin{enumerate}
+    \item $\QQ \cap [0,1]$ を
+    \[
+    \QQ \cap [0,1] = \bigcup_{n=1}^\infty \{q_n\}
+    \]
+    と可算個の1点集合の和に書く．
+    各 $\{q_n\}$ はJordan零集合，したがってJordan可測であるが，
+    和集合 $\QQ \cap [0,1]$ はJordan可測でない．
+    実際，$\QQ \cap [0,1]$ もその補集合 $([0,1]\setminus\QQ)$ も $[0,1]$ で稠密だから，
+    \[
+    \partial(\QQ \cap [0,1])=[0,1]
+    \]
+    となる．
+    したがってJordan可測集合の全体は可算和で閉じていない．
+
+    \item 上と同じ列 $q_1,q_2,\dots$ を用いて
+    \[
+    E_n:=\{q_1,\dots,q_n\}
+    \]
+    とおくと，$E_n$ はJordan可測で
+    \[
+    m_J(E_n)=0 \qquad (n=1,2,\dots)
+    \]
+    であり，しかも
+    \[
+    E_1 \subset E_2 \subset \cdots,
+    \qquad
+    \bigcup_{n=1}^\infty E_n=\QQ \cap [0,1]
+    \]
+    である．
+    もしLebesgue測度のような可算加法性や下からの連続性がJordan測度にも成り立つなら，
+    \[
+    m_J\Bigl(\bigcup_{n=1}^\infty E_n\Bigr)
+    = \sum_{n=1}^\infty m_J(E_n\setminus E_{n-1})
+    = 0
+    \]
+    あるいは
+    \[
+    m_J\Bigl(\bigcup_{n=1}^\infty E_n\Bigr)
+    = \lim_{n\to\infty} m_J(E_n)=0
+    \]
+    と書きたくなる．
+    しかし左辺の集合 $\QQ \cap [0,1]$ 自体がJordan可測でないので，
+    これらの等式はそもそも意味をもたない．
+    つまりJordan理論では，可算極限に進んだところで理論そのものが止まる．
+\end{enumerate}
+\end{example}
 
 \section{有限加法族}
 
