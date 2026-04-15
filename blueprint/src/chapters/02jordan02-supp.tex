@@ -1,0 +1,116 @@
+%\begin{remark}
+厳密には，Darboux 上下積分は「固定した$I$の分割」による上和・下和で定義され，
+Jordan 外測度・内測度は「任意の基本集合 $E,F$」で定義されているため，量化の範囲が異なる．
+格子分割の補題を使うと，分割から基本集合が作れ，逆に基本集合は共通細分で分割の和として書けるので，両者が一致することが言える．
+%\end{remark}
+
+\begin{lemma}
+有界集合 $A \subset I$ に対して
+\[
+\uint{I}{} 1_A(x)\,dx = m_J^*(A),
+\qquad
+\lint{I}{} 1_A(x)\,dx = m_{J,*}(A)
+\]
+が成り立つ．
+\end{lemma}
+\begin{proof}
+任意の分割 $\calP=\{R_1,\dots,R_N\}$ に対し
+\[
+G_{\calP}:=\bigcup_{R_j\cap A\neq\emptyset}R_j,
+\qquad
+F_{\calP}:=\bigcup_{R_j\subset A}R_j
+\]
+とおくと，$G_{\calP},F_{\calP}$ は基本集合で
+\[
+A\subset G_{\calP}\subset I,
+\qquad
+F_{\calP}\subset A
+\]
+を満たし，
+\[
+U(1_A,\calP)=m_J(G_{\calP}),
+\qquad
+L(1_A,\calP)=m_J(F_{\calP})
+\]
+である．
+したがって任意の $\calP$ に対して
+\[
+m_J^*(A)\le U(1_A,\calP),
+\qquad
+L(1_A,\calP)\le m_{J,*}(A)
+\]
+となるから
+\[
+m_J^*(A)\le \uint{I}{}1_A(x)\,dx,
+\qquad
+\lint{I}{}1_A(x)\,dx\le m_{J,*}(A)
+\]
+を得る．
+
+逆向きを示す．
+まず $A\subset G$ を満たす基本集合 $G$ を取る．
+$A\subset I$ だから $A\subset G\cap I$ であり，格子分割の補題により $G\cap I$ も基本集合である．
+$G\cap I$ に現れる端点で $I$ を分割すると，各小区間は $G\cap I$ に含まれるか，さもなくば交わらないかのいずれかである．
+この分割を $\calP$ とすると，$R_j\cap A\neq\emptyset$ ならば $R_j\subset G\cap I$ であるから
+\[
+U(1_A,\calP)
+=m_J(G_{\calP})
+\le m_J(G\cap I)
+\le m_J(G).
+\]
+よって
+\[
+\uint{I}{}1_A(x)\,dx\le m_J(G)
+\]
+であり，右辺で $G$ に関する下限を取って
+\[
+\uint{I}{}1_A(x)\,dx\le m_J^*(A)
+\]
+を得る．
+
+次に基本集合 $F\subset A$ を取る．
+$F$ に現れる端点で $I$ を分割すると，$F$ はその分割の小区間の合併になる．
+この分割を $\calP$ とすると，$F$ を構成する各小区間は $A$ に含まれるから
+\[
+L(1_A,\calP)\ge m_J(F).
+\]
+したがって
+\[
+\lint{I}{}1_A(x)\,dx\ge m_J(F)
+\]
+であり，右辺で $F$ に関する上限を取って
+\[
+\lint{I}{}1_A(x)\,dx\ge m_{J,*}(A)
+\]
+を得る．
+以上より結論が従う．
+\end{proof}
+
+\begin{lemma}
+基本集合の境界はJordan零集合である．
+\end{lemma}
+\begin{proof}
+まず半開区間
+\[
+Q = \prod_{k=1}^d [a_k,b_k)
+\]
+について示す．
+$\partial Q$ は有限個の座標超平面片の合併に含まれる：
+\[
+\partial Q \subset
+\bigcup_{k=1}^d
+\Bigl(
+\{x_k=a_k\} \cap \prod_{i=1}^d [a_i,b_i]
+\Bigr)
+\cup
+\bigcup_{k=1}^d
+\Bigl(
+\{x_k=b_k\} \cap \prod_{i=1}^d [a_i,b_i]
+\Bigr).
+\]
+各面は，厚さ $\delta$ の薄い板で覆えるので，
+その被覆の体積は $\delta$ に比例していくらでも小さくできる．
+したがって各面はJordan零であり，有限和である $\partial Q$ もJordan零である．
+基本集合の境界は有限個の半開区間の境界の和集合に含まれるから，同様にJordan零である．
+\end{proof}
+
