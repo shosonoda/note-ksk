@@ -1,3 +1,4 @@
+\setcounter{chapter}{2}
 \chapter{Lebesgue外測度}
 
 \paragraph{本章の目標}
@@ -5,9 +6,9 @@ Jordan外測度の「有限被覆」を「可算被覆」に置き換えて
 Lebesgue外測度 $\lambda^*$ を定義し，
 それが $\RR^d$ 上の外測度になることを示す．
 さらに，Lebesgue外測度が開被覆によっても同じように記述できることを証明する．
-本章ではまだ可測集合を選別しない．
+%本章ではまだ可測集合を選別しない．
 $\lambda^*$ はすべての部分集合に定義されるが，
-現時点で分かるのは可算劣加法性までである．
+一般には可算劣加法性しか言えない．
 
 \section{動機づけ}
 
@@ -29,7 +30,7 @@ $A=\{q_1,q_2,\dots\}$ と番号づけて，
 \sum_{n=1}^{\infty} \eps 2^{-n} = \eps
 \]
 になる．
-%したがって，$\QQ \cap [0,1]$ は「長さ $0$ の集合」と見なすのが自然である．
+したがって，$\QQ \cap [0,1]$ の長さは $0$ とみなすのが自然である．
 
 この観察は，Jordan理論の限界が
 「被覆が有限個に制限されていること」にあることを示している．
@@ -38,11 +39,11 @@ $A=\{q_1,q_2,\dots\}$ と番号づけて，
 \section{拡大実数}
 
 Lebesgue外測度では，下限や無限和を頻繁に扱う．
-そのため，値域として拡大実数を用いる．
+このとき，値域として拡大実数を設定すると記述が簡潔になって便利である．
 
 \begin{definition}[拡大実数]
 \[
-\overline{\RR}:=\RR \cup \{-\infty,\infty\}
+\eRR := \RR \cup \{-\infty,\infty\}
 \]
 を拡大実数全体と呼ぶ．
 特に測度論では
@@ -52,41 +53,42 @@ Lebesgue外測度では，下限や無限和を頻繁に扱う．
 を主に用いる．
 \end{definition}
 
-\begin{remark}
-非負の拡大実数列 $\{a_n\}_{n=1}^{\infty}$ に対して
-\[
-\sum_{n=1}^{\infty} a_n
-\]
-は部分和
-\[
-s_N:=\sum_{n=1}^N a_n
-\]
-の上限
-\[
-\sup_{N \in \NN} s_N
-\]
-として定める．
-非負項しか扱わないので，この和は常に意味をもつ．
-（部分和列は単調増加なので，$\lim_{N \to \infty} s_N = \sup_{N \in \NN} s_N$ である．）
-\end{remark}
+% \begin{remark}
+% 非負の拡大実数列 $\{a_n\}_{n=1}^{\infty}$ に対して
+% \[
+% \sum_{n=1}^{\infty} a_n
+% \]
+% は部分和
+% \[
+% s_N:=\sum_{n=1}^N a_n
+% \]
+% の上限
+% \[
+% \sup_{N \in \NN} s_N
+% \]
+% として定める．
+% 非負項しか扱わないので，この和は常に意味をもつ．
+% （部分和列は単調増加なので，$\lim_{N \to \infty} s_N = \sup_{N \in \NN} s_N$ である．）
+% \end{remark}
 
 \begin{remark}
 拡大実数では
 \[
 \infty-\infty,\qquad 0\cdot\infty,\qquad \frac{\infty}{\infty}
 \]
-のような式は一般に定義しない．
-測度論では，不定形を避けるため，
+のような式は一般には未定義とする．
+測度論では，このような不定形を避けるため，
 非負値の和・上限・下限だけを使って議論を進めることが多い．
 \end{remark}
 
 \section{定義}
 
 以後，次元 $d \in \NN$ を固定する．
-第2章と同様に，$\RR^d$ の有界区間 $R$ の体積を $|R|$ で表す．
+第2章の記法に拡大実数を含めるため，以下のように約束する
 \begin{itemize}
-    \item $\RR^d$ の左半開区間の全体を$\calE_d$と書く
-    \item $\RR^d$ の基本集合（有限個の互いに素な半開区間の合併）の全体を$\calA_d$と書く．
+    \item $\eRR^d$ の区間 $R$ の体積を $|R|$ で表す．区間に一つでも$\pm \infty$が含まれるときは $|R|=\infty$とする．
+    \item $\eRR^d$ の左半開区間の全体を$\calE_d$と書く
+    \item $\eRR^d$ の基本集合（互いに素な左半開区間の有限合併）の全体を$\calA_d$と書く．前章で触れた通り，区間の定義に拡大実数を含めると，$\calA_d$は有限加法族である．
 \end{itemize}
 
 \begin{definition}[Lebesgue外測度]
@@ -95,19 +97,19 @@ s_N:=\sum_{n=1}^N a_n
 \lambda^*(A)
 :=
 \inf\left\{
-\sum_{n=1}^{\infty} |R_n|
+\sum_{n=1}^{\infty} |R_i|
 \;\middle|\;
-A \subset \bigcup_{n=1}^{\infty} R_n,\ 
-R_n \text{ は有界区間}
+A \subset \bigcup_{i=1}^{\infty} R_i,\ 
+R_i \in \calE_d
 \right\}
 \]
 で定める．
 \end{definition}
 
 \begin{remark}
-有限個の被覆は可算個の被覆の特別な場合である．
-したがって，Lebesgue外測度はJordan外測度よりも
-柔軟な近似を許している．
+有限被覆 $A \subset \bigcup_{i=1}^n Q_i$ は可算被覆の特別な場合
+\[A \subset \bigcup_{i=1}^\infty R_i, \quad R_i := \begin{cases} Q_i, & i \le n \\ \emptyset, & i > n\end{cases}\]である．
+したがって，Lebesgue外測度はJordan外測度よりも精密に近似できる．
 \end{remark}
 
 \begin{proposition}[Jordan外測度との比較]
@@ -119,7 +121,7 @@ R_n \text{ は有界区間}
 \end{proposition}
 \begin{proof}
 $A \subset E$ を満たす基本集合 $E$ を取る．
-第2章より，$E$ は有限個の互いに素な半開区間の合併
+$E$ は互いに素な左半開区間の有限合併
 \[
 E = \bigsqcup_{j=1}^N Q_j
 \]
@@ -136,30 +138,24 @@ m_J(E) = \sum_{j=1}^N |Q_j|
 $E$ の取り方について下限を取ればよい．
 \end{proof}
 
-\section{外測度}
-
-\begin{definition}[外測度]
-集合 $X$ 上の写像
-\[
-\mu^* : \mathcal P(X) \to [0,\infty]
-\]
-が外測度であるとは，次の3条件を満たすことをいう．
-\begin{enumerate}
-    \item $\mu^*(\emptyset)=0$
-    \item $A \subset B$ ならば $\mu^*(A) \le \mu^*(B)$
-    \item 任意の集合列 $\{A_n\}_{n=1}^{\infty}$ に対して
+\begin{theorem}
+    Jordan可測集合 $A$ に対し，
     \[
-    \mu^*\left(\bigcup_{n=1}^{\infty} A_n\right)
-    \le
-    \sum_{n=1}^{\infty} \mu^*(A_n)
+    m_J(A) = \lambda^*(A).
     \]
-    が成り立つ
-\end{enumerate}
-\end{definition}
-
-\begin{theorem}[Lebesgue外測度は外測度]
-$\lambda^*$ は $\RR^d$ 上の外測度である．
 \end{theorem}
+
+\begin{proof}
+    %%% gpt
+\end{proof}
+
+
+\section{Lebesgue外測度の性質}
+
+\begin{theorem}
+    %%% gpt: 以下の proof に対応する statement を書く
+\end{theorem}
+
 \begin{proof}
 \begin{enumerate}
     \item $\lambda^*(\emptyset)=0$：
@@ -277,6 +273,32 @@ A+c \subset \bigcup_{n=1}^{\infty} (R_n+c)
 を得る．
 逆向きの不等式は $-c$ だけ平行移動すれば従う．
 \end{proof}
+
+\section{Carathéodory外測度}
+Lebesugue理論における一般の外測度についてもここで触れておく．
+
+\begin{definition}[Carathéodory外測度]
+集合 $X$ 上の写像
+\[
+\mu^* : \mathcal P(X) \to [0,\infty]
+\]
+が外測度であるとは，次の3条件を満たすことをいう．
+\begin{enumerate}
+    \item $\mu^*(\emptyset)=0$
+    \item $A \subset B$ ならば $\mu^*(A) \le \mu^*(B)$
+    \item 任意の集合列 $\{A_n\}_{n=1}^{\infty}$ に対して
+    \[
+    \mu^*\left(\bigcup_{n=1}^{\infty} A_n\right)
+    \le
+    \sum_{n=1}^{\infty} \mu^*(A_n)
+    \]
+    が成り立つ
+\end{enumerate}
+\end{definition}
+
+\begin{corollary}[Lebesgue外測度は外測度]
+$\lambda^*$ は $\RR^d$ 上の外測度である．
+\end{corollary}
 
 \section{開被覆による記述}
 
@@ -467,17 +489,17 @@ $A=\{a_1,a_2,\dots\}$ と書く．
 
 \section{解釈}
 
-Lebesgue外測度の本質は，
-Jordan外測度の有限被覆を可算被覆へ緩めたことにある．
-この1つの変更によって，
+Lebesgueは素朴な「面積」が満たすべき要求仕様として，以下のようなものを追求していたとされる：
 \begin{enumerate}
-    \item 可算集合のような「薄い集合」を体積 $0$ として扱える
-    \item 有界性を仮定せず，すべての部分集合に量を割り当てられる
-    \item しかしその代わり，現時点では加法性は失われ，劣加法性しか残らない
+    \item （全域性）すべての部分集合 $A \subset \RR^d$ に対し，面積 $\mu(A)$ が定まる
+    \item （非負性）$0 \le \mu(A) \le \infty$
+    \item （加法性）$\mu\left( \bigsqcup_{i=1}^\infty A_i \right) = \sum_{i=1}^\infty \mu(A_i)$
+    \item （合同変換不変性）$\mu( T A + c ) = \mu(A)$
+    \item （Euclid幾何学との整合性）可算集合のような薄い集合の体積は $0$
 \end{enumerate}
-という新しい状況が生じる．
+Lebesgue外測度は，Jordan外測度の有限被覆を可算被覆へ緩めることによって，加法性以外の性質を満たせるようになった．
 
-したがって $\lambda^*$ は，まだ「測度」ではなく「外測度」である．
+%したがって $\lambda^*$ は，まだ「測度」ではなく「外測度」である．
 次章ではこれに対応する内測度を導入し，
 \[
 \text{外測度}=\text{内測度}
