@@ -29,12 +29,11 @@ $A=\{q_1,q_2,\dots\}$ と番号づけて，
 \sum_{n=1}^{\infty} \eps 2^{-n} = \eps
 \]
 になる．
-したがって，$\QQ \cap [0,1]$ は「長さ $0$ の集合」と見なすのが自然である．
+%したがって，$\QQ \cap [0,1]$ は「長さ $0$ の集合」と見なすのが自然である．
 
 この観察は，Jordan理論の限界が
 「被覆が有限個に制限されていること」にあることを示している．
-そこで，有限被覆を可算被覆に置き換えて得られる量を
-Lebesgue外測度と呼ぶ．
+そこで，有限被覆を可算被覆に置き換えてLebesgue外測度を導入する．
 
 \section{拡大実数}
 
@@ -68,32 +67,8 @@ s_N:=\sum_{n=1}^N a_n
 \]
 として定める．
 非負項しか扱わないので，この和は常に意味をもつ．
+（部分和列は単調増加なので，$\lim_{N \to \infty} s_N = \sup_{N \in \NN} s_N$ である．）
 \end{remark}
-
-\begin{proposition}
-非負の拡大実数列 $\{a_n\}_{n=1}^{\infty}$ に対して，部分和列
-\[
-s_N:=\sum_{n=1}^N a_n
-\]
-は単調増加であり，
-\[
-\sum_{n=1}^{\infty} a_n=\sup_{N \in \NN} s_N
-\]
-が成り立つ．
-\end{proposition}
-\begin{proof}
-各 $a_n$ は非負だから
-\[
-s_{N+1}=s_N+a_{N+1}\ge s_N
-\]
-である．
-したがって $\{s_N\}$ は単調増加列である．
-また無限和の定義そのものが
-\[
-\sum_{n=1}^{\infty} a_n:=\sup_{N \in \NN} s_N
-\]
-である．
-\end{proof}
 
 \begin{remark}
 拡大実数では
@@ -109,6 +84,10 @@ s_{N+1}=s_N+a_{N+1}\ge s_N
 
 以後，次元 $d \in \NN$ を固定する．
 第2章と同様に，$\RR^d$ の有界区間 $R$ の体積を $|R|$ で表す．
+\begin{itemize}
+    \item $\RR^d$ の左半開区間の全体を$\calE_d$と書く
+    \item $\RR^d$ の基本集合（有限個の互いに素な半開区間の合併）の全体を$\calA_d$と書く．
+\end{itemize}
 
 \begin{definition}[Lebesgue外測度]
 集合 $A \subset \RR^d$ に対し，$A$ のLebesgue外測度 $\lambda^*(A)$ を
