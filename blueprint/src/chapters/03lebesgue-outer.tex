@@ -81,13 +81,13 @@ Lebesgue外測度では，下限や無限和を頻繁に扱う．
 非負値の和・上限・下限だけを使って議論を進めることが多い．
 \end{remark}
 
-\section{定義}
+\section{Lebesgue外測度の定義}
 
 以後，次元 $d \in \NN$ を固定する．
 第2章の記法に拡大実数を含めるため，以下のように約束する
 \begin{itemize}
-    \item $\eRR^d$ の区間 $R$ の体積を $|R|$ で表す．区間に一つでも$\pm \infty$が含まれるときは $|R|=\infty$とする．
-    \item $\eRR^d$ の左半開区間の全体を$\calE_d$と書く
+    \item $\eRR^d$ の区間 $R$ の体積を $|R|$ で表す．また $|\emptyset|:=0$ と約束する．区間に一つでも$\pm \infty$が含まれるときは $|R|=\infty$とする．
+    \item $\eRR^d$ の左半開区間の全体に空集合を加えたものを$\calE_d$と書く
     \item $\eRR^d$ の基本集合（互いに素な左半開区間の有限合併）の全体を$\calA_d$と書く．前章で触れた通り，区間の定義に拡大実数を含めると，$\calA_d$は有限加法族である．
 \end{itemize}
 
@@ -97,7 +97,7 @@ Lebesgue外測度では，下限や無限和を頻繁に扱う．
 \lambda^*(A)
 :=
 \inf\left\{
-\sum_{n=1}^{\infty} |R_i|
+\sum_{i=1}^{\infty} |R_i|
 \;\middle|\;
 A \subset \bigcup_{i=1}^{\infty} R_i,\ 
 R_i \in \calE_d
@@ -108,7 +108,16 @@ R_i \in \calE_d
 
 \begin{remark}
 有限被覆 $A \subset \bigcup_{i=1}^n Q_i$ は可算被覆の特別な場合
-\[A \subset \bigcup_{i=1}^\infty R_i, \quad R_i := \begin{cases} Q_i, & i \le n \\ \emptyset, & i > n\end{cases}\]である．
+\[
+A \subset \bigcup_{i=1}^\infty R_i,
+\qquad
+R_i :=
+\begin{cases}
+Q_i, & i \le n,\\
+\emptyset, & i > n
+\end{cases}
+\]
+である．
 したがって，Lebesgue外測度はJordan外測度よりも精密に近似できる．
 \end{remark}
 
@@ -138,37 +147,61 @@ m_J(E) = \sum_{j=1}^N |Q_j|
 $E$ の取り方について下限を取ればよい．
 \end{proof}
 
-\begin{theorem}
-    Jordan可測集合 $A$ に対し，
-    \[
-    m_J(A) = \lambda^*(A).
-    \]
-\end{theorem}
 
-\begin{proof}
-    %%% gpt
-\end{proof}
 
 
 \section{Lebesgue外測度の性質}
 
-\begin{theorem}
-    %%% gpt: 以下の proof に対応する statement を書く
-\end{theorem}
+\begin{definition}[Carathéodory外測度]
+集合 $X$ 上の写像
+\[
+\mu^* : \mathcal P(X) \to [0,\infty]
+\]
+が（Carathéodory）外測度であるとは，次の3条件を満たすことをいう．
+\begin{enumerate}
+    \item $\mu^*(\emptyset)=0$
+    \item $A \subset B$ ならば $\mu^*(A) \le \mu^*(B)$
+    \item 任意の集合列 $\{A_n\}_{n=1}^{\infty}$ に対して
+    \[
+    \mu^*\left(\bigcup_{n=1}^{\infty} A_n\right)
+    \le
+    \sum_{n=1}^{\infty} \mu^*(A_n)
+    \]
+    が成り立つ
+\end{enumerate}
+\end{definition}
+
+\begin{corollary}[Lebesgue外測度は外測度]
+$\lambda^*$ は $\RR^d$ 上の外測度である．
+\end{corollary}
+
+% \begin{theorem}[Lebesgue外測度の基本性質]
+% 任意の $A,B,A_n \subset \RR^d$ に対して次が成り立つ．
+% \begin{enumerate}
+%     \item  $\lambda^*(\emptyset)=0$
+%     \item （単調性） $A \subset B$ ならば $\lambda^*(A)\le \lambda^*(B)$
+%     \item （可算劣加法性）
+%     \[
+%     \lambda^*\left(\bigcup_{n=1}^{\infty} A_n\right)
+%     \le
+%     \sum_{n=1}^{\infty}\lambda^*(A_n)
+%     \]
+% \end{enumerate}
+% \end{theorem}
 
 \begin{proof}
 \begin{enumerate}
     \item $\lambda^*(\emptyset)=0$：
     まず定義から $\lambda^*(\emptyset)\ge 0$ である．
-    一方，任意の $\eps > 0$ に対して体積が $\eps$ 未満の有界区間 $R$ を1つ取れば
+    一方，
     \[
-    \emptyset \subset R
+    \emptyset \subset \bigcup_{n=1}^{\infty}\emptyset
     \]
     であるから
     \[
-    \lambda^*(\emptyset) \le |R| < \eps.
+    \lambda^*(\emptyset) \le \sum_{n=1}^{\infty} |\emptyset| = 0.
     \]
-    $\eps$ は任意なので $\lambda^*(\emptyset)=0$ である．
+    よって $\lambda^*(\emptyset)=0$ である．
 
     \item 単調性：
     $A \subset B$ とする．
@@ -230,20 +263,20 @@ $E$ の取り方について下限を取ればよい．
 \end{enumerate}
 \end{proof}
 
-\begin{corollary}[有限劣加法性]
-任意の $A,B \subset \RR^d$ に対して
-\[
-\lambda^*(A \cup B) \le \lambda^*(A) + \lambda^*(B)
-\]
-が成り立つ．
-\end{corollary}
-\begin{proof}
-上の定理で
-\[
-A_1=A,\qquad A_2=B,\qquad A_n=\emptyset\ (n \ge 3)
-\]
-とおけばよい．
-\end{proof}
+% \begin{corollary}[有限劣加法性]
+% 任意の $A,B \subset \RR^d$ に対して
+% \[
+% \lambda^*(A \cup B) \le \lambda^*(A) + \lambda^*(B)
+% \]
+% が成り立つ．
+% \end{corollary}
+% \begin{proof}
+% 上の定理で
+% \[
+% A_1=A,\qquad A_2=B,\qquad A_n=\emptyset\ (n \ge 3)
+% \]
+% とおけばよい．
+% \end{proof}
 
 \begin{proposition}[平行移動不変性]
 任意の $A \subset \RR^d$ と $c \in \RR^d$ に対して
@@ -274,35 +307,171 @@ A+c \subset \bigcup_{n=1}^{\infty} (R_n+c)
 逆向きの不等式は $-c$ だけ平行移動すれば従う．
 \end{proof}
 
-\section{Carathéodory外測度}
-Lebesugue理論における一般の外測度についてもここで触れておく．
+\section{Jordan測度との整合}
 
-\begin{definition}[Carathéodory外測度]
-集合 $X$ 上の写像
-\[
-\mu^* : \mathcal P(X) \to [0,\infty]
-\]
-が外測度であるとは，次の3条件を満たすことをいう．
-\begin{enumerate}
-    \item $\mu^*(\emptyset)=0$
-    \item $A \subset B$ ならば $\mu^*(A) \le \mu^*(B)$
-    \item 任意の集合列 $\{A_n\}_{n=1}^{\infty}$ に対して
+\begin{proposition}
+    基本集合 $A$ に対し，
     \[
-    \mu^*\left(\bigcup_{n=1}^{\infty} A_n\right)
-    \le
-    \sum_{n=1}^{\infty} \mu^*(A_n)
+    m_J(A) = \lambda^*(A).
     \]
-    が成り立つ
-\end{enumerate}
-\end{definition}
+\end{proposition}
 
-\begin{corollary}[Lebesgue外測度は外測度]
-$\lambda^*$ は $\RR^d$ 上の外測度である．
-\end{corollary}
+\begin{proof}
+\[
+\lambda^*(A)\le m_J(A)
+\]
+は，$A$ 自身による有限被覆を考えれば従う．
 
-\section{開被覆による記述}
+逆向きの不等式を示すため，
+$A \subset \bigcup_{n=1}^{\infty} R_n$ を満たす任意の可算被覆
+$\{R_n\}_{n=1}^{\infty} \subset \calE_d$ を取る．
+もし
+\[
+\sum_{n=1}^{\infty}|R_n|=\infty
+\]
+なら
+\[
+m_J(A)\le \sum_{n=1}^{\infty}|R_n|
+\]
+は自明である．
+したがって右辺が有限であるとする．このとき各 $R_n$ は有界であるから，
+第2章のJordan外測度の可算劣加法性より
+\[
+m_J(A)=m_J^*(A)
+\le
+\sum_{n=1}^{\infty} m_J^*(R_n)
+=
+\sum_{n=1}^{\infty}|R_n|
+\]
+を得る．
+被覆について下限を取れば
+\[
+m_J(A)\le \lambda^*(A)
+\]
+である．
+\end{proof}
 
-\begin{theorem}[開区間被覆による記述]
+\begin{lemma}[Jordan可測集合の基本集合近似]
+Jordan可測集合 $A$ と $\eps>0$ に対し，
+基本集合 $F,G \in \calA_d$ が存在して
+\[
+F \subset A \subset G,
+\qquad
+m_J(G)-m_J(F)<\eps
+\]
+を満たす．
+\end{lemma}
+
+\begin{proof}
+第2章のJordan可測性の近似定理より，
+基本集合 $F,G \in \calA_d$ が存在して
+\[
+F \subset A \subset G,
+\qquad
+m_J(G\setminus F)<\eps
+\]
+を満たす．
+基本集合の有限加法性より
+\[
+m_J(G)=m_J(F)+m_J(G\setminus F)
+\]
+だから
+\[
+m_J(G)-m_J(F)<\eps
+\]
+である．
+\end{proof}
+
+\begin{theorem}
+    Jordan可測集合 $A$ に対し，
+    \[
+    m_J(A) = \lambda^*(A).
+    \]
+\end{theorem}
+
+\begin{proof}
+Jordan可測集合 $A$ は有界である．
+任意の $\eps > 0$ に対し，前補題より
+基本集合 $F,G \in \calA_d$ を
+\[
+F \subset A \subset G,
+\qquad
+m_J(G)-m_J(F)<\eps
+\]
+となるように取る．
+単調性と前命題より
+\[
+\lambda^*(F)=m_J(F)\le \lambda^*(A)\le \lambda^*(G)=m_J(G)
+\]
+である．
+また $F \subset A \subset G$ だから
+\[
+m_J(F)\le m_J(A)\le m_J(G)
+\]
+であり，
+\[
+m_J(G)-m_J(F)<\eps
+\]
+だから
+\[
+m_J(A)-\eps < m_J(F)=\lambda^*(F)
+\le
+\lambda^*(A)
+\le
+\lambda^*(G)=m_J(G)
+< m_J(A)+\eps
+\]
+を得る．
+$\eps > 0$ は任意なので $\lambda^*(A)=m_J(A)$ である．
+\end{proof}
+
+\begin{theorem}
+    互いに素なJordan可測集合の列 $\{A_i\}_{i=1}^\infty$ に対し，
+    \[
+    \lambda^*\left( \bigsqcup_{i=1}^\infty A_i \right) = \sum_{i=1}^\infty \lambda^*(A_i).
+    \]
+\end{theorem}
+
+\begin{proof}
+$B_n:=\bigsqcup_{i=1}^n A_i$ とおく．
+各 $B_n$ は有限個のJordan可測集合の互いに素な合併だからJordan可測であり，
+Jordan測度の有限加法性と前定理より
+\[
+\lambda^*(B_n)=m_J(B_n)=\sum_{i=1}^n m_J(A_i)=\sum_{i=1}^n \lambda^*(A_i)
+\]
+が成り立つ．
+
+いま
+\[
+B_n \subset \bigsqcup_{i=1}^\infty A_i
+\]
+だから単調性より
+\[
+\sum_{i=1}^n \lambda^*(A_i)=\lambda^*(B_n)
+\le
+\lambda^*\left( \bigsqcup_{i=1}^\infty A_i \right)
+\]
+である．$n\to\infty$ とすれば
+\[
+\sum_{i=1}^\infty \lambda^*(A_i)
+\le
+\lambda^*\left( \bigsqcup_{i=1}^\infty A_i \right)
+\]
+を得る．
+
+逆向きの不等式はLebesgue外測度の可算劣加法性から
+\[
+\lambda^*\left( \bigsqcup_{i=1}^\infty A_i \right)
+\le
+\sum_{i=1}^\infty \lambda^*(A_i)
+\]
+である．
+以上より等号が成り立つ．
+\end{proof}
+
+\section{開被覆による書き換え}
+
+\begin{theorem}[開区間被覆による書き換え]
 任意の $A \subset \RR^d$ に対して
 \[
 \lambda^*(A)
@@ -318,20 +487,46 @@ U_n \text{ は有界開区間}
 \end{theorem}
 \begin{proof}
 右辺を $\alpha(A)$ とおく．
-有界開区間は有界区間の特別な場合だから
 \[
-\lambda^*(A)\le \alpha(A)
+A \subset \bigcup_{n=1}^{\infty} U_n,
+\qquad
+U_n \text{ は有界開区間}
+\]
+とする．
+各 $n$ に対し，任意の $\delta>0$ に対して
+$U_n$ を含む左半開区間 $R_n \in \calE_d$ を
+\[
+|R_n| < |U_n|+\delta
+\]
+となるように取れるから，
+\[
+\lambda^*(U_n)\le |U_n|
 \]
 である．
+したがって可算劣加法性より
+\[
+\lambda^*(A)
+\le
+\sum_{n=1}^{\infty}\lambda^*(U_n)
+\le
+\sum_{n=1}^{\infty}|U_n|
+\]
+を得る．
+被覆について下限を取れば $\lambda^*(A)\le \alpha(A)$ である．
 
 逆向きの不等式を示す．
+もし $\lambda^*(A)=\infty$ なら，
+すでに示した $\lambda^*(A)\le \alpha(A)$ より
+$\alpha(A)=\infty$ であり，自明である．
+
 $\eps>0$ を取る．
 Lebesgue外測度の定義より，
-$A$ を覆う有界区間列 $\{R_n\}_{n=1}^{\infty}$ で
+$A$ を覆う区間列 $\{R_n\}_{n=1}^{\infty} \subset \calE_d$ で
 \[
 \sum_{n=1}^{\infty}|R_n|<\lambda^*(A)+\eps
 \]
 を満たすものが取れる．
+右辺は有限だから各 $|R_n|$ は有限であり，したがって各 $R_n$ は有界である．
 各 $n$ に対して，$R_n \subset U_n$ を満たす有界開区間 $U_n$ を
 \[
 |U_n|<|R_n|+\frac{\eps}{2^n}
@@ -397,6 +592,8 @@ G:=\bigcup_{n=1}^{\infty}U_n
 <
 \lambda^*(A)+\eps.
 \]
+ここで第2の不等式は，前定理を $A=U_n$ に適用すれば
+$\lambda^*(U_n)\le |U_n|$ と分かることによる．
 したがって
 \[
 \beta(A)\le \lambda^*(A)+\eps.
@@ -407,7 +604,8 @@ $\eps>0$ は任意だから $\beta(A)\le \lambda^*(A)$ である．
 \section{具体例}
 
 \begin{proposition}[区間による上からの評価]
-$A \subset R$ を満たす有界区間 $R$ に対して
+$A \subset \RR^d$ と $R \in \calE_d$ が
+$A \subset R$ を満たすとする．このとき
 \[
 \lambda^*(A) \le |R|
 \]
@@ -489,18 +687,28 @@ $A=\{a_1,a_2,\dots\}$ と書く．
 
 \section{解釈}
 
-Lebesgueは素朴な「面積」が満たすべき要求仕様として，以下のようなものを追求していたとされる：
+%現代的には，
+Lebesgue理論の出発点は
+「すべての部分集合に可算加法的な体積を与えること」ではなく，
+まず外測度
+\[
+\lambda^* : \mathcal P(\RR^d) \to [0,\infty]
+\]
+を全ての部分集合上に定めることである．
+本章で得た $\lambda^*$ は
 \begin{enumerate}
-    \item （全域性）すべての部分集合 $A \subset \RR^d$ に対し，面積 $\mu(A)$ が定まる
-    \item （非負性）$0 \le \mu(A) \le \infty$
-    \item （加法性）$\mu\left( \bigsqcup_{i=1}^\infty A_i \right) = \sum_{i=1}^\infty \mu(A_i)$
-    \item （合同変換不変性）$\mu( T A + c ) = \mu(A)$
-    \item （Euclid幾何学との整合性）可算集合のような薄い集合の体積は $0$
+    \item 全域的に定義される
+    \item 非負で，$\lambda^*(\emptyset)=0$ を満たす
+    \item 可算劣加法的である
+    \item 平行移動不変である
+    \item 区間の体積や可算集合の長さ $0$ という幾何学的直観と整合する
 \end{enumerate}
-Lebesgue外測度は，Jordan外測度の有限被覆を可算被覆へ緩めることによって，加法性以外の性質を満たせるようになった．
+という性質をもつ．
+ただし，この段階ではまだ可算加法性は一般には成り立たないので，
+$\lambda^*$ は「測度」ではなく「外測度」にとどまっている．
 
 %したがって $\lambda^*$ は，まだ「測度」ではなく「外測度」である．
-次章ではこれに対応する内測度を導入し，
+次章以降ではこれに対応する内測度を導入し，
 \[
 \text{外測度}=\text{内測度}
 \]
