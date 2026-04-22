@@ -2,7 +2,7 @@
 \chapter{Jordan測度}
 
 \paragraph{本章の目標}
-Jordan測度，Jordan可測集合，有限加法族（集合代数）
+Jordan測度，Jordan可測集合，有限加法族，有限加法的測度
 
 第1章では1次元のRiemann積分を導入し，Dirichlet関数によって
 Riemann積分が常には定義できないことを見た．
@@ -55,18 +55,17 @@ R = I_1 \times \cdots \times I_d
 \]
 で定める．
 $d=1,2,3$ のときは，それぞれ長さ，面積，体積と呼ぶ．
-\red{$\RR^d$の左半開区間の全体に空集合を加えた集合族を$\calE_d$と書く．}
 \end{definition}
 
 \begin{remark}
 端点の開閉は体積に影響しない．
+後で見るように，境界は後でJordan零集合として無視できるので，閉区間・開区間・半開区間の違いは本質的でない．
 以後，有限分割を扱う際には
 \[
 Q = \prod_{k=1}^d (a_k,b_k]
 \]
-という左半開区間，すなわち $\calE_d$ の元を主に用いる．
-境界は後でJordan零集合として無視できるので，
-閉区間・開区間・半開区間の違いは本質的でない．
+という左半開区間を主に用いる．
+\red{$\RR^d$の左半開区間の全体に空集合を加えた集合族を$\calE_d$と書く．}
 \end{remark}
 
 \begin{definition}[基本集合]
@@ -256,7 +255,7 @@ L(1_A,\calP)
 分割に沿って $A$ を外側・内側から近似する基本集合の体積そのものである．
 これがJordan測度の出発点である．
 
-\section{Jordan外測度・Jordan内測度}
+\section{Jordan測度・Jordan可測}
 
 \begin{definition}[Jordan外測度とJordan内測度]
 集合 $A \subset \RR^d$ に対し，
@@ -296,7 +295,7 @@ $A$ を含む基本集合が存在しなければ $m_J^*(A)=\infty$ であり自
 左辺で上限を，右辺で下限を取ればよい．
 \end{proof}
 
-\begin{definition}[Jordan可測，Jordan零集合]
+\begin{definition}[Jordan可測・Jordan測度]
 有界集合 $A \subset \RR^d$ がJordan可測であるとは
 \[
 m_{J,*}(A) = m_J^*(A)
@@ -305,8 +304,10 @@ m_{J,*}(A) = m_J^*(A)
 その共通値を $A$ のJordan測度と書き，$m_J(A)$ で表す．
 \red{$\RR^d$のJordan可測集合の全体を$\calA_J$と書く．
 この定義により，$m_J$は集合族$\calA_J$上の非負値関数に拡張された．}
+\end{definition}
 
-また $m_J^*(N)=0$ を満たす集合 $N$ をJordan零集合という．
+\begin{definition}[Jordan零集合]
+$m_J^*(N)=0$ を満たす集合 $N$ をJordan零集合という．    
 \end{definition}
 
 \begin{proposition}
@@ -321,21 +322,11 @@ m_{J,*}(A) = m_J^*(A)
     だから $m_{J,*}(N)=m_J^*(N)=0$ である．
 \end{proof}
 
-\begin{lemma}
-次が成り立つ．
-\begin{enumerate}
-    \item 有界基本集合 $E \subset \RR^d$ の境界 $\partial E$ はJordan零集合である．
-    \item 任意の集合 $A_1,\dots,A_n \subset \RR^d$ に対して
-    \[
-    m_J^*\Bigl(\bigcup_{k=1}^n A_k\Bigr)
-    \le \sum_{k=1}^n m_J^*(A_k)
-    \]
-    が成り立つ．
-\end{enumerate}
-\end{lemma}
-\begin{proof}
-\begin{enumerate}
-    \item 有界基本集合 $E$ を
+\begin{proposition}
+    有界基本集合 $E \subset \RR^d$ の境界 $\partial E$ はJordan零集合である．
+\end{proposition}
+
+\begin{proof}有界基本集合 $E$ を
     \[
     E=\bigsqcup_{j=1}^m Q_j,
     \qquad
@@ -346,8 +337,21 @@ m_{J,*}(A) = m_J^*(A)
     \partial E \subset \bigcup_{j=1}^m \partial Q_j
     \]
     より，$\partial E$ もJordan零集合である．
+\end{proof}
 
-    \item 右辺が $\infty$ のときは自明なので有限の場合を示せばよい．任意の $\eps>0$ に対し，各 $k$ に対して基本集合 $E_k$ が存在して
+\section{Jordan可測性の判定法}
+
+\begin{lemma}[Jordan外測度の有限劣加法性]任意の集合 $A_1,\dots,A_n \subset \RR^d$ に対して
+    \[
+    m_J^*\Bigl(\bigcup_{k=1}^n A_k\Bigr)
+    \le \sum_{k=1}^n m_J^*(A_k)
+    \]
+    が成り立つ．
+\end{lemma}
+
+\begin{proof}
+%右辺が $\infty$ のときは自明なので有限の場合を示せばよい．
+任意の $\eps>0$ に対し，各 $k$ に対して基本集合 $E_k$ が存在して
     \[
     A_k \subset E_k,
     \qquad
@@ -365,7 +369,6 @@ m_{J,*}(A) = m_J^*(A)
     < \sum_{k=1}^n m_J^*(A_k)+\eps.
     \]
     $\eps$ の任意性より結論を得る．
-\end{enumerate}
 \end{proof}
 
 \begin{theorem}[Jordan可測の判定法]
@@ -555,118 +558,9 @@ m_J(F) \le \int_I 1_A(x)\,dx \le m_J(G)
 積分値は $m_J(A)$ に一致する．
 \end{proof}
 
-\begin{proposition}[分割によるJordan測度の近似]
-有界閉区間 $I \subset \RR^d$ とJordan可測集合 $A \subset I$ を取る．
-各 $n$ に対して
-\[
-\calP_n : I = \bigsqcup_{i=1}^{N_n} Q_i^{(n)}
-\]
-を $I$ の分割とし，
-\[
-|\calP_n| \to 0 \qquad (n\to\infty)
-\]
-とする．さらに
-\[
-F_n := \bigcup_{Q_i^{(n)} \subset A} Q_i^{(n)},
-\qquad
-G_n := \bigcup_{Q_i^{(n)} \cap A \neq \emptyset} Q_i^{(n)}
-\]
-とおく．
-このとき
-\[
-m_J(F_n)=L(1_A,\calP_n)\to m_J(A),
-\qquad
-m_J(G_n)=U(1_A,\calP_n)\to m_J(A)
-\]
-が成り立つ．特に
-\[
-\sum_{Q_i^{(n)} \cap A \neq \emptyset} |Q_i^{(n)}|
-\to m_J(A)
-\]
-である．
-\end{proposition}
-\begin{proof}
-上の定理と系より，$1_A$ は $I$ 上Riemann可積分であり，
-\[
-\int_I 1_A(x)\,dx = m_J(A)
-\]
-である．
 
-各 $n$ に対して，$Q_i^{(n)} \cap A \neq \emptyset$ なら
-$t_i^{(n)} \in Q_i^{(n)} \cap A$ を1点取り，
-$Q_i^{(n)} \cap A = \emptyset$ なら
-$t_i^{(n)} \in Q_i^{(n)}$ を任意に取る．
-すると
-\[
-1_A(t_i^{(n)})=
-\begin{cases}
-1 & (Q_i^{(n)} \cap A \neq \emptyset),\\
-0 & (Q_i^{(n)} \cap A = \emptyset)
-\end{cases}
-\]
-だから，対応するRiemann和は
-\[
-S(1_A,\calP_n,t^{(n)})
-= \sum_{Q_i^{(n)} \cap A \neq \emptyset} |Q_i^{(n)}|
-= U(1_A,\calP_n)
-= m_J(G_n)
-\]
-に一致する．
-したがってRiemann積分の一意性（区分求積法）より
-\[
-m_J(G_n)=U(1_A,\calP_n)\to \int_I 1_A(x)\,dx = m_J(A)
-\]
-を得る．
 
-同様に，$Q_i^{(n)} \subset A$ なら $s_i^{(n)} \in Q_i^{(n)}$ を任意に取り，
-$Q_i^{(n)} \not\subset A$ なら $s_i^{(n)} \in Q_i^{(n)} \setminus A$ を1点取る．
-このとき
-\[
-1_A(s_i^{(n)})=
-\begin{cases}
-1 & (Q_i^{(n)} \subset A),\\
-0 & (Q_i^{(n)} \not\subset A)
-\end{cases}
-\]
-であるから
-\[
-S(1_A,\calP_n,s^{(n)})
-= \sum_{Q_i^{(n)} \subset A} |Q_i^{(n)}|
-= L(1_A,\calP_n)
-= m_J(F_n)
-\]
-となる．再び区分求積法より
-\[
-m_J(F_n)=L(1_A,\calP_n)\to \int_I 1_A(x)\,dx = m_J(A)
-\]
-を得る．
-\end{proof}
-
-\begin{example}
-    基本集合はJordan可測であり，そのJordan測度は最初に定めた $m_J$ に一致する
-\end{example}
-\begin{proof}
-    基本集合 $E$ 自身を内側近似と外側近似に取れば
-    $m_{J,*}(E)=m_J^*(E)=m_J(E)$ である．
-\end{proof}
-
-\begin{example}
-    有限集合はJordan零集合である
-\end{example}
-\begin{proof}
-    1点集合は十分小さい区間1つで覆えるのでJordan零である．有限集合はその有限和である
-\end{proof}
-
-\begin{example}
-    線分や超平面片など，$\RR^d$ の中で厚みをもたない典型的な図形はJordan零集合である
-\end{example}
-\begin{proof}
-    例えば超平面片 $\{x_d=0\} \cap [-M,M]^d$ は厚さ $\delta$ の板
-    \[
-    [-M,M]^{d-1} \times [-\delta,\delta]
-    \]
-    で覆えるのでJordan零である．線分も同様に細い区間で覆える
-\end{proof}
+\section{Jordan可測集合の性質}
 
 \begin{theorem}[Jordan可測集合の集合演算に関する閉性]
 Jordan可測集合 $A,B \subset \RR^d$ と $c \in \RR^d$ に対して，
@@ -716,8 +610,57 @@ Jordan零集合の有限和と平行移動は再びJordan零集合だから，
 となり，Jordan可測ではない．
 \end{proof}
 
+\begin{example}
+$\QQ \cap [0,1]$ を
+    \[
+    \QQ \cap [0,1] = \bigcup_{n=1}^\infty \{q_n\}
+    \]
+    と可算個の1点集合の和に書く．
+    各 $\{q_n\}$ はJordan可測かつJordan零集合であるが，
+    既に見た通り，和集合 $\QQ \cap [0,1]$ はJordan可測でない．
+    % 実際，$\QQ \cap [0,1]$ もその補集合 $([0,1]\setminus\QQ)$ も $[0,1]$ で稠密だから，
+    % \[
+    % \partial(\QQ \cap [0,1])=[0,1]
+    % \]
+    % となる．
+    したがってJordan可測集合の全体は可算和で閉じていない．
+\end{example}
+
+\begin{example}
+上と同じ列 $q_1,q_2,\dots$ を用いて
+    \[
+    E_n:=\{q_1,\dots,q_n\}
+    \]
+    とおくと，各 $E_n$ はJordan可測かつJordan零集合である．
+    \[
+    m_J(E_n)=0 \qquad (n=1,2,\dots)
+    \]
+    ところが，
+    \[
+    E_1 \subset E_2 \subset \cdots,
+    \qquad
+    \bigcup_{n=1}^\infty E_n=\QQ \cap [0,1]
+    \]
+    である．
+    % もしLebesgue測度のような可算加法性や下からの連続性がJordan測度にも成り立つなら，
+    % \[
+    % m_J\Bigl(\bigcup_{n=1}^\infty E_n\Bigr)
+    % = \sum_{n=1}^\infty m_J(E_n\setminus E_{n-1})
+    % = 0
+    % \]
+    % あるいは
+    % \[
+    % m_J\Bigl(\bigcup_{n=1}^\infty E_n\Bigr)
+    % = \lim_{n\to\infty} m_J(E_n)=0
+    % \]
+    % と書きたくなる．
+    極限集合 $\QQ \cap [0,1]$ はJordan可測でないので，
+%    これらの等式はそもそも意味をもたない．
+    つまりJordan可測集合の全体は，可算極限でも閉じていない．
+\end{example}
+
 \begin{remark}
-この例が示す通り，Jordan可測集合は可算和で閉じていない．
+これらの例が示す通り，Jordan可測集合は可算和で閉じていない．
 一方，後に導入するLebesgue測度では
 $A$ は可測で，しかも測度 $0$ である．
 この例はまた，有界集合でもJordan可測とは限らないことを示す．
@@ -727,9 +670,9 @@ Jordan可測性は，有界性や開閉ではなく，
 「境界がJordan零かどうか」によって決まる．
 \end{remark}
 
+
+
 \section{Jordan測度の性質}
-
-
 
 \begin{theorem}[Jordan測度の性質]
 Jordan可測集合 $A,B \subset \RR^d$ と $c \in \RR^d$ に対して次が成り立つ．
@@ -896,56 +839,124 @@ Jordan測度は，Jordan可測集合の上では
 ここが後のLebesgue測度との最大の違いである．
 \end{remark}
 
+
+
+\begin{theorem}[分割によるJordan測度の近似]
+有界閉区間 $I \subset \RR^d$ とJordan可測集合 $A \subset I$ を取る．
+各 $n$ に対して
+\[
+\calP_n : I = \bigsqcup_{i=1}^{N_n} Q_i^{(n)}
+\]
+を $I$ の分割とし，
+\[
+|\calP_n| \to 0 \qquad (n\to\infty)
+\]
+とする．さらに
+\[
+F_n := \bigcup_{Q_i^{(n)} \subset A} Q_i^{(n)},
+\qquad
+G_n := \bigcup_{Q_i^{(n)} \cap A \neq \emptyset} Q_i^{(n)}
+\]
+とおく．
+このとき
+\[
+m_J(F_n)=L(1_A,\calP_n)\to m_J(A),
+\qquad
+m_J(G_n)=U(1_A,\calP_n)\to m_J(A)
+\]
+が成り立つ．特に
+\[
+\sum_{Q_i^{(n)} \cap A \neq \emptyset} |Q_i^{(n)}|
+\to m_J(A)
+\]
+である．
+\end{theorem}
+\begin{proof}
+上の定理と系より，$1_A$ は $I$ 上Riemann可積分であり，
+\[
+\int_I 1_A(x)\,dx = m_J(A)
+\]
+である．
+
+各 $n$ に対して，$Q_i^{(n)} \cap A \neq \emptyset$ なら
+$t_i^{(n)} \in Q_i^{(n)} \cap A$ を1点取り，
+$Q_i^{(n)} \cap A = \emptyset$ なら
+$t_i^{(n)} \in Q_i^{(n)}$ を任意に取る．
+すると
+\[
+1_A(t_i^{(n)})=
+\begin{cases}
+1 & (Q_i^{(n)} \cap A \neq \emptyset),\\
+0 & (Q_i^{(n)} \cap A = \emptyset)
+\end{cases}
+\]
+だから，対応するRiemann和は
+\[
+S(1_A,\calP_n,t^{(n)})
+= \sum_{Q_i^{(n)} \cap A \neq \emptyset} |Q_i^{(n)}|
+= U(1_A,\calP_n)
+= m_J(G_n)
+\]
+に一致する．
+したがってRiemann積分の一意性（区分求積法）より
+\[
+m_J(G_n)=U(1_A,\calP_n)\to \int_I 1_A(x)\,dx = m_J(A)
+\]
+を得る．
+
+同様に，$Q_i^{(n)} \subset A$ なら $s_i^{(n)} \in Q_i^{(n)}$ を任意に取り，
+$Q_i^{(n)} \not\subset A$ なら $s_i^{(n)} \in Q_i^{(n)} \setminus A$ を1点取る．
+このとき
+\[
+1_A(s_i^{(n)})=
+\begin{cases}
+1 & (Q_i^{(n)} \subset A),\\
+0 & (Q_i^{(n)} \not\subset A)
+\end{cases}
+\]
+であるから
+\[
+S(1_A,\calP_n,s^{(n)})
+= \sum_{Q_i^{(n)} \subset A} |Q_i^{(n)}|
+= L(1_A,\calP_n)
+= m_J(F_n)
+\]
+となる．再び区分求積法より
+\[
+m_J(F_n)=L(1_A,\calP_n)\to \int_I 1_A(x)\,dx = m_J(A)
+\]
+を得る．
+\end{proof}
+
+%\section{Jordan測度の例}
+
 \begin{example}
-\begin{enumerate}
-    \item $\QQ \cap [0,1]$ を
-    \[
-    \QQ \cap [0,1] = \bigcup_{n=1}^\infty \{q_n\}
-    \]
-    と可算個の1点集合の和に書く．
-    各 $\{q_n\}$ はJordan可測かつJordan零集合であるが，
-    既に見た通り，和集合 $\QQ \cap [0,1]$ はJordan可測でない．
-    % 実際，$\QQ \cap [0,1]$ もその補集合 $([0,1]\setminus\QQ)$ も $[0,1]$ で稠密だから，
-    % \[
-    % \partial(\QQ \cap [0,1])=[0,1]
-    % \]
-    % となる．
-    したがってJordan可測集合の全体は可算和で閉じていない．
-
-    \item 上と同じ列 $q_1,q_2,\dots$ を用いて
-    \[
-    E_n:=\{q_1,\dots,q_n\}
-    \]
-    とおくと，各 $E_n$ はJordan可測かつJordan零集合である．
-    \[
-    m_J(E_n)=0 \qquad (n=1,2,\dots)
-    \]
-    ところが，
-    \[
-    E_1 \subset E_2 \subset \cdots,
-    \qquad
-    \bigcup_{n=1}^\infty E_n=\QQ \cap [0,1]
-    \]
-    である．
-    % もしLebesgue測度のような可算加法性や下からの連続性がJordan測度にも成り立つなら，
-    % \[
-    % m_J\Bigl(\bigcup_{n=1}^\infty E_n\Bigr)
-    % = \sum_{n=1}^\infty m_J(E_n\setminus E_{n-1})
-    % = 0
-    % \]
-    % あるいは
-    % \[
-    % m_J\Bigl(\bigcup_{n=1}^\infty E_n\Bigr)
-    % = \lim_{n\to\infty} m_J(E_n)=0
-    % \]
-    % と書きたくなる．
-    極限集合 $\QQ \cap [0,1]$ はJordan可測でないので，
-%    これらの等式はそもそも意味をもたない．
-    つまりJordan可測集合の全体は，可算極限でも閉じていない．
-\end{enumerate}
+    基本集合はJordan可測であり，そのJordan測度は最初に定めた $m_J$ に一致する
 \end{example}
+\begin{proof}
+    基本集合 $E$ 自身を内側近似と外側近似に取れば
+    $m_{J,*}(E)=m_J^*(E)=m_J(E)$ である．
+\end{proof}
 
-\section{有限加法族}
+\begin{example}
+    有限集合はJordan零集合である
+\end{example}
+\begin{proof}
+    1点集合は十分小さい区間1つで覆えるのでJordan零である．有限集合はその有限和である
+\end{proof}
+
+\begin{example}
+    線分や超平面片など，$\RR^d$ の中で厚みをもたない典型的な図形はJordan零集合である
+\end{example}
+\begin{proof}
+    例えば超平面片 $\{x_d=0\} \cap [-M,M]^d$ は厚さ $\delta$ の板
+    \[
+    [-M,M]^{d-1} \times [-\delta,\delta]
+    \]
+    で覆えるのでJordan零である．線分も同様に細い区間で覆える
+\end{proof}
+
+\section{有限加法族・有限加法的測度}
 
 \begin{definition}[冪集合]
 集合 $X$ の全部分集合からなる集合族
@@ -1095,5 +1106,5 @@ $X=\RR^d$ 上の有限加法族とみなせる．
     \item Darboux上積分・下積分 $\leftrightarrow$ Jordan外測度・内測度
     \item （拡張）Jordan可測集合 $A$ のJordan測度 $m_J(A) := m_J^*(A) = m_{J,*}(A)$
     \item 有限加法族の例：基本集合の全体 $\calA_d(X)$，Jordan可測集合の全体 $\calA_J(X)$
-    \item 有限加法的測度の例：Jordan測度
+    \item 有限加法的測度の例：Jordan測度 $m_J : \calA_J(X) \to [0,\infty]$
 \end{itemize}
