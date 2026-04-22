@@ -50,27 +50,28 @@ R = I_1 \times \cdots \times I_d
 のことである．
 その体積を
 \[
-|R| := \prod_{k=1}^d |I_k|
+|R| := \prod_{k=1}^d |I_k|,
+\quad |\emptyset|=0
 \]
 で定める．
 $d=1,2,3$ のときは，それぞれ長さ，面積，体積と呼ぶ．
-\red{$\RR^d$の左半開区間の全体を$\calE_d$と書く．}
+\red{$\RR^d$の左半開区間の全体に空集合を加えた集合族を$\calE_d$と書く．}
 \end{definition}
 
 \begin{remark}
 端点の開閉は体積に影響しない．
 以後，有限分割を扱う際には
 \[
-Q = \prod_{k=1}^d \red{(}a_k,b_k\red{]}
+Q = \prod_{k=1}^d (a_k,b_k]
 \]
-という\red{左}半開区間を主に用いる．
+という左半開区間，すなわち $\calE_d$ の元を主に用いる．
 境界は後でJordan零集合として無視できるので，
 閉区間・開区間・半開区間の違いは本質的でない．
 \end{remark}
 
 \begin{definition}[基本集合]
 $\RR^d$ の基本集合とは，
-有限個の互いに素な半開区間の合併
+有限個の互いに素な $\calE_d$ の元の合併
 \[
 E = \bigsqcup_{j=1}^n Q_j
 \]
@@ -84,14 +85,14 @@ m_J(E) := \sum_{j=1}^n |Q_j|
 \end{definition}
 
 \begin{lemma}[格子分割]
-有限個の有界\red{左半}開区間$\{B_i\}_{i=1}^n \subset \RR^d$の合併 $A = \bigcup_{i=1}^n B_i$は，ある互いに素な半開区間$\{Q_j\}_{j=1}^m \subset \RR^d$からなる基本集合$\bigsqcup_{j=1}^m Q_j$として書き直せる．
+有限個の $\calE_d$ の元$\{B_i\}_{i=1}^n$の合併 $A = \bigcup_{i=1}^n B_i$は，ある互いに素な $\calE_d$ の元$\{Q_j\}_{j=1}^m$からなる基本集合$\bigsqcup_{j=1}^m Q_j$として書き直せる．
 \[
 A = \bigcup_{i=1}^n B_i = \bigsqcup_{j=1}^m Q_j.
 \]
 一般にこのような基本集合の取り方は一意ではないが，その体積$\sum_{j=1}^m |Q_j|$は基本集合の取り方に依らない．
 \end{lemma}
 \begin{proof}
-%    （各区間$B_i = \prod_{k=1}^d [a_{ik},b_{ik})$の端点で全ての区間$B_j$を細分し，互いに素な小半開区間をつくる．）
+%    （各区間$B_i = \prod_{k=1}^d (a_{ik},b_{ik}]$の端点で全ての区間$B_j$を細分し，互いに素な小半開区間をつくる．）
     （考え方：各区間$B_i$を細分し，互いに素な小半開区間$Q_j$をつくる．）
 \end{proof}
 %\input{chapters/02jordan-proof01.tex}
@@ -158,9 +159,9 @@ m_J(F)=\sum_{i\in J}|R_i|
     \]
 
     \item $c=(c_1,\dots,c_d)\in\RR^d$ とする．
-    各 $R_i=\prod_{k=1}^d[a_{i,k},b_{i,k})$ に対して
+    各 $R_i=\prod_{k=1}^d(a_{i,k},b_{i,k}]$ に対して
     \[
-    R_i+c=\prod_{k=1}^d[a_{i,k}+c_k,b_{i,k}+c_k)
+    R_i+c=\prod_{k=1}^d(a_{i,k}+c_k,b_{i,k}+c_k]
     \]
     であり，
     \[
@@ -338,7 +339,7 @@ m_{J,*}(A) = m_J^*(A)
     \[
     E=\bigsqcup_{j=1}^m Q_j,
     \qquad
-    Q_j=\prod_{k=1}^d [a_{j,k},b_{j,k})
+    Q_j=\prod_{k=1}^d (a_{j,k},b_{j,k}]
     \]
     と書く．各 $Q_j$ の境界 $\partial Q_j$ は，各座標について端点を1つ固定して得られる有限個の超平面片の合併であるからJordan零集合である．したがって
     \[
@@ -489,9 +490,9 @@ m_J(H) < \eps
 \]
 となる基本集合 $H$ が存在する．
 \[
-I = \prod_{k=1}^d [\alpha_k,\beta_k)
+I = \prod_{k=1}^d (\alpha_k,\beta_k]
 \]
-を $A \cup H$ を含む有界左半開区間とする．
+を $A \cup H$ を含む $\calE_d$ の元とする．
 いま，$I$ と $H$ に現れる全ての端点で $I$ を格子分割すると，
 \[
 I = \bigsqcup_{j=1}^N R_j
@@ -1026,7 +1027,7 @@ $\calA$ が $X$ 上の有限加法族ならば，任意の $A,B,A_1,\dots,A_n \i
 \end{definition}
 
 \begin{example}
-    有界左半開区間 $X \in \calE_d$ を固定し，
+    $X \in \calE_d$ を固定し，
     \[
     \calA_d(X):=\{E \in \calA_d \mid E \subset X\}
     \]
@@ -1088,7 +1089,7 @@ $X=\RR^d$ 上の有限加法族とみなせる．
 
 \section{概念の整理}
 \begin{itemize}
-    \item （出発点）左半開区間 $I = \prod_{i=1}^d [a_i,b_i)$ の体積 $|I| := \prod_{i=1}^d (b_i - a_i)$
+    \item （出発点）左半開区間 $I = \prod_{i=1}^d (a_i,b_i]$ の体積 $|I| := \prod_{i=1}^d (b_i - a_i)$
     \item （拡張）基本集合 $E=\bigsqcup_{i=1}^n Q_i$ のJordan測度 $m_J(E) := \sum_{i=1}^n |Q_i|$
     \item Riemann積分 $=$ $\sum$ Riemann可積分関数 $\times$ Jordan測度
     \item Darboux上積分・下積分 $\leftrightarrow$ Jordan外測度・内測度
