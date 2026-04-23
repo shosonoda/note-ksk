@@ -1,57 +1,54 @@
+\setcounter{chapter}{4}
 \chapter{Lebesgue測度}
 
 \paragraph{本章の目標}
-前章の
+Lebesgue外測度と内測度が一致する
 \[
 \lambda^*(A)=\lambda_*(A)
 \]
 という条件を用いてLebesgue可測集合とLebesgue測度を定義する．
-また，この章では測度論で使う基本的な言葉
+続けて，測度論で使う基本的な概念
 \[
-\sigma\text{-加法族},\qquad \text{測度},\qquad \text{Borel集合族}
+\text{$\sigma$-加法族},\qquad \text{測度},\qquad \text{Borel集合族}
 \]
-をまとめて導入する．
+を導入する．
 Lebesgue測度は，区間の体積を保ちながら「面積」を数理モデル化する代表例である．
 
 \section{動機づけ}
 
-面積や体積を表す量であるためには，
+「測度」が面積や体積を表す量であるためには，
 集合を外から測っても内から測っても同じ値になってほしい．
 そこで，外測度と内測度が一致する集合だけを
-「本当に面積が定まる集合」とみなす．
-
-これはJordan測度のときと同じ発想である．
-違いは，外側近似・内側近似のどちらにも
-可算という自由度が入ったことである．
-このおかげで，可算集合のような薄い集合を除外せずに
-面積論を展開できる．
+「面積が測れる集合」と規定する．
+これはJordan測度と同じ発想である．
+Jordanの理論では様々な局面で有限性の限界が現れたが，Lebesgueの理論では可算性まで含めた設計によって，可算集合のような薄い集合や，集合演算の極限まで一貫した論理のもとで扱えるようになる．
 
 \section{シグマ加法族}
 
 \begin{definition}[$\sigma$-加法族]
-集合 $X$ の部分集合族 $\mathcal M \subset \mathcal P(X)$ が
-$X$ 上の $\sigma$-加法族であるとは，次の3条件を満たすことをいう．
+集合 $X$ の部分集合族 $\calS \subset \calP(X)$ が
+$X$ 上の $\sigma$-加法族（完全加法族，可算加法族，$\sigma$-集合体）であるとは，次の3条件を満たすことをいう．
 \begin{enumerate}
-    \item $X \in \mathcal M$
-    \item $A \in \mathcal M$ ならば $X \setminus A \in \mathcal M$
-    \item $\{A_n\}_{n=1}^{\infty} \subset \mathcal M$ ならば
+    \item $X \in \calS$
+    \item $A \in \calS$ ならば $X \setminus A \in \calS$
+    \item $\{A_n\}_{n=1}^{\infty} \subset \calS$ ならば
     \[
-    \bigcup_{n=1}^{\infty} A_n \in \mathcal M
+    \bigcup_{n=1}^{\infty} A_n \in \calS
     \]
 \end{enumerate}
 \end{definition}
 
 \begin{proposition}[基本性質]
-$\mathcal M$ を $X$ 上の $\sigma$-加法族とする．
+$\calS$ を $X$ 上の $\sigma$-加法族とする．
 このとき次が成り立つ．
 \begin{enumerate}
-    \item $\emptyset \in \mathcal M$
-    \item $A,B \in \mathcal M$ ならば $A \cup B \in \mathcal M$
-    \item $A,B \in \mathcal M$ ならば $A \cap B \in \mathcal M$
-    \item $A,B \in \mathcal M$ ならば $A \setminus B \in \mathcal M$
-    \item $\{A_n\}_{n=1}^{\infty} \subset \mathcal M$ ならば
+    \item $\emptyset \in \calS$
+    \item $A,B \in \calS$ ならば $A \cup B \in \calS$
+    \item $A,B \in \calS$ ならば $A \cap B \in \calS$
+    \item $A,B \in \calS$ ならば $A \setminus B \in \calS$
+    \item $\{A_n\}_{n=1}^{\infty} \subset \calS$ ならば
     \[
-    \bigcap_{n=1}^{\infty} A_n \in \mathcal M
+    \bigcap_{n=1}^{\infty} A_n \in \calS
     \]
 \end{enumerate}
 \end{proposition}
@@ -61,7 +58,7 @@ $\mathcal M$ を $X$ 上の $\sigma$-加法族とする．
     \[
     \emptyset = X \setminus X
     \]
-    だから，補集合に関する閉性より $\emptyset \in \mathcal M$ である．
+    だから，補集合に関する閉性より $\emptyset \in \calS$ である．
 
     \item 可算和に関する閉性を
     \[
@@ -92,88 +89,88 @@ $\mathcal M$ を $X$ 上の $\sigma$-加法族とする．
 \end{proof}
 
 \begin{proposition}[共通部分]
-$X$ 上の $\sigma$-加法族の族 $\{\mathcal M_\alpha\}_{\alpha \in \Gamma}$ に対して
+$X$ 上の $\sigma$-加法族の族 $\{\calS_\alpha\}_{\alpha \in \Gamma}$ に対して
 \[
-\bigcap_{\alpha \in \Gamma}\mathcal M_\alpha
+\bigcap_{\alpha \in \Gamma}\calS_\alpha
 \]
 も $X$ 上の $\sigma$-加法族である．
 \end{proposition}
 \begin{proof}
 \[
-\mathcal M:=\bigcap_{\alpha \in \Gamma}\mathcal M_\alpha
+\calS:=\bigcap_{\alpha \in \Gamma}\calS_\alpha
 \]
 とおく．
-各 $\mathcal M_\alpha$ は $\sigma$-加法族だから，まず $X \in \mathcal M_\alpha$ がすべての $\alpha$ について成り立つ．
-したがって $X \in \mathcal M$ である．
+各 $\calS_\alpha$ は $\sigma$-加法族だから，まず $X \in \calS_\alpha$ がすべての $\alpha$ について成り立つ．
+したがって $X \in \calS$ である．
 
-次に $A \in \mathcal M$ とする．
-すると $A \in \mathcal M_\alpha$ がすべての $\alpha$ について成り立つ．
-各 $\mathcal M_\alpha$ は補集合に関して閉じているから
+次に $A \in \calS$ とする．
+すると $A \in \calS_\alpha$ がすべての $\alpha$ について成り立つ．
+各 $\calS_\alpha$ は補集合に関して閉じているから
 \[
-X\setminus A \in \mathcal M_\alpha
+X\setminus A \in \calS_\alpha
 \]
 がすべての $\alpha$ について成り立つ．
-よって $X\setminus A \in \mathcal M$ である．
+よって $X\setminus A \in \calS$ である．
 
-最後に $\{A_n\}_{n=1}^{\infty}\subset \mathcal M$ とする．
-すると各 $n$ と各 $\alpha$ に対して $A_n \in \mathcal M_\alpha$ である．
-各 $\mathcal M_\alpha$ は可算和に関して閉じているから
+最後に $\{A_n\}_{n=1}^{\infty}\subset \calS$ とする．
+すると各 $n$ と各 $\alpha$ に対して $A_n \in \calS_\alpha$ である．
+各 $\calS_\alpha$ は可算和に関して閉じているから
 \[
-\bigcup_{n=1}^{\infty}A_n \in \mathcal M_\alpha
+\bigcup_{n=1}^{\infty}A_n \in \calS_\alpha
 \]
 がすべての $\alpha$ について成り立つ．
 よって
 \[
-\bigcup_{n=1}^{\infty}A_n \in \mathcal M
+\bigcup_{n=1}^{\infty}A_n \in \calS
 \]
 である．
 \end{proof}
 
 \begin{definition}[生成される $\sigma$-加法族]
-集合族 $\mathcal E \subset \mathcal P(X)$ に対して，
-$\mathcal E$ を含む $X$ 上のすべての $\sigma$-加法族の共通部分を
+集合族 $\calE \subset \calP(X)$ に対して，
+$\calE$ を含む $X$ 上のすべての $\sigma$-加法族の共通部分を
 \[
-\sigma(\mathcal E)
+\sigma(\calE)
 \]
-と書き，$\mathcal E$ が生成する $\sigma$-加法族という．
+と書き，$\calE$ が生成する $\sigma$-加法族という．
 \end{definition}
 
 \begin{proposition}
-$\sigma(\mathcal E)$ は $X$ 上の $\sigma$-加法族であり，
-$\mathcal E \subset \sigma(\mathcal E)$ を満たす．
-さらに，$\mathcal E \subset \mathcal M$ を満たす任意の $\sigma$-加法族 $\mathcal M$ に対して
+$\sigma(\calE)$ は $X$ 上の $\sigma$-加法族であり，
+$\calE \subset \sigma(\calE)$ を満たす．
+さらに，$\calE \subset \calS$ を満たす任意の $\sigma$-加法族 $\calS$ に対して
 \[
-\sigma(\mathcal E) \subset \mathcal M
+\sigma(\calE) \subset \calS
 \]
 が成り立つ．
 \end{proposition}
 \begin{proof}
-$\mathcal E$ を含む $\sigma$-加法族全体の共通部分として $\sigma(\mathcal E)$ を定めたので，
-前命題より $\sigma(\mathcal E)$ 自身が $\sigma$-加法族である．
-また，各候補は $\mathcal E$ を含むから，共通部分 $\sigma(\mathcal E)$ も $\mathcal E$ を含む．
+$\calE$ を含む $\sigma$-加法族全体の共通部分として $\sigma(\calE)$ を定めたので，
+前命題より $\sigma(\calE)$ 自身が $\sigma$-加法族である．
+また，各候補は $\calE$ を含むから，共通部分 $\sigma(\calE)$ も $\calE$ を含む．
 最後の主張は，共通部分が各候補の部分集合であることから直ちに従う．
 \end{proof}
 
 \begin{definition}[Borel集合族]
-$\RR^d$ の開集合全体の族を $\mathcal G$ とする．
+$\RR^d$ の開集合系（開集合の全体）$\calO$ が生成する$\sigma$-加法族
 \[
-\mathcal B(\RR^d):=\sigma(\mathcal G)
+\calB(\RR^d):=\sigma(\calO)
 \]
 を $\RR^d$ のBorel集合族という．
-$\mathcal B(\RR^d)$ の元をBorel集合という．
+$\calB(\RR^d)$ の元をBorel集合という．
 \end{definition}
 
 \section{測度}
 
 \begin{definition}[測度]
-$X$ 上の $\sigma$-加法族 $\mathcal M$ に対して，写像
+$X$ 上の $\sigma$-加法族 $\calS$ に対して，写像
 \[
-\mu:\mathcal M \to [0,\infty]
+\mu:\calS \to [0,\infty]
 \]
 が測度であるとは，次の2条件を満たすことをいう．
 \begin{enumerate}
     \item $\mu(\emptyset)=0$
-    \item 互いに素な列 $\{A_n\}_{n=1}^{\infty}\subset \mathcal M$ に対して
+    \item （可算加法性または完全加法性）互いに素な列 $\{A_n\}_{n=1}^{\infty}\subset \calS$ に対して
     \[
     \mu\left(\bigcup_{n=1}^{\infty}A_n\right)
     =
@@ -182,27 +179,22 @@ $X$ 上の $\sigma$-加法族 $\mathcal M$ に対して，写像
 \end{enumerate}
 \end{definition}
 
-\begin{remark}
-上の性質 (2) を完全加法性，あるいは可算加法性という．
-この性質をもつ写像を測度と呼ぶ．
-\end{remark}
-
 \begin{proposition}[測度の基本性質]
-$\mu$ を $(X,\mathcal M)$ 上の測度とする．
+$\mu$ を $(X,\calS)$ 上の測度とする．
 このとき次が成り立つ．
 \begin{enumerate}
     \item 有限加法性：
-    $A,B \in \mathcal M$ が互いに素なら
+    $A,B \in \calS$ が互いに素なら
     \[
     \mu(A\cup B)=\mu(A)+\mu(B)
     \]
     \item 単調性：
-    $A,B \in \mathcal M$ で $A \subset B$ なら
+    $A,B \in \calS$ で $A \subset B$ なら
     \[
     \mu(A)\le \mu(B)
     \]
     \item 可算劣加法性：
-    $\{A_n\}_{n=1}^{\infty}\subset\mathcal M$ に対して
+    $\{A_n\}_{n=1}^{\infty}\subset\calS$ に対して
     \[
     \mu\left(\bigcup_{n=1}^{\infty}A_n\right)
     \le
@@ -331,12 +323,12 @@ $\mu$ を $(X,\mathcal M)$ 上の測度とする．
 
 \begin{definition}[Lebesgue可測集合とLebesgue測度]
 \[
-\mathcal L^d
+\calL^d
 :=
 \{A \subset \RR^d \mid \lambda^*(A)=\lambda_*(A)\}
 \]
 とおく．
-$A \in \mathcal L^d$ のとき，その共通値を
+$A \in \calL^d$ のとき，その共通値を
 \[
 \lambda(A)
 :=
@@ -401,9 +393,9 @@ $\lambda^*(A)=0$ ならば $A$ はLebesgue可測であり，
 \end{proof}
 
 \begin{theorem}[基本定理]
-第6章で証明するように，$\mathcal L^d$ は $\RR^d$ 上の $\sigma$-加法族であり，
+第6章で証明するように，$\calL^d$ は $\RR^d$ 上の $\sigma$-加法族であり，
 \[
-\lambda:\mathcal L^d\to[0,\infty]
+\lambda:\calL^d\to[0,\infty]
 \]
 は測度である．
 \end{theorem}
@@ -411,7 +403,7 @@ $\lambda^*(A)=0$ ならば $A$ はLebesgue可測であり，
 第6章でLebesgue流の定義とCarathéodory流の定義が一致することを示す．
 Carathéodoryの定理によれば，Carathéodory可測集合全体は $\sigma$-加法族をなし，
 外測度のその上への制限は測度になる．
-したがって同じことが $\mathcal L^d$ と $\lambda$ に対しても成り立つ．
+したがって同じことが $\calL^d$ と $\lambda$ に対しても成り立つ．
 \end{proof}
 
 \section{区間の測度}
@@ -552,7 +544,7 @@ $A$ が可測なら $A+c$ も可測であり，
 \end{proof}
 
 \begin{corollary}[零集合の部分集合]
-$N \in \mathcal L^d$ で $\lambda(N)=0$ とする．
+$N \in \calL^d$ で $\lambda(N)=0$ とする．
 このとき任意の $A \subset N$ もLebesgue可測であり，
 \[
 \lambda(A)=0
@@ -670,7 +662,7 @@ Lebesgue測度は，
 可算個の近似を許すことで面積論を大幅に安定化したものである．
 この章ではまだ
 \[
-\mathcal L^d
+\calL^d
 \]
 が本当に $\sigma$-加法族をなし，
 $\lambda$ が本当に測度になることの証明を与えていない．
