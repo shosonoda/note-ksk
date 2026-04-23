@@ -306,6 +306,16 @@ m_{J,*}(A) = m_J^*(A)
 この定義により，$m_J$は集合族$\calA_J$上の非負値関数に拡張された．}
 \end{definition}
 
+\begin{example}
+    基本集合はJordan可測であり，そのJordan測度は最初に定めた $m_J$ に一致する
+\end{example}
+\begin{proof}
+    基本集合 $E$ 自身を内側近似と外側近似に取れば
+    $m_{J,*}(E)=m_J^*(E)=m_J(E)$ である．
+\end{proof}
+
+\section{Jordan零集合}
+
 \begin{definition}[Jordan零集合]
 $m_J^*(N)=0$ を満たす集合 $N$ をJordan零集合という．    
 \end{definition}
@@ -322,9 +332,36 @@ $m_J^*(N)=0$ を満たす集合 $N$ をJordan零集合という．
     だから $m_{J,*}(N)=m_J^*(N)=0$ である．
 \end{proof}
 
-\begin{proposition}
+\begin{example}
+    1点集合はJordan零集合である．
+\end{example}
+
+\begin{proof}
+$x \in \RR^d$ を固定する．
+$\eps > 0$に対し，
+1点集合 $\{ x \}$ は，$x$ を中心とする幅 $2 \eps$ の区間 $Q_\eps$ で覆える：
+\[
+\{ x \} \subset Q_\eps := \prod_{i=1}^d (x_i - \eps, x_i+\eps].
+\]
+よって
+\[
+m_J^*(\{x\}) \le |Q_\eps| = (2 \eps)^d
+\]
+$\eps>0$ は任意なので $\eps \to 0$ として $m_J^*(\{x\}) = 0$.
+
+\end{proof}
+
+\begin{example}
+    有限集合はJordan零集合である
+\end{example}
+\begin{proof}
+    有限集合は1点集合の有限合併なので，
+    1点集合の場合と同様にして，十分小さい区間で覆えるのでJordan零である．
+\end{proof}
+
+\begin{example}
     有界基本集合 $E \subset \RR^d$ の境界 $\partial E$ はJordan零集合である．
-\end{proposition}
+\end{example}
 
 \begin{proof}有界基本集合 $E$ を
     \[
@@ -338,6 +375,18 @@ $m_J^*(N)=0$ を満たす集合 $N$ をJordan零集合という．
     \]
     より，$\partial E$ もJordan零集合である．
 \end{proof}
+
+\begin{example}
+    線分や超平面片など，$\RR^d$ の中で厚みをもたない典型的な図形はJordan零集合である
+\end{example}
+\begin{proof}
+    例えば超平面片 $\{x_d=0\} \cap [-M,M]^d$ は厚さ $\delta$ の板
+    \[
+    [-M,M]^{d-1} \times [-\delta,\delta]
+    \]
+    で覆えるのでJordan零である．線分も同様に細い区間で覆える
+\end{proof}
+
 
 \section{Jordan可測性の判定法}
 
@@ -558,11 +607,28 @@ m_J(F) \le \int_I 1_A(x)\,dx \le m_J(G)
 積分値は $m_J(A)$ に一致する．
 \end{proof}
 
+\begin{example}
+    （Dirichlet関数の台集合）$A = [0,1] \cap \QQ$ はJordan可測でない．
+\end{example}
+\begin{proof}
+    各点集合 $\{q\}$ はJordan零集合だが，
+    $A$ は $[0,1]$ の中で稠密なので
+\[
+\partial A = [0,1]
+\]
+となり，Jordan可測ではない．
+\end{proof}
 
 
 \section{Jordan可測集合の性質}
 
+    \begin{definition}[集合環]
+集合$X$の空でない部分集合族$\calA$が集合環（ring of sets）であるとは，(1)差集合（相対的補集合） $A \setminus B$ と (2) 有限合併 $A \cup B$ について閉じていることをいう．
+    \end{definition}
+    定義から自動的に，集合環$\calA$は (0) 空集合 $\emptyset$ を含み，(3) 有限交叉 $A \cap B$ について閉じている．
+
 \begin{theorem}[Jordan可測集合の集合演算に関する閉性]
+    $\RR^d$のJordan可測集合の全体$\calA_J$は，集合環をなす．つまり，
 Jordan可測集合 $A,B \subset \RR^d$ と $c \in \RR^d$ に対して，
 \[
 A \cup B,\qquad
@@ -589,28 +655,7 @@ Jordan零集合の有限和と平行移動は再びJordan零集合だから，
 判定法より各集合はJordan可測である．
 \end{proof}
 
-\begin{remark}
-    つまり，$\RR^d$のJordan可測集合の全体$\calA_J$は，集合環をなす．
-\end{remark}
-
-    \begin{definition}[集合環]
-集合$X$の空でない部分集合族$\calA$が集合環（ring of sets）であるとは，(1)差集合（相対的補集合） $A \setminus B$ と (2) 有限合併 $A \cup B$ について閉じていることをいう．
-    \end{definition}
-    定義から自動的に，集合環$\calA$は (0) 空集合 $\emptyset$ を含み，(3) 有限交叉 $A \cap B$ について閉じている．
-
-\begin{example}
-    （Dirichlet関数の台集合）$A = [0,1] \cap \QQ$ はJordan可測でない．
-\end{example}
-\begin{proof}
-    各点集合 $\{q\}$ はJordan零集合だが，
-    $A$ は $[0,1]$ の中で稠密なので
-\[
-\partial A = [0,1]
-\]
-となり，Jordan可測ではない．
-\end{proof}
-
-\begin{example}
+\begin{example}[可算和に関して閉じていない]
 $\QQ \cap [0,1]$ を
     \[
     \QQ \cap [0,1] = \bigcup_{n=1}^\infty \{q_n\}
@@ -626,7 +671,7 @@ $\QQ \cap [0,1]$ を
     したがってJordan可測集合の全体は可算和で閉じていない．
 \end{example}
 
-\begin{example}
+\begin{example}[極限に関して閉じていない]
 上と同じ列 $q_1,q_2,\dots$ を用いて
     \[
     E_n:=\{q_1,\dots,q_n\}
@@ -929,32 +974,6 @@ m_J(F_n)=L(1_A,\calP_n)\to \int_I 1_A(x)\,dx = m_J(A)
 \end{proof}
 
 %\section{Jordan測度の例}
-
-\begin{example}
-    基本集合はJordan可測であり，そのJordan測度は最初に定めた $m_J$ に一致する
-\end{example}
-\begin{proof}
-    基本集合 $E$ 自身を内側近似と外側近似に取れば
-    $m_{J,*}(E)=m_J^*(E)=m_J(E)$ である．
-\end{proof}
-
-\begin{example}
-    有限集合はJordan零集合である
-\end{example}
-\begin{proof}
-    1点集合は十分小さい区間1つで覆えるのでJordan零である．有限集合はその有限和である
-\end{proof}
-
-\begin{example}
-    線分や超平面片など，$\RR^d$ の中で厚みをもたない典型的な図形はJordan零集合である
-\end{example}
-\begin{proof}
-    例えば超平面片 $\{x_d=0\} \cap [-M,M]^d$ は厚さ $\delta$ の板
-    \[
-    [-M,M]^{d-1} \times [-\delta,\delta]
-    \]
-    で覆えるのでJordan零である．線分も同様に細い区間で覆える
-\end{proof}
 
 \section{有限加法族・有限加法的測度}
 

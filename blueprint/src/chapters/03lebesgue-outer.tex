@@ -147,21 +147,102 @@ m_J(E) = \sum_{j=1}^N |Q_j|
 $E$ の取り方について下限を取ればよい．
 \end{proof}
 
+\section{具体例}
 
+\begin{proposition}[区間による上からの評価]
+$A \subset \RR^d$ と $R \in \calE_d$ が
+$A \subset R$ を満たすとする．このとき
+\[
+\lambda^*(A) \le |R|
+\]
+が成り立つ．
+特に，有界集合のLebesgue外測度は有限である．
+\end{proposition}
+\begin{proof}
+$R$ 自身による1個の被覆を考えればよい．
+\end{proof}
 
+\begin{proposition}[1点集合は零集合]
+任意の $a \in \RR^d$ に対して
+\[
+\lambda^*(\{a\})=0
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+非負性より $\lambda^*(\{a\}) \ge 0$ である．
+任意の $\eps > 0$ に対し，$\delta > 0$ を十分小さく取って
+\[
+(2\delta)^d < \eps
+\]
+とする．
+すると
+\[
+\{a\}
+\subset
+\prod_{j=1}^d (a_j-\delta,a_j+\delta)
+\]
+であり，右辺の体積は $(2\delta)^d$ だから
+\[
+\lambda^*(\{a\}) \le (2\delta)^d < \eps.
+\]
+$\eps$ は任意なので $\lambda^*(\{a\})=0$ である．
+\end{proof}
+
+\begin{theorem}[可算集合は零集合]
+可算集合 $A \subset \RR^d$ に対して
+\[
+\lambda^*(A)=0
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+$A=\{a_1,a_2,\dots\}$ と書く．
+（後述の）可算劣加法性より
+\[
+\lambda^*(A)
+\le
+\sum_{n=1}^{\infty} \lambda^*(\{a_n\})
+=
+\sum_{n=1}^{\infty} 0
+=0.
+\]
+非負性と合わせて $\lambda^*(A)=0$ を得る．
+\end{proof}
+
+\begin{example}
+\begin{enumerate}
+    \item $\QQ^d$ は可算だから $\lambda^*(\QQ^d)=0$
+    \item 特に
+    \[
+    \lambda_1^*(\QQ \cap [0,1]) = 0
+    \]
+    である
+    \item $\ZZ^d$ も可算だから $\lambda^*(\ZZ^d)=0$
+\end{enumerate}
+\end{example}
+
+\begin{remark}
+第2章でJordan可測でなかった
+\[
+\QQ \cap [0,1]
+\]
+が，Lebesgue外測度では長さ $0$ になる．
+ここに「有限被覆」と「可算被覆」の差が最もはっきり現れる．
+\end{remark}
 
 \section{Lebesgue外測度の性質}
 
 \begin{definition}[Carathéodory外測度]
-集合 $X$ 上の写像
+集合 $X$ 上の集合関数
 \[
 \mu^* : \mathcal P(X) \to [0,\infty]
 \]
 が（Carathéodory）外測度であるとは，次の3条件を満たすことをいう．
 \begin{enumerate}
     \item $\mu^*(\emptyset)=0$
-    \item $A \subset B$ ならば $\mu^*(A) \le \mu^*(B)$
-    \item 任意の集合列 $\{A_n\}_{n=1}^{\infty}$ に対して
+    \item （単調性）$A \subset B$ ならば $\mu^*(A) \le \mu^*(B)$
+    \item （可算劣加法性）任意の集合列 $\{A_n\}_{n=1}^{\infty}$ に対して
     \[
     \mu^*\left(\bigcup_{n=1}^{\infty} A_n\right)
     \le
@@ -171,9 +252,9 @@ $E$ の取り方について下限を取ればよい．
 \end{enumerate}
 \end{definition}
 
-\begin{corollary}[Lebesgue外測度は外測度]
-$\lambda^*$ は $\RR^d$ 上の外測度である．
-\end{corollary}
+\begin{theorem}[Lebesgue外測度は外測度]
+$\lambda^*$ は $\RR^d$ 上のCarathéodory外測度である．
+\end{theorem}
 
 % \begin{theorem}[Lebesgue外測度の基本性質]
 % 任意の $A,B,A_n \subset \RR^d$ に対して次が成り立つ．
@@ -335,7 +416,7 @@ m_J(A)\le \sum_{n=1}^{\infty}|R_n|
 \]
 は自明である．
 したがって右辺が有限であるとする．このとき各 $R_n$ は有界であるから，
-第2章のJordan外測度の可算劣加法性より
+\red{第2章のJordan外測度の可算劣加法性?}より
 \[
 m_J(A)=m_J^*(A)
 \le
@@ -363,7 +444,7 @@ m_J(G)-m_J(F)<\eps
 \end{lemma}
 
 \begin{proof}
-第2章のJordan可測性の近似定理より，
+\red{第2章のJordan可測性の近似定理}より，
 基本集合 $F,G \in \calA_d$ が存在して
 \[
 F \subset A \subset G,
@@ -601,89 +682,6 @@ $\lambda^*(U_n)\le |U_n|$ と分かることによる．
 $\eps>0$ は任意だから $\beta(A)\le \lambda^*(A)$ である．
 \end{proof}
 
-\section{具体例}
-
-\begin{proposition}[区間による上からの評価]
-$A \subset \RR^d$ と $R \in \calE_d$ が
-$A \subset R$ を満たすとする．このとき
-\[
-\lambda^*(A) \le |R|
-\]
-が成り立つ．
-特に，有界集合のLebesgue外測度は有限である．
-\end{proposition}
-\begin{proof}
-$R$ 自身による1個の被覆を考えればよい．
-\end{proof}
-
-\begin{proposition}[1点集合は零集合]
-任意の $a \in \RR^d$ に対して
-\[
-\lambda^*(\{a\})=0
-\]
-が成り立つ．
-\end{proposition}
-\begin{proof}
-非負性より $\lambda^*(\{a\}) \ge 0$ である．
-任意の $\eps > 0$ に対し，$\delta > 0$ を十分小さく取って
-\[
-(2\delta)^d < \eps
-\]
-とする．
-すると
-\[
-\{a\}
-\subset
-\prod_{j=1}^d (a_j-\delta,a_j+\delta)
-\]
-であり，右辺の体積は $(2\delta)^d$ だから
-\[
-\lambda^*(\{a\}) \le (2\delta)^d < \eps.
-\]
-$\eps$ は任意なので $\lambda^*(\{a\})=0$ である．
-\end{proof}
-
-\begin{theorem}[可算集合は零集合]
-可算集合 $A \subset \RR^d$ に対して
-\[
-\lambda^*(A)=0
-\]
-が成り立つ．
-\end{theorem}
-\begin{proof}
-$A=\{a_1,a_2,\dots\}$ と書く．
-可算劣加法性より
-\[
-\lambda^*(A)
-\le
-\sum_{n=1}^{\infty} \lambda^*(\{a_n\})
-=
-\sum_{n=1}^{\infty} 0
-=0.
-\]
-非負性と合わせて $\lambda^*(A)=0$ を得る．
-\end{proof}
-
-\begin{example}
-\begin{enumerate}
-    \item $\QQ^d$ は可算だから $\lambda^*(\QQ^d)=0$
-    \item 特に
-    \[
-    \lambda_1^*(\QQ \cap [0,1]) = 0
-    \]
-    である
-    \item $\ZZ^d$ も可算だから $\lambda^*(\ZZ^d)=0$
-\end{enumerate}
-\end{example}
-
-\begin{remark}
-第2章でJordan可測でなかった
-\[
-\QQ \cap [0,1]
-\]
-が，Lebesgue外測度では長さ $0$ になる．
-ここに「有限被覆」と「可算被覆」の差が最もはっきり現れる．
-\end{remark}
 
 \section{解釈}
 
