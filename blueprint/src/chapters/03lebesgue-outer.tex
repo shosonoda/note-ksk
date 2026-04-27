@@ -415,22 +415,70 @@ $\{R_n\}_{n=1}^{\infty} \subset \calE_d$ を取る．
 m_J(A)\le \sum_{n=1}^{\infty}|R_n|
 \]
 は自明である．
-したがって右辺が有限であるとする．このとき各 $R_n$ は有界であるから，
-\red{第2章のJordan外測度の可算劣加法性?}より
+したがって右辺が有限であるとする．このとき各 $R_n$ は有界である．
+
+$\eps>0$ を取り，コンパクトなJordan可測集合 $K\subset A$ を任意に固定する．
+各 $n$ について $R_n$ を少し膨らませた開区間 $U_n$ を
 \[
-m_J(A)=m_J^*(A)
-\le
-\sum_{n=1}^{\infty} m_J^*(R_n)
-=
-\sum_{n=1}^{\infty}|R_n|
+R_n \subset U_n,
+\qquad
+|U_n| \le |R_n|+\frac{\eps}{2^n}
 \]
-を得る．
+となるように取る．
+すると $\{U_n\}_{n=1}^{\infty}$ はコンパクト集合 $K$ の開被覆であるから，
+有限部分被覆
+\[
+K \subset U_{n_1}\cup\cdots\cup U_{n_N}
+\]
+が存在する．
+Jordan外測度の有限劣加法性より
+\[
+m_J(K)=m_J^*(K)
+\le
+\sum_{j=1}^N m_J^*(U_{n_j})
+\le
+\sum_{j=1}^N |U_{n_j}|
+\le
+\sum_{n=1}^{\infty}|R_n|+\eps
+\]
+である．
+したがって $\eps>0$ は任意なので
+\[
+m_J(K)\le \sum_{n=1}^{\infty}|R_n|
+\]
+である．
+一方，基本集合 $A$ は有限個の半開区間の合併であるから，
+各端点を少し内側へ動かすことでコンパクトなJordan可測集合によって内側から近似できる．
+すなわち
+\[
+m_J(A)
+=
+\sup\{m_J(K)\mid K\subset A,\ K\text{ はコンパクトなJordan可測集合}\}
+\]
+である．ゆえに
+\[
+m_J(A)\le \sum_{n=1}^{\infty}|R_n|
+\]
+である．
 被覆について下限を取れば
 \[
 m_J(A)\le \lambda^*(A)
 \]
 である．
 \end{proof}
+
+\begin{remark}
+ここではJordan外測度の可算劣加法性は使っていない．
+実際，Jordan外測度は一般には可算劣加法的ではない．
+例えば
+\[
+\QQ\cap[0,1]
+=
+\bigcup_{q\in \QQ\cap[0,1]}\{q\}
+\]
+であり，各一点集合のJordan外測度は $0$ であるが，
+$\QQ\cap[0,1]$ のJordan外測度は $1$ である．
+\end{remark}
 
 \begin{lemma}[Jordan可測集合の基本集合近似]
 Jordan可測集合 $A$ と $\eps>0$ に対し，
