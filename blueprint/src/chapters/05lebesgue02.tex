@@ -1,0 +1,617 @@
+\setcounter{chapter}{4}
+\chapter{Lebesgue測度}
+
+\paragraph{本章の目標}
+Lebesgue外測度 $\lambda^*$ とLebesgue内測度 $\lambda_*$ が一致する集合を
+Lebesgue可測集合と定める．
+そのうえで，Lebesgue可測集合全体が $\sigma$-加法族をなし，
+Lebesgue測度が可算加法的な測度になることを確認する．
+最後に，内外正則性とCarathéodory条件による判定法を述べる．
+
+\section{Lebesgue可測集合とLebesgue測度}
+
+\begin{definition}[Lebesgue可測集合とLebesgue測度]
+集合 $A \subset \RR^d$ がLebesgue可測であるとは
+\[
+\lambda_*(A)=\lambda^*(A)
+\]
+が成り立つことをいう．
+Lebesgue可測集合全体を
+\[
+\calL^d:=\{A\subset\RR^d\mid \lambda_*(A)=\lambda^*(A)\}
+\]
+と書く．
+$A\in\calL^d$ のとき，この共通値を
+\[
+\lambda(A):=\lambda_*(A)=\lambda^*(A)
+\]
+と書き，$A$ のLebesgue測度という．
+\end{definition}
+
+\begin{definition}[Lebesgue零集合]
+集合 $N\subset\RR^d$ が
+\[
+\lambda^*(N)=0
+\]
+を満たすとき，$N$ をLebesgue零集合という．
+\end{definition}
+
+\begin{theorem}[Lebesgue零集合]
+Lebesgue零集合はLebesgue可測であり，Lebesgue測度は $0$ である．
+\end{theorem}
+\begin{proof}
+第4章で示した基本性質より
+\[
+0\le \lambda_*(N)\le \lambda^*(N)
+\]
+である．
+$\lambda^*(N)=0$ なら
+\[
+\lambda_*(N)=\lambda^*(N)=0
+\]
+だから，$N$ はLebesgue可測で $\lambda(N)=0$ である．
+\end{proof}
+
+\begin{corollary}[可算集合]
+一点集合，可算集合，$\QQ^d$，$\ZZ^d$ はLebesgue可測であり，測度 $0$ をもつ．
+特に1次元では $\QQ$ と $\ZZ$ はLebesgue測度 $0$ である．
+\end{corollary}
+\begin{proof}
+第3章で，一点集合および可算集合のLebesgue外測度は $0$ であることを示した．
+したがって前定理より従う．
+\end{proof}
+
+\begin{theorem}[Jordan可測集合]
+Jordan可測集合 $A\subset\RR^d$ はLebesgue可測であり，
+\[
+\lambda(A)=m_J(A)
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+第3章で，Jordan可測集合に対して
+\[
+\lambda^*(A)=m_J(A)
+\]
+が成り立つことを示した．
+
+$\eps>0$ を取る．
+Jordan可測性の近似定理と，基本集合をコンパクト集合で内側から近似できることにより，
+あるコンパクト集合 $K\subset A$ が存在して
+\[
+m_J(K)>m_J(A)-\eps
+\]
+を満たす．
+コンパクト集合はJordan可測なので，第3章の整合性より
+\[
+\lambda^*(K)=m_J(K)
+\]
+である．
+したがって内測度の定義から
+\[
+\lambda_*(A)\ge \lambda^*(K)=m_J(K)>m_J(A)-\eps
+=\lambda^*(A)-\eps
+\]
+である．
+一方，常に $\lambda_*(A)\le \lambda^*(A)$ だから，
+$\eps>0$ の任意性より
+\[
+\lambda_*(A)=\lambda^*(A)
+\]
+を得る．
+よって $A$ はLebesgue可測であり，
+\[
+\lambda(A)=\lambda^*(A)=m_J(A)
+\]
+である．
+\end{proof}
+
+\begin{example}
+\[
+\QQ\cap[0,1]
+\]
+は可算集合なのでLebesgue可測であり，
+\[
+\lambda_1(\QQ\cap[0,1])=0
+\]
+である．
+一方，$[0,1]$ はJordan可測で $m_J([0,1])=1$ だから
+\[
+\lambda_1([0,1])=1
+\]
+である．
+後で示す有限加法性より
+\[
+\lambda_1([0,1]\setminus\QQ)=1
+\]
+となる．
+\end{example}
+
+\section{Carathéodory条件}
+
+\begin{definition}[Carathéodory条件]
+集合 $A\subset\RR^d$ がLebesgue外測度 $\lambda^*$ に関するCarathéodory条件を満たすとは，
+任意の $E\subset\RR^d$ に対して
+\[
+\lambda^*(E)
+=
+\lambda^*(E\cap A)+\lambda^*(E\setminus A)
+\]
+が成り立つことをいう．
+\end{definition}
+
+\begin{theorem}[作業用の判定法]
+集合 $A\subset\RR^d$ について，次は同値である．
+\begin{enumerate}
+    \item $A$ はLebesgue可測である
+    \item $A$ はCarathéodory条件を満たす
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+本章末の判定法で，正則性を含む形で証明する．
+証明の核は第6章で述べるCarathéodoryの定理である．
+\end{proof}
+
+\section{Lebesgue可測集合の性質}
+
+\begin{theorem}[Lebesgue可測集合の $\sigma$-加法族性]
+Lebesgue可測集合全体 $\calL^d$ は $\RR^d$ 上の $\sigma$-加法族である．
+すなわち，次が成り立つ．
+\begin{enumerate}
+    \item $\RR^d\in\calL^d$
+    \item $A\in\calL^d$ ならば $\RR^d\setminus A\in\calL^d$
+    \item $\{A_n\}_{n=1}^{\infty}\subset\calL^d$ ならば
+    \[
+    \bigcup_{n=1}^{\infty}A_n\in\calL^d
+    \]
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+作業用の判定法により，$\calL^d$ は
+$\lambda^*$ に関するCarathéodory可測集合全体と一致する．
+第6章のCarathéodoryの定理によれば，外測度に関するCarathéodory可測集合全体は
+$\sigma$-加法族である．
+したがって $\calL^d$ も $\sigma$-加法族である．
+\end{proof}
+
+\begin{corollary}[集合演算]
+$A,B\in\calL^d$ ならば
+\[
+A\cup B,\qquad A\cap B,\qquad A\setminus B
+\]
+はいずれもLebesgue可測である．
+また $\{A_n\}_{n=1}^{\infty}\subset\calL^d$ ならば
+\[
+\bigcap_{n=1}^{\infty}A_n
+\]
+もLebesgue可測である．
+\end{corollary}
+\begin{proof}
+$\sigma$-加法族の基本性質から従う．
+\end{proof}
+
+\section{Lebesgue測度の性質}
+
+\begin{lemma}[有限加法性]
+$A,B\in\calL^d$ が互いに素ならば
+\[
+\lambda(A\cup B)=\lambda(A)+\lambda(B)
+\]
+が成り立つ．
+\end{lemma}
+\begin{proof}
+$A$ はCarathéodory条件を満たす．
+$E=A\cup B$ としてその条件を適用すると，
+\[
+\lambda^*(A\cup B)
+=
+\lambda^*((A\cup B)\cap A)+\lambda^*((A\cup B)\setminus A)
+=
+\lambda^*(A)+\lambda^*(B)
+\]
+である．
+$A,B,A\cup B$ はLebesgue可測なので，これは
+\[
+\lambda(A\cup B)=\lambda(A)+\lambda(B)
+\]
+を意味する．
+\end{proof}
+
+\begin{lemma}[互いに素な列への分解]
+Lebesgue可測集合列 $\{A_n\}_{n=1}^{\infty}$ に対して
+\[
+B_1:=A_1,\qquad
+B_n:=A_n\setminus\bigcup_{k=1}^{n-1}A_k\quad(n\ge2)
+\]
+とおくと，$\{B_n\}$ は互いに素なLebesgue可測集合列であり，
+\[
+\bigcup_{n=1}^{\infty}A_n=\bigsqcup_{n=1}^{\infty}B_n,
+\qquad
+B_n\subset A_n
+\]
+が成り立つ．
+\end{lemma}
+\begin{proof}
+$\calL^d$ は $\sigma$-加法族なので，各 $B_n$ はLebesgue可測である．
+定義から互いに素性と表示は明らかである．
+\end{proof}
+
+\begin{theorem}[完全加法性]
+互いに素なLebesgue可測集合列 $\{A_n\}_{n=1}^{\infty}$ に対して
+\[
+\lambda\left(\bigsqcup_{n=1}^{\infty}A_n\right)
+=
+\sum_{n=1}^{\infty}\lambda(A_n)
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+作業用の判定法により，Lebesgue可測集合はCarathéodory可測集合である．
+第6章のCarathéodoryの定理によれば，外測度 $\lambda^*$ を
+Carathéodory可測集合全体に制限したものは測度である．
+したがって互いに素な可測集合列に対して可算加法性が成り立つ．
+\end{proof}
+
+\begin{theorem}[基本性質]
+Lebesgue測度について次が成り立つ．
+\begin{enumerate}
+    \item $\lambda(\emptyset)=0$
+    \item 単調性：$A,B\in\calL^d$ かつ $A\subset B$ ならば
+    \[
+    \lambda(A)\le \lambda(B)
+    \]
+    \item 完全劣加法性：$\{A_n\}_{n=1}^{\infty}\subset\calL^d$ ならば
+    \[
+    \lambda\left(\bigcup_{n=1}^{\infty}A_n\right)
+    \le
+    \sum_{n=1}^{\infty}\lambda(A_n)
+    \]
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}
+    \item $\emptyset$ はLebesgue零集合であるから可測で，測度 $0$ をもつ．
+
+    \item $A\subset B$ とする．
+    このとき
+    \[
+    B=A\sqcup(B\setminus A)
+    \]
+    であり，有限加法性より
+    \[
+    \lambda(B)=\lambda(A)+\lambda(B\setminus A)\ge \lambda(A)
+    \]
+    である．
+
+    \item 前補題の記法を用いると
+    \[
+    \bigcup_{n=1}^{\infty}A_n=\bigsqcup_{n=1}^{\infty}B_n,
+    \qquad
+    B_n\subset A_n
+    \]
+    である．
+    完全加法性と単調性より
+    \[
+    \lambda\left(\bigcup_{n=1}^{\infty}A_n\right)
+    =
+    \sum_{n=1}^{\infty}\lambda(B_n)
+    \le
+    \sum_{n=1}^{\infty}\lambda(A_n)
+    \]
+    を得る．
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}[下からの連続性]
+Lebesgue可測集合の単調増大列
+\[
+A_1\subset A_2\subset \cdots
+\]
+に対して
+\[
+\lambda\left(\bigcup_{n=1}^{\infty}A_n\right)
+=
+\lim_{n\to\infty}\lambda(A_n)
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+\[
+B_1:=A_1,\qquad B_n:=A_n\setminus A_{n-1}\quad(n\ge2)
+\]
+とおく．
+すると $\{B_n\}$ は互いに素で，
+\[
+A_N=\bigsqcup_{n=1}^{N}B_n,\qquad
+\bigcup_{n=1}^{\infty}A_n=\bigsqcup_{n=1}^{\infty}B_n
+\]
+である．
+完全加法性より
+\[
+\lambda(A_N)=\sum_{n=1}^{N}\lambda(B_n),
+\qquad
+\lambda\left(\bigcup_{n=1}^{\infty}A_n\right)
+=
+\sum_{n=1}^{\infty}\lambda(B_n).
+\]
+$N\to\infty$ とすれば主張を得る．
+\end{proof}
+
+\begin{theorem}[上からの連続性]
+Lebesgue可測集合の単調減少列
+\[
+A_1\supset A_2\supset \cdots
+\]
+に対して，$\lambda(A_1)<\infty$ ならば
+\[
+\lambda\left(\bigcap_{n=1}^{\infty}A_n\right)
+=
+\lim_{n\to\infty}\lambda(A_n)
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+\[
+B_n:=A_1\setminus A_n
+\]
+とおくと，
+\[
+B_1\subset B_2\subset \cdots,
+\qquad
+\bigcup_{n=1}^{\infty}B_n
+=
+A_1\setminus\bigcap_{n=1}^{\infty}A_n
+\]
+である．
+下からの連続性より
+\[
+\lambda\left(A_1\setminus\bigcap_{n=1}^{\infty}A_n\right)
+=
+\lim_{n\to\infty}\lambda(A_1\setminus A_n)
+\]
+である．
+$A_n\subset A_1$ かつ $\lambda(A_1)<\infty$ なので有限加法性より
+\[
+\lambda(A_1\setminus A_n)=\lambda(A_1)-\lambda(A_n)
+\]
+である．
+同様に
+\[
+\lambda\left(A_1\setminus\bigcap_{n=1}^{\infty}A_n\right)
+=
+\lambda(A_1)-\lambda\left(\bigcap_{n=1}^{\infty}A_n\right).
+\]
+これらを合わせれば主張が従う．
+\end{proof}
+
+\begin{proposition}[平行移動不変性]
+$A\in\calL^d$ と $c\in\RR^d$ に対して
+\[
+A+c:=\{x+c\mid x\in A\}
+\]
+もLebesgue可測であり，
+\[
+\lambda(A+c)=\lambda(A)
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+第3章でLebesgue外測度の平行移動不変性を示した．
+また $K$ がコンパクトなら $K+c$ もコンパクトなので，内測度も平行移動で不変である．
+したがって
+\[
+\lambda^*(A+c)=\lambda^*(A),
+\qquad
+\lambda_*(A+c)=\lambda_*(A).
+\]
+$A$ がLebesgue可測なら $A+c$ もLebesgue可測で，測度は変わらない．
+\end{proof}
+
+\section{Lebesgue測度の正則性}
+
+\begin{theorem}[コンパクト集合]
+コンパクト集合 $K\subset\RR^d$ はLebesgue可測であり，
+\[
+\lambda(K)=\lambda^*(K)
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+第4章で
+\[
+\lambda_*(K)=\lambda^*(K)
+\]
+を示した．
+したがって $K$ はLebesgue可測で，その測度は共通値 $\lambda^*(K)$ に等しい．
+\end{proof}
+
+\begin{lemma}[座標超平面片]
+有界閉区間 $I\subset\RR^d$ と座標 $i$，実数 $c$ に対して
+\[
+F:=\{x\in I\mid x_i=c\}
+\]
+はLebesgue零集合である．
+\end{lemma}
+\begin{proof}
+$F$ は任意に薄い直方体で覆える．
+具体的には，$\eps>0$ に対して幅 $2\delta$ の板で $F$ を覆い，
+$\delta>0$ を十分小さく取ればその体積を $\eps$ 未満にできる．
+したがって $\lambda^*(F)=0$ である．
+\end{proof}
+
+\begin{theorem}[開集合]
+開集合 $G\subset\RR^d$ はLebesgue可測である．
+\end{theorem}
+\begin{proof}
+まず有界開区間
+\[
+J=(a_1,b_1)\times\cdots\times(a_d,b_d)
+\]
+を考える．
+同じ端点をもつ閉区間を $\overline J$ とすると，
+$\overline J$ はコンパクトだからLebesgue可測である．
+また
+\[
+\overline J\setminus J
+\]
+は有限個の座標超平面片の合併に含まれるためLebesgue零集合である．
+よって
+\[
+J=\overline J\setminus(\overline J\setminus J)
+\]
+はLebesgue可測である．
+
+端点がすべて有理数である有界開区間全体は可算であり，$\RR^d$ の開集合の基底をなす．
+したがって任意の開集合 $G$ は，そのような有界開区間の可算和として書ける．
+$\calL^d$ は $\sigma$-加法族だから，$G$ はLebesgue可測である．
+\end{proof}
+
+\begin{theorem}[内正則性]
+任意のLebesgue可測集合 $A\subset\RR^d$ に対して
+\[
+\lambda(A)
+=
+\sup\{\lambda(K)\mid K\subset A,\ K\text{ はコンパクト}\}
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+$A$ がLebesgue可測なら
+\[
+\lambda(A)=\lambda_*(A)
+\]
+である．
+内測度の定義より
+\[
+\lambda_*(A)
+=
+\sup\{\lambda^*(K)\mid K\subset A,\ K\text{ はコンパクト}\}.
+\]
+コンパクト集合はLebesgue可測なので $\lambda^*(K)=\lambda(K)$ と書ける．
+よって主張が従う．
+\end{proof}
+
+\begin{theorem}[外正則性]
+任意のLebesgue可測集合 $A\subset\RR^d$ に対して
+\[
+\lambda(A)
+=
+\inf\{\lambda(G)\mid A\subset G,\ G\text{ は開集合}\}
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+$A$ がLebesgue可測なら
+\[
+\lambda(A)=\lambda^*(A)
+\]
+である．
+第3章の開集合による外正則性より
+\[
+\lambda^*(A)
+=
+\inf\{\lambda^*(G)\mid A\subset G,\ G\text{ は開集合}\}
+\]
+である．
+開集合はLebesgue可測だから $\lambda^*(G)=\lambda(G)$ と書ける．
+したがって主張を得る．
+\end{proof}
+
+\section{Lebesgue可測集合の判定法}
+
+\begin{theorem}[判定法]
+$A\subset\RR^d$ とする．
+次は同値である．
+\begin{enumerate}
+    \item $A$ はLebesgue可測である
+    \item $A$ はCarathéodory条件を満たす
+    \item 任意の $R>0$ と $\eps>0$ に対し，開集合 $G$ とコンパクト集合 $K$ が存在して
+    \[
+    K\subset A\cap[-R,R]^d\subset G,
+    \qquad
+    \lambda^*(G\setminus K)<\eps
+    \]
+    を満たす
+\end{enumerate}
+さらに $\lambda^*(A)<\infty$ のときは，これらは次の条件とも同値である．
+\begin{enumerate}
+    \item[(4)] 任意の $\eps>0$ に対して開集合 $G$ とコンパクト集合 $K$ が存在して
+    \[
+    K\subset A\subset G,
+    \qquad
+    \lambda^*(G\setminus K)<\eps
+    \]
+    を満たす
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+(1) と (2) の同値は，第6章のCarathéodoryの定理をLebesgue外測度 $\lambda^*$ に適用し，
+Lebesgue流の可測性 $\lambda_*(A)=\lambda^*(A)$ と照合することで得られる．
+
+(1) から (3) を示す．
+\[
+A_R:=A\cap[-R,R]^d
+\]
+とおく．
+$A_R$ はLebesgue可測で，しかも有限測度である．
+内正則性より，コンパクト集合 $K\subset A_R$ で
+\[
+\lambda(A_R)-\lambda(K)<\frac{\eps}{2}
+\]
+を満たすものが取れる．
+外正則性より，開集合 $G\supset A_R$ で
+\[
+\lambda(G)-\lambda(A_R)<\frac{\eps}{2}
+\]
+を満たすものが取れる．
+すると $K\subset G$ であり，
+\[
+\lambda^*(G\setminus K)
+=
+\lambda(G\setminus K)
+=
+\lambda(G)-\lambda(K)
+<\eps
+\]
+である．
+
+(3) から (1) を示す．
+各 $R>0$ について $A_R=A\cap[-R,R]^d$ とおく．
+(3) により，任意の $\eps>0$ に対して
+\[
+K\subset A_R\subset G,
+\qquad
+\lambda^*(G\setminus K)<\eps
+\]
+を満たすコンパクト集合 $K$ と開集合 $G$ が取れる．
+このとき $K$ と $G$ はLebesgue可測であり，
+\[
+\lambda^*(A_R)-\lambda_*(A_R)
+\le
+\lambda(G)-\lambda(K)
+=
+\lambda(G\setminus K)
+<\eps
+\]
+である．
+$\eps>0$ は任意だから $A_R$ はLebesgue可測である．
+したがって
+\[
+A=\bigcup_{n=1}^{\infty}\bigl(A\cap[-n,n]^d\bigr)
+\]
+はLebesgue可測である．
+
+最後に $\lambda^*(A)<\infty$ と仮定する．
+(1) から (4) は，内正則性と外正則性を直接 $A$ に適用すればよい．
+(4) から (1) は，上の (3) から (1) の証明と同じ議論を $A$ そのものに適用すれば従う．
+\end{proof}
+
+\begin{remark}
+条件 (4) の形は有限測度の集合に対する判定法である．
+例えば $A=\RR^d$ の場合，どのコンパクト集合 $K$ を取っても
+\[
+\RR^d\setminus K
+\]
+は無限の測度をもつので，(4) は成り立たない．
+一般のLebesgue可測集合に対しては，条件 (3) のように有界な窓で切った局所版を用いる．
+\end{remark}

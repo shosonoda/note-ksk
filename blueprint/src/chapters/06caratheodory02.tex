@@ -1,0 +1,399 @@
+\setcounter{chapter}{5}
+\chapter{Carathéodory流の測度論}
+
+\paragraph{本章の目標}
+第5章ではLebesgue外測度とLebesgue内測度の一致によって可測性を定義した．
+本章では，その背後にある一般的な構成を述べる．
+中心になるのは，外測度とCarathéodory条件から $\sigma$-加法族上の測度を取り出す定理である．
+抽象論の証明は省略し，定義と使い方を整理する．
+
+\section{Carathéodoryの測度論}
+
+\begin{definition}[$\sigma$-加法族]
+集合 $X$ の部分集合族 $\calS\subset\calP(X)$ が
+$X$ 上の $\sigma$-加法族であるとは，次を満たすことをいう．
+\begin{enumerate}
+    \item $X\in\calS$
+    \item $A\in\calS$ ならば $X\setminus A\in\calS$
+    \item $\{A_n\}_{n=1}^{\infty}\subset\calS$ ならば
+    \[
+    \bigcup_{n=1}^{\infty}A_n\in\calS
+    \]
+\end{enumerate}
+\end{definition}
+
+\begin{remark}
+$\sigma$-加法族は，補集合と可算和を取っても外へ出ない集合族である．
+したがって可算共通部分や差集合についても閉じている．
+\end{remark}
+
+\begin{definition}[可測空間]
+$X$ 上の $\sigma$-加法族 $\calS$ を1つ固定した組
+\[
+(X,\calS)
+\]
+を可測空間という．
+\end{definition}
+
+\begin{definition}[測度]
+可測空間 $(X,\calS)$ 上の写像
+\[
+\mu:\calS\to[0,\infty]
+\]
+が測度であるとは，次を満たすことをいう．
+\begin{enumerate}
+    \item $\mu(\emptyset)=0$
+    \item 互いに素な列 $\{A_n\}_{n=1}^{\infty}\subset\calS$ に対して
+    \[
+    \mu\left(\bigsqcup_{n=1}^{\infty}A_n\right)
+    =
+    \sum_{n=1}^{\infty}\mu(A_n)
+    \]
+    が成り立つ
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[測度空間]
+可測空間 $(X,\calS)$ とその上の測度 $\mu$ の組
+\[
+(X,\calS,\mu)
+\]
+を測度空間という．
+\end{definition}
+
+\begin{definition}[外測度]
+集合 $X$ 上の写像
+\[
+\mu^*:\calP(X)\to[0,\infty]
+\]
+が外測度であるとは，次を満たすことをいう．
+\begin{enumerate}
+    \item $\mu^*(\emptyset)=0$
+    \item $A\subset B$ ならば $\mu^*(A)\le\mu^*(B)$
+    \item 任意の集合列 $\{A_n\}_{n=1}^{\infty}\subset\calP(X)$ に対して
+    \[
+    \mu^*\left(\bigcup_{n=1}^{\infty}A_n\right)
+    \le
+    \sum_{n=1}^{\infty}\mu^*(A_n)
+    \]
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[Carathéodory条件]
+外測度 $\mu^*$ に対し，集合 $A\subset X$ がCarathéodory条件を満たすとは，
+任意の $E\subset X$ に対して
+\[
+\mu^*(E)
+=
+\mu^*(E\cap A)+\mu^*(E\setminus A)
+\]
+が成り立つことをいう．
+この条件を満たす集合を $\mu^*$-可測集合ともいう．
+\end{definition}
+
+\begin{theorem}[Carathéodoryの定理]
+外測度 $\mu^*$ に関する $\mu^*$-可測集合全体を
+\[
+\calM_{\mu^*}
+\]
+と書く．
+このとき $\calM_{\mu^*}$ は $X$ 上の $\sigma$-加法族であり，
+\[
+\mu:=\mu^*|_{\calM_{\mu^*}}
+\]
+は $(X,\calM_{\mu^*})$ 上の測度である．
+さらに，$\mu(N)=0$ である可測集合 $N$ の任意の部分集合も可測で，測度 $0$ をもつ．
+\end{theorem}
+\begin{proof}
+証明は省略する．
+要点は，Carathéodory条件が「任意の集合を $A$ の内側と外側に切っても外測度が増えない」ことを表しており，
+この条件が補集合と可算和に関して安定であることにある．
+\end{proof}
+
+\section{半環から外測度へ}
+
+\begin{definition}[有限加法族]
+集合 $X$ の部分集合族 $\calA\subset\calP(X)$ が有限加法族であるとは，次を満たすことをいう．
+\begin{enumerate}
+    \item $\emptyset\in\calA$
+    \item $A,B\in\calA$ ならば $A\cup B\in\calA$
+    \item $A,B\in\calA$ ならば $A\setminus B\in\calA$
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[半環]
+集合 $X$ の部分集合族 $\calS\subset\calP(X)$ が半環であるとは，次を満たすことをいう．
+\begin{enumerate}
+    \item $\emptyset\in\calS$
+    \item $A,B\in\calS$ ならば $A\cap B\in\calS$
+    \item $A,B\in\calS$ ならば，ある有限個の互いに素な集合
+    $C_1,\dots,C_N\in\calS$ が存在して
+    \[
+    A\setminus B=\bigsqcup_{j=1}^{N}C_j
+    \]
+    と書ける
+\end{enumerate}
+\end{definition}
+
+\begin{definition}[半環が生成する有限加法族]
+半環 $\calS$ に対して
+\[
+\calA(\calS)
+:=
+\left\{
+\bigsqcup_{j=1}^{N}S_j
+\;\middle|\;
+N\in\NN,\ S_j\in\calS
+\right\}
+\]
+と定める．
+ただし空和は $\emptyset$ とみなす．
+\end{definition}
+
+\begin{theorem}
+$\calA(\calS)$ は $X$ 上の有限加法族である．
+\end{theorem}
+\begin{proof}
+証明は省略する．
+半環の差集合に関する条件により，有限個の半環要素の合併に対して差集合を取っても，
+再び有限個の半環要素の互いに素な合併として書ける．
+\end{proof}
+
+\begin{definition}[半環上の体積]
+半環 $\calS$ 上の写像
+\[
+v:\calS\to[0,\infty]
+\]
+が体積であるとは，次を満たすことをいう．
+\begin{enumerate}
+    \item $v(\emptyset)=0$
+    \item 互いに素な列 $\{S_n\}_{n=1}^{\infty}\subset\calS$ で
+    \[
+    S=\bigsqcup_{n=1}^{\infty}S_n\in\calS
+    \]
+    となるものに対して
+    \[
+    v(S)=\sum_{n=1}^{\infty}v(S_n)
+    \]
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}[有限加法族への延長]
+$v$ を半環 $\calS$ 上の体積とする．
+\[
+E=\bigsqcup_{j=1}^{N}S_j\in\calA(\calS)
+\qquad(S_j\in\calS)
+\]
+に対して
+\[
+\overline v(E):=\sum_{j=1}^{N}v(S_j)
+\]
+と定めると，$\overline v$ は表示の取り方によらず定まり，
+$\calA(\calS)$ 上の前測度になる．
+\end{theorem}
+\begin{proof}
+証明は省略する．
+異なる分割を共通部分で細分すれば，同じ有限和へ帰着される．
+\end{proof}
+
+\begin{definition}[生成される外測度]
+$\calA=\calA(\calS)$ とし，$\overline v$ をその上の前測度とする．
+任意の $E\subset X$ に対して
+\[
+\mu^*(E)
+:=
+\inf\left\{
+\sum_{n=1}^{\infty}\overline v(A_n)
+\;\middle|\;
+E\subset\bigcup_{n=1}^{\infty}A_n,\ A_n\in\calA
+\right\}
+\]
+と定める．
+\end{definition}
+
+\begin{theorem}
+上で定めた $\mu^*$ は $X$ 上の外測度であり，
+\[
+\mu^*(A)=\overline v(A)
+\qquad(A\in\calA)
+\]
+を満たす．
+したがってCarathéodoryの定理により
+\[
+\mu:=\mu^*|_{\calM_{\mu^*}}
+\]
+は $\calM_{\mu^*}$ 上の測度であり，$\calA$ 上では元の体積と一致する．
+\end{theorem}
+\begin{proof}
+証明は省略する．
+定義はLebesgue外測度と同じく「可算個の基本集合で外から覆る最小コスト」を取っている．
+この形から外測度の3条件が従い，前測度性から $\calA$ 上で値が一致する．
+\end{proof}
+
+\begin{theorem}[Carathéodory--Hahnの拡張定理]
+半環 $\calS$ 上の体積 $v$ から，上の構成によって
+\[
+\sigma(\calS)
+\]
+上の測度 $\mu$ が得られ，
+\[
+\mu(S)=v(S)\qquad(S\in\calS)
+\]
+を満たす．
+さらに，生成される有限加法族上の前測度が $\sigma$-有限ならば，
+この拡張は一意的である．
+\end{theorem}
+\begin{proof}
+証明は省略する．
+\end{proof}
+
+\begin{example}[Lebesgue測度]
+$X=\RR^d$ とし，
+\[
+\calS
+=
+\left\{
+\prod_{i=1}^{d}[a_i,b_i)
+\;\middle|\;
+a_i\le b_i
+\right\}
+\]
+を半開区間全体の半環とする．
+\[
+v\left(\prod_{i=1}^{d}[a_i,b_i)\right)
+:=
+\prod_{i=1}^{d}(b_i-a_i)
+\]
+と定めると，この体積からLebesgue外測度が得られる．
+Carathéodoryの定理によって得られる測度は，Lebesgue測度である．
+\end{example}
+
+\section{Borel集合族}
+
+\begin{definition}[Borel集合族]
+位相空間 $X$ に対し，$X$ の開集合全体が生成する $\sigma$-加法族を
+\[
+\calB(X)
+\]
+と書き，$X$ のBorel集合族という．
+$\calB(X)$ の元をBorel集合という．
+\end{definition}
+
+\begin{example}
+$\RR^d$ では，開集合，閉集合，開集合の可算共通部分，閉集合の可算和はいずれもBorel集合である．
+また，有理端点をもつ有界開区間全体は可算基底をなすので，
+\[
+\calB(\RR^d)
+\]
+は有理端点をもつ有界開区間全体から生成される．
+\end{example}
+
+\begin{theorem}[Borel集合はLebesgue可測]
+すべてのBorel集合 $B\subset\RR^d$ はLebesgue可測である．
+\end{theorem}
+\begin{proof}
+第5章で開集合がLebesgue可測であることを示した．
+Lebesgue可測集合全体 $\calL^d$ は $\sigma$-加法族であるから，
+開集合が生成する $\sigma$-加法族である $\calB(\RR^d)$ を含む．
+\end{proof}
+
+\begin{definition}[Borel測度]
+Lebesgue測度をBorel集合族に制限した測度
+\[
+\lambda|_{\calB(\RR^d)}
+\]
+を $\RR^d$ 上のBorel測度という．
+\end{definition}
+
+\begin{theorem}[Lebesgue測度はBorel測度の完備化]
+任意のLebesgue可測集合 $A\subset\RR^d$ は，あるBorel集合 $B$ とあるLebesgue零集合 $N$ を用いて
+\[
+A=B\triangle N
+\]
+と書ける．
+したがってLebesgue測度は，Borel測度に零集合の部分集合をすべて加えて得られる完備化である．
+\end{theorem}
+\begin{proof}
+証明は省略する．
+外正則性により $A$ を外側から開集合で近似し，それらの可算共通部分を取れば，
+$A$ との差が零集合であるBorel集合が得られる．
+\end{proof}
+
+\section{Lebesgue非可測集合}
+
+\begin{theorem}[Vitali]
+$[0,1]$ にはLebesgue非可測集合が存在する．
+\end{theorem}
+\begin{proof}
+$[0,1]$ 上に
+\[
+x\sim y
+\quad\Longleftrightarrow\quad
+x-y\in\QQ
+\]
+で同値関係を定める．
+選択公理を用いて，各同値類からちょうど1点ずつ選んだ集合を
+\[
+V\subset[0,1]
+\]
+とする．
+
+$q\in[-1,1]\cap\QQ$ に対して
+\[
+V+q:=\{v+q\mid v\in V\}
+\]
+を考える．
+もし $q_1\ne q_2$ なら，
+\[
+(V+q_1)\cap(V+q_2)=\emptyset
+\]
+である．
+実際，$v_1+q_1=v_2+q_2$ なら
+\[
+v_1-v_2=q_2-q_1\in\QQ
+\]
+だから $v_1,v_2$ は同じ同値類に属する．
+$V$ は各同値類から1点しか選んでいないので $v_1=v_2$ となり，
+したがって $q_1=q_2$ である．
+
+また
+\[
+[0,1]
+\subset
+\bigcup_{q\in[-1,1]\cap\QQ}(V+q)
+\subset
+[-1,2]
+\]
+である．
+左の包含は，任意の $x\in[0,1]$ に対して同じ同値類の代表元 $v\in V$ が存在し，
+$x-v\in[-1,1]\cap\QQ$ となることから従う．
+
+ここで $V$ がLebesgue可測であると仮定する．
+Lebesgue測度の平行移動不変性より，各 $V+q$ も可測で
+\[
+\lambda_1(V+q)=\lambda_1(V)
+\]
+である．
+互いに素な可算和の完全加法性より
+\[
+\lambda_1\left(\bigcup_{q\in[-1,1]\cap\QQ}(V+q)\right)
+=
+\sum_{q\in[-1,1]\cap\QQ}\lambda_1(V)
+\]
+となる．
+
+もし $\lambda_1(V)=0$ なら右辺は $0$ であるが，
+左辺の集合は $[0,1]$ を含むので測度は少なくとも $1$ である．
+これは矛盾である．
+もし $\lambda_1(V)>0$ なら右辺は $\infty$ であるが，
+左辺の集合は $[-1,2]$ に含まれるので測度は高々 $3$ である．
+これも矛盾である．
+
+したがって $V$ はLebesgue可測ではない．
+\end{proof}
+
+\begin{remark}
+Lebesgue測度はBorel集合より広い集合族まで測れるが，
+$\calP(\RR^d)$ 全体を測れるわけではない．
+Vitali集合は，可算加法性と平行移動不変性を保ったまま全ての部分集合へ測度を拡張できないことを示している．
+\end{remark}
