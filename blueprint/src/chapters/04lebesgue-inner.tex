@@ -81,10 +81,10 @@ Jordan内測度との類推から，内測度を
 \]
 のように定めても，あまりうまくいかない．
 
-まず，内側からの近似では，外測度のような（区間の重なりを許す） covering ではなく packing にとる必要がある．
-区間の重なりを許すと同じ部分を何度でも数えられ，supremum が無限大になるからである．
+まず，同じ部分を重複して測ると上限が発散するため，内側からの近似では重なりを許す被覆（covering）ではなく充填（packing）を用いる必要がある．
 
-しかし，互いに素な区間による packing にしても，左半開区間だけでは $A$ の内部しか見えない．
+%互いに素な区間による packing にしても，
+しかし，左半開区間だけでは $A$ の内部しか見えない．
 非退化な左半開区間 $R_i$ は空でない開集合を含むので，$R_i \subset A$ なら
 \[
 \intr R_i \subset \intr A
@@ -95,20 +95,10 @@ Jordan内測度との類推から，内測度を
 したがって，$\intr A=\emptyset$ ならこの方法は常に $0$ しか与えない．
 
 %伝統的に使われるLebesgue測度の正則性は，可測集合を内側から近似する基本対象がコンパクト集合であることを述べている．
-そして，fat Cantor 集合（Smith--Volterra--Cantor 集合）のように，
+ところが，fat Cantor 集合（Smith--Volterra--Cantor 集合）のように，
 内部が空でありながら正のLebesgue測度をもつコンパクト集合が存在するので，
-区間 packing ではこのような集合を測れない．
-このような背景を踏まえ，Lebesgue内測度では区間ではなく，コンパクト集合による packing を用いる．
-\end{remark}
-
-\begin{remark}
-有界集合 $A$ をある有界閉区間 $I$ に入れて
-\[
-|I|-\lambda^*(I\setminus A)
-\]
-によって内測度を定義する流儀もある．
-この定義が上のコンパクト集合による定義と一致することは，
-開集合とコンパクト集合の可測性を示した後で証明する．
+区間充填ではこのような集合を測れない．
+このような背景を踏まえ，Lebesgue内測度では区間ではなく，コンパクト集合による充填を用いる．
 \end{remark}
 
 \section{基本性質}
@@ -173,6 +163,7 @@ $\lambda^*(A)=0$ ならば
 だからである．
 \end{proof}
 
+
 \section{具体例}
 
 \begin{example}
@@ -208,34 +199,297 @@ $\lambda^*(A)=0$ ならば
 \end{enumerate}
 \end{proof}
 
+
+
+\section{同値な定義}
+
+% 有界集合 $A$ をある有界閉区間 $I$ に入れて
+% \[
+% |I|-\lambda^*(I\setminus A)
+% \]
+% によって内測度を定義する流儀もある．
+%この定義が上のコンパクト集合による定義と一致することは，開集合とコンパクト集合の可測性を示した後で証明する．
+
+外測度有限な集合 $A$ を，それを含む外測度有限な開集合 $O$ に入れて内測度を測ることができる．
+\begin{theorem}
+    $\lambda^*(A) < \infty$ とする．$A$を含む任意の外測度有限な開集合 $O$ に対し，
+    \[
+    \lambda_*(A) = \lambda^*(O) - \lambda^*(O \setminus A)
+    \]
+    である．
+\end{theorem}
+つまり，右辺は開集合の取り方に依らず一定である．これを内測度の定義とする流儀もある．
+
+\begin{proof}
+右辺を
+\[
+\alpha:=\lambda^*(O)-\lambda^*(O\setminus A)
+\]
+とおく．$O\setminus A\subset O$ だから $\lambda^*(O\setminus A)<\infty$ であり，
+$\alpha$ は未定義な差を含まない．
+
+まず $\lambda_*(A)\le\alpha$ を示す．
+$K\subset A$ を満たすコンパクト集合 $K$ を任意に取る．
+$A\subset O$ だから $K\subset O$ である．
+\cref{lem:finite-open-compact-split}をこの開集合 $O$ とコンパクト集合 $K$ に適用すると，
+\[
+\lambda^*(O)=\lambda^*(K)+\lambda^*(O\setminus K)
+\]
+である．また
+\[
+O\setminus A\subset O\setminus K
+\]
+だから，外測度の単調性より
+\[
+\lambda^*(O\setminus A)\le \lambda^*(O\setminus K).
+\]
+したがって
+\[
+\lambda^*(K)
+=
+\lambda^*(O)-\lambda^*(O\setminus K)
+\le
+\lambda^*(O)-\lambda^*(O\setminus A)
+=\alpha.
+\]
+$K$ について上限を取ると
+\[
+\lambda_*(A)\le \alpha
+\]
+を得る．
+
+逆向きの不等式を示す．$\eps>0$ を任意に取る．
+第3章の開集合による外正則性より，
+$O\setminus A\subset U$ を満たす開集合 $U$ で
+\[
+\lambda^*(U)<\lambda^*(O\setminus A)+\frac{\eps}{2}
+\]
+となるものが取れる．
+また\cref{lem:finite-open-inner-compact}より，コンパクト集合 $L\subset O$ で
+\[
+\lambda^*(L)>\lambda^*(O)-\frac{\eps}{2}
+\]
+となるものが取れる．
+再び\cref{lem:finite-open-compact-split}を $O$ と $L$ に適用すると
+\[
+\lambda^*(O)=\lambda^*(L)+\lambda^*(O\setminus L)
+\]
+であるから，
+\[
+\lambda^*(O\setminus L)<\frac{\eps}{2}
+\]
+である．
+
+ここで
+\[
+K:=L\setminus U
+\]
+とおく．$L$ はコンパクトで $U$ は開集合だから $K$ はコンパクトである．
+さらに $K\subset O\setminus U$ であり，$U$ は $O\setminus A$ を含むので，
+\[
+K\subset A
+\]
+である．
+また
+\[
+O\subset K\cup U\cup (O\setminus L)
+\]
+だから，外測度の劣加法性より
+\[
+\lambda^*(O)
+\le
+\lambda^*(K)+\lambda^*(U)+\lambda^*(O\setminus L).
+\]
+よって
+\begin{align*}
+\lambda^*(K)
+&\ge
+\lambda^*(O)-\lambda^*(U)-\lambda^*(O\setminus L)\\
+&>
+\lambda^*(O)-\lambda^*(O\setminus A)-\eps
+=\alpha-\eps.
+\end{align*}
+内測度の定義より $\lambda_*(A)\ge\lambda^*(K)$ だから
+\[
+\lambda_*(A)>\alpha-\eps
+\]
+である．$\eps>0$ は任意なので
+\[
+\lambda_*(A)\ge \alpha
+\]
+を得る．
+以上より
+\[
+\lambda_*(A)=\lambda^*(O)-\lambda^*(O\setminus A)
+\]
+である．
+\end{proof}
+
+\begin{lemma} \label{lem:positive-distance-additive}
+    $A,B\subset\RR^d$ が正の距離だけ離れていれば
+\[
+\lambda^*(A\cup B)=\lambda^*(A)+\lambda^*(B)
+\]
+である．
+\end{lemma}
+
+\begin{proof}
+片方が空集合の場合は自明なので，以下では $A,B$ は空でないとする．
+実際，$\operatorname{dist}(A,B)>0$ とし，
+$0<\rho<\operatorname{dist}(A,B)$ を取る．
+$A\cup B$ を覆う区間列 $\{R_i\}_{i=1}^{\infty}\subset\calE_d$ を任意に取る．
+$\sum_i |R_i|=\infty$ の場合は自明なので，この和は有限としてよい．
+すると各 $R_i$ は有界であり，有限個の左半開区間に分割して，
+各小区間の直径を $\rho$ 未満にできる．
+そのような小区間は $A$ と $B$ の両方には交わらない．
+したがって，$A$ に交わる小区間全体は $A$ を覆い，
+$B$ に交わる小区間全体は $B$ を覆うので，
+\[
+\lambda^*(A)+\lambda^*(B)\le \sum_{i=1}^{\infty}|R_i|.
+\]
+被覆について下限を取れば
+\[
+\lambda^*(A)+\lambda^*(B)\le \lambda^*(A\cup B)
+\]
+を得る．逆向きの不等式は外測度の劣加法性である．
+\end{proof}
+
+\begin{lemma} \label{lem:finite-open-inner-compact}
+    $\lambda^*(U)<\infty$ である開集合 $U$ は内側からコンパクト集合で近似できる．
+すなわち任意の $\eps>0$ に対し，コンパクト集合 $F\subset U$ で
+\[
+\lambda^*(F)>\lambda^*(U)-\eps
+\]
+となるものが取れる．
+\end{lemma}
+\begin{proof}
+    もし $U=\emptyset$ なら $F=\emptyset$ とすればよい．
+以下では $U\neq\emptyset$ とする．
+これを見るため，有理数端点をもつ有界閉区間で $U$ に含まれるもの全体を
+\[
+C_1,C_2,\dots
+\]
+と列挙する．$U$ は開集合だから，これらは $U$ を覆う．
+\[
+B_1:=C_1,\qquad
+B_n:=C_n\setminus\bigcup_{j=1}^{n-1}C_j\quad(n\ge2)
+\]
+とおくと，$\{B_n\}$ は互いに素なJordan可測集合列で，
+\[
+U=\bigsqcup_{n=1}^{\infty}B_n
+\]
+である．第3章で示した $\calA_J$ 上の可算加法性より
+\[
+\lambda^*(U)=\sum_{n=1}^{\infty}\lambda^*(B_n).
+\]
+よってある $N$ が存在して
+\[
+\sum_{n=1}^{N}\lambda^*(B_n)>\lambda^*(U)-\eps
+\]
+となる．
+このとき
+\[
+F:=\bigcup_{n=1}^{N}C_n
+\]
+は $U$ に含まれるコンパクト集合であり，
+\[
+\lambda^*(F)
+=
+\sum_{n=1}^{N}\lambda^*(B_n)
+>
+\lambda^*(U)-\eps
+\]
+である．
+\end{proof}
+
+\begin{lemma} \label{lem:finite-open-compact-split}
+    $\lambda^*(O)<\infty$ である開集合 $O \in \calO_d$ とコンパクト集合 $K$ に対し，
+    \[
+    \lambda^*(O) = \lambda^*(O \cap K) + \lambda^*(O \setminus K)
+    \]
+\end{lemma}
+\begin{proof}
+外測度の劣加法性より
+\[
+\lambda^*(O)
+\le
+\lambda^*(O\cap K)+\lambda^*(O\setminus K)
+\]
+である．
+
+逆向きの不等式を示す．$\eps>0$ を任意に取る．
+$O\setminus K$ は開集合であり，単調性より
+\[
+\lambda^*(O\setminus K)\le\lambda^*(O)<\infty
+\]
+である．
+したがって上の補題より，コンパクト集合 $F\subset O\setminus K$ で
+\[
+\lambda^*(F)>\lambda^*(O\setminus K)-\eps
+\]
+となるものが取れる．
+もし $F=\emptyset$ なら
+\[
+\lambda^*((O\cap K)\cup F)
+=
+\lambda^*(O\cap K)+\lambda^*(F)
+\]
+は自明である．
+もし $F\neq\emptyset$ なら，$F$ はコンパクトで $K$ と交わらないから，
+\[
+\operatorname{dist}(F,K)>0
+\]
+である．特に $F$ と $O\cap K$ も正の距離だけ離れている．
+この場合は補題より
+\[
+\lambda^*((O\cap K)\cup F)
+=
+\lambda^*(O\cap K)+\lambda^*(F)
+\]
+である．いずれの場合も上の等式が成り立つ．
+一方 $(O\cap K)\cup F\subset O$ だから，単調性より
+\[
+\lambda^*(O)
+\ge
+\lambda^*(O\cap K)+\lambda^*(F)
+>
+\lambda^*(O\cap K)+\lambda^*(O\setminus K)-\eps.
+\]
+$\eps>0$ は任意なので
+\[
+\lambda^*(O)
+\ge
+\lambda^*(O\cap K)+\lambda^*(O\setminus K)
+\]
+を得る．以上より等号が成り立つ．
+\end{proof}
+
 \section{解釈}
 
 Lebesgue内測度 $\lambda_*(A)$ は，
 「$A$ の中に入るコンパクト集合のうち，どこまで大きな面積を確保できるか」
 を表している．
-したがって
+したがって，Lebesgue流の可測性
 \[
 \lambda^*(A)=\lambda_*(A)
 \]
-とは，
-外から見た大きさと内から見た大きさが一致して，
+とは，外から見た大きさと内から見た大きさが一致して，
 その集合の面積がぶれないことを意味している．
-この等式を次章でLebesgue可測性の定義として採用する．
+%この等式を次章でLebesgue可測性の定義として採用する．
 
-ただし，この定義はまだ補助的なものである．
+ただし，この定義は補助的である．
 理由は2つある．
 \begin{enumerate}
     \item コンパクト集合という位相的概念に依存している
     \item この定義だけから可測集合全体の構造を調べるのは難しい
 \end{enumerate}
-第5章では，Lebesgue測度が実際にどのような性質をもつか，
-特に正則性
-\[
-\lambda(A)
-=
-\sup\{\lambda(K)\mid K \subset A,\ K \text{ compact}\}
-\]
-がどのように内測度と結びつくかを見る．
-そして第6章では，内測度を使わずに測度を構成できる
-Carathéodory流の定義へ進む．
-
+% 第5章では，Lebesgue測度が実際にどのような性質をもつか，
+% 特に正則性
+% \[
+% \lambda(A)
+% =
+% \sup\{\lambda(K)\mid K \subset A,\ K \text{ compact}\}
+% \]
+% がどのように内測度と結びつくかを見る．
+% そして第6章では，内測度を使わずに測度を構成できる
+% Carathéodory流の定義へ進む．

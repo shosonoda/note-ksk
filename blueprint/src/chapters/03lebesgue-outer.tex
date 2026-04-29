@@ -86,9 +86,13 @@ Lebesgue外測度では，下限や無限和を頻繁に扱う．
 以後，次元 $d \in \NN$ を固定する．
 第2章の記法に拡大実数を含めるため，以下のように約束する
 \begin{itemize}
-    \item $\eRR^d$ の区間 $R$ の体積を $|R|$ で表す．また $|\emptyset|:=0$ と約束する．区間に一つでも$\pm \infty$が含まれるときは $|R|=\infty$とする．
-    \item $\eRR^d$ の左半開区間の全体に空集合を加えたものを$\calE_d$と書く
-    \item $\eRR^d$ の基本集合（互いに素な左半開区間の有限合併）の全体を$\calA_d$と書く．前章で触れた通り，区間の定義に拡大実数を含めると，$\calA_d$は有限加法族である．
+    \item $\eRR$ の区間とは，$-\infty \le a < b \le \infty$ に対し，$I = (a,b), (a,b], [a,b), [a,b], \text{or } \emptyset$ である．便宜的に，空集合 $\emptyset$ も区間に含める．
+    \item $\eRR^d$ の区間 $R = \prod_{i=1}^d I_i$ の体積を $|R| = \prod_{i=1}^d (b_i - a_i)$ で表す．また空集合の体積を $|\emptyset|:=0$ と約束する．区間に一つでも$\pm \infty$が含まれるときは $|R|=\infty$とする．
+    \item $\eRR^d$ の左半開区間の全体に空集合を加えたものを
+    $\calE_d := \left\{ \prod_{i=1}^d (a_i,b_i] \;\middle|\; a_i < b_i \right\} \cup \{ \emptyset\}$
+%    $\calE_d := \{ \prod_{i=1}^d (a_i,b_i] \mid -\infty \le a_i < b_i \le \infty \} \cup \{ \emptyset\}$
+    と書く
+    \item $\eRR^d$ の基本集合（互いに素な左半開区間の有限合併）の全体を $\calA_d := \bigcup_{n \in \NN} \left\{ \bigsqcup_{j=1}^n Q_j \;\middle|\; Q_j \in \calE_d\right\}$ と書く．区間の定義に拡大実数を含めたことにより，$\calA_d$は有限加法族である．
 \end{itemize}
 
 \begin{definition}[Lebesgue外測度]
@@ -107,6 +111,10 @@ R_i \in \calE_d
 \end{definition}
 
 \begin{remark}
+    可算被覆の基本単位 $R_i$ として区間（$\calE_d$）ではなく基本集合（$\calA_d$）を採用しても同じ量を定める．
+\end{remark}
+
+\begin{remark}
 有限被覆 $A \subset \bigcup_{i=1}^n Q_i$ は可算被覆の特別な場合
 \[
 A \subset \bigcup_{i=1}^\infty R_i,
@@ -121,7 +129,7 @@ Q_i, & i \le n,\\
 したがって，Lebesgue外測度はJordan外測度よりも精密に近似できる．
 \end{remark}
 
-\begin{proposition}[Jordan外測度との比較]
+\begin{proposition}[Jordan外測度との比較] \label{prop:louter-le-jouter}
 有界集合 $A \subset \RR^d$ に対して
 \[
 \lambda^*(A) \le m_J^*(A)
@@ -213,23 +221,19 @@ $A=\{a_1,a_2,\dots\}$ と書く．
 \begin{example}
 \begin{enumerate}
     \item $\QQ^d$ は可算だから $\lambda^*(\QQ^d)=0$
-    \item 特に
-    \[
-    \lambda_1^*(\QQ \cap [0,1]) = 0
-    \]
-    である
+    \item 特に $\lambda^*(\QQ \cap [0,1]) = 0$ である
     \item $\ZZ^d$ も可算だから $\lambda^*(\ZZ^d)=0$
 \end{enumerate}
 \end{example}
 
-\begin{remark}
-第2章でJordan可測でなかった
-\[
-\QQ \cap [0,1]
-\]
-が，Lebesgue外測度では長さ $0$ になる．
-ここに「有限被覆」と「可算被覆」の差が最もはっきり現れる．
-\end{remark}
+% \begin{remark}
+% Jordan理論の範囲では，
+% Dirichlet関数の台集合$A=\QQ \cap [0,1]$や
+% Lebesgue外測度では長さ $0$ になる．
+% 非有界集合もJordan可測でなかったが，
+% Lebesgue
+% 有限被覆と可算被覆の顕著な違いである．
+% \end{remark}
 
 \section{Lebesgue外測度の性質}
 
@@ -390,128 +394,7 @@ A+c \subset \bigcup_{n=1}^{\infty} (R_n+c)
 
 \section{Jordan測度との整合}
 
-\begin{proposition}
-    基本集合 $A$ に対し，
-    \[
-    m_J(A) = \lambda^*(A).
-    \]
-\end{proposition}
-
-\begin{proof}
-\[
-\lambda^*(A)\le m_J(A)
-\]
-は，$A$ 自身による有限被覆を考えれば従う．
-
-逆向きの不等式を示すため，
-$A \subset \bigcup_{n=1}^{\infty} R_n$ を満たす任意の可算被覆
-$\{R_n\}_{n=1}^{\infty} \subset \calE_d$ を取る．
-もし
-\[
-\sum_{n=1}^{\infty}|R_n|=\infty
-\]
-なら
-\[
-m_J(A)\le \sum_{n=1}^{\infty}|R_n|
-\]
-は自明である．
-したがって右辺が有限であるとする．このとき各 $R_n$ は有界である．
-
-$\eps>0$ を取り，コンパクトなJordan可測集合 $K\subset A$ を任意に固定する．
-各 $n$ について $R_n$ を少し膨らませた開区間 $U_n$ を
-\[
-R_n \subset U_n,
-\qquad
-|U_n| \le |R_n|+\frac{\eps}{2^n}
-\]
-となるように取る．
-すると $\{U_n\}_{n=1}^{\infty}$ はコンパクト集合 $K$ の開被覆であるから，
-有限部分被覆
-\[
-K \subset U_{n_1}\cup\cdots\cup U_{n_N}
-\]
-が存在する．
-Jordan外測度の有限劣加法性より
-\[
-m_J(K)=m_J^*(K)
-\le
-\sum_{j=1}^N m_J^*(U_{n_j})
-\le
-\sum_{j=1}^N |U_{n_j}|
-\le
-\sum_{n=1}^{\infty}|R_n|+\eps
-\]
-である．
-したがって $\eps>0$ は任意なので
-\[
-m_J(K)\le \sum_{n=1}^{\infty}|R_n|
-\]
-である．
-一方，基本集合 $A$ は有限個の半開区間の合併であるから，
-各端点を少し内側へ動かすことでコンパクトなJordan可測集合によって内側から近似できる．
-すなわち
-\[
-m_J(A)
-=
-\sup\{m_J(K)\mid K\subset A,\ K\text{ はコンパクトなJordan可測集合}\}
-\]
-である．ゆえに
-\[
-m_J(A)\le \sum_{n=1}^{\infty}|R_n|
-\]
-である．
-被覆について下限を取れば
-\[
-m_J(A)\le \lambda^*(A)
-\]
-である．
-\end{proof}
-
-\begin{remark}
-ここではJordan外測度の可算劣加法性は使っていない．
-実際，Jordan外測度は一般には可算劣加法的ではない．
-例えば
-\[
-\QQ\cap[0,1]
-=
-\bigcup_{q\in \QQ\cap[0,1]}\{q\}
-\]
-であり，各一点集合のJordan外測度は $0$ であるが，
-$\QQ\cap[0,1]$ のJordan外測度は $1$ である．
-\end{remark}
-
-\begin{lemma}[Jordan可測集合の基本集合近似]
-Jordan可測集合 $A$ と $\eps>0$ に対し，
-基本集合 $F,G \in \calA_d$ が存在して
-\[
-F \subset A \subset G,
-\qquad
-m_J(G)-m_J(F)<\eps
-\]
-を満たす．
-\end{lemma}
-
-\begin{proof}
-\red{第2章のJordan可測性の近似定理}より，
-基本集合 $F,G \in \calA_d$ が存在して
-\[
-F \subset A \subset G,
-\qquad
-m_J(G\setminus F)<\eps
-\]
-を満たす．
-基本集合の有限加法性より
-\[
-m_J(G)=m_J(F)+m_J(G\setminus F)
-\]
-だから
-\[
-m_J(G)-m_J(F)<\eps
-\]
-である．
-\end{proof}
-
-\begin{theorem}
+\begin{theorem}[{$m_J : \calA_J \to [0,\infty]$の拡張}]
     Jordan可測集合 $A$ に対し，
     \[
     m_J(A) = \lambda^*(A).
@@ -519,42 +402,104 @@ m_J(G)-m_J(F)<\eps
 \end{theorem}
 
 \begin{proof}
-Jordan可測集合 $A$ は有界である．
-任意の $\eps > 0$ に対し，前補題より
-基本集合 $F,G \in \calA_d$ を
+Jordan可測集合 $A$ は有界であり，$m_J(A) = m_J^*(A) = m_{J,*}(A) <\infty$ である．
+$A = \emptyset$ のとき $m_J(\emptyset)=0, \lambda^*(\emptyset)=0$ より成り立つ．
+以下では$A \neq \emptyset$ とする．
+まず $\lambda^*(A)\le m_J(A)$ は，\cref{prop:louter-le-jouter} から直ちに従う．
+% 任意の $\eps>0$ に対し，$m_J(A)=m_J^*(A)$ とJordan外測度の定義より，
+% 基本集合 $G\in\calA_d$ が存在して
+% \[
+% A\subset G,
+% \qquad
+% m_J(G)<m_J(A)+\eps
+% \]
+% を満たす．
+% $G=\bigsqcup_{j=1}^N Q_j$ と半開区間の互いに素な有限合併に書けば，
+% $\{Q_j\}_{j=1}^N$ は $A$ の可算被覆とみなせるので
+% \[
+% \lambda^*(A)
+% \le
+% \sum_{j=1}^N |Q_j|
+% =
+% m_J(G)
+% <
+% m_J(A)+\eps .
+% \]
+% $\eps>0$ は任意だから $\lambda^*(A)\le m_J(A)$ である．
+
+逆向きの不等式を示す．
+$A\subset\bigcup_{n=1}^\infty R_n$ を満たす任意の可算被覆
+$\{R_n\}_{n=1}^\infty\subset\calE_d$ を取る．
+$\sum_{n=1}^\infty |R_n|=\infty$ の場合は自明なので，
+以下ではこの和が有限であるとする．
+このとき各 $R_n$ は有界である．
+
+基本集合 $F\subset A$ を任意に取る．
+任意の $\eps>0$ に対し，各 $R_n$ を少し膨らませた開区間 $U_n$ を
 \[
-F \subset A \subset G,
+R_n\subset U_n,
 \qquad
-m_J(G)-m_J(F)<\eps
+|U_n|\le |R_n|+\frac{\eps}{2^n}
 \]
 となるように取る．
-単調性と前命題より
+%
+% $F=\bigsqcup_{j=1}^N Q_j$，
+% $Q_j=\prod_{i=1}^d(a_{ij},b_{ij}]$ と書くと，$F\subset A$ だから各端点は有限である．
+% 十分小さい $\eta>0$ に対して
+% \[
+% K_\eta
+% :=
+% \bigsqcup_{j=1}^N \prod_{i=1}^d [a_{ij}+\eta,b_{ij}]
+% \subset F
+% \]
+% はコンパクトなJordan可測集合であり，直接計算により
+% $m_J(K_\eta)\to m_J(F)$ $(\eta\downarrow0)$ である．
+% したがって任意の $\delta>0$ に対し，$\eta>0$ を十分小さく取れば
+% \[
+% m_J(F)-\delta\le m_J(K_\eta)
+% \]
+% となる．
+さらに任意の $\delta >0$ に対し，$F$を少し縮ませたコンパクト集合 $K_\delta$ を
 \[
-\lambda^*(F)=m_J(F)\le \lambda^*(A)\le \lambda^*(G)=m_J(G)
+K_\delta \subset F, \qquad m_J(F) - \delta \le m_J(K_\delta)
+\]
+となるように取る．
+%
+$\{U_n\}_{n=1}^\infty$ はコンパクト集合 $K_\delta$ の開被覆だから有限部分被覆を持つ．
+Jordan外測度の有限劣加法性より
+\[
+m_J(K_\delta)=m_J^*(K_\delta)
+\le
+\sum_{k=1}^M m_J^*(U_{n_k})
+\le
+\sum_{k=1}^M |U_{n_k}|
+\le
+\sum_{n=1}^\infty |R_n|+\eps .
+\]
+ゆえに
+\[
+m_J(F)-\delta
+\le
+\sum_{n=1}^\infty |R_n|+\eps .
+\]
+$\delta,\eps>0$ は任意なので
+\[
+m_J(F)\le \sum_{n=1}^\infty |R_n|
 \]
 である．
-また $F \subset A \subset G$ だから
-\[
-m_J(F)\le m_J(A)\le m_J(G)
-\]
-であり，
-\[
-m_J(G)-m_J(F)<\eps
-\]
-だから
-\[
-m_J(A)-\eps < m_J(F)=\lambda^*(F)
-\le
-\lambda^*(A)
-\le
-\lambda^*(G)=m_J(G)
-< m_J(A)+\eps
-\]
-を得る．
-$\eps > 0$ は任意なので $\lambda^*(A)=m_J(A)$ である．
+最後に $F\subset A$ を満たす基本集合全体について上限を取り，
+% $A$ のJordan可測性より
+% \[
+% m_J(A)=m_{J,*}(A)
+% \le
+% \sum_{n=1}^\infty |R_n|
+% \]
+% を得る．
+可算被覆について下限を取れば \[m_J(A)=m_{J,*}(A)\le\lambda^*(A)\] を得る．
+以上より $m_J(A)=\lambda^*(A)$ である．
 \end{proof}
 
-\begin{theorem}
+\begin{theorem}[$\calA_J$上で可算加法的]
     互いに素なJordan可測集合の列 $\{A_i\}_{i=1}^\infty$ に対し，
     \[
     \lambda^*\left( \bigsqcup_{i=1}^\infty A_i \right) = \sum_{i=1}^\infty \lambda^*(A_i).
@@ -598,88 +543,150 @@ B_n \subset \bigsqcup_{i=1}^\infty A_i
 以上より等号が成り立つ．
 \end{proof}
 
-\section{開被覆による書き換え}
+\section{Lebesgue外測度の外正則性}%{開被覆による書き換え}
 
-\begin{theorem}[開区間被覆による書き換え]
-任意の $A \subset \RR^d$ に対して
-\[
-\lambda^*(A)
-=
-\inf\left\{
-\sum_{n=1}^{\infty} |U_n|
-\;\middle|\;
-A \subset \bigcup_{n=1}^{\infty} U_n,\ 
-U_n \text{ は有界開区間}
-\right\}
-\]
-が成り立つ．
-\end{theorem}
-\begin{proof}
-右辺を $\alpha(A)$ とおく．
-\[
-A \subset \bigcup_{n=1}^{\infty} U_n,
-\qquad
-U_n \text{ は有界開区間}
-\]
-とする．
-各 $n$ に対し，任意の $\delta>0$ に対して
-$U_n$ を含む左半開区間 $R_n \in \calE_d$ を
-\[
-|R_n| < |U_n|+\delta
-\]
-となるように取れるから，
-\[
-\lambda^*(U_n)\le |U_n|
-\]
-である．
-したがって可算劣加法性より
-\[
-\lambda^*(A)
-\le
-\sum_{n=1}^{\infty}\lambda^*(U_n)
-\le
-\sum_{n=1}^{\infty}|U_n|
-\]
-を得る．
-被覆について下限を取れば $\lambda^*(A)\le \alpha(A)$ である．
+$\RR^d$の開集合系を$\calO_d := \{ O \subset \RR^d \mid O \text{ は開集合}\}$と書く．
+\begin{remark}
+    一般の集合$X$の部分集合族$\calO_X$が開集合系であるとは，以下の3条件を満たすことをいう
+    \begin{itemize}
+        \item $X,\emptyset \in \calO_X$
+        \item （任意合併）$\{ O_\lambda \}_{\lambda \in \Lambda} \subset \calO \implies \bigcup_{\lambda \in \Lambda} O_\lambda \in \calO$
+        \item （有限交叉）$O_1,O_2 \in \calO_X \implies O_1 \cap O_2 \in \calO_X$
+    \end{itemize}
+    特に，$\RR^d$の開集合系$\calO_d$は，上記の条件を満たす．
+\end{remark}
 
-逆向きの不等式を示す．
-もし $\lambda^*(A)=\infty$ なら，
-すでに示した $\lambda^*(A)\le \alpha(A)$ より
-$\alpha(A)=\infty$ であり，自明である．
+% \begin{theorem}[開区間被覆による書き換え]
+% 任意の $A \subset \RR^d$ に対して
+% \[
+% \lambda^*(A)
+% =
+% \inf\left\{
+% \sum_{n=1}^{\infty} |U_n|
+% \;\middle|\;
+% A \subset \bigcup_{n=1}^{\infty} U_n,
+% U_n \text{ は有界開区間}
+% \right\}
+% \]
+% が成り立つ．
+% \end{theorem}
+% \begin{proof}
+% 右辺を $\alpha(A)$ とおく．
+% \[
+% A \subset \bigcup_{n=1}^{\infty} U_n,
+% \qquad
+% U_n \text{ は有界開区間}
+% \]
+% とする．
+% 各 $n$ に対し，任意の $\delta>0$ に対して
+% $U_n$ を含む左半開区間 $R_n \in \calE_d$ を
+% \[
+% |R_n| < |U_n|+\delta
+% \]
+% となるように取れるから，
+% \[
+% \lambda^*(U_n)\le |U_n|
+% \]
+% である．
+% したがって可算劣加法性より
+% \[
+% \lambda^*(A)
+% \le
+% \sum_{n=1}^{\infty}\lambda^*(U_n)
+% \le
+% \sum_{n=1}^{\infty}|U_n|
+% \]
+% を得る．
+% 被覆について下限を取れば $\lambda^*(A)\le \alpha(A)$ である．
+%
+% 逆向きの不等式を示す．
+% もし $\lambda^*(A)=\infty$ なら，
+% すでに示した $\lambda^*(A)\le \alpha(A)$ より
+% $\alpha(A)=\infty$ であり，自明である．
+%
+% $\eps>0$ を取る．
+% Lebesgue外測度の定義より，
+% $A$ を覆う区間列 $\{R_n\}_{n=1}^{\infty} \subset \calE_d$ で
+% \[
+% \sum_{n=1}^{\infty}|R_n|<\lambda^*(A)+\eps
+% \]
+% を満たすものが取れる．
+% 右辺は有限だから各 $|R_n|$ は有限であり，したがって各 $R_n$ は有界である．
+% 各 $n$ に対して，$R_n \subset U_n$ を満たす有界開区間 $U_n$ を
+% \[
+% |U_n|<|R_n|+\frac{\eps}{2^n}
+% \]
+% となるように選ぶ．
+% すると $\{U_n\}$ は $A$ の有界開区間被覆であり，
+% \begin{align*}
+% \sum_{n=1}^{\infty}|U_n|
+% &<
+% \sum_{n=1}^{\infty}\left(|R_n|+\frac{\eps}{2^n}\right) \\
+% &=
+% \sum_{n=1}^{\infty}|R_n|+\eps \\
+% &<
+% \lambda^*(A)+2\eps.
+% \end{align*}
+% したがって
+% \[
+% \alpha(A)\le \lambda^*(A)+2\eps
+% \]
+% を得る．
+% $\eps>0$ は任意だから $\alpha(A)\le \lambda^*(A)$ である．
+% \end{proof}
+%
+% \begin{corollary}[開集合による外正則性]
+% 任意の $A \subset \RR^d$ に対して
+% \[
+% \lambda^*(A)
+% =
+% \inf\{\lambda^*(G)\mid A \subset G,\ G \text{ は開集合}\}
+% \]
+% が成り立つ．
+% \end{corollary}
+% \begin{proof}
+% 右辺を $\beta(A)$ とおく．
+% $A \subset G$ なら単調性より
+% \[
+% \lambda^*(A)\le \lambda^*(G)
+% \]
+% だから
+% \[
+% \lambda^*(A)\le \beta(A)
+% \]
+% である．
+%
+% 逆向きの不等式を示す．
+% $\eps>0$ を取る．
+% 前定理より，$A$ を覆う有界開区間列 $\{U_n\}_{n=1}^{\infty}$ で
+% \[
+% \sum_{n=1}^{\infty}|U_n|<\lambda^*(A)+\eps
+% \]
+% を満たすものが取れる．
+% \[
+% G:=\bigcup_{n=1}^{\infty}U_n
+% \]
+% とおけば，$G$ は開集合で $A \subset G$ である．
+% また外測度の可算劣加法性より
+% \[
+% \lambda^*(G)
+% \le
+% \sum_{n=1}^{\infty}\lambda^*(U_n)
+% \le
+% \sum_{n=1}^{\infty}|U_n|
+% <
+% \lambda^*(A)+\eps.
+% \]
+% ここで第2の不等式は，前定理を $A=U_n$ に適用すれば
+% $\lambda^*(U_n)\le |U_n|$ と分かることによる．
+% したがって
+% \[
+% \beta(A)\le \lambda^*(A)+\eps.
+% \]
+% $\eps>0$ は任意だから $\beta(A)\le \lambda^*(A)$ である．
+% \end{proof}
 
-$\eps>0$ を取る．
-Lebesgue外測度の定義より，
-$A$ を覆う区間列 $\{R_n\}_{n=1}^{\infty} \subset \calE_d$ で
-\[
-\sum_{n=1}^{\infty}|R_n|<\lambda^*(A)+\eps
-\]
-を満たすものが取れる．
-右辺は有限だから各 $|R_n|$ は有限であり，したがって各 $R_n$ は有界である．
-各 $n$ に対して，$R_n \subset U_n$ を満たす有界開区間 $U_n$ を
-\[
-|U_n|<|R_n|+\frac{\eps}{2^n}
-\]
-となるように選ぶ．
-すると $\{U_n\}$ は $A$ の有界開区間被覆であり，
-\begin{align*}
-\sum_{n=1}^{\infty}|U_n|
-&<
-\sum_{n=1}^{\infty}\left(|R_n|+\frac{\eps}{2^n}\right) \\
-&=
-\sum_{n=1}^{\infty}|R_n|+\eps \\
-&<
-\lambda^*(A)+2\eps.
-\end{align*}
-したがって
-\[
-\alpha(A)\le \lambda^*(A)+2\eps
-\]
-を得る．
-$\eps>0$ は任意だから $\alpha(A)\le \lambda^*(A)$ である．
-\end{proof}
-
-\begin{corollary}[開集合による外正則性]
+\begin{theorem}[開集合による外正則性]
 任意の $A \subset \RR^d$ に対して
 \[
 \lambda^*(A)
@@ -687,49 +694,62 @@ $\eps>0$ は任意だから $\alpha(A)\le \lambda^*(A)$ である．
 \inf\{\lambda^*(G)\mid A \subset G,\ G \text{ は開集合}\}
 \]
 が成り立つ．
-\end{corollary}
+\end{theorem}
+
 \begin{proof}
-右辺を $\beta(A)$ とおく．
-$A \subset G$ なら単調性より
-\[
-\lambda^*(A)\le \lambda^*(G)
-\]
-だから
-\[
-\lambda^*(A)\le \beta(A)
-\]
-である．
+    右辺を $\omega(A) := \inf\{ \lambda^*(O) \mid A \subset O, O \in \calO_d \}$ とおく．
+    まずLebesgue外測度の単調性により，任意の開集合 $O$ に対し \[A \subset O \implies \lambda^*(A) \le \lambda^*(O)\] である．よって $\lambda^*(A) \le \omega(A)$ である．
 
-逆向きの不等式を示す．
-$\eps>0$ を取る．
-前定理より，$A$ を覆う有界開区間列 $\{U_n\}_{n=1}^{\infty}$ で
-\[
-\sum_{n=1}^{\infty}|U_n|<\lambda^*(A)+\eps
-\]
-を満たすものが取れる．
-\[
-G:=\bigcup_{n=1}^{\infty}U_n
-\]
-とおけば，$G$ は開集合で $A \subset G$ である．
-また外測度の可算劣加法性より
-\[
-\lambda^*(G)
-\le
-\sum_{n=1}^{\infty}\lambda^*(U_n)
-\le
-\sum_{n=1}^{\infty}|U_n|
-<
-\lambda^*(A)+\eps.
-\]
-ここで第2の不等式は，前定理を $A=U_n$ に適用すれば
-$\lambda^*(U_n)\le |U_n|$ と分かることによる．
-したがって
-\[
-\beta(A)\le \lambda^*(A)+\eps.
-\]
-$\eps>0$ は任意だから $\beta(A)\le \lambda^*(A)$ である．
+    逆向きの不等号を示す．
+    もし $\lambda^*(A)=\infty$ なら，すでに示した $\lambda^*(A)\le\omega(A)$ より
+    $\omega(A)=\infty$ であり，自明である．
+
+    以下，$\lambda^*(A)<\infty$ とする．
+    $\eps>0$ を取る．
+    Lebesgue外測度の定義より，
+    区間列 $\{ Q_i \}_{i=1}^\infty \subset \calE_d$ が存在して
+    \[
+    A \subset \bigcup_{i=1}^\infty Q_i,
+    \qquad
+    \sum_{i=1}^\infty |Q_i| < \lambda^*(A) + \frac{\eps}{2}
+    \]
+    である．このとき右辺は有限なので，空でない $Q_i$ は有界である．
+    各 $i$ に対し，$Q_i\subset O_i$ を満たす開集合 $O_i\in\calO_d$ を
+    \[
+    \lambda^*(O_i) < |Q_i| + \frac{\eps}{2^{i+1}}
+    \]
+    となるように取る．
+    実際，$Q_i=\emptyset$ なら $O_i=\emptyset$ とし，
+    $Q_i\neq\emptyset$ なら，まず $Q_i\subset V_i$ かつ
+    \[
+    |V_i|<|Q_i|+\frac{\eps}{2^{i+2}}
+    \]
+    となる有界開区間 $V_i$ を取る．
+    次に $V_i\subset R_i$ かつ
+    \[
+    |R_i|<|V_i|+\frac{\eps}{2^{i+2}}
+    \]
+    となる左半開区間 $R_i\in\calE_d$ を取り，$O_i:=V_i$ とおけば
+    \[
+    \lambda^*(O_i)\le |R_i|
+    <
+    |Q_i|+\frac{\eps}{2^{i+1}}
+    \]
+    である．
+
+    したがって，$O_\eps := \bigcup_{i=1}^\infty O_i$ とおくと，
+    $O_\eps$ は $A$ を含む開集合（$A \subset O_\eps, O_\eps \in \calO_d$）であって，
+    \[
+    \lambda^*(O_\eps)
+    \le
+    \sum_{i=1}^\infty \lambda^*(O_i)
+    <
+    \sum_{i=1}^\infty |Q_i| + \frac{\eps}{2}
+    <
+    \lambda^*(A) + \eps
+    \]
+    である．$\eps>0$ は任意だから $\omega(A) \le \lambda^*(A)$ である．
 \end{proof}
-
 
 \section{解釈}
 
