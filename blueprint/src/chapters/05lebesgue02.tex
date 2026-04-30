@@ -69,39 +69,30 @@ Jordan可測集合 $A\subset\RR^d$ はLebesgue可測であり，
 が成り立つ．
 \end{theorem}
 \begin{proof}
-第3章で，Jordan可測集合に対して
+Jordan可測性より
 \[
-\lambda^*(A)=m_J(A)
-\]
-が成り立つことを示した．
-
-$\eps>0$ を取る．
-Jordan可測性の近似定理と，基本集合をコンパクト集合で内側から近似できることにより，
-あるコンパクト集合 $K\subset A$ が存在して
-\[
-m_J(K)>m_J(A)-\eps
-\]
-を満たす．
-コンパクト集合はJordan可測なので，第3章の整合性より
-\[
-\lambda^*(K)=m_J(K)
+m_{J,*}(A)=m_J^*(A)=m_J(A)
 \]
 である．
-したがって内測度の定義から
+第4章のJordan内測度との比較，Lebesgue内測度の基本性質，
+第3章のJordan外測度との比較を順に用いると
 \[
-\lambda_*(A)\ge \lambda^*(K)=m_J(K)>m_J(A)-\eps
-=\lambda^*(A)-\eps
+m_J(A)
+=m_{J,*}(A)
+\le \lambda_*(A)
+\le \lambda^*(A)
+\le m_J^*(A)
+=m_J(A)
+\]
+となる．
+したがってすべて等号であり，特に
+\[
+\lambda_*(A)=\lambda^*(A)=m_J(A)
 \]
 である．
-一方，常に $\lambda_*(A)\le \lambda^*(A)$ だから，
-$\eps>0$ の任意性より
-\[
-\lambda_*(A)=\lambda^*(A)
-\]
-を得る．
 よって $A$ はLebesgue可測であり，
 \[
-\lambda(A)=\lambda^*(A)=m_J(A)
+\lambda(A)=m_J(A)
 \]
 である．
 \end{proof}

@@ -199,7 +199,62 @@ $\lambda^*(A)=0$ ならば
 \end{enumerate}
 \end{proof}
 
+\section{Jordan測度との関係}
+\begin{theorem}
+集合 $A \subset \RR^d$ に対し，\[
+m_{J,*}(A) \le \lambda_*(A)
+\]
+である．
+\end{theorem}
 
+\begin{proof}
+$E\subset A$ を満たす基本集合 $E$ を任意に取る．
+$E=\emptyset$ のときは $m_J(E)=0\le\lambda_*(A)$ だからよい．
+以下では $E\neq\emptyset$ とする．
+このとき
+\[
+E=\bigsqcup_{j=1}^{N}Q_j
+\]
+と互いに素な有界区間の有限合併に書ける．
+任意の $\eps>0$ に対し，各 $Q_j$ の端点を少し内側へ動かせば，
+コンパクト区間 $C_j\subset Q_j$ で
+\[
+|C_j|>|Q_j|-\frac{\eps}{N}
+\]
+を満たすものが取れる．ただし $|Q_j|=0$ の場合は $C_j=\emptyset$ とすればよい．
+
+そこで
+\[
+K:=\bigcup_{j=1}^{N}C_j
+\]
+とおくと，$K$ はコンパクト集合であり，$K\subset E\subset A$ である．
+また $Q_j$ たちは互いに素なので，$C_j$ たちも互いに素である．
+したがって $K$ はJordan可測であり，第3章で示した
+Jordan測度とLebesgue外測度の一致より
+\[
+\lambda^*(K)=m_J(K)=\sum_{j=1}^{N}|C_j|.
+\]
+よって
+\[
+\lambda_*(A)
+\ge \lambda^*(K)
+=\sum_{j=1}^{N}|C_j|
+>
+\sum_{j=1}^{N}|Q_j|-\eps
+=m_J(E)-\eps.
+\]
+$\eps>0$ は任意なので
+\[
+m_J(E)\le \lambda_*(A)
+\]
+である．
+
+最後に，$E\subset A$ を満たす基本集合全体について上限を取ると
+\[
+m_{J,*}(A)\le \lambda_*(A)
+\]
+を得る．
+\end{proof}
 
 \section{同値な定義}
 
