@@ -219,11 +219,92 @@ $A=\{a_1,a_2,\dots\}$ と書く．
 \end{proof}
 
 \begin{example}
-\begin{enumerate}
-    \item $\QQ^d$ は可算だから $\lambda^*(\QQ^d)=0$
-    \item 特に $\lambda^*(\QQ \cap [0,1]) = 0$ である
-    \item $\ZZ^d$ も可算だから $\lambda^*(\ZZ^d)=0$
-\end{enumerate}
+%\begin{enumerate}
+%    \item 
+    $\QQ^d, \QQ \cap [0,1], \ZZ^d$ は可算集合だから $\lambda^*(\QQ^d)=0, \lambda^*(\QQ \cap [0,1]) = 0, \lambda^*(\ZZ^d)=0$
+%\end{enumerate}
+\end{example}
+\begin{proposition}
+各 $a_i<b_i$ を実数とする．
+開区間$R=\prod_{i=1}^d (a_i,b_i)$,
+左半開区間$R=\prod_{i=1}^d (a_i,b_i]$,
+右半開区間$R=\prod_{i=1}^d [a_i,b_i)$,
+閉区間$R=\prod_{i=1}^d [a_i,b_i]$
+のLebesgue外測度はいずれも区間の体積 $\prod_{i=1}^d (b_i - a_i)$ に一致する．
+\end{proposition}
+\begin{proof}
+右辺を
+\[
+|R|:=\prod_{i=1}^d (b_i-a_i)
+\]
+と書く．
+
+まず上から評価する．任意の $\eta>0$ に対して
+\[
+R\subset \prod_{i=1}^d (a_i-\eta,b_i]
+\]
+であり，右辺は $\calE_d$ の元である．したがって
+\[
+\lambda^*(R)
+\le
+\prod_{i=1}^d (b_i-a_i+\eta)
+\]
+である．$\eta\downarrow0$ とすれば
+\[
+\lambda^*(R)\le |R|
+\]
+を得る．
+
+逆向きの不等式を示す．$\eps>0$ を任意に取る．
+$0<\eta<\frac12\min_i(b_i-a_i)$ を十分小さく取って
+\[
+K_\eta:=\prod_{i=1}^d [a_i+\eta,b_i-\eta]\subset R,
+\qquad
+|K_\eta|>|R|-\eps
+\]
+となるようにする．
+
+$R\subset\bigcup_{n=1}^{\infty}R_n$ を満たす任意の可算被覆
+$\{R_n\}_{n=1}^{\infty}\subset\calE_d$ を取る．
+$\sum_n |R_n|=\infty$ のときは自明なので，この和は有限としてよい．
+各 $n$ に対し，$R_n=\emptyset$ なら $U_n=\emptyset$ とする．
+そうでなければ，$R_n$ を少し膨らませた有界開区間 $U_n$ を
+\[
+R_n\subset U_n,
+\qquad
+|U_n|<|R_n|+\frac{\eps}{2^n}
+\]
+となるように取る．すると $\{U_n\}_{n=1}^{\infty}$ は
+コンパクト集合 $K_\eta$ の開被覆だから，有限部分被覆
+\[
+K_\eta\subset \bigcup_{k=1}^{N}U_{n_k}
+\]
+をもつ．Jordan外測度の有限劣加法性より
+\[
+|K_\eta|
+=m_J(K_\eta)
+\le
+\sum_{k=1}^{N}m_J^*(U_{n_k})
+\le
+\sum_{k=1}^{N}|U_{n_k}|
+\le
+\sum_{n=1}^{\infty}|R_n|+\eps.
+\]
+したがって
+\[
+|R|-\eps
+<
+\sum_{n=1}^{\infty}|R_n|+\eps.
+\]
+被覆 $\{R_n\}$ について下限を取り，さらに $\eps>0$ の任意性を用いると
+\[
+|R|\le \lambda^*(R)
+\]
+である．
+以上より $\lambda^*(R)=|R|$ である．
+\end{proof}
+\begin{example}
+    基本集合 $E = \bigsqcup_{j=1}^N Q_j$ に対し $\lambda^*(E) = \sum_{j=1}^N |Q_j|$
 \end{example}
 
 % \begin{remark}
