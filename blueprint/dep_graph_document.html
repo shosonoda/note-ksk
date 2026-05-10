@@ -1,0 +1,1674 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dependency graph</title>
+  <meta name="generator" content="plasTeX" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="styles/theme-white.css" />
+  <link rel="stylesheet" href="styles/dep_graph.css" />
+  
+  <script type="text/x-mathjax-config">
+  
+    MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+  
+  </script>
+
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">  </script>
+
+
+<link rel="stylesheet" href="styles/extra_styles.css" />
+
+</head>
+
+<body>
+<header>
+  <a class="toc" href="index.html">Home</a>
+  <h1 id="doc_title">Dependencies</h1>
+</header>
+<div class="wrapper">
+<div class="content">
+  <div id="Legend">
+    <span id="legend_title" class="title">Legend
+    <div class="btn">
+       <div class="bar"></div>
+       <div class="bar"></div>
+       <div class="bar"></div>
+    </div></span> 
+    <dl class="legend">
+      
+      <dt>Boxes</dt><dd>definitions</dd>
+      
+      <dt>Ellipses</dt><dd>theorems and lemmas</dd>
+      
+      <dt>Blue border</dt><dd>the <em>statement</em> of this result is ready to be formalized; all prerequisites are done</dd>
+      
+      <dt>Orange border</dt><dd>the <em>statement</em> of this result is not ready to be formalized; the blueprint needs more work</dd>
+      
+      <dt>Blue background</dt><dd>the <em>proof</em> of this result is ready to be formalized; all prerequisites are done</dd>
+      
+      <dt>Green border</dt><dd>the <em>statement</em> of this result is formalized</dd>
+      
+      <dt>Green background</dt><dd>the <em>proof</em> of this result is formalized</dd>
+      
+      <dt>Dark green background</dt><dd>the <em>proof</em> of this result and all its ancestors are formalized</dd>
+      
+      <dt>Dark green border</dt><dd>this is in Mathlib</dd>
+      
+    </dl>
+  </div>
+    <div id="graph"></div>
+<div id="statements">
+
+    
+    <div class="dep-modal-container" id="a0000000010_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000010" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">1</span><span class="definition_thmtitle">拡大実数</span></div>
+    <div class="thm_thmcontent"><div class="displaymath" id="a0000000011">
+  \[  \overline{\mathbb R}:= \mathbb R\cup \{ -\infty ,\infty \}   \]
+</div>
+<p> を拡大実数全体と呼ぶ． 特に測度論では </p>
+<div class="displaymath" id="a0000000012">
+  \[  [0,\infty ]:=[0,\infty )\cup \{ \infty \}   \]
+</div>
+<p> を主に用いる． </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#a0000000010">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000016_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000016" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">2</span><span class="definition_thmtitle">Lebesgue外測度</span></div>
+    <div class="thm_thmcontent"><p> 集合 \(A \subset \mathbb R^d\) に対し，\(A\) のLebesgue外測度 \(\lambda ^*(A)\) を </p>
+<div class="displaymath" id="a0000000017">
+  \[  \lambda ^*(A) := \inf \left\{  \sum _{i=1}^{\infty } |R_i| \; \middle |\;  A \subset \bigcup _{i=1}^{\infty } R_i,\   R_i \in \mathcal E_d \right\}   \]
+</div>
+<p> で定める． </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#a0000000016">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000027_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000027" style="display: none">
+    <div class="thm_thmheading">
+      <span class="proposition_thmcaption">
+      Proposition
+      </span>
+      <span class="proposition_thmlabel">4</span><span class="proposition_thmtitle">区間による上からの評価</span></div>
+    <div class="thm_thmcontent"><p> \(A \subset \mathbb R^d\) と \(R \in \mathcal E_d\) が \(A \subset R\) を満たすとする．このとき </p>
+<div class="displaymath" id="a0000000029">
+  \[  \lambda ^*(A) \le |R|  \]
+</div>
+<p> が成り立つ． 特に，有界集合のLebesgue外測度は有限である． </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#a0000000027">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000030_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000030" style="display: none">
+    <div class="thm_thmheading">
+      <span class="proposition_thmcaption">
+      Proposition
+      </span>
+      <span class="proposition_thmlabel">5</span><span class="proposition_thmtitle">1点集合は零集合</span></div>
+    <div class="thm_thmcontent"><p> 任意の \(a \in \mathbb R^d\) に対して </p>
+<div class="displaymath" id="a0000000032">
+  \[  \lambda ^*(\{ a\} )=0  \]
+</div>
+<p> が成り立つ． </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#a0000000030">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000036_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000036" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">6</span><span class="theorem_thmtitle">可算集合は零集合</span></div>
+    <div class="thm_thmcontent"><p> 可算集合 \(A \subset \mathbb R^d\) に対して </p>
+<div class="displaymath" id="a0000000038">
+  \[  \lambda ^*(A)=0  \]
+</div>
+<p> が成り立つ． </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#a0000000036">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000041_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000041" style="display: none">
+    <div class="thm_thmheading">
+      <span class="proposition_thmcaption">
+      Proposition
+      </span>
+      <span class="proposition_thmlabel">7</span></div>
+    <div class="thm_thmcontent"><p>各 \(a_i{\lt}b_i\) を実数とする． 開区間\(R=\prod _{i=1}^d (a_i,b_i)\), 左半開区間\(R=\prod _{i=1}^d (a_i,b_i]\), 右半開区間\(R=\prod _{i=1}^d [a_i,b_i)\), 閉区間\(R=\prod _{i=1}^d [a_i,b_i]\) のLebesgue外測度はいずれも区間の体積 \(\prod _{i=1}^d (b_i - a_i)\) に一致する． </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#a0000000041">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000055_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000055" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">8</span><span class="definition_thmtitle">Carathéodory外測度</span></div>
+    <div class="thm_thmcontent"><p> 集合 \(X\) 上の集合関数 </p>
+<div class="displaymath" id="a0000000056">
+  \[  \mu ^* : \mathcal P(X) \to [0,\infty ]  \]
+</div>
+<p> が（Carathéodory）外測度であるとは，次の3条件を満たすことをいう． </p>
+<ol class="enumerate">
+  <li><p>\(\mu ^*(\emptyset )=0\) </p>
+</li>
+  <li><p>（単調性）\(A \subset B\) ならば \(\mu ^*(A) \le \mu ^*(B)\) </p>
+</li>
+  <li><p>（可算劣加法性）任意の集合列 \(\{ A_n\} _{n=1}^{\infty }\) に対して </p>
+<div class="displaymath" id="a0000000057">
+  \[  \mu ^*\left(\bigcup _{n=1}^{\infty } A_n\right) \le \sum _{n=1}^{\infty } \mu ^*(A_n)  \]
+</div>
+<p> が成り立つ </p>
+</li>
+</ol>
+</div>
+
+    <a class="latex_link" href="sect0001.html#a0000000055">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000058_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000058" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">9</span><span class="theorem_thmtitle">Lebesgue外測度は外測度</span></div>
+    <div class="thm_thmcontent"><p> \(\lambda ^*\) は \(\mathbb R^d\) 上のCarathéodory外測度である． </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#a0000000058">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000069_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000069" style="display: none">
+    <div class="thm_thmheading">
+      <span class="proposition_thmcaption">
+      Proposition
+      </span>
+      <span class="proposition_thmlabel">10</span><span class="proposition_thmtitle">平行移動不変性</span></div>
+    <div class="thm_thmcontent"><p> 任意の \(A \subset \mathbb R^d\) と \(c \in \mathbb R^d\) に対して </p>
+<div class="displaymath" id="a0000000071">
+  \[  \lambda ^*(A+c)=\lambda ^*(A)  \]
+</div>
+<p> が成り立つ． </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#a0000000069">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000077_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000077" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">11</span><span class="theorem_thmtitle">\(m_J : \mathcal A_J \to [0,\infty ]\)の拡張</span></div>
+    <div class="thm_thmcontent"><p> Jordan可測集合 \(A\) に対し， </p>
+<div class="displaymath" id="a0000000079">
+  \[  m_J(A) = \lambda ^*(A).  \]
+</div>
+</div>
+
+    <a class="latex_link" href="sect0001.html#a0000000077">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000086_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000086" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">12</span><span class="theorem_thmtitle">\(\mathcal A_J\)上で可算加法的</span></div>
+    <div class="thm_thmcontent"><p> 互いに素なJordan可測集合の列 \(\{ A_i\} _{i=1}^\infty \) に対し， </p>
+<div class="displaymath" id="a0000000088">
+  \[  \lambda ^*\left( \bigsqcup _{i=1}^\infty A_i \right) = \sum _{i=1}^\infty \lambda ^*(A_i).  \]
+</div>
+</div>
+
+    <a class="latex_link" href="sect0001.html#a0000000086">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000096_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000096" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">13</span><span class="theorem_thmtitle">開集合による外正則性</span></div>
+    <div class="thm_thmcontent"><p> 任意の \(A \subset \mathbb R^d\) に対して </p>
+<div class="displaymath" id="a0000000098">
+  \[  \lambda ^*(A) = \inf \{ \lambda ^*(G)\mid A \subset G,\  G \text{ は開集合}\}   \]
+</div>
+<p> が成り立つ． </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#a0000000096">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000124_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000124" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">14</span><span class="definition_thmtitle">Lebesgue内測度</span></div>
+    <div class="thm_thmcontent"><p> 集合 \(A \subset \mathbb R^d\) に対し，Lebesgue内測度 \(\lambda _*(A)\) を </p>
+<div class="displaymath" id="a0000000125">
+  \[  \lambda _*(A) := \sup \{ \lambda ^*(K) \mid K \subset A,\  K \text{ はコンパクト}\}   \]
+</div>
+<p> で定める． </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#a0000000124">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000130_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000130" style="display: none">
+    <div class="thm_thmheading">
+      <span class="proposition_thmcaption">
+      Proposition
+      </span>
+      <span class="proposition_thmlabel">15</span></div>
+    <div class="thm_thmcontent"><p>任意の \(A,B \subset \mathbb R^d\) に対して次が成り立つ． </p>
+<ol class="enumerate">
+  <li><p>\(0 \le \lambda _*(A) \le \lambda ^*(A)\) </p>
+</li>
+  <li><p>\(A \subset B\) ならば \(\lambda _*(A) \le \lambda _*(B)\) </p>
+</li>
+</ol>
+</div>
+
+    <a class="latex_link" href="sect0002.html#a0000000130">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000134_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000134" style="display: none">
+    <div class="thm_thmheading">
+      <span class="proposition_thmcaption">
+      Proposition
+      </span>
+      <span class="proposition_thmlabel">16</span><span class="proposition_thmtitle">コンパクト集合では内外が一致する</span></div>
+    <div class="thm_thmcontent"><p> コンパクト集合 \(K \subset \mathbb R^d\) に対して </p>
+<div class="displaymath" id="a0000000136">
+  \[  \lambda _*(K)=\lambda ^*(K)  \]
+</div>
+<p> が成り立つ． </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#a0000000134">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000138_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000138" style="display: none">
+    <div class="thm_thmheading">
+      <span class="corollary_thmcaption">
+      Corollary
+      </span>
+      <span class="corollary_thmlabel">17</span><span class="corollary_thmtitle">外測度零集合の内測度</span></div>
+    <div class="thm_thmcontent"><p> \(\lambda ^*(A)=0\) ならば </p>
+<div class="displaymath" id="a0000000140">
+  \[  \lambda _*(A)=0  \]
+</div>
+<p> である． </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#a0000000138">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000148_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000148" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">18</span></div>
+    <div class="thm_thmcontent"><p>集合 \(A \subset \mathbb R^d\) に対し，</p>
+<div class="displaymath" id="a0000000150">
+  \[  m_{J,*}(A) \le \lambda _*(A)  \]
+</div>
+<p> である． </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#a0000000148">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000158_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000158" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">19</span></div>
+    <div class="thm_thmcontent"><p>\(\lambda ^*(A) {\lt} \infty \) とする．\(A\)を含む任意の外測度有限な開集合 \(O\) に対し， </p>
+<div class="displaymath" id="a0000000160">
+  \[  \lambda _*(A) = \lambda ^*(O) - \lambda ^*(O \setminus A)  \]
+</div>
+<p> である． </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#a0000000158">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000203_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000203" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">23</span><span class="definition_thmtitle">Lebesgue可測集合とLebesgue測度</span></div>
+    <div class="thm_thmcontent"><p> 集合 \(A \subset \mathbb R^d\) がLebesgue可測であるとは </p>
+<div class="displaymath" id="a0000000204">
+  \[  \lambda _*(A)=\lambda ^*(A)  \]
+</div>
+<p> が成り立つことをいう． Lebesgue可測集合全体を </p>
+<div class="displaymath" id="a0000000205">
+  \[  \mathcal L^d:=\{ A\subset \mathbb R^d\mid \lambda _*(A)=\lambda ^*(A)\}   \]
+</div>
+<p> と書く． \(A\in \mathcal L^d\) のとき，この共通値を </p>
+<div class="displaymath" id="a0000000206">
+  \[  \lambda (A):=\lambda _*(A)=\lambda ^*(A)  \]
+</div>
+<p> と書き，\(A\) のLebesgue測度という． </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#a0000000203">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000207_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000207" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">24</span><span class="definition_thmtitle">Lebesgue零集合</span></div>
+    <div class="thm_thmcontent"><p> 集合 \(N\subset \mathbb R^d\) が </p>
+<div class="displaymath" id="a0000000208">
+  \[  \lambda ^*(N)=0  \]
+</div>
+<p> を満たすとき，\(N\) をLebesgue零集合という． </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#a0000000207">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000209_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000209" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">25</span><span class="theorem_thmtitle">Lebesgue零集合</span></div>
+    <div class="thm_thmcontent"><p> Lebesgue零集合はLebesgue可測であり，Lebesgue測度は \(0\) である． </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#a0000000209">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000213_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000213" style="display: none">
+    <div class="thm_thmheading">
+      <span class="corollary_thmcaption">
+      Corollary
+      </span>
+      <span class="corollary_thmlabel">26</span><span class="corollary_thmtitle">可算集合</span></div>
+    <div class="thm_thmcontent"><p> 一点集合，可算集合，\(\mathbb Q^d\)，\(\mathbb Z^d\) はLebesgue可測であり，測度 \(0\) をもつ． 特に1次元では \(\mathbb Q\) と \(\mathbb Z\) はLebesgue測度 \(0\) である． </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#a0000000213">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000215_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000215" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">27</span><span class="theorem_thmtitle">Jordan可測集合</span></div>
+    <div class="thm_thmcontent"><p> Jordan可測集合 \(A\subset \mathbb R^d\) はLebesgue可測であり， </p>
+<div class="displaymath" id="a0000000217">
+  \[  \lambda (A)=m_J(A)  \]
+</div>
+<p> が成り立つ． </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#a0000000215">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000227_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000227" style="display: none">
+    <div class="thm_thmheading">
+      <span class="definition_thmcaption">
+      Definition
+      </span>
+      <span class="definition_thmlabel">28</span><span class="definition_thmtitle">Carathéodory条件</span></div>
+    <div class="thm_thmcontent"><p> 集合 \(A\subset \mathbb R^d\) がLebesgue外測度 \(\lambda ^*\) に関するCarathéodory条件を満たすとは， 任意の \(E\subset \mathbb R^d\) に対して </p>
+<div class="displaymath" id="a0000000228">
+  \[  \lambda ^*(E) = \lambda ^*(E\cap A)+\lambda ^*(E\setminus A)  \]
+</div>
+<p> が成り立つことをいう． </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#a0000000227">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000229_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000229" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">29</span><span class="theorem_thmtitle">作業用の判定法</span></div>
+    <div class="thm_thmcontent"><p> 集合 \(A\subset \mathbb R^d\) について，次は同値である． </p>
+<ol class="enumerate">
+  <li><p>\(A\) はLebesgue可測である </p>
+</li>
+  <li><p>\(A\) はCarathéodory条件を満たす </p>
+</li>
+</ol>
+</div>
+
+    <a class="latex_link" href="sect0003.html#a0000000229">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000231_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000231" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">30</span><span class="theorem_thmtitle">Lebesgue可測集合の \(\sigma \)-加法族性</span></div>
+    <div class="thm_thmcontent"><p> Lebesgue可測集合全体 \(\mathcal L^d\) は \(\mathbb R^d\) 上の \(\sigma \)-加法族である． すなわち，次が成り立つ． </p>
+<ol class="enumerate">
+  <li><p>\(\mathbb R^d\in \mathcal L^d\) </p>
+</li>
+  <li><p>\(A\in \mathcal L^d\) ならば \(\mathbb R^d\setminus A\in \mathcal L^d\) </p>
+</li>
+  <li><p>\(\{ A_n\} _{n=1}^{\infty }\subset \mathcal L^d\) ならば </p>
+<div class="displaymath" id="a0000000233">
+  \[  \bigcup _{n=1}^{\infty }A_n\in \mathcal L^d  \]
+</div>
+</li>
+</ol>
+</div>
+
+    <a class="latex_link" href="sect0003.html#a0000000231">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000234_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000234" style="display: none">
+    <div class="thm_thmheading">
+      <span class="corollary_thmcaption">
+      Corollary
+      </span>
+      <span class="corollary_thmlabel">31</span><span class="corollary_thmtitle">集合演算</span></div>
+    <div class="thm_thmcontent"><p> \(A,B\in \mathcal L^d\) ならば </p>
+<div class="displaymath" id="a0000000236">
+  \[  A\cup B,\qquad A\cap B,\qquad A\setminus B  \]
+</div>
+<p> はいずれもLebesgue可測である． また \(\{ A_n\} _{n=1}^{\infty }\subset \mathcal L^d\) ならば </p>
+<div class="displaymath" id="a0000000237">
+  \[  \bigcap _{n=1}^{\infty }A_n  \]
+</div>
+<p> もLebesgue可測である． </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#a0000000234">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000238_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000238" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">32</span><span class="lemma_thmtitle">有限加法性</span></div>
+    <div class="thm_thmcontent"><p> \(A,B\in \mathcal L^d\) が互いに素ならば </p>
+<div class="displaymath" id="a0000000240">
+  \[  \lambda (A\cup B)=\lambda (A)+\lambda (B)  \]
+</div>
+<p> が成り立つ． </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#a0000000238">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000243_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000243" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">33</span><span class="lemma_thmtitle">互いに素な列への分解</span></div>
+    <div class="thm_thmcontent"><p> Lebesgue可測集合列 \(\{ A_n\} _{n=1}^{\infty }\) に対して </p>
+<div class="displaymath" id="a0000000245">
+  \[  B_1:=A_1,\qquad B_n:=A_n\setminus \bigcup _{k=1}^{n-1}A_k\quad (n\ge 2)  \]
+</div>
+<p> とおくと，\(\{ B_n\} \) は互いに素なLebesgue可測集合列であり， </p>
+<div class="displaymath" id="a0000000246">
+  \[  \bigcup _{n=1}^{\infty }A_n=\bigsqcup _{n=1}^{\infty }B_n, \qquad B_n\subset A_n  \]
+</div>
+<p> が成り立つ． </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#a0000000243">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000247_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000247" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">34</span><span class="theorem_thmtitle">完全加法性</span></div>
+    <div class="thm_thmcontent"><p> 互いに素なLebesgue可測集合列 \(\{ A_n\} _{n=1}^{\infty }\) に対して </p>
+<div class="displaymath" id="a0000000249">
+  \[  \lambda \left(\bigsqcup _{n=1}^{\infty }A_n\right) = \sum _{n=1}^{\infty }\lambda (A_n)  \]
+</div>
+<p> が成り立つ． </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#a0000000247">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000250_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000250" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">35</span><span class="theorem_thmtitle">基本性質</span></div>
+    <div class="thm_thmcontent"><p> Lebesgue測度について次が成り立つ． </p>
+<ol class="enumerate">
+  <li><p>\(\lambda (\emptyset )=0\) </p>
+</li>
+  <li><p>単調性：\(A,B\in \mathcal L^d\) かつ \(A\subset B\) ならば </p>
+<div class="displaymath" id="a0000000252">
+  \[  \lambda (A)\le \lambda (B)  \]
+</div>
+</li>
+  <li><p>完全劣加法性：\(\{ A_n\} _{n=1}^{\infty }\subset \mathcal L^d\) ならば </p>
+<div class="displaymath" id="a0000000253">
+  \[  \lambda \left(\bigcup _{n=1}^{\infty }A_n\right) \le \sum _{n=1}^{\infty }\lambda (A_n)  \]
+</div>
+</li>
+</ol>
+</div>
+
+    <a class="latex_link" href="sect0003.html#a0000000250">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000258_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000258" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">36</span><span class="theorem_thmtitle">下からの連続性</span></div>
+    <div class="thm_thmcontent"><p> Lebesgue可測集合の単調増大列 </p>
+<div class="displaymath" id="a0000000260">
+  \[  A_1\subset A_2\subset \cdots  \]
+</div>
+<p> に対して </p>
+<div class="displaymath" id="a0000000261">
+  \[  \lambda \left(\bigcup _{n=1}^{\infty }A_n\right) = \lim _{n\to \infty }\lambda (A_n)  \]
+</div>
+<p> が成り立つ． </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#a0000000258">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000265_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000265" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">37</span><span class="theorem_thmtitle">上からの連続性</span></div>
+    <div class="thm_thmcontent"><p> Lebesgue可測集合の単調減少列 </p>
+<div class="displaymath" id="a0000000267">
+  \[  A_1\supset A_2\supset \cdots  \]
+</div>
+<p> に対して，\(\lambda (A_1){\lt}\infty \) ならば </p>
+<div class="displaymath" id="a0000000268">
+  \[  \lambda \left(\bigcap _{n=1}^{\infty }A_n\right) = \lim _{n\to \infty }\lambda (A_n)  \]
+</div>
+<p> が成り立つ． </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#a0000000265">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000274_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000274" style="display: none">
+    <div class="thm_thmheading">
+      <span class="proposition_thmcaption">
+      Proposition
+      </span>
+      <span class="proposition_thmlabel">38</span><span class="proposition_thmtitle">平行移動不変性</span></div>
+    <div class="thm_thmcontent"><p> \(A\in \mathcal L^d\) と \(c\in \mathbb R^d\) に対して </p>
+<div class="displaymath" id="a0000000276">
+  \[  A+c:=\{ x+c\mid x\in A\}   \]
+</div>
+<p> もLebesgue可測であり， </p>
+<div class="displaymath" id="a0000000277">
+  \[  \lambda (A+c)=\lambda (A)  \]
+</div>
+<p> が成り立つ． </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#a0000000274">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000279_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000279" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">39</span><span class="theorem_thmtitle">コンパクト集合</span></div>
+    <div class="thm_thmcontent"><p> コンパクト集合 \(K\subset \mathbb R^d\) はLebesgue可測であり， </p>
+<div class="displaymath" id="a0000000281">
+  \[  \lambda (K)=\lambda ^*(K)  \]
+</div>
+<p> が成り立つ． </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#a0000000279">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000283_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000283" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">40</span><span class="lemma_thmtitle">座標超平面片</span></div>
+    <div class="thm_thmcontent"><p> 有界閉区間 \(I\subset \mathbb R^d\) と座標 \(i\)，実数 \(c\) に対して </p>
+<div class="displaymath" id="a0000000285">
+  \[  F:=\{ x\in I\mid x_i=c\}   \]
+</div>
+<p> はLebesgue零集合である． </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#a0000000283">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000286_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000286" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">41</span><span class="theorem_thmtitle">開集合</span></div>
+    <div class="thm_thmcontent"><p> 開集合 \(G\subset \mathbb R^d\) はLebesgue可測である． </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#a0000000286">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000291_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000291" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">42</span><span class="theorem_thmtitle">内正則性</span></div>
+    <div class="thm_thmcontent"><p> 任意のLebesgue可測集合 \(A\subset \mathbb R^d\) に対して </p>
+<div class="displaymath" id="a0000000293">
+  \[  \lambda (A) = \sup \{ \lambda (K)\mid K\subset A,\  K\text{ はコンパクト}\}   \]
+</div>
+<p> が成り立つ． </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#a0000000291">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000296_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000296" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">43</span><span class="theorem_thmtitle">外正則性</span></div>
+    <div class="thm_thmcontent"><p> 任意のLebesgue可測集合 \(A\subset \mathbb R^d\) に対して </p>
+<div class="displaymath" id="a0000000298">
+  \[  \lambda (A) = \inf \{ \lambda (G)\mid A\subset G,\  G\text{ は開集合}\}   \]
+</div>
+<p> が成り立つ． </p>
+</div>
+
+    <a class="latex_link" href="sect0003.html#a0000000296">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="a0000000301_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="a0000000301" style="display: none">
+    <div class="thm_thmheading">
+      <span class="theorem_thmcaption">
+      Theorem
+      </span>
+      <span class="theorem_thmlabel">44</span><span class="theorem_thmtitle">判定法</span></div>
+    <div class="thm_thmcontent"><p> \(A\subset \mathbb R^d\) とする． 次は同値である． </p>
+<ol class="enumerate">
+  <li><p>\(A\) はLebesgue可測である </p>
+</li>
+  <li><p>\(A\) はCarathéodory条件を満たす </p>
+</li>
+  <li><p>任意の \(R{\gt}0\) と \(\varepsilon {\gt}0\) に対し，開集合 \(G\) とコンパクト集合 \(K\) が存在して </p>
+<div class="displaymath" id="a0000000303">
+  \[  K\subset A\cap [-R,R]^d\subset G, \qquad \lambda ^*(G\setminus K){\lt}\varepsilon  \]
+</div>
+<p> を満たす </p>
+</li>
+</ol>
+<p> さらに \(\lambda ^*(A){\lt}\infty \) のときは，これらは次の条件とも同値である． </p>
+<ol class="enumerate">
+  <li><p>任意の \(\varepsilon {\gt}0\) に対して開集合 \(G\) とコンパクト集合 \(K\) が存在して </p>
+<div class="displaymath" id="a0000000304">
+  \[  K\subset A\subset G, \qquad \lambda ^*(G\setminus K){\lt}\varepsilon  \]
+</div>
+<p> を満たす </p>
+</li>
+</ol>
+</div>
+
+    <a class="latex_link" href="sect0003.html#a0000000301">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:finite-open-compact-split_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:finite-open-compact-split" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">22</span></div>
+    <div class="thm_thmcontent"><p> \(\lambda ^*(O){\lt}\infty \) である開集合 \(O \in \mathcal O_d\) とコンパクト集合 \(K\) に対し， </p>
+<div class="displaymath" id="a0000000193">
+  \[  \lambda ^*(O) = \lambda ^*(O \cap K) + \lambda ^*(O \setminus K)  \]
+</div>
+</div>
+
+    <a class="latex_link" href="sect0002.html#lem:finite-open-compact-split">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:finite-open-inner-compact_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:finite-open-inner-compact" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">21</span></div>
+    <div class="thm_thmcontent"><p> \(\lambda ^*(U){\lt}\infty \) である開集合 \(U\) は内側からコンパクト集合で近似できる． すなわち任意の \(\varepsilon {\gt}0\) に対し，コンパクト集合 \(F\subset U\) で </p>
+<div class="displaymath" id="a0000000184">
+  \[  \lambda ^*(F){\gt}\lambda ^*(U)-\varepsilon  \]
+</div>
+<p> となるものが取れる． </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#lem:finite-open-inner-compact">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="lem:positive-distance-additive_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="lem:positive-distance-additive" style="display: none">
+    <div class="thm_thmheading">
+      <span class="lemma_thmcaption">
+      Lemma
+      </span>
+      <span class="lemma_thmlabel">20</span></div>
+    <div class="thm_thmcontent"><p> \(A,B\subset \mathbb R^d\) が正の距離だけ離れていれば </p>
+<div class="displaymath" id="a0000000180">
+  \[  \lambda ^*(A\cup B)=\lambda ^*(A)+\lambda ^*(B)  \]
+</div>
+<p> である． </p>
+</div>
+
+    <a class="latex_link" href="sect0002.html#lem:positive-distance-additive">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+
+
+    
+    <div class="dep-modal-container" id="prop:louter-le-jouter_modal">
+      <div class="dep-modal-content">
+          <button class="dep-closebtn">
+<svg  class="icon icon-cross "><use xlink:href="symbol-defs.svg#icon-cross"></use></svg>
+</button>
+        
+  <div class="thm" id="prop:louter-le-jouter" style="display: none">
+    <div class="thm_thmheading">
+      <span class="proposition_thmcaption">
+      Proposition
+      </span>
+      <span class="proposition_thmlabel">3</span><span class="proposition_thmtitle">Jordan外測度との比較</span></div>
+    <div class="thm_thmcontent"><p>  有界集合 \(A \subset \mathbb R^d\) に対して </p>
+<div class="displaymath" id="a0000000022">
+  \[  \lambda ^*(A) \le m_J^*(A)  \]
+</div>
+<p> が成り立つ． </p>
+</div>
+
+    <a class="latex_link" href="sect0001.html#prop:louter-le-jouter">LaTeX</a>
+    
+    
+  
+    
+    
+  
+    
+  </div>
+    
+      </div>
+    </div>
+</div>
+</div> <!-- content -->
+</div> <!-- wrapper -->
+<script src="js/jquery.min.js" type="text/javascript"></script>
+
+<script src="js/d3.min.js"></script>
+<script src="js/hpcc.min.js"></script>
+<script src="js/d3-graphviz.js"></script>
+
+<script type="text/javascript">
+const graphContainer = d3.select("#graph");
+const width = graphContainer.node().clientWidth;
+const height = graphContainer.node().clientHeight;
+
+
+graphContainer.graphviz({useWorker: true})
+    .width(width)
+    .height(height)
+    .fit(true)
+    .renderDot(`strict digraph "" {	graph [bgcolor=transparent];	node [label="\N",		penwidth=1.8	];	edge [arrowhead=vee];	a0000000231	[color=blue,		fillcolor="#A3D6FF",		label=a0000000231,		shape=ellipse,		style=filled];	a0000000030	[color=blue,		fillcolor="#A3D6FF",		label=a0000000030,		shape=ellipse,		style=filled];	a0000000041	[color=blue,		fillcolor="#A3D6FF",		label=a0000000041,		shape=ellipse,		style=filled];	a0000000010	[color=blue,		fillcolor="#A3D6FF",		label=a0000000010,		shape=box,		style=filled];	a0000000027	[color=blue,		fillcolor="#A3D6FF",		label=a0000000027,		shape=ellipse,		style=filled];	a0000000274	[color=blue,		fillcolor="#A3D6FF",		label=a0000000274,		shape=ellipse,		style=filled];	a0000000148	[color=blue,		fillcolor="#A3D6FF",		label=a0000000148,		shape=ellipse,		style=filled];	a0000000158	[color=blue,		fillcolor="#A3D6FF",		label=a0000000158,		shape=ellipse,		style=filled];	a0000000215	[color=blue,		fillcolor="#A3D6FF",		label=a0000000215,		shape=ellipse,		style=filled];	a0000000229	[color=blue,		fillcolor="#A3D6FF",		label=a0000000229,		shape=ellipse,		style=filled];	a0000000286	[color=blue,		fillcolor="#A3D6FF",		label=a0000000286,		shape=ellipse,		style=filled];	a0000000213	[color=blue,		fillcolor="#A3D6FF",		label=a0000000213,		shape=ellipse,		style=filled];	a0000000055	[color=blue,		fillcolor="#A3D6FF",		label=a0000000055,		shape=box,		style=filled];	a0000000124	[color=blue,		fillcolor="#A3D6FF",		label=a0000000124,		shape=box,		style=filled];	a0000000207	[color=blue,		fillcolor="#A3D6FF",		label=a0000000207,		shape=box,		style=filled];	"lem:positive-distance-additive"	[color=blue,		fillcolor="#A3D6FF",		label="positive-distance-additive",		shape=ellipse,		style=filled];	a0000000130	[color=blue,		fillcolor="#A3D6FF",		label=a0000000130,		shape=ellipse,		style=filled];	a0000000291	[color=blue,		fillcolor="#A3D6FF",		label=a0000000291,		shape=ellipse,		style=filled];	a0000000227	[color=blue,		fillcolor="#A3D6FF",		label=a0000000227,		shape=box,		style=filled];	"prop:louter-le-jouter"	[color=blue,		fillcolor="#A3D6FF",		label="louter-le-jouter",		shape=ellipse,		style=filled];	a0000000247	[color=blue,		fillcolor="#A3D6FF",		label=a0000000247,		shape=ellipse,		style=filled];	a0000000258	[color=blue,		fillcolor="#A3D6FF",		label=a0000000258,		shape=ellipse,		style=filled];	a0000000279	[color=blue,		fillcolor="#A3D6FF",		label=a0000000279,		shape=ellipse,		style=filled];	a0000000301	[color=blue,		fillcolor="#A3D6FF",		label=a0000000301,		shape=ellipse,		style=filled];	a0000000036	[color=blue,		fillcolor="#A3D6FF",		label=a0000000036,		shape=ellipse,		style=filled];	a0000000234	[color=blue,		fillcolor="#A3D6FF",		label=a0000000234,		shape=ellipse,		style=filled];	a0000000069	[color=blue,		fillcolor="#A3D6FF",		label=a0000000069,		shape=ellipse,		style=filled];	a0000000016	[color=blue,		fillcolor="#A3D6FF",		label=a0000000016,		shape=box,		style=filled];	a0000000203	[color=blue,		fillcolor="#A3D6FF",		label=a0000000203,		shape=box,		style=filled];	"lem:finite-open-inner-compact"	[color=blue,		fillcolor="#A3D6FF",		label="finite-open-inner-compact",		shape=ellipse,		style=filled];	a0000000243	[color=blue,		fillcolor="#A3D6FF",		label=a0000000243,		shape=ellipse,		style=filled];	a0000000283	[color=blue,		fillcolor="#A3D6FF",		label=a0000000283,		shape=ellipse,		style=filled];	a0000000134	[color=blue,		fillcolor="#A3D6FF",		label=a0000000134,		shape=ellipse,		style=filled];	a0000000058	[color=blue,		fillcolor="#A3D6FF",		label=a0000000058,		shape=ellipse,		style=filled];	a0000000077	[color=blue,		fillcolor="#A3D6FF",		label=a0000000077,		shape=ellipse,		style=filled];	a0000000096	[color=blue,		fillcolor="#A3D6FF",		label=a0000000096,		shape=ellipse,		style=filled];	a0000000086	[color=blue,		fillcolor="#A3D6FF",		label=a0000000086,		shape=ellipse,		style=filled];	a0000000209	[color=blue,		fillcolor="#A3D6FF",		label=a0000000209,		shape=ellipse,		style=filled];	a0000000138	[color=blue,		fillcolor="#A3D6FF",		label=a0000000138,		shape=ellipse,		style=filled];	"lem:finite-open-compact-split"	[color=blue,		fillcolor="#A3D6FF",		label="finite-open-compact-split",		shape=ellipse,		style=filled];	a0000000238	[color=blue,		fillcolor="#A3D6FF",		label=a0000000238,		shape=ellipse,		style=filled];	a0000000265	[color=blue,		fillcolor="#A3D6FF",		label=a0000000265,		shape=ellipse,		style=filled];	a0000000296	[color=blue,		fillcolor="#A3D6FF",		label=a0000000296,		shape=ellipse,		style=filled];	a0000000250	[color=blue,		fillcolor="#A3D6FF",		label=a0000000250,		shape=ellipse,		style=filled];}`)
+    .on("end", interactive);
+
+latexLabelEscaper = function(label) {
+  return label.replace(/\./g, '\\.').replace(/:/g, '\\:')
+}
+
+clickNode = function() {
+  $("#statements div").hide()
+  var node_id = $('text', this).text();
+  $('.thm').hide();
+  $('#'+latexLabelEscaper(node_id)).show().children().show();
+}
+function interactive() {
+    $("span#legend_title").on("click", function () {
+           $(this).siblings('dl').toggle();
+        })
+
+    d3.selectAll('.node')
+        .attr('pointer-events', 'fill')
+        .on('click', function () {
+           var title = d3.select(this).selectAll('title').text().trim();
+           $('#statements > div').hide()
+           $('.thm').hide();
+           $('#'+latexLabelEscaper(title)+'_modal').show().children().show().children().show();
+           $('#statements').show()
+        });
+
+    d3.selectAll('.dep-closebtn').on('click', function() {
+        var modal =
+            d3.select(this).node().parentNode.parentNode.parentNode ;
+        d3.select(modal).style('display', 'none');
+    });
+}
+
+</script>
+
+</body>
+</html>
