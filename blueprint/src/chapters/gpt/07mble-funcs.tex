@@ -167,7 +167,7 @@ f\left(\bigcap_n A_n\right)=\bigcap_n f(A_n)
 \begin{definition}[制限された $\sigma$-加法族]
 $E \subset \RR^d$ をLebesgue可測集合とする．
 \[
-\mathcal L_E^d:=\{E\cap A \mid A\in \mathcal L^d\}
+\calL_d(E):=\{E\cap A \mid A\in \calL_d\}
 \]
 を $E$ 上の制限Lebesgue $\sigma$-加法族という．
 \end{definition}
@@ -188,7 +188,7 @@ f:E\to \eRR
 \]
 がLebesgue可測であるとは，
 \[
-f:(E,\mathcal L_E^d)\to (\eRR,\mathcal B(\eRR))
+f:(E,\calL_d(E))\to (\eRR,\mathcal B(\eRR))
 \]
 が可測写像であることをいう．
 \end{definition}
@@ -258,7 +258,7 @@ f^{-1}((a,\infty])
 
 \textbf{(5) $\Rightarrow$ (1)}\quad
 \[
-\mathcal C:=\{B\subset \eRR \mid f^{-1}(B)\in \mathcal L_E^d\}
+\mathcal C:=\{B\subset \eRR \mid f^{-1}(B)\in \calL_d(E)\}
 \]
 とおく．
 逆像の基本性質より，$\mathcal C$ は $\eRR$ 上の $\sigma$-加法族である．
@@ -356,7 +356,7 @@ F(x):=(f_1(x),\dots,f_n(x))
 \end{proposition}
 \begin{proof}
 \[
-\mathcal C:=\{B\in\mathcal B(\RR^n)\mid F^{-1}(B)\in \mathcal L_E^d\}
+\mathcal C:=\{B\in\mathcal B(\RR^n)\mid F^{-1}(B)\in \calL_d(E)\}
 \]
 とおく．
 逆像の基本性質より $\mathcal C$ は $\sigma$-加法族である．

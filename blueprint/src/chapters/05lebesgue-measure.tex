@@ -323,12 +323,12 @@ $\mu$ を $(X,\calS)$ 上の測度とする．
 
 \begin{definition}[Lebesgue可測集合とLebesgue測度]
 \[
-\calL^d
+\calL_d
 :=
 \{A \subset \RR^d \mid \lambda^*(A)=\lambda_*(A)\}
 \]
 とおく．
-$A \in \calL^d$ のとき，その共通値を
+$A \in \calL_d$ のとき，その共通値を
 \[
 \lambda(A)
 :=
@@ -393,9 +393,9 @@ $\lambda^*(A)=0$ ならば $A$ はLebesgue可測であり，
 \end{proof}
 
 \begin{theorem}[基本定理]
-第6章で証明するように，$\calL^d$ は $\RR^d$ 上の $\sigma$-加法族であり，
+第6章で証明するように，$\calL_d$ は $\RR^d$ 上の $\sigma$-加法族であり，
 \[
-\lambda:\calL^d\to[0,\infty]
+\lambda:\calL_d\to[0,\infty]
 \]
 は測度である．
 \end{theorem}
@@ -403,7 +403,7 @@ $\lambda^*(A)=0$ ならば $A$ はLebesgue可測であり，
 第6章でLebesgue流の定義とCarathéodory流の定義が一致することを示す．
 Carathéodoryの定理によれば，Carathéodory可測集合全体は $\sigma$-加法族をなし，
 外測度のその上への制限は測度になる．
-したがって同じことが $\calL^d$ と $\lambda$ に対しても成り立つ．
+したがって同じことが $\calL_d$ と $\lambda$ に対しても成り立つ．
 \end{proof}
 
 \section{区間の測度}
@@ -544,7 +544,7 @@ $A$ が可測なら $A+c$ も可測であり，
 \end{proof}
 
 \begin{corollary}[零集合の部分集合]
-$N \in \calL^d$ で $\lambda(N)=0$ とする．
+$N \in \calL_d$ で $\lambda(N)=0$ とする．
 このとき任意の $A \subset N$ もLebesgue可測であり，
 \[
 \lambda(A)=0
@@ -662,7 +662,7 @@ Lebesgue測度は，
 可算個の近似を許すことで面積論を大幅に安定化したものである．
 この章ではまだ
 \[
-\calL^d
+\calL_d
 \]
 が本当に $\sigma$-加法族をなし，
 $\lambda$ が本当に測度になることの証明を与えていない．

@@ -51,7 +51,7 @@ $\RR^n$ 上のLebesgue測度を $m_n$ と書く．
 \begin{definition}[積測度]
 $\RR^m\times\RR^n$ 上の積 $\sigma$-加法族
 \[
-\mathcal L^m\otimes \mathcal L^n
+\calL_m\otimes \calL_n
 \]
 に対し，第6章の前測度の拡張定理によって得られる測度
 \[
@@ -68,7 +68,7 @@ m_m\otimes m_n
 \begin{remark}
 本章では
 \[
-(\RR^m\times\RR^n,\mathcal L^m\otimes\mathcal L^n,m_m\otimes m_n)
+(\RR^m\times\RR^n,\calL_m\otimes\calL_n,m_m\otimes m_n)
 \]
 の上で積分を考える．
 直感的には
@@ -98,19 +98,19 @@ f^y(x):=f(x,y)
 \end{definition}
 
 \begin{proposition}[切片の可測性]
-$E\in \mathcal L^m\otimes\mathcal L^n$ とする．
+$E\in \calL_m\otimes\calL_n$ とする．
 このとき任意の $x\in\RR^m$ と任意の $y\in\RR^n$ に対して
 \[
-E_x\in \mathcal L^n,
+E_x\in \calL_n,
 \qquad
-E^y\in \mathcal L^m
+E^y\in \calL_m
 \]
 が成り立つ．
 \end{proposition}
 \begin{proof}
 $x\in\RR^m$ を固定し，
 \[
-\mathcal C_x:=\{E\in \mathcal L^m\otimes\mathcal L^n \mid E_x\in\mathcal L^n\}
+\mathcal C_x:=\{E\in \calL_m\otimes\calL_n \mid E_x\in\calL_n\}
 \]
 とおく．
 まず $\mathcal C_x$ は $\sigma$-加法族である．
@@ -141,7 +141,7 @@ B & (x\in A),\\
 であるから $A\times B\in\mathcal C_x$ である．
 したがって，矩形が生成する $\sigma$-加法族全体
 \[
-\mathcal L^m\otimes\mathcal L^n
+\calL_m\otimes\calL_n
 \]
 が $\mathcal C_x$ に含まれる．
 ゆえに $E_x$ は可測である．
@@ -152,7 +152,7 @@ $E^y$ についても同様である．
 \begin{corollary}[切片関数の可測性]
 $f:\RR^m\times\RR^n\to\eRR$ を
 \[
-\mathcal L^m\otimes\mathcal L^n
+\calL_m\otimes\calL_n
 \]
 に関して可測とする．
 このとき任意の $x\in\RR^m$ と任意の $y\in\RR^n$ に対して
@@ -173,7 +173,7 @@ f^y:\RR^m\to\eRR
 である．
 右辺に現れる集合は $f$ の可測性より
 \[
-\mathcal L^m\otimes\mathcal L^n
+\calL_m\otimes\calL_n
 \]
 に属するから，前命題よりその $x$-切片は可測である．
 したがって判定法より $f_x$ は可測である．
@@ -187,7 +187,7 @@ $f^y$ についても同様である．
 $I\subset\RR^m$，$J\subset\RR^n$ を有界閉区間とする．
 このとき，任意の
 \[
-E\in \mathcal L_I^m\otimes\mathcal L_J^n
+E\in \calL_m(I)\otimes\calL_n(J)
 \]
 に対して
 \[
@@ -200,9 +200,9 @@ x\longmapsto m_n(E_x)
 が成り立つ．
 ただし
 \[
-\mathcal L_I^m:=\{A\cap I\mid A\in\mathcal L^m\},
+\calL_m(I):=\{A\cap I\mid A\in\calL_m\},
 \qquad
-\mathcal L_J^n:=\{B\cap J\mid B\in\mathcal L^n\}
+\calL_n(J):=\{B\cap J\mid B\in\calL_n\}
 \]
 とする．
 \end{theorem}
@@ -211,7 +211,7 @@ x\longmapsto m_n(E_x)
 \mathcal C
 :=
 \left\{
-E\in \mathcal L_I^m\otimes\mathcal L_J^n
+E\in \calL_m(I)\otimes\calL_n(J)
 \ \middle|\
 x\mapsto m_n(E_x)\text{ は }I\text{ 上可測で， }
 (m_m\otimes m_n)(E)=\int_I m_n(E_x)\,dm_m(x)
@@ -292,7 +292,7 @@ m_n\left(\left(\bigcup_{k=1}^{\infty}E_k\right)_x\right)
 以上より $\mathcal C$ は $\sigma$-加法族である．
 
 次に矩形 $A\times B$ で
-$A\in\mathcal L_I^m$，$B\in\mathcal L_J^n$ とする．
+$A\in\calL_m(I)$，$B\in\calL_n(J)$ とする．
 このとき
 \[
 (A\times B)_x
@@ -319,11 +319,11 @@ m_n(B)m_m(A)
 
 可測矩形は
 \[
-\mathcal L_I^m\otimes\mathcal L_J^n
+\calL_m(I)\otimes\calL_n(J)
 \]
 を生成するから，
 \[
-\mathcal C=\mathcal L_I^m\otimes\mathcal L_J^n
+\mathcal C=\calL_m(I)\otimes\calL_n(J)
 \]
 である．
 \end{proof}
@@ -331,7 +331,7 @@ m_n(B)m_m(A)
 \begin{theorem}[一般の集合]
 任意の
 \[
-E\in\mathcal L^m\otimes\mathcal L^n
+E\in\calL_m\otimes\calL_n
 \]
 に対して
 \[
@@ -429,7 +429,7 @@ x\longmapsto \int_{\RR^n}s(x,y)\,dm_n(y)
 \end{theorem}
 \begin{proof}
 $s$ は有限個の非負実数 $a_1,\dots,a_N$ と互いに素な可測集合
-$E_1,\dots,E_N\in\mathcal L^m\otimes\mathcal L^n$ を用いて
+$E_1,\dots,E_N\in\calL_m\otimes\calL_n$ を用いて
 \[
 s=\sum_{k=1}^N a_k1_{E_k}
 \]
@@ -470,7 +470,7 @@ $y$ についての式も同様である．
 \begin{theorem}[Tonelliの定理]
 $f:\RR^m\times\RR^n\to[0,\infty]$ を
 \[
-\mathcal L^m\otimes\mathcal L^n
+\calL_m\otimes\calL_n
 \]
 に関して可測な非負関数とする．
 このとき
@@ -544,7 +544,7 @@ $y$ についての式も同様である．
 \begin{theorem}[Fubiniの定理]
 $f:\RR^m\times\RR^n\to\eRR$ を
 \[
-\mathcal L^m\otimes\mathcal L^n
+\calL_m\otimes\calL_n
 \]
 に関して可測で，
 \[

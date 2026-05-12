@@ -18,10 +18,10 @@ Lebesgue測度が可算加法的な測度になることを確認する．
 が成り立つことをいう．
 Lebesgue可測集合全体を
 \[
-\calL^d:=\{A\subset\RR^d\mid \lambda_*(A)=\lambda^*(A)\}
+\calL_d:=\{A\subset\RR^d\mid \lambda_*(A)=\lambda^*(A)\}
 \]
 と書く．
-$A\in\calL^d$ のとき，この共通値を
+$A\in\calL_d$ のとき，この共通値を
 \[
 \lambda(A):=\lambda_*(A)=\lambda^*(A)
 \]
@@ -146,32 +146,32 @@ m_J(A)
 \section{Lebesgue可測集合の性質}
 
 \begin{theorem}[Lebesgue可測集合の $\sigma$-加法族性]
-Lebesgue可測集合全体 $\calL^d$ は $\RR^d$ 上の $\sigma$-加法族である．
+Lebesgue可測集合全体 $\calL_d$ は $\RR^d$ 上の $\sigma$-加法族である．
 すなわち，次が成り立つ．
 \begin{enumerate}
-    \item $\RR^d\in\calL^d$
-    \item $A\in\calL^d$ ならば $\RR^d\setminus A\in\calL^d$
-    \item $\{A_n\}_{n=1}^{\infty}\subset\calL^d$ ならば
+    \item $\RR^d\in\calL_d$
+    \item $A\in\calL_d$ ならば $\RR^d\setminus A\in\calL_d$
+    \item $\{A_n\}_{n=1}^{\infty}\subset\calL_d$ ならば
     \[
-    \bigcup_{n=1}^{\infty}A_n\in\calL^d
+    \bigcup_{n=1}^{\infty}A_n\in\calL_d
     \]
 \end{enumerate}
 \end{theorem}
 \begin{proof}
-作業用の判定法により，$\calL^d$ は
+作業用の判定法により，$\calL_d$ は
 $\lambda^*$ に関するCarathéodory可測集合全体と一致する．
 第6章のCarathéodoryの定理によれば，外測度に関するCarathéodory可測集合全体は
 $\sigma$-加法族である．
-したがって $\calL^d$ も $\sigma$-加法族である．
+したがって $\calL_d$ も $\sigma$-加法族である．
 \end{proof}
 
 \begin{corollary}[集合演算]
-$A,B\in\calL^d$ ならば
+$A,B\in\calL_d$ ならば
 \[
 A\cup B,\qquad A\cap B,\qquad A\setminus B
 \]
 はいずれもLebesgue可測である．
-また $\{A_n\}_{n=1}^{\infty}\subset\calL^d$ ならば
+また $\{A_n\}_{n=1}^{\infty}\subset\calL_d$ ならば
 \[
 \bigcap_{n=1}^{\infty}A_n
 \]
@@ -184,7 +184,7 @@ $\sigma$-加法族の基本性質から従う．
 \section{Lebesgue測度の性質}
 
 \begin{lemma}[有限加法性]
-$A,B\in\calL^d$ が互いに素ならば
+$A,B\in\calL_d$ が互いに素ならば
 \[
 \lambda(A\cup B)=\lambda(A)+\lambda(B)
 \]
@@ -223,7 +223,7 @@ B_n\subset A_n
 が成り立つ．
 \end{lemma}
 \begin{proof}
-$\calL^d$ は $\sigma$-加法族なので，各 $B_n$ はLebesgue可測である．
+$\calL_d$ は $\sigma$-加法族なので，各 $B_n$ はLebesgue可測である．
 定義から互いに素性と表示は明らかである．
 \end{proof}
 
@@ -247,11 +247,11 @@ Carathéodory可測集合全体に制限したものは測度である．
 Lebesgue測度について次が成り立つ．
 \begin{enumerate}
     \item $\lambda(\emptyset)=0$
-    \item 単調性：$A,B\in\calL^d$ かつ $A\subset B$ ならば
+    \item 単調性：$A,B\in\calL_d$ かつ $A\subset B$ ならば
     \[
     \lambda(A)\le \lambda(B)
     \]
-    \item 完全劣加法性：$\{A_n\}_{n=1}^{\infty}\subset\calL^d$ ならば
+    \item 完全劣加法性：$\{A_n\}_{n=1}^{\infty}\subset\calL_d$ ならば
     \[
     \lambda\left(\bigcup_{n=1}^{\infty}A_n\right)
     \le
@@ -376,7 +376,7 @@ $A_n\subset A_1$ かつ $\lambda(A_1)<\infty$ なので有限加法性より
 \end{proof}
 
 \begin{proposition}[平行移動不変性]
-$A\in\calL^d$ と $c\in\RR^d$ に対して
+$A\in\calL_d$ と $c\in\RR^d$ に対して
 \[
 A+c:=\{x+c\mid x\in A\}
 \]
@@ -454,7 +454,7 @@ J=\overline J\setminus(\overline J\setminus J)
 
 端点がすべて有理数である有界開区間全体は可算であり，$\RR^d$ の開集合の基底をなす．
 したがって任意の開集合 $G$ は，そのような有界開区間の可算和として書ける．
-$\calL^d$ は $\sigma$-加法族だから，$G$ はLebesgue可測である．
+$\calL_d$ は $\sigma$-加法族だから，$G$ はLebesgue可測である．
 \end{proof}
 
 \begin{theorem}[内正則性]
