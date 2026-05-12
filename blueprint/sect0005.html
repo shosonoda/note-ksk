@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lebesgue測度</title>
+<link rel="next" href="sect0006.html" title="Carathéodory流の測度論" />
+<link rel="prev" href="sect0004.html" title="Lebesgue内測度" />
+<link rel="up" href="index.html" title="Lecture note on KSK" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">Lecture note on KSK</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Riemann積分</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0001.html#a0000000010"><span class="toc_ref"></span> <span class="toc_entry">Riemann和による定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000020"><span class="toc_ref"></span> <span class="toc_entry">Darbouxの上積分と下積分による定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000031"><span class="toc_ref"></span> <span class="toc_entry">Riemann可積分関数の例</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000093"><span class="toc_ref"></span> <span class="toc_entry">Riemann可積分でない例</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000106"><span class="toc_ref"></span> <span class="toc_entry">極限と積分の順序交換</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000115"><span class="toc_ref"></span> <span class="toc_entry">順序交換の応用例</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000124"><span class="toc_ref"></span> <span class="toc_entry">Riemann積分の長所と短所</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0001.html#a0000000125"><span class="toc_ref"></span> <span class="toc_entry">長所：定義が素朴であり，計算しやすい</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000126"><span class="toc_ref"></span> <span class="toc_entry">短所：無限回操作に対して不安定</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000127"><span class="toc_ref"></span> <span class="toc_entry">原因：Riemann積分の定義が有限和（有限分割\(\mathcal P\)）の極限</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000129"><span class="toc_ref"></span> <span class="toc_entry">技術的課題：無限和（無限分割）にすると何が起きるか</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000131"><span class="toc_ref"></span> <span class="toc_entry">解決策：Lebesgue積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000132"><span class="toc_ref"></span> <span class="toc_entry">展望：何が嬉しいか</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000133"><span class="toc_ref"></span> <span class="toc_entry">多くの応用先</span></a>
+ </li>
+
+  </ul>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0002.html#a0000000134"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000135"><span class="toc_ref"></span> <span class="toc_entry">\(\mathbb R^d\)の基本集合</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000136"><span class="toc_ref"></span> <span class="toc_entry">\(\mathbb R^d\)のRiemann積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000137"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度・Jordan可測</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000138"><span class="toc_ref"></span> <span class="toc_entry">Jordan零集合</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000139"><span class="toc_ref"></span> <span class="toc_entry">Jordan可測性の判定法</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000140"><span class="toc_ref"></span> <span class="toc_entry">Jordan可測集合の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000141"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000142"><span class="toc_ref"></span> <span class="toc_entry">有限加法族・有限加法的測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000143"><span class="toc_ref"></span> <span class="toc_entry">概念の整理</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0003.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0003.html#a0000000144"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000145"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000146"><span class="toc_ref"></span> <span class="toc_entry">拡大実数</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000147"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000148"><span class="toc_ref"></span> <span class="toc_entry">具体例</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000149"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000150"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度との整合</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000151"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の外正則性</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000152"><span class="toc_ref"></span> <span class="toc_entry">解釈</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0004.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue内測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0004.html#a0000000153"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000154"><span class="toc_ref"></span> <span class="toc_entry">定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000155"><span class="toc_ref"></span> <span class="toc_entry">基本性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000156"><span class="toc_ref"></span> <span class="toc_entry">具体例</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000157"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度との関係</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000158"><span class="toc_ref"></span> <span class="toc_entry">同値な定義</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0004.html#a0000000159"><span class="toc_ref"></span> <span class="toc_entry">外測度に関する補助定理</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000160"><span class="toc_ref"></span> <span class="toc_entry">解釈</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class=" active current">
+  <a href="sect0005.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度</span></a>
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
+     <li class="">
+  <a href="sect0005.html#a0000000161"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000162"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合とLebesgue測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000163"><span class="toc_ref"></span> <span class="toc_entry">Carathéodory条件</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000164"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000165"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000166"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度の正則性</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000167"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合の判定法</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0006.html"><span class="toc_ref"></span> <span class="toc_entry">Carathéodory流の測度論</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0006.html#a0000000168"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000169"><span class="toc_ref"></span> <span class="toc_entry">Carathéodoryの測度論</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000170"><span class="toc_ref"></span> <span class="toc_entry">半環から外測度へ</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000171"><span class="toc_ref"></span> <span class="toc_entry">Borel集合族</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000172"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue非可測集合</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000006"> Lebesgue測度</h1>
+<h4 id="a0000000161">本章の目標</h4>
+<p> Lebesgue外測度 \(\lambda ^*\) とLebesgue内測度 \(\lambda _*\) が一致する集合を Lebesgue可測集合と定める． そのうえで，Lebesgue可測集合全体が \(\sigma \)-加法族をなし， Lebesgue測度が可算加法的な測度になることを確認する． 最後に，内外正則性とCarathéodory条件による判定法を述べる． </p>
+<h1 id="a0000000162"> Lebesgue可測集合とLebesgue測度</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000000515">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">55</span>
+    <span class="definition_thmtitle">Lebesgue可測集合とLebesgue測度</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#a0000000515">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 集合 \(A \subset \mathbb R^d\) がLebesgue可測であるとは </p>
+<div class="displaymath" id="a0000000516">
+  \[  \lambda _*(A)=\lambda ^*(A)  \]
+</div>
+<p> が成り立つことをいう． Lebesgue可測集合全体を </p>
+<div class="displaymath" id="a0000000517">
+  \[  \mathcal L^d:=\{ A\subset \mathbb R^d\mid \lambda _*(A)=\lambda ^*(A)\}   \]
+</div>
+<p> と書く． \(A\in \mathcal L^d\) のとき，この共通値を </p>
+<div class="displaymath" id="a0000000518">
+  \[  \lambda (A):=\lambda _*(A)=\lambda ^*(A)  \]
+</div>
+<p> と書き，\(A\) のLebesgue測度という． </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000000519">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">56</span>
+    <span class="definition_thmtitle">Lebesgue零集合</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#a0000000519">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 集合 \(N\subset \mathbb R^d\) が </p>
+<div class="displaymath" id="a0000000520">
+  \[  \lambda ^*(N)=0  \]
+</div>
+<p> を満たすとき，\(N\) をLebesgue零集合という． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000000521">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">57</span>
+    <span class="theorem_thmtitle">Lebesgue零集合</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#a0000000521">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000522"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> Lebesgue零集合はLebesgue可測であり，Lebesgue測度は \(0\) である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000522">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>第4章で示した基本性質より </p>
+<div class="displaymath" id="a0000000523">
+  \[  0\le \lambda _*(N)\le \lambda ^*(N)  \]
+</div>
+<p> である． \(\lambda ^*(N)=0\) なら </p>
+<div class="displaymath" id="a0000000524">
+  \[  \lambda _*(N)=\lambda ^*(N)=0  \]
+</div>
+<p> だから，\(N\) はLebesgue可測で \(\lambda (N)=0\) である． </p>
+
+  </div>
+</div>
+<div class="corollary_thmwrapper theorem-style-plain" id="a0000000525">
+  <div class="corollary_thmheading">
+    <span class="corollary_thmcaption">
+    Corollary
+    </span>
+    <span class="corollary_thmlabel">58</span>
+    <span class="corollary_thmtitle">可算集合</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#a0000000525">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000526"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="corollary_thmcontent">
+  <p> 一点集合，可算集合，\(\mathbb Q^d\)，\(\mathbb Z^d\) はLebesgue可測であり，測度 \(0\) をもつ． 特に1次元では \(\mathbb Q\) と \(\mathbb Z\) はLebesgue測度 \(0\) である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000526">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>第3章で，一点集合および可算集合のLebesgue外測度は \(0\) であることを示した． したがって前定理より従う． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000000527">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">59</span>
+    <span class="theorem_thmtitle">Jordan可測集合</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#a0000000527">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000528"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> Jordan可測集合 \(A\subset \mathbb R^d\) はLebesgue可測であり， </p>
+<div class="displaymath" id="a0000000529">
+  \[  \lambda (A)=m_J(A)  \]
+</div>
+<p> が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000528">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Jordan可測性より </p>
+<div class="displaymath" id="a0000000530">
+  \[  m_{J,*}(A)=m_J^*(A)=m_J(A)  \]
+</div>
+<p> である． 第4章のJordan内測度との比較，Lebesgue内測度の基本性質， 第3章のJordan外測度との比較を順に用いると </p>
+<div class="displaymath" id="a0000000531">
+  \[  m_J(A) =m_{J,*}(A) \le \lambda _*(A) \le \lambda ^*(A) \le m_J^*(A) =m_J(A)  \]
+</div>
+<p> となる． したがってすべて等号であり，特に </p>
+<div class="displaymath" id="a0000000532">
+  \[  \lambda _*(A)=\lambda ^*(A)=m_J(A)  \]
+</div>
+<p> である． よって \(A\) はLebesgue可測であり， </p>
+<div class="displaymath" id="a0000000533">
+  \[  \lambda (A)=m_J(A)  \]
+</div>
+<p> である． </p>
+
+  </div>
+</div>
+<div class="example_thmwrapper theorem-style-plain" id="a0000000534">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
+    </span>
+    <span class="example_thmlabel">24</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#a0000000534">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="example_thmcontent">
+  <div class="displaymath" id="a0000000535">
+  \[  \mathbb Q\cap [0,1]  \]
+</div>
+<p> は可算集合なのでLebesgue可測であり， </p>
+<div class="displaymath" id="a0000000536">
+  \[  \lambda _1(\mathbb Q\cap [0,1])=0  \]
+</div>
+<p> である． 一方，\([0,1]\) はJordan可測で \(m_J([0,1])=1\) だから </p>
+<div class="displaymath" id="a0000000537">
+  \[  \lambda _1([0,1])=1  \]
+</div>
+<p> である． 後で示す有限加法性より </p>
+<div class="displaymath" id="a0000000538">
+  \[  \lambda _1([0,1]\setminus \mathbb Q)=1  \]
+</div>
+<p> となる． </p>
+
+  </div>
+</div>
+<h1 id="a0000000163"> Carathéodory条件</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000000539">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">60</span>
+    <span class="definition_thmtitle">Carathéodory条件</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#a0000000539">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 集合 \(A\subset \mathbb R^d\) がLebesgue外測度 \(\lambda ^*\) に関するCarathéodory条件を満たすとは， 任意の \(E\subset \mathbb R^d\) に対して </p>
+<div class="displaymath" id="a0000000540">
+  \[  \lambda ^*(E) = \lambda ^*(E\cap A)+\lambda ^*(E\setminus A)  \]
+</div>
+<p> が成り立つことをいう． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000000541">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">61</span>
+    <span class="theorem_thmtitle">作業用の判定法</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#a0000000541">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000542"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> 集合 \(A\subset \mathbb R^d\) について，次は同値である． </p>
+<ol class="enumerate">
+  <li><p>\(A\) はLebesgue可測である </p>
+</li>
+  <li><p>\(A\) はCarathéodory条件を満たす </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000542">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>本章末の判定法で，正則性を含む形で証明する． 証明の核は第6章で述べるCarathéodoryの定理である． </p>
+
+  </div>
+</div>
+<h1 id="a0000000164"> Lebesgue可測集合の性質</h1>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000000543">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">62</span>
+    <span class="theorem_thmtitle">Lebesgue可測集合の \(\sigma \)-加法族性</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#a0000000543">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000544"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> Lebesgue可測集合全体 \(\mathcal L^d\) は \(\mathbb R^d\) 上の \(\sigma \)-加法族である． すなわち，次が成り立つ． </p>
+<ol class="enumerate">
+  <li><p>\(\mathbb R^d\in \mathcal L^d\) </p>
+</li>
+  <li><p>\(A\in \mathcal L^d\) ならば \(\mathbb R^d\setminus A\in \mathcal L^d\) </p>
+</li>
+  <li><p>\(\{ A_n\} _{n=1}^{\infty }\subset \mathcal L^d\) ならば </p>
+<div class="displaymath" id="a0000000545">
+  \[  \bigcup _{n=1}^{\infty }A_n\in \mathcal L^d  \]
+</div>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000544">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>作業用の判定法により，\(\mathcal L^d\) は \(\lambda ^*\) に関するCarathéodory可測集合全体と一致する． 第6章のCarathéodoryの定理によれば，外測度に関するCarathéodory可測集合全体は \(\sigma \)-加法族である． したがって \(\mathcal L^d\) も \(\sigma \)-加法族である． </p>
+
+  </div>
+</div>
+<div class="corollary_thmwrapper theorem-style-plain" id="a0000000546">
+  <div class="corollary_thmheading">
+    <span class="corollary_thmcaption">
+    Corollary
+    </span>
+    <span class="corollary_thmlabel">63</span>
+    <span class="corollary_thmtitle">集合演算</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#a0000000546">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000547"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="corollary_thmcontent">
+  <p> \(A,B\in \mathcal L^d\) ならば </p>
+<div class="displaymath" id="a0000000548">
+  \[  A\cup B,\qquad A\cap B,\qquad A\setminus B  \]
+</div>
+<p> はいずれもLebesgue可測である． また \(\{ A_n\} _{n=1}^{\infty }\subset \mathcal L^d\) ならば </p>
+<div class="displaymath" id="a0000000549">
+  \[  \bigcap _{n=1}^{\infty }A_n  \]
+</div>
+<p> もLebesgue可測である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000547">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(\sigma \)-加法族の基本性質から従う． </p>
+
+  </div>
+</div>
+<h1 id="a0000000165"> Lebesgue測度の性質</h1>
+<div class="lemma_thmwrapper theorem-style-plain" id="a0000000550">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">64</span>
+    <span class="lemma_thmtitle">有限加法性</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#a0000000550">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000551"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> \(A,B\in \mathcal L^d\) が互いに素ならば </p>
+<div class="displaymath" id="a0000000552">
+  \[  \lambda (A\cup B)=\lambda (A)+\lambda (B)  \]
+</div>
+<p> が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000551">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(A\) はCarathéodory条件を満たす． \(E=A\cup B\) としてその条件を適用すると， </p>
+<div class="displaymath" id="a0000000553">
+  \[  \lambda ^*(A\cup B) = \lambda ^*((A\cup B)\cap A)+\lambda ^*((A\cup B)\setminus A) = \lambda ^*(A)+\lambda ^*(B)  \]
+</div>
+<p> である． \(A,B,A\cup B\) はLebesgue可測なので，これは </p>
+<div class="displaymath" id="a0000000554">
+  \[  \lambda (A\cup B)=\lambda (A)+\lambda (B)  \]
+</div>
+<p> を意味する． </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="a0000000555">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">65</span>
+    <span class="lemma_thmtitle">互いに素な列への分解</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#a0000000555">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000556"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> Lebesgue可測集合列 \(\{ A_n\} _{n=1}^{\infty }\) に対して </p>
+<div class="displaymath" id="a0000000557">
+  \[  B_1:=A_1,\qquad B_n:=A_n\setminus \bigcup _{k=1}^{n-1}A_k\quad (n\ge 2)  \]
+</div>
+<p> とおくと，\(\{ B_n\} \) は互いに素なLebesgue可測集合列であり， </p>
+<div class="displaymath" id="a0000000558">
+  \[  \bigcup _{n=1}^{\infty }A_n=\bigsqcup _{n=1}^{\infty }B_n, \qquad B_n\subset A_n  \]
+</div>
+<p> が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000556">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(\mathcal L^d\) は \(\sigma \)-加法族なので，各 \(B_n\) はLebesgue可測である． 定義から互いに素性と表示は明らかである． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000000559">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">66</span>
+    <span class="theorem_thmtitle">完全加法性</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#a0000000559">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000560"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> 互いに素なLebesgue可測集合列 \(\{ A_n\} _{n=1}^{\infty }\) に対して </p>
+<div class="displaymath" id="a0000000561">
+  \[  \lambda \left(\bigsqcup _{n=1}^{\infty }A_n\right) = \sum _{n=1}^{\infty }\lambda (A_n)  \]
+</div>
+<p> が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000560">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>作業用の判定法により，Lebesgue可測集合はCarathéodory可測集合である． 第6章のCarathéodoryの定理によれば，外測度 \(\lambda ^*\) を Carathéodory可測集合全体に制限したものは測度である． したがって互いに素な可測集合列に対して可算加法性が成り立つ． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000000562">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">67</span>
+    <span class="theorem_thmtitle">基本性質</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#a0000000562">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000563"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> Lebesgue測度について次が成り立つ． </p>
+<ol class="enumerate">
+  <li><p>\(\lambda (\emptyset )=0\) </p>
+</li>
+  <li><p>単調性：\(A,B\in \mathcal L^d\) かつ \(A\subset B\) ならば </p>
+<div class="displaymath" id="a0000000564">
+  \[  \lambda (A)\le \lambda (B)  \]
+</div>
+</li>
+  <li><p>完全劣加法性：\(\{ A_n\} _{n=1}^{\infty }\subset \mathcal L^d\) ならば </p>
+<div class="displaymath" id="a0000000565">
+  \[  \lambda \left(\bigcup _{n=1}^{\infty }A_n\right) \le \sum _{n=1}^{\infty }\lambda (A_n)  \]
+</div>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000563">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <ol class="enumerate">
+  <li><p>\(\emptyset \) はLebesgue零集合であるから可測で，測度 \(0\) をもつ． </p>
+</li>
+  <li><p>\(A\subset B\) とする． このとき </p>
+<div class="displaymath" id="a0000000566">
+  \[  B=A\sqcup (B\setminus A)  \]
+</div>
+<p> であり，有限加法性より </p>
+<div class="displaymath" id="a0000000567">
+  \[  \lambda (B)=\lambda (A)+\lambda (B\setminus A)\ge \lambda (A)  \]
+</div>
+<p> である． </p>
+</li>
+  <li><p>前補題の記法を用いると </p>
+<div class="displaymath" id="a0000000568">
+  \[  \bigcup _{n=1}^{\infty }A_n=\bigsqcup _{n=1}^{\infty }B_n, \qquad B_n\subset A_n  \]
+</div>
+<p> である． 完全加法性と単調性より </p>
+<div class="displaymath" id="a0000000569">
+  \[  \lambda \left(\bigcup _{n=1}^{\infty }A_n\right) = \sum _{n=1}^{\infty }\lambda (B_n) \le \sum _{n=1}^{\infty }\lambda (A_n)  \]
+</div>
+<p> を得る． </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000000570">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">68</span>
+    <span class="theorem_thmtitle">下からの連続性</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#a0000000570">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000571"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> Lebesgue可測集合の単調増大列 </p>
+<div class="displaymath" id="a0000000572">
+  \[  A_1\subset A_2\subset \cdots  \]
+</div>
+<p> に対して </p>
+<div class="displaymath" id="a0000000573">
+  \[  \lambda \left(\bigcup _{n=1}^{\infty }A_n\right) = \lim _{n\to \infty }\lambda (A_n)  \]
+</div>
+<p> が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000571">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <div class="displaymath" id="a0000000574">
+  \[  B_1:=A_1,\qquad B_n:=A_n\setminus A_{n-1}\quad (n\ge 2)  \]
+</div>
+<p> とおく． すると \(\{ B_n\} \) は互いに素で， </p>
+<div class="displaymath" id="a0000000575">
+  \[  A_N=\bigsqcup _{n=1}^{N}B_n,\qquad \bigcup _{n=1}^{\infty }A_n=\bigsqcup _{n=1}^{\infty }B_n  \]
+</div>
+<p> である． 完全加法性より </p>
+<div class="displaymath" id="a0000000576">
+  \[  \lambda (A_N)=\sum _{n=1}^{N}\lambda (B_n), \qquad \lambda \left(\bigcup _{n=1}^{\infty }A_n\right) = \sum _{n=1}^{\infty }\lambda (B_n).  \]
+</div>
+<p> \(N\to \infty \) とすれば主張を得る． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000000577">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">69</span>
+    <span class="theorem_thmtitle">上からの連続性</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#a0000000577">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000578"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> Lebesgue可測集合の単調減少列 </p>
+<div class="displaymath" id="a0000000579">
+  \[  A_1\supset A_2\supset \cdots  \]
+</div>
+<p> に対して，\(\lambda (A_1){\lt}\infty \) ならば </p>
+<div class="displaymath" id="a0000000580">
+  \[  \lambda \left(\bigcap _{n=1}^{\infty }A_n\right) = \lim _{n\to \infty }\lambda (A_n)  \]
+</div>
+<p> が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000578">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <div class="displaymath" id="a0000000581">
+  \[  B_n:=A_1\setminus A_n  \]
+</div>
+<p> とおくと， </p>
+<div class="displaymath" id="a0000000582">
+  \[  B_1\subset B_2\subset \cdots , \qquad \bigcup _{n=1}^{\infty }B_n = A_1\setminus \bigcap _{n=1}^{\infty }A_n  \]
+</div>
+<p> である． 下からの連続性より </p>
+<div class="displaymath" id="a0000000583">
+  \[  \lambda \left(A_1\setminus \bigcap _{n=1}^{\infty }A_n\right) = \lim _{n\to \infty }\lambda (A_1\setminus A_n)  \]
+</div>
+<p> である． \(A_n\subset A_1\) かつ \(\lambda (A_1){\lt}\infty \) なので有限加法性より </p>
+<div class="displaymath" id="a0000000584">
+  \[  \lambda (A_1\setminus A_n)=\lambda (A_1)-\lambda (A_n)  \]
+</div>
+<p> である． 同様に </p>
+<div class="displaymath" id="a0000000585">
+  \[  \lambda \left(A_1\setminus \bigcap _{n=1}^{\infty }A_n\right) = \lambda (A_1)-\lambda \left(\bigcap _{n=1}^{\infty }A_n\right).  \]
+</div>
+<p> これらを合わせれば主張が従う． </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="a0000000586">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">70</span>
+    <span class="proposition_thmtitle">平行移動不変性</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#a0000000586">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000587"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \(A\in \mathcal L^d\) と \(c\in \mathbb R^d\) に対して </p>
+<div class="displaymath" id="a0000000588">
+  \[  A+c:=\{ x+c\mid x\in A\}   \]
+</div>
+<p> もLebesgue可測であり， </p>
+<div class="displaymath" id="a0000000589">
+  \[  \lambda (A+c)=\lambda (A)  \]
+</div>
+<p> が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000587">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>第3章でLebesgue外測度の平行移動不変性を示した． また \(K\) がコンパクトなら \(K+c\) もコンパクトなので，内測度も平行移動で不変である． したがって </p>
+<div class="displaymath" id="a0000000590">
+  \[  \lambda ^*(A+c)=\lambda ^*(A), \qquad \lambda _*(A+c)=\lambda _*(A).  \]
+</div>
+<p> \(A\) がLebesgue可測なら \(A+c\) もLebesgue可測で，測度は変わらない． </p>
+
+  </div>
+</div>
+<h1 id="a0000000166"> Lebesgue測度の正則性</h1>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000000591">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">71</span>
+    <span class="theorem_thmtitle">コンパクト集合</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#a0000000591">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000592"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> コンパクト集合 \(K\subset \mathbb R^d\) はLebesgue可測であり， </p>
+<div class="displaymath" id="a0000000593">
+  \[  \lambda (K)=\lambda ^*(K)  \]
+</div>
+<p> が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000592">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>第4章で </p>
+<div class="displaymath" id="a0000000594">
+  \[  \lambda _*(K)=\lambda ^*(K)  \]
+</div>
+<p> を示した． したがって \(K\) はLebesgue可測で，その測度は共通値 \(\lambda ^*(K)\) に等しい． </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="a0000000595">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">72</span>
+    <span class="lemma_thmtitle">座標超平面片</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#a0000000595">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000596"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> 有界閉区間 \(I\subset \mathbb R^d\) と座標 \(i\)，実数 \(c\) に対して </p>
+<div class="displaymath" id="a0000000597">
+  \[  F:=\{ x\in I\mid x_i=c\}   \]
+</div>
+<p> はLebesgue零集合である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000596">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(F\) は任意に薄い直方体で覆える． 具体的には，\(\varepsilon {\gt}0\) に対して幅 \(2\delta \) の板で \(F\) を覆い， \(\delta {\gt}0\) を十分小さく取ればその体積を \(\varepsilon \) 未満にできる． したがって \(\lambda ^*(F)=0\) である． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000000598">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">73</span>
+    <span class="theorem_thmtitle">開集合</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#a0000000598">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000599"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> 開集合 \(G\subset \mathbb R^d\) はLebesgue可測である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000599">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>まず有界開区間 </p>
+<div class="displaymath" id="a0000000600">
+  \[  J=(a_1,b_1)\times \cdots \times (a_d,b_d)  \]
+</div>
+<p> を考える． 同じ端点をもつ閉区間を \(\overline J\) とすると， \(\overline J\) はコンパクトだからLebesgue可測である． また </p>
+<div class="displaymath" id="a0000000601">
+  \[  \overline J\setminus J  \]
+</div>
+<p> は有限個の座標超平面片の合併に含まれるためLebesgue零集合である． よって </p>
+<div class="displaymath" id="a0000000602">
+  \[  J=\overline J\setminus (\overline J\setminus J)  \]
+</div>
+<p> はLebesgue可測である． </p>
+<p>端点がすべて有理数である有界開区間全体は可算であり，\(\mathbb R^d\) の開集合の基底をなす． したがって任意の開集合 \(G\) は，そのような有界開区間の可算和として書ける． \(\mathcal L^d\) は \(\sigma \)-加法族だから，\(G\) はLebesgue可測である． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000000603">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">74</span>
+    <span class="theorem_thmtitle">内正則性</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#a0000000603">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000604"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> 任意のLebesgue可測集合 \(A\subset \mathbb R^d\) に対して </p>
+<div class="displaymath" id="a0000000605">
+  \[  \lambda (A) = \sup \{ \lambda (K)\mid K\subset A,\  K\text{ はコンパクト}\}   \]
+</div>
+<p> が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000604">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(A\) がLebesgue可測なら </p>
+<div class="displaymath" id="a0000000606">
+  \[  \lambda (A)=\lambda _*(A)  \]
+</div>
+<p> である． 内測度の定義より </p>
+<div class="displaymath" id="a0000000607">
+  \[  \lambda _*(A) = \sup \{ \lambda ^*(K)\mid K\subset A,\  K\text{ はコンパクト}\} .  \]
+</div>
+<p> コンパクト集合はLebesgue可測なので \(\lambda ^*(K)=\lambda (K)\) と書ける． よって主張が従う． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000000608">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">75</span>
+    <span class="theorem_thmtitle">外正則性</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#a0000000608">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000609"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> 任意のLebesgue可測集合 \(A\subset \mathbb R^d\) に対して </p>
+<div class="displaymath" id="a0000000610">
+  \[  \lambda (A) = \inf \{ \lambda (G)\mid A\subset G,\  G\text{ は開集合}\}   \]
+</div>
+<p> が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000609">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(A\) がLebesgue可測なら </p>
+<div class="displaymath" id="a0000000611">
+  \[  \lambda (A)=\lambda ^*(A)  \]
+</div>
+<p> である． 第3章の開集合による外正則性より </p>
+<div class="displaymath" id="a0000000612">
+  \[  \lambda ^*(A) = \inf \{ \lambda ^*(G)\mid A\subset G,\  G\text{ は開集合}\}   \]
+</div>
+<p> である． 開集合はLebesgue可測だから \(\lambda ^*(G)=\lambda (G)\) と書ける． したがって主張を得る． </p>
+
+  </div>
+</div>
+<h1 id="a0000000167"> Lebesgue可測集合の判定法</h1>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000000613">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">76</span>
+    <span class="theorem_thmtitle">判定法</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#a0000000613">#</a>
+    
+    <a class="icon proof" href="sect0005.html#a0000000614"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> \(A\subset \mathbb R^d\) とする． 次は同値である． </p>
+<ol class="enumerate">
+  <li><p>\(A\) はLebesgue可測である </p>
+</li>
+  <li><p>\(A\) はCarathéodory条件を満たす </p>
+</li>
+  <li><p>任意の \(R{\gt}0\) と \(\varepsilon {\gt}0\) に対し，開集合 \(G\) とコンパクト集合 \(K\) が存在して </p>
+<div class="displaymath" id="a0000000615">
+  \[  K\subset A\cap [-R,R]^d\subset G, \qquad \lambda ^*(G\setminus K){\lt}\varepsilon  \]
+</div>
+<p> を満たす </p>
+</li>
+</ol>
+<p> さらに \(\lambda ^*(A){\lt}\infty \) のときは，これらは次の条件とも同値である． </p>
+<ol class="enumerate">
+  <li><p>任意の \(\varepsilon {\gt}0\) に対して開集合 \(G\) とコンパクト集合 \(K\) が存在して </p>
+<div class="displaymath" id="a0000000616">
+  \[  K\subset A\subset G, \qquad \lambda ^*(G\setminus K){\lt}\varepsilon  \]
+</div>
+<p> を満たす </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000614">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>(1) と (2) の同値は，第6章のCarathéodoryの定理をLebesgue外測度 \(\lambda ^*\) に適用し， Lebesgue流の可測性 \(\lambda _*(A)=\lambda ^*(A)\) と照合することで得られる． </p>
+<p>(1) から (3) を示す． </p>
+<div class="displaymath" id="a0000000617">
+  \[  A_R:=A\cap [-R,R]^d  \]
+</div>
+<p> とおく． \(A_R\) はLebesgue可測で，しかも有限測度である． 内正則性より，コンパクト集合 \(K\subset A_R\) で </p>
+<div class="displaymath" id="a0000000618">
+  \[  \lambda (A_R)-\lambda (K){\lt}\frac{\varepsilon }{2}  \]
+</div>
+<p> を満たすものが取れる． 外正則性より，開集合 \(G\supset A_R\) で </p>
+<div class="displaymath" id="a0000000619">
+  \[  \lambda (G)-\lambda (A_R){\lt}\frac{\varepsilon }{2}  \]
+</div>
+<p> を満たすものが取れる． すると \(K\subset G\) であり， </p>
+<div class="displaymath" id="a0000000620">
+  \[  \lambda ^*(G\setminus K) = \lambda (G\setminus K) = \lambda (G)-\lambda (K) {\lt}\varepsilon  \]
+</div>
+<p> である． </p>
+<p>(3) から (1) を示す． 各 \(R{\gt}0\) について \(A_R=A\cap [-R,R]^d\) とおく． (3) により，任意の \(\varepsilon {\gt}0\) に対して </p>
+<div class="displaymath" id="a0000000621">
+  \[  K\subset A_R\subset G, \qquad \lambda ^*(G\setminus K){\lt}\varepsilon  \]
+</div>
+<p> を満たすコンパクト集合 \(K\) と開集合 \(G\) が取れる． このとき \(K\) と \(G\) はLebesgue可測であり， </p>
+<div class="displaymath" id="a0000000622">
+  \[  \lambda ^*(A_R)-\lambda _*(A_R) \le \lambda (G)-\lambda (K) = \lambda (G\setminus K) {\lt}\varepsilon  \]
+</div>
+<p> である． \(\varepsilon {\gt}0\) は任意だから \(A_R\) はLebesgue可測である． したがって </p>
+<div class="displaymath" id="a0000000623">
+  \[  A=\bigcup _{n=1}^{\infty }\bigl(A\cap [-n,n]^d\bigr)  \]
+</div>
+<p> はLebesgue可測である． </p>
+<p>最後に \(\lambda ^*(A){\lt}\infty \) と仮定する． (1) から (4) は，内正則性と外正則性を直接 \(A\) に適用すればよい． (4) から (1) は，上の (3) から (1) の証明と同じ議論を \(A\) そのものに適用すれば従う． </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000000624">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">17</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0005.html#a0000000624">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>条件 (4) の形は有限測度の集合に対する判定法である． 例えば \(A=\mathbb R^d\) の場合，どのコンパクト集合 \(K\) を取っても </p>
+<div class="displaymath" id="a0000000625">
+  \[  \mathbb R^d\setminus K  \]
+</div>
+<p> は無限の測度をもつので，(4) は成り立たない． 一般のLebesgue可測集合に対しては，条件 (3) のように有界な窓で切った局所版を用いる． </p>
+
+  </div>
+</div>
+
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="sect0004.html" title="Lebesgue内測度"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="Lecture note on KSK"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+  <a href="sect0006.html" title="Carathéodory流の測度論"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>

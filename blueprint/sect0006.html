@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Carathéodory流の測度論</title>
+<link rel="prev" href="sect0005.html" title="Lebesgue測度" />
+<link rel="up" href="index.html" title="Lecture note on KSK" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">Lecture note on KSK</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Riemann積分</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0001.html#a0000000010"><span class="toc_ref"></span> <span class="toc_entry">Riemann和による定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000020"><span class="toc_ref"></span> <span class="toc_entry">Darbouxの上積分と下積分による定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000031"><span class="toc_ref"></span> <span class="toc_entry">Riemann可積分関数の例</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000093"><span class="toc_ref"></span> <span class="toc_entry">Riemann可積分でない例</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000106"><span class="toc_ref"></span> <span class="toc_entry">極限と積分の順序交換</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000115"><span class="toc_ref"></span> <span class="toc_entry">順序交換の応用例</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000124"><span class="toc_ref"></span> <span class="toc_entry">Riemann積分の長所と短所</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0001.html#a0000000125"><span class="toc_ref"></span> <span class="toc_entry">長所：定義が素朴であり，計算しやすい</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000126"><span class="toc_ref"></span> <span class="toc_entry">短所：無限回操作に対して不安定</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000127"><span class="toc_ref"></span> <span class="toc_entry">原因：Riemann積分の定義が有限和（有限分割\(\mathcal P\)）の極限</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000129"><span class="toc_ref"></span> <span class="toc_entry">技術的課題：無限和（無限分割）にすると何が起きるか</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000131"><span class="toc_ref"></span> <span class="toc_entry">解決策：Lebesgue積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000132"><span class="toc_ref"></span> <span class="toc_entry">展望：何が嬉しいか</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000133"><span class="toc_ref"></span> <span class="toc_entry">多くの応用先</span></a>
+ </li>
+
+  </ul>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0002.html#a0000000134"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000135"><span class="toc_ref"></span> <span class="toc_entry">\(\mathbb R^d\)の基本集合</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000136"><span class="toc_ref"></span> <span class="toc_entry">\(\mathbb R^d\)のRiemann積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000137"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度・Jordan可測</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000138"><span class="toc_ref"></span> <span class="toc_entry">Jordan零集合</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000139"><span class="toc_ref"></span> <span class="toc_entry">Jordan可測性の判定法</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000140"><span class="toc_ref"></span> <span class="toc_entry">Jordan可測集合の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000141"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000142"><span class="toc_ref"></span> <span class="toc_entry">有限加法族・有限加法的測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000143"><span class="toc_ref"></span> <span class="toc_entry">概念の整理</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0003.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0003.html#a0000000144"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000145"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000146"><span class="toc_ref"></span> <span class="toc_entry">拡大実数</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000147"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000148"><span class="toc_ref"></span> <span class="toc_entry">具体例</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000149"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000150"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度との整合</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000151"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の外正則性</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000152"><span class="toc_ref"></span> <span class="toc_entry">解釈</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0004.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue内測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0004.html#a0000000153"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000154"><span class="toc_ref"></span> <span class="toc_entry">定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000155"><span class="toc_ref"></span> <span class="toc_entry">基本性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000156"><span class="toc_ref"></span> <span class="toc_entry">具体例</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000157"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度との関係</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000158"><span class="toc_ref"></span> <span class="toc_entry">同値な定義</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0004.html#a0000000159"><span class="toc_ref"></span> <span class="toc_entry">外測度に関する補助定理</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000160"><span class="toc_ref"></span> <span class="toc_entry">解釈</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0005.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0005.html#a0000000161"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000162"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合とLebesgue測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000163"><span class="toc_ref"></span> <span class="toc_entry">Carathéodory条件</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000164"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000165"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000166"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度の正則性</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000167"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合の判定法</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class=" active current">
+  <a href="sect0006.html"><span class="toc_ref"></span> <span class="toc_entry">Carathéodory流の測度論</span></a>
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
+     <li class="">
+  <a href="sect0006.html#a0000000168"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000169"><span class="toc_ref"></span> <span class="toc_entry">Carathéodoryの測度論</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000170"><span class="toc_ref"></span> <span class="toc_entry">半環から外測度へ</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000171"><span class="toc_ref"></span> <span class="toc_entry">Borel集合族</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000172"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue非可測集合</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000007"> Carathéodory流の測度論</h1>
+<h4 id="a0000000168">本章の目標</h4>
+<p> 第5章ではLebesgue外測度とLebesgue内測度の一致によって可測性を定義した． 本章では，その背後にある一般的な構成を述べる． 中心になるのは，外測度とCarathéodory条件から \(\sigma \)-加法族上の測度を取り出す定理である． 抽象論の証明は省略し，定義と使い方を整理する． </p>
+<h1 id="a0000000169"> Carathéodoryの測度論</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000000626">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">77</span>
+    <span class="definition_thmtitle">\(\sigma \)-加法族</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000626">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 集合 \(X\) の部分集合族 \(\mathcal S\subset \mathcal P(X)\) が \(X\) 上の \(\sigma \)-加法族であるとは，次を満たすことをいう． </p>
+<ol class="enumerate">
+  <li><p>\(X\in \mathcal S\) </p>
+</li>
+  <li><p>\(A\in \mathcal S\) ならば \(X\setminus A\in \mathcal S\) </p>
+</li>
+  <li><p>\(\{ A_n\} _{n=1}^{\infty }\subset \mathcal S\) ならば </p>
+<div class="displaymath" id="a0000000627">
+  \[  \bigcup _{n=1}^{\infty }A_n\in \mathcal S \]
+</div>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000000628">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">18</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000628">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>\(\sigma \)-加法族は，補集合と可算和を取っても外へ出ない集合族である． したがって可算共通部分や差集合についても閉じている． </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000000629">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">78</span>
+    <span class="definition_thmtitle">可測空間</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000629">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> \(X\) 上の \(\sigma \)-加法族 \(\mathcal S\) を1つ固定した組 </p>
+<div class="displaymath" id="a0000000630">
+  \[  (X,\mathcal S)  \]
+</div>
+<p> を可測空間という． </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000000631">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">79</span>
+    <span class="definition_thmtitle">測度</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000631">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 可測空間 \((X,\mathcal S)\) 上の写像 </p>
+<div class="displaymath" id="a0000000632">
+  \[  \mu :\mathcal S\to [0,\infty ]  \]
+</div>
+<p> が測度であるとは，次を満たすことをいう． </p>
+<ol class="enumerate">
+  <li><p>\(\mu (\emptyset )=0\) </p>
+</li>
+  <li><p>互いに素な列 \(\{ A_n\} _{n=1}^{\infty }\subset \mathcal S\) に対して </p>
+<div class="displaymath" id="a0000000633">
+  \[  \mu \left(\bigsqcup _{n=1}^{\infty }A_n\right) = \sum _{n=1}^{\infty }\mu (A_n)  \]
+</div>
+<p> が成り立つ </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000000634">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">80</span>
+    <span class="definition_thmtitle">測度空間</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000634">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 可測空間 \((X,\mathcal S)\) とその上の測度 \(\mu \) の組 </p>
+<div class="displaymath" id="a0000000635">
+  \[  (X,\mathcal S,\mu )  \]
+</div>
+<p> を測度空間という． </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000000636">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">81</span>
+    <span class="definition_thmtitle">外測度</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000636">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 集合 \(X\) 上の写像 </p>
+<div class="displaymath" id="a0000000637">
+  \[  \mu ^*:\mathcal P(X)\to [0,\infty ]  \]
+</div>
+<p> が外測度であるとは，次を満たすことをいう． </p>
+<ol class="enumerate">
+  <li><p>\(\mu ^*(\emptyset )=0\) </p>
+</li>
+  <li><p>\(A\subset B\) ならば \(\mu ^*(A)\le \mu ^*(B)\) </p>
+</li>
+  <li><p>任意の集合列 \(\{ A_n\} _{n=1}^{\infty }\subset \mathcal P(X)\) に対して </p>
+<div class="displaymath" id="a0000000638">
+  \[  \mu ^*\left(\bigcup _{n=1}^{\infty }A_n\right) \le \sum _{n=1}^{\infty }\mu ^*(A_n)  \]
+</div>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000000639">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">82</span>
+    <span class="definition_thmtitle">Carathéodory条件</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000639">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 外測度 \(\mu ^*\) に対し，集合 \(A\subset X\) がCarathéodory条件を満たすとは， 任意の \(E\subset X\) に対して </p>
+<div class="displaymath" id="a0000000640">
+  \[  \mu ^*(E) = \mu ^*(E\cap A)+\mu ^*(E\setminus A)  \]
+</div>
+<p> が成り立つことをいう． この条件を満たす集合を \(\mu ^*\)-可測集合ともいう． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000000641">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">83</span>
+    <span class="theorem_thmtitle">Carathéodoryの定理</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000641">#</a>
+    
+    <a class="icon proof" href="sect0006.html#a0000000642"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> 外測度 \(\mu ^*\) に関する \(\mu ^*\)-可測集合全体を </p>
+<div class="displaymath" id="a0000000643">
+  \[  \mathcal M_{\mu ^*}  \]
+</div>
+<p> と書く． このとき \(\mathcal M_{\mu ^*}\) は \(X\) 上の \(\sigma \)-加法族であり， </p>
+<div class="displaymath" id="a0000000644">
+  \[  \mu :=\mu ^*|_{\mathcal M_{\mu ^*}}  \]
+</div>
+<p> は \((X,\mathcal M_{\mu ^*})\) 上の測度である． さらに，\(\mu (N)=0\) である可測集合 \(N\) の任意の部分集合も可測で，測度 \(0\) をもつ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000642">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>証明は省略する． 要点は，Carathéodory条件が「任意の集合を \(A\) の内側と外側に切っても外測度が増えない」ことを表しており， この条件が補集合と可算和に関して安定であることにある． </p>
+
+  </div>
+</div>
+<h1 id="a0000000170"> 半環から外測度へ</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000000645">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">84</span>
+    <span class="definition_thmtitle">有限加法族</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000645">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 集合 \(X\) の部分集合族 \(\mathcal A\subset \mathcal P(X)\) が有限加法族であるとは，次を満たすことをいう． </p>
+<ol class="enumerate">
+  <li><p>\(\emptyset \in \mathcal A\) </p>
+</li>
+  <li><p>\(A,B\in \mathcal A\) ならば \(A\cup B\in \mathcal A\) </p>
+</li>
+  <li><p>\(A,B\in \mathcal A\) ならば \(A\setminus B\in \mathcal A\) </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000000646">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">85</span>
+    <span class="definition_thmtitle">半環</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000646">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 集合 \(X\) の部分集合族 \(\mathcal S\subset \mathcal P(X)\) が半環であるとは，次を満たすことをいう． </p>
+<ol class="enumerate">
+  <li><p>\(\emptyset \in \mathcal S\) </p>
+</li>
+  <li><p>\(A,B\in \mathcal S\) ならば \(A\cap B\in \mathcal S\) </p>
+</li>
+  <li><p>\(A,B\in \mathcal S\) ならば，ある有限個の互いに素な集合 \(C_1,\dots ,C_N\in \mathcal S\) が存在して </p>
+<div class="displaymath" id="a0000000647">
+  \[  A\setminus B=\bigsqcup _{j=1}^{N}C_j  \]
+</div>
+<p> と書ける </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000000648">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">86</span>
+    <span class="definition_thmtitle">半環が生成する有限加法族</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000648">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 半環 \(\mathcal S\) に対して </p>
+<div class="displaymath" id="a0000000649">
+  \[  \mathcal A(\mathcal S) := \left\{  \bigsqcup _{j=1}^{N}S_j \; \middle |\;  N\in \mathbb N,\  S_j\in \mathcal S\right\}   \]
+</div>
+<p> と定める． ただし空和は \(\emptyset \) とみなす． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000000650">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">87</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000650">#</a>
+    
+    <a class="icon proof" href="sect0006.html#a0000000651"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>\(\mathcal A(\mathcal S)\) は \(X\) 上の有限加法族である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000651">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>証明は省略する． 半環の差集合に関する条件により，有限個の半環要素の合併に対して差集合を取っても， 再び有限個の半環要素の互いに素な合併として書ける． </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000000652">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">88</span>
+    <span class="definition_thmtitle">半環上の体積</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000652">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 半環 \(\mathcal S\) 上の写像 </p>
+<div class="displaymath" id="a0000000653">
+  \[  v:\mathcal S\to [0,\infty ]  \]
+</div>
+<p> が体積であるとは，次を満たすことをいう． </p>
+<ol class="enumerate">
+  <li><p>\(v(\emptyset )=0\) </p>
+</li>
+  <li><p>互いに素な列 \(\{ S_n\} _{n=1}^{\infty }\subset \mathcal S\) で </p>
+<div class="displaymath" id="a0000000654">
+  \[  S=\bigsqcup _{n=1}^{\infty }S_n\in \mathcal S \]
+</div>
+<p> となるものに対して </p>
+<div class="displaymath" id="a0000000655">
+  \[  v(S)=\sum _{n=1}^{\infty }v(S_n)  \]
+</div>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000000656">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">89</span>
+    <span class="theorem_thmtitle">有限加法族への延長</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000656">#</a>
+    
+    <a class="icon proof" href="sect0006.html#a0000000657"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> \(v\) を半環 \(\mathcal S\) 上の体積とする． </p>
+<div class="displaymath" id="a0000000658">
+  \[  E=\bigsqcup _{j=1}^{N}S_j\in \mathcal A(\mathcal S) \qquad (S_j\in \mathcal S)  \]
+</div>
+<p> に対して </p>
+<div class="displaymath" id="a0000000659">
+  \[  \overline v(E):=\sum _{j=1}^{N}v(S_j)  \]
+</div>
+<p> と定めると，\(\overline v\) は表示の取り方によらず定まり， \(\mathcal A(\mathcal S)\) 上の前測度になる． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000657">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>証明は省略する． 異なる分割を共通部分で細分すれば，同じ有限和へ帰着される． </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000000660">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">90</span>
+    <span class="definition_thmtitle">生成される外測度</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000660">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> \(\mathcal A=\mathcal A(\mathcal S)\) とし，\(\overline v\) をその上の前測度とする． 任意の \(E\subset X\) に対して </p>
+<div class="displaymath" id="a0000000661">
+  \[  \mu ^*(E) := \inf \left\{  \sum _{n=1}^{\infty }\overline v(A_n) \; \middle |\;  E\subset \bigcup _{n=1}^{\infty }A_n,\  A_n\in \mathcal A\right\}   \]
+</div>
+<p> と定める． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000000662">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">91</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000662">#</a>
+    
+    <a class="icon proof" href="sect0006.html#a0000000663"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>上で定めた \(\mu ^*\) は \(X\) 上の外測度であり， </p>
+<div class="displaymath" id="a0000000664">
+  \[  \mu ^*(A)=\overline v(A) \qquad (A\in \mathcal A)  \]
+</div>
+<p> を満たす． したがってCarathéodoryの定理により </p>
+<div class="displaymath" id="a0000000665">
+  \[  \mu :=\mu ^*|_{\mathcal M_{\mu ^*}}  \]
+</div>
+<p> は \(\mathcal M_{\mu ^*}\) 上の測度であり，\(\mathcal A\) 上では元の体積と一致する． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000663">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>証明は省略する． 定義はLebesgue外測度と同じく「可算個の基本集合で外から覆る最小コスト」を取っている． この形から外測度の3条件が従い，前測度性から \(\mathcal A\) 上で値が一致する． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000000666">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">92</span>
+    <span class="theorem_thmtitle">Carathéodory–Hahnの拡張定理</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000666">#</a>
+    
+    <a class="icon proof" href="sect0006.html#a0000000667"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> 半環 \(\mathcal S\) 上の体積 \(v\) から，上の構成によって </p>
+<div class="displaymath" id="a0000000668">
+  \[  \sigma (\mathcal S)  \]
+</div>
+<p> 上の測度 \(\mu \) が得られ， </p>
+<div class="displaymath" id="a0000000669">
+  \[  \mu (S)=v(S)\qquad (S\in \mathcal S)  \]
+</div>
+<p> を満たす． さらに，生成される有限加法族上の前測度が \(\sigma \)-有限ならば， この拡張は一意的である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000667">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>証明は省略する． </p>
+
+  </div>
+</div>
+<div class="example_thmwrapper theorem-style-plain" id="a0000000670">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
+    </span>
+    <span class="example_thmlabel">25</span>
+    <span class="example_thmtitle">Lebesgue測度</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000670">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="example_thmcontent">
+  <p> \(X=\mathbb R^d\) とし， </p>
+<div class="displaymath" id="a0000000671">
+  \[  \mathcal S= \left\{  \prod _{i=1}^{d}[a_i,b_i) \; \middle |\;  a_i\le b_i \right\}   \]
+</div>
+<p> を半開区間全体の半環とする． </p>
+<div class="displaymath" id="a0000000672">
+  \[  v\left(\prod _{i=1}^{d}[a_i,b_i)\right) := \prod _{i=1}^{d}(b_i-a_i)  \]
+</div>
+<p> と定めると，この体積からLebesgue外測度が得られる． Carathéodoryの定理によって得られる測度は，Lebesgue測度である． </p>
+
+  </div>
+</div>
+<h1 id="a0000000171"> Borel集合族</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000000673">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">93</span>
+    <span class="definition_thmtitle">Borel集合族</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000673">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 位相空間 \(X\) に対し，\(X\) の開集合全体が生成する \(\sigma \)-加法族を </p>
+<div class="displaymath" id="a0000000674">
+  \[  \mathcal B(X)  \]
+</div>
+<p> と書き，\(X\) のBorel集合族という． \(\mathcal B(X)\) の元をBorel集合という． </p>
+
+  </div>
+</div>
+<div class="example_thmwrapper theorem-style-plain" id="a0000000675">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
+    </span>
+    <span class="example_thmlabel">26</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000675">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="example_thmcontent">
+  <p>\(\mathbb R^d\) では，開集合，閉集合，開集合の可算共通部分，閉集合の可算和はいずれもBorel集合である． また，有理端点をもつ有界開区間全体は可算基底をなすので， </p>
+<div class="displaymath" id="a0000000676">
+  \[  \mathcal B(\mathbb R^d)  \]
+</div>
+<p> は有理端点をもつ有界開区間全体から生成される． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000000677">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">94</span>
+    <span class="theorem_thmtitle">Borel集合はLebesgue可測</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000677">#</a>
+    
+    <a class="icon proof" href="sect0006.html#a0000000678"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> すべてのBorel集合 \(B\subset \mathbb R^d\) はLebesgue可測である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000678">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>第5章で開集合がLebesgue可測であることを示した． Lebesgue可測集合全体 \(\mathcal L^d\) は \(\sigma \)-加法族であるから， 開集合が生成する \(\sigma \)-加法族である \(\mathcal B(\mathbb R^d)\) を含む． </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000000679">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">95</span>
+    <span class="definition_thmtitle">Borel測度</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000679">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> Lebesgue測度をBorel集合族に制限した測度 </p>
+<div class="displaymath" id="a0000000680">
+  \[  \lambda |_{\mathcal B(\mathbb R^d)}  \]
+</div>
+<p> を \(\mathbb R^d\) 上のBorel測度という． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000000681">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">96</span>
+    <span class="theorem_thmtitle">Lebesgue測度はBorel測度の完備化</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000681">#</a>
+    
+    <a class="icon proof" href="sect0006.html#a0000000682"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> 任意のLebesgue可測集合 \(A\subset \mathbb R^d\) は，あるBorel集合 \(B\) とあるLebesgue零集合 \(N\) を用いて </p>
+<div class="displaymath" id="a0000000683">
+  \[  A=B\triangle N  \]
+</div>
+<p> と書ける． したがってLebesgue測度は，Borel測度に零集合の部分集合をすべて加えて得られる完備化である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000682">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>証明は省略する． 外正則性により \(A\) を外側から開集合で近似し，それらの可算共通部分を取れば， \(A\) との差が零集合であるBorel集合が得られる． </p>
+
+  </div>
+</div>
+<h1 id="a0000000172"> Lebesgue非可測集合</h1>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000000684">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">97</span>
+    <span class="theorem_thmtitle">Vitali</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000684">#</a>
+    
+    <a class="icon proof" href="sect0006.html#a0000000685"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> \([0,1]\) にはLebesgue非可測集合が存在する． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000685">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\([0,1]\) 上に </p>
+<div class="displaymath" id="a0000000686">
+  \[  x\sim y \quad \Longleftrightarrow \quad x-y\in \mathbb Q \]
+</div>
+<p> で同値関係を定める． 選択公理を用いて，各同値類からちょうど1点ずつ選んだ集合を </p>
+<div class="displaymath" id="a0000000687">
+  \[  V\subset [0,1]  \]
+</div>
+<p> とする． </p>
+<p>\(q\in [-1,1]\cap \mathbb Q\) に対して </p>
+<div class="displaymath" id="a0000000688">
+  \[  V+q:=\{ v+q\mid v\in V\}   \]
+</div>
+<p> を考える． もし \(q_1\ne q_2\) なら， </p>
+<div class="displaymath" id="a0000000689">
+  \[  (V+q_1)\cap (V+q_2)=\emptyset  \]
+</div>
+<p> である． 実際，\(v_1+q_1=v_2+q_2\) なら </p>
+<div class="displaymath" id="a0000000690">
+  \[  v_1-v_2=q_2-q_1\in \mathbb Q \]
+</div>
+<p> だから \(v_1,v_2\) は同じ同値類に属する． \(V\) は各同値類から1点しか選んでいないので \(v_1=v_2\) となり， したがって \(q_1=q_2\) である． </p>
+<p>また </p>
+<div class="displaymath" id="a0000000691">
+  \[  [0,1] \subset \bigcup _{q\in [-1,1]\cap \mathbb Q}(V+q) \subset [-1,2]  \]
+</div>
+<p> である． 左の包含は，任意の \(x\in [0,1]\) に対して同じ同値類の代表元 \(v\in V\) が存在し， \(x-v\in [-1,1]\cap \mathbb Q\) となることから従う． </p>
+<p>ここで \(V\) がLebesgue可測であると仮定する． Lebesgue測度の平行移動不変性より，各 \(V+q\) も可測で </p>
+<div class="displaymath" id="a0000000692">
+  \[  \lambda _1(V+q)=\lambda _1(V)  \]
+</div>
+<p> である． 互いに素な可算和の完全加法性より </p>
+<div class="displaymath" id="a0000000693">
+  \[  \lambda _1\left(\bigcup _{q\in [-1,1]\cap \mathbb Q}(V+q)\right) = \sum _{q\in [-1,1]\cap \mathbb Q}\lambda _1(V)  \]
+</div>
+<p> となる． </p>
+<p>もし \(\lambda _1(V)=0\) なら右辺は \(0\) であるが， 左辺の集合は \([0,1]\) を含むので測度は少なくとも \(1\) である． これは矛盾である． もし \(\lambda _1(V){\gt}0\) なら右辺は \(\infty \) であるが， 左辺の集合は \([-1,2]\) に含まれるので測度は高々 \(3\) である． これも矛盾である． </p>
+<p>したがって \(V\) はLebesgue可測ではない． </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000000694">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">19</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000694">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>Lebesgue測度はBorel集合より広い集合族まで測れるが， \(\mathcal P(\mathbb R^d)\) 全体を測れるわけではない． Vitali集合は，可算加法性と平行移動不変性を保ったまま全ての部分集合へ測度を拡張できないことを示している． </p>
+
+  </div>
+</div>
+
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="sect0005.html" title="Lebesgue測度"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="Lecture note on KSK"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>

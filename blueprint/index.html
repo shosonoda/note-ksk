@@ -13,7 +13,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Lecture note on KSK</title>
-<link rel="next" href="sect0001.html" title="Lebesgue外測度" />
+<link rel="next" href="sect0001.html" title="Riemann積分" />
 <link rel="stylesheet" href="styles/theme-white.css" />
 <link rel="stylesheet" href="styles/amsthm.css" />
 <link rel="stylesheet" href="styles/showmore.css" />
@@ -30,91 +30,210 @@
 <nav class="toc">
 <ul class="sub-toc-0">
 <li class="">
-  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度</span></a>
+  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Riemann積分</span></a>
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0001.html#a0000000005"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+  <a href="sect0001.html#a0000000010"><span class="toc_ref"></span> <span class="toc_entry">Riemann和による定義</span></a>
  </li>
 <li class="">
-  <a href="sect0001.html#a0000000006"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+  <a href="sect0001.html#a0000000020"><span class="toc_ref"></span> <span class="toc_entry">Darbouxの上積分と下積分による定義</span></a>
  </li>
 <li class="">
-  <a href="sect0001.html#a0000000009"><span class="toc_ref"></span> <span class="toc_entry">拡大実数</span></a>
+  <a href="sect0001.html#a0000000031"><span class="toc_ref"></span> <span class="toc_entry">Riemann可積分関数の例</span></a>
  </li>
 <li class="">
-  <a href="sect0001.html#a0000000015"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の定義</span></a>
+  <a href="sect0001.html#a0000000093"><span class="toc_ref"></span> <span class="toc_entry">Riemann可積分でない例</span></a>
  </li>
 <li class="">
-  <a href="sect0001.html#a0000000026"><span class="toc_ref"></span> <span class="toc_entry">具体例</span></a>
+  <a href="sect0001.html#a0000000106"><span class="toc_ref"></span> <span class="toc_entry">極限と積分の順序交換</span></a>
  </li>
 <li class="">
-  <a href="sect0001.html#a0000000054"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の性質</span></a>
+  <a href="sect0001.html#a0000000115"><span class="toc_ref"></span> <span class="toc_entry">順序交換の応用例</span></a>
  </li>
 <li class="">
-  <a href="sect0001.html#a0000000076"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度との整合</span></a>
+  <a href="sect0001.html#a0000000124"><span class="toc_ref"></span> <span class="toc_entry">Riemann積分の長所と短所</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0001.html#a0000000125"><span class="toc_ref"></span> <span class="toc_entry">長所：定義が素朴であり，計算しやすい</span></a>
  </li>
 <li class="">
-  <a href="sect0001.html#a0000000094"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の外正則性</span></a>
+  <a href="sect0001.html#a0000000126"><span class="toc_ref"></span> <span class="toc_entry">短所：無限回操作に対して不安定</span></a>
  </li>
 <li class="">
-  <a href="sect0001.html#a0000000106"><span class="toc_ref"></span> <span class="toc_entry">解釈</span></a>
+  <a href="sect0001.html#a0000000127"><span class="toc_ref"></span> <span class="toc_entry">原因：Riemann積分の定義が有限和（有限分割\(\mathcal P\)）の極限</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000129"><span class="toc_ref"></span> <span class="toc_entry">技術的課題：無限和（無限分割）にすると何が起きるか</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000131"><span class="toc_ref"></span> <span class="toc_entry">解決策：Lebesgue積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000132"><span class="toc_ref"></span> <span class="toc_entry">展望：何が嬉しいか</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000133"><span class="toc_ref"></span> <span class="toc_entry">多くの応用先</span></a>
+ </li>
+
+  </ul>
  </li>
 
   </ul>
  </li>
 <li class="">
-  <a href="sect0002.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue内測度</span></a>
+  <a href="sect0002.html"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度</span></a>
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0002.html#a0000000109"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+  <a href="sect0002.html#a0000000134"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
  </li>
 <li class="">
-  <a href="sect0002.html#a0000000110"><span class="toc_ref"></span> <span class="toc_entry">定義</span></a>
+  <a href="sect0002.html#a0000000135"><span class="toc_ref"></span> <span class="toc_entry">\(\mathbb R^d\)の基本集合</span></a>
  </li>
 <li class="">
-  <a href="sect0002.html#a0000000111"><span class="toc_ref"></span> <span class="toc_entry">基本性質</span></a>
+  <a href="sect0002.html#a0000000136"><span class="toc_ref"></span> <span class="toc_entry">\(\mathbb R^d\)のRiemann積分</span></a>
  </li>
 <li class="">
-  <a href="sect0002.html#a0000000112"><span class="toc_ref"></span> <span class="toc_entry">具体例</span></a>
+  <a href="sect0002.html#a0000000137"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度・Jordan可測</span></a>
  </li>
 <li class="">
-  <a href="sect0002.html#a0000000113"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度との関係</span></a>
+  <a href="sect0002.html#a0000000138"><span class="toc_ref"></span> <span class="toc_entry">Jordan零集合</span></a>
  </li>
 <li class="">
-  <a href="sect0002.html#a0000000114"><span class="toc_ref"></span> <span class="toc_entry">同値な定義</span></a>
+  <a href="sect0002.html#a0000000139"><span class="toc_ref"></span> <span class="toc_entry">Jordan可測性の判定法</span></a>
  </li>
 <li class="">
-  <a href="sect0002.html#a0000000115"><span class="toc_ref"></span> <span class="toc_entry">解釈</span></a>
+  <a href="sect0002.html#a0000000140"><span class="toc_ref"></span> <span class="toc_entry">Jordan可測集合の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000141"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000142"><span class="toc_ref"></span> <span class="toc_entry">有限加法族・有限加法的測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000143"><span class="toc_ref"></span> <span class="toc_entry">概念の整理</span></a>
  </li>
 
   </ul>
  </li>
 <li class="">
-  <a href="sect0003.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度</span></a>
+  <a href="sect0003.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度</span></a>
   <span class="expand-toc">▶</span>
   <ul class="sub-toc-1">
      <li class="">
-  <a href="sect0003.html#a0000000116"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+  <a href="sect0003.html#a0000000144"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
  </li>
 <li class="">
-  <a href="sect0003.html#a0000000117"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合とLebesgue測度</span></a>
+  <a href="sect0003.html#a0000000145"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
  </li>
 <li class="">
-  <a href="sect0003.html#a0000000118"><span class="toc_ref"></span> <span class="toc_entry">Carathéodory条件</span></a>
+  <a href="sect0003.html#a0000000146"><span class="toc_ref"></span> <span class="toc_entry">拡大実数</span></a>
  </li>
 <li class="">
-  <a href="sect0003.html#a0000000119"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合の性質</span></a>
+  <a href="sect0003.html#a0000000147"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の定義</span></a>
  </li>
 <li class="">
-  <a href="sect0003.html#a0000000120"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度の性質</span></a>
+  <a href="sect0003.html#a0000000148"><span class="toc_ref"></span> <span class="toc_entry">具体例</span></a>
  </li>
 <li class="">
-  <a href="sect0003.html#a0000000121"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度の正則性</span></a>
+  <a href="sect0003.html#a0000000149"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の性質</span></a>
  </li>
 <li class="">
-  <a href="sect0003.html#a0000000122"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合の判定法</span></a>
+  <a href="sect0003.html#a0000000150"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度との整合</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000151"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の外正則性</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000152"><span class="toc_ref"></span> <span class="toc_entry">解釈</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0004.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue内測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0004.html#a0000000153"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000154"><span class="toc_ref"></span> <span class="toc_entry">定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000155"><span class="toc_ref"></span> <span class="toc_entry">基本性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000156"><span class="toc_ref"></span> <span class="toc_entry">具体例</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000157"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度との関係</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000158"><span class="toc_ref"></span> <span class="toc_entry">同値な定義</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0004.html#a0000000159"><span class="toc_ref"></span> <span class="toc_entry">外測度に関する補助定理</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000160"><span class="toc_ref"></span> <span class="toc_entry">解釈</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0005.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0005.html#a0000000161"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000162"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合とLebesgue測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000163"><span class="toc_ref"></span> <span class="toc_entry">Carathéodory条件</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000164"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000165"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000166"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度の正則性</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000167"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合の判定法</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0006.html"><span class="toc_ref"></span> <span class="toc_entry">Carathéodory流の測度論</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0006.html#a0000000168"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000169"><span class="toc_ref"></span> <span class="toc_entry">Carathéodoryの測度論</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000170"><span class="toc_ref"></span> <span class="toc_entry">半環から外測度へ</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000171"><span class="toc_ref"></span> <span class="toc_entry">Borel集合族</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000172"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue非可測集合</span></a>
  </li>
 
   </ul>
@@ -135,93 +254,206 @@
 </p>
 </div>
 
-
 </div> <!--main-text -->
 <nav class=local_toc>
 <ul>
   <li>	
-  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度</span></a>
+  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Riemann積分</span></a>
 	<ul>
 		   <li>	
-  <a href="sect0001.html#a0000000005"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+  <a href="sect0001.html#a0000000010"><span class="toc_ref"></span> <span class="toc_entry">Riemann和による定義</span></a>
   </li>
   <li>	
-  <a href="sect0001.html#a0000000006"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+  <a href="sect0001.html#a0000000020"><span class="toc_ref"></span> <span class="toc_entry">Darbouxの上積分と下積分による定義</span></a>
   </li>
   <li>	
-  <a href="sect0001.html#a0000000009"><span class="toc_ref"></span> <span class="toc_entry">拡大実数</span></a>
+  <a href="sect0001.html#a0000000031"><span class="toc_ref"></span> <span class="toc_entry">Riemann可積分関数の例</span></a>
   </li>
   <li>	
-  <a href="sect0001.html#a0000000015"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の定義</span></a>
+  <a href="sect0001.html#a0000000093"><span class="toc_ref"></span> <span class="toc_entry">Riemann可積分でない例</span></a>
   </li>
   <li>	
-  <a href="sect0001.html#a0000000026"><span class="toc_ref"></span> <span class="toc_entry">具体例</span></a>
+  <a href="sect0001.html#a0000000106"><span class="toc_ref"></span> <span class="toc_entry">極限と積分の順序交換</span></a>
   </li>
   <li>	
-  <a href="sect0001.html#a0000000054"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の性質</span></a>
+  <a href="sect0001.html#a0000000115"><span class="toc_ref"></span> <span class="toc_entry">順序交換の応用例</span></a>
   </li>
   <li>	
-  <a href="sect0001.html#a0000000076"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度との整合</span></a>
+  <a href="sect0001.html#a0000000124"><span class="toc_ref"></span> <span class="toc_entry">Riemann積分の長所と短所</span></a>
+	<ul>
+		   <li>	
+  <a href="sect0001.html#a0000000125"><span class="toc_ref"></span> <span class="toc_entry">長所：定義が素朴であり，計算しやすい</span></a>
   </li>
   <li>	
-  <a href="sect0001.html#a0000000094"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の外正則性</span></a>
+  <a href="sect0001.html#a0000000126"><span class="toc_ref"></span> <span class="toc_entry">短所：無限回操作に対して不安定</span></a>
   </li>
   <li>	
-  <a href="sect0001.html#a0000000106"><span class="toc_ref"></span> <span class="toc_entry">解釈</span></a>
+  <a href="sect0001.html#a0000000127"><span class="toc_ref"></span> <span class="toc_entry">原因：Riemann積分の定義が有限和（有限分割\(\mathcal P\)）の極限</span></a>
+  </li>
+  <li>	
+  <a href="sect0001.html#a0000000129"><span class="toc_ref"></span> <span class="toc_entry">技術的課題：無限和（無限分割）にすると何が起きるか</span></a>
+  </li>
+  <li>	
+  <a href="sect0001.html#a0000000131"><span class="toc_ref"></span> <span class="toc_entry">解決策：Lebesgue積分</span></a>
+  </li>
+  <li>	
+  <a href="sect0001.html#a0000000132"><span class="toc_ref"></span> <span class="toc_entry">展望：何が嬉しいか</span></a>
+  </li>
+  <li>	
+  <a href="sect0001.html#a0000000133"><span class="toc_ref"></span> <span class="toc_entry">多くの応用先</span></a>
+  </li>
+
+	</ul>
   </li>
 
 	</ul>
   </li>
   <li>	
-  <a href="sect0002.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue内測度</span></a>
+  <a href="sect0002.html"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度</span></a>
 	<ul>
 		   <li>	
-  <a href="sect0002.html#a0000000109"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+  <a href="sect0002.html#a0000000134"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
   </li>
   <li>	
-  <a href="sect0002.html#a0000000110"><span class="toc_ref"></span> <span class="toc_entry">定義</span></a>
+  <a href="sect0002.html#a0000000135"><span class="toc_ref"></span> <span class="toc_entry">\(\mathbb R^d\)の基本集合</span></a>
   </li>
   <li>	
-  <a href="sect0002.html#a0000000111"><span class="toc_ref"></span> <span class="toc_entry">基本性質</span></a>
+  <a href="sect0002.html#a0000000136"><span class="toc_ref"></span> <span class="toc_entry">\(\mathbb R^d\)のRiemann積分</span></a>
   </li>
   <li>	
-  <a href="sect0002.html#a0000000112"><span class="toc_ref"></span> <span class="toc_entry">具体例</span></a>
+  <a href="sect0002.html#a0000000137"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度・Jordan可測</span></a>
   </li>
   <li>	
-  <a href="sect0002.html#a0000000113"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度との関係</span></a>
+  <a href="sect0002.html#a0000000138"><span class="toc_ref"></span> <span class="toc_entry">Jordan零集合</span></a>
   </li>
   <li>	
-  <a href="sect0002.html#a0000000114"><span class="toc_ref"></span> <span class="toc_entry">同値な定義</span></a>
+  <a href="sect0002.html#a0000000139"><span class="toc_ref"></span> <span class="toc_entry">Jordan可測性の判定法</span></a>
   </li>
   <li>	
-  <a href="sect0002.html#a0000000115"><span class="toc_ref"></span> <span class="toc_entry">解釈</span></a>
+  <a href="sect0002.html#a0000000140"><span class="toc_ref"></span> <span class="toc_entry">Jordan可測集合の性質</span></a>
+  </li>
+  <li>	
+  <a href="sect0002.html#a0000000141"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度の性質</span></a>
+  </li>
+  <li>	
+  <a href="sect0002.html#a0000000142"><span class="toc_ref"></span> <span class="toc_entry">有限加法族・有限加法的測度</span></a>
+  </li>
+  <li>	
+  <a href="sect0002.html#a0000000143"><span class="toc_ref"></span> <span class="toc_entry">概念の整理</span></a>
   </li>
 
 	</ul>
   </li>
   <li>	
-  <a href="sect0003.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度</span></a>
+  <a href="sect0003.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度</span></a>
 	<ul>
 		   <li>	
-  <a href="sect0003.html#a0000000116"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+  <a href="sect0003.html#a0000000144"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
   </li>
   <li>	
-  <a href="sect0003.html#a0000000117"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合とLebesgue測度</span></a>
+  <a href="sect0003.html#a0000000145"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
   </li>
   <li>	
-  <a href="sect0003.html#a0000000118"><span class="toc_ref"></span> <span class="toc_entry">Carathéodory条件</span></a>
+  <a href="sect0003.html#a0000000146"><span class="toc_ref"></span> <span class="toc_entry">拡大実数</span></a>
   </li>
   <li>	
-  <a href="sect0003.html#a0000000119"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合の性質</span></a>
+  <a href="sect0003.html#a0000000147"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の定義</span></a>
   </li>
   <li>	
-  <a href="sect0003.html#a0000000120"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度の性質</span></a>
+  <a href="sect0003.html#a0000000148"><span class="toc_ref"></span> <span class="toc_entry">具体例</span></a>
   </li>
   <li>	
-  <a href="sect0003.html#a0000000121"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度の正則性</span></a>
+  <a href="sect0003.html#a0000000149"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の性質</span></a>
   </li>
   <li>	
-  <a href="sect0003.html#a0000000122"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合の判定法</span></a>
+  <a href="sect0003.html#a0000000150"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度との整合</span></a>
+  </li>
+  <li>	
+  <a href="sect0003.html#a0000000151"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の外正則性</span></a>
+  </li>
+  <li>	
+  <a href="sect0003.html#a0000000152"><span class="toc_ref"></span> <span class="toc_entry">解釈</span></a>
+  </li>
+
+	</ul>
+  </li>
+  <li>	
+  <a href="sect0004.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue内測度</span></a>
+	<ul>
+		   <li>	
+  <a href="sect0004.html#a0000000153"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+  </li>
+  <li>	
+  <a href="sect0004.html#a0000000154"><span class="toc_ref"></span> <span class="toc_entry">定義</span></a>
+  </li>
+  <li>	
+  <a href="sect0004.html#a0000000155"><span class="toc_ref"></span> <span class="toc_entry">基本性質</span></a>
+  </li>
+  <li>	
+  <a href="sect0004.html#a0000000156"><span class="toc_ref"></span> <span class="toc_entry">具体例</span></a>
+  </li>
+  <li>	
+  <a href="sect0004.html#a0000000157"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度との関係</span></a>
+  </li>
+  <li>	
+  <a href="sect0004.html#a0000000158"><span class="toc_ref"></span> <span class="toc_entry">同値な定義</span></a>
+	<ul>
+		   <li>	
+  <a href="sect0004.html#a0000000159"><span class="toc_ref"></span> <span class="toc_entry">外測度に関する補助定理</span></a>
+  </li>
+
+	</ul>
+  </li>
+  <li>	
+  <a href="sect0004.html#a0000000160"><span class="toc_ref"></span> <span class="toc_entry">解釈</span></a>
+  </li>
+
+	</ul>
+  </li>
+  <li>	
+  <a href="sect0005.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度</span></a>
+	<ul>
+		   <li>	
+  <a href="sect0005.html#a0000000161"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+  </li>
+  <li>	
+  <a href="sect0005.html#a0000000162"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合とLebesgue測度</span></a>
+  </li>
+  <li>	
+  <a href="sect0005.html#a0000000163"><span class="toc_ref"></span> <span class="toc_entry">Carathéodory条件</span></a>
+  </li>
+  <li>	
+  <a href="sect0005.html#a0000000164"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合の性質</span></a>
+  </li>
+  <li>	
+  <a href="sect0005.html#a0000000165"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度の性質</span></a>
+  </li>
+  <li>	
+  <a href="sect0005.html#a0000000166"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度の正則性</span></a>
+  </li>
+  <li>	
+  <a href="sect0005.html#a0000000167"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合の判定法</span></a>
+  </li>
+
+	</ul>
+  </li>
+  <li>	
+  <a href="sect0006.html"><span class="toc_ref"></span> <span class="toc_entry">Carathéodory流の測度論</span></a>
+	<ul>
+		   <li>	
+  <a href="sect0006.html#a0000000168"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+  </li>
+  <li>	
+  <a href="sect0006.html#a0000000169"><span class="toc_ref"></span> <span class="toc_entry">Carathéodoryの測度論</span></a>
+  </li>
+  <li>	
+  <a href="sect0006.html#a0000000170"><span class="toc_ref"></span> <span class="toc_entry">半環から外測度へ</span></a>
+  </li>
+  <li>	
+  <a href="sect0006.html#a0000000171"><span class="toc_ref"></span> <span class="toc_entry">Borel集合族</span></a>
+  </li>
+  <li>	
+  <a href="sect0006.html#a0000000172"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue非可測集合</span></a>
   </li>
 
 	</ul>
@@ -237,7 +469,7 @@
 
   <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
 
-  <a href="sect0001.html" title="Lebesgue外測度"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+  <a href="sect0001.html" title="Riemann積分"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
 </a>
 </nav>
 
