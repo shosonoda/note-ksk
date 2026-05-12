@@ -103,7 +103,7 @@ Jordan内測度との類推から，内測度を
 
 \section{基本性質}
 
-\begin{proposition}
+\begin{proposition} \label{prop:lebesgue-inner-basic}
 任意の $A,B \subset \RR^d$ に対して次が成り立つ．
 \begin{enumerate}
     \item $0 \le \lambda_*(A) \le \lambda^*(A)$
@@ -130,7 +130,7 @@ Jordan内測度との類推から，内測度を
 \end{enumerate}
 \end{proof}
 
-\begin{proposition}[コンパクト集合では内外が一致する]
+\begin{proposition}[コンパクト集合では内外が一致する] \label{prop:compact-inner-outer-equal}
 コンパクト集合 $K \subset \RR^d$ に対して
 \[
 \lambda_*(K)=\lambda^*(K)
@@ -200,7 +200,7 @@ $\lambda^*(A)=0$ ならば
 \end{proof}
 
 \section{Jordan測度との関係}
-\begin{theorem}
+\begin{theorem} \label{thm:jordan-inner-lebesgue-inner}
 集合 $A \subset \RR^d$ に対し，\[
 m_{J,*}(A) \le \lambda_*(A)
 \]
@@ -266,7 +266,7 @@ m_{J,*}(A)\le \lambda_*(A)
 %この定義が上のコンパクト集合による定義と一致することは，開集合とコンパクト集合の可測性を示した後で証明する．
 
 外測度有限な集合 $A$ を，それを含む外測度有限な開集合 $O$ に入れて内測度を測ることができる．
-\begin{theorem}
+\begin{theorem} \label{thm:inner-measure-via-open-set}
     $\lambda^*(A) < \infty$ とする．$A$を含む任意の外測度有限な開集合 $O$ に対し，
     \[
     \lambda_*(A) = \lambda^*(O) - \lambda^*(O \setminus A)

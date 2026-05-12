@@ -21,20 +21,20 @@ Lebesgue可測集合全体を
 \calL_d:=\{A\subset\RR^d\mid \lambda_*(A)=\lambda^*(A)\}
 \]
 と書く．
-$A\in\calL_d$ のとき，この共通値を
+$A\in\calL_d$ のとき，共通値
 \[
 \lambda(A):=\lambda_*(A)=\lambda^*(A)
 \]
-と書き，$A$ のLebesgue測度という．
+を $A$ のLebesgue測度という．
 \end{definition}
 
-\begin{definition}[Lebesgue零集合]
-集合 $N\subset\RR^d$ が
-\[
-\lambda^*(N)=0
-\]
-を満たすとき，$N$ をLebesgue零集合という．
-\end{definition}
+% \begin{definition}[Lebesgue零集合]
+% 集合 $N\subset\RR^d$ が
+% \[
+% \lambda^*(N)=0
+% \]
+% を満たすとき，$N$ をLebesgue零集合という．
+% \end{definition}
 
 \begin{theorem}[Lebesgue零集合]
 Lebesgue零集合はLebesgue可測であり，Lebesgue測度は $0$ である．
@@ -54,10 +54,10 @@ $\lambda^*(N)=0$ なら
 
 \begin{corollary}[可算集合]
 一点集合，可算集合，$\QQ^d$，$\ZZ^d$ はLebesgue可測であり，測度 $0$ をもつ．
-特に1次元では $\QQ$ と $\ZZ$ はLebesgue測度 $0$ である．
+%特に1次元では $\QQ$ と $\ZZ$ はLebesgue測度 $0$ である．
 \end{corollary}
 \begin{proof}
-第3章で，一点集合および可算集合のLebesgue外測度は $0$ であることを示した．
+一点集合および可算集合のLebesgue外測度は $0$ である．
 したがって前定理より従う．
 \end{proof}
 
@@ -111,37 +111,37 @@ m_J(A)
 \lambda_1([0,1])=1
 \]
 である．
-後で示す有限加法性より
+よって，後で示す有限加法性より
 \[
 \lambda_1([0,1]\setminus\QQ)=1
 \]
 となる．
 \end{example}
 
-\section{Carathéodory条件}
+% \section{Carathéodory条件}
 
-\begin{definition}[Carathéodory条件]
-集合 $A\subset\RR^d$ がLebesgue外測度 $\lambda^*$ に関するCarathéodory条件を満たすとは，
-任意の $E\subset\RR^d$ に対して
-\[
-\lambda^*(E)
-=
-\lambda^*(E\cap A)+\lambda^*(E\setminus A)
-\]
-が成り立つことをいう．
-\end{definition}
+% \begin{definition}[Carathéodory条件]
+% 集合 $A\subset\RR^d$ がLebesgue外測度 $\lambda^*$ に関するCarathéodory条件を満たすとは，
+% 任意の $E\subset\RR^d$ に対して
+% \[
+% \lambda^*(E)
+% =
+% \lambda^*(E\cap A)+\lambda^*(E\setminus A)
+% \]
+% が成り立つことをいう．
+% \end{definition}
 
-\begin{theorem}[作業用の判定法]
-集合 $A\subset\RR^d$ について，次は同値である．
-\begin{enumerate}
-    \item $A$ はLebesgue可測である
-    \item $A$ はCarathéodory条件を満たす
-\end{enumerate}
-\end{theorem}
-\begin{proof}
-本章末の判定法で，正則性を含む形で証明する．
-証明の核は第6章で述べるCarathéodoryの定理である．
-\end{proof}
+% \begin{theorem}[作業用の判定法]
+% 集合 $A\subset\RR^d$ について，次は同値である．
+% \begin{enumerate}
+%     \item $A$ はLebesgue可測である
+%     \item $A$ はCarathéodory条件を満たす
+% \end{enumerate}
+% \end{theorem}
+% \begin{proof}
+% 本章末の判定法で，正則性を含む形で証明する．
+% 証明の核は第6章で述べるCarathéodoryの定理である．
+% \end{proof}
 
 \section{Lebesgue可測集合の性質}
 

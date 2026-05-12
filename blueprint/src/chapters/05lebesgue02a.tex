@@ -1,0 +1,1039 @@
+\setcounter{chapter}{4}
+\chapter{Lebesgue測度}
+
+\paragraph{本章の目標}
+有界な窓で切ったときにLebesgue外測度 $\lambda^*$ とLebesgue内測度 $\lambda_*$ が一致する集合を
+Lebesgue可測集合と定める．
+そのうえで，Lebesgue可測集合全体が $\sigma$-加法族をなし，
+Lebesgue測度が可算加法的な測度になることを確認する．
+最後に，内外正則性とCarathéodory条件による判定法を述べる．
+
+\section{Lebesgue可測集合とLebesgue測度}
+
+以下では，
+\[
+Q_R:=[-R,R]^d\qquad(R>0)
+\]
+と書く．
+
+\begin{definition}[Lebesgue可測集合とLebesgue測度]\label{def:lebesgue-measurable-local}
+集合 $A \subset \RR^d$ がLebesgue可測であるとは
+\[
+\lambda_*(A\cap Q_R)=\lambda^*(A\cap Q_R)
+\qquad (R>0)
+\]
+が成り立つことをいう．
+Lebesgue可測集合全体を
+\[
+\calL_d:=\{A\subset\RR^d\mid A \text{ はLebesgue可測}\}
+\]
+と書く．
+$A\in\calL_d$ のとき，
+\[
+\lambda(A):=\lambda^*(A)
+\]
+を $A$ のLebesgue測度という．
+\end{definition}
+
+\begin{lemma}[有界集合の可測性]\label{lem:bounded-measurable-iff-inner-outer}
+有界集合 $A\subset\RR^d$ について，次は同値である．
+\begin{enumerate}
+    \item $A$ はLebesgue可測である
+    \item $\lambda_*(A)=\lambda^*(A)$
+\end{enumerate}
+また，$A$ が有界ならば 
+%\[
+$\lambda_*(A)<\infty$
+%\]
+である．
+\end{lemma}
+\begin{proof}
+$A$ は有界なので，ある $R_0>0$ が存在して
+\[
+A\subset Q_{R_0}=[-R_0,R_0]^d
+\]
+となる．
+
+まず $A$ がLebesgue可測であるとする．
+定義より
+\[
+\lambda_*(A\cap Q_{R_0})=\lambda^*(A\cap Q_{R_0})
+\]
+である．
+$A\cap Q_{R_0}=A$ だから
+\[
+\lambda_*(A)=\lambda^*(A)
+\]
+を得る．
+
+逆に $\lambda_*(A)=\lambda^*(A)$ とする．
+任意の $R>0$ に対し，
+\[
+E:=A\cap Q_R
+\]
+とおく．
+$E$ が内外一致することを示せばよい．
+$A$ は有界なので $\lambda^*(A)<\infty$ である．
+$\eps>0$ を任意に取る．
+内測度の定義と仮定 $\lambda_*(A)=\lambda^*(A)$ より，
+コンパクト集合 $K\subset A$ を
+\[
+\lambda^*(K)>\lambda^*(A)-\frac{\eps}{3}
+\]
+となるように取れる．
+また開集合による外正則性（\cref{thm:lebesgue-outer-regularity-open}）より，開集合 $G\supset A$ を
+\[
+\lambda^*(G)<\lambda^*(A)+\frac{\eps}{3}
+\]
+となるように取れる．
+特に $\lambda^*(G)<\infty$ である．
+開集合とコンパクト集合の分解公式（\cref{lem:finite-open-compact-split}）を $G$ と $K$ に適用すると
+\[
+\lambda^*(G\setminus K)
+=
+\lambda^*(G)-\lambda^*(K)
+<\frac{2\eps}{3}
+\]
+である．
+
+さらに $\eta>0$ を十分小さく取って
+\[
+U:=(-R-\eta,R+\eta)^d
+\]
+が
+\[
+\lambda^*(U\setminus Q_R)<\frac{\eps}{3}
+\]
+を満たすようにする．
+そして
+\[
+H:=G\cap U,
+\qquad
+L:=K\cap Q_R
+\]
+とおく．
+このとき $H$ は $E$ を含む有限外測度の開集合であり，
+$L$ は $E$ に含まれるコンパクト集合である．
+また
+\[
+H\setminus L
+\subset
+(G\setminus K)\cup(U\setminus Q_R)
+\]
+だから
+\[
+\lambda^*(H\setminus L)<\eps.
+\]
+開集合とコンパクト集合の分解公式（\cref{lem:finite-open-compact-split}）を $H$ と $L$ に適用すると
+\[
+\lambda^*(H)=\lambda^*(L)+\lambda^*(H\setminus L)
+\]
+である．
+したがって
+\[
+\lambda^*(E)
+\le
+\lambda^*(H)
+<
+\lambda^*(L)+\eps
+\le
+\lambda_*(E)+\eps.
+\]
+$\eps>0$ は任意なので $\lambda^*(E)\le\lambda_*(E)$ であり，
+逆向きの不等式はLebesgue内測度の基本性質（\cref{prop:lebesgue-inner-basic}）から従う．
+よって $E=A\cap Q_R$ は内外一致する．
+$R>0$ は任意だから，$A$ はLebesgue可測である．
+
+最後に，$A\subset Q_{R_0}$ と
+Lebesgue外測度は外測度であること（\cref{thm:lebesgue-outer-measure}）の単調性より
+\[
+\lambda_*(A)\le \lambda^*(A)\le \lambda^*(Q_{R_0})<\infty
+\]
+である．
+\end{proof}
+
+\begin{remark}
+逆に
+\[
+\lambda_*(A)<\infty \implies A \text{ は有界}
+\]
+は成り立たない．
+例えば $\ZZ^d$ は非有界であるが，可算集合なので
+\[
+\lambda_*(\ZZ^d)=0
+\]
+である．
+\end{remark}
+
+% \begin{definition}[Lebesgue零集合]
+% 集合 $N\subset\RR^d$ が
+% \[
+% \lambda^*(N)=0
+% \]
+% を満たすとき，$N$ をLebesgue零集合という．
+% \end{definition}
+
+\begin{theorem}[Lebesgue零集合]\label{thm:lebesgue-null-measurable}
+Lebesgue零集合はLebesgue可測であり，Lebesgue測度は $0$ である．
+\end{theorem}
+\begin{proof}
+任意の $R>0$ に対して，Lebesgue外測度は外測度であること
+（\cref{thm:lebesgue-outer-measure}）の単調性より
+\[
+\lambda^*(N\cap[-R,R]^d)\le \lambda^*(N)=0
+\]
+である．
+Lebesgue内測度の基本性質（\cref{prop:lebesgue-inner-basic}）より
+\[
+0\le \lambda_*(N\cap[-R,R]^d)
+\le
+\lambda^*(N\cap[-R,R]^d)
+\]
+である．
+したがって
+\[
+\lambda_*(N\cap[-R,R]^d)
+=
+\lambda^*(N\cap[-R,R]^d)
+=0
+\]
+だから，$N$ はLebesgue可測である．
+また $\lambda(N)=\lambda^*(N)=0$ である．
+\end{proof}
+
+\begin{corollary}[可算集合]\label{cor:countable-lebesgue-null}
+一点集合，可算集合，$\QQ^d$，$\ZZ^d$ はLebesgue可測であり，測度 $0$ をもつ．
+%特に1次元では $\QQ$ と $\ZZ$ はLebesgue測度 $0$ である．
+\end{corollary}
+\begin{proof}
+一点集合および可算集合のLebesgue外測度は $0$ である
+（\cref{thm:countable-outer-measure-zero}）．
+したがってLebesgue零集合の可測性（\cref{thm:lebesgue-null-measurable}）より従う．
+\end{proof}
+
+\begin{theorem}[Jordan可測集合]\label{thm:jordan-measurable-lebesgue}
+Jordan可測集合 $A\subset\RR^d$ はLebesgue可測であり，
+\[
+\lambda(A)=m_J(A)
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+任意の $R>0$ に対して
+\[
+A_R:=A\cap[-R,R]^d
+\]
+とおく．
+Jordan可測集合は有限交叉で閉じているので，$A_R$ もJordan可測である．
+したがって
+\[
+m_{J,*}(A_R)=m_J^*(A_R)=m_J(A_R)
+\]
+である．
+Jordan内測度とLebesgue内測度の比較（\cref{thm:jordan-inner-lebesgue-inner}），
+Lebesgue内測度の基本性質（\cref{prop:lebesgue-inner-basic}），
+Jordan外測度とLebesgue外測度の比較（\cref{prop:louter-le-jouter}）を順に用いると
+\[
+m_J(A_R)
+=m_{J,*}(A_R)
+\le \lambda_*(A_R)
+\le \lambda^*(A_R)
+\le m_J^*(A_R)
+=m_J(A_R)
+\]
+となる．
+したがってすべて等号であり，特に
+\[
+\lambda_*(A_R)=\lambda^*(A_R)=m_J(A_R)
+\]
+である．
+よって $A$ はLebesgue可測である．
+さらに $R>0$ を十分大きく取れば $A_R=A$ だから，
+\[
+\lambda(A)=\lambda^*(A)=m_J(A)
+\]
+である．
+\end{proof}
+
+\begin{example}
+\[
+\QQ\cap[0,1]
+\]
+は可算集合なのでLebesgue可測であり，
+\[
+\lambda_1(\QQ\cap[0,1])=0
+\]
+である．
+一方，$[0,1]$ はJordan可測で $m_J([0,1])=1$ だから
+\[
+\lambda_1([0,1])=1
+\]
+である．
+よって，後で示す完全加法性（\cref{thm:lebesgue-measure-countable-additivity}）から従う有限加法性より
+\[
+\lambda_1([0,1]\setminus\QQ)=1
+\]
+となる．
+\end{example}
+
+\section{Lebesgue可測集合の性質}
+
+まず，有界な窓の中で使う有限外測度の判定法を用意する．
+
+\begin{lemma}[有限外測度集合の近似判定法]\label{lem:finite-outer-approx-criterion}
+$E\subset\RR^d$ が $\lambda^*(E)<\infty$ を満たすとする．
+このとき次は同値である．
+\begin{enumerate}
+    \item $\lambda_*(E)=\lambda^*(E)$
+    \item 任意の $\eps>0$ に対して，コンパクト集合 $K$ と開集合 $G$ が存在して
+    \[
+    K\subset E\subset G,
+    \qquad
+    \lambda^*(G\setminus K)<\eps
+    \]
+    を満たす
+    \item 任意の $\eps>0$ に対して，開集合 $G\supset E$ が存在して
+    \[
+    \lambda^*(G\setminus E)<\eps
+    \]
+    を満たす
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+(1) から (2) を示す．
+$E$ が内外一致するとする．
+内測度の定義より，コンパクト集合 $K\subset E$ で
+\[
+\lambda^*(K)>\lambda^*(E)-\frac{\eps}{2}
+\]
+を満たすものが取れる．
+また開集合による外正則性（\cref{thm:lebesgue-outer-regularity-open}）より，開集合 $G\supset E$ で
+\[
+\lambda^*(G)<\lambda^*(E)+\frac{\eps}{2}
+\]
+を満たすものが取れる．
+特に $\lambda^*(G)<\infty$ である．
+開集合とコンパクト集合の分解公式（\cref{lem:finite-open-compact-split}）を $G$ と $K$ に適用すると
+\[
+\lambda^*(G)=\lambda^*(K)+\lambda^*(G\setminus K)
+\]
+である．
+したがって
+\[
+\lambda^*(G\setminus K)
+=\lambda^*(G)-\lambda^*(K)
+<\eps
+\]
+を得る．
+
+(2) から (3) は
+\[
+G\setminus E\subset G\setminus K
+\]
+より従う．
+
+(3) から (1) を示す．
+$\eps>0$ を任意に取る．
+$G\supset E$ を
+\[
+\lambda^*(G\setminus E)<\eps
+\]
+となる開集合とする．
+外測度の劣加法性より
+\[
+\lambda^*(G)\le \lambda^*(E)+\lambda^*(G\setminus E)<\infty
+\]
+である．
+開集合を用いた内測度表示（\cref{thm:inner-measure-via-open-set}）を，
+有限外測度集合 $E$ とそれを含む有限外測度の開集合 $G$ に適用すると
+\[
+\lambda_*(E)=\lambda^*(G)-\lambda^*(G\setminus E)
+\]
+である．
+一方，$E\subset G$ だから
+\[
+\lambda^*(E)\le\lambda^*(G)
+\]
+であり，したがって
+\[
+\lambda_*(E)
+\ge
+\lambda^*(E)-\lambda^*(G\setminus E)
+>
+\lambda^*(E)-\eps.
+\]
+$\eps>0$ は任意だから
+\[
+\lambda_*(E)\ge \lambda^*(E)
+\]
+である．
+逆向きの不等式はLebesgue内測度の基本性質（\cref{prop:lebesgue-inner-basic}）であるから，
+\[
+\lambda_*(E)=\lambda^*(E)
+\]
+を得る．
+\end{proof}
+
+\begin{lemma}[有限外測度での集合演算]\label{lem:finite-outer-measure-set-operations}
+$E,F\subset\RR^d$ はLebesgue可測であり，
+\[
+\lambda^*(E)<\infty,\qquad \lambda^*(F)<\infty
+\]
+を満たすとする．
+このとき
+\[
+E\cup F,\qquad E\setminus F,\qquad E\cap F
+\]
+も内外一致する．
+さらに，$\{E_n\}_{n=1}^{\infty}$ がLebesgue可測集合列で，各 $n$ について
+\[
+\lambda^*(E_n)<\infty
+\]
+を満たし，
+\[
+B:=\bigcup_{n=1}^{\infty}E_n
+\]
+が $\lambda^*(B)<\infty$ を満たすならば，$B$ も内外一致する．
+\end{lemma}
+\begin{proof}
+まず，Lebesgue可測かつ外測度有限な集合 $C$ は内外一致することを確認する．
+$\eps>0$ を任意に取る．
+外測度の定義より，$C$ を覆う区間列 $\{I_n\}_{n=1}^{\infty}$ で
+\[
+\sum_{n=1}^{\infty}|I_n|<\lambda^*(C)+\eps
+\]
+となるものが取れる．
+有限個の項を十分多く取れば，ある $N$ について
+\[
+\sum_{n>N}|I_n|<\eps
+\]
+である．
+さらに $R>0$ を十分大きく取って，空でない有界区間
+$I_1,\dots,I_N$ がすべて $Q_R$ に含まれるようにする．
+すると
+\[
+C\setminus Q_R\subset\bigcup_{n>N}I_n
+\]
+だから
+\[
+\lambda^*(C\setminus Q_R)<\eps.
+\]
+定義より $C\cap Q_R$ は内外一致するので，コンパクト集合 $K\subset C\cap Q_R$ を
+\[
+\lambda^*(K)>\lambda^*(C\cap Q_R)-\eps
+\]
+となるように取れる．
+外測度の劣加法性より
+\[
+\lambda^*(C)
+\le
+\lambda^*(C\cap Q_R)+\lambda^*(C\setminus Q_R)
+<
+\lambda^*(K)+2\eps
+\le
+\lambda_*(C)+2\eps.
+\]
+$\eps>0$ は任意なので，基本不等式と合わせて
+\[
+\lambda_*(C)=\lambda^*(C)
+\]
+である．
+したがって，$E,F$ および各 $E_n$ は内外一致する．
+以下では有限外測度集合の近似判定法（\cref{lem:finite-outer-approx-criterion}）の (3) を用いる．
+
+まず和集合を考える．
+$\eps>0$ を任意に取る．
+開集合 $G_E\supset E$ と $G_F\supset F$ を
+\[
+\lambda^*(G_E\setminus E)<\frac{\eps}{2},
+\qquad
+\lambda^*(G_F\setminus F)<\frac{\eps}{2}
+\]
+となるように取る．
+すると $G:=G_E\cup G_F$ は $E\cup F$ を含む開集合であり，
+\[
+G\setminus(E\cup F)
+\subset
+(G_E\setminus E)\cup(G_F\setminus F)
+\]
+だから
+\[
+\lambda^*(G\setminus(E\cup F))<\eps.
+\]
+よって $E\cup F$ は内外一致する．
+
+次に差集合を考える．
+開集合 $G_E\supset E$ と，コンパクト集合 $K_F\subset F$ を
+\[
+\lambda^*(G_E\setminus E)<\frac{\eps}{2},
+\qquad
+\lambda^*(F\setminus K_F)<\frac{\eps}{2}
+\]
+となるように取る．
+後者は有限外測度集合の近似判定法（\cref{lem:finite-outer-approx-criterion}）の (2) から従う．
+このとき
+\[
+H:=G_E\setminus K_F
+\]
+は $E\setminus F$ を含む開集合である．
+$x\in H\setminus(E\setminus F)$ ならば，$x\notin E$ または $x\in F$ である．
+さらに $x\notin K_F$ だから
+\[
+H\setminus(E\setminus F)
+\subset
+(G_E\setminus E)\cup(F\setminus K_F).
+\]
+したがって
+\[
+\lambda^*(H\setminus(E\setminus F))<\eps.
+\]
+よって $E\setminus F$ も内外一致する．
+
+共通部分は
+\[
+E\cap F=E\setminus(E\setminus F)
+\]
+と書けるので，すでに示した差集合の場合から従う．
+
+最後に可算和を考える．
+$\eps>0$ を任意に取る．
+各 $n$ について開集合 $G_n\supset E_n$ を
+\[
+\lambda^*(G_n\setminus E_n)<\frac{\eps}{2^n}
+\]
+となるように取る．
+このとき
+\[
+G:=\bigcup_{n=1}^{\infty}G_n
+\]
+は $B$ を含む開集合であり，
+\[
+G\setminus B
+\subset
+\bigcup_{n=1}^{\infty}(G_n\setminus E_n)
+\]
+だから，Lebesgue外測度は外測度であること（\cref{thm:lebesgue-outer-measure}）の可算劣加法性より
+\[
+\lambda^*(G\setminus B)
+\le
+\sum_{n=1}^{\infty}\lambda^*(G_n\setminus E_n)
+<\eps.
+\]
+$\lambda^*(B)<\infty$ という仮定と有限外測度集合の近似判定法
+（\cref{lem:finite-outer-approx-criterion}）より，$B$ は内外一致する．
+\end{proof}
+
+\begin{theorem}[Lebesgue可測集合の $\sigma$-加法族性]\label{thm:lebesgue-measurable-sigma-algebra}
+Lebesgue可測集合全体 $\calL_d$ は $\RR^d$ 上の $\sigma$-加法族である．
+すなわち，次が成り立つ．
+\begin{enumerate}
+    \item $\emptyset,\RR^d\in\calL_d$
+    \item $A\in\calL_d$ ならば $\RR^d\setminus A\in\calL_d$
+    \item $\{A_n\}_{n=1}^{\infty}\subset\calL_d$ ならば
+    \[
+    \bigcup_{n=1}^{\infty}A_n\in\calL_d
+    \]
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+$\emptyset\cap Q_R=\emptyset$ であり，また
+$\RR^d\cap Q_R=Q_R$ はコンパクト集合である．
+コンパクト集合では内外が一致すること（\cref{prop:compact-inner-outer-equal}）より，
+\[
+\emptyset,\RR^d\in\calL_d
+\]
+である．
+
+$A\in\calL_d$ とする．
+任意の $R>0$ に対して
+\[
+(\RR^d\setminus A)\cap Q_R
+=
+Q_R\setminus(A\cap Q_R)
+\]
+である．
+$Q_R$ はコンパクトなのでLebesgue可測で外測度有限である．
+また $A\cap Q_R$ は有界であり，定義より内外一致するので，
+有界集合の可測性（\cref{lem:bounded-measurable-iff-inner-outer}）よりLebesgue可測である．
+したがって有限外測度での集合演算（\cref{lem:finite-outer-measure-set-operations}）を適用でき，右辺は内外一致する．
+したがって $\RR^d\setminus A\in\calL_d$ である．
+
+次に $\{A_n\}_{n=1}^{\infty}\subset\calL_d$ とする．
+任意の $R>0$ に対して
+\[
+\left(\bigcup_{n=1}^{\infty}A_n\right)\cap Q_R
+=
+\bigcup_{n=1}^{\infty}(A_n\cap Q_R)
+\]
+である．
+各 $A_n\cap Q_R$ は有界であり，定義より内外一致するので，
+有界集合の可測性（\cref{lem:bounded-measurable-iff-inner-outer}）よりLebesgue可測である．
+また右辺は $Q_R$ に含まれるので有限外測度をもつ．
+有限外測度での集合演算（\cref{lem:finite-outer-measure-set-operations}）の可算和の場合より，右辺は内外一致する．
+ゆえに
+\[
+\bigcup_{n=1}^{\infty}A_n\in\calL_d
+\]
+である．
+\end{proof}
+
+\begin{corollary}[集合演算]\label{cor:lebesgue-measurable-set-operations}
+$A,B\in\calL_d$ ならば
+\[
+A\cup B,\qquad A\cap B,\qquad A\setminus B
+\]
+はいずれもLebesgue可測である．
+また $\{A_n\}_{n=1}^{\infty}\subset\calL_d$ ならば
+\[
+\bigcap_{n=1}^{\infty}A_n
+\]
+もLebesgue可測である．
+\end{corollary}
+\begin{proof}
+Lebesgue可測集合の $\sigma$-加法族性（\cref{thm:lebesgue-measurable-sigma-algebra}）から従う．
+例えば
+\[
+A\cap B=(A^c\cup B^c)^c,
+\qquad
+A\setminus B=A\cap B^c
+\]
+であり，可算共通部分は
+\[
+\bigcap_{n=1}^{\infty}A_n
+=
+\left(\bigcup_{n=1}^{\infty}A_n^c\right)^c
+\]
+と書ける．
+\end{proof}
+
+\begin{theorem}[開集合と閉集合]\label{thm:open-closed-lebesgue-measurable}
+開集合と閉集合はLebesgue可測である．
+\end{theorem}
+\begin{proof}
+まず開集合 $G\subset\RR^d$ を取る．
+任意の $R>0$ に対して
+\[
+E:=G\cap Q_R
+\]
+とおく．
+これは $Q_R$ に含まれるので有限外測度をもつ．
+$\eps>0$ を任意に取る．
+$\eta>0$ を十分小さく取って
+\[
+\lambda^*\bigl((-R-\eta,R+\eta)^d\setminus Q_R\bigr)<\eps
+\]
+となるようにする．
+実際，左辺の集合はJordan可測であり，そのJordan測度は $\eta\downarrow0$ で $0$ に近づく．
+このとき
+\[
+H:=G\cap(-R-\eta,R+\eta)^d
+\]
+は $E$ を含む開集合であり，
+\[
+H\setminus E
+\subset
+(-R-\eta,R+\eta)^d\setminus Q_R
+\]
+だから
+\[
+\lambda^*(H\setminus E)<\eps.
+\]
+有限外測度集合の近似判定法（\cref{lem:finite-outer-approx-criterion}）より，
+$E=G\cap Q_R$ は内外一致する．
+$R>0$ は任意なので $G$ はLebesgue可測である．
+
+閉集合は開集合の補集合であり，Lebesgue可測集合の $\sigma$-加法族性
+（\cref{thm:lebesgue-measurable-sigma-algebra}）より $\calL_d$ は補集合で閉じている．
+したがって閉集合もLebesgue可測である．
+\end{proof}
+
+\section{Lebesgue測度の性質}
+
+\begin{lemma}[有限外測度での有限加法性]\label{lem:finite-outer-measure-finite-additivity}
+$E,F\subset\RR^d$ が有限外測度をもち内外一致しているとする．
+さらに $E\cap F=\emptyset$ ならば
+\[
+\lambda^*(E\cup F)=\lambda^*(E)+\lambda^*(F)
+\]
+である．
+\end{lemma}
+\begin{proof}
+外測度の劣加法性より
+\[
+\lambda^*(E\cup F)\le \lambda^*(E)+\lambda^*(F)
+\]
+である．
+逆向きの不等式を示す．
+$\eps>0$ を任意に取る．
+内測度の定義より，コンパクト集合 $K_E\subset E$ と $K_F\subset F$ を
+\[
+\lambda^*(K_E)>\lambda^*(E)-\eps,
+\qquad
+\lambda^*(K_F)>\lambda^*(F)-\eps
+\]
+となるように取る．
+$K_E$ と $K_F$ は互いに素なコンパクト集合だから，空でない場合は正の距離だけ離れている．
+正の距離だけ離れた集合の加法性（\cref{lem:positive-distance-additive}）より
+\[
+\lambda^*(K_E\cup K_F)=\lambda^*(K_E)+\lambda^*(K_F)
+\]
+である．
+したがってLebesgue外測度は外測度であること
+（\cref{thm:lebesgue-outer-measure}）の単調性より
+\[
+\lambda^*(E\cup F)
+\ge
+\lambda^*(K_E\cup K_F)
+>
+\lambda^*(E)+\lambda^*(F)-2\eps.
+\]
+$\eps>0$ は任意なので
+\[
+\lambda^*(E\cup F)\ge \lambda^*(E)+\lambda^*(F)
+\]
+を得る．
+\end{proof}
+
+\begin{lemma}[有界窓による近似]\label{lem:bounded-window-approximation}
+$A\in\calL_d$ に対して
+\[
+\lambda(A)=\lim_{R\to\infty}\lambda(A\cap Q_R)
+=\sup_{R>0}\lambda(A\cap Q_R)
+\]
+が成り立つ．
+\end{lemma}
+\begin{proof}
+$R<S$ なら $A\cap Q_R\subset A\cap Q_S$ であるから，
+$\lambda(A\cap Q_R)$ は $R$ について単調増加である．
+またLebesgue外測度は外測度であること（\cref{thm:lebesgue-outer-measure}）の単調性より
+\[
+\sup_{R>0}\lambda(A\cap Q_R)\le \lambda(A)
+\]
+である．
+
+まず $\lambda(A)<\infty$ の場合を考える．
+$\eps>0$ を任意に取る．
+Lebesgue外測度の定義より，$A$ を覆う区間列 $\{I_n\}_{n=1}^{\infty}$ で
+\[
+\sum_{n=1}^{\infty}|I_n|<\lambda(A)+\eps
+\]
+となるものが取れる．
+有限個の項を十分多く取れば，ある $N$ について
+\[
+\sum_{n>N}|I_n|<\eps
+\]
+である．
+このとき $I_1,\dots,I_N$ は，空集合を除けばすべて有界である．
+$I_1,\dots,I_N$ を含むように $R$ を十分大きく取ると，
+\[
+A\setminus Q_R\subset\bigcup_{n>N}I_n
+\]
+となるので
+\[
+\lambda^*(A\setminus Q_R)<\eps.
+\]
+外測度の劣加法性より
+\[
+\lambda(A)
+\le
+\lambda(A\cap Q_R)+\lambda^*(A\setminus Q_R)
+<
+\lambda(A\cap Q_R)+\eps.
+\]
+したがって
+\[
+\lambda(A)\le \sup_{R>0}\lambda(A\cap Q_R)
+\]
+である．
+
+次に $\lambda(A)=\infty$ の場合を考える．
+もし
+\[
+\sup_{R>0}\lambda(A\cap Q_R)<\infty
+\]
+なら，整数 $m\ge1$ に対して
+\[
+B_1:=A\cap Q_1,
+\qquad
+B_m:=A\cap(Q_m\setminus Q_{m-1})\quad(m\ge2)
+\]
+とおくと，$B_m$ たちは互いに素なLebesgue可測集合であり，しかも有界である．
+有限外測度での有限加法性（\cref{lem:finite-outer-measure-finite-additivity}）を繰り返すと
+\[
+\sum_{m=1}^{N}\lambda(B_m)
+=
+\lambda(A\cap Q_N)
+\le
+\sup_{R>0}\lambda(A\cap Q_R)
+\]
+である．
+よって
+\[
+\sum_{m=1}^{\infty}\lambda(B_m)<\infty.
+\]
+一方
+\[
+A=\bigcup_{m=1}^{\infty}B_m
+\]
+だから，Lebesgue外測度は外測度であること（\cref{thm:lebesgue-outer-measure}）の可算劣加法性より
+\[
+\lambda(A)
+\le
+\sum_{m=1}^{\infty}\lambda(B_m)
+<\infty
+\]
+となり，$\lambda(A)=\infty$ に反する．
+したがって
+\[
+\sup_{R>0}\lambda(A\cap Q_R)=\infty=\lambda(A)
+\]
+である．
+\end{proof}
+
+\begin{theorem}[完全加法性]\label{thm:lebesgue-measure-countable-additivity}
+互いに素なLebesgue可測集合列 $\{A_n\}_{n=1}^{\infty}$ に対して
+\[
+\lambda\left(\bigsqcup_{n=1}^{\infty}A_n\right)
+=
+\sum_{n=1}^{\infty}\lambda(A_n)
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+まず有限加法性を示す．
+$A,B\in\calL_d$ が互いに素であるとする．
+任意の $R>0$ に対して
+\[
+(A\cup B)\cap Q_R
+=
+(A\cap Q_R)\sqcup(B\cap Q_R)
+\]
+である．
+右辺の2つの集合は有限外測度をもち内外一致しているので，
+有限外測度での有限加法性（\cref{lem:finite-outer-measure-finite-additivity}）より
+\[
+\lambda((A\cup B)\cap Q_R)
+=
+\lambda(A\cap Q_R)+\lambda(B\cap Q_R)
+\]
+である．
+$R\to\infty$ とし，有界窓による近似（\cref{lem:bounded-window-approximation}）を用いると
+\[
+\lambda(A\cup B)=\lambda(A)+\lambda(B)
+\]
+を得る．
+帰納法により，互いに素な有限個のLebesgue可測集合についても有限加法性が成り立つ．
+
+可算個の場合を示す．
+Lebesgue外測度は外測度であること（\cref{thm:lebesgue-outer-measure}）の可算劣加法性より
+\[
+\lambda\left(\bigsqcup_{n=1}^{\infty}A_n\right)
+\le
+\sum_{n=1}^{\infty}\lambda(A_n)
+\]
+である．
+逆向きについては，任意の $N$ に対して
+Lebesgue外測度は外測度であること（\cref{thm:lebesgue-outer-measure}）の単調性と，
+いま示した有限加法性より
+\[
+\lambda\left(\bigsqcup_{n=1}^{\infty}A_n\right)
+\ge
+\lambda\left(\bigsqcup_{n=1}^{N}A_n\right)
+=
+\sum_{n=1}^{N}\lambda(A_n).
+\]
+$N\to\infty$ とすれば
+\[
+\lambda\left(\bigsqcup_{n=1}^{\infty}A_n\right)
+\ge
+\sum_{n=1}^{\infty}\lambda(A_n)
+\]
+を得る．
+\end{proof}
+
+\begin{theorem}[基本性質]\label{thm:lebesgue-measure-basic}
+Lebesgue測度について次が成り立つ．
+\begin{enumerate}
+    \item 非負性：
+    \[
+    0\le \lambda(A)\le\infty
+    \qquad(A\in\calL_d)
+    \]
+    かつ $\lambda(\emptyset)=0$ である．
+    \item 単調性：$A,B\in\calL_d$ かつ $A\subset B$ ならば
+    \[
+    \lambda(A)\le \lambda(B)
+    \]
+    \item 劣加法性：$\{A_n\}_{n=1}^{\infty}\subset\calL_d$ ならば
+    \[
+    \lambda\left(\bigcup_{n=1}^{\infty}A_n\right)
+    \le
+    \sum_{n=1}^{\infty}\lambda(A_n)
+    \]
+\end{enumerate}
+\end{theorem}
+\begin{proof}
+\begin{enumerate}
+    \item Lebesgue測度はLebesgue外測度の制限なので非負である．
+    また $\lambda(\emptyset)=\lambda^*(\emptyset)=0$ である．
+
+    \item Lebesgue外測度は外測度であること（\cref{thm:lebesgue-outer-measure}）の単調性から直ちに従う．
+
+    \item
+    \[
+    B_1:=A_1,\qquad
+    B_n:=A_n\setminus\bigcup_{k=1}^{n-1}A_k\quad(n\ge2)
+    \]
+    とおく．
+    Lebesgue可測集合の集合演算（\cref{cor:lebesgue-measurable-set-operations}）より
+    各 $B_n$ はLebesgue可測で，互いに素であり，
+    \[
+    \bigcup_{n=1}^{\infty}A_n=\bigsqcup_{n=1}^{\infty}B_n,
+    \qquad
+    B_n\subset A_n
+    \]
+    である．
+    完全加法性（\cref{thm:lebesgue-measure-countable-additivity}）と
+    上の単調性より
+    \[
+    \lambda\left(\bigcup_{n=1}^{\infty}A_n\right)
+    =
+    \sum_{n=1}^{\infty}\lambda(B_n)
+    \le
+    \sum_{n=1}^{\infty}\lambda(A_n)
+    \]
+    を得る．
+\end{enumerate}
+\end{proof}
+
+\begin{theorem}[下からの連続性]\label{thm:lebesgue-measure-continuity-from-below}
+Lebesgue可測集合の単調増大列
+\[
+A_1\subset A_2\subset\cdots
+\]
+に対して
+\[
+\lambda\left(\bigcup_{n=1}^{\infty}A_n\right)
+=
+\lim_{n\to\infty}\lambda(A_n)
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+\[
+B_1:=A_1,\qquad
+B_n:=A_n\setminus A_{n-1}\quad(n\ge2)
+\]
+とおく．
+すると $B_n$ たちは互いに素であり，
+\[
+A_N=\bigsqcup_{n=1}^{N}B_n,
+\qquad
+\bigcup_{n=1}^{\infty}A_n=\bigsqcup_{n=1}^{\infty}B_n
+\]
+である．
+完全加法性（\cref{thm:lebesgue-measure-countable-additivity}）より
+\[
+\lambda(A_N)=\sum_{n=1}^{N}\lambda(B_n),
+\qquad
+\lambda\left(\bigcup_{n=1}^{\infty}A_n\right)
+=
+\sum_{n=1}^{\infty}\lambda(B_n).
+\]
+$N\to\infty$ とすれば主張を得る．
+\end{proof}
+
+\begin{theorem}[上からの連続性]\label{thm:lebesgue-measure-continuity-from-above}
+Lebesgue可測集合の単調減少列
+\[
+A_1\supset A_2\supset\cdots
+\]
+に対して，$\lambda(A_1)<\infty$ ならば
+\[
+\lambda\left(\bigcap_{n=1}^{\infty}A_n\right)
+=
+\lim_{n\to\infty}\lambda(A_n)
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+\[
+B_n:=A_1\setminus A_n
+\]
+とおく．
+すると
+\[
+B_1\subset B_2\subset\cdots,
+\qquad
+\bigcup_{n=1}^{\infty}B_n
+=
+A_1\setminus\bigcap_{n=1}^{\infty}A_n
+\]
+である．
+下からの連続性（\cref{thm:lebesgue-measure-continuity-from-below}）より
+\[
+\lambda\left(A_1\setminus\bigcap_{n=1}^{\infty}A_n\right)
+=
+\lim_{n\to\infty}\lambda(A_1\setminus A_n).
+\]
+$A_n\subset A_1$ かつ $\lambda(A_1)<\infty$ なので，
+完全加法性（\cref{thm:lebesgue-measure-countable-additivity}）から従う有限加法性より
+\[
+\lambda(A_1\setminus A_n)=\lambda(A_1)-\lambda(A_n)
+\]
+である．
+同様に
+\[
+\lambda\left(A_1\setminus\bigcap_{n=1}^{\infty}A_n\right)
+=
+\lambda(A_1)-\lambda\left(\bigcap_{n=1}^{\infty}A_n\right).
+\]
+これらを合わせれば主張が従う．
+\end{proof}
+
+\begin{proposition}[平行移動不変性]\label{prop:lebesgue-measure-translation-invariant}
+$A\in\calL_d$ と $c\in\RR^d$ に対して
+\[
+A+c:=\{x+c\mid x\in A\}
+\]
+もLebesgue可測であり，
+\[
+\lambda(A+c)=\lambda(A)
+\]
+が成り立つ．
+\end{proposition}
+\begin{proof}
+まず可測性を示す．
+任意の $R>0$ に対して
+\[
+E:=(A+c)\cap Q_R
+\]
+とおく．
+平行移動して戻すと
+\[
+E-c=A\cap(Q_R-c)
+\]
+である．
+$Q_R-c$ はコンパクト集合なのでLebesgue可測であり，
+Lebesgue可測集合の集合演算（\cref{cor:lebesgue-measurable-set-operations}）より
+$A\cap(Q_R-c)$ もLebesgue可測である．
+これは有界集合だから，内外一致する．
+
+Lebesgue外測度の平行移動不変性（\cref{prop:lebesgue-outer-translation-invariant}）を用いる．
+またコンパクト集合の平行移動はコンパクト集合なので，内測度も平行移動で不変である．
+したがって
+\[
+\lambda^*(E)=\lambda^*(E-c),
+\qquad
+\lambda_*(E)=\lambda_*(E-c)
+\]
+である．
+$E-c$ は内外一致するので $E$ も内外一致する．
+$R>0$ は任意だから $A+c$ はLebesgue可測である．
+
+最後に，Lebesgue外測度の平行移動不変性（\cref{prop:lebesgue-outer-translation-invariant}）より
+\[
+\lambda(A+c)=\lambda^*(A+c)=\lambda^*(A)=\lambda(A)
+\]
+である．
+\end{proof}
