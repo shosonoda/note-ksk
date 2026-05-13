@@ -28,6 +28,30 @@ $A\in\calL_d$ のとき，共通値
 を $A$ のLebesgue測度という．
 \end{definition}
 
+\begin{lemma}[有界集合の区間判定]\label{lem:bounded-measurable-interval-criterion}
+有界集合 $A\subset\RR^d$ と，$A\subset Q$ を満たす有界区間 $Q$ に対して，
+次は同値である．
+\begin{enumerate}
+    \item $A$ はLebesgue可測である
+    \item $\lambda^*(A)+\lambda^*(Q\setminus A)=|Q|$
+\end{enumerate}
+\end{lemma}
+\begin{proof}
+\cref{cor:inner-measure-via-interval} より
+\[
+\lambda_*(A)=|Q|-\lambda^*(Q\setminus A)
+\]
+である．したがって
+\[
+\lambda_*(A)=\lambda^*(A)
+\]
+は
+\[
+\lambda^*(A)+\lambda^*(Q\setminus A)=|Q|
+\]
+と同値である．
+\end{proof}
+
 % \begin{definition}[Lebesgue零集合]
 % 集合 $N\subset\RR^d$ が
 % \[
@@ -69,32 +93,22 @@ Jordan可測集合 $A\subset\RR^d$ はLebesgue可測であり，
 が成り立つ．
 \end{theorem}
 \begin{proof}
-Jordan可測性より
+有界区間 $Q$ を $A\subset Q$ となるように取る．
+$Q\setminus A$ もJordan可測であり，Jordan測度の有限加法性より
 \[
-m_{J,*}(A)=m_J^*(A)=m_J(A)
+m_J(A)+m_J(Q\setminus A)=m_J(Q)=|Q|
 \]
 である．
-第4章のJordan内測度との比較，Lebesgue内測度の基本性質，
-第3章のJordan外測度との比較を順に用いると
+第3章で示したJordan測度とLebesgue外測度の一致より
 \[
-m_J(A)
-=m_{J,*}(A)
-\le \lambda_*(A)
-\le \lambda^*(A)
-\le m_J^*(A)
-=m_J(A)
+\lambda^*(A)+\lambda^*(Q\setminus A)=|Q|
 \]
-となる．
-したがってすべて等号であり，特に
-\[
-\lambda_*(A)=\lambda^*(A)=m_J(A)
-\]
-である．
-よって $A$ はLebesgue可測であり，
+だから，\cref{lem:bounded-measurable-interval-criterion} より $A$ はLebesgue可測である．
+さらに
 \[
 \lambda(A)=m_J(A)
 \]
-である．
+は，ふたたびJordan測度とLebesgue外測度の一致から従う．
 \end{proof}
 
 \begin{example}

@@ -67,80 +67,82 @@ $A\cap Q_{R_0}=A$ だから
 を得る．
 
 逆に $\lambda_*(A)=\lambda^*(A)$ とする．
+区間を用いた内測度表示（\cref{cor:inner-measure-via-interval}）を
+$A\subset Q_{R_0}$ に適用すると
+\[
+\lambda^*(Q_{R_0})
+=
+\lambda^*(A)+\lambda^*(Q_{R_0}\setminus A)
+\]
+である．
+
 任意の $R>0$ に対し，
 \[
 E:=A\cap Q_R
 \]
 とおく．
 $E$ が内外一致することを示せばよい．
-$A$ は有界なので $\lambda^*(A)<\infty$ である．
-$\eps>0$ を任意に取る．
-内測度の定義と仮定 $\lambda_*(A)=\lambda^*(A)$ より，
-コンパクト集合 $K\subset A$ を
+ここで
 \[
-\lambda^*(K)>\lambda^*(A)-\frac{\eps}{3}
+C:=Q_{R_0}
 \]
-となるように取れる．
-また開集合による外正則性（\cref{thm:lebesgue-outer-regularity-open}）より，開集合 $G\supset A$ を
+および
 \[
-\lambda^*(G)<\lambda^*(A)+\frac{\eps}{3}
+D:=C\cap Q_R
 \]
-となるように取れる．
-特に $\lambda^*(G)<\infty$ である．
-開集合とコンパクト集合の分解公式（\cref{lem:finite-open-compact-split}）を $G$ と $K$ に適用すると
+とおくと，$D$ はコンパクト集合であり，
+$E=A\cap D$ である．
+コンパクト集合による外測度の分解
+（\cref{lem:compact-splits-outer-measure}）を
+コンパクト集合 $D$ と集合 $A,\,C\setminus A,\,C$ にそれぞれ適用すると，
 \[
-\lambda^*(G\setminus K)
+\lambda^*(A)=\lambda^*(E)+\lambda^*(A\setminus D),
+\]
+\[
+\lambda^*(C\setminus A)
 =
-\lambda^*(G)-\lambda^*(K)
-<\frac{2\eps}{3}
+\lambda^*(D\setminus E)
++
+\lambda^*((C\setminus A)\setminus D),
+\]
+\[
+\lambda^*(C)=\lambda^*(D)+\lambda^*(C\setminus D)
+\]
+である．また
+\[
+C\setminus D
+=
+(A\setminus D)\cup((C\setminus A)\setminus D)
+\]
+だから，外測度の劣加法性より
+\[
+\lambda^*(C\setminus D)
+\le
+\lambda^*(A\setminus D)
++
+\lambda^*((C\setminus A)\setminus D)
 \]
 である．
-
-さらに $\eta>0$ を十分小さく取って
+すべて $C$ の部分集合なので外測度は有限であり，上の等式を比較すると
 \[
-U:=(-R-\eta,R+\eta)^d
+\lambda^*(E)+\lambda^*(D\setminus E)
+\le
+\lambda^*(D)
 \]
-が
+を得る．逆向きの不等式は外測度の劣加法性から従うので
 \[
-\lambda^*(U\setminus Q_R)<\frac{\eps}{3}
-\]
-を満たすようにする．
-そして
-\[
-H:=G\cap U,
-\qquad
-L:=K\cap Q_R
-\]
-とおく．
-このとき $H$ は $E$ を含む有限外測度の開集合であり，
-$L$ は $E$ に含まれるコンパクト集合である．
-また
-\[
-H\setminus L
-\subset
-(G\setminus K)\cup(U\setminus Q_R)
-\]
-だから
-\[
-\lambda^*(H\setminus L)<\eps.
-\]
-開集合とコンパクト集合の分解公式（\cref{lem:finite-open-compact-split}）を $H$ と $L$ に適用すると
-\[
-\lambda^*(H)=\lambda^*(L)+\lambda^*(H\setminus L)
+\lambda^*(D)=\lambda^*(E)+\lambda^*(D\setminus E)
 \]
 である．
-したがって
+最後に，区間を用いた内測度表示を $E\subset D$ に適用すれば
 \[
+\lambda_*(E)
+=
+\lambda^*(D)-\lambda^*(D\setminus E)
+=
 \lambda^*(E)
-\le
-\lambda^*(H)
-<
-\lambda^*(L)+\eps
-\le
-\lambda_*(E)+\eps.
 \]
-$\eps>0$ は任意なので $\lambda^*(E)\le\lambda_*(E)$ であり，
-逆向きの不等式はLebesgue内測度の基本性質（\cref{prop:lebesgue-inner-basic}）から従う．
+を得る．
 よって $E=A\cap Q_R$ は内外一致する．
 $R>0$ は任意だから，$A$ はLebesgue可測である．
 
@@ -150,6 +152,24 @@ Lebesgue外測度は外測度であること（\cref{thm:lebesgue-outer-measure}
 \lambda_*(A)\le \lambda^*(A)\le \lambda^*(Q_{R_0})<\infty
 \]
 である．
+\end{proof}
+
+\begin{corollary}[有界集合の区間判定]\label{cor:bounded-measurable-interval-criterion}
+有界集合 $A\subset\RR^d$ と，$A\subset Q$ を満たす有界区間 $Q$ に対して，
+次は同値である．
+\begin{enumerate}
+    \item $A$ はLebesgue可測である
+    \item $\lambda^*(A)+\lambda^*(Q\setminus A)=|Q|$
+\end{enumerate}
+\end{corollary}
+\begin{proof}
+有界集合の可測性（\cref{lem:bounded-measurable-iff-inner-outer}）と
+区間を用いた内測度表示（\cref{cor:inner-measure-via-interval}）より，
+$A$ がLebesgue可測であることは
+\[
+\lambda^*(A)=\lambda_*(A)=|Q|-\lambda^*(Q\setminus A)
+\]
+と同値である．
 \end{proof}
 
 \begin{remark}
@@ -219,40 +239,27 @@ Jordan可測集合 $A\subset\RR^d$ はLebesgue可測であり，
 が成り立つ．
 \end{theorem}
 \begin{proof}
-任意の $R>0$ に対して
+Jordan可測集合は有界なので，有界閉区間 $Q$ を
 \[
-A_R:=A\cap[-R,R]^d
+A\subset Q
 \]
-とおく．
-Jordan可測集合は有限交叉で閉じているので，$A_R$ もJordan可測である．
-したがって
+となるように取る．
+$Q\setminus A$ もJordan可測であり，Jordan測度の有限加法性より
 \[
-m_{J,*}(A_R)=m_J^*(A_R)=m_J(A_R)
-\]
-である．
-Jordan内測度とLebesgue内測度の比較（\cref{thm:jordan-inner-lebesgue-inner}），
-Lebesgue内測度の基本性質（\cref{prop:lebesgue-inner-basic}），
-Jordan外測度とLebesgue外測度の比較（\cref{prop:louter-le-jouter}）を順に用いると
-\[
-m_J(A_R)
-=m_{J,*}(A_R)
-\le \lambda_*(A_R)
-\le \lambda^*(A_R)
-\le m_J^*(A_R)
-=m_J(A_R)
-\]
-となる．
-したがってすべて等号であり，特に
-\[
-\lambda_*(A_R)=\lambda^*(A_R)=m_J(A_R)
+m_J(A)+m_J(Q\setminus A)=m_J(Q)=|Q|
 \]
 である．
-よって $A$ はLebesgue可測である．
-さらに $R>0$ を十分大きく取れば $A_R=A$ だから，
+第3章で示したJordan測度とLebesgue外測度の一致より
+\[
+\lambda^*(A)+\lambda^*(Q\setminus A)=|Q|
+\]
+だから，有界集合の区間判定（\cref{cor:bounded-measurable-interval-criterion}）より
+$A$ はLebesgue可測である．
+さらに
 \[
 \lambda(A)=\lambda^*(A)=m_J(A)
 \]
-である．
+は，ふたたびJordan測度とLebesgue外測度の一致から従う．
 \end{proof}
 
 \begin{example}
