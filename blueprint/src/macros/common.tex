@@ -39,12 +39,20 @@
 \DeclareMathOperator{\cl}{cl}
 \DeclareMathOperator{\intr}{int}
 
+\AddToHook{env/proposition/begin}{\crefalias{theorem}{proposition}}
+\AddToHook{env/lemma/begin}{\crefalias{theorem}{lemma}}
+\AddToHook{env/corollary/begin}{\crefalias{theorem}{corollary}}
+\AddToHook{env/definition/begin}{\crefalias{theorem}{definition}}
+\AddToHook{env/assumption/begin}{\crefalias{theorem}{assumption}}
+\AddToHook{env/example/begin}{\crefalias{theorem}{example}}
+\AddToHook{cmd/appendix/before}{\crefalias{section}{appendix}}
+
 \theoremstyle{plain}
 \newtheorem{theorem}{Theorem}[chapter]
 \newtheorem{proposition}[theorem]{Proposition}
 \newtheorem{lemma}[theorem]{Lemma}
 \newtheorem{corollary}[theorem]{Corollary}
-\newtheorem{example}{Example}
+\newtheorem{example}[theorem]{Example}
 
 \theoremstyle{definition}
 \newtheorem{definition}[theorem]{Definition}

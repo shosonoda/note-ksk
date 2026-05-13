@@ -265,7 +265,11 @@ m_{J,*}(A)\le \lambda_*(A)
 % によって内測度を定義する流儀もある．
 %この定義が上のコンパクト集合による定義と一致することは，開集合とコンパクト集合の可測性を示した後で証明する．
 
-外測度有限な集合 $A$ を，それを含む外測度有限な開集合 $O$ に入れて内測度を測ることができる．
+有界区間 $Q$ の中では，内測度は補集合の外測度で表せる．
+この形は次章で可測性を判定するときに最も使いやすい．
+\iffalse
+後続では区間表示を使うため，開集合表示とコンパクト集合表示は本文から外す．
+
 \begin{theorem} \label{thm:inner-measure-via-open-set}
     $\lambda^*(A) < \infty$ とする．$A$を含む任意の外測度有限な開集合 $O$ に対し，
     \[
@@ -380,7 +384,130 @@ O\subset K\cup U\cup (O\setminus L)
 である．
 \end{proof}
 
+\begin{corollary}[コンパクト集合を用いた内測度表示]\label{cor:inner-measure-via-compact-set}
+コンパクト集合 $C\subset\RR^d$ と $A\subset C$ に対して
+\[
+\lambda_*(A)
+=
+\lambda^*(C)-\lambda^*(C\setminus A)
+\]
+が成り立つ．
+\end{corollary}
+\begin{proof}
+$C$ はコンパクトだから有界である．したがって，
+$C\subset O$ かつ $\lambda^*(O)<\infty$ を満たす開集合 $O$ が取れる．
+$A\subset C$ より $\lambda^*(A)<\infty$ であるから，
+開集合を用いた内測度表示（\cref{thm:inner-measure-via-open-set}）より
+\[
+\lambda_*(A)=\lambda^*(O)-\lambda^*(O\setminus A)
+\]
+である．
+一方，\cref{lem:compact-splits-outer-measure} を $B=O\setminus A$ に適用すると
+\[
+\lambda^*(O\setminus A)
+=
+\lambda^*(C\setminus A)+\lambda^*(O\setminus C)
+\]
+である．また \cref{lem:finite-open-compact-split} より
+\[
+\lambda^*(O)=\lambda^*(C)+\lambda^*(O\setminus C)
+\]
+である．これらを代入して
+\[
+\lambda_*(A)
+=
+\lambda^*(C)-\lambda^*(C\setminus A)
+\]
+を得る．
+\end{proof}
+
+\fi
+
+\begin{theorem}[区間を用いた内測度表示]\label{thm:inner-measure-via-interval}\label{cor:inner-measure-via-interval}
+有界区間 $Q\subset\RR^d$ と $A\subset Q$ に対して
+\[
+\lambda_*(A)
+=
+|Q|-\lambda^*(Q\setminus A)
+\]
+が成り立つ．
+\end{theorem}
+\begin{proof}
+$Q=\emptyset$ のときは自明である．以下では $Q\neq\emptyset$ とする．
+$C:=\overline Q$ とおく．第3章で示した区間の外測度の計算より
+$\lambda^*(C)=|Q|$ であり，また $C\setminus Q$ は零集合なので
+\[
+\lambda^*(C\setminus A)=\lambda^*(Q\setminus A)
+\]
+である．
+
+まず $\lambda_*(A)\le |Q|-\lambda^*(Q\setminus A)$ を示す．
+コンパクト集合 $K\subset A$ を取る．
+\cref{lem:compact-splits-outer-measure} を $B=C$ とコンパクト集合 $K$ に適用すると
+\[
+\lambda^*(C)=\lambda^*(K)+\lambda^*(C\setminus K)
+\]
+である．また $Q\setminus A\subset C\setminus K$ だから
+\[
+\lambda^*(K)
+\le
+\lambda^*(C)-\lambda^*(Q\setminus A)
+=
+|Q|-\lambda^*(Q\setminus A).
+\]
+上限を取ると
+\[
+\lambda_*(A)\le |Q|-\lambda^*(Q\setminus A)
+\]
+である．
+
+逆向きの不等式を示す．$\eps>0$ を任意に取る．
+開集合による外正則性より，$C\setminus A$ を含む開集合 $U$ で
+\[
+\lambda^*(U)<\lambda^*(C\setminus A)+\eps
+\]
+となるものを取る．
+このとき $K:=C\setminus U$ は $A$ に含まれるコンパクト集合である．
+$C\subset K\cup U$ だから
+\[
+\lambda^*(C)\le \lambda^*(K)+\lambda^*(U)
+\]
+であり，
+\[
+\lambda^*(K)
+>
+\lambda^*(C)-\lambda^*(C\setminus A)-\eps
+=
+|Q|-\lambda^*(Q\setminus A)-\eps.
+\]
+内測度の定義より
+\[
+\lambda_*(A)\ge |Q|-\lambda^*(Q\setminus A)-\eps
+\]
+である．$\eps>0$ は任意なので逆向きの不等式も従う．
+\end{proof}
+
+\begin{corollary}[区間による外測度の分解]\label{cor:interval-outer-measure-split}
+有界区間 $Q\subset\RR^d$ と $A\subset Q$ に対して
+\[
+\lambda_*(A)=\lambda^*(A)
+\qquad\Longleftrightarrow\qquad
+|Q|=\lambda^*(A)+\lambda^*(Q\setminus A)
+\]
+である．
+\end{corollary}
+\begin{proof}
+\cref{thm:inner-measure-via-interval} により
+\[
+\lambda_*(A)=|Q|-\lambda^*(Q\setminus A)
+\]
+である．これを $\lambda_*(A)=\lambda^*(A)$ に代入すればよい．
+\end{proof}
+
+
 \subsection{外測度に関する補助定理}
+
+上の証明と次章で使う外測度の補助定理をまとめておく．
 
 \begin{lemma} \label{lem:positive-distance-additive}
     $A,B\subset\RR^d$ が正の距離だけ離れていれば
@@ -577,84 +704,6 @@ $\eps>0$ は任意なので
 である．
 \end{proof}
 
-\begin{corollary}[コンパクト集合を用いた内測度表示]\label{cor:inner-measure-via-compact-set}
-コンパクト集合 $C\subset\RR^d$ と $A\subset C$ に対して
-\[
-\lambda_*(A)
-=
-\lambda^*(C)-\lambda^*(C\setminus A)
-\]
-が成り立つ．
-\end{corollary}
-\begin{proof}
-$C$ はコンパクトだから有界である．したがって，
-$C\subset O$ かつ $\lambda^*(O)<\infty$ を満たす開集合 $O$ が取れる．
-$A\subset C$ より $\lambda^*(A)<\infty$ であるから，
-開集合を用いた内測度表示（\cref{thm:inner-measure-via-open-set}）より
-\[
-\lambda_*(A)=\lambda^*(O)-\lambda^*(O\setminus A)
-\]
-である．
-一方，\cref{lem:compact-splits-outer-measure} を $B=O\setminus A$ に適用すると
-\[
-\lambda^*(O\setminus A)
-=
-\lambda^*(C\setminus A)+\lambda^*(O\setminus C)
-\]
-である．また \cref{lem:finite-open-compact-split} より
-\[
-\lambda^*(O)=\lambda^*(C)+\lambda^*(O\setminus C)
-\]
-である．これらを代入して
-\[
-\lambda_*(A)
-=
-\lambda^*(C)-\lambda^*(C\setminus A)
-\]
-を得る．
-\end{proof}
-
-\begin{corollary}[区間を用いた内測度表示]\label{cor:inner-measure-via-interval}
-有界区間 $Q\subset\RR^d$ と $A\subset Q$ に対して
-\[
-\lambda_*(A)
-=
-|Q|-\lambda^*(Q\setminus A)
-\]
-が成り立つ．
-\end{corollary}
-\begin{proof}
-$Q=\emptyset$ のときは自明である．
-以下では $Q\neq\emptyset$ とする．
-$C:=\overline Q$ とおくと，$C$ はコンパクト集合であり，$A\subset C$ である．
-コンパクト集合を用いた内測度表示
-（\cref{cor:inner-measure-via-compact-set}）より
-\[
-\lambda_*(A)
-=
-\lambda^*(C)-\lambda^*(C\setminus A)
-\]
-である．
-第3章で示したJordan測度とLebesgue外測度の一致より
-\[
-\lambda^*(C)=|Q|
-\]
-である．
-また $C\setminus Q$ は有限個の座標超平面片の合併に含まれるので，
-\[
-\lambda^*(C\setminus Q)=0
-\]
-である．実際，各片は一方向だけ任意に薄い有界区間で覆える．
-したがって
-\[
-C\setminus A=(Q\setminus A)\cup(C\setminus Q)
-\]
-より
-\[
-\lambda^*(C\setminus A)=\lambda^*(Q\setminus A)
-\]
-である．以上を代入すれば主張を得る．
-\end{proof}
 
 \section{解釈}
 
