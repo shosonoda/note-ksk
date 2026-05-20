@@ -867,6 +867,14 @@ $B_n\in\calL(Q)$ である．また $\{B_n\}$ は互いに素であり，
 
 \subsection{全空間上のLebesgue可測集合}
 
+\begin{remark}
+    次の性質を使用して，Lebesgue可測集合の $\sigma$-加法族性を示す．
+    \begin{itemize}
+        \item $\RR^d$ の任意の有界閉区間 $Q$ に対して，$\calL(Q)$ は $Q$ 上の $\sigma$-加法族である．
+        \item $A\subset\RR^d$ がLebesgue可測であるとは，任意の有界閉区間 $Q$ に対して $A\cap Q\in\calL(Q)$ であることと同値である．
+    \end{itemize}
+\end{remark}
+
 \begin{theorem}[Lebesgue可測集合の $\sigma$-加法族性]\label{thm:lebesgue-measurable-sigma-algebra}
 Lebesgue可測集合全体 $\calL_d$ は $\RR^d$ 上の $\sigma$-加法族である．
 \end{theorem}
@@ -960,7 +968,25 @@ Lebesgue可測集合の $\sigma$-加法族性
 （\cref{thm:lebesgue-measurable-sigma-algebra}）より，その補集合である $G$ もLebesgue可測である．
 \end{proof}
 
-\section{Lebesgue測度の性質}
+\section{Lebesgue測度の性質} \label{sec:lebesgue-measure-properties}
+
+\begin{definition}[完全加法的測度]\label{def:countably-additive-measure}
+集合 $X$ と $X$ 上の $\sigma$-加法族 $\calS$ に対し，写像
+\[
+\mu:\calS\to[0,\infty]
+\]
+が $(X,\calS)$ 上の完全加法的測度であるとは，次の2条件を満たすことをいう．
+\begin{enumerate}
+    \item $\mu(\emptyset)=0$
+    \item 互いに素な列 $\{A_n\}_{n=1}^{\infty}\subset\calS$ に対して
+    \[
+    \mu\left(\bigsqcup_{n=1}^{\infty}A_n\right)
+    =
+    \sum_{n=1}^{\infty}\mu(A_n)
+    \]
+\end{enumerate}
+第2条件を完全加法性という．
+\end{definition}
 
 \begin{proposition}[非負性と空集合]\label{prop:lebesgue-measure-nonnegative}
 任意の $A\in\calL_d$ に対して
@@ -1048,7 +1074,7 @@ $A\cap B=\emptyset$ だから $K_A$ と $K_B$ は交わらない．
 を得る．
 \end{proof}
 
-\begin{theorem}[可算加法性]\label{thm:lebesgue-measure-countable-additivity}
+\begin{theorem}[完全加法性]\label{thm:lebesgue-measure-countable-additivity}
 互いに素な列 $\{A_n\}_{n=1}^{\infty}\subset\calL_d$ に対して
 \[
 \lambda\left(\bigsqcup_{n=1}^{\infty}A_n\right)
@@ -1166,7 +1192,7 @@ A_N=\bigsqcup_{n=1}^{N}B_n,
 \qquad
 A=\bigsqcup_{n=1}^{\infty}B_n
 \]
-である．可算加法性（\cref{thm:lebesgue-measure-countable-additivity}）と
+である．完全加法性（\cref{thm:lebesgue-measure-countable-additivity}）と
 有限加法性（\cref{lem:lebesgue-measure-finite-additivity}）より
 \[
 \lambda(A)=\sum_{n=1}^{\infty}\lambda(B_n),
@@ -1336,37 +1362,18 @@ $A\in\calL_d$ に対して
 が成り立つ．
 \end{theorem}
 \begin{proof}
-まず $\lambda(A)<\infty$ とする．
-有限外測度集合の近似判定法
-（\cref{lem:finite-outer-compact-criterion}）より，任意の $\eps>0$ に対して
-コンパクト集合 $K\subset A$ で
+コンパクト集合はLebesgue可測であり，そのLebesgue測度は外測度に等しいので，
+右辺は内測度の定義そのものから $\lambda_*(A)$ である．
+したがって，$\lambda(A)<\infty$ のときは，有限外測度集合の可測性
+（\cref{thm:finite-outer-measurable-iff-inner-outer}）より
 \[
-\lambda^*(A\setminus K)<\eps
+\lambda(A)=\lambda^*(A)=\lambda_*(A)
 \]
-となるものが取れる．コンパクト集合による外測度の分解
-（\cref{lem:compact-splits-outer-measure}）より
-\[
-\lambda(A)=\lambda^*(A)=\lambda^*(K)+\lambda^*(A\setminus K)
-\]
-だから
-\[
-\lambda^*(K)>\lambda(A)-\eps
-\]
-である．コンパクト集合はLebesgue可測である
-（\cref{thm:open-closed-lebesgue-measurable}）ので $\lambda^*(K)=\lambda(K)$ である．
-したがって
-\[
-\sup\{\lambda(K)\mid K\subset A,\ K\text{ はコンパクト}\}
-\ge
-\lambda(A)-\eps
-\]
-である．逆向きの不等式は単調性
-（\cref{thm:lebesgue-measure-basic}）から従う．
-$\eps>0$ は任意なので，有限測度の場合の主張が従う．
+となり，結論が従う．
 
 次に $\lambda(A)=\infty$ とする．
 \[
-A_n:=A\cap Q_n\qquad(n\in\NN)
+A_n:=A\cap Q_n\qquad(n=1,2,\dots)
 \]
 とおく．Lebesgue可測集合の集合演算
 （\cref{cor:lebesgue-measurable-set-operations}）と
@@ -1384,10 +1391,9 @@ A=\bigcup_{n=1}^{\infty}A_n
 \]
 である．したがって任意の $M>0$ に対して，ある $n$ が存在して
 \[
-\lambda(A_n)>M+1
+\lambda(A_n)>M
 \]
-となる．$A_n$ は有界なので $\lambda(A_n)<\infty$ であり，
-すでに示した有限測度の場合を $A_n$ に適用すると，
+となる．$A_n$ は有界なので有限測度の場合を $A_n$ に適用でき，
 コンパクト集合 $K\subset A_n\subset A$ で
 \[
 \lambda(K)>M
@@ -1398,3 +1404,29 @@ A=\bigcup_{n=1}^{\infty}A_n
 \]
 である．
 \end{proof}
+
+\section{まとめ}
+
+本章では，有界な窓で切ったときの内測度と外測度の一致を出発点として，
+Lebesgue可測集合とLebesgue測度の基本性質を確立した．
+\begin{itemize}
+    \item Lebesgue可測集合全体 $\calL_d$ は $\RR^d$ 上の完全加法族，
+    すなわち $\sigma$-加法族である
+    （\cref{thm:lebesgue-measurable-sigma-algebra}）．
+    \item Lebesgue測度 $\lambda:\calL_d\to[0,\infty]$ は
+    $\lambda(\emptyset)=0$ と完全加法性を満たす．
+    したがって $\lambda$ は $(\RR^d,\calL_d)$ 上の完全加法的測度である
+    （\cref{prop:lebesgue-measure-nonnegative,thm:lebesgue-measure-countable-additivity}）．
+    \item Lebesgue測度は平行移動不変である．すなわち
+    $A\in\calL_d$ と $c\in\RR^d$ に対して $A+c\in\calL_d$ であり，
+    $\lambda(A+c)=\lambda(A)$ である
+    （\cref{prop:lebesgue-measure-translation-invariant}）．
+    \item Lebesgue測度は完備である．実際，$\lambda(N)=0$ となる
+    $N\in\calL_d$ と $E\subset N$ に対して，
+    $\lambda^*(E)\le\lambda^*(N)=0$ だから $E$ はLebesgue零集合であり，
+    $E\in\calL_d$ かつ $\lambda(E)=0$ である
+    （\cref{thm:lebesgue-null-measurable}）．
+    \item Lebesgue測度は正則である．すなわち任意の $A\in\calL_d$ に対して，
+    開集合で外側から，コンパクト集合で内側から測度を近似できる
+    （\cref{thm:lebesgue-measure-outer-regularity,thm:lebesgue-measure-inner-regularity}）．
+\end{itemize}
