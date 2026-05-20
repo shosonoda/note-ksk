@@ -201,19 +201,26 @@
   <a href="sect0005.html#a0000000162"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合とLebesgue測度</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000163"><span class="toc_ref"></span> <span class="toc_entry">Carathéodory条件</span></a>
+  <a href="sect0005.html#a0000000163"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合の性質</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0005.html#a0000000164"><span class="toc_ref"></span> <span class="toc_entry">有界閉区間上のLebesgue可測集合</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000164"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合の性質</span></a>
+  <a href="sect0005.html#a0000000165"><span class="toc_ref"></span> <span class="toc_entry">全空間上のLebesgue可測集合</span></a>
+ </li>
+
+  </ul>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000165"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度の性質</span></a>
+  <a href="sect0005.html#sec:lebesgue-measure-properties"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度の性質</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000166"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度の正則性</span></a>
+  <a href="sect0005.html#sec:lebesgue-caratheodory-comparison"><span class="toc_ref"></span> <span class="toc_entry">Carathéodory条件との比較</span></a>
  </li>
 <li class="">
-  <a href="sect0005.html#a0000000167"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合の判定法</span></a>
+  <a href="sect0005.html#a0000000166"><span class="toc_ref"></span> <span class="toc_entry">まとめ</span></a>
  </li>
 
   </ul>
@@ -223,19 +230,31 @@
   <span class="expand-toc">▼</span>
   <ul class="sub-toc-1 active">
      <li class="">
-  <a href="sect0006.html#a0000000168"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+  <a href="sect0006.html#a0000000167"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
  </li>
 <li class="">
-  <a href="sect0006.html#a0000000169"><span class="toc_ref"></span> <span class="toc_entry">Carathéodoryの測度論</span></a>
+  <a href="sect0006.html#a0000000168"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
  </li>
 <li class="">
-  <a href="sect0006.html#a0000000170"><span class="toc_ref"></span> <span class="toc_entry">半環から外測度へ</span></a>
+  <a href="sect0006.html#a0000000169"><span class="toc_ref"></span> <span class="toc_entry">可測空間と測度</span></a>
  </li>
 <li class="">
-  <a href="sect0006.html#a0000000171"><span class="toc_ref"></span> <span class="toc_entry">Borel集合族</span></a>
+  <a href="sect0006.html#a0000000170"><span class="toc_ref"></span> <span class="toc_entry">外測度とCarathéodory可測性</span></a>
  </li>
 <li class="">
-  <a href="sect0006.html#a0000000172"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue非可測集合</span></a>
+  <a href="sect0006.html#a0000000171"><span class="toc_ref"></span> <span class="toc_entry">半加法族と前測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000172"><span class="toc_ref"></span> <span class="toc_entry">外測度の生成と拡張定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000173"><span class="toc_ref"></span> <span class="toc_entry">Borel集合族</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000174"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測性の限界</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000175"><span class="toc_ref"></span> <span class="toc_entry">まとめ</span></a>
  </li>
 
   </ul>
@@ -250,55 +269,47 @@
 
 <div class="main-text">
 <h1 id="a0000000007"> Carathéodory流の測度論</h1>
-<h4 id="a0000000168">本章の目標</h4>
-<p> 第5章ではLebesgue外測度とLebesgue内測度の一致によって可測性を定義した． 本章では，その背後にある一般的な構成を述べる． 中心になるのは，外測度とCarathéodory条件から \(\sigma \)-加法族上の測度を取り出す定理である． 抽象論の証明は省略し，定義と使い方を整理する． </p>
-<h1 id="a0000000169"> Carathéodoryの測度論</h1>
-<div class="definition_thmwrapper theorem-style-definition" id="a0000000626">
+<h4 id="a0000000167">本章の目標</h4>
+<p> Lebesgue可測性は，内測度と外測度の一致として定義した （??def:lebesgue-measurable-local）． 一方で，同じ可測性はLebesgue外測度に対するCarathéodory条件でも特徴づけられる （??cor:lebesgue-caratheodory-equivalence）． 本章ではこの後者の見方を一般化し，任意の外測度から可測集合と測度を取り出す方法， および半加法族上の体積から測度を作る方法を整理する． </p>
+<h1 id="a0000000168"> 動機づけ</h1>
+<p>Lebesgue内測度は，コンパクト集合で内側から近似する量として導入した． これは幾何学的には自然だが，コンパクト集合という位相的概念に依存している． 一般の集合 \(X\) では位相を持たないことも多く，内測度を同じ形で定義できるとは限らない． </p>
+<p>Carathéodoryの考え方は，内測度を使わず，外測度だけから可測性を判定することである． この方法では「集合を \(A\) の内側と外側に切っても外測度が余計に増えない」 という条件が，可測性の役割を果たす． </p>
+<h1 id="a0000000169"> 可測空間と測度</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:sigma-algebra">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Definition
     </span>
-    <span class="definition_thmlabel">77</span>
+    <span class="definition_thmlabel">.1</span>
     <span class="definition_thmtitle">\(\sigma \)-加法族</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000626">#</a>
+    <a class="icon proof" href="sect0006.html#def:sigma-algebra">#</a>
     
     
     
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p> 集合 \(X\) の部分集合族 \(\mathcal S\subset \mathcal P(X)\) が \(X\) 上の \(\sigma \)-加法族であるとは，次を満たすことをいう． </p>
-<ol class="enumerate">
-  <li><p>\(X\in \mathcal S\) </p>
-</li>
-  <li><p>\(A\in \mathcal S\) ならば \(X\setminus A\in \mathcal S\) </p>
-</li>
-  <li><p>\(\{ A_n\} _{n=1}^{\infty }\subset \mathcal S\) ならば </p>
-<div class="displaymath" id="a0000000627">
-  \[  \bigcup _{n=1}^{\infty }A_n\in \mathcal S \]
-</div>
-</li>
-</ol>
+  <p> 集合 \(X\) の部分集合族 \(\mathcal S\subset \mathcal P(X)\) が \(X\) 上の \(\sigma \)-加法族であるとは， \(X\in \mathcal S\)，\(A\in \mathcal S\) ならば \(X\setminus A\in \mathcal S\)， また \(\{ A_n\} _{n=1}^{\infty }\subset \mathcal S\) ならば \(\bigcup _{n=1}^{\infty }A_n\in \mathcal S\) であることをいう． </p>
 
   </div>
 </div>
-<div class="remark_thmwrapper theorem-style-remark" id="a0000000628">
+<div class="remark_thmwrapper theorem-style-remark" id="a0000000715">
   <div class="remark_thmheading">
     <span class="remark_thmcaption">
     Remark
     </span>
-    <span class="remark_thmlabel">18</span>
+    <span class="remark_thmlabel">19</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000628">#</a>
+    <a class="icon proof" href="sect0006.html#a0000000715">#</a>
     
     
     
@@ -309,148 +320,204 @@
 
   </div>
 </div>
-<div class="definition_thmwrapper theorem-style-definition" id="a0000000629">
+<div class="definition_thmwrapper theorem-style-definition" id="def:generated-sigma-algebra">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Definition
     </span>
-    <span class="definition_thmlabel">78</span>
+    <span class="definition_thmlabel">.2</span>
+    <span class="definition_thmtitle">生成される \(\sigma \)-加法族</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#def:generated-sigma-algebra">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 任意の集合族 \(\mathcal C\subset \mathcal P(X)\) に対し， \(\mathcal C\) を含む最小の \(\sigma \)-加法族を \(\sigma (\mathcal C)\) と書き， \(\mathcal C\) が生成する \(\sigma \)-加法族という． 具体的には，\(\mathcal C\) を含むすべての \(\sigma \)-加法族の共通部分である． </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000000716">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.3</span>
     <span class="definition_thmtitle">可測空間</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000629">#</a>
+    <a class="icon proof" href="sect0006.html#a0000000716">#</a>
     
     
     
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p> \(X\) 上の \(\sigma \)-加法族 \(\mathcal S\) を1つ固定した組 </p>
-<div class="displaymath" id="a0000000630">
-  \[  (X,\mathcal S)  \]
-</div>
-<p> を可測空間という． </p>
+  <p> \(X\) 上の \(\sigma \)-加法族 \(\mathcal S\) を1つ固定した組 \((X,\mathcal S)\) を可測空間という． </p>
 
   </div>
 </div>
-<div class="definition_thmwrapper theorem-style-definition" id="a0000000631">
+<div class="definition_thmwrapper theorem-style-definition" id="def:measure">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Definition
     </span>
-    <span class="definition_thmlabel">79</span>
+    <span class="definition_thmlabel">.4</span>
     <span class="definition_thmtitle">測度</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000631">#</a>
+    <a class="icon proof" href="sect0006.html#def:measure">#</a>
     
     
     
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p> 可測空間 \((X,\mathcal S)\) 上の写像 </p>
-<div class="displaymath" id="a0000000632">
-  \[  \mu :\mathcal S\to [0,\infty ]  \]
-</div>
-<p> が測度であるとは，次を満たすことをいう． </p>
-<ol class="enumerate">
-  <li><p>\(\mu (\emptyset )=0\) </p>
-</li>
-  <li><p>互いに素な列 \(\{ A_n\} _{n=1}^{\infty }\subset \mathcal S\) に対して </p>
-<div class="displaymath" id="a0000000633">
-  \[  \mu \left(\bigsqcup _{n=1}^{\infty }A_n\right) = \sum _{n=1}^{\infty }\mu (A_n)  \]
-</div>
-<p> が成り立つ </p>
-</li>
-</ol>
+  <p> 可測空間 \((X,\mathcal S)\) 上の写像 \(\mu :\mathcal S\to [0,\infty ]\) が測度であるとは， \(\mu (\emptyset )=0\) であり，互いに素な列 \(\{ A_n\} _{n=1}^{\infty }\subset \mathcal S\) に対して \(\mu (\bigsqcup _{n=1}^{\infty }A_n)=\sum _{n=1}^{\infty }\mu (A_n)\) が成り立つことをいう． </p>
 
   </div>
 </div>
-<div class="definition_thmwrapper theorem-style-definition" id="a0000000634">
+<div class="definition_thmwrapper theorem-style-definition" id="a0000000717">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Definition
     </span>
-    <span class="definition_thmlabel">80</span>
+    <span class="definition_thmlabel">.5</span>
     <span class="definition_thmtitle">測度空間</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000634">#</a>
+    <a class="icon proof" href="sect0006.html#a0000000717">#</a>
     
     
     
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p> 可測空間 \((X,\mathcal S)\) とその上の測度 \(\mu \) の組 </p>
-<div class="displaymath" id="a0000000635">
-  \[  (X,\mathcal S,\mu )  \]
-</div>
-<p> を測度空間という． </p>
+  <p> 可測空間 \((X,\mathcal S)\) とその上の測度 \(\mu \) の組 \((X,\mathcal S,\mu )\) を測度空間という． </p>
 
   </div>
 </div>
-<div class="definition_thmwrapper theorem-style-definition" id="a0000000636">
+<div class="definition_thmwrapper theorem-style-definition" id="def:sigma-finite-measure">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Definition
     </span>
-    <span class="definition_thmlabel">81</span>
+    <span class="definition_thmlabel">.6</span>
+    <span class="definition_thmtitle">\(\sigma \)-有限測度</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#def:sigma-finite-measure">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 測度 \(\mu \) が \(\sigma \)-有限であるとは， ある \(X_n\in \mathcal S\) が存在して \(X=\bigcup _{n=1}^{\infty }X_n\) かつ \(\mu (X_n){\lt}\infty \) を満たすことをいう． 同じ言葉を有限加法族上の前測度に対して使うときも， 被覆集合 \(X_n\) はその有限加法族の元とする． </p>
+
+  </div>
+</div>
+<div class="example_thmwrapper theorem-style-plain" id="ex:counting-measure">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
+    </span>
+    <span class="example_thmlabel">.7</span>
+    <span class="example_thmtitle">数え上げ測度</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#ex:counting-measure">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="example_thmcontent">
+  <p> 任意の集合 \(X\) について \(\mathcal P(X)\) 上で \(\# A\) を \(A\) の元の個数，ただし無限集合なら \(\# A=\infty \)，と定めると測度になる． これを数え上げ測度という． \(X\) が可算集合なら一点集合の可算和で覆えるので \(\sigma \)-有限であり， \(X\) が非可算集合なら \(\sigma \)-有限ではない． </p>
+
+  </div>
+</div>
+<div class="example_thmwrapper theorem-style-plain" id="ex:dirac-measure">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
+    </span>
+    <span class="example_thmlabel">.8</span>
+    <span class="example_thmtitle">Dirac測度</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#ex:dirac-measure">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="example_thmcontent">
+  <p> 可測空間 \((X,\mathcal S)\) と点 \(a\in X\) に対し， \(\delta _a(A)=1\)（\(a\in A\) のとき），\(\delta _a(A)=0\)（\(a\notin A\) のとき）と定める． これは \((X,\mathcal S)\) 上の測度であり，点 \(a\) に質量が集中したDirac測度という． </p>
+
+  </div>
+</div>
+<h1 id="a0000000170"> 外測度とCarathéodory可測性</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:outer-measure">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.9</span>
     <span class="definition_thmtitle">外測度</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000636">#</a>
+    <a class="icon proof" href="sect0006.html#def:outer-measure">#</a>
     
     
     
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p> 集合 \(X\) 上の写像 </p>
-<div class="displaymath" id="a0000000637">
-  \[  \mu ^*:\mathcal P(X)\to [0,\infty ]  \]
-</div>
-<p> が外測度であるとは，次を満たすことをいう． </p>
-<ol class="enumerate">
-  <li><p>\(\mu ^*(\emptyset )=0\) </p>
-</li>
-  <li><p>\(A\subset B\) ならば \(\mu ^*(A)\le \mu ^*(B)\) </p>
-</li>
-  <li><p>任意の集合列 \(\{ A_n\} _{n=1}^{\infty }\subset \mathcal P(X)\) に対して </p>
-<div class="displaymath" id="a0000000638">
-  \[  \mu ^*\left(\bigcup _{n=1}^{\infty }A_n\right) \le \sum _{n=1}^{\infty }\mu ^*(A_n)  \]
-</div>
-</li>
-</ol>
+  <p> 集合 \(X\) 上の写像 \(\mu ^*:\mathcal P(X)\to [0,\infty ]\) が外測度であるとは， \(\mu ^*(\emptyset )=0\)，\(A\subset B\) ならば \(\mu ^*(A)\le \mu ^*(B)\)， また任意の集合列 \(\{ A_n\} _{n=1}^{\infty }\subset \mathcal P(X)\) に対して \(\mu ^*(\bigcup _{n=1}^{\infty }A_n)\le \sum _{n=1}^{\infty }\mu ^*(A_n)\) であることをいう． </p>
 
   </div>
 </div>
-<div class="definition_thmwrapper theorem-style-definition" id="a0000000639">
+<div class="definition_thmwrapper theorem-style-definition" id="def:caratheodory-condition">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Definition
     </span>
-    <span class="definition_thmlabel">82</span>
+    <span class="definition_thmlabel">.10</span>
     <span class="definition_thmtitle">Carathéodory条件</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000639">#</a>
+    <a class="icon proof" href="sect0006.html#def:caratheodory-condition">#</a>
     
     
     
@@ -458,28 +525,28 @@
   </div>
   <div class="definition_thmcontent">
   <p> 外測度 \(\mu ^*\) に対し，集合 \(A\subset X\) がCarathéodory条件を満たすとは， 任意の \(E\subset X\) に対して </p>
-<div class="displaymath" id="a0000000640">
-  \[  \mu ^*(E) = \mu ^*(E\cap A)+\mu ^*(E\setminus A)  \]
+<div class="displaymath" id="a0000000718">
+  \[  \mu ^*(E)=\mu ^*(E\cap A)+\mu ^*(E\setminus A)  \]
 </div>
 <p> が成り立つことをいう． この条件を満たす集合を \(\mu ^*\)-可測集合ともいう． </p>
 
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-plain" id="a0000000641">
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:caratheodory-theorem">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">83</span>
+    <span class="theorem_thmlabel">.11</span>
     <span class="theorem_thmtitle">Carathéodoryの定理</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000641">#</a>
+    <a class="icon proof" href="sect0006.html#thm:caratheodory-theorem">#</a>
     
-    <a class="icon proof" href="sect0006.html#a0000000642"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0006.html#a0000000719"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -487,19 +554,11 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p> 外測度 \(\mu ^*\) に関する \(\mu ^*\)-可測集合全体を </p>
-<div class="displaymath" id="a0000000643">
-  \[  \mathcal M_{\mu ^*}  \]
-</div>
-<p> と書く． このとき \(\mathcal M_{\mu ^*}\) は \(X\) 上の \(\sigma \)-加法族であり， </p>
-<div class="displaymath" id="a0000000644">
-  \[  \mu :=\mu ^*|_{\mathcal M_{\mu ^*}}  \]
-</div>
-<p> は \((X,\mathcal M_{\mu ^*})\) 上の測度である． さらに，\(\mu (N)=0\) である可測集合 \(N\) の任意の部分集合も可測で，測度 \(0\) をもつ． </p>
+  <p> 外測度 \(\mu ^*\) に関する \(\mu ^*\)-可測集合全体を \(\mathcal M_{\mu ^*}\) と書く． このとき \(\mathcal M_{\mu ^*}\) は \(X\) 上の \(\sigma \)-加法族であり， \(\mu :=\mu ^*|_{\mathcal M_{\mu ^*}}\) は \((X,\mathcal M_{\mu ^*})\) 上の測度である． さらに，\(\mu (N)=0\) である可測集合 \(N\) の任意の部分集合も可測で，測度 \(0\) をもつ． </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000642">
+<div class="proof_wrapper" id="a0000000719">
   <div class="proof_heading">
     <span class="proof_caption">
     
@@ -507,118 +566,149 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>証明は省略する． 要点は，Carathéodory条件が「任意の集合を \(A\) の内側と外側に切っても外測度が増えない」ことを表しており， この条件が補集合と可算和に関して安定であることにある． </p>
+  <p>外測度の劣加法性より，Carathéodory条件では \(\mu ^*(E)\ge \mu ^*(E\cap A)+\mu ^*(E\setminus A)\) だけを示せばよい． \(\emptyset \) と \(X\) が可測であること，および補集合で閉じていることは定義から直ちに従う． \(A,B\) が可測なら，任意の \(E\) に対して \(A\) で切り，さらに各部分を \(B\) で切ると， \(\mu ^*(E)\ge \mu ^*(E\cap (A\cup B))+\mu ^*(E\setminus (A\cup B))\) を得るので， 有限和で閉じている． 可算和については，\(B_1=A_1\)， \(B_n=A_n\setminus \bigcup _{k{\lt}n}A_k\) とおいて互いに素な列に直す． \(B=\bigcup _n B_n\) とすると，有限和の場合を繰り返して任意の \(N\) で \(\mu ^*(E)\ge \sum _{n=1}^N\mu ^*(E\cap B_n)+\mu ^*(E\setminus B)\) であり， \(N\to \infty \) と外測度の劣加法性から \(\mu ^*(E)\ge \mu ^*(E\cap B)+\mu ^*(E\setminus B)\) が従う． よって \(\mathcal M_{\mu ^*}\) は \(\sigma \)-加法族である． </p>
+<p>互いに素な可測列 \(A_n\) と \(A=\bigsqcup _n A_n\) に対し， 上の有限段階の不等式を \(E=A\) に適用すると \(\mu ^*(A)\ge \sum _{n=1}^N\mu ^*(A_n)\) がすべての \(N\) で成り立つ． 逆向きは外測度の可算劣加法性であるから， \(\mu (A)=\sum _n\mu (A_n)\) であり，\(\mu \) は測度である． 最後に \(N\) が可測で \(\mu (N)=0\)，\(A\subset N\) とする． 任意の \(E\) で \(\mu ^*(E\cap A)=0\) かつ \(\mu ^*(E\setminus A)\le \mu ^*(E)\) なので， \(A\) もCarathéodory条件を満たし，測度は \(0\) である． </p>
 
   </div>
 </div>
-<h1 id="a0000000170"> 半環から外測度へ</h1>
-<div class="definition_thmwrapper theorem-style-definition" id="a0000000645">
+<div class="definition_thmwrapper theorem-style-definition" id="def:completion">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Definition
     </span>
-    <span class="definition_thmlabel">84</span>
+    <span class="definition_thmlabel">.12</span>
+    <span class="definition_thmtitle">完備測度と完備化</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#def:completion">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 測度空間 \((X,\mathcal S,\mu )\) が完備であるとは， \(N\in \mathcal S\)，\(\mu (N)=0\)，\(A\subset N\) ならば \(A\in \mathcal S\) であることをいう． 一般の測度の完備化とは，零集合の部分集合をすべて可測集合として加えた測度であり， たとえば \(\overline{\mathcal S}:=\{ A\triangle Z\mid A\in \mathcal S,\  Z\subset N,\  N\in \mathcal S,\  \mu (N)=0\} \) 上に \(\overline\mu (A\triangle Z):=\mu (A)\) と定めて得られる． ここで \(A\triangle Z:=(A\setminus Z)\cup (Z\setminus A)\) は対称差を表す． </p>
+
+  </div>
+</div>
+<h1 id="a0000000171"> 半加法族と前測度</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:finite-additive-family">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.13</span>
     <span class="definition_thmtitle">有限加法族</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000645">#</a>
+    <a class="icon proof" href="sect0006.html#def:finite-additive-family">#</a>
     
     
     
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p> 集合 \(X\) の部分集合族 \(\mathcal A\subset \mathcal P(X)\) が有限加法族であるとは，次を満たすことをいう． </p>
-<ol class="enumerate">
-  <li><p>\(\emptyset \in \mathcal A\) </p>
-</li>
-  <li><p>\(A,B\in \mathcal A\) ならば \(A\cup B\in \mathcal A\) </p>
-</li>
-  <li><p>\(A,B\in \mathcal A\) ならば \(A\setminus B\in \mathcal A\) </p>
-</li>
-</ol>
+  <p> 集合 \(X\) の部分集合族 \(\mathcal A\subset \mathcal P(X)\) が有限加法族であるとは， \(\emptyset \in \mathcal A\)，\(A,B\in \mathcal A\) ならば \(A\cup B\in \mathcal A\)， また \(A,B\in \mathcal A\) ならば \(A\setminus B\in \mathcal A\) であることをいう． </p>
 
   </div>
 </div>
-<div class="definition_thmwrapper theorem-style-definition" id="a0000000646">
+<div class="definition_thmwrapper theorem-style-definition" id="def:semiring">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Definition
     </span>
-    <span class="definition_thmlabel">85</span>
-    <span class="definition_thmtitle">半環</span>
+    <span class="definition_thmlabel">.14</span>
+    <span class="definition_thmtitle">半加法族（半環）</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000646">#</a>
+    <a class="icon proof" href="sect0006.html#def:semiring">#</a>
     
     
     
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p> 集合 \(X\) の部分集合族 \(\mathcal S\subset \mathcal P(X)\) が半環であるとは，次を満たすことをいう． </p>
-<ol class="enumerate">
-  <li><p>\(\emptyset \in \mathcal S\) </p>
-</li>
-  <li><p>\(A,B\in \mathcal S\) ならば \(A\cap B\in \mathcal S\) </p>
-</li>
-  <li><p>\(A,B\in \mathcal S\) ならば，ある有限個の互いに素な集合 \(C_1,\dots ,C_N\in \mathcal S\) が存在して </p>
-<div class="displaymath" id="a0000000647">
-  \[  A\setminus B=\bigsqcup _{j=1}^{N}C_j  \]
-</div>
-<p> と書ける </p>
-</li>
-</ol>
+  <p> 集合 \(X\) の部分集合族 \(\mathcal E\subset \mathcal P(X)\) が半加法族，または半環，であるとは， \(\emptyset \in \mathcal E\)，\(A,B\in \mathcal E\) ならば \(A\cap B\in \mathcal E\)， また \(A,B\in \mathcal E\) ならば \(A\setminus B\) が有限個の互いに素な \(\mathcal E\) の元の合併 として書けることをいう． ここで有限個は \(0\) 個でもよい． </p>
 
   </div>
 </div>
-<div class="definition_thmwrapper theorem-style-definition" id="a0000000648">
+<div class="definition_thmwrapper theorem-style-definition" id="def:algebra-generated-by-semiring">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Definition
     </span>
-    <span class="definition_thmlabel">86</span>
-    <span class="definition_thmtitle">半環が生成する有限加法族</span>
+    <span class="definition_thmlabel">.15</span>
+    <span class="definition_thmtitle">半加法族が生成する有限加法族</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000648">#</a>
+    <a class="icon proof" href="sect0006.html#def:algebra-generated-by-semiring">#</a>
     
     
     
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p> 半環 \(\mathcal S\) に対して </p>
-<div class="displaymath" id="a0000000649">
-  \[  \mathcal A(\mathcal S) := \left\{  \bigsqcup _{j=1}^{N}S_j \; \middle |\;  N\in \mathbb N,\  S_j\in \mathcal S\right\}   \]
+  <p> 半加法族 \(\mathcal E\) に対して </p>
+<div class="displaymath" id="a0000000720">
+  \[  \mathcal A(\mathcal E) := \left\{  \bigsqcup _{j=1}^{N}E_j \; \middle |\;  N\in \mathbb N,\  E_j\in \mathcal E\right\}  \cup \{ \emptyset \}   \]
 </div>
-<p> と定める． ただし空和は \(\emptyset \) とみなす． </p>
+<p> と定める． </p>
 
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-plain" id="a0000000650">
+<div class="example_thmwrapper theorem-style-plain" id="ex:left-half-open-semiring">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
+    </span>
+    <span class="example_thmlabel">.16</span>
+    <span class="example_thmtitle">左半開区間の半加法族</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#ex:left-half-open-semiring">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="example_thmcontent">
+  <p> \(\mathbb R^d\) では </p>
+<div class="displaymath" id="a0000000721">
+  \[  \mathcal E_d := \left\{  \prod _{i=1}^{d}(a_i,b_i] \; \middle |\;  -\infty \le a_i{\lt}b_i\le \infty \right\}  \cup \{ \emptyset \}   \]
+</div>
+<p> を用いる． 端点が \(\pm \infty \) のときは自然な意味で解釈する． 共通部分は再び左半開区間であり，差集合は有限個の互いに素な左半開区間に分割できるので， \(\mathcal E_d\) は半加法族である． これまで基本集合と呼んできた族は \(\mathcal A(\mathcal E_d)\) である． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:algebra-generated-by-semiring">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">87</span>
+    <span class="theorem_thmlabel">.17</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000650">#</a>
+    <a class="icon proof" href="sect0006.html#thm:algebra-generated-by-semiring">#</a>
     
-    <a class="icon proof" href="sect0006.html#a0000000651"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0006.html#a0000000722"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -626,11 +716,11 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p>\(\mathcal A(\mathcal S)\) は \(X\) 上の有限加法族である． </p>
+  <p> \(\mathcal A(\mathcal E)\) は \(X\) 上の有限加法族である． </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000651">
+<div class="proof_wrapper" id="a0000000722">
   <div class="proof_heading">
     <span class="proof_caption">
     
@@ -638,65 +728,71 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>証明は省略する． 半環の差集合に関する条件により，有限個の半環要素の合併に対して差集合を取っても， 再び有限個の半環要素の互いに素な合併として書ける． </p>
+  <p>まず \(C\in \mathcal E\) と \(F\in \mathcal A(\mathcal E)\) に対して， \(C\setminus F\) は有限個の互いに素な \(\mathcal E\) の元の合併になる． これは \(F\) の表示に現れる項数に関する帰納法と，半加法族の差集合条件から従う． したがって \(E=\bigsqcup _i E_i\) と \(F\in \mathcal A(\mathcal E)\) なら \(E\setminus F=\bigsqcup _i(E_i\setminus F)\) も \(\mathcal A(\mathcal E)\) に属する． また \(E\cup F=E\sqcup (F\setminus E)\) だから有限和でも閉じており， \(\emptyset \) は定義で含めてある． </p>
 
   </div>
 </div>
-<div class="definition_thmwrapper theorem-style-definition" id="a0000000652">
+<div class="definition_thmwrapper theorem-style-definition" id="def:premeasure-on-semiring">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Definition
     </span>
-    <span class="definition_thmlabel">88</span>
-    <span class="definition_thmtitle">半環上の体積</span>
+    <span class="definition_thmlabel">.18</span>
+    <span class="definition_thmtitle">半加法族上の前測度</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000652">#</a>
+    <a class="icon proof" href="sect0006.html#def:premeasure-on-semiring">#</a>
     
     
     
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p> 半環 \(\mathcal S\) 上の写像 </p>
-<div class="displaymath" id="a0000000653">
-  \[  v:\mathcal S\to [0,\infty ]  \]
-</div>
-<p> が体積であるとは，次を満たすことをいう． </p>
-<ol class="enumerate">
-  <li><p>\(v(\emptyset )=0\) </p>
-</li>
-  <li><p>互いに素な列 \(\{ S_n\} _{n=1}^{\infty }\subset \mathcal S\) で </p>
-<div class="displaymath" id="a0000000654">
-  \[  S=\bigsqcup _{n=1}^{\infty }S_n\in \mathcal S \]
-</div>
-<p> となるものに対して </p>
-<div class="displaymath" id="a0000000655">
-  \[  v(S)=\sum _{n=1}^{\infty }v(S_n)  \]
-</div>
-</li>
-</ol>
+  <p> 半加法族 \(\mathcal E\) 上の写像 \(\mu _0:\mathcal E\to [0,\infty ]\) が前測度であるとは， \(\mu _0(\emptyset )=0\) であり，互いに素な列 \(\{ E_n\} \subset \mathcal E\) が \(E=\bigsqcup _{n=1}^{\infty }E_n\in \mathcal E\) を満たすとき \(\mu _0(E)=\sum _{n=1}^{\infty }\mu _0(E_n)\) となることをいう． 半加法族上の前測度を体積と呼ぶこともある． 有限個の分割については，残りを空集合とすれば同じ等式が成り立つ． </p>
 
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-plain" id="a0000000656">
+<div class="definition_thmwrapper theorem-style-definition" id="def:premeasure-on-algebra">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.19</span>
+    <span class="definition_thmtitle">有限加法族上の前測度</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#def:premeasure-on-algebra">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 有限加法族 \(\mathcal A\) 上の写像 \(\mu _0:\mathcal A\to [0,\infty ]\) が前測度であるとは， \(\mu _0(\emptyset )=0\)，\(\mu _0\) が有限加法的であり，互いに素な列 \(\{ A_n\} \subset \mathcal A\) について \(\bigcup _n A_n\in \mathcal A\) であるとき \(\mu _0(\bigcup _n A_n)=\sum _n\mu _0(A_n)\) が成り立つことをいう． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:premeasure-extension-to-algebra">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">89</span>
+    <span class="theorem_thmlabel">.20</span>
     <span class="theorem_thmtitle">有限加法族への延長</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000656">#</a>
+    <a class="icon proof" href="sect0006.html#thm:premeasure-extension-to-algebra">#</a>
     
-    <a class="icon proof" href="sect0006.html#a0000000657"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0006.html#a0000000723"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -704,19 +800,11 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p> \(v\) を半環 \(\mathcal S\) 上の体積とする． </p>
-<div class="displaymath" id="a0000000658">
-  \[  E=\bigsqcup _{j=1}^{N}S_j\in \mathcal A(\mathcal S) \qquad (S_j\in \mathcal S)  \]
-</div>
-<p> に対して </p>
-<div class="displaymath" id="a0000000659">
-  \[  \overline v(E):=\sum _{j=1}^{N}v(S_j)  \]
-</div>
-<p> と定めると，\(\overline v\) は表示の取り方によらず定まり， \(\mathcal A(\mathcal S)\) 上の前測度になる． </p>
+  <p> \(\mu _0\) を半加法族 \(\mathcal E\) 上の前測度とする． \(A=\bigsqcup _{j=1}^{N}E_j\in \mathcal A(\mathcal E)\) に対して \(\overline\mu _0(A):=\sum _{j=1}^{N}\mu _0(E_j)\) と定めると， \(\overline\mu _0\) は表示の取り方によらず定まり， \(\mathcal A(\mathcal E)\) 上の前測度になる． </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000657">
+<div class="proof_wrapper" id="a0000000723">
   <div class="proof_heading">
     <span class="proof_caption">
     
@@ -724,51 +812,53 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>証明は省略する． 異なる分割を共通部分で細分すれば，同じ有限和へ帰着される． </p>
+  <p>\(A=\bigsqcup _i E_i=\bigsqcup _j F_j\) と2通りに表す． 各 \(E_i\) は互いに素な有限和 \(E_i=\bigsqcup _j(E_i\cap F_j)\) に分割され， 各 \(F_j\) も \(F_j=\bigsqcup _i(E_i\cap F_j)\) に分割される． 半加法族上の前測度の有限加法性を使えば， \(\sum _i\mu _0(E_i)=\sum _{i,j}\mu _0(E_i\cap F_j)=\sum _j\mu _0(F_j)\) となる． よって well-defined である． 有限加法性は表示を並べればよい． 可算加法性は，\(A=\bigsqcup _n A_n\in \mathcal A(\mathcal E)\) をさらに \(A=\bigsqcup _i E_i\) と書き，各 \(E_i\) を \(A_n\cap E_i\) で分割して 半加法族上の前測度の可算加法性を適用すれば従う． </p>
 
   </div>
 </div>
-<div class="definition_thmwrapper theorem-style-definition" id="a0000000660">
+<h1 id="a0000000172"> 外測度の生成と拡張定理</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:outer-measure-generated-by-premeasure">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Definition
     </span>
-    <span class="definition_thmlabel">90</span>
+    <span class="definition_thmlabel">.21</span>
     <span class="definition_thmtitle">生成される外測度</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000660">#</a>
+    <a class="icon proof" href="sect0006.html#def:outer-measure-generated-by-premeasure">#</a>
     
     
     
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p> \(\mathcal A=\mathcal A(\mathcal S)\) とし，\(\overline v\) をその上の前測度とする． 任意の \(E\subset X\) に対して </p>
-<div class="displaymath" id="a0000000661">
-  \[  \mu ^*(E) := \inf \left\{  \sum _{n=1}^{\infty }\overline v(A_n) \; \middle |\;  E\subset \bigcup _{n=1}^{\infty }A_n,\  A_n\in \mathcal A\right\}   \]
+  <p> 有限加法族 \(\mathcal A\) 上の前測度 \(\mu _0\) から，任意の \(E\subset X\) に対して </p>
+<div class="displaymath" id="a0000000724">
+  \[  \mu ^*(E) := \inf \left\{  \sum _{n=1}^{\infty }\mu _0(A_n) \; \middle |\;  E\subset \bigcup _{n=1}^{\infty }A_n,\  A_n\in \mathcal A\right\}   \]
 </div>
 <p> と定める． </p>
 
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-plain" id="a0000000662">
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:outer-measure-from-premeasure">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">91</span>
+    <span class="theorem_thmlabel">.22</span>
+    <span class="theorem_thmtitle">前測度から作る外測度</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000662">#</a>
+    <a class="icon proof" href="sect0006.html#thm:outer-measure-from-premeasure">#</a>
     
-    <a class="icon proof" href="sect0006.html#a0000000663"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0006.html#a0000000725"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -776,19 +866,11 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p>上で定めた \(\mu ^*\) は \(X\) 上の外測度であり， </p>
-<div class="displaymath" id="a0000000664">
-  \[  \mu ^*(A)=\overline v(A) \qquad (A\in \mathcal A)  \]
-</div>
-<p> を満たす． したがってCarathéodoryの定理により </p>
-<div class="displaymath" id="a0000000665">
-  \[  \mu :=\mu ^*|_{\mathcal M_{\mu ^*}}  \]
-</div>
-<p> は \(\mathcal M_{\mu ^*}\) 上の測度であり，\(\mathcal A\) 上では元の体積と一致する． </p>
+  <p> ??def:outer-measure-generated-by-premeasureで定めた \(\mu ^*\) は \(X\) 上の外測度である． さらに，任意の \(A\in \mathcal A\) に対して \(\mu ^*(A)=\mu _0(A)\) であり， \(A\) は \(\mu ^*\)-可測である． </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000663">
+<div class="proof_wrapper" id="a0000000725">
   <div class="proof_heading">
     <span class="proof_caption">
     
@@ -796,25 +878,25 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>証明は省略する． 定義はLebesgue外測度と同じく「可算個の基本集合で外から覆る最小コスト」を取っている． この形から外測度の3条件が従い，前測度性から \(\mathcal A\) 上で値が一致する． </p>
+  <p>\(\mu ^*(\emptyset )=0\) は空集合による被覆から従い，単調性は被覆の範囲が広がるだけである． 可算劣加法性は，右辺が有限の場合に各 \(E_n\) を \(\varepsilon 2^{-n}\) 以内で覆う \(\mathcal A\) の列を取り，それらを全部並べることで従う． 次に \(A\in \mathcal A\) なら1項被覆で \(\mu ^*(A)\le \mu _0(A)\) である． 逆に \(A\subset \bigcup _n A_n\) を \(\mathcal A\) の被覆とし， \(B_1=A\cap A_1\)，\(B_n=A\cap (A_n\setminus \bigcup _{k{\lt}n}A_k)\) とおくと， \(A=\bigsqcup _n B_n\)，\(B_n\in \mathcal A\)，\(B_n\subset A_n\) である． 前測度性と単調性より \(\mu _0(A)=\sum _n\mu _0(B_n)\le \sum _n\mu _0(A_n)\) なので， 下限を取って \(\mu _0(A)\le \mu ^*(A)\) を得る． 最後に \(A\in \mathcal A\) と任意の \(E\subset X\) を取る． \(E\subset \bigcup _n A_n\) という任意の \(\mathcal A\)-被覆を \(A_n\cap A\) と \(A_n\setminus A\) に分けると， \(\mu ^*(E\cap A)+\mu ^*(E\setminus A)\le \sum _n\mu _0(A_n)\) である． 下限を取ればCarathéodory条件の逆向きが従い，劣加法性と合わせて \(A\) は可測である． </p>
 
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-plain" id="a0000000666">
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:caratheodory-hahn-extension">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">92</span>
+    <span class="theorem_thmlabel">.23</span>
     <span class="theorem_thmtitle">Carathéodory–Hahnの拡張定理</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000666">#</a>
+    <a class="icon proof" href="sect0006.html#thm:caratheodory-hahn-extension">#</a>
     
-    <a class="icon proof" href="sect0006.html#a0000000667"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0006.html#a0000000726"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -822,19 +904,11 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p> 半環 \(\mathcal S\) 上の体積 \(v\) から，上の構成によって </p>
-<div class="displaymath" id="a0000000668">
-  \[  \sigma (\mathcal S)  \]
-</div>
-<p> 上の測度 \(\mu \) が得られ， </p>
-<div class="displaymath" id="a0000000669">
-  \[  \mu (S)=v(S)\qquad (S\in \mathcal S)  \]
-</div>
-<p> を満たす． さらに，生成される有限加法族上の前測度が \(\sigma \)-有限ならば， この拡張は一意的である． </p>
+  <p> \(\mathcal E\) を集合 \(X\) 上の半加法族，\(\mu _0\) をその上の前測度とする． このとき，\(\sigma (\mathcal E)\) 上の測度 \(\mu \) で すべての \(E\in \mathcal E\) に対して \(\mu (E)=\mu _0(E)\) を満たすものが存在する． さらに，\(\overline\mu _0\) が \(\mathcal A(\mathcal E)\) 上で \(\sigma \)-有限ならば， この拡張は一意的である． </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000667">
+<div class="proof_wrapper" id="a0000000726">
   <div class="proof_heading">
     <span class="proof_caption">
     
@@ -842,110 +916,118 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>証明は省略する． </p>
+  <p>??thm:premeasure-extension-to-algebraにより \(\overline\mu _0\) は \(\mathcal A(\mathcal E)\) 上の前測度である． ??thm:outer-measure-from-premeasureで外測度 \(\mu ^*\) を作ると， \(\mathcal A(\mathcal E)\) の元はすべて \(\mu ^*\)-可測で，\(\mu ^*\) はその上で \(\overline\mu _0\) と一致する． ??thm:caratheodory-theoremより \(\widetilde\mu :=\mu ^*|_{\mathcal M_{\mu ^*}}\) は測度であり， \(\sigma (\mathcal E)=\sigma (\mathcal A(\mathcal E))\subset \mathcal M_{\mu ^*}\) である． したがって \(\mu :=\widetilde\mu |_{\sigma (\mathcal E)}\) が求める拡張である． </p>
+<p>一意性を示す． 別の拡張を \(\nu \) とする． まず \(\nu \) と \(\mu \) は \(\mathcal A(\mathcal E)\) 上で一致する． \(\sigma \)-有限性により \(X_n\in \mathcal A(\mathcal E)\)，\(X_n\uparrow X\)， \(\overline\mu _0(X_n){\lt}\infty \) と取る． 任意の \(F\in \sigma (\mathcal E)\) に対し \(F_n:=F\cap X_n\) とおく． 任意の \(\mathcal A(\mathcal E)\)-被覆 \(F_n\subset \bigcup _k A_k\) について \(\nu (F_n)\le \sum _k\overline\mu _0(A_k)\) だから \(\nu (F_n)\le \mu ^*(F_n)\)． 逆向きは，\(X_n\setminus F\) の任意の \(\mathcal A(\mathcal E)\)-被覆を用いて \(\overline\mu _0(X_n)-\nu (F_n)\le \mu ^*(X_n\setminus F)\) とし， \(X_n\) と \(F\) の \(\mu ^*\)-可測性から \(\mu ^*(F_n)=\overline\mu _0(X_n)-\mu ^*(X_n\setminus F)\le \nu (F_n)\) を得る． よって \(\nu (F_n)=\mu (F_n)\) であり，\(F_n\uparrow F\) と測度の下からの連続性により \(\nu (F)=\mu (F)\) である． </p>
 
   </div>
 </div>
-<div class="example_thmwrapper theorem-style-plain" id="a0000000670">
+<div class="remark_thmwrapper theorem-style-remark" id="a0000000727">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">20</span>
+    <span class="remark_thmtitle">Hopfの拡張定理との関係</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000727">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p> 用語には揺れがあるが，ここでは前測度から測度が存在する部分を Carathéodory–Hahnの拡張定理と呼んだ． \(\sigma \)-有限性の仮定のもとで一意性まで述べる形をHopfの拡張定理と呼ぶ文献もある． 要点は，半加法族 \(\mathcal E\) から有限加法族 \(\mathcal A(\mathcal E)\) へ延ばし， そこから外測度を作り，Carathéodory可測集合へ制限するという流れである． </p>
+
+  </div>
+</div>
+<div class="example_thmwrapper theorem-style-plain" id="ex:lebesgue-measure-from-caratheodory-hahn">
   <div class="example_thmheading">
     <span class="example_thmcaption">
     Example
     </span>
-    <span class="example_thmlabel">25</span>
+    <span class="example_thmlabel">.24</span>
     <span class="example_thmtitle">Lebesgue測度</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000670">#</a>
+    <a class="icon proof" href="sect0006.html#ex:lebesgue-measure-from-caratheodory-hahn">#</a>
     
     
     
         </div>
   </div>
   <div class="example_thmcontent">
-  <p> \(X=\mathbb R^d\) とし， </p>
-<div class="displaymath" id="a0000000671">
-  \[  \mathcal S= \left\{  \prod _{i=1}^{d}[a_i,b_i) \; \middle |\;  a_i\le b_i \right\}   \]
-</div>
-<p> を半開区間全体の半環とする． </p>
-<div class="displaymath" id="a0000000672">
-  \[  v\left(\prod _{i=1}^{d}[a_i,b_i)\right) := \prod _{i=1}^{d}(b_i-a_i)  \]
-</div>
-<p> と定めると，この体積からLebesgue外測度が得られる． Carathéodoryの定理によって得られる測度は，Lebesgue測度である． </p>
+  <p> ??ex:left-half-open-semiringの \(\mathcal E_d\) 上で \(\mu _0(\prod _{i=1}^d(a_i,b_i])=\prod _{i=1}^d(b_i-a_i)\)， \(\mu _0(\emptyset )=0\) と定める． これは半加法族上の前測度であり， ??thm:caratheodory-hahn-extensionにより \(\sigma (\mathcal E_d)=\mathcal B(\mathbb R^d)\) 上の測度が得られる． さらに，この前測度から作る外測度はLebesgue外測度の定義そのものであり， ??cor:lebesgue-caratheodory-equivalenceにより Carathéodory可測集合はLebesgue可測集合と一致する． したがってCarathéodoryの構成で得られる完全測度がLebesgue測度である． </p>
 
   </div>
 </div>
-<h1 id="a0000000171"> Borel集合族</h1>
-<div class="definition_thmwrapper theorem-style-definition" id="a0000000673">
+<h1 id="a0000000173"> Borel集合族</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:borel-sigma-algebra">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Definition
     </span>
-    <span class="definition_thmlabel">93</span>
+    <span class="definition_thmlabel">.25</span>
     <span class="definition_thmtitle">Borel集合族</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000673">#</a>
+    <a class="icon proof" href="sect0006.html#def:borel-sigma-algebra">#</a>
     
     
     
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p> 位相空間 \(X\) に対し，\(X\) の開集合全体が生成する \(\sigma \)-加法族を </p>
-<div class="displaymath" id="a0000000674">
-  \[  \mathcal B(X)  \]
-</div>
-<p> と書き，\(X\) のBorel集合族という． \(\mathcal B(X)\) の元をBorel集合という． </p>
+  <p> 位相空間 \(X\) に対し，\(X\) の開集合全体を \(\mathcal O(X)\) と書く． \(\mathcal B(X):=\sigma (\mathcal O(X))\) を \(X\) のBorel集合族といい， \(\mathcal B(X)\) の元をBorel集合という． </p>
 
   </div>
 </div>
-<div class="example_thmwrapper theorem-style-plain" id="a0000000675">
+<div class="example_thmwrapper theorem-style-plain" id="a0000000728">
   <div class="example_thmheading">
     <span class="example_thmcaption">
     Example
     </span>
-    <span class="example_thmlabel">26</span>
+    <span class="example_thmlabel">.26</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000675">#</a>
+    <a class="icon proof" href="sect0006.html#a0000000728">#</a>
     
     
     
         </div>
   </div>
   <div class="example_thmcontent">
-  <p>\(\mathbb R^d\) では，開集合，閉集合，開集合の可算共通部分，閉集合の可算和はいずれもBorel集合である． また，有理端点をもつ有界開区間全体は可算基底をなすので， </p>
-<div class="displaymath" id="a0000000676">
-  \[  \mathcal B(\mathbb R^d)  \]
-</div>
-<p> は有理端点をもつ有界開区間全体から生成される． </p>
+  <p>\(\mathbb R^d\) では，開集合，閉集合，開集合の可算共通部分，閉集合の可算和はいずれもBorel集合である． また，有理端点をもつ有界開区間 \(\prod _{i=1}^d(a_i,b_i)\)，\(a_i,b_i\in \mathbb Q\)，の全体は可算基底をなすので， \(\mathcal B(\mathbb R^d)\) はこの可算な集合族から生成される． </p>
 
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-plain" id="a0000000677">
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:borel-sets-are-lebesgue-measurable">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">94</span>
+    <span class="theorem_thmlabel">.27</span>
     <span class="theorem_thmtitle">Borel集合はLebesgue可測</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000677">#</a>
+    <a class="icon proof" href="sect0006.html#thm:borel-sets-are-lebesgue-measurable">#</a>
     
-    <a class="icon proof" href="sect0006.html#a0000000678"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0006.html#a0000000729"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -957,7 +1039,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000678">
+<div class="proof_wrapper" id="a0000000729">
   <div class="proof_heading">
     <span class="proof_caption">
     
@@ -965,52 +1047,48 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>第5章で開集合がLebesgue可測であることを示した． Lebesgue可測集合全体 \(\mathcal L^d\) は \(\sigma \)-加法族であるから， 開集合が生成する \(\sigma \)-加法族である \(\mathcal B(\mathbb R^d)\) を含む． </p>
+  <p>??thm:open-closed-lebesgue-measurableにより開集合はLebesgue可測である． また ??thm:lebesgue-measurable-sigma-algebra により Lebesgue可測集合全体 \(\mathcal L_d\) は \(\sigma \)-加法族である． したがって開集合が生成する \(\mathcal B(\mathbb R^d)\) は \(\mathcal L_d\) に含まれる． </p>
 
   </div>
 </div>
-<div class="definition_thmwrapper theorem-style-definition" id="a0000000679">
+<div class="definition_thmwrapper theorem-style-definition" id="def:borel-measure">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Definition
     </span>
-    <span class="definition_thmlabel">95</span>
+    <span class="definition_thmlabel">.28</span>
     <span class="definition_thmtitle">Borel測度</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000679">#</a>
+    <a class="icon proof" href="sect0006.html#def:borel-measure">#</a>
     
     
     
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p> Lebesgue測度をBorel集合族に制限した測度 </p>
-<div class="displaymath" id="a0000000680">
-  \[  \lambda |_{\mathcal B(\mathbb R^d)}  \]
-</div>
-<p> を \(\mathbb R^d\) 上のBorel測度という． </p>
+  <p> Lebesgue測度をBorel集合族に制限した測度 \(\lambda |_{\mathcal B(\mathbb R^d)}\) を \(\mathbb R^d\) 上のBorel測度という． </p>
 
   </div>
 </div>
-<div class="theorem_thmwrapper theorem-style-plain" id="a0000000681">
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:lebesgue-measure-completion-of-borel">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">96</span>
+    <span class="theorem_thmlabel">.29</span>
     <span class="theorem_thmtitle">Lebesgue測度はBorel測度の完備化</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000681">#</a>
+    <a class="icon proof" href="sect0006.html#thm:lebesgue-measure-completion-of-borel">#</a>
     
-    <a class="icon proof" href="sect0006.html#a0000000682"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0006.html#a0000000730"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -1018,15 +1096,11 @@
         </div>
   </div>
   <div class="theorem_thmcontent">
-  <p> 任意のLebesgue可測集合 \(A\subset \mathbb R^d\) は，あるBorel集合 \(B\) とあるLebesgue零集合 \(N\) を用いて </p>
-<div class="displaymath" id="a0000000683">
-  \[  A=B\triangle N  \]
-</div>
-<p> と書ける． したがってLebesgue測度は，Borel測度に零集合の部分集合をすべて加えて得られる完備化である． </p>
+  <p> 任意のLebesgue可測集合 \(A\subset \mathbb R^d\) は， あるBorel集合 \(B\) とあるLebesgue零集合 \(N\) を用いて \(A=B\triangle N\) と書ける． したがってLebesgue測度は，Borel測度の完備化である． </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000682">
+<div class="proof_wrapper" id="a0000000730">
   <div class="proof_heading">
     <span class="proof_caption">
     
@@ -1034,26 +1108,28 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>証明は省略する． 外正則性により \(A\) を外側から開集合で近似し，それらの可算共通部分を取れば， \(A\) との差が零集合であるBorel集合が得られる． </p>
+  <p>まず \(\lambda (A){\lt}\infty \) の場合を示す． ??thm:lebesgue-measure-outer-regularityと有限加法性により，各 \(n\) で \(A\subset O_n\) かつ \(\lambda (O_n\setminus A){\lt}1/n\) となる開集合 \(O_n\) が取れる． \(B:=\bigcap _n O_n\) とおくと \(B\) はBorel集合で，\(A\subset B\)， かつ \(B\setminus A\subset O_n\setminus A\) がすべての \(n\) で成り立つので \(\lambda (B\setminus A)=0\) である． 一般の場合は \(Q_m:=(-m,m]^d\) とし，有限測度集合 \(A\cap Q_m\) に上の議論を適用して， Borel集合 \(B_m\) で \(A\cap Q_m\subset B_m\subset Q_m\) かつ \(\lambda (B_m\setminus A)=0\) となるものを取る． \(B:=\bigcup _m B_m\) とすれば \(B\) はBorel集合，\(A\subset B\)， \(B\setminus A\) は零集合である． \(N:=B\setminus A\) とおけば \(A=B\triangle N\) であり，これは ??def:completionの意味でBorel測度を完備化している． なお任意のLebesgue零集合は，外正則性によりBorel零集合に含まれる． </p>
 
   </div>
 </div>
-<h1 id="a0000000172"> Lebesgue非可測集合</h1>
-<div class="theorem_thmwrapper theorem-style-plain" id="a0000000684">
+<h1 id="a0000000174"> Lebesgue可測性の限界</h1>
+<p>ここまでで，Borel集合はすべてLebesgue可測であり （??thm:borel-sets-are-lebesgue-measurable）， Lebesgue測度はBorel測度の完備化として得られることを見た （??thm:lebesgue-measure-completion-of-borel）． つまりLebesgue測度は，位相から自然に作られるBorel集合だけでなく， 零集合の任意の部分集合まで測れる． </p>
+<p>しかし，選択公理を用いると，それでもなおLebesgue可測でない集合が存在する． その標準的な例がVitali集合である． </p>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:vitali-nonmeasurable">
   <div class="theorem_thmheading">
     <span class="theorem_thmcaption">
     Theorem
     </span>
-    <span class="theorem_thmlabel">97</span>
+    <span class="theorem_thmlabel">.30</span>
     <span class="theorem_thmtitle">Vitali</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000684">#</a>
+    <a class="icon proof" href="sect0006.html#thm:vitali-nonmeasurable">#</a>
     
-    <a class="icon proof" href="sect0006.html#a0000000685"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0006.html#a0000000731"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -1065,7 +1141,7 @@
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000685">
+<div class="proof_wrapper" id="a0000000731">
   <div class="proof_heading">
     <span class="proof_caption">
     
@@ -1073,69 +1149,166 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>\([0,1]\) 上に </p>
-<div class="displaymath" id="a0000000686">
-  \[  x\sim y \quad \Longleftrightarrow \quad x-y\in \mathbb Q \]
+  <p>\([0,1]\) 上に \(x\sim y \Longleftrightarrow x-y\in \mathbb Q\) で同値関係を定める． 選択公理を用いて各同値類から1点ずつ選んだ集合を \(V\subset [0,1]\) とする． \(q\in [-1,1]\cap \mathbb Q\) に対し \(V+q:=\{ v+q\mid v\in V\} \) とおく． もし \(q_1\ne q_2\) なら \((V+q_1)\cap (V+q_2)=\emptyset \) である． 実際，\(v_1+q_1=v_2+q_2\) なら \(v_1-v_2=q_2-q_1\in \mathbb Q\) なので \(v_1,v_2\) は同じ同値類に属し，代表元の選び方から \(v_1=v_2\)， したがって \(q_1=q_2\) となる． </p>
+<p>また \([0,1]\subset \bigcup _{q\in [-1,1]\cap \mathbb Q}(V+q)\subset [-1,2]\) である． ここで \(V\) がLebesgue可測であると仮定する． ??prop:lebesgue-measure-translation-invariantにより各 \(V+q\) も可測で \(\lambda (V+q)=\lambda (V)\) である． ??thm:lebesgue-measure-countable-additivityより </p>
+<div class="displaymath" id="a0000000732">
+  \[  \lambda \left(\bigcup _{q\in [-1,1]\cap \mathbb Q}(V+q)\right) = \sum _{q\in [-1,1]\cap \mathbb Q}\lambda (V)  \]
 </div>
-<p> で同値関係を定める． 選択公理を用いて，各同値類からちょうど1点ずつ選んだ集合を </p>
-<div class="displaymath" id="a0000000687">
-  \[  V\subset [0,1]  \]
-</div>
-<p> とする． </p>
-<p>\(q\in [-1,1]\cap \mathbb Q\) に対して </p>
-<div class="displaymath" id="a0000000688">
-  \[  V+q:=\{ v+q\mid v\in V\}   \]
-</div>
-<p> を考える． もし \(q_1\ne q_2\) なら， </p>
-<div class="displaymath" id="a0000000689">
-  \[  (V+q_1)\cap (V+q_2)=\emptyset  \]
-</div>
-<p> である． 実際，\(v_1+q_1=v_2+q_2\) なら </p>
-<div class="displaymath" id="a0000000690">
-  \[  v_1-v_2=q_2-q_1\in \mathbb Q \]
-</div>
-<p> だから \(v_1,v_2\) は同じ同値類に属する． \(V\) は各同値類から1点しか選んでいないので \(v_1=v_2\) となり， したがって \(q_1=q_2\) である． </p>
-<p>また </p>
-<div class="displaymath" id="a0000000691">
-  \[  [0,1] \subset \bigcup _{q\in [-1,1]\cap \mathbb Q}(V+q) \subset [-1,2]  \]
-</div>
-<p> である． 左の包含は，任意の \(x\in [0,1]\) に対して同じ同値類の代表元 \(v\in V\) が存在し， \(x-v\in [-1,1]\cap \mathbb Q\) となることから従う． </p>
-<p>ここで \(V\) がLebesgue可測であると仮定する． Lebesgue測度の平行移動不変性より，各 \(V+q\) も可測で </p>
-<div class="displaymath" id="a0000000692">
-  \[  \lambda _1(V+q)=\lambda _1(V)  \]
-</div>
-<p> である． 互いに素な可算和の完全加法性より </p>
-<div class="displaymath" id="a0000000693">
-  \[  \lambda _1\left(\bigcup _{q\in [-1,1]\cap \mathbb Q}(V+q)\right) = \sum _{q\in [-1,1]\cap \mathbb Q}\lambda _1(V)  \]
-</div>
-<p> となる． </p>
-<p>もし \(\lambda _1(V)=0\) なら右辺は \(0\) であるが， 左辺の集合は \([0,1]\) を含むので測度は少なくとも \(1\) である． これは矛盾である． もし \(\lambda _1(V){\gt}0\) なら右辺は \(\infty \) であるが， 左辺の集合は \([-1,2]\) に含まれるので測度は高々 \(3\) である． これも矛盾である． </p>
-<p>したがって \(V\) はLebesgue可測ではない． </p>
+<p> となる． もし \(\lambda (V)=0\) なら右辺は \(0\) だが，左辺の集合は \([0,1]\) を含むので少なくとも \(1\) である． もし \(\lambda (V){\gt}0\) なら右辺は \(\infty \) だが，左辺の集合は \([-1,2]\) に含まれるので高々 \(3\) である． どちらも矛盾するから，\(V\) はLebesgue可測ではない． </p>
 
   </div>
 </div>
-<div class="remark_thmwrapper theorem-style-remark" id="a0000000694">
+<div class="remark_thmwrapper theorem-style-remark" id="a0000000733">
   <div class="remark_thmheading">
     <span class="remark_thmcaption">
     Remark
     </span>
-    <span class="remark_thmlabel">19</span>
+    <span class="remark_thmlabel">21</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0006.html#a0000000694">#</a>
+    <a class="icon proof" href="sect0006.html#a0000000733">#</a>
     
     
     
         </div>
   </div>
   <div class="remark_thmcontent">
-  <p>Lebesgue測度はBorel集合より広い集合族まで測れるが， \(\mathcal P(\mathbb R^d)\) 全体を測れるわけではない． Vitali集合は，可算加法性と平行移動不変性を保ったまま全ての部分集合へ測度を拡張できないことを示している． </p>
+  <p>Lebesgue測度はBorel集合より広い集合族まで測れるが， ??thm:vitali-nonmeasurableにより \(\mathcal P(\mathbb R^d)\) 全体を測れるわけではない． Vitali集合は，可算加法性と平行移動不変性を保ったまま すべての部分集合へLebesgue測度を拡張できないことを示している． </p>
 
   </div>
 </div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:solovay-model">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">.31</span>
+    <span class="theorem_thmtitle">Solovay</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#thm:solovay-model">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> 到達不能基数の存在を含むZFCが無矛盾であるならば， ZFに従属選択公理を加えた公理系，すなわちZF+DC，のモデルで， \(\mathbb R\) のすべての部分集合がLebesgue可測であるものが存在する． </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000000734">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">22</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000734">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>Solovayの定理は，Lebesgue非可測集合の存在が 集合論の公理，とくに選択公理の強さに深く関わっていることを示している． 完全な選択公理を仮定する通常のZFCではVitali集合が作れるが， 選択公理を弱めた世界では「すべての実数集合がLebesgue可測」と矛盾しない場合がある． ここでは証明せず，非可測集合の存在は単なる測度論内部の現象ではなく， 集合論的な現象でもある，という位置づけだけを押さえる． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:banach-tarski">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">.32</span>
+    <span class="theorem_thmtitle">Banach–Tarskiのパラドックス</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#thm:banach-tarski">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> \(\mathbb R^3\) の球は有限個の互いに素な部分集合に分割でき， それらを回転と平行移動だけで組み替えることで， 元の球と同じ大きさの球を2つ作ることができる． </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000000735">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">23</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000735">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>Banach–Tarskiのパラドックスも選択公理を用いる結果である． 分割片は通常の意味で体積をもつ集合ではないため， Lebesgue測度の有限加法性や平行移動不変性とは矛盾しない． むしろこの結果は，\(\mathbb R^3\) のすべての部分集合に対して， 通常の体積を拡張するような有限加法的かつ運動不変な測度を定めることができないことを強く示している． </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000000736">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">24</span>
+    <span class="remark_thmtitle">任意加法性は強すぎる</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0006.html#a0000000736">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p> Lebesgue測度は可算加法的であるが， 任意個の互いに素な集合族に対してまで加法性を要求することはできない． 実際，すべての1点集合は測度 \(0\) であるから， もし任意加法性 </p>
+<div class="displaymath" id="a0000000737">
+  \[  \lambda \left(\bigsqcup _{\alpha \in \Gamma } A_\alpha \right) = \sum _{\alpha \in \Gamma } \lambda (A_\alpha )  \]
+</div>
+<p> が常に成り立つとする （右辺は有限部分和の上限として解釈する）． すると </p>
+<div class="displaymath" id="a0000000738">
+  \[  [0,1] = \bigsqcup _{x \in [0,1]} \{ x\}   \]
+</div>
+<p> より </p>
+<div class="displaymath" id="a0000000739">
+  \[  \lambda _1([0,1]) = \sum _{x \in [0,1]} 0 = 0  \]
+</div>
+<p> となってしまう． これは明らかに矛盾である． したがって，面積を正しくモデル化するには 「可算加法性」がちょうどよい強さである． </p>
+
+  </div>
+</div>
+<h1 id="a0000000175"> まとめ</h1>
+<p>本章では，Lebesgue流の測度論をCarathéodory流の一般論として捉え直した． 内測度を使って定義したLebesgue可測性は， ??cor:lebesgue-caratheodory-equivalenceにより Lebesgue外測度に関するCarathéodory可測性と一致する． この観点では，可測集合とは外測度を内側と外側に正しく分割する集合であり， ??thm:caratheodory-theoremにより，その全体は自然に \(\sigma \)-加法族をなす． </p>
+<p>また，半加法族上の前測度から外測度を作り， Carathéodory可測集合へ制限することで測度を得る手順を見た． ??thm:caratheodory-hahn-extensionは， 区間の体積からLebesgue測度を作る構成が， 一般の測度構成の一例であることを説明している． この枠組みでは，数え上げ測度やDirac測度も同じ「可測空間上の測度」として扱える． </p>
+<p>Borel集合族は位相から生成される標準的な \(\sigma \)-加法族であり， Lebesgue測度はBorel測度の完備化として得られる． 一方で，Vitali集合やBanach–Tarskiのパラドックスが示すように， 可算加法性，平行移動不変性，通常の体積との整合性を保ったまま すべての部分集合を測ることはできない． これで，Lebesgue積分を支える測度論の土台は一段落する．  </p>
 
 
 </div> <!--main-text -->
