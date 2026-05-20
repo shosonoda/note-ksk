@@ -1401,6 +1401,128 @@ $K\subset A\cap Q_n\subset A$ で
 である．
 \end{proof}
 
+\section{Carathéodory条件との比較}\label{sec:lebesgue-caratheodory-comparison}
+
+\begin{definition}[Lebesgue外測度に関するCarathéodory可測性]\label{def:lebesgue-caratheodory-measurable}
+集合 $A\subset\RR^d$ がLebesgue外測度 $\lambda^*$ に関してCarathéodory可測であるとは，
+任意の $E\subset\RR^d$ に対して
+\[
+\lambda^*(E)
+=
+\lambda^*(E\cap A)+\lambda^*(E\setminus A)
+\]
+が成り立つことをいう．この等式をCarathéodory条件という．
+\end{definition}
+
+\begin{lemma}[有限外測度集合のCarathéodory分割]\label{lem:lebesgue-measurable-caratheodory-finite}
+$A\in\calL_d$ とし，$E\subset\RR^d$ が $\lambda^*(E)<\infty$ を満たすとする．
+このとき
+\[
+\lambda^*(E)
+=
+\lambda^*(E\cap A)+\lambda^*(E\setminus A)
+\]
+である．
+\end{lemma}
+\begin{proof}
+外測度の劣加法性（\cref{thm:lebesgue-outer-measure}）より
+\[
+\lambda^*(E)
+\le
+\lambda^*(E\cap A)+\lambda^*(E\setminus A)
+\]
+である．逆向きの不等式を示す．
+
+$\eps>0$ を任意に取る．開集合による外正則性
+（\cref{thm:lebesgue-outer-regularity-open}）より，
+$E\subset G$ を満たす開集合 $G$ で
+\[
+\lambda^*(G)<\lambda^*(E)+\eps
+\]
+となるものが取れる．特に $\lambda^*(G)<\infty$ である．
+開集合と閉集合の可測性
+（\cref{thm:open-closed-lebesgue-measurable}）と
+Lebesgue可測集合の集合演算
+（\cref{cor:lebesgue-measurable-set-operations}）より，
+$G\cap A$ と $G\setminus A$ はLebesgue可測である．
+有限加法性（\cref{lem:lebesgue-measure-finite-additivity}）より
+\[
+\lambda(G)=\lambda(G\cap A)+\lambda(G\setminus A)
+\]
+である．したがって，単調性より
+\[
+\lambda^*(E\cap A)+\lambda^*(E\setminus A)
+\le
+\lambda(G\cap A)+\lambda(G\setminus A)
+=
+\lambda(G)
+=
+\lambda^*(G)
+<
+\lambda^*(E)+\eps.
+\]
+$\eps>0$ は任意だから逆向きの不等式も従う．
+\end{proof}
+
+\begin{theorem}[Lebesgue可測ならCarathéodory可測]\label{thm:lebesgue-measurable-implies-caratheodory}
+$A\in\calL_d$ ならば，$A$ は $\lambda^*$ に関してCarathéodory可測である．
+\end{theorem}
+\begin{proof}
+任意の $E\subset\RR^d$ を取る．
+$\lambda^*(E)<\infty$ の場合は
+\cref{lem:lebesgue-measurable-caratheodory-finite} より従う．
+$\lambda^*(E)=\infty$ の場合は，外測度の劣加法性
+（\cref{thm:lebesgue-outer-measure}）より
+\[
+\infty=\lambda^*(E)
+\le
+\lambda^*(E\cap A)+\lambda^*(E\setminus A)
+\]
+だから右辺も $\infty$ である．逆向きの不等式は自明なので，
+Carathéodory条件が成り立つ．
+\end{proof}
+
+\begin{theorem}[Carathéodory可測ならLebesgue可測]\label{thm:caratheodory-implies-lebesgue-measurable}
+$A\subset\RR^d$ が $\lambda^*$ に関してCarathéodory可測ならば，
+$A$ はLebesgue可測である．
+\end{theorem}
+\begin{proof}
+$R>0$ を任意に取り，$Q_R=[-R,R]^d$ とおく．
+Carathéodory条件を $E=Q_R$ に適用すると
+\[
+\lambda^*(Q_R)
+=
+\lambda^*(A\cap Q_R)+\lambda^*(Q_R\setminus A)
+\]
+である．第3章の区間の外測度の計算
+（\cref{prop:interval-outer-measure-volume}）より $\lambda^*(Q_R)=|Q_R|$ だから
+\[
+|Q_R|
+=
+\lambda^*(A\cap Q_R)+\lambda^*(Q_R\setminus A)
+\]
+である．区間による外測度の分解
+（\cref{cor:interval-outer-measure-split}）を
+$A\cap Q_R\subset Q_R$ に適用すると
+（ここで $Q_R\setminus A=Q_R\setminus(A\cap Q_R)$ である）
+\[
+\lambda_*(A\cap Q_R)=\lambda^*(A\cap Q_R)
+\]
+を得る．$R>0$ は任意なので，$A$ はLebesgue可測である．
+\end{proof}
+
+\begin{corollary}[Lebesgue可測性とCarathéodory可測性の一致]\label{cor:lebesgue-caratheodory-equivalence}
+集合 $A\subset\RR^d$ について，次は同値である．
+\begin{enumerate}
+    \item $A$ はLebesgue可測である
+    \item $A$ は $\lambda^*$ に関してCarathéodory可測である
+\end{enumerate}
+\end{corollary}
+\begin{proof}
+\cref{thm:lebesgue-measurable-implies-caratheodory,thm:caratheodory-implies-lebesgue-measurable}
+より従う．
+\end{proof}
+
 \section{まとめ}
 
 本章では，有界な窓で切ったときの内測度と外測度の一致を出発点として，
@@ -1409,6 +1531,9 @@ Lebesgue可測集合とLebesgue測度の基本性質を確立した．
     \item Lebesgue可測集合全体 $\calL_d$ は $\RR^d$ 上の完全加法族，
     すなわち $\sigma$-加法族である
     （\cref{thm:lebesgue-measurable-sigma-algebra}）．
+    \item Lebesgue可測性は，Lebesgue外測度 $\lambda^*$ に関する
+    Carathéodory可測性と同値である
+    （\cref{cor:lebesgue-caratheodory-equivalence}）．
     \item Lebesgue測度 $\lambda:\calL_d\to[0,\infty]$ は
     $\lambda(\emptyset)=0$ と完全加法性を満たす．
     したがって $\lambda$ は $(\RR^d,\calL_d)$ 上の完全加法的測度である
