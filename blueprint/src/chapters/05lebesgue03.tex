@@ -975,7 +975,7 @@ Lebesgue可測集合の $\sigma$-加法族性
 \[
 \mu:\calS\to[0,\infty]
 \]
-が $(X,\calS)$ 上の完全加法的測度であるとは，次の2条件を満たすことをいう．
+が $(X,\calS)$ 上の（完全加法的）測度であるとは，次の2条件を満たすことをいう．
 \begin{enumerate}
     \item $\mu(\emptyset)=0$
     \item 互いに素な列 $\{A_n\}_{n=1}^{\infty}\subset\calS$ に対して
@@ -985,7 +985,7 @@ Lebesgue可測集合の $\sigma$-加法族性
     \sum_{n=1}^{\infty}\mu(A_n)
     \]
 \end{enumerate}
-第2条件を完全加法性という．
+%第2条件を完全加法性という．
 \end{definition}
 
 \begin{proposition}[非負性と空集合]\label{prop:lebesgue-measure-nonnegative}
@@ -1010,6 +1010,42 @@ Lebesgue外測度の非負性
 である．
 \end{proof}
 
+\begin{lemma}[窓による測度の表示]\label{lem:lebesgue-measure-window}
+任意の $A\in\calL_d$ について
+\[
+\lambda(A)=\sup_{m\ge1}\lambda(A\cap Q_m).
+\]
+\end{lemma}
+\begin{proof}
+右辺が左辺以下であることはLebesgue外測度の単調性から従う．
+逆向きについて，右辺を $M$ とおく．$M=\infty$ のときはただちに従うので，
+$M<\infty$ とする．
+\[
+E_1:=A\cap Q_1,\qquad
+E_m:=A\cap(Q_m\setminus Q_{m-1})\quad(m\ge2)
+\]
+とおくと，$E_m$ は互いに素なLebesgue可測集合であり，
+$A=\bigcup_{m=1}^{\infty}E_m$ である．
+有界閉区間内の有限加法性
+（\cref{lem:local-measurable-finite-union-additivity}）を
+$Q_N$ の中の互いに素な集合 $E_1,\dots,E_N\in\calL(Q_N)$ に適用すると
+\[
+\lambda(A\cap Q_N)=\sum_{m=1}^{N}\lambda(E_m)
+\]
+である．したがって
+\[
+\sum_{m=1}^{\infty}\lambda(E_m)=M
+\]
+である．外測度の可算劣加法性（\cref{thm:lebesgue-outer-measure}）より
+\[
+\lambda(A)=\lambda^*(A)\le
+\sum_{m=1}^{\infty}\lambda^*(E_m)
+=
+\sum_{m=1}^{\infty}\lambda(E_m)=M
+\]
+となり，主張が従う．
+\end{proof}
+
 \begin{lemma}[有限加法性]\label{lem:lebesgue-measure-finite-additivity}
 $A,B\in\calL_d$ が互いに素ならば
 \[
@@ -1018,58 +1054,19 @@ $A,B\in\calL_d$ が互いに素ならば
 である．
 \end{lemma}
 \begin{proof}
-外測度の劣加法性（\cref{thm:lebesgue-outer-measure}）より
+任意の $m\ge1$ に対して，
+$A\cap Q_m$ と $B\cap Q_m$ は $\calL(Q_m)$ に属し，互いに素である．
+有界閉区間内の有限加法性
+（\cref{lem:local-measurable-finite-union-additivity}）より
 \[
-\lambda(A\cup B)\le\lambda(A)+\lambda(B)
-\]
-である．逆向きの不等式を示す．
-
-$\lambda(A)=\infty$ または $\lambda(B)=\infty$ のときは，
-$A\subset A\cup B$ または $B\subset A\cup B$ と外測度の単調性
-（\cref{thm:lebesgue-outer-measure}）より
-\[
-\lambda(A\cup B)=\infty
-\]
-となるのでよい．
-以下では $\lambda(A),\lambda(B)<\infty$ とする．
-
-有限外測度集合の可測性
-（\cref{thm:finite-outer-measurable-iff-inner-outer}）より
-\[
-\lambda_*(A)=\lambda(A),
-\qquad
-\lambda_*(B)=\lambda(B)
-\]
-である．したがって内測度の定義より，任意の $\eps>0$ に対して
-コンパクト集合 $K_A\subset A,\ K_B\subset B$ で
-\[
-\lambda^*(K_A)>\lambda(A)-\frac{\eps}{2},
-\qquad
-\lambda^*(K_B)>\lambda(B)-\frac{\eps}{2}
-\]
-となるものが取れる．
-$A\cap B=\emptyset$ だから $K_A$ と $K_B$ は交わらない．
-両方とも空でない場合，2つのコンパクト集合は正の距離だけ離れているので，
-正距離集合に対する外測度の加法性
-（\cref{lem:positive-distance-additive}）より
-\[
-\lambda^*(K_A\cup K_B)
+\lambda\bigl((A\cup B)\cap Q_m\bigr)
 =
-\lambda^*(K_A)+\lambda^*(K_B)
+\lambda(A\cap Q_m)+\lambda(B\cap Q_m)
 \]
-である．片方が空の場合もこの等式は自明である．よって
+である．$m$ に関して上限を取ると，
+\cref{lem:lebesgue-measure-window} と単調列の上限の性質から
 \[
-\lambda(A\cup B)
-=
-\lambda^*(A\cup B)
-\ge
-\lambda^*(K_A\cup K_B)
->
-\lambda(A)+\lambda(B)-\eps
-\]
-である．$\eps>0$ は任意だから
-\[
-\lambda(A\cup B)\ge\lambda(A)+\lambda(B)
+\lambda(A\cup B)=\lambda(A)+\lambda(B)
 \]
 を得る．
 \end{proof}
@@ -1090,32 +1087,43 @@ Lebesgue可測集合の $\sigma$-加法族性
 A:=\bigsqcup_{n=1}^{\infty}A_n
 \]
 はLebesgue可測である．
-外測度の可算劣加法性（\cref{thm:lebesgue-outer-measure}）より
+任意の $m\ge1$ に対して，
+$\{A_n\cap Q_m\}_{n=1}^{\infty}\subset\calL(Q_m)$ は互いに素である．
+有界閉区間内の完全加法性
+（\cref{thm:local-measurable-sigma-algebra}）より
 \[
-\lambda(A)
+\lambda(A\cap Q_m)
 =
-\lambda^*(A)
+\sum_{n=1}^{\infty}\lambda(A_n\cap Q_m)
 \le
-\sum_{n=1}^{\infty}\lambda^*(A_n)
-=
 \sum_{n=1}^{\infty}\lambda(A_n)
+\]
+である．$m$ に関して上限を取り，
+\cref{lem:lebesgue-measure-window} を用いれば
+\[
+\lambda(A)\le\sum_{n=1}^{\infty}\lambda(A_n)
 \]
 である．
 
-逆向きの不等式を示す．
+逆向きの不等式を示す．任意の $N$ に対して，
+\cref{lem:lebesgue-measure-window} と単調列の上限の性質より
 \[
-S_N:=\bigsqcup_{n=1}^{N}A_n
+\sum_{n=1}^{N}\lambda(A_n)
+=
+\sup_{m\ge1}\sum_{n=1}^{N}\lambda(A_n\cap Q_m)
 \]
-とおく．有限加法性（\cref{lem:lebesgue-measure-finite-additivity}）を繰り返し用いると
+である．したがって，有界閉区間内の完全加法性
+（\cref{thm:local-measurable-sigma-algebra}）より
 \[
-\lambda(S_N)=\sum_{n=1}^{N}\lambda(A_n)
+\sum_{n=1}^{N}\lambda(A_n)
+\le
+\sup_{m\ge1}\sum_{n=1}^{\infty}\lambda(A_n\cap Q_m)
+=
+\sup_{m\ge1}\lambda(A\cap Q_m)
+=
+\lambda(A)
 \]
-である．また $S_N\subset A$ なので，外測度の単調性
-（\cref{thm:lebesgue-outer-measure}）より
-\[
-\sum_{n=1}^{N}\lambda(A_n)=\lambda(S_N)\le\lambda(A)
-\]
-である．$N\to\infty$ として
+である．$N\to\infty$ とすれば
 \[
 \sum_{n=1}^{\infty}\lambda(A_n)\le\lambda(A)
 \]
@@ -1372,29 +1380,17 @@ $A\in\calL_d$ に対して
 となり，結論が従う．
 
 次に $\lambda(A)=\infty$ とする．
+窓による測度の表示（\cref{lem:lebesgue-measure-window}）より
 \[
-A_n:=A\cap Q_n\qquad(n=1,2,\dots)
-\]
-とおく．Lebesgue可測集合の集合演算
-（\cref{cor:lebesgue-measurable-set-operations}）と
-開集合と閉集合の可測性
-（\cref{thm:open-closed-lebesgue-measurable}）より，$A_n$ はLebesgue可測である．
-また
-\[
-A_1\subset A_2\subset\cdots,\qquad
-A=\bigcup_{n=1}^{\infty}A_n
-\]
-である．下からの連続性
-（\cref{thm:lebesgue-measure-continuity-from-below}）より
-\[
-\lambda(A)=\lim_{n\to\infty}\lambda(A_n)=\infty
+\sup_{n\ge1}\lambda(A\cap Q_n)=\infty
 \]
 である．したがって任意の $M>0$ に対して，ある $n$ が存在して
 \[
-\lambda(A_n)>M
+\lambda(A\cap Q_n)>M
 \]
-となる．$A_n$ は有界なので有限測度の場合を $A_n$ に適用でき，
-コンパクト集合 $K\subset A_n\subset A$ で
+となる．$A\cap Q_n$ は有界なLebesgue可測集合なので，
+有限測度の場合を $A\cap Q_n$ に適用でき，コンパクト集合
+$K\subset A\cap Q_n\subset A$ で
 \[
 \lambda(K)>M
 \]
@@ -1417,6 +1413,11 @@ Lebesgue可測集合とLebesgue測度の基本性質を確立した．
     $\lambda(\emptyset)=0$ と完全加法性を満たす．
     したがって $\lambda$ は $(\RR^d,\calL_d)$ 上の完全加法的測度である
     （\cref{prop:lebesgue-measure-nonnegative,thm:lebesgue-measure-countable-additivity}）．
+    \item Lebesgue測度は単調列に関して連続である．すなわち，
+    下から増大する可測集合列では和集合の測度が測度の極限に等しく，
+    上から減少する可測集合列では最初の集合の測度が有限であれば
+    共通部分の測度が測度の極限に等しい
+    （\cref{thm:lebesgue-measure-continuity-from-below,thm:lebesgue-measure-continuity-from-above}）．
     \item Lebesgue測度は平行移動不変である．すなわち
     $A\in\calL_d$ と $c\in\RR^d$ に対して $A+c\in\calL_d$ であり，
     $\lambda(A+c)=\lambda(A)$ である
