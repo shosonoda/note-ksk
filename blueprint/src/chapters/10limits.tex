@@ -32,14 +32,14 @@ f_n \to f
 \]
 という極限に対して
 \[
-\int f_n\,dm \to \int f\,dm
+\int f_n\,d\lambda \to \int f\,d\lambda
 \]
 を言いたい場面が非常に多い．
 本章では，そのための代表的な4つの定理を学ぶ．
 
 \section{単調収束定理}
 
-\begin{theorem}[単調収束定理]
+\begin{theorem}[単調収束定理]\label{thm:monotone-convergence}
 $E \subset \RR^d$ を可測集合とし，
 $f_n:E \to [0,\infty]$ を非負可測関数列とする．
 もし
@@ -50,27 +50,27 @@ f_n(x)\to f(x)\quad (x \in E)
 \]
 ならば
 \[
-\int_E f_n\,dm \uparrow \int_E f\,dm
+\int_E f_n\,d\lambda \uparrow \int_E f\,d\lambda
 \]
 すなわち
 \[
-\lim_{n\to\infty}\int_E f_n\,dm=\int_E f\,dm
+\lim_{n\to\infty}\int_E f_n\,d\lambda=\int_E f\,d\lambda
 \]
 が成り立つ．
 \end{theorem}
 \begin{proof}
-まず $f_n \le f$ だから単調性より
+まず $f_n \le f$ だから\cref{prop:nonnegative-integral-basic}より
 \[
-\int_E f_n\,dm\le \int_E f\,dm
+\int_E f_n\,d\lambda\le \int_E f\,d\lambda
 \]
-であり，列 $\left\{\int_E f_n\,dm\right\}$ は単調増加で上に有界である．
+であり，列 $\{\int_E f_n\,d\lambda\}$ は拡大実数値の単調増加列である．
 したがって極限
 \[
-L:=\lim_{n\to\infty}\int_E f_n\,dm
+L:=\lim_{n\to\infty}\int_E f_n\,d\lambda
 \]
 が存在して
 \[
-L\le \int_E f\,dm
+L\le \int_E f\,d\lambda
 \]
 である．
 
@@ -105,49 +105,49 @@ u_n\le f_n
 が成り立つ．
 したがって
 \[
-\int_E u_n\,dm\le \int_E f_n\,dm\le L.
+\int_E u_n\,d\lambda\le \int_E f_n\,d\lambda\le L.
 \]
-一方，測度の下からの連続性より
+一方，測度の下からの連続性（\cref{thm:lebesgue-measure-continuity-from-below}）より
 \[
-m(B_{j,n})\to m(A_j)
+\lambda(B_{j,n})\to \lambda(A_j)
 \]
 だから
 \[
-\int_E u_n\,dm
+\int_E u_n\,d\lambda
 =
-\sum_{j=1}^m \alpha a_j m(B_{j,n})
+\sum_{j=1}^m \alpha a_j \lambda(B_{j,n})
 \to
-\sum_{j=1}^m \alpha a_j m(A_j)
+\sum_{j=1}^m \alpha a_j \lambda(A_j)
 =
-\alpha \int_E s\,dm.
+\alpha \int_E s\,d\lambda.
 \]
 よって
 \[
-\alpha \int_E s\,dm\le L.
+\alpha \int_E s\,d\lambda\le L.
 \]
 $\alpha \uparrow 1$ とすれば
 \[
-\int_E s\,dm\le L.
+\int_E s\,d\lambda\le L.
 \]
 $s \le f$ を満たす単関数 $s$ は任意だから，
-$f$ の積分の定義より
+非負可測関数の積分の定義（\cref{def:nonnegative-lebesgue-integral}）より
 \[
-\int_E f\,dm\le L.
+\int_E f\,d\lambda\le L.
 \]
 したがって
 \[
-\int_E f\,dm=L
+\int_E f\,d\lambda=L
 \]
 である．
 \end{proof}
 
-\begin{corollary}[非負級数の項別積分]
+\begin{corollary}[非負級数の項別積分]\label{cor:nonnegative-series-termwise-integration}
 $f_n:E \to [0,\infty]$ を非負可測関数列とする．
 このとき
 \[
-\int_E \left(\sum_{n=1}^{\infty}f_n\right)\,dm
+\int_E \left(\sum_{n=1}^{\infty}f_n\right)\,d\lambda
 =
-\sum_{n=1}^{\infty}\int_E f_n\,dm
+\sum_{n=1}^{\infty}\int_E f_n\,d\lambda
 \]
 が成り立つ．
 \end{corollary}
@@ -162,37 +162,37 @@ S_1\le S_2\le \cdots,
 \qquad
 S_N \uparrow \sum_{n=1}^{\infty}f_n.
 \]
-したがって単調収束定理より
+したがって\cref{thm:monotone-convergence}より
 \[
-\int_E \left(\sum_{n=1}^{\infty}f_n\right)\,dm
+\int_E \left(\sum_{n=1}^{\infty}f_n\right)\,d\lambda
 =
-\lim_{N\to\infty}\int_E S_N\,dm.
+\lim_{N\to\infty}\int_E S_N\,d\lambda.
 \]
-一方，有限和の線形性より
+一方，非負可測関数の有限和に関する線形性（\cref{prop:nonnegative-integral-basic}）より
 \[
-\int_E S_N\,dm
+\int_E S_N\,d\lambda
 =
-\sum_{n=1}^N \int_E f_n\,dm.
+\sum_{n=1}^N \int_E f_n\,d\lambda.
 \]
 よって
 \[
-\int_E \left(\sum_{n=1}^{\infty}f_n\right)\,dm
+\int_E \left(\sum_{n=1}^{\infty}f_n\right)\,d\lambda
 =
-\lim_{N\to\infty}\sum_{n=1}^N \int_E f_n\,dm
+\lim_{N\to\infty}\sum_{n=1}^N \int_E f_n\,d\lambda
 =
-\sum_{n=1}^{\infty}\int_E f_n\,dm.
+\sum_{n=1}^{\infty}\int_E f_n\,d\lambda.
 \]
 \end{proof}
 
 \section{Fatouの補題}
 
-\begin{theorem}[Fatouの補題]
+\begin{theorem}[Fatouの補題]\label{thm:fatou-lemma}
 $f_n:E \to [0,\infty]$ を非負可測関数列とする．
 このとき
 \[
-\int_E \liminf_{n\to\infty} f_n\,dm
+\int_E \liminf_{n\to\infty} f_n\,d\lambda
 \le
-\liminf_{n\to\infty}\int_E f_n\,dm
+\liminf_{n\to\infty}\int_E f_n\,d\lambda
 \]
 が成り立つ．
 \end{theorem}
@@ -208,45 +208,45 @@ g_1\le g_2\le \cdots,
 \qquad
 g_n \uparrow \liminf_{n\to\infty} f_n.
 \]
-したがって単調収束定理より
+したがって\cref{thm:monotone-convergence}より
 \[
-\int_E \liminf_{n\to\infty} f_n\,dm
+\int_E \liminf_{n\to\infty} f_n\,d\lambda
 =
-\lim_{n\to\infty}\int_E g_n\,dm.
+\lim_{n\to\infty}\int_E g_n\,d\lambda.
 \]
 しかも各 $n$ と各 $k\ge n$ に対して
 \[
 g_n\le f_k
 \]
-だから単調性より
+だから\cref{prop:nonnegative-integral-basic}より
 \[
-\int_E g_n\,dm\le \int_E f_k\,dm.
+\int_E g_n\,d\lambda\le \int_E f_k\,d\lambda.
 \]
 ゆえに
 \[
-\int_E g_n\,dm\le \inf_{k\ge n}\int_E f_k\,dm.
+\int_E g_n\,d\lambda\le \inf_{k\ge n}\int_E f_k\,d\lambda.
 \]
 両辺で $n\to\infty$ とすると
 \[
-\int_E \liminf_{n\to\infty} f_n\,dm
+\int_E \liminf_{n\to\infty} f_n\,d\lambda
 \le
-\lim_{n\to\infty}\inf_{k\ge n}\int_E f_k\,dm
+\lim_{n\to\infty}\inf_{k\ge n}\int_E f_k\,d\lambda
 =
-\liminf_{n\to\infty}\int_E f_n\,dm.
+\liminf_{n\to\infty}\int_E f_n\,d\lambda.
 \]
 \end{proof}
 
 \begin{remark}
-Fatouの補題は，
+\cref{thm:fatou-lemma}は，
 「極限の積分は積分の極限以下とは限らないが，
 少なくとも \(\liminf\) については不等式が成り立つ」
 という定理である．
-優収束定理の証明でも重要な役割を果たす．
+\cref{thm:dominated-convergence}の証明でも重要な役割を果たす．
 \end{remark}
 
 \section{優収束定理}
 
-\begin{theorem}[優収束定理]
+\begin{theorem}[優収束定理]\label{thm:dominated-convergence}
 $f_n:E \to \eRR$ を可測関数列とし，
 $g:E \to [0,\infty]$ を可積分な関数とする．
 もし
@@ -260,11 +260,11 @@ f_n(x)\to f(x) \quad \text{a.e.\ on } E
 がすべての $n$ について成り立つならば，
 $f$ は可積分であり，
 \[
-\lim_{n\to\infty}\int_E |f_n-f|\,dm=0
+\lim_{n\to\infty}\int_E |f_n-f|\,d\lambda=0
 \]
 したがって
 \[
-\lim_{n\to\infty}\int_E f_n\,dm=\int_E f\,dm
+\lim_{n\to\infty}\int_E f_n\,d\lambda=\int_E f\,d\lambda
 \]
 が成り立つ．
 \end{theorem}
@@ -274,7 +274,7 @@ $f$ は可積分であり，
 |f|\le g
 \]
 である．
-したがって第8章の優関数による判定より $f$ は可積分である．
+したがって\cref{cor:dominated-integrability}より $f$ は可積分である．
 
 次に
 \[
@@ -293,55 +293,55 @@ h_n\to 0 \quad \text{a.e.\ on } E
 \[
 2g-h_n \ge 0
 \]
-なので Fatou の補題を $\{2g-h_n\}$ に適用すると
+なので \cref{thm:fatou-lemma} を $\{2g-h_n\}$ に適用すると
 \[
-\int_E \liminf_{n\to\infty}(2g-h_n)\,dm
+\int_E \liminf_{n\to\infty}(2g-h_n)\,d\lambda
 \le
-\liminf_{n\to\infty}\int_E (2g-h_n)\,dm.
+\liminf_{n\to\infty}\int_E (2g-h_n)\,d\lambda.
 \]
 左辺の integrand は a.e.\ で $2g$ に収束するから
 \[
-2\int_E g\,dm
+2\int_E g\,d\lambda
 \le
-\liminf_{n\to\infty}\left(2\int_E g\,dm-\int_E h_n\,dm\right).
+\liminf_{n\to\infty}\left(2\int_E g\,d\lambda-\int_E h_n\,d\lambda\right).
 \]
 すなわち
 \[
-2\int_E g\,dm
+2\int_E g\,d\lambda
 \le
-2\int_E g\,dm-\limsup_{n\to\infty}\int_E h_n\,dm.
+2\int_E g\,d\lambda-\limsup_{n\to\infty}\int_E h_n\,d\lambda.
 \]
 よって
 \[
-\limsup_{n\to\infty}\int_E h_n\,dm\le 0.
+\limsup_{n\to\infty}\int_E h_n\,d\lambda\le 0.
 \]
-各 $\int_E h_n\,dm$ は非負だから
+各 $\int_E h_n\,d\lambda$ は非負だから
 \[
-\lim_{n\to\infty}\int_E h_n\,dm=0.
+\lim_{n\to\infty}\int_E h_n\,d\lambda=0.
 \]
 すなわち
 \[
-\int_E |f_n-f|\,dm \to 0.
+\int_E |f_n-f|\,d\lambda \to 0.
 \]
 
-最後に
+最後に\cref{prop:integral-absolute-value-bound}より
 \[
-\left|\int_E f_n\,dm-\int_E f\,dm\right|
+\left|\int_E f_n\,d\lambda-\int_E f\,d\lambda\right|
 =
-\left|\int_E (f_n-f)\,dm\right|
+\left|\int_E (f_n-f)\,d\lambda\right|
 \le
-\int_E |f_n-f|\,dm
+\int_E |f_n-f|\,d\lambda
 \to 0
 \]
 より
 \[
-\int_E f_n\,dm\to \int_E f\,dm
+\int_E f_n\,d\lambda\to \int_E f\,d\lambda
 \]
 を得る．
 \end{proof}
 
-\begin{corollary}[有界収束定理]
-$m(E)<\infty$ とし，
+\begin{corollary}[有界収束定理]\label{cor:bounded-convergence}
+$\lambda(E)<\infty$ とし，
 $f_n:E \to \eRR$ を可測関数列とする．
 もし
 \[
@@ -354,7 +354,7 @@ f_n(x)\to f(x)\quad \text{a.e.\ on } E
 がすべての $n$ について成り立つならば，
 $f$ は可積分で
 \[
-\int_E f_n\,dm\to \int_E f\,dm
+\int_E f_n\,d\lambda\to \int_E f\,d\lambda
 \]
 が成り立つ．
 \end{corollary}
@@ -364,19 +364,19 @@ g:=M1_E
 \]
 とおくと
 \[
-\int_E g\,dm=M\,m(E)<\infty
+\int_E g\,d\lambda=M\,\lambda(E)<\infty
 \]
 だから $g$ は可積分である．
 しかも a.e.\ で
 \[
 |f_n|\le g
 \]
-であるから，優収束定理を適用すればよい．
+であるから，\cref{thm:dominated-convergence}を適用すればよい．
 \end{proof}
 
 \section{項別積分}
 
-\begin{theorem}[優収束定理による項別積分]
+\begin{theorem}[優収束定理による項別積分]\label{thm:dominated-series-termwise-integration}
 $f_n:E \to \eRR$ を可積分関数列とする．
 さらに，ある可積分関数 $g:E \to [0,\infty]$ が存在して
 \[
@@ -389,9 +389,9 @@ $f_n:E \to \eRR$ を可積分関数列とする．
 \]
 は a.e.\ で絶対収束し，その和を $f$ と書けば $f$ は可積分で，
 \[
-\int_E f\,dm
+\int_E f\,d\lambda
 =
-\sum_{n=1}^{\infty}\int_E f_n\,dm
+\sum_{n=1}^{\infty}\int_E f_n\,d\lambda
 \]
 が成り立つ．
 \end{theorem}
@@ -423,36 +423,36 @@ S_N(x)\to f(x) \quad \text{a.e.}
 g(x)
 \quad \text{a.e.}
 \]
-だから，優収束定理より
+だから，\cref{thm:dominated-convergence}より
 \[
-\int_E S_N\,dm\to \int_E f\,dm.
+\int_E S_N\,d\lambda\to \int_E f\,d\lambda.
 \]
-一方，有限和の線形性より
+一方，有限和の線形性（\cref{cor:integral-finite-sum}）より
 \[
-\int_E S_N\,dm
+\int_E S_N\,d\lambda
 =
-\sum_{n=1}^N \int_E f_n\,dm.
+\sum_{n=1}^N \int_E f_n\,d\lambda.
 \]
 したがって
 \[
-\int_E f\,dm
+\int_E f\,d\lambda
 =
-\lim_{N\to\infty}\sum_{n=1}^N \int_E f_n\,dm
+\lim_{N\to\infty}\sum_{n=1}^N \int_E f_n\,d\lambda
 =
-\sum_{n=1}^{\infty}\int_E f_n\,dm.
+\sum_{n=1}^{\infty}\int_E f_n\,d\lambda.
 \]
 \end{proof}
 
 \begin{remark}
-非負項級数なら単調収束定理で，
-符号が混ざる級数でも絶対値で支配されていれば優収束定理で，
+非負項級数なら\cref{cor:nonnegative-series-termwise-integration}で，
+符号が混ざる級数でも絶対値で支配されていれば\cref{thm:dominated-series-termwise-integration}で，
 項別積分が正当化される．
 これが「和と積分の交換」の基本形である．
 \end{remark}
 
 \section{積分記号下の微分}
 
-\begin{theorem}[積分記号下の微分]
+\begin{theorem}[積分記号下の微分]\label{thm:differentiation-under-integral-sign}
 $I \subset \RR$ を開区間とし，$E \subset \RR^d$ を可測集合とする．
 関数
 \[
@@ -471,11 +471,11 @@ F:I \times E \to \RR
 \end{enumerate}
 このとき
 \[
-G(t):=\int_E F(t,x)\,dm(x)
+G(t):=\int_E F(t,x)\,d\lambda(x)
 \]
 は $I$ 上でよく定義されて微分可能であり，
 \[
-G'(t)=\int_E \partial_tF(t,x)\,dm(x)
+G'(t)=\int_E \partial_tF(t,x)\,d\lambda(x)
 \]
 が成り立つ．
 \end{theorem}
@@ -523,27 +523,27 @@ Q_h(x)\to \partial_tF(t,x)
 \text{a.e.\ on } E
 \]
 である．
-よって優収束定理を $Q_h$ に適用できて
+よって\cref{thm:dominated-convergence}を $Q_h$ に適用できて
 \[
-\lim_{h\to 0}\int_E Q_h(x)\,dm(x)
+\lim_{h\to 0}\int_E Q_h(x)\,d\lambda(x)
 =
-\int_E \partial_tF(t,x)\,dm(x)
+\int_E \partial_tF(t,x)\,d\lambda(x)
 \]
 を得る．
 左辺は
 \[
-\int_E Q_h(x)\,dm(x)
+\int_E Q_h(x)\,d\lambda(x)
 =
 \frac{1}{h}
 \left(
-\int_E F(t+h,x)\,dm(x)-\int_E F(t,x)\,dm(x)
+\int_E F(t+h,x)\,d\lambda(x)-\int_E F(t,x)\,d\lambda(x)
 \right)
 =
 \frac{G(t+h)-G(t)}{h}
 \]
 だから
 \[
-G'(t)=\int_E \partial_tF(t,x)\,dm(x)
+G'(t)=\int_E \partial_tF(t,x)\,d\lambda(x)
 \]
 が従う．
 \end{proof}
@@ -585,7 +585,7 @@ xe^{-ax}
 \int_0^{\infty}xe^{-ax}\,dx<\infty
 \]
 を満たすので可積分である．
-したがって前定理の仮定が成り立ち，
+したがって\cref{thm:differentiation-under-integral-sign}の仮定が成り立ち，
 \[
 G'(t)=\int_0^{\infty}(-x)e^{-tx}\,dx
 \]

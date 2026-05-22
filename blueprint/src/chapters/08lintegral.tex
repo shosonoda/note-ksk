@@ -32,16 +32,8 @@ f=1_{\QQ \cap [0,1]}
 どの小区間にも有理数と無理数が両方入るので，
 上和は常に $1$，下和は常に $0$ になってしまうからである．
 
-ところが，第5章までで
-\[
-m(\QQ \cap [0,1])=0
-\]
-が分かった．
-すると，面積が $0$ の集合の上だけで値が $1$ になっている関数の積分値は
-\[
-0
-\]
-であるべきだと考えるのが自然である．
+ところが，\cref{cor:countable-lebesgue-null}より $\lambda(\QQ \cap [0,1])=0$ である．
+すると，面積が $0$ の集合の上だけで値が $1$ になっている関数の積分値は $0$ であるべきだと考えるのが自然である．
 Lebesgue積分は，まさにこの直感を実現する積分である．
 
 もう1つの動機は，極限との相性である．
@@ -57,13 +49,9 @@ Lebesgue積分は，そのための収束定理をもつように設計されて
 \section{準備：単関数}
 
 以後，$E \subset \RR^d$ はLebesgue可測集合とし，
-Lebesgue測度 $\lambda$ を
-\[
-m
-\]
-と書く．
+Lebesgue測度はこれまで通り $\lambda$ と書く．
 
-\begin{definition}[非負単関数]
+\begin{definition}[非負単関数]\label{def:nonnegative-simple-function}
 写像 $s:E \to [0,\infty)$ が非負単関数であるとは，
 有限個の非負実数 $a_1,\dots,a_n$ と
 互いに素な可測集合 $A_1,\dots,A_n \subset E$ を用いて
@@ -83,24 +71,24 @@ s=\sum_{k=1}^n a_k 1_{A_k}
 は最も基本的な単関数である．
 \end{remark}
 
-\begin{definition}[単関数の積分]
+\begin{definition}[単関数の積分]\label{def:simple-function-integral}
 非負単関数
 \[
 s=\sum_{k=1}^n a_k 1_{A_k}
 \]
 に対して，
 \[
-\int_E s\,dm
+\int_E s\,d\lambda
 :=
-\sum_{k=1}^n a_k\,m(A_k)
+\sum_{k=1}^n a_k\,\lambda(A_k)
 \]
 と定める．
 \end{definition}
 
-\begin{proposition}[単関数の積分のwell-definedness]
+\begin{proposition}[単関数の積分のwell-definedness]\label{prop:simple-function-integral-well-defined}
 非負単関数 $s$ の表示の仕方によらず，
 \[
-\int_E s\,dm
+\int_E s\,d\lambda
 \]
 は同じ値を与える．
 \end{proposition}
@@ -130,17 +118,17 @@ s(x)=a_i=b_j
 だから，$C_{ij}$ 上では係数が一致する．
 ゆえに測度の可算加法性より
 \begin{align*}
-\sum_{i=1}^n a_i\,m(A_i)
+\sum_{i=1}^n a_i\,\lambda(A_i)
 &=
-\sum_{i=1}^n a_i \sum_{j=1}^m m(C_{ij}) \\
+\sum_{i=1}^n a_i \sum_{j=1}^m \lambda(C_{ij}) \\
 &=
-\sum_{i=1}^n \sum_{j=1}^m a_i\,m(C_{ij}) \\
+\sum_{i=1}^n \sum_{j=1}^m a_i\,\lambda(C_{ij}) \\
 &=
-\sum_{i=1}^n \sum_{j=1}^m b_j\,m(C_{ij}) \\
+\sum_{i=1}^n \sum_{j=1}^m b_j\,\lambda(C_{ij}) \\
 &=
-\sum_{j=1}^m b_j \sum_{i=1}^n m(C_{ij}) \\
+\sum_{j=1}^m b_j \sum_{i=1}^n \lambda(C_{ij}) \\
 &=
-\sum_{j=1}^m b_j\,m(B_j).
+\sum_{j=1}^m b_j\,\lambda(B_j).
 \end{align*}
 したがって積分値は表示に依らない．
 \end{proof}
@@ -149,36 +137,36 @@ s(x)=a_i=b_j
 \begin{enumerate}
     \item 可測集合 $A \subset E$ に対して
     \[
-    \int_E 1_A\,dm = m(A)
+    \int_E 1_A\,d\lambda = \lambda(A)
     \]
     である
     \item 定数関数 $c \ge 0$ に対して
     \[
-    \int_E c\,dm = c\,m(E)
+    \int_E c\,d\lambda = c\,\lambda(E)
     \]
     である
     \item
     \[
     s=\sum_{k=1}^n a_k 1_{A_k}
     \]
-    なら，積分は各値 $a_k$ にその値をとる領域の面積 $m(A_k)$ を掛けて足したものである
+    なら，積分は各値 $a_k$ にその値をとる領域の面積 $\lambda(A_k)$ を掛けて足したものである
 \end{enumerate}
 \end{example}
 
-\begin{proposition}[単関数の基本性質]
+\begin{proposition}[単関数の基本性質]\label{prop:simple-function-integral-basic}
 非負単関数 $s,t$ と $c \ge 0$ に対して次が成り立つ．
 \begin{enumerate}
     \item
     \[
-    \int_E (s+t)\,dm = \int_E s\,dm + \int_E t\,dm
+    \int_E (s+t)\,d\lambda = \int_E s\,d\lambda + \int_E t\,d\lambda
     \]
     \item
     \[
-    \int_E cs\,dm = c \int_E s\,dm
+    \int_E cs\,d\lambda = c \int_E s\,d\lambda
     \]
     \item $s \le t$ なら
     \[
-    \int_E s\,dm \le \int_E t\,dm
+    \int_E s\,d\lambda \le \int_E t\,d\lambda
     \]
 \end{enumerate}
 \end{proposition}
@@ -201,15 +189,15 @@ s+t=\sum_{i=1}^n \sum_{j=1}^m (a_i+b_j)1_{C_{ij}}
 である．
 したがって
 \begin{align*}
-\int_E (s+t)\,dm
+\int_E (s+t)\,d\lambda
 &=
-\sum_{i,j}(a_i+b_j)m(C_{ij}) \\
+\sum_{i,j}(a_i+b_j)\lambda(C_{ij}) \\
 &=
-\sum_{i,j}a_i m(C_{ij})+\sum_{i,j}b_j m(C_{ij}) \\
+\sum_{i,j}a_i \lambda(C_{ij})+\sum_{i,j}b_j \lambda(C_{ij}) \\
 &=
-\sum_i a_i m(A_i)+\sum_j b_j m(B_j) \\
+\sum_i a_i \lambda(A_i)+\sum_j b_j \lambda(B_j) \\
 &=
-\int_E s\,dm+\int_E t\,dm.
+\int_E s\,d\lambda+\int_E t\,d\lambda.
 \end{align*}
 これで (1) が従う．
 
@@ -222,24 +210,24 @@ cs=\sum_{i=1}^n (ca_i)1_{A_i}
 (3) を示す．
 $t-s$ は非負単関数であるから (1), (2) より
 \[
-\int_E t\,dm
+\int_E t\,d\lambda
 =
-\int_E s\,dm+\int_E (t-s)\,dm
+\int_E s\,d\lambda+\int_E (t-s)\,d\lambda
 \ge
-\int_E s\,dm
+\int_E s\,d\lambda
 \]
 である．
 \end{proof}
 
 \section{非負可測関数の積分}
 
-\begin{definition}[非負可測関数のLebesgue積分]
+\begin{definition}[非負可測関数のLebesgue積分]\label{def:nonnegative-lebesgue-integral}
 非負可測関数 $f:E \to [0,\infty]$ に対して
 \[
-\int_E f\,dm
+\int_E f\,d\lambda
 :=
 \sup\left\{
-\int_E s\,dm
+\int_E s\,d\lambda
 \;\middle|\;
 0 \le s \le f,\ s \text{ は非負単関数}
 \right\}
@@ -256,7 +244,7 @@ $t-s$ は非負単関数であるから (1), (2) より
 より簡単な単関数で近似して積分している．
 \end{remark}
 
-\begin{lemma}[単関数による近似]
+\begin{lemma}[単関数による近似]\label{lem:simple-function-approximation}
 非負可測関数 $f:E \to [0,\infty]$ に対して，
 単関数列 $\{s_n\}_{n=1}^{\infty}$ で
 \[
@@ -318,7 +306,7 @@ s_n(x)\le s_{n+1}(x)
 よって所望の単関数列を得る．
 \end{proof}
 
-\begin{theorem}[非負可測関数の積分は単関数近似の極限]
+\begin{theorem}[非負可測関数の積分は単関数近似の極限]\label{thm:nonnegative-integral-simple-approximation}
 $f:E \to [0,\infty]$ を非負可測関数とし，
 $s_n$ を
 \[
@@ -329,9 +317,9 @@ s_n \to f
 を満たす単関数列とする．
 このとき
 \[
-\int_E f\,dm
+\int_E f\,d\lambda
 =
-\lim_{n\to\infty}\int_E s_n\,dm
+\lim_{n\to\infty}\int_E s_n\,d\lambda
 \]
 が成り立つ．
 \end{theorem}
@@ -339,23 +327,23 @@ s_n \to f
 各 $n$ について $s_n \le f$ だから，
 定義より
 \[
-\int_E s_n\,dm \le \int_E f\,dm.
+\int_E s_n\,d\lambda \le \int_E f\,d\lambda.
 \]
 また $s_n \le s_{n+1}$ だから，単関数の単調性より
 \[
-\int_E s_n\,dm \le \int_E s_{n+1}\,dm.
+\int_E s_n\,d\lambda \le \int_E s_{n+1}\,d\lambda.
 \]
 したがって列
 \[
-\left\{\int_E s_n\,dm\right\}_{n=1}^{\infty}
+\left\{\int_E s_n\,d\lambda\right\}_{n=1}^{\infty}
 \]
 は単調増加であり，極限
 \[
-L:=\lim_{n\to\infty}\int_E s_n\,dm
+L:=\lim_{n\to\infty}\int_E s_n\,d\lambda
 \]
 が存在して
 \[
-L \le \int_E f\,dm
+L \le \int_E f\,d\lambda
 \]
 である．
 
@@ -395,53 +383,53 @@ u_n \le s_n
 が成り立つ．
 したがって
 \[
-\int_E u_n\,dm \le \int_E s_n\,dm \le L.
+\int_E u_n\,d\lambda \le \int_E s_n\,d\lambda \le L.
 \]
 
-一方，測度の下からの連続性より
+一方，測度の下からの連続性（\cref{thm:lebesgue-measure-continuity-from-below}）より
 \[
-m(A_{j,n}) \to m(A_j)
+\lambda(A_{j,n}) \to \lambda(A_j)
 \]
 であるから，
 \[
-\int_E u_n\,dm
+\int_E u_n\,d\lambda
 =
-\sum_{j=1}^m \left(a_j-\frac1n\right)_+ m(A_{j,n})
+\sum_{j=1}^m \left(a_j-\frac1n\right)_+ \lambda(A_{j,n})
 \to
-\sum_{j=1}^m a_j m(A_j)
+\sum_{j=1}^m a_j \lambda(A_j)
 =
-\int_E t\,dm.
+\int_E t\,d\lambda.
 \]
 よって
 \[
-\int_E t\,dm \le L.
+\int_E t\,d\lambda \le L.
 \]
 $t \le f$ を満たす単関数 $t$ は任意であったから，
 定義より
 \[
-\int_E f\,dm \le L.
+\int_E f\,d\lambda \le L.
 \]
 以上より
 \[
-\int_E f\,dm=L
+\int_E f\,d\lambda=L
 \]
 が従う．
 \end{proof}
 
-\begin{proposition}[非負可測関数の基本性質]
+\begin{proposition}[非負可測関数の基本性質]\label{prop:nonnegative-integral-basic}
 非負可測関数 $f,g:E \to [0,\infty]$ と $c \ge 0$ に対して次が成り立つ．
 \begin{enumerate}
     \item
     \[
-    \int_E (f+g)\,dm = \int_E f\,dm + \int_E g\,dm
+    \int_E (f+g)\,d\lambda = \int_E f\,d\lambda + \int_E g\,d\lambda
     \]
     \item
     \[
-    \int_E cf\,dm = c\int_E f\,dm
+    \int_E cf\,d\lambda = c\int_E f\,d\lambda
     \]
     \item $f \le g$ なら
     \[
-    \int_E f\,dm \le \int_E g\,dm
+    \int_E f\,d\lambda \le \int_E g\,d\lambda
     \]
 \end{enumerate}
 \end{proposition}
@@ -453,59 +441,59 @@ s_n+t_n \uparrow f+g,
 \qquad
 cs_n \uparrow cf.
 \]
-したがって前定理と単関数の基本性質より
+したがって\cref{thm:nonnegative-integral-simple-approximation,prop:simple-function-integral-basic}より
 \begin{align*}
-\int_E (f+g)\,dm
+\int_E (f+g)\,d\lambda
 &=
-\lim_{n\to\infty}\int_E (s_n+t_n)\,dm \\
+\lim_{n\to\infty}\int_E (s_n+t_n)\,d\lambda \\
 &=
-\lim_{n\to\infty}\left(\int_E s_n\,dm+\int_E t_n\,dm\right) \\
+\lim_{n\to\infty}\left(\int_E s_n\,d\lambda+\int_E t_n\,d\lambda\right) \\
 &=
-\int_E f\,dm+\int_E g\,dm,
+\int_E f\,d\lambda+\int_E g\,d\lambda,
 \end{align*}
 および
 \[
-\int_E cf\,dm
+\int_E cf\,d\lambda
 =
-\lim_{n\to\infty}\int_E cs_n\,dm
+\lim_{n\to\infty}\int_E cs_n\,d\lambda
 =
-\lim_{n\to\infty} c\int_E s_n\,dm
+\lim_{n\to\infty} c\int_E s_n\,d\lambda
 =
-c\int_E f\,dm
+c\int_E f\,d\lambda
 \]
 を得る．
 
 また $0 \le g-f$ だから
 \[
-\int_E g\,dm
+\int_E g\,d\lambda
 =
-\int_E f\,dm+\int_E (g-f)\,dm
+\int_E f\,d\lambda+\int_E (g-f)\,d\lambda
 \ge
-\int_E f\,dm
+\int_E f\,d\lambda
 \]
 であり，(3) が従う．
 \end{proof}
 
-\begin{definition}[部分集合上の積分]
+\begin{definition}[部分集合上の積分]\label{def:integral-over-subset}
 $A \subset E$ を可測集合とする．
 非負可測関数 $f:E \to [0,\infty]$ に対して
 \[
-\int_A f\,dm
+\int_A f\,d\lambda
 :=
-\int_E f1_A\,dm
+\int_E f1_A\,d\lambda
 \]
 と定める．
 符号付可測関数の場合も同様に定める．
 \end{definition}
 
-\begin{proposition}[集合に関する加法性]
+\begin{proposition}[集合に関する加法性]\label{prop:nonnegative-integral-disjoint-additivity}
 $A,B \subset E$ を互いに素な可測集合とし，
 $f:E \to [0,\infty]$ を非負可測関数とする．
 このとき
 \[
-\int_{A \sqcup B} f\,dm
+\int_{A \sqcup B} f\,d\lambda
 =
-\int_A f\,dm+\int_B f\,dm
+\int_A f\,d\lambda+\int_B f\,d\lambda
 \]
 が成り立つ．
 \end{proposition}
@@ -516,35 +504,35 @@ $f:E \to [0,\infty]$ を非負可測関数とする．
 だから，
 非負可測関数の加法性より
 \begin{align*}
-\int_{A \sqcup B} f\,dm
+\int_{A \sqcup B} f\,d\lambda
 &=
-\int_E f1_{A \sqcup B}\,dm \\
+\int_E f1_{A \sqcup B}\,d\lambda \\
 &=
-\int_E f(1_A+1_B)\,dm \\
+\int_E f(1_A+1_B)\,d\lambda \\
 &=
-\int_E f1_A\,dm+\int_E f1_B\,dm \\
+\int_E f1_A\,d\lambda+\int_E f1_B\,d\lambda \\
 &=
-\int_A f\,dm+\int_B f\,dm.
+\int_A f\,d\lambda+\int_B f\,d\lambda.
 \end{align*}
 \end{proof}
 
 \section{零集合と almost everywhere}
 
-\begin{proposition}[零集合上の積分]
-$N \subset E$ が可測で $m(N)=0$ ならば，
+\begin{proposition}[零集合上の積分]\label{prop:null-set-integral-nonnegative}
+$N \subset E$ が可測で $\lambda(N)=0$ ならば，
 任意の非負可測関数 $f:E \to [0,\infty]$ に対して
 \[
-\int_N f\,dm=0
+\int_N f\,d\lambda=0
 \]
 が成り立つ．
 \end{proposition}
 \begin{proof}
 定義より
 \[
-\int_N f\,dm
+\int_N f\,d\lambda
 =
 \sup\left\{
-\int_N s\,dm
+\int_N s\,d\lambda
 \;\middle|\;
 0 \le s \le f,\ s \text{ は単関数}
 \right\}.
@@ -555,23 +543,23 @@ s=\sum_{k=1}^n a_k1_{A_k}
 \]
 について，各 $A_k \subset N$ だから
 \[
-m(A_k)\le m(N)=0
+\lambda(A_k)\le \lambda(N)=0
 \]
 である．
 したがって
 \[
-\int_N s\,dm
+\int_N s\,d\lambda
 =
-\sum_{k=1}^n a_k m(A_k)=0.
+\sum_{k=1}^n a_k \lambda(A_k)=0.
 \]
 ゆえに上限も $0$ である．
 \end{proof}
 
-\begin{proposition}[非負関数の a.e. 不変性]
+\begin{proposition}[非負関数の a.e. 不変性]\label{prop:nonnegative-integral-ae-invariance}
 $f,g:E \to [0,\infty]$ を非負可測関数とする．
 $f=g$ a.e.\ on $E$ ならば
 \[
-\int_E f\,dm=\int_E g\,dm
+\int_E f\,d\lambda=\int_E g\,d\lambda
 \]
 が成り立つ．
 \end{proposition}
@@ -579,39 +567,39 @@ $f=g$ a.e.\ on $E$ ならば
 \[
 N:=\{x \in E \mid f(x)\ne g(x)\}
 \]
-とおくと $m(N)=0$ である．
-したがって前命題より
+とおくと $\lambda(N)=0$ である．
+したがって\cref{prop:null-set-integral-nonnegative}より
 \[
-\int_N f\,dm=\int_N g\,dm=0.
+\int_N f\,d\lambda=\int_N g\,d\lambda=0.
 \]
 また $E=(E\setminus N)\sqcup N$ だから，
 集合に関する加法性より
 \[
-\int_E f\,dm
+\int_E f\,d\lambda
 =
-\int_{E\setminus N} f\,dm+\int_N f\,dm
+\int_{E\setminus N} f\,d\lambda+\int_N f\,d\lambda
 =
-\int_{E\setminus N} g\,dm+\int_N g\,dm
+\int_{E\setminus N} g\,d\lambda+\int_N g\,d\lambda
 =
-\int_E g\,dm.
+\int_E g\,d\lambda.
 \]
 \end{proof}
 
-\begin{proposition}[非負関数の積分が $0$ であることの判定]
+\begin{proposition}[非負関数の積分が $0$ であることの判定]\label{prop:nonnegative-integral-zero-iff-ae-zero}
 非負可測関数 $f:E \to [0,\infty]$ に対して，次は同値である．
 \begin{enumerate}
     \item
     \[
-    \int_E f\,dm=0
+    \int_E f\,d\lambda=0
     \]
     \item $f=0$ a.e.\ on $E$
 \end{enumerate}
 \end{proposition}
 \begin{proof}
 \textbf{(2) $\Rightarrow$ (1)}\quad
-$f=0$ a.e.\ なら，前命題を $g=0$ に適用して
+$f=0$ a.e.\ なら，\cref{prop:nonnegative-integral-ae-invariance}を $g=0$ に適用して
 \[
-\int_E f\,dm=\int_E 0\,dm=0
+\int_E f\,d\lambda=\int_E 0\,d\lambda=0
 \]
 である．
 
@@ -627,15 +615,15 @@ A_n:=\left\{x \in E \mid f(x)\ge \frac1n\right\}
 \]
 だから単調性より
 \[
-\frac1n m(A_n)
+\frac1n \lambda(A_n)
 =
-\int_E \frac1n 1_{A_n}\,dm
+\int_E \frac1n 1_{A_n}\,d\lambda
 \le
-\int_E f\,dm
+\int_E f\,d\lambda
 =
 0.
 \]
-よって $m(A_n)=0$ である．
+よって $\lambda(A_n)=0$ である．
 一方，
 \[
 \{x \in E \mid f(x)>0\}
@@ -644,14 +632,14 @@ A_n:=\left\{x \in E \mid f(x)\ge \frac1n\right\}
 \]
 だから可算加法性より
 \[
-m(\{f>0\})=0.
+\lambda(\{f>0\})=0.
 \]
 したがって $f=0$ a.e.\ である．
 \end{proof}
 
 \section{符号付可測関数の積分}
 
-\begin{definition}[正部分と負部分]
+\begin{definition}[正部分と負部分]\label{def:positive-negative-parts}
 可測関数 $f:E \to \eRR$ に対して
 \[
 f^+:=\max(f,0),
@@ -673,19 +661,19 @@ f=f^+-f^-,
 非負関数の積分に帰着できる．
 \end{remark}
 
-\begin{definition}[可積分関数]
+\begin{definition}[可積分関数]\label{def:lebesgue-integrable-function}
 可測関数 $f:E \to \eRR$ がLebesgue可積分であるとは，
 \[
-\int_E f^+\,dm<\infty,
+\int_E f^+\,d\lambda<\infty,
 \qquad
-\int_E f^-\,dm<\infty
+\int_E f^-\,d\lambda<\infty
 \]
 が成り立つことをいう．
 このとき
 \[
-\int_E f\,dm
+\int_E f\,d\lambda
 :=
-\int_E f^+\,dm-\int_E f^-\,dm
+\int_E f^+\,d\lambda-\int_E f^-\,d\lambda
 \]
 で定める．
 \end{definition}
@@ -699,23 +687,23 @@ f=f^+-f^-,
 符号付関数の積分を定義する．
 この条件は，後で見るように
 \[
-\int_E |f|\,dm<\infty
+\int_E |f|\,d\lambda<\infty
 \]
 と同値である．
 \end{remark}
 
-\begin{proposition}[表示の独立性]
+\begin{proposition}[表示の独立性]\label{prop:integral-representation-independence}
 $f=u-v=u'-v'$ と書け，
 $u,v,u',v'$ がすべて非負可測で
 \[
-\int_E u\,dm,\ \int_E v\,dm,\ \int_E u'\,dm,\ \int_E v'\,dm<\infty
+\int_E u\,d\lambda,\ \int_E v\,d\lambda,\ \int_E u'\,d\lambda,\ \int_E v'\,d\lambda<\infty
 \]
 とする．
 このとき
 \[
-\int_E u\,dm-\int_E v\,dm
+\int_E u\,d\lambda-\int_E v\,d\lambda
 =
-\int_E u'\,dm-\int_E v'\,dm
+\int_E u'\,d\lambda-\int_E v'\,d\lambda
 \]
 が成り立つ．
 \end{proposition}
@@ -730,24 +718,24 @@ u+v'=u'+v
 である．
 両辺は非負可測関数なので，加法性より
 \[
-\int_E u\,dm+\int_E v'\,dm
+\int_E u\,d\lambda+\int_E v'\,d\lambda
 =
-\int_E (u+v')\,dm
+\int_E (u+v')\,d\lambda
 =
-\int_E (u'+v)\,dm
+\int_E (u'+v)\,d\lambda
 =
-\int_E u'\,dm+\int_E v\,dm.
+\int_E u'\,d\lambda+\int_E v\,d\lambda.
 \]
 したがって移項して
 \[
-\int_E u\,dm-\int_E v\,dm
+\int_E u\,d\lambda-\int_E v\,d\lambda
 =
-\int_E u'\,dm-\int_E v'\,dm
+\int_E u'\,d\lambda-\int_E v'\,d\lambda
 \]
 を得る．
 \end{proof}
 
-\begin{theorem}[可積分性と絶対値]
+\begin{theorem}[可積分性と絶対値]\label{thm:integrable-iff-absolute}
 可測関数 $f:E \to \eRR$ に対して，次は同値である．
 \begin{enumerate}
     \item $f$ は可積分である
@@ -755,9 +743,9 @@ u+v'=u'+v
 \end{enumerate}
 さらに，このとき
 \[
-\int_E |f|\,dm
+\int_E |f|\,d\lambda
 =
-\int_E f^+\,dm+\int_E f^-\,dm
+\int_E f^+\,d\lambda+\int_E f^-\,d\lambda
 \]
 が成り立つ．
 \end{theorem}
@@ -767,19 +755,19 @@ u+v'=u'+v
 \]
 だから，非負可測関数の加法性より
 \[
-\int_E |f|\,dm
+\int_E |f|\,d\lambda
 =
-\int_E f^+\,dm+\int_E f^-\,dm.
+\int_E f^+\,d\lambda+\int_E f^-\,d\lambda.
 \]
 したがって右辺が有限であることと
 \[
-\int_E f^+\,dm<\infty,\qquad \int_E f^-\,dm<\infty
+\int_E f^+\,d\lambda<\infty,\qquad \int_E f^-\,d\lambda<\infty
 \]
 が成り立つことは同値である．
 これはまさに $f$ の可積分性の定義である．
 \end{proof}
 
-\begin{corollary}[優関数による可積分性の判定]
+\begin{corollary}[優関数による可積分性の判定]\label{cor:dominated-integrability}
 $f:E \to \eRR$ を可測関数とし，
 $g:E \to [0,\infty]$ を可積分な非負可測関数とする．
 もし
@@ -792,16 +780,16 @@ $g:E \to [0,\infty]$ を可積分な非負可測関数とする．
 \[
 N:=\{x \in E \mid |f(x)|>g(x)\}
 \]
-とおくと $m(N)=0$ である．
+とおくと $\lambda(N)=0$ である．
 したがって
 \[
 |f|=|f|1_{E\setminus N}\quad \text{a.e.}
 \]
 であり，非負関数の a.e.\ 不変性より
 \[
-\int_E |f|\,dm
+\int_E |f|\,d\lambda
 =
-\int_E |f|1_{E\setminus N}\,dm.
+\int_E |f|1_{E\setminus N}\,d\lambda.
 \]
 しかも $E\setminus N$ 上では
 \[
@@ -809,16 +797,16 @@ N:=\{x \in E \mid |f(x)|>g(x)\}
 \]
 だから単調性より
 \[
-\int_E |f|\,dm
+\int_E |f|\,d\lambda
 \le
-\int_E g\,dm
+\int_E g\,d\lambda
 <
 \infty.
 \]
-ゆえに前定理より $f$ は可積分である．
+ゆえに\cref{thm:integrable-iff-absolute}より $f$ は可積分である．
 \end{proof}
 
-\begin{corollary}[可積分関数は有限値を a.e.\ でとる]
+\begin{corollary}[可積分関数は有限値を a.e.\ でとる]\label{cor:integrable-finite-ae}
 $f:E \to \eRR$ が可積分ならば
 \[
 |f|<\infty \quad \text{a.e.\ on } E
@@ -833,46 +821,47 @@ n1_N\le |f|
 \]
 だから，単調性より
 \[
-n\,m(N)=\int_E n1_N\,dm \le \int_E |f|\,dm<\infty.
+n\,\lambda(N)=\int_E n1_N\,d\lambda \le \int_E |f|\,d\lambda<\infty.
 \]
 これがすべての $n$ で成り立つためには
 \[
-m(N)=0
+\lambda(N)=0
 \]
 でなければならない．
 \end{proof}
 
-\begin{proposition}[零集合上の任意の関数]
-$N \subset E$ が可測で $m(N)=0$ ならば，
+\begin{proposition}[零集合上の任意の関数]\label{prop:null-set-integral-signed}
+$N \subset E$ が可測で $\lambda(N)=0$ ならば，
 任意の可測関数 $f:E \to \eRR$ は $N$ 上で可積分であり，
 \[
-\int_N f\,dm=0
+\int_N f\,d\lambda=0
 \]
 が成り立つ．
 \end{proposition}
 \begin{proof}
-前節で示したように，非負可測関数については零集合上の積分は $0$ である．
+非負可測関数については零集合上の積分は $0$ である
+（\cref{prop:null-set-integral-nonnegative}）．
 したがって
 \[
-\int_N f^+\,dm=\int_N f^-\,dm=0
+\int_N f^+\,d\lambda=\int_N f^-\,d\lambda=0
 \]
 である．
 よって $f$ は $N$ 上で可積分で，
 \[
-\int_N f\,dm
+\int_N f\,d\lambda
 =
-\int_N f^+\,dm-\int_N f^-\,dm
+\int_N f^+\,d\lambda-\int_N f^-\,d\lambda
 =
 0
 \]
 となる．
 \end{proof}
 
-\begin{proposition}[符号付関数の a.e.\ 不変性]
+\begin{proposition}[符号付関数の a.e.\ 不変性]\label{prop:signed-integral-ae-invariance}
 $f,g:E \to \eRR$ を可測関数とする．
 $f=g$ a.e.\ on $E$ で，$f$ が可積分ならば $g$ も可積分であり，
 \[
-\int_E f\,dm=\int_E g\,dm
+\int_E f\,d\lambda=\int_E g\,d\lambda
 \]
 が成り立つ．
 \end{proposition}
@@ -880,17 +869,17 @@ $f=g$ a.e.\ on $E$ で，$f$ が可積分ならば $g$ も可積分であり，
 \[
 N:=\{x \in E \mid f(x)\ne g(x)\}
 \]
-とおくと $m(N)=0$ である．
+とおくと $\lambda(N)=0$ である．
 $E\setminus N$ 上では $|g|=|f|$ であり，
 $N$ 上の積分はどちらも $0$ だから
 \[
-\int_E |g|\,dm
+\int_E |g|\,d\lambda
 =
-\int_{E\setminus N}|g|\,dm+\int_N |g|\,dm
+\int_{E\setminus N}|g|\,d\lambda+\int_N |g|\,d\lambda
 =
-\int_{E\setminus N}|f|\,dm
+\int_{E\setminus N}|f|\,d\lambda
 \le
-\int_E |f|\,dm
+\int_E |f|\,d\lambda
 <
 \infty.
 \]
@@ -898,28 +887,28 @@ $N$ 上の積分はどちらも $0$ だから
 
 さらに
 \[
-\int_E f\,dm
+\int_E f\,d\lambda
 =
-\int_{E\setminus N} f\,dm+\int_N f\,dm
+\int_{E\setminus N} f\,d\lambda+\int_N f\,d\lambda
 =
-\int_{E\setminus N} g\,dm+\int_N g\,dm
+\int_{E\setminus N} g\,d\lambda+\int_N g\,d\lambda
 =
-\int_E g\,dm.
+\int_E g\,d\lambda.
 \]
 \end{proof}
 
 \section{積分の絶対連続性}
 
-\begin{theorem}[積分の絶対連続性]
+\begin{theorem}[積分の絶対連続性]\label{thm:integral-absolute-continuity}
 $f:E \to \eRR$ を可積分関数とする．
 このとき任意の $\eps>0$ に対して，ある $\delta>0$ が存在して，
 可測集合 $A \subset E$ が
 \[
-m(A)<\delta
+\lambda(A)<\delta
 \]
 を満たせば
 \[
-\int_A |f|\,dm<\eps
+\int_A |f|\,d\lambda<\eps
 \]
 が成り立つ．
 \end{theorem}
@@ -930,7 +919,7 @@ h:=|f|
 とおくと，$h$ は非負可積分である．
 積分の定義より，ある非負単関数 $s \le h$ が存在して
 \[
-\int_E h\,dm-\int_E s\,dm<\frac{\eps}{2}
+\int_E h\,d\lambda-\int_E s\,d\lambda<\frac{\eps}{2}
 \]
 となる．
 いま
@@ -945,7 +934,7 @@ M:=\max_{1\le k\le n}a_k
 
 $M=0$ なら $s=0$ だから
 \[
-\int_E h\,dm<\frac{\eps}{2}
+\int_E h\,d\lambda<\frac{\eps}{2}
 \]
 である．
 この場合は任意の $\delta>0$ でよい．
@@ -955,24 +944,24 @@ $M>0$ の場合は
 \delta:=\frac{\eps}{2M}
 \]
 とおく．
-可測集合 $A \subset E$ が $m(A)<\delta$ を満たすとする．
+可測集合 $A \subset E$ が $\lambda(A)<\delta$ を満たすとする．
 すると集合に関する加法性と $s\le h$ から
 \begin{align*}
-\int_E h\,dm
+\int_E h\,d\lambda
 &=
-\int_A h\,dm+\int_{E\setminus A}h\,dm \\
+\int_A h\,d\lambda+\int_{E\setminus A}h\,d\lambda \\
 &\ge
-\int_A h\,dm+\int_{E\setminus A}s\,dm.
+\int_A h\,d\lambda+\int_{E\setminus A}s\,d\lambda.
 \end{align*}
 よって
 \begin{align*}
-\int_A h\,dm
+\int_A h\,d\lambda
 &\le
-\int_E h\,dm-\int_{E\setminus A}s\,dm \\
+\int_E h\,d\lambda-\int_{E\setminus A}s\,d\lambda \\
 &=
-\left(\int_E h\,dm-\int_E s\,dm\right)+\int_A s\,dm \\
+\left(\int_E h\,d\lambda-\int_E s\,d\lambda\right)+\int_A s\,d\lambda \\
 &<
-\frac{\eps}{2}+M\,m(A) \\
+\frac{\eps}{2}+M\,\lambda(A) \\
 &<
 \frac{\eps}{2}+M\delta=\eps.
 \end{align*}
@@ -988,23 +977,19 @@ f:=1_{\QQ \cap [0,1]}
 とする．
 このとき
 \[
-\int_{[0,1]} f\,dm=0
+\int_{[0,1]} f\,d\lambda=0
 \]
 である．
 \end{example}
 \begin{proof}
-第5章で
-\[
-m(\QQ \cap [0,1])=0
-\]
-を示した．
+\cref{cor:countable-lebesgue-null}より $\lambda(\QQ \cap [0,1])=0$ である．
 したがって
 \[
-\int_{[0,1]} f\,dm
+\int_{[0,1]} f\,d\lambda
 =
-\int_{[0,1]} 1_{\QQ \cap [0,1]}\,dm
+\int_{[0,1]} 1_{\QQ \cap [0,1]}\,d\lambda
 =
-m(\QQ \cap [0,1])
+\lambda(\QQ \cap [0,1])
 =
 0.
 \]
@@ -1030,7 +1015,7 @@ g=1 \quad \text{a.e.\ on } [0,1]
 \]
 だから
 \[
-\int_{[0,1]} g\,dm=1
+\int_{[0,1]} g\,d\lambda=1
 \]
 である．
 \end{example}
@@ -1044,22 +1029,22 @@ g=1_{[0,1]\setminus N}=1 \quad \text{on } [0,1]\setminus N.
 \]
 したがって a.e.\ 不変性より
 \[
-\int_{[0,1]} g\,dm
+\int_{[0,1]} g\,d\lambda
 =
-\int_{[0,1]} 1\,dm
+\int_{[0,1]} 1\,d\lambda
 =
-m([0,1])=1.
+\lambda([0,1])=1.
 \]
 \end{proof}
 
 \section{Riemann積分との関係}
 
-\begin{theorem}[Riemann可積分ならLebesgue可積分]
+\begin{theorem}[Riemann可積分ならLebesgue可積分]\label{thm:riemann-implies-lebesgue-integrable}
 $I \subset \RR^d$ を有界閉区間とし，
 $f:I \to \RR$ をRiemann可積分関数とする．
 このとき $f$ はLebesgue可測かつLebesgue可積分であり，
 \[
-\int_I f\,dm
+\int_I f\,d\lambda
 \]
 はRiemann積分値に一致する．
 \end{theorem}
@@ -1091,9 +1076,9 @@ u_{n,j}:=\sup_{x \in R_{n,j}} f(x)
 が成り立つ．
 さらに
 \[
-\int_I \phi_n\,dm = L(f,\calP_n),
+\int_I \phi_n\,d\lambda = L(f,\calP_n),
 \qquad
-\int_I \psi_n\,dm = U(f,\calP_n)
+\int_I \psi_n\,d\lambda = U(f,\calP_n)
 \]
 である．
 
@@ -1115,9 +1100,9 @@ g \le f \le h
 \]
 だから単調性より
 \[
-0 \le \int_I (h-g)\,dm
+0 \le \int_I (h-g)\,d\lambda
 \le
-\int_I (\psi_n-\phi_n)\,dm
+\int_I (\psi_n-\phi_n)\,d\lambda
 =
 U(f,\calP_n)-L(f,\calP_n)
 <
@@ -1125,7 +1110,7 @@ U(f,\calP_n)-L(f,\calP_n)
 \]
 したがって
 \[
-\int_I (h-g)\,dm=0.
+\int_I (h-g)\,d\lambda=0.
 \]
 非負関数の積分が $0$ であることの判定より
 \[
@@ -1155,7 +1140,8 @@ f=g=h \quad \text{on } I\setminus N
 \]
 と書ける．
 $g$ は可測，$N$ は零集合だから可測であり，
-しかもLebesgue測度は完備なので $N$ の任意の部分集合は可測である．
+しかもLebesgue測度の完備性（\cref{thm:lebesgue-null-measurable}）より
+$N$ の任意の部分集合は可測である．
 したがって右辺は可測である．
 ゆえに $f$ はLebesgue可測である．
 
@@ -1171,10 +1157,10 @@ Riemann可積分関数は有界だから，ある $M>0$ が存在して
 \]
 $I$ は有界閉区間なので
 \[
-\int_I M1_I\,dm = M\,m(I)=M|I|<\infty
+\int_I M1_I\,d\lambda = M\,\lambda(I)=M|I|<\infty
 \]
 である．
-よって優関数による判定より $f$ はLebesgue可積分である．
+よって\cref{cor:dominated-integrability}より $f$ はLebesgue可積分である．
 
 最後に積分値の一致を示す．
 各 $n$ に対して
@@ -1183,11 +1169,11 @@ $I$ は有界閉区間なので
 \]
 だから単調性より
 \[
-L(f,\calP_n)=\int_I \phi_n\,dm
+L(f,\calP_n)=\int_I \phi_n\,d\lambda
 \le
-\int_I f\,dm
+\int_I f\,d\lambda
 \le
-\int_I \psi_n\,dm=U(f,\calP_n).
+\int_I \psi_n\,d\lambda=U(f,\calP_n).
 \]
 Riemann可積分性より
 \[
@@ -1195,7 +1181,7 @@ U(f,\calP_n)-L(f,\calP_n)\to 0.
 \]
 したがってはさみうちにより
 \[
-\int_I f\,dm
+\int_I f\,d\lambda
 =
 \lim_{n\to\infty}L(f,\calP_n)
 =
@@ -1287,7 +1273,7 @@ I_k:=
 
 Lebesgue積分では，まず
 \[
-\int 1_A\,dm = m(A)
+\int 1_A\,d\lambda = \lambda(A)
 \]
 という形で「集合の面積」を積分に埋め込み，
 そこから単関数の積分を定め，

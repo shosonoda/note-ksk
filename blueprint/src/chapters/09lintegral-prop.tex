@@ -1,7 +1,7 @@
 \chapter{Lebesgue積分の性質}
 
 \paragraph{本章の目標}
-前章でLebesgue積分を定義した．
+\cref{def:nonnegative-lebesgue-integral,def:lebesgue-integrable-function}でLebesgue積分を定義した．
 本章では，その積分を実際の計算に使うための基本性質を整理する．
 特に
 \[
@@ -15,9 +15,9 @@
 積分を定義しただけでは，まだ計算には使いにくい．
 例えば
 \[
-\int_E(f+g)\,dm,\qquad
-\int_E cf\,dm,\qquad
-\int_{A\sqcup B}f\,dm
+\int_E(f+g)\,d\lambda,\qquad
+\int_E cf\,d\lambda,\qquad
+\int_{A\sqcup B}f\,d\lambda
 \]
 がどう振る舞うかが分からなければ，
 実際の応用ではほとんど何もできない．
@@ -35,7 +35,7 @@ f=g \quad \text{a.e.}
 以後，$E \subset \RR^d$ はLebesgue可測集合とし，
 $f,g:E \to \eRR$ は可測関数とする．
 
-\begin{proposition}[基本恒等式]
+\begin{proposition}[基本恒等式]\label{prop:positive-negative-basic-identities}
 任意の可測関数 $f$ に対して
 \[
 f=f^+-f^-,
@@ -60,7 +60,7 @@ f^+(x)=0,\qquad f^-(x)=-f(x)
 したがって各点 $x$ ごとに上の3つの等式が成り立つ．
 \end{proof}
 
-\begin{proposition}[非負関数による表示]
+\begin{proposition}[非負関数による表示]\label{prop:integrable-as-difference}
 $f$ が可積分であることと，
 ある非負可積分関数 $u,v$ が存在して
 \[
@@ -69,15 +69,15 @@ f=u-v
 と書けることは同値である．
 このとき
 \[
-\int_E f\,dm=\int_E u\,dm-\int_E v\,dm
+\int_E f\,d\lambda=\int_E u\,d\lambda-\int_E v\,d\lambda
 \]
 が成り立つ．
 \end{proposition}
 \begin{proof}
-前章で示した表示の独立性より，
+\cref{prop:integral-representation-independence}より，
 $f=u-v$ と書ければ積分値
 \[
-\int_E u\,dm-\int_E v\,dm
+\int_E u\,d\lambda-\int_E v\,d\lambda
 \]
 は表示に依らない．
 
@@ -100,69 +100,68 @@ f^+(x)=f(x)=u(x)-v(x)\le u(x)
 \]
 であり，$f(x)<0$ なら $f^+(x)=0\le u(x)$ である．
 $f^-\le v$ も同様である．
-したがって単調性より
+したがって\cref{prop:nonnegative-integral-basic}より
 \[
-\int_E f^+\,dm\le \int_E u\,dm<\infty,
+\int_E f^+\,d\lambda\le \int_E u\,d\lambda<\infty,
 \qquad
-\int_E f^-\,dm\le \int_E v\,dm<\infty.
+\int_E f^-\,d\lambda\le \int_E v\,d\lambda<\infty.
 \]
 よって $f$ は可積分である．
 \end{proof}
 
 \section{集合に関する性質}
 
-\begin{proposition}[零集合上では積分は消える]
-$m(E)=0$ で $f$ が $E$ 上可積分ならば
+\begin{proposition}[零集合上では積分は消える]\label{prop:integral-zero-on-null-set}
+$\lambda(E)=0$ で $f$ が $E$ 上可積分ならば
 \[
-\int_E f\,dm=0
+\int_E f\,d\lambda=0
 \]
 が成り立つ．
 \end{proposition}
 \begin{proof}
-前章で，零集合上では任意の可測関数の積分が $0$ になることを示した．
-したがってそのまま従う．
+\cref{prop:null-set-integral-signed}そのものである．
 \end{proof}
 
-\begin{proposition}[互いに素な集合への加法性]
+\begin{proposition}[互いに素な集合への加法性]\label{prop:integral-disjoint-additivity}
 $A,B \subset E$ を互いに素な可測集合とし，
 $f$ を $A\sqcup B$ 上の可積分関数とする．
 このとき
 \[
-\int_{A \sqcup B} f\,dm
+\int_{A \sqcup B} f\,d\lambda
 =
-\int_A f\,dm+\int_B f\,dm
+\int_A f\,d\lambda+\int_B f\,d\lambda
 \]
 が成り立つ．
 \end{proposition}
 \begin{proof}
 $f=f^+-f^-$ と書く．
-$f^+,f^-$ は非負可積分だから，前章の集合に関する加法性より
+$f^+,f^-$ は非負可積分だから，\cref{prop:nonnegative-integral-disjoint-additivity}より
 \[
-\int_{A \sqcup B} f^+\,dm
+\int_{A \sqcup B} f^+\,d\lambda
 =
-\int_A f^+\,dm+\int_B f^+\,dm
+\int_A f^+\,d\lambda+\int_B f^+\,d\lambda
 \]
 および
 \[
-\int_{A \sqcup B} f^-\,dm
+\int_{A \sqcup B} f^-\,d\lambda
 =
-\int_A f^-\,dm+\int_B f^-\,dm
+\int_A f^-\,d\lambda+\int_B f^-\,d\lambda
 \]
 が成り立つ．
 したがって
 \begin{align*}
-\int_{A \sqcup B} f\,dm
+\int_{A \sqcup B} f\,d\lambda
 &=
-\int_{A \sqcup B} f^+\,dm-\int_{A \sqcup B} f^-\,dm \\
+\int_{A \sqcup B} f^+\,d\lambda-\int_{A \sqcup B} f^-\,d\lambda \\
 &=
-\left(\int_A f^+\,dm+\int_B f^+\,dm\right)
--\left(\int_A f^-\,dm+\int_B f^-\,dm\right) \\
+\left(\int_A f^+\,d\lambda+\int_B f^+\,d\lambda\right)
+-\left(\int_A f^-\,d\lambda+\int_B f^-\,d\lambda\right) \\
 &=
-\int_A f\,dm+\int_B f\,dm.
+\int_A f\,d\lambda+\int_B f\,d\lambda.
 \end{align*}
 \end{proof}
 
-\begin{proposition}[a.e.\ 不変性]
+\begin{proposition}[a.e.\ 不変性]\label{prop:integral-ae-invariance}
 $f,g$ を $E$ 上の可積分関数とする．
 もし
 \[
@@ -170,19 +169,17 @@ f=g \quad \text{a.e.\ on } E
 \]
 ならば
 \[
-\int_E f\,dm=\int_E g\,dm
+\int_E f\,d\lambda=\int_E g\,d\lambda
 \]
 が成り立つ．
 \end{proposition}
 \begin{proof}
-前章ですでに示した．
-要点は，$f$ と $g$ の差があるのは零集合の上だけであり，
-零集合上の積分は $0$ になることである．
+\cref{prop:signed-integral-ae-invariance}そのものである．
 \end{proof}
 
 \section{順序と大きさ}
 
-\begin{proposition}[単調性]
+\begin{proposition}[単調性]\label{prop:integral-monotonicity}
 $f,g$ を $E$ 上の可積分関数とする．
 もし
 \[
@@ -190,44 +187,33 @@ f\le g \quad \text{a.e.\ on } E
 \]
 ならば
 \[
-\int_E f\,dm\le \int_E g\,dm
+\int_E f\,d\lambda\le \int_E g\,d\lambda
 \]
 が成り立つ．
 \end{proposition}
 \begin{proof}
+零集合上で値を変えても積分値は変わらない
+（\cref{prop:integral-ae-invariance}）ので，$f\le g$ が各点で成り立つとしてよい．
+このとき $g^+ + f^- \ge f^+ + g^-$ である．
+実際，これは $g^+-g^- \ge f^+-f^-$ と同値である．
+\cref{prop:nonnegative-integral-basic}を非負関数に適用すると
 \[
-h:=g-f
+\int_E g^+\,d\lambda+\int_E f^-\,d\lambda
+\ge
+\int_E f^+\,d\lambda+\int_E g^-\,d\lambda
 \]
-とおくと，$h$ は a.e.\ で非負である．
-また
-\[
-|h|\le |g|+|f|
-\]
-だから $h$ は可積分である．
-さらに a.e.\ 不変性により，$h$ は非負関数として扱ってよい．
-したがって
-\[
-\int_E h\,dm\ge 0.
-\]
-一方，
-\[
-g=f+h
-\]
-だから
-\[
-\int_E g\,dm=\int_E f\,dm+\int_E h\,dm\ge \int_E f\,dm.
-\]
+である．両辺を移項して $\int_E f\,d\lambda\le \int_E g\,d\lambda$ を得る．
 \end{proof}
 
-\begin{proposition}[定数による評価]
-$m(E)<\infty$ とし，$a,b \in \RR$ が
+\begin{proposition}[定数による評価]\label{prop:integral-bound-by-constants}
+$\lambda(E)<\infty$ とし，$a,b \in \RR$ が
 \[
 a\le f(x)\le b \quad \text{a.e.\ on } E
 \]
 を満たすとする．
 このとき
 \[
-a\,m(E)\le \int_E f\,dm\le b\,m(E)
+a\,\lambda(E)\le \int_E f\,d\lambda\le b\,\lambda(E)
 \]
 が成り立つ．
 \end{proposition}
@@ -236,23 +222,23 @@ a.e.\ で
 \[
 a1_E\le f\le b1_E
 \]
-だから，単調性より
+だから，\cref{prop:integral-monotonicity}より
 \[
-\int_E a1_E\,dm\le \int_E f\,dm\le \int_E b1_E\,dm.
+\int_E a1_E\,d\lambda\le \int_E f\,d\lambda\le \int_E b1_E\,d\lambda.
 \]
 定数関数の積分
 \[
-\int_E c1_E\,dm=c\,m(E)
+\int_E c1_E\,d\lambda=c\,\lambda(E)
 \]
 を用いれば結論を得る．
 \end{proof}
 
-\begin{proposition}[絶対値による評価]
+\begin{proposition}[絶対値による評価]\label{prop:integral-absolute-value-bound}
 $f$ が $E$ 上可積分ならば
 \[
-\left|\int_E f\,dm\right|
+\left|\int_E f\,d\lambda\right|
 \le
-\int_E |f|\,dm
+\int_E |f|\,d\lambda
 \]
 が成り立つ．
 \end{proposition}
@@ -261,24 +247,24 @@ a.e.\ で
 \[
 -|f|\le f\le |f|
 \]
-だから，単調性より
+だから，\cref{prop:integral-monotonicity}より
 \[
--\int_E |f|\,dm
+-\int_E |f|\,d\lambda
 \le
-\int_E f\,dm
+\int_E f\,d\lambda
 \le
-\int_E |f|\,dm.
+\int_E |f|\,d\lambda.
 \]
 したがって絶対値をとればよい．
 \end{proof}
 
-\begin{proposition}[積分が $0$ であることの判定]
+\begin{proposition}[積分が $0$ であることの判定]\label{prop:integral-zero-iff-ae-zero}
 $f$ が $E$ 上可積分であるとする．
 このとき次は同値である．
 \begin{enumerate}
     \item
     \[
-    \int_E |f|\,dm=0
+    \int_E |f|\,d\lambda=0
     \]
     \item
     \[
@@ -288,14 +274,14 @@ $f$ が $E$ 上可積分であるとする．
 \end{proposition}
 \begin{proof}
 \textbf{(2) $\Rightarrow$ (1)}\quad
-$|f|=0$ a.e.\ だから，a.e.\ 不変性より
+$|f|=0$ a.e.\ だから，\cref{prop:integral-ae-invariance}より
 \[
-\int_E |f|\,dm=0.
+\int_E |f|\,d\lambda=0.
 \]
 
 \textbf{(1) $\Rightarrow$ (2)}\quad
 $|f|$ は非負可測関数であり，
-前章の判定法より
+\cref{prop:nonnegative-integral-zero-iff-ae-zero}より
 \[
 |f|=0 \quad \text{a.e.\ on } E
 \]
@@ -303,13 +289,13 @@ $|f|$ は非負可測関数であり，
 これは $f=0$ a.e.\ と同値である．
 \end{proof}
 
-\begin{proposition}[Chebyshev不等式]
+\begin{proposition}[Chebyshev不等式]\label{prop:chebyshev-inequality}
 $f$ を $E$ 上の可積分関数とし，$\alpha>0$ とする．
 このとき
 \[
-m\bigl(\{x \in E \mid |f(x)|\ge \alpha\}\bigr)
+\lambda\bigl(\{x \in E \mid |f(x)|\ge \alpha\}\bigr)
 \le
-\frac{1}{\alpha}\int_E |f|\,dm
+\frac{1}{\alpha}\int_E |f|\,d\lambda
 \]
 が成り立つ．
 \end{proposition}
@@ -322,26 +308,26 @@ A:=\{x \in E \mid |f(x)|\ge \alpha\}
 \[
 \alpha 1_A\le |f|
 \]
-が成り立つので，単調性より
+が成り立つので，\cref{prop:integral-monotonicity}より
 \[
-\alpha\,m(A)
+\alpha\,\lambda(A)
 =
-\int_E \alpha 1_A\,dm
+\int_E \alpha 1_A\,d\lambda
 \le
-\int_E |f|\,dm.
+\int_E |f|\,d\lambda.
 \]
 両辺を $\alpha$ で割ればよい．
 \end{proof}
 
 \section{線形性}
 
-\begin{proposition}[斉次性]
+\begin{proposition}[斉次性]\label{prop:integral-homogeneity}
 $f$ を $E$ 上の可積分関数，$c \in \RR$ とする．
 このとき
 \[
-\int_E cf\,dm
+\int_E cf\,d\lambda
 =
-c\int_E f\,dm
+c\int_E f\,d\lambda
 \]
 が成り立つ．
 \end{proposition}
@@ -357,13 +343,13 @@ cf=(cf^+)-(cf^-)
 であり，$cf^+,cf^-$ は非負可積分である．
 したがって
 \begin{align*}
-\int_E cf\,dm
+\int_E cf\,d\lambda
 &=
-\int_E cf^+\,dm-\int_E cf^-\,dm \\
+\int_E cf^+\,d\lambda-\int_E cf^-\,d\lambda \\
 &=
-c\int_E f^+\,dm-c\int_E f^-\,dm \\
+c\int_E f^+\,d\lambda-c\int_E f^-\,d\lambda \\
 &=
-c\int_E f\,dm.
+c\int_E f\,d\lambda.
 \end{align*}
 
 次に $c<0$ とする．
@@ -373,24 +359,24 @@ cf=(-c)(-f)
 \]
 であり，$-c>0$ だから前半の結果を $-f$ に適用して
 \[
-\int_E cf\,dm
+\int_E cf\,d\lambda
 =
-(-c)\int_E (-f)\,dm
+(-c)\int_E (-f)\,d\lambda
 =
-(-c)\left(-\int_E f\,dm\right)
+(-c)\left(-\int_E f\,d\lambda\right)
 =
-c\int_E f\,dm
+c\int_E f\,d\lambda
 \]
 を得る．
 \end{proof}
 
-\begin{proposition}[加法性]
+\begin{proposition}[加法性]\label{prop:integral-additivity}
 $f,g$ を $E$ 上の可積分関数とする．
 このとき $f+g$ も可積分で，
 \[
-\int_E (f+g)\,dm
+\int_E (f+g)\,d\lambda
 =
-\int_E f\,dm+\int_E g\,dm
+\int_E f\,d\lambda+\int_E g\,d\lambda
 \]
 が成り立つ．
 \end{proposition}
@@ -400,7 +386,7 @@ $f,g$ を $E$ 上の可積分関数とする．
 |f+g|\le |f|+|g|
 \]
 だから，右辺の可積分性より
-$f+g$ も可積分である．
+\cref{cor:dominated-integrability}から $f+g$ も可積分である．
 
 次に
 \[
@@ -414,82 +400,87 @@ f+g=(f^++g^+)-(f^-+g^-)
 \]
 である．
 $f^++g^+$ と $f^-+g^-$ は非負可積分であるから，
-前章の非負関数の加法性と表示の独立性より
+\cref{prop:nonnegative-integral-basic,prop:integral-representation-independence}より
 \begin{align*}
-\int_E (f+g)\,dm
+\int_E (f+g)\,d\lambda
 &=
-\int_E (f^++g^+)\,dm-\int_E (f^-+g^-)\,dm \\
+\int_E (f^++g^+)\,d\lambda-\int_E (f^-+g^-)\,d\lambda \\
 &=
-\left(\int_E f^+\,dm+\int_E g^+\,dm\right)
--\left(\int_E f^-\,dm+\int_E g^-\,dm\right) \\
+\left(\int_E f^+\,d\lambda+\int_E g^+\,d\lambda\right)
+-\left(\int_E f^-\,d\lambda+\int_E g^-\,d\lambda\right) \\
 &=
-\int_E f\,dm+\int_E g\,dm.
+\int_E f\,d\lambda+\int_E g\,d\lambda.
 \end{align*}
 \end{proof}
 
-\begin{corollary}[有限和]
+\begin{corollary}[有限和]\label{cor:integral-finite-sum}
 $f_1,\dots,f_n$ を $E$ 上の可積分関数とすると
 \[
-\int_E \left(\sum_{k=1}^n f_k\right)\,dm
+\int_E \left(\sum_{k=1}^n f_k\right)\,d\lambda
 =
-\sum_{k=1}^n \int_E f_k\,dm
+\sum_{k=1}^n \int_E f_k\,d\lambda
 \]
 が成り立つ．
 \end{corollary}
 \begin{proof}
-前命題を繰り返し用いればよい．
+\cref{prop:integral-additivity}を繰り返し用いればよい．
 \end{proof}
 
 \section{計算則のまとめ}
 
-\begin{theorem}[Lebesgue積分の基本公式]
+\begin{theorem}[Lebesgue積分の基本公式]\label{thm:lebesgue-integral-basic-formulas}
 $E \subset \RR^d$ を可測集合とし，$f,g$ を $E$ 上の可積分関数とする．
 このとき次が成り立つ．
 \begin{enumerate}
-    \item $m(E)=0$ なら
+    \item $\lambda(E)=0$ なら
     \[
-    \int_E f\,dm=0
+    \int_E f\,d\lambda=0
     \]
     \item $f=g$ a.e.\ なら
     \[
-    \int_E f\,dm=\int_E g\,dm
+    \int_E f\,d\lambda=\int_E g\,d\lambda
     \]
     \item $f\le g$ a.e.\ なら
     \[
-    \int_E f\,dm\le \int_E g\,dm
+    \int_E f\,d\lambda\le \int_E g\,d\lambda
     \]
     \item 任意の $c \in \RR$ に対して
     \[
-    \int_E cf\,dm=c\int_E f\,dm
+    \int_E cf\,d\lambda=c\int_E f\,d\lambda
     \]
     \item
     \[
-    \int_E (f+g)\,dm=\int_E f\,dm+\int_E g\,dm
+    \int_E (f+g)\,d\lambda=\int_E f\,d\lambda+\int_E g\,d\lambda
     \]
     \item
     \[
-    \left|\int_E f\,dm\right|\le \int_E |f|\,dm
+    \left|\int_E f\,d\lambda\right|\le \int_E |f|\,d\lambda
     \]
     \item
     \[
-    \int_E |f|\,dm=0
+    \int_E |f|\,d\lambda=0
     \iff
     f=0 \text{ a.e.\ on } E
     \]
     \item $A,B \subset E$ が互いに素なら
     \[
-    \int_{A \sqcup B} f\,dm
+    \int_{A \sqcup B} f\,d\lambda
     =
-    \int_A f\,dm+\int_B f\,dm
+    \int_A f\,d\lambda+\int_B f\,d\lambda
     \]
     \item $\alpha>0$ に対して
     \[
-    m(\{|f|\ge \alpha\})
+    \lambda(\{|f|\ge \alpha\})
     \le
-    \frac{1}{\alpha}\int_E |f|\,dm
+    \frac{1}{\alpha}\int_E |f|\,d\lambda
     \]
 \end{enumerate}
 \end{theorem}
+\begin{proof}
+各項は順に
+\cref{prop:integral-zero-on-null-set,prop:integral-ae-invariance,prop:integral-monotonicity,prop:integral-homogeneity,prop:integral-additivity,prop:integral-absolute-value-bound,prop:integral-zero-iff-ae-zero,prop:integral-disjoint-additivity,prop:chebyshev-inequality}
+で示した内容である．
+\end{proof}
 
 \begin{remark}
 この章で得た公式は，今後の章でほぼ毎回使う．
@@ -507,14 +498,14 @@ f=g \text{ a.e.}
 \end{remark}
 
 \begin{example}
-$m(E)<\infty$ とし，
+$\lambda(E)<\infty$ とし，
 \[
 |f(x)|\le M \quad \text{a.e.\ on } E
 \]
 を満たすとする．
 このとき $f$ は可積分で，
 \[
-\left|\int_E f\,dm\right|\le M\,m(E)
+\left|\int_E f\,d\lambda\right|\le M\,\lambda(E)
 \]
 が成り立つ．
 \end{example}
@@ -524,16 +515,16 @@ $m(E)<\infty$ とし，
 \]
 だから
 \[
-\int_E |f|\,dm\le M\,m(E)<\infty.
+\int_E |f|\,d\lambda\le M\,\lambda(E)<\infty.
 \]
 よって $f$ は可積分である．
-さらに絶対値による評価より
+さらに\cref{prop:integral-absolute-value-bound}より
 \[
-\left|\int_E f\,dm\right|
+\left|\int_E f\,d\lambda\right|
 \le
-\int_E |f|\,dm
+\int_E |f|\,d\lambda
 \le
-M\,m(E).
+M\,\lambda(E).
 \]
 \end{proof}
 
