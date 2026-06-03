@@ -205,14 +205,22 @@ $f:E\to\eRR$ に対して，次は同値である．
 \begin{remark}[レベル集合の略記]\label{rem:level-set-notation}
 以後，$f:E\to\eRR$ と $B\subset\eRR$ に対して
 \[
-\{f\in B\}:=f^{-1}(B)=\{x\in E\mid f(x)\in B\}
+\{f\in B\}:=\{x\in E\mid f(x)\in B\} = f^{-1}(B)
 \]
 と書く．
-特に $a\in\RR$ に対して
-$\{f>a\}:=\{x\in E\mid f(x)>a\}$，
-$\{f\ge a\}:=\{x\in E\mid f(x)\ge a\}$ などと書く．
-また $f,g:E\to\eRR$ に対して
-$\{f>g\}:=\{x\in E\mid f(x)>g(x)\}$ などと書く．
+また $a\in\RR$ に対して
+\[
+\begin{aligned}
+\{f>a\} &:=\{x\in E\mid f(x)>a\} = f^{-1}( (a,\infty] ),\\
+\{f\ge a\}&:=\{x\in E\mid f(x)\ge a\} = f^{-1}( [a,\infty] )\\
+\end{aligned}
+\]
+などと書く．
+さらに $f,g:E\to\eRR$ に対して
+\[
+\{f>g\}:=\{x\in E\mid f(x)>g(x)\} = (f-g)^{-1}( (0,\infty])
+\]
+などと書く．
 定義域 $E$ は文脈から判断する．
 \end{remark}
 
@@ -298,7 +306,9 @@ f=1_{\QQ\cap[0,1]}
 は $[0,1]$ 上Lebesgue可測である．
 \end{example}
 \begin{proof}
-\cref{cor:countable-lebesgue-null}より $\QQ\cap[0,1]$ はLebesgue可測である．
+%\cref{cor:countable-lebesgue-null}より 
+既に見た通り 
+$\QQ\cap[0,1]$ はLebesgue可測である．
 したがって\cref{ex:indicator-function-measurable}より $f$ は可測である．
 \end{proof}
 
@@ -497,18 +507,35 @@ f=\limsup_{n\to\infty}f_n=\liminf_{n\to\infty}f_n
 だから $f$ は可測である．
 \end{proof}
 
-\section{almost everywhere}
+\section{ほとんど至る所（almost everywhere）}
 
-\begin{definition}[almost everywhere]\label{def:ae-equality}
-$E \subset \RR^d$ を可測集合とし，$f,g:E\to\eRR$ を関数とする．
-\[
-f=g \quad \text{a.e.\ on } E
-\]
-とは
-\[
-\{x\in E\mid f(x)\ne g(x)\}
-\]
-がLebesgue零集合であることをいう．
+\begin{definition}[ほとんど至る所（almost everywhere）]\label{def:ae-prop}
+    測度空間$(X,\calM,\mu)$ 上の述語$P$（つまり，各点 $x \in X$ に命題$P(x)$を対応付ける写像）
+    %述語関数 $P : X \to \{\top,\bot\}$ 
+    と可測集合$E \in \calM$ に対し，
+    「$P$が$E$上ほとんど至る所（almost everywhere）成り立つ」または「ほとんど至る所の点$x \in E$で$P$が成り立つ」
+    \[
+    P \text{ $\mu$-a.e.\ on } E, \quad P(x) \text{ at $\mu$-a.e. } x \in E
+    \]
+    % または，ほとんどすべて（almost all）の点$x \in E$で$P(x)$が成り立つ
+    % \[
+    % P(x) \quad \text{a.a. } x \in E
+    % \]
+    とは，$P$が成り立たない点の集合が$\mu$-零集合となることをいう
+    \[
+    \exists N \in \calM \text{ such that } \mu(N)=0 \text{ and }
+    \{ x \in E \mid \neg P(x) \} \subset N.
+    \]
+%     零集合$N \subset X$が存在して，
+% $E \subset \RR^d$ を可測集合とし，$f,g:E\to\eRR$ を関数とする．
+% \[
+% f=g \quad \text{a.e.\ on } E
+% \]
+% とは
+% \[
+% \{x\in E\mid f(x)\ne g(x)\}
+% \]
+% がLebesgue零集合であることをいう．
 \end{definition}
 
 \begin{proposition}\label{prop:ae-equality-equivalence}
@@ -541,7 +568,9 @@ f=g \quad \text{a.e.\ on } E
 N:=\{x\in E\mid f(x)\ne g(x)\}
 \]
 とおくと，$N$ は零集合である．
-Lebesgue測度の完備性（\cref{thm:lebesgue-null-measurable}）より，$N$ の任意の部分集合は可測である．
+Lebesgue測度の完備性
+%（\cref{thm:lebesgue-null-measurable}）
+より，$N$ の任意の部分集合は可測である．
 
 任意の $a\in\RR$ に対して
 \[
@@ -571,10 +600,10 @@ $\eRR$ の意味で $f(x)$ に収束することをいう．
 f_n\to f \quad \text{a.e.\ on } E
 \]
 と書く．
-同値に，
-\[
-\{x\in E\mid f_n(x)\not\to f(x)\}
-\]
+つまり，
+%\[
+$\{x\in E\mid f_n(x)\not\to f(x)\}$
+%\]
 がLebesgue零集合であることをいう．
 各 $f_n$ や $f$ を零集合上で変更しても，例外集合は可算和をとるだけなので，
 この条件は a.e.\ 同値類に対してもよく定義されている．
