@@ -1,0 +1,211 @@
+\setcounter{chapter}{10}
+\chapter{Fubiniと変数変換}
+
+\paragraph{本章の目標}
+本章では，多変数積分を計算するための2つの道具を事実として使える形で整理する．
+前半では一般の測度空間上でTonelliの定理とFubiniの定理を述べ，積分順序を交換する条件を確認する．
+後半ではLebesgue測度上の変数変換公式を述べ，Jacobianの絶対値が面積・体積の伸び縮みを表すことを確認する．
+
+\section{積測度と切片}
+
+本章の前半では，$\sigma$-有限な測度空間 $(X,\calM,\mu)$ と $(Y,\calN,\nu)$ を固定する．
+積空間には積 $\sigma$-加法族 $\calM\otimes\calN$ と積測度 $\mu\otimes\nu$ を入れる．
+積測度は可測矩形について $(\mu\otimes\nu)(A\times B)=\mu(A)\nu(B)$ を満たす測度である．
+
+\begin{remark}
+$\sigma$-有限性は，積測度の一意性やTonelli--Fubiniの標準形を使うための仮定である．
+Lebesgue測度空間は $\sigma$-有限なので，本章の定理は $\RR^m\times\RR^n$ 上の積分にもそのまま適用できる．
+\end{remark}
+
+\begin{definition}[切片]\label{def:sections}
+$E\subset X\times Y$ と $f:X\times Y\to\eRR$ に対して，各 $x\in X$，$y\in Y$ について
+$E_x:=\{y\in Y\mid (x,y)\in E\}$，$E^y:=\{x\in X\mid (x,y)\in E\}$ と書く．
+また $f_x(y):=f(x,y)$，$f^y(x):=f(x,y)$ と書き，これらを切片という．
+\end{definition}
+
+\begin{theorem}[切片の可測性]\label{thm:sections-measurable-general}
+$E\in\calM\otimes\calN$ なら，すべての $x\in X$ と $y\in Y$ に対して
+$E_x\in\calN$，$E^y\in\calM$ である．
+また $f\in M(X\times Y;\eRR)$ なら，すべての $x\in X$ と $y\in Y$ に対して
+$f_x\in M(Y;\eRR)$，$f^y\in M(X;\eRR)$ である．
+\end{theorem}
+
+\begin{remark}
+ここで $M(X\times Y;\eRR)$ は積測度空間 $(X\times Y,\calM\otimes\calN,\mu\otimes\nu)$ 上の可測関数全体を表す．
+以下でも，文脈が明らかなときはこの記法を省略して使う．
+\end{remark}
+
+\section{Tonelliの定理}
+
+Tonelliの定理は，非負関数なら積分可能性を先に確認しなくても反復積分に直せる，という定理である．
+両辺が $+\infty$ になることも許す．
+
+\begin{theorem}[Tonelliの定理]\label{thm:tonelli}
+$f\in M^+(X\times Y)$ とする．
+このとき $x\mapsto \int_Y f(x,y)\,d\nu(y)$ は $M^+(X)$ に属し，
+$y\mapsto \int_X f(x,y)\,d\mu(x)$ は $M^+(Y)$ に属する．
+さらに
+\[
+\int_{X\times Y} f\,d(\mu\otimes\nu)=\int_X\!\int_Y f(x,y)\,d\nu(y)\,d\mu(x)=\int_Y\!\int_X f(x,y)\,d\mu(x)\,d\nu(y)
+\]
+が成り立つ．
+\end{theorem}
+
+\begin{remark}[使い方]
+被積分関数が非負なら，まずTonelliを使ってよい．
+例えば $f\ge0$ のときは，$\int_{X\times Y}f$ を直接計算しても，
+$\int_X\int_Y f$ または $\int_Y\int_X f$ として計算してもよい．
+収束性を先に調べる必要はないが，答えが $+\infty$ になる可能性は残る．
+\end{remark}
+
+\begin{example}[三角形の面積]\label{ex:triangle-area-tonelli}
+$E:=\{(x,y)\in[0,1]^2\mid x+y\le1\}$ とする．
+指示関数 $1_E$ は非負可測なのでTonelliを使える．
+各 $x\in[0,1]$ について $E_x=[0,1-x]$ だから
+$(\lambda_1\otimes\lambda_1)(E)=\int_0^1 \lambda_1(E_x)\,d\lambda_1(x)=\int_0^1(1-x)\,dx=\frac12$ である．
+\end{example}
+
+\begin{example}[直積形の関数]\label{ex:product-function-tonelli}
+$f\in M^+(X)$，$g\in M^+(Y)$ とする．
+このとき $h(x,y):=f(x)g(y)$ は $M^+(X\times Y)$ に属し，Tonelliより
+$\int_{X\times Y}h\,d(\mu\otimes\nu)=\left(\int_X f\,d\mu\right)\left(\int_Y g\,d\nu\right)$ である．
+これは，長方形の測度公式 $(\mu\otimes\nu)(A\times B)=\mu(A)\nu(B)$ の関数版である．
+\end{example}
+
+\section{Fubiniの定理}
+
+Fubiniの定理は，符号がある関数でも絶対可積分なら積分順序を交換できる，という定理である．
+Tonelliが「非負ならよい」という定理であるのに対し，Fubiniは「絶対値が積分できるならよい」という定理である．
+
+\begin{theorem}[Fubiniの定理]\label{thm:fubini}
+$f\in\calL^1(X\times Y)$ とする．
+このとき，$\mu$-a.e. の $x\in X$ に対して $f_x\in\calL^1(Y)$ であり，
+$\nu$-a.e. の $y\in Y$ に対して $f^y\in\calL^1(X)$ である．
+さらに，$g(x):=\int_Y f(x,y)\,d\nu(y)$ と $h(y):=\int_X f(x,y)\,d\mu(x)$ は
+a.e. の値を適当に定めれば $g\in\calL^1(X)$，$h\in\calL^1(Y)$ となり，
+\[
+\int_{X\times Y} f\,d(\mu\otimes\nu)=\int_X\!\int_Y f(x,y)\,d\nu(y)\,d\mu(x)=\int_Y\!\int_X f(x,y)\,d\mu(x)\,d\nu(y)
+\]
+が成り立つ．
+\end{theorem}
+
+\begin{corollary}[積分順序の交換判定]\label{cor:iterated-integral-exchange}
+$f\in M(X\times Y)$ とし，
+$\int_X(\int_Y |f(x,y)|\,d\nu(y))d\mu(x)<\infty$ が成り立つとする．
+このとき $f\in\calL^1(X\times Y)$ であり，
+\[
+\int_X\!\int_Y f(x,y)\,d\nu(y)\,d\mu(x)=\int_Y\!\int_X f(x,y)\,d\mu(x)\,d\nu(y)
+\]
+が成り立つ．
+\end{corollary}
+
+\begin{remark}[確認の順番]
+実際の計算では，まず $f\ge0$ ならTonelliを使う．
+符号がある場合は，先に $\int\int |f|<\infty$ を確認してからFubiniを使う．
+絶対可積分性を確認せずに順序交換すると，値が変わることがある．
+\end{remark}
+
+\begin{example}[積分領域の入れ替え]\label{ex:change-order-triangle}
+連続関数 $\varphi:[0,1]\to\RR$ に対して
+Fubiniより $\int_0^1(\int_0^x \varphi(y)\,dy)dx=\int_0^1(\int_y^1 \varphi(y)\,dx)dy=\int_0^1(1-y)\varphi(y)\,dy$ である．
+これは領域 $0\le y\le x\le1$ を，$0\le y\le1$，$y\le x\le1$ と読み替えただけである．
+例えば $\varphi(y)=e^{y^2}$ のように原始関数が初等的に書けない場合でも，順序交換により計算しやすい形へ変えられる．
+\end{example}
+
+\section{Lebesgue測度での積測度}
+
+Lebesgue測度の場合，$\RR^m\times\RR^n$ は自然に $\RR^{m+n}$ と同一視される．
+この同一視のもとで，$\lambda_m\otimes\lambda_n$ は $\lambda_{m+n}$ と同じものとして扱ってよい．
+厳密には積 $\sigma$-加法族の完備化を考えるが，通常の計算ではこの違いは問題にならない．
+
+\begin{remark}
+今後は $\int_{\RR^m\times\RR^n} f(x,y)\,d(\lambda_m\otimes\lambda_n)$ を
+$\int_{\RR^m}\int_{\RR^n} f(x,y)\,dy\,dx$ のように略記する．
+これは記法の省略であり，正当化はTonelliまたはFubiniによって行う．
+\end{remark}
+
+\section{変数変換}
+
+ここからはLebesgue測度に固有の話に戻る．
+変数変換では，写像によって面積や体積がどれだけ伸び縮みするかを補正する必要がある．
+この補正係数がJacobianの絶対値である．
+
+\begin{theorem}[1変数の affine 変数変換]\label{thm:one-dimensional-affine-change-variables}
+$a\in\RR\setminus\{0\}$，$b\in\RR$ とする．
+$f\in M^+(\RR)$ または $f\in\calL^1(\RR)$ なら
+\[
+\int_{\RR} f(au+b)\,d\lambda_1(u)=\frac1{|a|}\int_{\RR}f(x)\,d\lambda_1(x)
+\]
+が成り立つ．同値な形で，$\int_{\RR} f(x)\,d\lambda_1(x)=\int_{\RR} f(au+b)|a|\,d\lambda_1(u)$ である．
+\end{theorem}
+
+\begin{remark}[向きと絶対値]
+$a<0$ のとき，Riemann積分の向きつき記法では符号が現れることがある．
+しかしLebesgue積分は集合上の積分なので向きを持たない．
+そのため変数変換では $a$ ではなく $|a|$ が現れる．
+\end{remark}
+
+\begin{theorem}[線形変数変換]\label{thm:linear-change-of-variables}
+$T\in GL(d,\RR)$ とする．
+$f\in M^+(\RR^d)$ または $f\in\calL^1(\RR^d)$ なら
+\[
+\int_{\RR^d} f(Tu)\,d\lambda_d(u)=\frac1{|\det T|}\int_{\RR^d}f(x)\,d\lambda_d(x)
+\]
+が成り立つ．同値な形で，$\int_{\RR^d}f(x)\,d\lambda_d(x)=\int_{\RR^d}f(Tu)|\det T|\,d\lambda_d(u)$ である．
+\end{theorem}
+
+\begin{corollary}[affine 変数変換]\label{cor:affine-change-of-variables}
+$T\in GL(d,\RR)$，$b\in\RR^d$ とする．
+$f\in M^+(\RR^d)$ または $f\in\calL^1(\RR^d)$ なら
+\[
+\int_{\RR^d} f(Tu+b)|\det T|\,d\lambda_d(u)=\int_{\RR^d}f(x)\,d\lambda_d(x)
+\]
+が成り立つ．
+\end{corollary}
+
+\begin{corollary}[集合の体積の変換]\label{cor:volume-under-affine-map}
+$T\in GL(d,\RR)$，$b\in\RR^d$ とし，$A\subset\RR^d$ をLebesgue可測集合とする．
+このとき $TA+b$ はLebesgue可測であり，$\lambda_d(TA+b)=|\det T|\,\lambda_d(A)$ が成り立つ．
+\end{corollary}
+
+\begin{example}[平行四辺形の面積]\label{ex:parallelogram-area}
+$T=\begin{pmatrix}a&c\\ b&d\end{pmatrix}$ とし，$Q:=[0,1]^2$ とする．
+このとき $TQ$ は原点を頂点にもつ平行四辺形であり，
+$\lambda_2(TQ)=|\det T|\lambda_2(Q)=|ad-bc|$ である．
+\end{example}
+
+\begin{theorem}[一般の変数変換公式]\label{thm:change-of-variables-diffeomorphism}
+$U,V\subset\RR^d$ を開集合とし，$\Phi:U\to V$ を $C^1$ 級微分同相写像とする．
+$f\in M^+(V)$ または $f\in\calL^1(V)$ なら
+\[
+\int_V f(x)\,d\lambda_d(x)=\int_U f(\Phi(u))\,|\det D\Phi(u)|\,d\lambda_d(u)
+\]
+が成り立つ．
+\end{theorem}
+
+\begin{remark}
+本講義ではこの一般形の証明は扱わない．
+affine 変換では $D\Phi=T$ が定数行列なので，Jacobian $|\det D\Phi|$ は $|\det T|$ になる．
+\end{remark}
+
+\begin{example}[極座標]\label{ex:polar-coordinates}
+$\Phi(r,\theta)=(r\cos\theta,r\sin\theta)$ とおくと，Jacobianは
+$|\det D\Phi(r,\theta)|=r$ である．
+厳密には原点と角度の端点を除いて微分同相な領域に分けて適用するが，零集合は積分値に影響しない．
+したがって非負可測関数または可積分関数 $f:\RR^2\to\eRR$ に対して
+\[
+\int_{\RR^2}f(x,y)\,dx\,dy=\int_0^\infty\!\int_0^{2\pi} f(r\cos\theta,r\sin\theta)\,r\,d\theta\,dr
+\]
+が成り立つ．例えば $f=1_{\{x^2+y^2\le R^2\}}$ とすれば，
+$\lambda_2(\{x^2+y^2\le R^2\})=\int_0^R\int_0^{2\pi}r\,d\theta\,dr=\pi R^2$ である．
+\end{example}
+
+\section{解釈とまとめ}
+
+Tonelliの定理は「非負なら積分順序を自由に選べる」という定理である．
+Fubiniの定理は「絶対可積分なら符号があっても積分順序を交換できる」という定理である．
+実際の計算では，$f\ge0$ ならTonelli，符号があるなら $\int\int |f|<\infty$ を確認してFubini，という順で使う．
+
+変数変換公式は，Lebesgue測度が向きを持たず，体積だけを測ることを反映している．
+そのためJacobianは $\det D\Phi$ ではなく $|\det D\Phi|$ として現れる．
+多変数積分では，積分順序を変える操作と変数を取り替える操作を組み合わせることで，計算しにくい積分を扱いやすい形へ変形する．
