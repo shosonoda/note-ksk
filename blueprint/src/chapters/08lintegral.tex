@@ -503,6 +503,20 @@ $N:=\QQ \cap [0,1]$ は零集合であり，$[0,1]\setminus N$ 上で $g=1_{[0,1
 
 \section{Riemann積分との関係}
 
+\begin{remark}[積分区間の向き]\label{rem:lebesgue-integral-no-orientation}
+Lebesgue積分 $\int_A f\,d\lambda$ は可測集合 $A$ 上の積分であり，積分区間の向きは含まない．
+例えば $[0,1]$ 上では $\int_{[0,1]} f\,d\lambda$ が定義されるが，
+Riemann積分の記法 $\int_1^0 f(x)\,dx$ をどう定義するかは別の約束である．
+向きつきの約束では $\int_1^0 f(x)\,dx=-\int_0^1 f(x)\,dx$ とすることが多いが，
+この符号はLebesgue測度から来るものではない．
+Lebesgue積分で逆向きを表したいなら，別途 $-\int_{[0,1]}f\,d\lambda$ と符号を付ける．
+また，空区間として扱う約束なら積分値は $0$ になるが，これも向きではなく積分する集合の選び方である．
+
+したがって以下の「Riemann積分値との一致」は，
+集合としての有界閉区間 $I$ 上の通常のRiemann積分値との一致を意味する．
+この違いは，後の変数変換公式でJacobianの絶対値が現れることとも関係している．
+\end{remark}
+
 \begin{theorem}[Riemann可積分ならLebesgue可積分]\label{thm:riemann-implies-lebesgue-integrable}
 $I \subset \RR^d$ を有界閉区間とし，
 $f:I \to \RR$ をRiemann可積分関数とする．
