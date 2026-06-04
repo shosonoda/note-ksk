@@ -1,178 +1,88 @@
 \setcounter{chapter}{8}
-\chapter{Lebesgue積分の性質}
+\chapter{測度空間上の積分の性質}
 
 \paragraph{本章の目標}
-\cref{def:nonnegative-lebesgue-integral,def:lebesgue-integrable-function}でLebesgue積分を定義した．
+\cref{def:nonnegative-lebesgue-integral,def:lebesgue-integrable-function}で測度空間上の積分を定義した．
 本章では，その積分を実際の計算に使うための基本性質を整理する．
-特に
-\[
-\text{単調性},\qquad \text{線形性},\qquad \text{a.e.\ 不変性},\qquad \text{Chebyshev不等式}
-\]
-を証明し，
+特に単調性，線形性，a.e.\ 不変性，Chebyshev不等式を証明し，
 確率論や関数解析で必要になる計算規則を揃える．
 
 \section{動機づけ}
 
 積分を定義しただけでは，まだ計算には使いにくい．
-例えば
-\[
-\int_E(f+g)\,d\lambda,\qquad
-\int_E cf\,d\lambda,\qquad
-\int_{A\sqcup B}f\,d\lambda
-\]
-がどう振る舞うかが分からなければ，
+例えば $\int_X(f+g)\,d\mu$，$\int_X cf\,d\mu$，$\int_{A\sqcup B}f\,d\mu$ がどう振る舞うかが分からなければ，
 実際の応用ではほとんど何もできない．
 
-また，Lebesgue積分では
-\[
-f=g \quad \text{a.e.}
-\]
-を同一視してよいことが本質である．
+また，測度空間上の積分では $f=g$ a.e.\ を同一視してよいことが本質である．
 この原理があるからこそ，零集合上で生じるコーナーケースを気にせず，
 確率変数や関数列を計算できる．
 
 \section{準備：正部分と負部分}
 
-以後，$E \subset \RR^d$ はLebesgue可測集合とし，
-$f,g:E \to \eRR$ は可測関数とする．
+以後，測度空間 $(X,\calM,\mu)$ を固定し，$f,g:X \to \eRR$ は可測関数とする．
 
 \begin{proposition}[基本恒等式]\label{prop:positive-negative-basic-identities}
 任意の可測関数 $f$ に対して
-\[
-f=f^+-f^-,
-\qquad
-|f|=f^++f^-,
-\qquad
-f^+f^-=0
-\]
-が成り立つ．
+$f=f^+-f^-$，$|f|=f^++f^-$，$f^+f^-=0$ が成り立つ．
 \end{proposition}
 \begin{proof}
-$f(x)\ge 0$ のとき
-\[
-f^+(x)=f(x),\qquad f^-(x)=0
-\]
-であり，
-$f(x)<0$ のとき
-\[
-f^+(x)=0,\qquad f^-(x)=-f(x)
-\]
-である．
+$f(x)\ge 0$ のとき $f^+(x)=f(x)$，$f^-(x)=0$ であり，
+$f(x)<0$ のとき $f^+(x)=0$，$f^-(x)=-f(x)$ である．
 したがって各点 $x$ ごとに上の3つの等式が成り立つ．
 \end{proof}
 
 \begin{proposition}[非負関数による表示]\label{prop:integrable-as-difference}
 $f$ が可積分であることと，
-ある非負可積分関数 $u,v$ が存在して
-\[
-f=u-v
-\]
-と書けることは同値である．
-このとき
-\[
-\int_E f\,d\lambda=\int_E u\,d\lambda-\int_E v\,d\lambda
-\]
-が成り立つ．
+ある非負可積分関数 $u,v$ が存在して $f=u-v$ と書けることは同値である．
+このとき $\int_X f\,d\mu=\int_X u\,d\mu-\int_X v\,d\mu$ が成り立つ．
 \end{proposition}
 \begin{proof}
 \cref{prop:integral-representation-independence}より，
-$f=u-v$ と書ければ積分値
-\[
-\int_E u\,d\lambda-\int_E v\,d\lambda
-\]
-は表示に依らない．
+$f=u-v$ と書ければ積分値 $\int_X u\,d\mu-\int_X v\,d\mu$ は表示に依らない．
 
-まず $f$ が可積分なら
-\[
-f=f^+-f^-
-\]
-であり，
+まず $f$ が可積分なら $f=f^+-f^-$ であり，
 $f^+,f^-$ は非負可積分であるから条件を満たす．
 
 逆に $f=u-v$ と書け，$u,v$ が非負可積分とする．
-このとき
-\[
-f^+\le u,\qquad f^-\le v
-\]
-が成り立つ．
-実際，$f(x)\ge 0$ なら
-\[
-f^+(x)=f(x)=u(x)-v(x)\le u(x)
-\]
-であり，$f(x)<0$ なら $f^+(x)=0\le u(x)$ である．
+このとき $f^+\le u$，$f^-\le v$ が成り立つ．
+実際，$f(x)\ge 0$ なら $f^+(x)=f(x)=u(x)-v(x)\le u(x)$ であり，$f(x)<0$ なら $f^+(x)=0\le u(x)$ である．
 $f^-\le v$ も同様である．
 したがって\cref{prop:nonnegative-integral-basic}より
-\[
-\int_E f^+\,d\lambda\le \int_E u\,d\lambda<\infty,
-\qquad
-\int_E f^-\,d\lambda\le \int_E v\,d\lambda<\infty.
-\]
+$\int_X f^+\,d\mu\le \int_X u\,d\mu<\infty$，
+$\int_X f^-\,d\mu\le \int_X v\,d\mu<\infty$ である．
 よって $f$ は可積分である．
 \end{proof}
 
 \section{集合に関する性質}
 
 \begin{proposition}[零集合上では積分は消える]\label{prop:integral-zero-on-null-set}
-$\lambda(E)=0$ で $f$ が $E$ 上可積分ならば
-\[
-\int_E f\,d\lambda=0
-\]
-が成り立つ．
+$\mu(X)=0$ で $f$ が $X$ 上可積分ならば $\int_X f\,d\mu=0$ が成り立つ．
 \end{proposition}
 \begin{proof}
 \cref{prop:null-set-integral-signed}そのものである．
 \end{proof}
 
 \begin{proposition}[互いに素な集合への加法性]\label{prop:integral-disjoint-additivity}
-$A,B \subset E$ を互いに素な可測集合とし，
-$f$ を $A\sqcup B$ 上の可積分関数とする．
-このとき
-\[
-\int_{A \sqcup B} f\,d\lambda
-=
-\int_A f\,d\lambda+\int_B f\,d\lambda
-\]
-が成り立つ．
+$A,B \subset X$ を互いに素な可測集合とし，
+$f$ を $X$ 上の可積分関数とする．
+このとき $\int_{A \sqcup B} f\,d\mu=\int_A f\,d\mu+\int_B f\,d\mu$ が成り立つ．
 \end{proposition}
 \begin{proof}
 $f=f^+-f^-$ と書く．
 $f^+,f^-$ は非負可積分だから，\cref{prop:nonnegative-integral-disjoint-additivity}より
-\[
-\int_{A \sqcup B} f^+\,d\lambda
-=
-\int_A f^+\,d\lambda+\int_B f^+\,d\lambda
-\]
-および
-\[
-\int_{A \sqcup B} f^-\,d\lambda
-=
-\int_A f^-\,d\lambda+\int_B f^-\,d\lambda
-\]
-が成り立つ．
+$\int_{A \sqcup B} f^+\,d\mu=\int_A f^+\,d\mu+\int_B f^+\,d\mu$ および
+$\int_{A \sqcup B} f^-\,d\mu=\int_A f^-\,d\mu+\int_B f^-\,d\mu$ が成り立つ．
 したがって
-\begin{align*}
-\int_{A \sqcup B} f\,d\lambda
-&=
-\int_{A \sqcup B} f^+\,d\lambda-\int_{A \sqcup B} f^-\,d\lambda \\
-&=
-\left(\int_A f^+\,d\lambda+\int_B f^+\,d\lambda\right)
--\left(\int_A f^-\,d\lambda+\int_B f^-\,d\lambda\right) \\
-&=
-\int_A f\,d\lambda+\int_B f\,d\lambda.
-\end{align*}
+\[
+\int_{A \sqcup B} f\,d\mu
+=\int_{A \sqcup B} f^+\,d\mu-\int_{A \sqcup B} f^-\,d\mu
+=\int_A f\,d\mu+\int_B f\,d\mu.
+\]
 \end{proof}
 
 \begin{proposition}[a.e.\ 不変性]\label{prop:integral-ae-invariance}
-$f,g$ を $E$ 上の可積分関数とする．
-もし
-\[
-f=g \quad \text{a.e.\ on } E
-\]
-ならば
-\[
-\int_E f\,d\lambda=\int_E g\,d\lambda
-\]
-が成り立つ．
+$f,g$ を $X$ 上の可積分関数とする．
+もし $f=g$ a.e.\ on $X$ ならば $\int_X f\,d\mu=\int_X g\,d\mu$ が成り立つ．
 \end{proposition}
 \begin{proof}
 \cref{prop:signed-integral-ae-invariance}そのものである．
@@ -181,16 +91,8 @@ f=g \quad \text{a.e.\ on } E
 \section{順序と大きさ}
 
 \begin{proposition}[単調性]\label{prop:integral-monotonicity}
-$f,g$ を $E$ 上の可積分関数とする．
-もし
-\[
-f\le g \quad \text{a.e.\ on } E
-\]
-ならば
-\[
-\int_E f\,d\lambda\le \int_E g\,d\lambda
-\]
-が成り立つ．
+$f,g$ を $X$ 上の可積分関数とする．
+もし $f\le g$ a.e.\ on $X$ ならば $\int_X f\,d\mu\le \int_X g\,d\mu$ が成り立つ．
 \end{proposition}
 \begin{proof}
 零集合上で値を変えても積分値は変わらない
@@ -199,229 +101,108 @@ f\le g \quad \text{a.e.\ on } E
 実際，これは $g^+-g^- \ge f^+-f^-$ と同値である．
 \cref{prop:nonnegative-integral-basic}を非負関数に適用すると
 \[
-\int_E g^+\,d\lambda+\int_E f^-\,d\lambda
+\int_X g^+\,d\mu+\int_X f^-\,d\mu
 \ge
-\int_E f^+\,d\lambda+\int_E g^-\,d\lambda
+\int_X f^+\,d\mu+\int_X g^-\,d\mu
 \]
-である．両辺を移項して $\int_E f\,d\lambda\le \int_E g\,d\lambda$ を得る．
+である．両辺を移項して $\int_X f\,d\mu\le \int_X g\,d\mu$ を得る．
 \end{proof}
 
 \begin{proposition}[定数による評価]\label{prop:integral-bound-by-constants}
-$\lambda(E)<\infty$ とし，$a,b \in \RR$ が
-\[
-a\le f(x)\le b \quad \text{a.e.\ on } E
-\]
-を満たすとする．
-このとき
-\[
-a\,\lambda(E)\le \int_E f\,d\lambda\le b\,\lambda(E)
-\]
-が成り立つ．
+$\mu(X)<\infty$ とし，$a,b \in \RR$ が $a\le f(x)\le b$ a.e.\ on $X$ を満たすとする．
+このとき $a\,\mu(X)\le \int_X f\,d\mu\le b\,\mu(X)$ が成り立つ．
 \end{proposition}
 \begin{proof}
-a.e.\ で
-\[
-a1_E\le f\le b1_E
-\]
-だから，\cref{prop:integral-monotonicity}より
-\[
-\int_E a1_E\,d\lambda\le \int_E f\,d\lambda\le \int_E b1_E\,d\lambda.
-\]
-定数関数の積分
-\[
-\int_E c1_E\,d\lambda=c\,\lambda(E)
-\]
-を用いれば結論を得る．
+a.e.\ で $a1_X\le f\le b1_X$ だから，\cref{prop:integral-monotonicity}より
+$\int_X a1_X\,d\mu\le \int_X f\,d\mu\le \int_X b1_X\,d\mu$ である．
+定数関数の積分 $\int_X c1_X\,d\mu=c\,\mu(X)$ を用いれば結論を得る．
 \end{proof}
 
 \begin{proposition}[絶対値による評価]\label{prop:integral-absolute-value-bound}
-$f$ が $E$ 上可積分ならば
-\[
-\left|\int_E f\,d\lambda\right|
-\le
-\int_E |f|\,d\lambda
-\]
-が成り立つ．
+$f$ が $X$ 上可積分ならば
+$\left|\int_X f\,d\mu\right|\le \int_X |f|\,d\mu$ が成り立つ．
 \end{proposition}
 \begin{proof}
-a.e.\ で
-\[
--|f|\le f\le |f|
-\]
-だから，\cref{prop:integral-monotonicity}より
-\[
--\int_E |f|\,d\lambda
-\le
-\int_E f\,d\lambda
-\le
-\int_E |f|\,d\lambda.
-\]
+a.e.\ で $-|f|\le f\le |f|$ だから，\cref{prop:integral-monotonicity}より
+$-\int_X |f|\,d\mu\le \int_X f\,d\mu\le \int_X |f|\,d\mu$ である．
 したがって絶対値をとればよい．
 \end{proof}
 
 \begin{proposition}[積分が $0$ であることの判定]\label{prop:integral-zero-iff-ae-zero}
-$f$ が $E$ 上可積分であるとする．
+$f$ が $X$ 上可積分であるとする．
 このとき次は同値である．
 \begin{enumerate}
-    \item
-    \[
-    \int_E |f|\,d\lambda=0
-    \]
-    \item
-    \[
-    f=0 \quad \text{a.e.\ on } E
-    \]
+    \item $\int_X |f|\,d\mu=0$
+    \item $f=0$ a.e.\ on $X$
 \end{enumerate}
 \end{proposition}
 \begin{proof}
 \textbf{(2) $\Rightarrow$ (1)}\quad
-$|f|=0$ a.e.\ だから，\cref{prop:integral-ae-invariance}より
-\[
-\int_E |f|\,d\lambda=0.
-\]
+$|f|=0$ a.e.\ だから，\cref{prop:integral-ae-invariance}より $\int_X |f|\,d\mu=0$ である．
 
 \textbf{(1) $\Rightarrow$ (2)}\quad
 $|f|$ は非負可測関数であり，
-\cref{prop:nonnegative-integral-zero-iff-ae-zero}より
-\[
-|f|=0 \quad \text{a.e.\ on } E
-\]
-である．
+\cref{prop:nonnegative-integral-zero-iff-ae-zero}より $|f|=0$ a.e.\ on $X$ である．
 これは $f=0$ a.e.\ と同値である．
 \end{proof}
 
 \begin{proposition}[Chebyshev不等式]\label{prop:chebyshev-inequality}
-$f$ を $E$ 上の可積分関数とし，$\alpha>0$ とする．
-このとき
-\[
-\lambda\bigl(\{x \in E \mid |f(x)|\ge \alpha\}\bigr)
-\le
-\frac{1}{\alpha}\int_E |f|\,d\lambda
-\]
-が成り立つ．
+$f$ を $X$ 上の可積分関数とし，$\alpha>0$ とする．
+このとき $\mu(\{x \in X \mid |f(x)|\ge \alpha\})\le \alpha^{-1}\int_X |f|\,d\mu$ が成り立つ．
 \end{proposition}
 \begin{proof}
-\[
-A:=\{x \in E \mid |f(x)|\ge \alpha\}
-\]
-とおく．
-すると a.e.\ で
-\[
-\alpha 1_A\le |f|
-\]
-が成り立つので，\cref{prop:integral-monotonicity}より
-\[
-\alpha\,\lambda(A)
-=
-\int_E \alpha 1_A\,d\lambda
-\le
-\int_E |f|\,d\lambda.
-\]
+$A:=\{x \in X \mid |f(x)|\ge \alpha\}$ とおく．
+すると a.e.\ で $\alpha 1_A\le |f|$ が成り立つので，\cref{prop:integral-monotonicity}より
+$\alpha\,\mu(A)=\int_X \alpha 1_A\,d\mu\le \int_X |f|\,d\mu$ である．
 両辺を $\alpha$ で割ればよい．
 \end{proof}
 
 \section{線形性}
 
 \begin{proposition}[斉次性]\label{prop:integral-homogeneity}
-$f$ を $E$ 上の可積分関数，$c \in \RR$ とする．
-このとき
-\[
-\int_E cf\,d\lambda
-=
-c\int_E f\,d\lambda
-\]
-が成り立つ．
+$f$ を $X$ 上の可積分関数，$c \in \RR$ とする．
+このとき $\int_X cf\,d\mu=c\int_X f\,d\mu$ が成り立つ．
 \end{proposition}
 \begin{proof}
-まず $c\ge 0$ の場合を示す．
-\[
-f=f^+-f^-
-\]
-だから
-\[
-cf=(cf^+)-(cf^-)
-\]
-であり，$cf^+,cf^-$ は非負可積分である．
+まず $c\ge 0$ の場合を示す．$f=f^+-f^-$ だから $cf=(cf^+)-(cf^-)$ であり，$cf^+,cf^-$ は非負可積分である．
 したがって
-\begin{align*}
-\int_E cf\,d\lambda
-&=
-\int_E cf^+\,d\lambda-\int_E cf^-\,d\lambda \\
-&=
-c\int_E f^+\,d\lambda-c\int_E f^-\,d\lambda \\
-&=
-c\int_E f\,d\lambda.
-\end{align*}
+\[
+\int_X cf\,d\mu
+=\int_X cf^+\,d\mu-\int_X cf^-\,d\mu
+=c\int_X f^+\,d\mu-c\int_X f^-\,d\mu
+=c\int_X f\,d\mu.
+\]
 
 次に $c<0$ とする．
-このとき
-\[
-cf=(-c)(-f)
-\]
-であり，$-c>0$ だから前半の結果を $-f$ に適用して
-\[
-\int_E cf\,d\lambda
-=
-(-c)\int_E (-f)\,d\lambda
-=
-(-c)\left(-\int_E f\,d\lambda\right)
-=
-c\int_E f\,d\lambda
-\]
-を得る．
+このとき $cf=(-c)(-f)$ であり，$-c>0$ だから前半の結果を $-f$ に適用して
+$\int_X cf\,d\mu=(-c)\int_X (-f)\,d\mu=(-c)(-\int_X f\,d\mu)=c\int_X f\,d\mu$ を得る．
 \end{proof}
 
 \begin{proposition}[加法性]\label{prop:integral-additivity}
-$f,g$ を $E$ 上の可積分関数とする．
+$f,g$ を $X$ 上の可積分関数とする．
 このとき $f+g$ も可積分で，
-\[
-\int_E (f+g)\,d\lambda
-=
-\int_E f\,d\lambda+\int_E g\,d\lambda
-\]
-が成り立つ．
+$\int_X (f+g)\,d\mu=\int_X f\,d\mu+\int_X g\,d\mu$ が成り立つ．
 \end{proposition}
 \begin{proof}
-まず
-\[
-|f+g|\le |f|+|g|
-\]
-だから，右辺の可積分性より
+まず $|f+g|\le |f|+|g|$ だから，右辺の可積分性より
 \cref{cor:dominated-integrability}から $f+g$ も可積分である．
 
-次に
-\[
-f=f^+-f^-,
-\qquad
-g=g^+-g^-
-\]
-と書くと
-\[
-f+g=(f^++g^+)-(f^-+g^-)
-\]
-である．
+次に $f=f^+-f^-$，$g=g^+-g^-$ と書くと $f+g=(f^++g^+)-(f^-+g^-)$ である．
 $f^++g^+$ と $f^-+g^-$ は非負可積分であるから，
 \cref{prop:nonnegative-integral-basic,prop:integral-representation-independence}より
-\begin{align*}
-\int_E (f+g)\,d\lambda
-&=
-\int_E (f^++g^+)\,d\lambda-\int_E (f^-+g^-)\,d\lambda \\
-&=
-\left(\int_E f^+\,d\lambda+\int_E g^+\,d\lambda\right)
--\left(\int_E f^-\,d\lambda+\int_E g^-\,d\lambda\right) \\
-&=
-\int_E f\,d\lambda+\int_E g\,d\lambda.
-\end{align*}
+\[
+\int_X (f+g)\,d\mu
+=\int_X (f^++g^+)\,d\mu-\int_X (f^-+g^-)\,d\mu
+\]
+である．
+また $\int_X (f^++g^+)\,d\mu=\int_X f^+\,d\mu+\int_X g^+\,d\mu$ かつ
+$\int_X (f^-+g^-)\,d\mu=\int_X f^-\,d\mu+\int_X g^-\,d\mu$ だから，
+右辺は $\int_X f\,d\mu+\int_X g\,d\mu$ に等しい．
 \end{proof}
 
 \begin{corollary}[有限和]\label{cor:integral-finite-sum}
-$f_1,\dots,f_n$ を $E$ 上の可積分関数とすると
-\[
-\int_E \left(\sum_{k=1}^n f_k\right)\,d\lambda
-=
-\sum_{k=1}^n \int_E f_k\,d\lambda
-\]
-が成り立つ．
+$f_1,\dots,f_n$ を $X$ 上の可積分関数とすると
+$\int_X (\sum_{k=1}^n f_k)\,d\mu=\sum_{k=1}^n \int_X f_k\,d\mu$ が成り立つ．
 \end{corollary}
 \begin{proof}
 \cref{prop:integral-additivity}を繰り返し用いればよい．
@@ -429,52 +210,19 @@ $f_1,\dots,f_n$ を $E$ 上の可積分関数とすると
 
 \section{計算則のまとめ}
 
-\begin{theorem}[Lebesgue積分の基本公式]\label{thm:lebesgue-integral-basic-formulas}
-$E \subset \RR^d$ を可測集合とし，$f,g$ を $E$ 上の可積分関数とする．
+\begin{theorem}[測度空間上の積分の基本公式]\label{thm:lebesgue-integral-basic-formulas}
+$f,g$ を $X$ 上の可積分関数とする．
 このとき次が成り立つ．
 \begin{enumerate}
-    \item $\lambda(E)=0$ なら
-    \[
-    \int_E f\,d\lambda=0
-    \]
-    \item $f=g$ a.e.\ なら
-    \[
-    \int_E f\,d\lambda=\int_E g\,d\lambda
-    \]
-    \item $f\le g$ a.e.\ なら
-    \[
-    \int_E f\,d\lambda\le \int_E g\,d\lambda
-    \]
-    \item 任意の $c \in \RR$ に対して
-    \[
-    \int_E cf\,d\lambda=c\int_E f\,d\lambda
-    \]
-    \item
-    \[
-    \int_E (f+g)\,d\lambda=\int_E f\,d\lambda+\int_E g\,d\lambda
-    \]
-    \item
-    \[
-    \left|\int_E f\,d\lambda\right|\le \int_E |f|\,d\lambda
-    \]
-    \item
-    \[
-    \int_E |f|\,d\lambda=0
-    \iff
-    f=0 \text{ a.e.\ on } E
-    \]
-    \item $A,B \subset E$ が互いに素なら
-    \[
-    \int_{A \sqcup B} f\,d\lambda
-    =
-    \int_A f\,d\lambda+\int_B f\,d\lambda
-    \]
-    \item $\alpha>0$ に対して
-    \[
-    \lambda(\{|f|\ge \alpha\})
-    \le
-    \frac{1}{\alpha}\int_E |f|\,d\lambda
-    \]
+    \item $\mu(X)=0$ なら $\int_X f\,d\mu=0$
+    \item $f=g$ a.e.\ なら $\int_X f\,d\mu=\int_X g\,d\mu$
+    \item $f\le g$ a.e.\ なら $\int_X f\,d\mu\le \int_X g\,d\mu$
+    \item 任意の $c \in \RR$ に対して $\int_X cf\,d\mu=c\int_X f\,d\mu$
+    \item $\int_X (f+g)\,d\mu=\int_X f\,d\mu+\int_X g\,d\mu$
+    \item $\left|\int_X f\,d\mu\right|\le \int_X |f|\,d\mu$
+    \item $\int_X |f|\,d\mu=0 \iff f=0$ a.e.\ on $X$
+    \item $A,B \subset X$ が互いに素な可測集合なら $\int_{A \sqcup B} f\,d\mu=\int_A f\,d\mu+\int_B f\,d\mu$
+    \item $\alpha>0$ に対して $\mu(\{|f|\ge \alpha\})\le \alpha^{-1}\int_X |f|\,d\mu$
 \end{enumerate}
 \end{theorem}
 \begin{proof}
@@ -485,57 +233,25 @@ $E \subset \RR^d$ を可測集合とし，$f,g$ を $E$ 上の可積分関数と
 
 \begin{remark}
 この章で得た公式は，今後の章でほぼ毎回使う．
-特に
-\[
-f=g \text{ a.e.}
-\]
-なら積分値を区別しなくてよいこと，
-および
-\[
-\left|\int f\right|\le \int |f|
-\]
-という評価は，
+特に $f=g$ a.e.\ なら積分値を区別しなくてよいこと，および $\left|\int f\right|\le \int |f|$ という評価は，
 収束定理を運用する際の基本になる．
 \end{remark}
 
 \begin{example}
-$\lambda(E)<\infty$ とし，
-\[
-|f(x)|\le M \quad \text{a.e.\ on } E
-\]
-を満たすとする．
-このとき $f$ は可積分で，
-\[
-\left|\int_E f\,d\lambda\right|\le M\,\lambda(E)
-\]
-が成り立つ．
+$\mu(X)<\infty$ とし，
+$|f(x)|\le M$ a.e.\ on $X$ を満たすとする．
+このとき $f$ は可積分で，$\left|\int_X f\,d\mu\right|\le M\,\mu(X)$ が成り立つ．
 \end{example}
 \begin{proof}
-\[
-|f|\le M1_E
-\]
-だから
-\[
-\int_E |f|\,d\lambda\le M\,\lambda(E)<\infty.
-\]
+$|f|\le M1_X$ だから $\int_X |f|\,d\mu\le M\,\mu(X)<\infty$ である．
 よって $f$ は可積分である．
 さらに\cref{prop:integral-absolute-value-bound}より
-\[
-\left|\int_E f\,d\lambda\right|
-\le
-\int_E |f|\,d\lambda
-\le
-M\,\lambda(E).
-\]
+$\left|\int_X f\,d\mu\right|\le \int_X |f|\,d\mu\le M\,\mu(X)$ である．
 \end{proof}
 
 \section{解釈とまとめ}
 
-本章で示した性質により，Lebesgue積分は
-\[
-\text{順序を保ち，線形で，零集合を無視できる}
-\]
-ことが分かった．
+本章で示した性質により，測度空間上の積分は順序を保ち，線形で，零集合を無視できることが分かった．
 これはまさに，確率論や関数解析で積分を計算道具として使うために必要な性質である．
 
 特に重要なのは次の3点である．
@@ -545,8 +261,4 @@ M\,\lambda(E).
     \item 集合の大きさと積分の大きさをChebyshev不等式で結びつけられる
 \end{enumerate}
 
-次章では，これらの性質を基礎にして
-\[
-\lim \quad \text{と} \quad \int
-\]
-の順序交換を正当化する収束定理を学ぶ．
+次章では，これらの性質を基礎にして $\lim$ と $\int$ の順序交換を正当化する収束定理を学ぶ．
