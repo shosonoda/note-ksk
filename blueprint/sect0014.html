@@ -12,9 +12,8 @@
 <meta name="generator" content="plasTeX" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Lebesgue内測度</title>
-<link rel="next" href="sect0005.html" title="Lebesgue測度" />
-<link rel="prev" href="sect0003.html" title="Lebesgue外測度" />
+<title>線形作用素</title>
+<link rel="prev" href="sect0013.html" title="Hilbert空間" />
 <link rel="up" href="index.html" title="Lecture note on KSK" />
 <link rel="stylesheet" href="styles/theme-white.css" />
 <link rel="stylesheet" href="styles/amsthm.css" />
@@ -156,10 +155,10 @@
 
   </ul>
  </li>
-<li class=" active current">
+<li class="">
   <a href="sect0004.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue内測度</span></a>
-  <span class="expand-toc">▼</span>
-  <ul class="sub-toc-1 active">
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
      <li class="">
   <a href="sect0004.html#a0000000161"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
  </li>
@@ -483,10 +482,10 @@
 
   </ul>
  </li>
-<li class="">
+<li class=" active current">
   <a href="sect0014.html"><span class="toc_ref"></span> <span class="toc_entry">線形作用素</span></a>
-  <span class="expand-toc">▶</span>
-  <ul class="sub-toc-1">
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
      <li class="">
   <a href="sect0014.html#a0000000241"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
  </li>
@@ -520,130 +519,141 @@
 
 
 <div class="main-text">
-<h1 id="a0000000005"> Lebesgue内測度</h1>
-<h4 id="a0000000161">本章の目標</h4>
-<p> Lebesgue流の可測性 </p>
-<div class="displaymath" id="a0000000505">
-  \[  \text{外測度}=\text{内測度}  \]
-</div>
-<p> を定義するため， Lebesgue内測度を導入する． ただし，内測度は外測度や位相の言葉を用いて定義される副次的な量であり， Carathéodoryが整理した抽象理論では外測度が主役となることを後に説明する． </p>
-<h1 id="a0000000162"> 定義</h1>
-<div class="definition_thmwrapper theorem-style-definition" id="a0000000506">
+<h1 id="a0000000015"> 線形作用素</h1>
+<h4 id="a0000000241">本章の目標</h4>
+<p> Banach空間やHilbert空間を用意しただけでは， まだ「関数を関数へ送る操作」を体系的には扱えない． 関数解析では \(\text{積分}\)，\(\text{微分}\)，\(\text{平均}\)，\(\text{Fourier係数をとる操作}\) のような写像そのものを対象にする． その基本概念が線形作用素である． </p>
+<p>本章では </p>
+<ol class="enumerate">
+  <li><p>線形作用素と点列連続性の定義 </p>
+</li>
+  <li><p>線形作用素では点列連続性とLipschitz連続性が同値であること </p>
+</li>
+  <li><p>有界線形作用素（BLO）の定義と作用素ノルム </p>
+</li>
+  <li><p>\(\mathcal B(X,Y)\) がBanach空間になること </p>
+</li>
+  <li><p>積分作用素の例と，微分作用素が非有界になる例 </p>
+</li>
+</ol>
+<p> を説明する． </p>
+<h1 id="a0000000242"> 動機づけ</h1>
+<p>関数解析で重要なのは， 関数空間の中の点としての関数だけではない． 関数を別の関数へ，あるいは実数へ送る写像も同じくらい重要である． </p>
+<p>例えば \(f\longmapsto \int _0^1 f(x)\, dx\) は関数を1つの数へ送る． また \(f\longmapsto \left(x\mapsto \int _0^x f(t)\, dt\right)\) は関数を別の関数へ送る． さらに \(f\longmapsto f'\) という微分作用素もある． </p>
+<p>これらはすべて線形であるが， 極限に対する振る舞いは同じではない． 積分作用素は安定であるのに対し， 微分作用素はノルムの取り方によっては不安定になる． その違いを正確に言い表すのが「有界性」である． </p>
+<h1 id="a0000000243"> 線形作用素と連続性</h1>
+<p>以後，\(X,Y\) をノルム空間とする． </p>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000001142">
   <div class="definition_thmheading">
     <span class="definition_thmcaption">
     Definition
     </span>
     <span class="definition_thmlabel">.1</span>
-    <span class="definition_thmtitle">Lebesgue内測度</span>
+    <span class="definition_thmtitle">線形作用素</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0004.html#a0000000506">#</a>
+    <a class="icon proof" href="sect0014.html#a0000001142">#</a>
     
     
     
         </div>
   </div>
   <div class="definition_thmcontent">
-  <p> 集合 \(A \subset \mathbb R^d\) に対し，Lebesgue内測度 \(\lambda _*(A)\) を </p>
-<div class="displaymath" id="a0000000507">
-  \[  \lambda _*(A) := \sup \{ \lambda ^*(K) \mid K \subset A,\  K \text{ はコンパクト}\}   \]
-</div>
-<p> で定める． </p>
+  <p> 写像 \(T:X\to Y\) が線形作用素であるとは，任意の \(x,y\in X\) と任意の \(a,b\in \mathbb R\) に対して \(T(ax+by)=aT(x)+bT(y)\) が成り立つことをいう． </p>
 
   </div>
 </div>
-<div class="remark_thmwrapper theorem-style-remark" id="a0000000508">
-  <div class="remark_thmheading">
-    <span class="remark_thmcaption">
-    Remark
+<div class="definition_thmwrapper theorem-style-definition" id="a0000001143">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
     </span>
-    <span class="remark_thmlabel">15</span>
+    <span class="definition_thmlabel">.2</span>
+    <span class="definition_thmtitle">点列連続</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0004.html#a0000000508">#</a>
+    <a class="icon proof" href="sect0014.html#a0000001143">#</a>
     
     
     
         </div>
   </div>
-  <div class="remark_thmcontent">
-  <p>この定義は，Lebesgue外測度や，\(\mathbb R^d\) のコンパクト集合という位相構造を用いて記述されている． 第3章では，Lebesgue外測度が開被覆の下限として言い換えられることを見た．位相論において，開集合の対照的な概念は（閉集合ではなく）コンパクト集合であり，この観点で内測度は外測度の対照的な量である． </p>
+  <div class="definition_thmcontent">
+  <p> 線形作用素 \(T:X\to Y\) が点 \(x_0\in X\) で点列連続であるとは， 任意の点列 \(\{ x_n\} _{n=1}^{\infty }\subset X\) に対して \(x_n\to x_0\) が \(X\) で成り立つならば \(T(x_n)\to T(x_0)\) が \(Y\) で成り立つことをいう． </p>
 
   </div>
 </div>
-<div class="remark_thmwrapper theorem-style-remark" id="a0000000509">
-  <div class="remark_thmheading">
-    <span class="remark_thmcaption">
-    Remark
+<div class="definition_thmwrapper theorem-style-definition" id="a0000001144">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
     </span>
-    <span class="remark_thmlabel">16</span>
-    <span class="remark_thmtitle">区間による内側近似がうまくいかない理由</span>
+    <span class="definition_thmlabel">.3</span>
+    <span class="definition_thmtitle">Lipschitz連続</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0004.html#a0000000509">#</a>
+    <a class="icon proof" href="sect0014.html#a0000001144">#</a>
     
     
     
         </div>
   </div>
-  <div class="remark_thmcontent">
-  <p> Jordan内測度との類推から，内測度を </p>
-<div class="displaymath" id="a0000000510">
-  \[  \gamma (A) := \sup \left\{  \sum _{i=1}^\infty |R_i| \; \middle |\;  \bigsqcup _{i=1}^\infty R_i \subset A,\  R_i \text{ は互いに素な左半開区間}\right\}   \]
+  <div class="definition_thmcontent">
+  <p> 写像 \(T:X\to Y\) がLipschitz連続であるとは， ある定数 \(C\ge 0\) が存在して </p>
+<div class="displaymath" id="a0000001145">
+  \[  \| T(x)-T(y)\| _Y\le C\| x-y\| _X \qquad (x,y\in X)  \]
 </div>
-<p> のように定めても，あまりうまくいかない． </p>
-<p>まず，同じ部分を重複して測ると上限が発散するため，内側からの近似では重なりを許す被覆（covering）ではなく充填（packing）を用いる必要がある． </p>
-<p>しかし，左半開区間だけでは \(A\) の内部しか見えない． 非退化な左半開区間 \(R_i\) は空でない開集合を含むので，\(R_i \subset A\) なら </p>
-<div class="displaymath" id="a0000000511">
-  \[  \operatorname{int}R_i \subset \operatorname{int}A  \]
-</div>
-<p> である． しかも境界は測度 \(0\) だから，\(|R_i|=|\operatorname{int}R_i|\) であり， この方法で得られる量は高々 \(\lambda ^*(\operatorname{int}A)\) である． したがって，\(\operatorname{int}A=\emptyset \) ならこの方法は常に \(0\) しか与えない． </p>
-<p>ところが，fat Cantor 集合（Smith–Volterra–Cantor 集合）のように， 内部が空でありながら正のLebesgue測度をもつコンパクト集合が存在するので， 区間充填ではこのような集合を測れない． このような背景を踏まえ，Lebesgue内測度では区間ではなく，コンパクト集合による充填を用いる． </p>
+<p> が成り立つことをいう． </p>
 
   </div>
 </div>
-<h1 id="a0000000163"> 基本性質</h1>
-<div class="proposition_thmwrapper theorem-style-plain" id="prop:lebesgue-inner-basic">
-  <div class="proposition_thmheading">
-    <span class="proposition_thmcaption">
-    Proposition
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000001146">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
     </span>
-    <span class="proposition_thmlabel">.2</span>
+    <span class="theorem_thmlabel">.4</span>
+    <span class="theorem_thmtitle">線形作用素の連続性の判定</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0004.html#prop:lebesgue-inner-basic">#</a>
+    <a class="icon proof" href="sect0014.html#a0000001146">#</a>
     
-    <a class="icon proof" href="sect0004.html#a0000000512"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0014.html#a0000001147"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
     
         </div>
   </div>
-  <div class="proposition_thmcontent">
-  <p> 任意の \(A,B \subset \mathbb R^d\) に対して次が成り立つ． </p>
+  <div class="theorem_thmcontent">
+  <p> 線形作用素 \(T:X\to Y\) に対して，次は同値である． </p>
 <ol class="enumerate">
-  <li><p>\(0 \le \lambda _*(A) \le \lambda ^*(A)\) </p>
+  <li><p>\(T\) は \(0\) で点列連続である </p>
 </li>
-  <li><p>\(A \subset B\) ならば \(\lambda _*(A) \le \lambda _*(B)\) </p>
+  <li><p>ある定数 \(C\ge 0\) が存在して </p>
+<div class="displaymath" id="a0000001148">
+  \[  \| T(x)\| _Y\le C\| x\| _X \qquad (x\in X)  \]
+</div>
+<p> が成り立つ </p>
+</li>
+  <li><p>\(T\) はLipschitz連続である </p>
 </li>
 </ol>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000512">
+<div class="proof_wrapper" id="a0000001147">
   <div class="proof_heading">
     <span class="proof_caption">
     
@@ -651,84 +661,30 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <ol class="enumerate">
-  <li><p>コンパクト集合 \(K \subset A\) に対して，外測度の単調性より </p>
-<div class="displaymath" id="a0000000513">
-  \[  \lambda ^*(K) \le \lambda ^*(A)  \]
+  <p><b class="bfseries">(2) \(\Rightarrow \) (3)</b>&#8195;任意の \(x,y\in X\) に対して，線形性より \(T(x)-T(y)=T(x-y)\) だから </p>
+<div class="displaymath" id="a0000001149">
+  \[  \| T(x)-T(y)\| _Y = \| T(x-y)\| _Y \le C\| x-y\| _X.  \]
 </div>
-<p> である． 左辺について上限を取れば </p>
-<div class="displaymath" id="a0000000514">
-  \[  \lambda _*(A) \le \lambda ^*(A)  \]
-</div>
-<p> を得る． また外測度は常に非負なので，その上限である \(\lambda _*(A)\) も非負である． </p>
-</li>
-  <li><p>\(A \subset B\) とする． \(K \subset A\) なる任意のコンパクト集合は，そのまま \(K \subset B\) も満たす． したがって，\(A\) に対して取る上限は \(B\) に対して取る上限以下である． </p>
-</li>
-</ol>
+<p> したがって \(T\) はLipschitz連続である． </p>
+<p><b class="bfseries">(3) \(\Rightarrow \) (1)</b>&#8195;\(x_n\to 0\) とする． Lipschitz連続性より \(\| T(x_n)-T(0)\| _Y\le C\| x_n\| _X\to 0\) である． 線形性から \(T(0)=0\) だから \(T(x_n)\to 0\) である． よって \(T\) は \(0\) で点列連続である． </p>
+<p><b class="bfseries">(1) \(\Rightarrow \) (2)</b>&#8195;背理法で示す． もし (2) が成り立たないなら， 任意の \(n\in \mathbb N\) に対してある \(x_n\in X\) が存在して \(\| T(x_n)\| _Y{\gt}n\| x_n\| _X\) となる． このとき \(x_n\ne 0\) である． そこで \(y_n:=x_n/(n\| x_n\| _X)\) とおくと \(\| y_n\| _X=1/n\to 0\) である． 一方， \(\| T(y_n)\| _Y=\| T(x_n)\| _Y/(n\| x_n\| _X){\gt}1\) だから \(T(y_n)\not\to 0\) である． これは \(0\) での点列連続性に反する． したがって (2) が成り立つ． </p>
 
   </div>
 </div>
-<div class="proposition_thmwrapper theorem-style-plain" id="prop:compact-inner-outer-equal">
-  <div class="proposition_thmheading">
-    <span class="proposition_thmcaption">
-    Proposition
-    </span>
-    <span class="proposition_thmlabel">.3</span>
-    <span class="proposition_thmtitle">コンパクト集合では内外が一致する</span>
-    <div class="thm_header_extras">
-
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0004.html#prop:compact-inner-outer-equal">#</a>
-    
-    <a class="icon proof" href="sect0004.html#a0000000515"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    
-        </div>
-  </div>
-  <div class="proposition_thmcontent">
-  <p>  コンパクト集合 \(K \subset \mathbb R^d\) に対して </p>
-<div class="displaymath" id="a0000000516">
-  \[  \lambda _*(K)=\lambda ^*(K)  \]
-</div>
-<p> が成り立つ． </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000515">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>\(K\) 自身がコンパクトだから， 内測度の上限を取る集合の中に \(K\) そのものが含まれている． したがって </p>
-<div class="displaymath" id="a0000000517">
-  \[  \lambda _*(K) \ge \lambda ^*(K)  \]
-</div>
-<p> である． 逆向きの不等式は前命題から従う． </p>
-
-  </div>
-</div>
-<div class="corollary_thmwrapper theorem-style-plain" id="a0000000518">
+<div class="corollary_thmwrapper theorem-style-plain" id="a0000001150">
   <div class="corollary_thmheading">
     <span class="corollary_thmcaption">
     Corollary
     </span>
-    <span class="corollary_thmlabel">.4</span>
-    <span class="corollary_thmtitle">外測度零集合の内測度</span>
+    <span class="corollary_thmlabel">.5</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0004.html#a0000000518">#</a>
+    <a class="icon proof" href="sect0014.html#a0000001150">#</a>
     
-    <a class="icon proof" href="sect0004.html#a0000000519"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0014.html#a0000001151"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -736,15 +692,11 @@
         </div>
   </div>
   <div class="corollary_thmcontent">
-  <p> \(\lambda ^*(A)=0\) ならば </p>
-<div class="displaymath" id="a0000000520">
-  \[  \lambda _*(A)=0  \]
-</div>
-<p> である． </p>
+  <p>線形作用素 \(T:X\to Y\) が \(0\) で点列連続ならば， 任意の点 \(x_0\in X\) で点列連続である． </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000519">
+<div class="proof_wrapper" id="a0000001151">
   <div class="proof_heading">
     <span class="proof_caption">
     
@@ -752,29 +704,323 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>基本性質の (1) より </p>
-<div class="displaymath" id="a0000000521">
-  \[  0 \le \lambda _*(A) \le \lambda ^*(A)=0  \]
+  <p>前定理より，ある \(C\ge 0\) が存在して \(\| T(x)\| _Y\le C\| x\| _X\) \((x\in X)\) が成り立つ． \(x_n\to x_0\) とすると </p>
+<div class="displaymath" id="a0000001152">
+  \[  \| T(x_n)-T(x_0)\| _Y = \| T(x_n-x_0)\| _Y \le C\| x_n-x_0\| _X\to 0  \]
 </div>
-<p> だからである． </p>
+<p> である． したがって \(T\) は \(x_0\) で点列連続である． </p>
 
   </div>
 </div>
-<h1 id="a0000000164"> 具体例</h1>
-<div class="example_thmwrapper theorem-style-plain" id="a0000000522">
-  <div class="example_thmheading">
-    <span class="example_thmcaption">
-    Example
+<div class="definition_thmwrapper theorem-style-definition" id="a0000001153">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
     </span>
-    <span class="example_thmlabel">.5</span>
+    <span class="definition_thmlabel">.6</span>
+    <span class="definition_thmtitle">有界線形作用素</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0004.html#a0000000522">#</a>
+    <a class="icon proof" href="sect0014.html#a0000001153">#</a>
     
-    <a class="icon proof" href="sect0004.html#a0000000523"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 前定理の条件を満たす線形作用素を有界線形作用素 （bounded linear operator, BLO）という． </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000001154">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">58</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0014.html#a0000001154">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>線形作用素では， \(\text{点列連続} \iff \text{Lipschitz連続} \iff \text{有界}\) である． これは一般の非線形写像では成り立たない． 線形性が入ることで，連続性の判定が非常に簡単になる． </p>
+
+  </div>
+</div>
+<h1 id="a0000000244"> 作用素ノルム</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000001155">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.7</span>
+    <span class="definition_thmtitle">作用素ノルム</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0014.html#a0000001155">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 有界線形作用素 \(T:X\to Y\) に対して </p>
+<div class="displaymath" id="a0000001156">
+  \[  \| T\|  := \sup \{ \| T(x)\| _Y \mid x\in X,\  \| x\| _X\le 1\}   \]
+</div>
+<p> を \(T\) の作用素ノルムという． </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="a0000001157">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.8</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0014.html#a0000001157">#</a>
+    
+    <a class="icon proof" href="sect0014.html#a0000001158"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p>有界線形作用素 \(T:X\to Y\) に対して次が成り立つ． </p>
+<ol class="enumerate">
+  <li><p>任意の \(x\in X\) に対して </p>
+<div class="displaymath" id="a0000001159">
+  \[  \| T(x)\| _Y\le \| T\| \, \| x\| _X  \]
+</div>
+</li>
+  <li><p>もしある \(C\ge 0\) が存在して </p>
+<div class="displaymath" id="a0000001160">
+  \[  \| T(x)\| _Y\le C\| x\| _X \qquad (x\in X)  \]
+</div>
+<p> ならば </p>
+<div class="displaymath" id="a0000001161">
+  \[  \| T\| \le C  \]
+</div>
+<p> である </p>
+</li>
+</ol>
+<p> 特に \(\| T\| \) は上の不等式を満たす最小の定数である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000001158">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p><b class="bfseries">(1)</b>&#8195;\(x=0\) なら自明である． \(x\ne 0\) のとき \(u:=x/\| x\| _X\) とおくと \(\| u\| _X=1\) だから，作用素ノルムの定義より \(\| T(u)\| _Y\le \| T\| \) である． したがって </p>
+<div class="displaymath" id="a0000001162">
+  \[  \| T(x)\| _Y = \| x\| _X\| T(u)\| _Y \le \| T\| \, \| x\| _X.  \]
+</div>
+<p><b class="bfseries">(2)</b>&#8195;\(\| x\| _X\le 1\) なら \(\| T(x)\| _Y\le C\| x\| _X\le C\) である． したがって単位球上で上限をとれば \(\| T\| \le C\) を得る． </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000001163">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.9</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0014.html#a0000001163">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p>有界線形作用素全体を \(\mathcal B(X,Y)\) と書く． </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="a0000001164">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.10</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0014.html#a0000001164">#</a>
+    
+    <a class="icon proof" href="sect0014.html#a0000001165"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p>作用素ノルムは \(\mathcal B(X,Y)\) 上のノルムである． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000001165">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>まず \(\| T\| \ge 0\) であり，\(\| T\| =0\) なら前命題より任意の \(x\in X\) に対して \(\| T(x)\| _Y\le \| T\| \, \| x\| _X=0\) だから \(T(x)=0\) である． したがって \(T=0\) である． 逆向きは明らかである． </p>
+<p>次に \(a\in \mathbb R\) に対して </p>
+<div class="displaymath" id="a0000001166">
+  \[  \| aT\|  = \sup _{\| x\| _X\le 1}\| aT(x)\| _Y = |a|\sup _{\| x\| _X\le 1}\| T(x)\| _Y = |a|\, \| T\|   \]
+</div>
+<p> である． </p>
+<p>最後に \(S,T\in \mathcal B(X,Y)\) に対し，任意の \(\| x\| _X\le 1\) について </p>
+<div class="displaymath" id="a0000001167">
+  \[  \| (S+T)(x)\| _Y \le \| S(x)\| _Y+\| T(x)\| _Y \le \| S\| +\| T\|   \]
+</div>
+<p> である． 上限をとれば \(\| S+T\| \le \| S\| +\| T\| \) を得る． したがって作用素ノルムはノルムである． </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="a0000001168">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.11</span>
+    <span class="proposition_thmtitle">合成に関する評価</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0014.html#a0000001168">#</a>
+    
+    <a class="icon proof" href="sect0014.html#a0000001169"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \(X,Y,Z\) をノルム空間とし， \(T\in \mathcal B(X,Y)\)， \(S\in \mathcal B(Y,Z)\) とする． このとき \(S\circ T\in \mathcal B(X,Z)\) であり， </p>
+<div class="displaymath" id="a0000001170">
+  \[  \| S\circ T\| \le \| S\| \, \| T\|   \]
+</div>
+<p> が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000001169">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>任意の \(x\in X\) に対して </p>
+<div class="displaymath" id="a0000001171">
+  \[  \| (S\circ T)(x)\| _Z \le \| S\| \, \| T(x)\| _Y \le \| S\| \, \| T\| \, \| x\| _X  \]
+</div>
+<p> である． したがって \(S\circ T\) は有界線形であり， 前命題より \(\| S\circ T\| \le \| S\| \, \| T\| \) を得る． </p>
+
+  </div>
+</div>
+<h1 id="a0000000245"> \(\mathcal B(X,Y)\) の完備性</h1>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000001172">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">.12</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0014.html#a0000001172">#</a>
+    
+    <a class="icon proof" href="sect0014.html#a0000001173"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>\(Y\) がBanach空間ならば \(\mathcal B(X,Y)\) は作用素ノルムに関してBanach空間である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000001173">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(\{ T_n\} _{n=1}^{\infty }\) を \(\mathcal B(X,Y)\) のCauchy列とする． すなわち任意の \(\varepsilon {\gt}0\) に対して，ある \(N\) が存在して \(m,n\ge N \implies \| T_n-T_m\| {\lt}\varepsilon \) である． </p>
+<p>まず各 \(x\in X\) について \(\{ T_n(x)\} \) が \(Y\) でCauchy列になることを示す． 実際， </p>
+<div class="displaymath" id="a0000001174">
+  \[  \| T_n(x)-T_m(x)\| _Y \le \| T_n-T_m\| \, \| x\| _X  \]
+</div>
+<p> だからである． \(Y\) はBanach空間なので，極限 \(T(x):=\lim _{n\to \infty }T_n(x)\) が存在する． こうして写像 \(T:X\to Y\) が定まる． </p>
+<p>次に \(T\) が線形であることを示す． \(x,y\in X\)，\(a,b\in \mathbb R\) に対して \(T_n(ax+by)=aT_n(x)+bT_n(y)\) であり，\(n\to \infty \) とすれば \(T(ax+by)=aT(x)+bT(y)\) を得る． したがって \(T\) は線形である． </p>
+<p>さらに \(T\) が有界であることを示す． \(\{ T_n\} \) はCauchy列だから，ある \(N_0\) が存在して \(n,m\ge N_0 \implies \| T_n-T_m\| \le 1\) である． 特に \(n\ge N_0\) とすると \(\| T_n\| \le \| T_{N_0}\| +\| T_n-T_{N_0}\| \le \| T_{N_0}\| +1\) である． したがって \(M:=\max \{ \| T_1\| ,\dots ,\| T_{N_0-1}\| ,\| T_{N_0}\| +1\} \) とおけば， すべての \(n\) とすべての \(x\in X\) に対して \(\| T_n(x)\| _Y\le M\| x\| _X\) が成り立つ． \(n\to \infty \) とすれば \(\| T(x)\| _Y\le M\| x\| _X\) を得る． よって \(T\in \mathcal B(X,Y)\) である． </p>
+<p>最後に \(T_n\to T\) が作用素ノルムで成り立つことを示す． \(\varepsilon {\gt}0\) を与え，上のCauchy条件を満たす \(N\) を取る． \(n\ge N\) とし，\(\| x\| _X\le 1\) を満たす任意の \(x\) を取る． すると任意の \(m\ge N\) に対して \(\| (T_n-T_m)(x)\| _Y\le \| T_n-T_m\| {\lt}\varepsilon \) である． \(m\to \infty \) とすると \(\| (T_n-T)(x)\| _Y\le \varepsilon \) を得る． これは \(\| x\| _X\le 1\) の任意の \(x\) に対して成り立つから \(\| T_n-T\| \le \varepsilon \) \((n\ge N)\) である． したがって \(\| T_n-T\| \to 0\) である． よって \(\mathcal B(X,Y)\) は完備である． </p>
+
+  </div>
+</div>
+<h1 id="a0000000246"> 例</h1>
+<div class="example_thmwrapper theorem-style-plain" id="a0000001175">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
+    </span>
+    <span class="example_thmlabel">.13</span>
+    <span class="example_thmtitle">積分型線形汎関数</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0014.html#a0000001175">#</a>
+    
+    <a class="icon proof" href="sect0014.html#a0000001176"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -782,26 +1028,11 @@
         </div>
   </div>
   <div class="example_thmcontent">
-  <ol class="enumerate">
-  <li><p>任意のコンパクト集合では内測度と外測度が一致する </p>
-</li>
-  <li><p>任意の可算集合 \(A\) に対して </p>
-<div class="displaymath" id="a0000000524">
-  \[  \lambda _*(A)=0  \]
-</div>
-<p> である </p>
-</li>
-  <li><p>特に </p>
-<div class="displaymath" id="a0000000525">
-  \[  \mathbb Q\cap [0,1]  \]
-</div>
-<p> は内測度 \(0\) をもつ </p>
-</li>
-</ol>
+  <p> \(X=C([0,1])\) とし， \(I(f):=\int _0^1 f(x)\, dx\) \((f\in C([0,1]))\) と定める． すると \(I:C([0,1])\to \mathbb R\) は有界線形作用素であり，\(\| I\| =1\) である． </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000523">
+<div class="proof_wrapper" id="a0000001176">
   <div class="proof_heading">
     <span class="proof_caption">
     
@@ -809,56 +1040,41 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <ol class="enumerate">
-  <li><p>直前の命題で示した． </p>
-</li>
-  <li><p>第3章で可算集合の外測度は \(0\) であることを示したから， 直前の系より </p>
-<div class="displaymath" id="a0000000526">
-  \[  \lambda _*(A)=0  \]
+  <p>線形性は積分の線形性から従う． また任意の \(f\in C([0,1])\) に対して </p>
+<div class="displaymath" id="a0000001177">
+  \[  |I(f)| = \left|\int _0^1 f(x)\, dx\right| \le \int _0^1 |f(x)|\, dx \le \| f\| _\infty  \]
 </div>
-<p> である． </p>
-</li>
-  <li><p>(2) を </p>
-<div class="displaymath" id="a0000000527">
-  \[  A=\mathbb Q\cap [0,1]  \]
-</div>
-<p> に適用すればよい． </p>
-</li>
-</ol>
+<p> だから \(\| I\| \le 1\) である． 一方，定数関数 \(f\equiv 1\) に対して \(\| f\| _\infty =1\)，\(I(f)=1\) であるから \(\| I\| \ge 1\) である． したがって \(\| I\| =1\) である． </p>
 
   </div>
 </div>
-<h1 id="a0000000165"> Jordan測度との関係</h1>
-<div class="theorem_thmwrapper theorem-style-plain" id="thm:jordan-inner-lebesgue-inner">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
+<div class="example_thmwrapper theorem-style-plain" id="a0000001178">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
     </span>
-    <span class="theorem_thmlabel">.6</span>
+    <span class="example_thmlabel">.14</span>
+    <span class="example_thmtitle">積分作用素</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0004.html#thm:jordan-inner-lebesgue-inner">#</a>
+    <a class="icon proof" href="sect0014.html#a0000001178">#</a>
     
-    <a class="icon proof" href="sect0004.html#a0000000528"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0014.html#a0000001179"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
     
         </div>
   </div>
-  <div class="theorem_thmcontent">
-  <p> 集合 \(A \subset \mathbb R^d\) に対し，</p>
-<div class="displaymath" id="a0000000529">
-  \[  m_{J,*}(A) \le \lambda _*(A)  \]
-</div>
-<p> である． </p>
+  <div class="example_thmcontent">
+  <p> \(X=C([0,1])\) とし， \((Tf)(x):=\int _0^x f(t)\, dt\) \((0\le x\le 1)\) と定める． すると \(T:C([0,1])\to C([0,1])\) は有界線形作用素であり，\(\| T\| =1\) である． </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000528">
+<div class="proof_wrapper" id="a0000001179">
   <div class="proof_heading">
     <span class="proof_caption">
     
@@ -866,73 +1082,48 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>\(E\subset A\) を満たす基本集合 \(E\) を任意に取る． \(E=\emptyset \) のときは \(m_J(E)=0\le \lambda _*(A)\) だからよい． 以下では \(E\neq \emptyset \) とする． このとき </p>
-<div class="displaymath" id="a0000000530">
-  \[  E=\bigsqcup _{j=1}^{N}Q_j  \]
+  <p>まず線形性は積分の線形性から従う． </p>
+<p>次に \(Tf\) が連続であることを示す． \(x,y\in [0,1]\) とし，\(x{\lt}y\) とすると \(Tf(y)-Tf(x)=\int _x^y f(t)\, dt\) だから </p>
+<div class="displaymath" id="a0000001180">
+  \[  |Tf(y)-Tf(x)| \le \int _x^y |f(t)|\, dt \le \| f\| _\infty |y-x|.  \]
 </div>
-<p> と互いに素な有界区間の有限合併に書ける． 任意の \(\varepsilon {\gt}0\) に対し，各 \(Q_j\) の端点を少し内側へ動かせば， コンパクト区間 \(C_j\subset Q_j\) で </p>
-<div class="displaymath" id="a0000000531">
-  \[  |C_j|{\gt}|Q_j|-\frac{\varepsilon }{N}  \]
+<p> よって \(Tf\) は連続である． </p>
+<p>さらに任意の \(x\in [0,1]\) に対して </p>
+<div class="displaymath" id="a0000001181">
+  \[  |Tf(x)| \le \int _0^x |f(t)|\, dt \le \| f\| _\infty x \le \| f\| _\infty  \]
 </div>
-<p> を満たすものが取れる．ただし \(|Q_j|=0\) の場合は \(C_j=\emptyset \) とすればよい． </p>
-<p>そこで </p>
-<div class="displaymath" id="a0000000532">
-  \[  K:=\bigcup _{j=1}^{N}C_j  \]
-</div>
-<p> とおくと，\(K\) はコンパクト集合であり，\(K\subset E\subset A\) である． また \(Q_j\) たちは互いに素なので，\(C_j\) たちも互いに素である． したがって \(K\) はJordan可測であり，第3章で示した Jordan測度とLebesgue外測度の一致より </p>
-<div class="displaymath" id="a0000000533">
-  \[  \lambda ^*(K)=m_J(K)=\sum _{j=1}^{N}|C_j|.  \]
-</div>
-<p> よって </p>
-<div class="displaymath" id="a0000000534">
-  \[  \lambda _*(A) \ge \lambda ^*(K) =\sum _{j=1}^{N}|C_j| {\gt} \sum _{j=1}^{N}|Q_j|-\varepsilon =m_J(E)-\varepsilon .  \]
-</div>
-<p> \(\varepsilon {\gt}0\) は任意なので </p>
-<div class="displaymath" id="a0000000535">
-  \[  m_J(E)\le \lambda _*(A)  \]
-</div>
-<p> である． </p>
-<p>最後に，\(E\subset A\) を満たす基本集合全体について上限を取ると </p>
-<div class="displaymath" id="a0000000536">
-  \[  m_{J,*}(A)\le \lambda _*(A)  \]
-</div>
-<p> を得る． </p>
+<p> であるから \(\| Tf\| _\infty \le \| f\| _\infty \) である． したがって \(T\) は有界線形作用素であり \(\| T\| \le 1\) である． </p>
+<p>一方，\(f\equiv 1\) とすると \((Tf)(x)=x\) だから \(\| Tf\| _\infty =1=\| f\| _\infty \) である． したがって \(\| T\| =1\) を得る． </p>
 
   </div>
 </div>
-<h1 id="a0000000166"> 同値な定義</h1>
-<p>有界区間 \(Q\) の中では，内測度は補集合の外測度で表せる． この形は次章で可測性を判定するときに最も使いやすい． </p>
-<div class="theorem_thmwrapper theorem-style-plain" id="cor:inner-measure-via-interval">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
+<div class="example_thmwrapper theorem-style-plain" id="a0000001182">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
     </span>
-    <span class="theorem_thmlabel">.7</span>
-    <span class="theorem_thmtitle">区間を用いた内測度表示</span>
+    <span class="example_thmlabel">.15</span>
+    <span class="example_thmtitle">非有界な微分作用素</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0004.html#cor:inner-measure-via-interval">#</a>
+    <a class="icon proof" href="sect0014.html#a0000001182">#</a>
     
-    <a class="icon proof" href="sect0004.html#a0000000537"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0014.html#a0000001183"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
     
         </div>
   </div>
-  <div class="theorem_thmcontent">
-  <p> 有界区間 \(Q\subset \mathbb R^d\) と \(A\subset Q\) に対して </p>
-<div class="displaymath" id="a0000000538">
-  \[  \lambda _*(A) = |Q|-\lambda ^*(Q\setminus A)  \]
-</div>
-<p> が成り立つ． </p>
+  <div class="example_thmcontent">
+  <p> \(D:C^1([0,1])\to C([0,1])\)，\(Df:=f'\) を考える． ただし定義域 \(C^1([0,1])\) には sup-norm \(\| f\| _\infty :=\sup _{x\in [0,1]}|f(x)|\) を入れる． このとき \(D\) は線形だが有界ではない． </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000537">
+<div class="proof_wrapper" id="a0000001183">
   <div class="proof_heading">
     <span class="proof_caption">
     
@@ -940,364 +1131,38 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>\(Q=\emptyset \) のときは自明である．以下では \(Q\neq \emptyset \) とする． \(C:=\overline Q\) とおく．第3章で示した区間の外測度の計算より \(\lambda ^*(C)=|Q|\) であり，また \(C\setminus Q\) は零集合なので </p>
-<div class="displaymath" id="a0000000539">
-  \[  \lambda ^*(C\setminus A)=\lambda ^*(Q\setminus A)  \]
-</div>
-<p> である． </p>
-<p>まず \(\lambda _*(A)\le |Q|-\lambda ^*(Q\setminus A)\) を示す． コンパクト集合 \(K\subset A\) を取る． ??lem:compact-splits-outer-measure を \(B=C\) とコンパクト集合 \(K\) に適用すると </p>
-<div class="displaymath" id="a0000000540">
-  \[  \lambda ^*(C)=\lambda ^*(K)+\lambda ^*(C\setminus K)  \]
-</div>
-<p> である．また \(Q\setminus A\subset C\setminus K\) だから </p>
-<div class="displaymath" id="a0000000541">
-  \[  \lambda ^*(K) \le \lambda ^*(C)-\lambda ^*(Q\setminus A) = |Q|-\lambda ^*(Q\setminus A).  \]
-</div>
-<p> 上限を取ると </p>
-<div class="displaymath" id="a0000000542">
-  \[  \lambda _*(A)\le |Q|-\lambda ^*(Q\setminus A)  \]
-</div>
-<p> である． </p>
-<p>逆向きの不等式を示す．\(\varepsilon {\gt}0\) を任意に取る． 開集合による外正則性より，\(C\setminus A\) を含む開集合 \(U\) で </p>
-<div class="displaymath" id="a0000000543">
-  \[  \lambda ^*(U){\lt}\lambda ^*(C\setminus A)+\varepsilon  \]
-</div>
-<p> となるものを取る． このとき \(K:=C\setminus U\) は \(A\) に含まれるコンパクト集合である． \(C\subset K\cup U\) だから </p>
-<div class="displaymath" id="a0000000544">
-  \[  \lambda ^*(C)\le \lambda ^*(K)+\lambda ^*(U)  \]
-</div>
-<p> であり， </p>
-<div class="displaymath" id="a0000000545">
-  \[  \lambda ^*(K) {\gt} \lambda ^*(C)-\lambda ^*(C\setminus A)-\varepsilon = |Q|-\lambda ^*(Q\setminus A)-\varepsilon .  \]
-</div>
-<p> 内測度の定義より </p>
-<div class="displaymath" id="a0000000546">
-  \[  \lambda _*(A)\ge |Q|-\lambda ^*(Q\setminus A)-\varepsilon  \]
-</div>
-<p> である．\(\varepsilon {\gt}0\) は任意なので逆向きの不等式も従う． </p>
+  <p>線形性は微分の線形性から従う． </p>
+<p>有界でないことを示すため \(f_n(x):=x^n\) \((n\in \mathbb N)\) を考える． すると \(\| f_n\| _\infty =1\) である． 一方， \(Df_n(x)=nx^{n-1}\) だから \(\| Df_n\| _\infty =n\) である． もし \(D\) が有界なら，ある定数 \(C\ge 0\) が存在して \(\| Df_n\| _\infty \le C\| f_n\| _\infty =C\) がすべての \(n\) で成り立つはずである． しかし \(\| Df_n\| _\infty =n\to \infty \) だから矛盾である． したがって \(D\) は有界ではない． </p>
 
   </div>
 </div>
-<div class="corollary_thmwrapper theorem-style-plain" id="cor:interval-outer-measure-split">
-  <div class="corollary_thmheading">
-    <span class="corollary_thmcaption">
-    Corollary
+<div class="remark_thmwrapper theorem-style-remark" id="a0000001184">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
     </span>
-    <span class="corollary_thmlabel">.8</span>
-    <span class="corollary_thmtitle">区間による外測度の分解</span>
+    <span class="remark_thmlabel">59</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0004.html#cor:interval-outer-measure-split">#</a>
-    
-    <a class="icon proof" href="sect0004.html#a0000000547"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
+    <a class="icon proof" href="sect0014.html#a0000001184">#</a>
     
     
     
         </div>
   </div>
-  <div class="corollary_thmcontent">
-  <p> 有界区間 \(Q\subset \mathbb R^d\) と \(A\subset Q\) に対して </p>
-<div class="displaymath" id="a0000000548">
-  \[  \lambda _*(A)=\lambda ^*(A) \qquad \Longleftrightarrow \qquad |Q|=\lambda ^*(A)+\lambda ^*(Q\setminus A)  \]
-</div>
-<p> である． </p>
+  <div class="remark_thmcontent">
+  <p>同じ微分作用素でも， 定義域に \(\| f\| _{C^1}:=\| f\| _\infty +\| f'\| _\infty \) というノルムを入れれば \(\| Df\| _\infty \le \| f\| _{C^1}\) となり，有界線形作用素になる． したがって「作用素が有界かどうか」は， 作用素そのものだけでなく，定義域と値域にどのノルムを入れるかにも依存する． </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000547">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>??thm:inner-measure-via-interval により </p>
-<div class="displaymath" id="a0000000549">
-  \[  \lambda _*(A)=|Q|-\lambda ^*(Q\setminus A)  \]
-</div>
-<p> である．これを \(\lambda _*(A)=\lambda ^*(A)\) に代入すればよい． </p>
+<h1 id="a0000000247"> 解釈とまとめ</h1>
+<p>線形作用素の要点は， 線形性があると連続性の判定が \(\| T(x)\| \le C\| x\| \) という1本の不等式に集約されることである． この不等式が成り立つと， 極限をとっても \(x_n\to x \implies T(x_n)\to T(x)\) が自動的に従う． </p>
+<p>また有界線形作用素全体 \(\mathcal B(X,Y)\) 自身も，\(Y\) がBanach空間ならBanach空間になる． したがって「空間の上の写像」をさらに1つの空間として扱えるようになる． </p>
+<p>積分作用素は有界線形作用素の典型例であり， 微分作用素はノルムの取り方によっては非有界になる典型例である． この対比は，関数解析が \(\text{どの空間で}\)，\(\text{どのノルムで}\) 問題を見るかを非常に重視することを示している．  </p>
 
-  </div>
-</div>
-<h2 id="a0000000167"> 外測度に関する補助定理</h2>
-<p>上の証明と次章で使う外測度の補助定理をまとめておく． </p>
-<div class="lemma_thmwrapper theorem-style-plain" id="lem:positive-distance-additive">
-  <div class="lemma_thmheading">
-    <span class="lemma_thmcaption">
-    Lemma
-    </span>
-    <span class="lemma_thmlabel">.9</span>
-    <div class="thm_header_extras">
-
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0004.html#lem:positive-distance-additive">#</a>
-    
-    <a class="icon proof" href="sect0004.html#a0000000550"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    
-        </div>
-  </div>
-  <div class="lemma_thmcontent">
-  <p> \(A,B\subset \mathbb R^d\) が正の距離だけ離れていれば </p>
-<div class="displaymath" id="a0000000551">
-  \[  \lambda ^*(A\cup B)=\lambda ^*(A)+\lambda ^*(B)  \]
-</div>
-<p> である． </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000550">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>片方が空集合の場合は自明なので，以下では \(A,B\) は空でないとする． 実際，\(\operatorname {dist}(A,B){\gt}0\) とし， \(0{\lt}\rho {\lt}\operatorname {dist}(A,B)\) を取る． \(A\cup B\) を覆う区間列 \(\{ R_i\} _{i=1}^{\infty }\subset \mathcal E_d\) を任意に取る． \(\sum _i |R_i|=\infty \) の場合は自明なので，この和は有限としてよい． すると各 \(R_i\) は有界であり，有限個の左半開区間に分割して， 各小区間の直径を \(\rho \) 未満にできる． そのような小区間は \(A\) と \(B\) の両方には交わらない． したがって，\(A\) に交わる小区間全体は \(A\) を覆い， \(B\) に交わる小区間全体は \(B\) を覆うので， </p>
-<div class="displaymath" id="a0000000552">
-  \[  \lambda ^*(A)+\lambda ^*(B)\le \sum _{i=1}^{\infty }|R_i|.  \]
-</div>
-<p> 被覆について下限を取れば </p>
-<div class="displaymath" id="a0000000553">
-  \[  \lambda ^*(A)+\lambda ^*(B)\le \lambda ^*(A\cup B)  \]
-</div>
-<p> を得る．逆向きの不等式は外測度の劣加法性である． </p>
-
-  </div>
-</div>
-<div class="lemma_thmwrapper theorem-style-plain" id="lem:finite-open-inner-compact">
-  <div class="lemma_thmheading">
-    <span class="lemma_thmcaption">
-    Lemma
-    </span>
-    <span class="lemma_thmlabel">.10</span>
-    <div class="thm_header_extras">
-
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0004.html#lem:finite-open-inner-compact">#</a>
-    
-    <a class="icon proof" href="sect0004.html#a0000000554"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    
-        </div>
-  </div>
-  <div class="lemma_thmcontent">
-  <p> \(\lambda ^*(U){\lt}\infty \) である開集合 \(U\) は内側からコンパクト集合で近似できる． すなわち任意の \(\varepsilon {\gt}0\) に対し，コンパクト集合 \(F\subset U\) で </p>
-<div class="displaymath" id="a0000000555">
-  \[  \lambda ^*(F){\gt}\lambda ^*(U)-\varepsilon  \]
-</div>
-<p> となるものが取れる． </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000554">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>もし \(U=\emptyset \) なら \(F=\emptyset \) とすればよい． 以下では \(U\neq \emptyset \) とする． これを見るため，有理数端点をもつ有界閉区間で \(U\) に含まれるもの全体を </p>
-<div class="displaymath" id="a0000000556">
-  \[  C_1,C_2,\dots  \]
-</div>
-<p> と列挙する．\(U\) は開集合だから，これらは \(U\) を覆う． </p>
-<div class="displaymath" id="a0000000557">
-  \[  B_1:=C_1,\qquad B_n:=C_n\setminus \bigcup _{j=1}^{n-1}C_j\quad (n\ge 2)  \]
-</div>
-<p> とおくと，\(\{ B_n\} \) は互いに素なJordan可測集合列で， </p>
-<div class="displaymath" id="a0000000558">
-  \[  U=\bigsqcup _{n=1}^{\infty }B_n  \]
-</div>
-<p> である．第3章で示した \(\mathcal A_J\) 上の可算加法性より </p>
-<div class="displaymath" id="a0000000559">
-  \[  \lambda ^*(U)=\sum _{n=1}^{\infty }\lambda ^*(B_n).  \]
-</div>
-<p> よってある \(N\) が存在して </p>
-<div class="displaymath" id="a0000000560">
-  \[  \sum _{n=1}^{N}\lambda ^*(B_n){\gt}\lambda ^*(U)-\varepsilon  \]
-</div>
-<p> となる． このとき </p>
-<div class="displaymath" id="a0000000561">
-  \[  F:=\bigcup _{n=1}^{N}C_n  \]
-</div>
-<p> は \(U\) に含まれるコンパクト集合であり， </p>
-<div class="displaymath" id="a0000000562">
-  \[  \lambda ^*(F) = \sum _{n=1}^{N}\lambda ^*(B_n) {\gt} \lambda ^*(U)-\varepsilon  \]
-</div>
-<p> である． </p>
-
-  </div>
-</div>
-<div class="lemma_thmwrapper theorem-style-plain" id="lem:finite-open-compact-split">
-  <div class="lemma_thmheading">
-    <span class="lemma_thmcaption">
-    Lemma
-    </span>
-    <span class="lemma_thmlabel">.11</span>
-    <div class="thm_header_extras">
-
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0004.html#lem:finite-open-compact-split">#</a>
-    
-    <a class="icon proof" href="sect0004.html#a0000000563"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    
-        </div>
-  </div>
-  <div class="lemma_thmcontent">
-  <p> \(\lambda ^*(O){\lt}\infty \) である開集合 \(O \in \mathcal O_d\) とコンパクト集合 \(K\) に対し， </p>
-<div class="displaymath" id="a0000000564">
-  \[  \lambda ^*(O) = \lambda ^*(O \cap K) + \lambda ^*(O \setminus K)  \]
-</div>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000563">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>外測度の劣加法性より </p>
-<div class="displaymath" id="a0000000565">
-  \[  \lambda ^*(O) \le \lambda ^*(O\cap K)+\lambda ^*(O\setminus K)  \]
-</div>
-<p> である． </p>
-<p>逆向きの不等式を示す．\(\varepsilon {\gt}0\) を任意に取る． \(O\setminus K\) は開集合であり，単調性より </p>
-<div class="displaymath" id="a0000000566">
-  \[  \lambda ^*(O\setminus K)\le \lambda ^*(O){\lt}\infty  \]
-</div>
-<p> である． したがって上の補題より，コンパクト集合 \(F\subset O\setminus K\) で </p>
-<div class="displaymath" id="a0000000567">
-  \[  \lambda ^*(F){\gt}\lambda ^*(O\setminus K)-\varepsilon  \]
-</div>
-<p> となるものが取れる． もし \(F=\emptyset \) なら </p>
-<div class="displaymath" id="a0000000568">
-  \[  \lambda ^*((O\cap K)\cup F) = \lambda ^*(O\cap K)+\lambda ^*(F)  \]
-</div>
-<p> は自明である． もし \(F\neq \emptyset \) なら，\(F\) はコンパクトで \(K\) と交わらないから， </p>
-<div class="displaymath" id="a0000000569">
-  \[  \operatorname {dist}(F,K){\gt}0  \]
-</div>
-<p> である．特に \(F\) と \(O\cap K\) も正の距離だけ離れている． この場合は補題より </p>
-<div class="displaymath" id="a0000000570">
-  \[  \lambda ^*((O\cap K)\cup F) = \lambda ^*(O\cap K)+\lambda ^*(F)  \]
-</div>
-<p> である．いずれの場合も上の等式が成り立つ． 一方 \((O\cap K)\cup F\subset O\) だから，単調性より </p>
-<div class="displaymath" id="a0000000571">
-  \[  \lambda ^*(O) \ge \lambda ^*(O\cap K)+\lambda ^*(F) {\gt} \lambda ^*(O\cap K)+\lambda ^*(O\setminus K)-\varepsilon .  \]
-</div>
-<p> \(\varepsilon {\gt}0\) は任意なので </p>
-<div class="displaymath" id="a0000000572">
-  \[  \lambda ^*(O) \ge \lambda ^*(O\cap K)+\lambda ^*(O\setminus K)  \]
-</div>
-<p> を得る．以上より等号が成り立つ． </p>
-
-  </div>
-</div>
-<div class="lemma_thmwrapper theorem-style-plain" id="lem:compact-splits-outer-measure">
-  <div class="lemma_thmheading">
-    <span class="lemma_thmcaption">
-    Lemma
-    </span>
-    <span class="lemma_thmlabel">.12</span>
-    <span class="lemma_thmtitle">コンパクト集合による外測度の分解</span>
-    <div class="thm_header_extras">
-
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0004.html#lem:compact-splits-outer-measure">#</a>
-    
-    <a class="icon proof" href="sect0004.html#a0000000573"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    
-        </div>
-  </div>
-  <div class="lemma_thmcontent">
-  <p> コンパクト集合 \(C\subset \mathbb R^d\) と任意の集合 \(B\subset \mathbb R^d\) に対して </p>
-<div class="displaymath" id="a0000000574">
-  \[  \lambda ^*(B) = \lambda ^*(B\cap C)+\lambda ^*(B\setminus C)  \]
-</div>
-<p> が成り立つ． </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000573">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>外測度の劣加法性より </p>
-<div class="displaymath" id="a0000000575">
-  \[  \lambda ^*(B) \le \lambda ^*(B\cap C)+\lambda ^*(B\setminus C)  \]
-</div>
-<p> である． </p>
-<p>逆向きの不等式を示す．\(\lambda ^*(B)=\infty \) のときは自明なので， \(\lambda ^*(B){\lt}\infty \) とする． \(\varepsilon {\gt}0\) を任意に取る．開集合による外正則性 （??thm:lebesgue-outer-regularity-open）より， \(B\subset U\) を満たす開集合 \(U\) で </p>
-<div class="displaymath" id="a0000000576">
-  \[  \lambda ^*(U){\lt}\lambda ^*(B)+\varepsilon  \]
-</div>
-<p> となるものが取れる． 特に \(\lambda ^*(U){\lt}\infty \) である． ??lem:finite-open-compact-split を \(U\) と \(C\) に適用すると </p>
-<div class="displaymath" id="a0000000577">
-  \[  \lambda ^*(U) = \lambda ^*(U\cap C)+\lambda ^*(U\setminus C)  \]
-</div>
-<p> である． また </p>
-<div class="displaymath" id="a0000000578">
-  \[  B\cap C\subset U\cap C,\qquad B\setminus C\subset U\setminus C  \]
-</div>
-<p> だから，単調性より </p>
-<div class="displaymath" id="a0000000579">
-  \[  \lambda ^*(B\cap C)+\lambda ^*(B\setminus C) \le \lambda ^*(U) {\lt} \lambda ^*(B)+\varepsilon .  \]
-</div>
-<p> \(\varepsilon {\gt}0\) は任意なので </p>
-<div class="displaymath" id="a0000000580">
-  \[  \lambda ^*(B\cap C)+\lambda ^*(B\setminus C) \le \lambda ^*(B)  \]
-</div>
-<p> である． </p>
-
-  </div>
-</div>
-<h1 id="a0000000168"> 解釈</h1>
-<p>Lebesgue内測度 \(\lambda _*(A)\) は， 「\(A\) の中に入るコンパクト集合のうち，どこまで大きな面積を確保できるか」 を表している． したがって，Lebesgue流の可測性 </p>
-<div class="displaymath" id="a0000000581">
-  \[  \lambda ^*(A)=\lambda _*(A)  \]
-</div>
-<p> とは，外から見た大きさと内から見た大きさが一致して， その集合の面積がぶれないことを意味している． </p>
-<p>ただし，この定義は補助的である． 理由は2つある． </p>
-<ol class="enumerate">
-  <li><p>コンパクト集合という位相的概念に依存している </p>
-</li>
-  <li><p>この定義だけから可測集合全体の構造を調べるのは難しい </p>
-</li>
-</ol>
-<p>  <br />  </p>
 
 </div> <!--main-text -->
 </div> <!-- content-wrapper -->
@@ -1309,11 +1174,9 @@
 
   <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
 
-  <a href="sect0003.html" title="Lebesgue外測度"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+  <a href="sect0013.html" title="Hilbert空間"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
 </a>
   <a href="index.html" title="Lecture note on KSK"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
-</a>
-  <a href="sect0005.html" title="Lebesgue測度"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
 </a>
 </nav>
 

@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Hilbert空間</title>
+<link rel="next" href="sect0014.html" title="線形作用素" />
+<link rel="prev" href="sect0012.html" title="Banach空間" />
+<link rel="up" href="index.html" title="Lecture note on KSK" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">Lecture note on KSK</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Riemann積分</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0001.html#a0000000018"><span class="toc_ref"></span> <span class="toc_entry">Riemann和による定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000028"><span class="toc_ref"></span> <span class="toc_entry">Darbouxの上積分と下積分による定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000039"><span class="toc_ref"></span> <span class="toc_entry">Riemann可積分関数の例</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000101"><span class="toc_ref"></span> <span class="toc_entry">Riemann可積分でない例</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000114"><span class="toc_ref"></span> <span class="toc_entry">極限と積分の順序交換</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000123"><span class="toc_ref"></span> <span class="toc_entry">順序交換の応用例</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000132"><span class="toc_ref"></span> <span class="toc_entry">Riemann積分の長所と短所</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0001.html#a0000000133"><span class="toc_ref"></span> <span class="toc_entry">長所：定義が素朴であり，計算しやすい</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000134"><span class="toc_ref"></span> <span class="toc_entry">短所：無限回操作に対して不安定</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000135"><span class="toc_ref"></span> <span class="toc_entry">原因：Riemann積分の定義が有限和（有限分割\(\mathcal P\)）の極限</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000137"><span class="toc_ref"></span> <span class="toc_entry">技術的課題：無限和（無限分割）にすると何が起きるか</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000139"><span class="toc_ref"></span> <span class="toc_entry">解決策：Lebesgue積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000140"><span class="toc_ref"></span> <span class="toc_entry">展望：何が嬉しいか</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000141"><span class="toc_ref"></span> <span class="toc_entry">多くの応用先</span></a>
+ </li>
+
+  </ul>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0002.html#a0000000142"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000143"><span class="toc_ref"></span> <span class="toc_entry">\(\mathbb R^d\)の基本集合</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000144"><span class="toc_ref"></span> <span class="toc_entry">\(\mathbb R^d\)のRiemann積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000145"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度・Jordan可測</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000146"><span class="toc_ref"></span> <span class="toc_entry">Jordan零集合</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000147"><span class="toc_ref"></span> <span class="toc_entry">Jordan可測性の判定法</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000148"><span class="toc_ref"></span> <span class="toc_entry">Jordan可測集合の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000149"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000150"><span class="toc_ref"></span> <span class="toc_entry">有限加法族・有限加法的測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000151"><span class="toc_ref"></span> <span class="toc_entry">概念の整理</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0003.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0003.html#a0000000152"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000153"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000154"><span class="toc_ref"></span> <span class="toc_entry">拡大実数</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000155"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000156"><span class="toc_ref"></span> <span class="toc_entry">具体例</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000157"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000158"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度との整合</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000159"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の外正則性</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000160"><span class="toc_ref"></span> <span class="toc_entry">解釈</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0004.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue内測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0004.html#a0000000161"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000162"><span class="toc_ref"></span> <span class="toc_entry">定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000163"><span class="toc_ref"></span> <span class="toc_entry">基本性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000164"><span class="toc_ref"></span> <span class="toc_entry">具体例</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000165"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度との関係</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000166"><span class="toc_ref"></span> <span class="toc_entry">同値な定義</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0004.html#a0000000167"><span class="toc_ref"></span> <span class="toc_entry">外測度に関する補助定理</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000168"><span class="toc_ref"></span> <span class="toc_entry">解釈</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0005.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0005.html#a0000000169"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000170"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合とLebesgue測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000171"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合の性質</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0005.html#a0000000172"><span class="toc_ref"></span> <span class="toc_entry">有界閉区間上のLebesgue可測集合</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000173"><span class="toc_ref"></span> <span class="toc_entry">全空間上のLebesgue可測集合</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0005.html#sec:lebesgue-measure-properties"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#sec:lebesgue-caratheodory-comparison"><span class="toc_ref"></span> <span class="toc_entry">Carathéodory条件との比較</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000174"><span class="toc_ref"></span> <span class="toc_entry">まとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0006.html"><span class="toc_ref"></span> <span class="toc_entry">Carathéodory流の測度論</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0006.html#a0000000175"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000176"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000177"><span class="toc_ref"></span> <span class="toc_entry">可測空間と測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000178"><span class="toc_ref"></span> <span class="toc_entry">外測度とCarathéodory可測性</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000179"><span class="toc_ref"></span> <span class="toc_entry">半加法族と前測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000180"><span class="toc_ref"></span> <span class="toc_entry">誘導外測度と拡張定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000181"><span class="toc_ref"></span> <span class="toc_entry">Borel集合族</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000182"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測性の限界</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000183"><span class="toc_ref"></span> <span class="toc_entry">まとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0007.html"><span class="toc_ref"></span> <span class="toc_entry">可測関数</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0007.html#a0000000184"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000185"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000186"><span class="toc_ref"></span> <span class="toc_entry">可測写像</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000187"><span class="toc_ref"></span> <span class="toc_entry">可測関数の定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000188"><span class="toc_ref"></span> <span class="toc_entry">基本例</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000189"><span class="toc_ref"></span> <span class="toc_entry">ベクトル値可測写像と合成</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000190"><span class="toc_ref"></span> <span class="toc_entry">不等式・極限で作られる関数</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000191"><span class="toc_ref"></span> <span class="toc_entry">ほとんど至る所（almost everywhere）</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#sec:ae-convergence"><span class="toc_ref"></span> <span class="toc_entry">概収束</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000192"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0008.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue積分</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0008.html#a0000000193"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000194"><span class="toc_ref"></span> <span class="toc_entry">単関数の積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000195"><span class="toc_ref"></span> <span class="toc_entry">非負可測関数の積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000196"><span class="toc_ref"></span> <span class="toc_entry">零集合と almost everywhere</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000197"><span class="toc_ref"></span> <span class="toc_entry">符号付可測関数の積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000198"><span class="toc_ref"></span> <span class="toc_entry">積分の絶対連続性</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000199"><span class="toc_ref"></span> <span class="toc_entry">具体例</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000200"><span class="toc_ref"></span> <span class="toc_entry">Riemann積分との関係</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000201"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0009.html"><span class="toc_ref"></span> <span class="toc_entry">測度空間上の積分の性質</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0009.html#a0000000202"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000203"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000204"><span class="toc_ref"></span> <span class="toc_entry">準備：正部分と負部分</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000205"><span class="toc_ref"></span> <span class="toc_entry">集合に関する性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000206"><span class="toc_ref"></span> <span class="toc_entry">順序と大きさ</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000207"><span class="toc_ref"></span> <span class="toc_entry">線形性</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000208"><span class="toc_ref"></span> <span class="toc_entry">計算則のまとめ</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000209"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0010.html"><span class="toc_ref"></span> <span class="toc_entry">収束定理</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0010.html#a0000000210"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000211"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000212"><span class="toc_ref"></span> <span class="toc_entry">設定</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000213"><span class="toc_ref"></span> <span class="toc_entry">単調収束定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000214"><span class="toc_ref"></span> <span class="toc_entry">Fatouの補題</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000215"><span class="toc_ref"></span> <span class="toc_entry">優収束定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000216"><span class="toc_ref"></span> <span class="toc_entry">項別積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000217"><span class="toc_ref"></span> <span class="toc_entry">積分記号下の微分</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000218"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0011.html"><span class="toc_ref"></span> <span class="toc_entry">Fubiniと変数変換</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0011.html#a0000000219"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html#a0000000220"><span class="toc_ref"></span> <span class="toc_entry">積測度と切片</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html#a0000000221"><span class="toc_ref"></span> <span class="toc_entry">Tonelliの定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html#a0000000222"><span class="toc_ref"></span> <span class="toc_entry">Fubiniの定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html#a0000000223"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度での積測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html#a0000000224"><span class="toc_ref"></span> <span class="toc_entry">変数変換</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html#a0000000225"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0012.html"><span class="toc_ref"></span> <span class="toc_entry">Banach空間</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0012.html#a0000000226"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000227"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000228"><span class="toc_ref"></span> <span class="toc_entry">ノルム空間とBanach空間</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000229"><span class="toc_ref"></span> <span class="toc_entry">\(C(X)\) と sup-norm</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000230"><span class="toc_ref"></span> <span class="toc_entry">\(L^p(X)\) 空間</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000231"><span class="toc_ref"></span> <span class="toc_entry">Hölderの不等式とMinkowskiの不等式</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000232"><span class="toc_ref"></span> <span class="toc_entry">Riesz–Fischerの定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000233"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class=" active current">
+  <a href="sect0013.html"><span class="toc_ref"></span> <span class="toc_entry">Hilbert空間</span></a>
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
+     <li class="">
+  <a href="sect0013.html#a0000000234"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000235"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000236"><span class="toc_ref"></span> <span class="toc_entry">内積空間とHilbert空間</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000237"><span class="toc_ref"></span> <span class="toc_entry">\(L^2(X)\) はHilbert空間</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000238"><span class="toc_ref"></span> <span class="toc_entry">正規直交系と直交射影</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000239"><span class="toc_ref"></span> <span class="toc_entry">Fourier関数系</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000240"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0014.html"><span class="toc_ref"></span> <span class="toc_entry">線形作用素</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0014.html#a0000000241"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000242"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000243"><span class="toc_ref"></span> <span class="toc_entry">線形作用素と連続性</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000244"><span class="toc_ref"></span> <span class="toc_entry">作用素ノルム</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000245"><span class="toc_ref"></span> <span class="toc_entry">\(\mathcal B(X,Y)\) の完備性</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000246"><span class="toc_ref"></span> <span class="toc_entry">例</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000247"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000014"> Hilbert空間</h1>
+<h4 id="a0000000234">本章の目標</h4>
+<p> 前章では，関数の大きさを測るノルムを導入し， \(L^p\) 空間や \(C(X)\) がBanach空間になることを見た． その中でも \(p=2\) の場合は特別である． このときノルムは内積から作られ， 長さだけでなく角度や直交も扱えるようになる． </p>
+<p>本章では </p>
+<ol class="enumerate">
+  <li><p>内積空間・Hilbert空間の定義 </p>
+</li>
+  <li><p>Cauchy–Schwarz の不等式と内積から誘導されるノルム </p>
+</li>
+  <li><p>\(L^2(X)\) がHilbert空間になること </p>
+</li>
+  <li><p>正規直交系，Fourier係数，Bessel の不等式，Parseval の等式 </p>
+</li>
+  <li><p>Fourier関数系という典型例 </p>
+</li>
+</ol>
+<p> を説明する． </p>
+<h1 id="a0000000235"> 動機づけ</h1>
+<p>ノルムだけでは，ベクトルの長さは分かっても， 2つのベクトルがどれくらい「直交しているか」は分からない． しかし実際には \(\text{最小二乗法}\)，\(\text{Fourier級数}\)，\(\text{エネルギー評価}\) のように，直交が本質的な役割を果たす場面が多い． </p>
+<p>例えば \(L^2([0,1],\lambda )\) の関数 \(f\) を \(1,\cos (2\pi x),\sin (2\pi x),\dots \) のような基本関数で展開したいとき， 係数は \(\int _0^1 f(x)\cos (2\pi nx)\, dx\) や \(\int _0^1 f(x)\sin (2\pi nx)\, dx\) で与えられる． これらは単なる積分ではなく， 関数 \(f\) と基本関数との「内積」になっている． </p>
+<p>この考え方を抽象化したのがHilbert空間である． </p>
+<h1 id="a0000000236"> 内積空間とHilbert空間</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000001084">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.1</span>
+    <span class="definition_thmtitle">内積</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0013.html#a0000001084">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 実ベクトル空間 \(H\) 上の写像 \(\langle \cdot ,\cdot \rangle :H\times H\to \mathbb R\) が内積であるとは，任意の \(x,y,z\in H\) と任意の \(a\in \mathbb R\) に対して 次を満たすことをいう． </p>
+<ol class="enumerate">
+  <li><p>\(\langle x+y,z\rangle =\langle x,z\rangle +\langle y,z\rangle \) </p>
+</li>
+  <li><p>\(\langle ax,y\rangle =a\langle x,y\rangle \) </p>
+</li>
+  <li><p>\(\langle x,y\rangle =\langle y,x\rangle \) </p>
+</li>
+  <li><p>\(\langle x,x\rangle \ge 0\) かつ \(\langle x,x\rangle =0 \iff x=0\) </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000001085">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.2</span>
+    <span class="definition_thmtitle">内積空間</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0013.html#a0000001085">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 内積を備えた実ベクトル空間を内積空間という． </p>
+
+  </div>
+</div>
+<div class="example_thmwrapper theorem-style-plain" id="a0000001086">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
+    </span>
+    <span class="example_thmlabel">.3</span>
+    <span class="example_thmtitle">\(\mathbb R^d\) の標準内積</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0013.html#a0000001086">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="example_thmcontent">
+  <p> \(x=(x_1,\dots ,x_d)\)，\(y=(y_1,\dots ,y_d)\in \mathbb R^d\) に対して \(\langle x,y\rangle :=\sum _{k=1}^d x_k y_k\) と定めると，これは \(\mathbb R^d\) 上の内積である． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000001087">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">.4</span>
+    <span class="theorem_thmtitle">Cauchy–Schwarzの不等式</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0013.html#a0000001087">#</a>
+    
+    <a class="icon proof" href="sect0013.html#a0000001088"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> 内積空間 \(H\) の任意の \(x,y\in H\) に対して </p>
+<div class="displaymath" id="a0000001089">
+  \[  |\langle x,y\rangle | \le \sqrt{\langle x,x\rangle }\sqrt{\langle y,y\rangle }  \]
+</div>
+<p> が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000001088">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(y=0\) のときは自明である． 以下では \(y\ne 0\) とする． 任意の \(t\in \mathbb R\) に対して \(\langle x-ty,x-ty\rangle \ge 0\) である． これを展開すると \(\langle x,x\rangle -2t\langle x,y\rangle +t^2\langle y,y\rangle \ge 0\) を得る． 左辺は \(t\) の2次式であり，すべての \(t\) に対して非負だから判別式は \(0\) 以下である． したがって \(4\langle x,y\rangle ^2-4\langle x,x\rangle \langle y,y\rangle \le 0\)， すなわち \(\langle x,y\rangle ^2\le \langle x,x\rangle \langle y,y\rangle \) が成り立つ． 両辺は非負だから平方根をとって結論を得る． </p>
+
+  </div>
+</div>
+<div class="corollary_thmwrapper theorem-style-plain" id="a0000001090">
+  <div class="corollary_thmheading">
+    <span class="corollary_thmcaption">
+    Corollary
+    </span>
+    <span class="corollary_thmlabel">.5</span>
+    <span class="corollary_thmtitle">内積から誘導されるノルム</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0013.html#a0000001090">#</a>
+    
+    <a class="icon proof" href="sect0013.html#a0000001091"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="corollary_thmcontent">
+  <p> 内積空間 \(H\) に対して \(\| x\| :=\sqrt{\langle x,x\rangle }\) とおくと，これは \(H\) 上のノルムである． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000001091">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>まず \(\| x\| =0 \iff \langle x,x\rangle =0 \iff x=0\) である． </p>
+<p>次に \(\| ax\| ^2=\langle ax,ax\rangle =a^2\langle x,x\rangle =|a|^2\| x\| ^2\) だから \(\| ax\| =|a|\, \| x\| \) である． </p>
+<p>最後に </p>
+<div class="displaymath" id="a0000001092">
+  \begin{align*}  \| x+y\| ^2 & = \langle x+y,x+y\rangle \\ & = \| x\| ^2+2\langle x,y\rangle +\| y\| ^2 \\ & \le \| x\| ^2+2\| x\| \| y\| +\| y\| ^2 \\ & = (\| x\| +\| y\| )^2 \end{align*}
+</div>
+<p> である． 両辺は非負だから平方根をとって </p>
+<div class="displaymath" id="a0000001093">
+  \[  \| x+y\| \le \| x\| +\| y\|   \]
+</div>
+<p> を得る． </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="a0000001094">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.6</span>
+    <span class="proposition_thmtitle">Pythagorasの定理</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0013.html#a0000001094">#</a>
+    
+    <a class="icon proof" href="sect0013.html#a0000001095"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> 内積空間 \(H\) の \(x,y\in H\) が \(\langle x,y\rangle =0\) を満たすとする． このとき </p>
+<div class="displaymath" id="a0000001096">
+  \[  \| x+y\| ^2=\| x\| ^2+\| y\| ^2  \]
+</div>
+<p> が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000001095">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <div class="displaymath" id="a0000001097">
+  \[  \| x+y\| ^2 = \langle x+y,x+y\rangle = \langle x,x\rangle +\langle x,y\rangle +\langle y,x\rangle +\langle y,y\rangle = \| x\| ^2+\| y\| ^2  \]
+</div>
+<p> である． </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000001098">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.7</span>
+    <span class="definition_thmtitle">Hilbert空間</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0013.html#a0000001098">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 内積空間 \(H\) が， 上の内積から誘導されるノルムに関して完備であるとき， \(H\) をHilbert空間という． </p>
+
+  </div>
+</div>
+<div class="example_thmwrapper theorem-style-plain" id="a0000001099">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
+    </span>
+    <span class="example_thmlabel">.8</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0013.html#a0000001099">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="example_thmcontent">
+  <p>\(\mathbb R^d\) は標準内積に関してHilbert空間である． 実際，誘導されるノルムは \(\| x\| =\left(\sum _{k=1}^d |x_k|^2\right)^{1/2}\) であり，前章で \(\mathbb R^d\) はこのノルムに関して完備であることを示した． </p>
+
+  </div>
+</div>
+<h1 id="a0000000237"> \(L^2(X)\) はHilbert空間</h1>
+<p>以後，測度空間 \((X,\mathcal M,\mu )\) を固定する． </p>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000001100">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.9</span>
+    <span class="definition_thmtitle">\(L^2\) の内積</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0013.html#a0000001100">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> \(f,g\in L^2(X)\) に対して \(\langle f,g\rangle :=\int _X f g\, d\mu \) と定める． </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="a0000001101">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.10</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0013.html#a0000001101">#</a>
+    
+    <a class="icon proof" href="sect0013.html#a0000001102"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p>上の式は \(L^2(X)\) 上のwell-definedな内積である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000001102">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>まず \(f,g\in L^2(X)\) なら， 前章の Hölder の不等式を \(p=q=2\) に適用して \(\int _X |fg|\, d\mu \le \| f\| _2\| g\| _2{\lt}\infty \) を得る． したがって積分は有限である． </p>
+<p>また \(f=f'\) a.e., \(g=g'\) a.e. なら \(fg=f'g'\) a.e. だから，第8章の a.e. 不変性より \(\int _X fg\, d\mu =\int _X f'g'\, d\mu \) である． よってこの式は同値類の取り方によらない． </p>
+<p>線形性と対称性は積分の線形性から直ちに従う． さらに \(\langle f,f\rangle =\int _X f^2\, d\mu \ge 0\) である． もし \(\langle f,f\rangle =0\) なら \(\int _X f^2\, d\mu =0\) であり， 第9章の「積分が \(0\) であることの判定」より \(f^2=0\) a.e. である． したがって \(f=0\) a.e. である． すなわち \(L^2\) の元として \(f=0\) である． 以上より，これは内積である． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000001103">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">.11</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0013.html#a0000001103">#</a>
+    
+    <a class="icon proof" href="sect0013.html#a0000001104"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p>\(L^2(X)\) は上の内積に関してHilbert空間である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000001104">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>直前の命題より，\(L^2(X)\) は内積空間である． この内積が誘導するノルムは \(\| f\| =\sqrt{\langle f,f\rangle }=\left(\int _X |f|^2\, d\mu \right)^{1/2}=\| f\| _2\) である． 前章の Riesz–Fischer の定理より， \(L^2(X)\) はこのノルムに関して完備である． したがって \(L^2(X)\) はHilbert空間である． </p>
+
+  </div>
+</div>
+<div class="example_thmwrapper theorem-style-plain" id="a0000001105">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
+    </span>
+    <span class="example_thmlabel">.12</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0013.html#a0000001105">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="example_thmcontent">
+  <p>\(X=[0,1]\) とし \(\lambda \) をLebesgue測度とすると， \(L^2([0,1],\lambda )\) はHilbert空間である． ここでの内積は \(\langle f,g\rangle =\int _0^1 f(x)g(x)\, dx\) である． 確率論では，確率空間上の \(L^2\) は「二乗平均が有限な確率変数全体」の空間になる． </p>
+
+  </div>
+</div>
+<h1 id="a0000000238"> 正規直交系と直交射影</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000001106">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.13</span>
+    <span class="definition_thmtitle">直交と正規直交</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0013.html#a0000001106">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 内積空間 \(H\) の \(x,y\in H\) に対して \(\langle x,y\rangle =0\) のとき，\(x\) と \(y\) は直交するといい，\(x\perp y\) と書く． </p>
+<p>また \(\| x\| =1\) を満たすベクトルを正規化されたベクトルという． 互いに直交し，かつ各ベクトルが長さ \(1\) をもつベクトル族を正規直交族という． </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000001107">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.14</span>
+    <span class="definition_thmtitle">正規直交系とCONS</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0013.html#a0000001107">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> Hilbert空間 \(H\) の列 \(\{ e_n\} _{n=1}^{\infty }\) が正規直交系であるとは， 任意の \(m,n\in \mathbb N\) に対して </p>
+<div class="displaymath" id="a0000001108">
+  \[  \langle e_n,e_m\rangle = \begin{cases}  1 &  (n=m),\\ 0 &  (n\ne m) \end{cases}  \]
+</div>
+<p> が成り立つことをいう． </p>
+<p>さらに \(\operatorname {span}\{ e_1,e_2,\dots \} \) の閉包が \(H\) 全体に一致するとき， この正規直交系を完全正規直交系 （complete orthonormal system, CONS）という． </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="a0000001109">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.15</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0013.html#a0000001109">#</a>
+    
+    <a class="icon proof" href="sect0013.html#a0000001110"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p>正規直交族は線形独立である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000001110">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(\sum _{k=1}^N c_k e_k=0\) とする． 両辺と \(e_j\) との内積をとると \(0=\left\langle \sum _{k=1}^N c_k e_k,e_j\right\rangle =\sum _{k=1}^N c_k \langle e_k,e_j\rangle =c_j\) である． \(j=1,\dots ,N\) は任意だから，すべての係数 \(c_j\) は \(0\) である． </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000001111">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.16</span>
+    <span class="definition_thmtitle">Fourier係数と部分和</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0013.html#a0000001111">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> \(\{ e_n\} _{n=1}^{\infty }\) をHilbert空間 \(H\) の正規直交系とする． \(x\in H\) に対して \(\langle x,e_n\rangle \) を \(x\) の \(e_n\) に関するFourier係数という． </p>
+<p>また \(P_Nx:=\sum _{n=1}^N \langle x,e_n\rangle e_n\) を \(x\) の第 \(N\) 部分和という． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000001112">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">.17</span>
+    <span class="theorem_thmtitle">直交射影の基本性質</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0013.html#a0000001112">#</a>
+    
+    <a class="icon proof" href="sect0013.html#a0000001113"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> \(\{ e_n\} \) を正規直交系とし， \(M_N:=\operatorname {span}\{ e_1,\dots ,e_N\} \) とおく． このとき任意の \(x\in H\) に対して次が成り立つ． </p>
+<ol class="enumerate">
+  <li><div class="displaymath" id="a0000001114">
+  \[  x-P_Nx \perp e_j \qquad (1\le j\le N)  \]
+</div>
+</li>
+  <li><p>任意の \(y\in M_N\) に対して </p>
+<div class="displaymath" id="a0000001115">
+  \[  \| x-y\| ^2 = \| x-P_Nx\| ^2 + \| P_Nx-y\| ^2  \]
+</div>
+<p> が成り立つ． 特に </p>
+<div class="displaymath" id="a0000001116">
+  \[  \| x-P_Nx\| \le \| x-y\|   \]
+</div>
+<p> である． </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000001113">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p><b class="bfseries">(1)</b>&#8195;\(1\le j\le N\) に対して </p>
+<div class="displaymath" id="a0000001117">
+  \begin{align*}  \langle x-P_Nx,e_j\rangle & = \langle x,e_j\rangle - \left\langle \sum _{n=1}^N \langle x,e_n\rangle e_n,e_j\right\rangle \\ & = \langle x,e_j\rangle - \sum _{n=1}^N \langle x,e_n\rangle \langle e_n,e_j\rangle \\ & = \langle x,e_j\rangle -\langle x,e_j\rangle =0. \end{align*}
+</div>
+<p><b class="bfseries">(2)</b>&#8195;\(y\in M_N\) を任意に取る． すると \(P_Nx-y\in M_N\) であるから，(1) より \(x-P_Nx \perp P_Nx-y\) が成り立つ． さらに \(x-y=(x-P_Nx)+(P_Nx-y)\) だから，Pythagoras の定理より </p>
+<div class="displaymath" id="a0000001118">
+  \[  \| x-y\| ^2 = \| x-P_Nx\| ^2+\| P_Nx-y\| ^2  \]
+</div>
+<p> を得る． 特に第2項は非負だから \(\| x-P_Nx\| \le \| x-y\| \) である． </p>
+
+  </div>
+</div>
+<div class="corollary_thmwrapper theorem-style-plain" id="a0000001119">
+  <div class="corollary_thmheading">
+    <span class="corollary_thmcaption">
+    Corollary
+    </span>
+    <span class="corollary_thmlabel">.18</span>
+    <span class="corollary_thmtitle">Besselの不等式</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0013.html#a0000001119">#</a>
+    
+    <a class="icon proof" href="sect0013.html#a0000001120"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="corollary_thmcontent">
+  <p> \(\{ e_n\} _{n=1}^{\infty }\) をHilbert空間 \(H\) の正規直交系とする． このとき任意の \(x\in H\) と任意の \(N\in \mathbb N\) に対して </p>
+<div class="displaymath" id="a0000001121">
+  \[  \sum _{n=1}^N |\langle x,e_n\rangle |^2\le \| x\| ^2  \]
+</div>
+<p> が成り立つ． 特に級数 \(\sum _{n=1}^{\infty } |\langle x,e_n\rangle |^2\) は収束する． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000001120">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>直交射影の基本性質を \(y=0\) に適用すると </p>
+<div class="displaymath" id="a0000001122">
+  \[  \| x\| ^2=\| x-P_Nx\| ^2+\| P_Nx\| ^2  \]
+</div>
+<p> を得る． 一方，\(\{ e_1,\dots ,e_N\} \) は正規直交族だから </p>
+<div class="displaymath" id="a0000001123">
+  \[  \| P_Nx\| ^2 = \left\|  \sum _{n=1}^N \langle x,e_n\rangle e_n \right\| ^2 = \sum _{n=1}^N |\langle x,e_n\rangle |^2  \]
+</div>
+<p> である． したがって </p>
+<div class="displaymath" id="a0000001124">
+  \[  \sum _{n=1}^N |\langle x,e_n\rangle |^2 = \| P_Nx\| ^2 \le \| x\| ^2  \]
+</div>
+<p> である． 左辺は \(N\) に関して単調増加で上に有界だから収束する． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="a0000001125">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">.19</span>
+    <span class="theorem_thmtitle">CONSの特徴づけ</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0013.html#a0000001125">#</a>
+    
+    <a class="icon proof" href="sect0013.html#a0000001126"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> \(\{ e_n\} _{n=1}^{\infty }\) をHilbert空間 \(H\) の正規直交系とする． このとき次は同値である． </p>
+<ol class="enumerate">
+  <li><p>\(\{ e_n\} \) は CONS である </p>
+</li>
+  <li><p>任意の \(x\in H\) に対して \(\| x-P_Nx\| \to 0\) が成り立つ </p>
+</li>
+  <li><p>任意の \(x\in H\) に対して </p>
+<div class="displaymath" id="a0000001127">
+  \[  \| x\| ^2=\sum _{n=1}^{\infty }|\langle x,e_n\rangle |^2  \]
+</div>
+<p> が成り立つ </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000001126">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p><b class="bfseries">(1) \(\Rightarrow \) (2)</b>&#8195;\(x\in H\) と \(\varepsilon {\gt}0\) を任意に取る． CONS であることから，ある有限和 \(y=\sum _{n=1}^M a_n e_n\) が存在して \(\| x-y\| {\lt}\varepsilon \) である． \(N\ge M\) とすれば \(y\in M_N\) であるから，直交射影の基本性質より \(\| x-P_Nx\| \le \| x-y\| {\lt}\varepsilon \) である． よって \(\| x-P_Nx\| \to 0\) である． </p>
+<p><b class="bfseries">(2) \(\Rightarrow \) (3)</b>&#8195;Bessel の不等式の証明で得た等式 </p>
+<div class="displaymath" id="a0000001128">
+  \[  \| x\| ^2=\| x-P_Nx\| ^2+\sum _{n=1}^N |\langle x,e_n\rangle |^2  \]
+</div>
+<p> で \(N\to \infty \) とすれば， </p>
+<div class="displaymath" id="a0000001129">
+  \[  \| x\| ^2=\sum _{n=1}^{\infty }|\langle x,e_n\rangle |^2  \]
+</div>
+<p> を得る． </p>
+<p><b class="bfseries">(3) \(\Rightarrow \) (2)</b>&#8195;同じ等式に (3) を代入すると </p>
+<div class="displaymath" id="a0000001130">
+  \[  \| x-P_Nx\| ^2 = \sum _{n=N+1}^{\infty }|\langle x,e_n\rangle |^2 \to 0  \]
+</div>
+<p> である． したがって \(\| x-P_Nx\| \to 0\) である． </p>
+<p><b class="bfseries">(2) \(\Rightarrow \) (1)</b>&#8195;各 \(P_Nx\) は \(\operatorname {span}\{ e_1,e_2,\dots \} \) に属する． (2) より \(P_Nx\to x\) だから， \(x\) はその閉包に属する． \(x\in H\) は任意だから，この閉包は \(H\) 全体に一致する． したがって \(\{ e_n\} \) は CONS である． </p>
+
+  </div>
+</div>
+<div class="example_thmwrapper theorem-style-plain" id="a0000001131">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
+    </span>
+    <span class="example_thmlabel">.20</span>
+    <span class="example_thmtitle">\(\mathbb R^d\) の標準基底</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0013.html#a0000001131">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="example_thmcontent">
+  <p> \(\mathbb R^d\) の標準基底 \(e_1=(1,0,\dots ,0),\dots ,e_d=(0,\dots ,0,1)\) は正規直交族であり， その線形包は \(\mathbb R^d\) 全体だから CONS である． このとき \(x=\sum _{k=1}^d \langle x,e_k\rangle e_k\) であり， Parseval の等式は \(\| x\| ^2=\sum _{k=1}^d |x_k|^2\) に他ならない． </p>
+
+  </div>
+</div>
+<h1 id="a0000000239"> Fourier関数系</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="a0000001132">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.21</span>
+    <span class="definition_thmtitle">実Fourier関数系</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0013.html#a0000001132">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> \(L^2([0,1],\lambda )\) において \(\varphi _0(x):=1\)， \(\varphi _n^c(x):=\sqrt{2}\cos (2\pi n x)\)， \(\varphi _n^s(x):=\sqrt{2}\sin (2\pi n x)\) \((n\ge 1)\) を考える． これらをまとめて実Fourier関数系という． </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="a0000001133">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.22</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0013.html#a0000001133">#</a>
+    
+    <a class="icon proof" href="sect0013.html#a0000001134"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p>実Fourier関数系は \(L^2([0,1],\lambda )\) の正規直交系である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000001134">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>まず \(\int _0^1 1^2\, dx=1\) だから \(\varphi _0\) は長さ \(1\) をもつ． </p>
+<p>次に \(n\ge 1\) とすると </p>
+<div class="displaymath" id="a0000001135">
+  \[  \int _0^1 \cos ^2(2\pi n x)\, dx = \frac12\int _0^1 \bigl(1+\cos (4\pi n x)\bigr)\, dx = \frac12  \]
+</div>
+<p> であるから \(\| \varphi _n^c\| _2^2=2\cdot \frac12=1\) である． 同様に </p>
+<div class="displaymath" id="a0000001136">
+  \[  \int _0^1 \sin ^2(2\pi n x)\, dx = \frac12\int _0^1 \bigl(1-\cos (4\pi n x)\bigr)\, dx = \frac12  \]
+</div>
+<p> より \(\| \varphi _n^s\| _2^2=1\) である． </p>
+<p>また任意の非零整数 \(k\) に対して \(\int _0^1 \cos (2\pi kx)\, dx=0\)，\(\int _0^1 \sin (2\pi kx)\, dx=0\) である． したがって </p>
+<div class="displaymath" id="a0000001137">
+  \[  \langle \varphi _0,\varphi _n^c\rangle = \sqrt{2}\int _0^1 \cos (2\pi n x)\, dx =0,  \]
+</div>
+<div class="displaymath" id="a0000001138">
+  \[  \langle \varphi _0,\varphi _n^s\rangle = \sqrt{2}\int _0^1 \sin (2\pi n x)\, dx =0.  \]
+</div>
+<p>さらに \(m\ne n\) に対して積和公式 \(\cos \alpha \cos \beta =\frac12\bigl(\cos (\alpha -\beta )+\cos (\alpha +\beta )\bigr)\) を用いると </p>
+<div class="displaymath" id="a0000001139">
+  \begin{align*}  \langle \varphi _n^c,\varphi _m^c\rangle & = 2\int _0^1 \cos (2\pi n x)\cos (2\pi m x)\, dx \\ & = \int _0^1 \cos (2\pi (n-m)x)\, dx + \int _0^1 \cos (2\pi (n+m)x)\, dx \\ & =0. \end{align*}
+</div>
+<p> \(n=m\) のときはすでに長さ \(1\) を確かめたので \(\langle \varphi _n^c,\varphi _n^c\rangle =1\) である． </p>
+<p>同様に \(\sin \alpha \sin \beta =\frac12\bigl(\cos (\alpha -\beta )-\cos (\alpha +\beta )\bigr)\) より \(\langle \varphi _n^s,\varphi _m^s\rangle =\delta _{nm}\) を得る． </p>
+<p>最後に \(\sin \alpha \cos \beta =\frac12\bigl(\sin (\alpha +\beta )+\sin (\alpha -\beta )\bigr)\) より \(\langle \varphi _n^s,\varphi _m^c\rangle =0\) である． したがって実Fourier関数系は正規直交系である． </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000001140">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">57</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0013.html#a0000001140">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>実Fourier関数系に対するFourier係数は </p>
+<div class="displaymath" id="a0000001141">
+  \[  \begin{aligned}  \langle f,\varphi _0\rangle & =\int _0^1 f(x)\, dx,\\ \langle f,\varphi _n^c\rangle & =\sqrt{2}\int _0^1 f(x)\cos (2\pi n x)\, dx,\\ \langle f,\varphi _n^s\rangle & =\sqrt{2}\int _0^1 f(x)\sin (2\pi n x)\, dx \end{aligned}  \]
+</div>
+<p> で与えられる． つまり Fourier 係数は「関数と基本波との内積」である． </p>
+<p>古典的な Fourier 解析では， この正規直交系が実際に CONS であることを示す． その結果，\(L^2([0,1],\lambda )\) の関数をFourier級数で展開できる． </p>
+
+  </div>
+</div>
+<h1 id="a0000000240"> 解釈とまとめ</h1>
+<p>Banach空間では長さだけを見ていたが， Hilbert空間では内積によって \(\text{長さ}\)，\(\text{角度}\)，\(\text{直交}\) が同時に扱えるようになった． </p>
+<p>特に重要なのは， \(L^2(X)\) がHilbert空間になることである． ここでは関数の直交性が積分 \(\int _X f g\, d\mu \) で表されるため， 積分論と線形代数が直接結びつく． </p>
+<p>さらに正規直交系を用いると， 任意のベクトル \(x\) を \(\langle x,e_n\rangle \) という係数で解析できる． Bessel の不等式と Parseval の等式は， この展開がエネルギー保存 \(\| x\| ^2\) と整合的であることを示している． 次章では，こうした空間のあいだを結ぶ写像として 線形作用素を導入する．   </p>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="sect0012.html" title="Banach空間"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="Lecture note on KSK"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+  <a href="sect0014.html" title="線形作用素"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>

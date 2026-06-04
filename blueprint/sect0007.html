@@ -1,0 +1,1829 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>可測関数</title>
+<link rel="next" href="sect0008.html" title="Lebesgue積分" />
+<link rel="prev" href="sect0006.html" title="Carathéodory流の測度論" />
+<link rel="up" href="index.html" title="Lecture note on KSK" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">Lecture note on KSK</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Riemann積分</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0001.html#a0000000018"><span class="toc_ref"></span> <span class="toc_entry">Riemann和による定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000028"><span class="toc_ref"></span> <span class="toc_entry">Darbouxの上積分と下積分による定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000039"><span class="toc_ref"></span> <span class="toc_entry">Riemann可積分関数の例</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000101"><span class="toc_ref"></span> <span class="toc_entry">Riemann可積分でない例</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000114"><span class="toc_ref"></span> <span class="toc_entry">極限と積分の順序交換</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000123"><span class="toc_ref"></span> <span class="toc_entry">順序交換の応用例</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000132"><span class="toc_ref"></span> <span class="toc_entry">Riemann積分の長所と短所</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0001.html#a0000000133"><span class="toc_ref"></span> <span class="toc_entry">長所：定義が素朴であり，計算しやすい</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000134"><span class="toc_ref"></span> <span class="toc_entry">短所：無限回操作に対して不安定</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000135"><span class="toc_ref"></span> <span class="toc_entry">原因：Riemann積分の定義が有限和（有限分割\(\mathcal P\)）の極限</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000137"><span class="toc_ref"></span> <span class="toc_entry">技術的課題：無限和（無限分割）にすると何が起きるか</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000139"><span class="toc_ref"></span> <span class="toc_entry">解決策：Lebesgue積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000140"><span class="toc_ref"></span> <span class="toc_entry">展望：何が嬉しいか</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000141"><span class="toc_ref"></span> <span class="toc_entry">多くの応用先</span></a>
+ </li>
+
+  </ul>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0002.html#a0000000142"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000143"><span class="toc_ref"></span> <span class="toc_entry">\(\mathbb R^d\)の基本集合</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000144"><span class="toc_ref"></span> <span class="toc_entry">\(\mathbb R^d\)のRiemann積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000145"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度・Jordan可測</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000146"><span class="toc_ref"></span> <span class="toc_entry">Jordan零集合</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000147"><span class="toc_ref"></span> <span class="toc_entry">Jordan可測性の判定法</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000148"><span class="toc_ref"></span> <span class="toc_entry">Jordan可測集合の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000149"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000150"><span class="toc_ref"></span> <span class="toc_entry">有限加法族・有限加法的測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000151"><span class="toc_ref"></span> <span class="toc_entry">概念の整理</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0003.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0003.html#a0000000152"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000153"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000154"><span class="toc_ref"></span> <span class="toc_entry">拡大実数</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000155"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000156"><span class="toc_ref"></span> <span class="toc_entry">具体例</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000157"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000158"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度との整合</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000159"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の外正則性</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000160"><span class="toc_ref"></span> <span class="toc_entry">解釈</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0004.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue内測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0004.html#a0000000161"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000162"><span class="toc_ref"></span> <span class="toc_entry">定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000163"><span class="toc_ref"></span> <span class="toc_entry">基本性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000164"><span class="toc_ref"></span> <span class="toc_entry">具体例</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000165"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度との関係</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000166"><span class="toc_ref"></span> <span class="toc_entry">同値な定義</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0004.html#a0000000167"><span class="toc_ref"></span> <span class="toc_entry">外測度に関する補助定理</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000168"><span class="toc_ref"></span> <span class="toc_entry">解釈</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0005.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0005.html#a0000000169"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000170"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合とLebesgue測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000171"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合の性質</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0005.html#a0000000172"><span class="toc_ref"></span> <span class="toc_entry">有界閉区間上のLebesgue可測集合</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000173"><span class="toc_ref"></span> <span class="toc_entry">全空間上のLebesgue可測集合</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0005.html#sec:lebesgue-measure-properties"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#sec:lebesgue-caratheodory-comparison"><span class="toc_ref"></span> <span class="toc_entry">Carathéodory条件との比較</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000174"><span class="toc_ref"></span> <span class="toc_entry">まとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0006.html"><span class="toc_ref"></span> <span class="toc_entry">Carathéodory流の測度論</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0006.html#a0000000175"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000176"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000177"><span class="toc_ref"></span> <span class="toc_entry">可測空間と測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000178"><span class="toc_ref"></span> <span class="toc_entry">外測度とCarathéodory可測性</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000179"><span class="toc_ref"></span> <span class="toc_entry">半加法族と前測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000180"><span class="toc_ref"></span> <span class="toc_entry">誘導外測度と拡張定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000181"><span class="toc_ref"></span> <span class="toc_entry">Borel集合族</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000182"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測性の限界</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000183"><span class="toc_ref"></span> <span class="toc_entry">まとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class=" active current">
+  <a href="sect0007.html"><span class="toc_ref"></span> <span class="toc_entry">可測関数</span></a>
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
+     <li class="">
+  <a href="sect0007.html#a0000000184"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000185"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000186"><span class="toc_ref"></span> <span class="toc_entry">可測写像</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000187"><span class="toc_ref"></span> <span class="toc_entry">可測関数の定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000188"><span class="toc_ref"></span> <span class="toc_entry">基本例</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000189"><span class="toc_ref"></span> <span class="toc_entry">ベクトル値可測写像と合成</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000190"><span class="toc_ref"></span> <span class="toc_entry">不等式・極限で作られる関数</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000191"><span class="toc_ref"></span> <span class="toc_entry">ほとんど至る所（almost everywhere）</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#sec:ae-convergence"><span class="toc_ref"></span> <span class="toc_entry">概収束</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000192"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0008.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue積分</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0008.html#a0000000193"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000194"><span class="toc_ref"></span> <span class="toc_entry">単関数の積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000195"><span class="toc_ref"></span> <span class="toc_entry">非負可測関数の積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000196"><span class="toc_ref"></span> <span class="toc_entry">零集合と almost everywhere</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000197"><span class="toc_ref"></span> <span class="toc_entry">符号付可測関数の積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000198"><span class="toc_ref"></span> <span class="toc_entry">積分の絶対連続性</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000199"><span class="toc_ref"></span> <span class="toc_entry">具体例</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000200"><span class="toc_ref"></span> <span class="toc_entry">Riemann積分との関係</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000201"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0009.html"><span class="toc_ref"></span> <span class="toc_entry">測度空間上の積分の性質</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0009.html#a0000000202"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000203"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000204"><span class="toc_ref"></span> <span class="toc_entry">準備：正部分と負部分</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000205"><span class="toc_ref"></span> <span class="toc_entry">集合に関する性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000206"><span class="toc_ref"></span> <span class="toc_entry">順序と大きさ</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000207"><span class="toc_ref"></span> <span class="toc_entry">線形性</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000208"><span class="toc_ref"></span> <span class="toc_entry">計算則のまとめ</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000209"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0010.html"><span class="toc_ref"></span> <span class="toc_entry">収束定理</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0010.html#a0000000210"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000211"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000212"><span class="toc_ref"></span> <span class="toc_entry">設定</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000213"><span class="toc_ref"></span> <span class="toc_entry">単調収束定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000214"><span class="toc_ref"></span> <span class="toc_entry">Fatouの補題</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000215"><span class="toc_ref"></span> <span class="toc_entry">優収束定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000216"><span class="toc_ref"></span> <span class="toc_entry">項別積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000217"><span class="toc_ref"></span> <span class="toc_entry">積分記号下の微分</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000218"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0011.html"><span class="toc_ref"></span> <span class="toc_entry">Fubiniと変数変換</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0011.html#a0000000219"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html#a0000000220"><span class="toc_ref"></span> <span class="toc_entry">積測度と切片</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html#a0000000221"><span class="toc_ref"></span> <span class="toc_entry">Tonelliの定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html#a0000000222"><span class="toc_ref"></span> <span class="toc_entry">Fubiniの定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html#a0000000223"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度での積測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html#a0000000224"><span class="toc_ref"></span> <span class="toc_entry">変数変換</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html#a0000000225"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0012.html"><span class="toc_ref"></span> <span class="toc_entry">Banach空間</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0012.html#a0000000226"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000227"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000228"><span class="toc_ref"></span> <span class="toc_entry">ノルム空間とBanach空間</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000229"><span class="toc_ref"></span> <span class="toc_entry">\(C(X)\) と sup-norm</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000230"><span class="toc_ref"></span> <span class="toc_entry">\(L^p(X)\) 空間</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000231"><span class="toc_ref"></span> <span class="toc_entry">Hölderの不等式とMinkowskiの不等式</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000232"><span class="toc_ref"></span> <span class="toc_entry">Riesz–Fischerの定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000233"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0013.html"><span class="toc_ref"></span> <span class="toc_entry">Hilbert空間</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0013.html#a0000000234"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000235"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000236"><span class="toc_ref"></span> <span class="toc_entry">内積空間とHilbert空間</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000237"><span class="toc_ref"></span> <span class="toc_entry">\(L^2(X)\) はHilbert空間</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000238"><span class="toc_ref"></span> <span class="toc_entry">正規直交系と直交射影</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000239"><span class="toc_ref"></span> <span class="toc_entry">Fourier関数系</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000240"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0014.html"><span class="toc_ref"></span> <span class="toc_entry">線形作用素</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0014.html#a0000000241"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000242"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000243"><span class="toc_ref"></span> <span class="toc_entry">線形作用素と連続性</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000244"><span class="toc_ref"></span> <span class="toc_entry">作用素ノルム</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000245"><span class="toc_ref"></span> <span class="toc_entry">\(\mathcal B(X,Y)\) の完備性</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000246"><span class="toc_ref"></span> <span class="toc_entry">例</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000247"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000008"> 可測関数</h1>
+<h4 id="a0000000184">本章の目標</h4>
+<p> LebesgueとCarathéodoryの測度論によって，極限操作に対しても頑健に，面積や体積が測れる集合のクラスが明らかになった． 積分論では，積分を測度論に帰着することで，極限操作に対しても頑健に積分できる関数のクラスを明らかにする． 本章では，その出発点として一般の可測関数を定義し，特にLebesgue可測関数を説明する． </p>
+<h1 id="a0000000185"> 動機づけ</h1>
+<p> 積分を測度論に帰着する第一歩として，有限個の区間に分けて定まる区分定数関数を考える． </p>
+<div class="displaymath" id="a0000000830">
+  \[  [0,1]=A_1\sqcup \cdots \sqcup A_n,\qquad f(x) = \sum _{i=1}^n c_i 1_{A_i}(x).  \]
+</div>
+<p> ここで各\(A_i\)は互いに素な区間であり，値\(c_i\)は \(0\le c_1{\lt}c_2{\lt}\cdots {\lt}c_n\) を満たすとする． この関数のRiemann積分は </p>
+<div class="displaymath" id="a0000000831">
+  \[  \int _0^1 f(x)\, dx = \sum _{i=1}^n c_i\, m_J(A_i)  \]
+</div>
+<p> と書ける． これは定義域側の区間\(A_i\)を見て，その上の高さ\(c_i\)を足し合わせる計算である． </p>
+<p>同じ計算を，関数値の側から見直してみる． 値\(c_i\)を固定すると，\(c_i\)をとる点全体は </p>
+<div class="displaymath" id="a0000000832">
+  \[  A_i = f^{-1}(\{ c_i\} ) = \{  x \in [0,1] \mid f(x)=c_i \}   \]
+</div>
+<p> である． したがって先ほどの式は </p>
+<div class="displaymath" id="a0000000833">
+  \[  \int _0^1 f(x)\, dx = \sum _{i=1}^n c_i\, m_J\left(f^{-1}(\{ c_i\} )\right)  \]
+</div>
+<p> とも書ける． この形では，値\(c_i\)そのものではなく， その値をとる点の集まり\(f^{-1}(\{ c_i\} )\)の大きさを測っている． つまり，値域側で条件を指定し，逆像によって定義域側の集合に戻してから測度を適用しているのである． </p>
+<p>この視点は，Riemann積分では扱えなかった関数を見直す手掛かりになる． Dirichlet関数 \(f_D = 1_{[0,1]\cap \mathbb Q}\) は値としては\(0\)と\(1\)しかとらないが， \(f_D^{-1}(\{ 0\} )\) も \(f_D^{-1}(\{ 1\} )\) も境界が\([0,1]\)全体になり， Jordan可測ではない． したがってJordan測度ではこの計算を正当化できない． 一方，Lebesgue測度\(\lambda \)を用いれば </p>
+<div class="displaymath" id="a0000000834">
+  \[  0\cdot \lambda \left(f_D^{-1}(\{ 0\} )\right) +1\cdot \lambda \left(f_D^{-1}(\{ 1\} )\right) = \lambda ([0,1]\cap \mathbb Q) =0  \]
+</div>
+<p> となる． もちろん，この式を積分として正当化するにはまだ準備が必要である． しかし少なくとも，関数値側の条件から生じる集合 \(f^{-1}(B)\) が測れることを要求すべきだ，という方針は見えてくる． これがLebesgue積分論において逆像が基本的な役割を果たす理由である． </p>
+<h1 id="a0000000186"> 可測写像</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:measurable-space">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.1</span>
+    <span class="definition_thmtitle">可測空間</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#def:measurable-space">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 集合 \(X\) とその上の\(\sigma \)-加法族 \(\mathcal M\) の組 \((X,\mathcal M)\) を可測空間という． </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:measurable-map">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.2</span>
+    <span class="definition_thmtitle">可測写像</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#def:measurable-map">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 可測空間 \((X,\mathcal M)\) と \((Y,\mathcal N)\) の間の写像 \(f:X\to Y\) が可測であるとは，任意の \(B \in \mathcal N\) に対して \(f^{-1}(B)\in \mathcal M\) が成り立つことをいう． </p>
+
+  </div>
+</div>
+<p>以下では，写像\(f : X \to Y\) による集合族 \(\mathcal E\subset \mathcal P(Y)\) の逆像を </p>
+<div class="displaymath" id="a0000000835">
+  \[  f^{-1}(\mathcal E):=\{ f^{-1}(E)\mid E\in \mathcal E\}   \]
+</div>
+<p> と略記する．例えば，写像の可測性は \(f^{-1}(\mathcal N) \subset \mathcal M\) と書ける． </p>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:inverse-image-basic">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.3</span>
+    <span class="proposition_thmtitle">逆像の基本性質</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#prop:inverse-image-basic">#</a>
+    
+    <a class="icon proof" href="sect0007.html#a0000000836"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> 任意の写像 \(f:X\to Y\) と部分集合族 \(\{ B_s\} _{s\in S}\subset \mathcal P(Y)\) に対して 次が成り立つ． </p>
+<div class="displaymath" id="a0000000837">
+  \[  f^{-1}(Y\setminus B) =X\setminus f^{-1}(B),\quad f^{-1}\left(\bigcup _{s\in S}B_s\right) =\bigcup _{s\in S}f^{-1}(B_s),\quad f^{-1}\left(\bigcap _{s\in S}B_s\right) =\bigcap _{s\in S}f^{-1}(B_s).  \]
+</div>
+<p> ここで添え字集合\(S\)は非可算無限集合でもよい． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000836">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p><b class="bfseries">補集合</b>&#8195;\(x\in f^{-1}(Y\setminus B)\) であることは \(f(x)\in Y\setminus B\)，すなわち \(f(x)\notin B\) と同値である． これは \(x\notin f^{-1}(B)\)，つまり \(x\in X\setminus f^{-1}(B)\) と同値だから， \(f^{-1}(Y\setminus B)=X\setminus f^{-1}(B)\) である． </p>
+<p><b class="bfseries">和集合</b>&#8195;\(x\in f^{-1}(\bigcup _s B_s)\) であることは，ある \(s\) について \(f(x)\in B_s\) となること，すなわち \(x\in f^{-1}(B_s)\) となることと同値である． したがって \(x\in \bigcup _{s\in S}f^{-1}(B_s)\) である． </p>
+<p><b class="bfseries">共通部分</b>&#8195;補集合と和集合の場合，および De Morgan の法則から従う． </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:inverse-image-sigma-algebra">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.4</span>
+    <span class="proposition_thmtitle">\(\sigma \)-加法族の誘導</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#prop:inverse-image-sigma-algebra">#</a>
+    
+    <a class="icon proof" href="sect0007.html#a0000000838"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p>  任意の写像 \(f: X \to Y\) と \(Y\)上の\(\sigma \)-加法族 \(\mathcal N\) に対して，逆像 \(\mathcal M:= f^{-1}(\mathcal N)\) は\(X\)上の\(\sigma \)-加法族である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000838">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>まず \(f^{-1}(\emptyset ) = \emptyset \) より \(\emptyset \in \mathcal M\) である． 次に ??prop:inverse-image-basicより \(f^{-1}(Y\setminus B)=X\setminus f^{-1}(B)\) および \(f^{-1}(\bigcup _n B_n)=\bigcup _n f^{-1}(B_n)\) が成り立つので， \(A \in \mathcal M\implies A^c \in \mathcal M\) および \(\{ A_i\} _{i=1}^\infty \subset \mathcal M\implies \cup _{i=1}^\infty A_i \in \mathcal M\) が言える． </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:commute-induce-generate-sigma-algebra">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">.5</span>
+    <span class="lemma_thmtitle">逆像と生成 \(\sigma \)-加法族の可換性</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#lem:commute-induce-generate-sigma-algebra">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>  任意の写像 \(f: X \to Y\) と集合族 \(\mathcal E\subset \mathcal P(Y)\) に対して， </p>
+<div class="displaymath" id="a0000000839">
+  \[  f^{-1}\left(\sigma (\mathcal E)\right) = \sigma \left(f^{-1}(\mathcal E)\right)  \]
+</div>
+<p> が成り立つ． 特に \(f : (X,\sigma (f^{-1}(\mathcal E))) \to (Y,\sigma (\mathcal E))\) は可測写像である． </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000000840">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">30</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#a0000000840">#</a>
+    
+    <a class="icon proof" href="sect0007.html#a0000000841"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>したがって，\(Y\) 側の \(\sigma \)-加法族がある生成族で記述されていれば，\(X\) 側ではその生成族の逆像だけを調べればよい． 可測集合の全体\(\mathcal B\)はしばしば超越的なので，その素性はよく分からないが，生成系\(\mathcal E\)の方はある程度分かりやすい構造を持っていることがある．例えば，開集合系\(\mathcal O\)が生成するBorel集合系\(\mathcal B(\mathcal O)\)などが典型的である． そのような場合にこの補題は威力を発揮する． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000841">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(\sigma (\mathcal E)\) は \(Y\) 上の \(\sigma \)-加法族である． したがって??prop:inverse-image-sigma-algebraより \(f^{-1}(\sigma (\mathcal E))\) は \(X\) 上の \(\sigma \)-加法族である． また \(f^{-1}(\mathcal E)\subset f^{-1}(\sigma (\mathcal E))\) だから， </p>
+<div class="displaymath" id="a0000000842">
+  \[  \sigma (f^{-1}(\mathcal E))\subset f^{-1}(\sigma (\mathcal E))  \]
+</div>
+<p> である． </p>
+<p>逆向きを示す． </p>
+<div class="displaymath" id="a0000000843">
+  \[  \mathcal C:=\{ B\subset Y\mid f^{-1}(B)\in \sigma (f^{-1}(\mathcal E))\}   \]
+</div>
+<p> とおく． \(\mathcal C\) は \(Y\) 上の \(\sigma \)-加法族である． しかも \(\mathcal E\subset \mathcal C\) であるから， \(\sigma (\mathcal E)\subset \mathcal C\) である． したがって任意の \(B\in \sigma (\mathcal E)\) に対して \(f^{-1}(B)\in \sigma (f^{-1}(\mathcal E))\) となる． これは </p>
+<div class="displaymath" id="a0000000844">
+  \[  f^{-1}(\sigma (\mathcal E))\subset \sigma (f^{-1}(\mathcal E))  \]
+</div>
+<p> を意味する． 以上より等号が成り立つ． </p>
+<p>最後に，\(B\in \sigma (\mathcal E)\) ならば \(f^{-1}(B)\in \sigma (f^{-1}(\mathcal E))\) であるから， 述べた写像は可測である． </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000000845">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">31</span>
+    <span class="remark_thmtitle">可測写像の定義はなぜ逆像か</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#a0000000845">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p> 可測写像や連続写像の定義は，像ではなく逆像で書かれる． その理由は，逆像が補集合，可算和，可算共通部分といった集合演算を保つからである． 実際，??prop:inverse-image-basicより \(f^{-1}(Y\setminus B)=X\setminus f^{-1}(B)\) および \(f^{-1}(\bigcup _n B_n)=\bigcup _n f^{-1}(B_n)\) が成り立つ． さらに??lem:commute-induce-generate-sigma-algebraより，生成族について \(f^{-1}(\sigma (\mathcal E))=\sigma (f^{-1}(\mathcal E))\) が成り立つ． </p>
+<p>これに対して像 \(f(B)\) は，一般には \(f(X\setminus A)=Y\setminus f(A)\) も \(f(\bigcap _n A_n)=\bigcap _n f(A_n)\) も満たさない． したがって「\(\sigma \)-加法族の構造を保つ」という意味で自然なのは像ではなく逆像なのである． </p>
+
+  </div>
+</div>
+<h1 id="a0000000187"> 可測関数の定義</h1>
+<p>拡大実数直線 \(\overline{\mathbb R}\) のBorel集合族を \(\mathcal B(\overline{\mathbb R})\) と書く． </p>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:borel-eRR">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">.6</span>
+    <span class="lemma_thmtitle">拡大実数直線のBorel集合族</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#lem:borel-eRR">#</a>
+    
+    <a class="icon proof" href="sect0007.html#a0000000846"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p>  \(\mathcal B(\overline{\mathbb R})=\sigma (\{ (-\infty ,a]\mid a\in \mathbb R\} )\) である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000846">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(\mathcal G:=\{ (-\infty ,a]\mid a\in \mathbb R\} \) とおく． 各 \((-\infty ,a]\) は \(\overline{\mathbb R}\) の閉集合だから \(\mathcal G\subset \mathcal B(\overline{\mathbb R})\) である． したがって </p>
+<div class="displaymath" id="a0000000847">
+  \[ \sigma (\mathcal G)\subset \mathcal B(\overline{\mathbb R}) \]
+</div>
+<p> である． </p>
+<p>逆向きを示す． \(p,q\in \mathbb Q,\  p{\lt}q\) に対して </p>
+<div class="displaymath" id="a0000000848">
+  \[  (p,\infty ]=\overline{\mathbb R}\setminus (-\infty ,p]\in \sigma (\mathcal G)  \]
+</div>
+<p> であり，また </p>
+<div class="displaymath" id="a0000000849">
+  \[  [-\infty ,q)=\bigcup _{n=1}^{\infty }(-\infty ,q-\frac1n]\in \sigma (\mathcal G)  \]
+</div>
+<p> である． したがって </p>
+<div class="displaymath" id="a0000000850">
+  \[  (p,q)=(p,\infty ]\cap [-\infty ,q)\in \sigma (\mathcal G)  \]
+</div>
+<p> も成り立つ． </p>
+<p>拡大実数直線 \(\overline{\mathbb R}\) の通常の順序位相は </p>
+<div class="displaymath" id="a0000000851">
+  \[  \{ [-\infty ,q)\mid q\in \mathbb Q\}  \cup \{ (p,q)\mid p,q\in \mathbb Q,\  p{\lt}q\}  \cup \{ (p,\infty ]\mid p\in \mathbb Q\}   \]
+</div>
+<p> を可算基底にもつ． この基底の各元は \(\sigma (\mathcal G)\) に属するので，任意の開集合は \(\sigma (\mathcal G)\) に属する． よって </p>
+<div class="displaymath" id="a0000000852">
+  \[  \mathcal B(\overline{\mathbb R})\subset \sigma (\mathcal G)  \]
+</div>
+<p> である． 以上より等号が成り立つ． </p>
+
+  </div>
+</div>
+<p>可測空間 \((X,\mathcal M)\) と \(E\in \mathcal M\) に対して，\(E\) 上に制限された \(\sigma \)-加法族を </p>
+<div class="displaymath" id="a0000000853">
+  \[  \mathcal M(E):=\{ E\cap A\mid A\in \mathcal M\}   \]
+</div>
+<p> と書く． 特にLebesgue可測集合 \(E \in \mathcal L_d\) 上に制限されたLebesgue \(\sigma \)-加法族を </p>
+<div class="displaymath" id="a0000000854">
+  \[  \mathcal L_d(E):=\{ E\cap A \mid A\in \mathcal L_d\}   \]
+</div>
+<p> と書く． </p>
+<div class="definition_thmwrapper theorem-style-definition" id="def:lebesgue-measurable-function">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.7</span>
+    <span class="definition_thmtitle">可測関数</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#def:lebesgue-measurable-function">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 可測空間 \((X,\mathcal M)\) 上の拡大実数値関数 \(f:X \to \overline{\mathbb R}\) が\(\mathcal M\)-可測関数であるとは， </p>
+<div class="displaymath" id="a0000000855">
+  \[  f:(X,\mathcal M)\to (\overline{\mathbb R},\mathcal B(\overline{\mathbb R}))  \]
+</div>
+<p> が??def:measurable-mapの意味で可測写像であることをいう． 特に\(X\) がLebesgue可測集合で \(\mathcal M=\mathcal L_d(X)\) のとき，\(f\) をLebesgue可測関数という．また，\(\mathcal M\)がBorel \(\sigma \)-加法族のとき，\(f\) をBorel可測関数という． </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:measurable-function-space-notation">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.8</span>
+    <span class="definition_thmtitle">可測関数空間の記号</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#def:measurable-function-space-notation">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 可測空間 \((X,\mathcal M)\) 上の拡大実数値可測関数全体を \(M(X;\overline{\mathbb R})\) と書く．文脈から値域が明らかなときは \(M(X):=M(X;\overline{\mathbb R})\) と略記する． また，実数値可測関数全体を \(M(X;\mathbb R)\)，非負可測関数全体を \(M^+(X):=\{ f\in M(X;\overline{\mathbb R})\mid f\ge 0\} \) と書く． </p>
+<p>\(\sigma \)-加法族を明示したいときは \(M(X,\mathcal M;\overline{\mathbb R})\) のように書く． 可測集合 \(E\in \mathcal M\) について \(M(E;\overline{\mathbb R})\) と書く場合は，相対可測空間 \((E,\mathcal M(E))\) 上の可測関数全体を意味する． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:lebesgue-measurable-function-criterion">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">.9</span>
+    <span class="theorem_thmtitle">可測関数の判定法</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#thm:lebesgue-measurable-function-criterion">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> \((X,\mathcal M)\) を可測空間とし，\(f:X\to \overline{\mathbb R}\) とする． 次は同値である． </p>
+<ol class="enumerate">
+  <li><p>\(f\) は \(\mathcal M\)-可測である </p>
+</li>
+  <li><p>任意の \(a\in \mathbb R\) に対して \(\{ x\in X \mid f(x){\gt}a\} \) は \(\mathcal M\) に属する </p>
+</li>
+  <li><p>任意の \(a\in \mathbb R\) に対して \(\{ x\in X \mid f(x)\ge a\} \) は \(\mathcal M\) に属する </p>
+</li>
+  <li><p>任意の \(a\in \mathbb R\) に対して \(\{ x\in X \mid f(x){\lt}a\} \) は \(\mathcal M\) に属する </p>
+</li>
+  <li><p>任意の \(a\in \mathbb R\) に対して \(\{ x\in X \mid f(x)\le a\} \) は \(\mathcal M\) に属する </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="rem:level-set-notation">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">32</span>
+    <span class="remark_thmtitle">レベル集合の略記</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#rem:level-set-notation">#</a>
+    
+    <a class="icon proof" href="sect0007.html#a0000000856"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p> 以後，\(f:X\to \overline{\mathbb R}\) と \(B\subset \overline{\mathbb R}\) に対して </p>
+<div class="displaymath" id="a0000000857">
+  \[  \{ f\in B\} :=\{ x\in X\mid f(x)\in B\}  = f^{-1}(B)  \]
+</div>
+<p> と書く． また \(a\in \mathbb R\) に対して </p>
+<div class="displaymath" id="a0000000858">
+  \[  \begin{aligned}  \{ f{\gt}a\}  & :=\{ x\in X\mid f(x){\gt}a\}  = f^{-1}( (a,\infty ] ),\\ \{ f\ge a\} & :=\{ x\in X\mid f(x)\ge a\}  = f^{-1}( [a,\infty ] )\\ \end{aligned}  \]
+</div>
+<p> などと書く． さらに \(f,g:X\to \overline{\mathbb R}\) に対して </p>
+<div class="displaymath" id="a0000000859">
+  \[  \{ f{\gt}g\} :=\{ x\in X\mid f(x){\gt}g(x)\}   \]
+</div>
+<p> などと書く． 定義域 \(X\) は文脈から判断する． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000856">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p><b class="bfseries">(1) \(\Rightarrow \) (2)</b>&#8195;\((a,\infty ]\in \mathcal B(\overline{\mathbb R})\) だから，可測性の定義より \(f^{-1}((a,\infty ])=\{ x\in X \mid f(x){\gt}a\} \) は可測である． </p>
+<p><b class="bfseries">(2) \(\Rightarrow \) (3)</b>&#8195;任意の \(a\in \mathbb R\) に対して </p>
+<div class="displaymath" id="a0000000860">
+  \[  \{ f\ge a\}  = \bigcap _{n=1}^{\infty }\left\{ f{\gt}a-\frac1n\right\}   \]
+</div>
+<p> である． 右辺は可測集合の可算共通部分だから可測である． </p>
+<p><b class="bfseries">(3) \(\Rightarrow \) (4)</b>&#8195;</p>
+<div class="displaymath" id="a0000000861">
+  \[  \{ f{\lt}a\} =X\setminus \{ f\ge a\}   \]
+</div>
+<p> だから可測である． </p>
+<p><b class="bfseries">(4) \(\Rightarrow \) (5)</b>&#8195;</p>
+<div class="displaymath" id="a0000000862">
+  \[  \{ f\le a\}  = \bigcap _{n=1}^{\infty }\left\{ f{\lt}a+\frac1n\right\}   \]
+</div>
+<p> だから可測である． </p>
+<p><b class="bfseries">(5) \(\Rightarrow \) (1)</b>&#8195;\(\mathcal G:=\{ (-\infty ,a]\mid a\in \mathbb R\} \) とおく． 仮定より \(f^{-1}(\mathcal G)\subset \mathcal M\) である． \(\mathcal M\) は \(\sigma \)-加法族だから \(\sigma (f^{-1}(\mathcal G))\subset \mathcal M\) である． 一方，??lem:commute-induce-generate-sigma-algebra,lem:borel-eRRより </p>
+<div class="displaymath" id="a0000000863">
+  \[  f^{-1}(\mathcal B(\overline{\mathbb R})) =f^{-1}(\sigma (\mathcal G)) =\sigma (f^{-1}(\mathcal G))  \]
+</div>
+<p> である． したがって任意の \(B\in \mathcal B(\overline{\mathbb R})\) に対して \(f^{-1}(B)\in \mathcal M\) であり，\(f\) は \(\mathcal M\)-可測である． </p>
+
+  </div>
+</div>
+<h1 id="a0000000188"> 基本例</h1>
+<div class="example_thmwrapper theorem-style-plain" id="ex:continuous-function-measurable">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
+    </span>
+    <span class="example_thmlabel">.10</span>
+    <span class="example_thmtitle">連続関数</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#ex:continuous-function-measurable">#</a>
+    
+    <a class="icon proof" href="sect0007.html#a0000000864"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="example_thmcontent">
+  <p> \((X,\mathcal O)\) を位相空間とし，\(\mathcal B(X):=\sigma (\mathcal O)\) とする． 連続関数 \(f:X\to \mathbb R\) はBorel可測である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000864">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(\mathbb R\) には通常の位相を入れる． 連続性より，任意の開集合 \(U\subset \mathbb R\) に対して \(f^{-1}(U)\in \mathcal O\) である． したがって </p>
+<div class="displaymath" id="a0000000865">
+  \[  f^{-1}(\mathcal O(\mathbb R))\subset \mathcal B(X)  \]
+</div>
+<p> である． ここで \(\mathcal O(\mathbb R)\) は \(\mathbb R\) の開集合全体を表す． ??lem:commute-induce-generate-sigma-algebraより </p>
+<div class="displaymath" id="a0000000866">
+  \[  f^{-1}(\mathcal B(\mathbb R)) =f^{-1}(\sigma (\mathcal O(\mathbb R))) =\sigma (f^{-1}(\mathcal O(\mathbb R))) \subset \mathcal B(X)  \]
+</div>
+<p> である． よって \(f:(X,\mathcal B(X))\to (\mathbb R,\mathcal B(\mathbb R))\) は可測写像であり， \(f\) はBorel可測である． </p>
+
+  </div>
+</div>
+<div class="example_thmwrapper theorem-style-plain" id="ex:indicator-function-measurable">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
+    </span>
+    <span class="example_thmlabel">.11</span>
+    <span class="example_thmtitle">指示関数</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#ex:indicator-function-measurable">#</a>
+    
+    <a class="icon proof" href="sect0007.html#a0000000867"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="example_thmcontent">
+  <p> \((X,\mathcal M)\) を可測空間とする． \(A \in \mathcal M\) なら \(1_A\in M(X;\mathbb R)\) である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000867">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>任意の \(a\in \mathbb R\) に対して </p>
+<div class="displaymath" id="a0000000868">
+  \[  \{ 1_A{\gt}a\}  = \begin{cases}  \emptyset &  (a\ge 1),\\ A &  (0\le a{\lt}1),\\ X &  (a{\lt}0). \end{cases}  \]
+</div>
+<p> いずれも可測だから，??thm:lebesgue-measurable-function-criterionより \(1_A\) は可測である． </p>
+
+  </div>
+</div>
+<div class="example_thmwrapper theorem-style-plain" id="a0000000869">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
+    </span>
+    <span class="example_thmlabel">.12</span>
+    <span class="example_thmtitle">Dirichlet関数</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#a0000000869">#</a>
+    
+    <a class="icon proof" href="sect0007.html#a0000000870"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="example_thmcontent">
+  <p> \(f=1_{\mathbb Q\cap [0,1]}\) は \([0,1]\) 上Lebesgue可測である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000870">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>既に見た通り \(\mathbb Q\cap [0,1]\) はLebesgue可測である． したがって??ex:indicator-function-measurableを \(([0,1],\mathcal L_1([0,1]))\) に適用すれば，\(f\) は可測である． </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000000871">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">33</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#a0000000871">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>Dirichlet関数はRiemann積分できなかったが， Lebesgue積分論ではまず「可測である」ことが分かる． 積分できるかどうかは次章で考える． </p>
+
+  </div>
+</div>
+<h1 id="a0000000189"> ベクトル値可測写像と合成</h1>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:measurable-vector-map">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.13</span>
+    <span class="proposition_thmtitle">有限個の可測関数をまとめた写像</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#prop:measurable-vector-map">#</a>
+    
+    <a class="icon proof" href="sect0007.html#a0000000872"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \((X,\mathcal M)\) を可測空間とし， \(f_1,\dots ,f_n\in M(X;\mathbb R)\) とする． このとき \(F:X\to \mathbb R^n,\  F(x):=(f_1(x),\dots ,f_n(x))\) は可測である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000872">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(\mathcal C:=\{ B\in \mathcal B(\mathbb R^n)\mid F^{-1}(B)\in \mathcal M\} \) とおく． \(\mathcal C\) は \(\sigma \)-加法族である． </p>
+<p>任意の \(a_1,\dots ,a_n\in \mathbb R\) に対して </p>
+<div class="displaymath" id="a0000000873">
+  \begin{align*}  F^{-1}\bigl((-\infty ,a_1]\times \cdots \times (-\infty ,a_n]\bigr) = \bigcap _{k=1}^n \{ x\in X\mid f_k(x)\le a_k\}  \end{align*}
+</div>
+<p> であり，右辺は可測である． したがって </p>
+<div class="displaymath" id="a0000000874">
+  \[  (-\infty ,a_1]\times \cdots \times (-\infty ,a_n]\in \mathcal C.  \]
+</div>
+<p> ところが，このような直方体は \(\mathcal B(\mathbb R^n)\) を生成するから \(\mathcal B(\mathbb R^n)\subset \mathcal C\) である． よって \(F\) は可測である． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:measurable-continuous-composition">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">.14</span>
+    <span class="theorem_thmtitle">連続写像との合成</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#thm:measurable-continuous-composition">#</a>
+    
+    <a class="icon proof" href="sect0007.html#a0000000875"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> \((X,\mathcal M)\) を可測空間とする． \(F:(X,\mathcal M)\to (\mathbb R^n,\mathcal B(\mathbb R^n))\) を可測写像， \(\Phi :\mathbb R^n\to \mathbb R\) を連続関数とする． このとき \(\Phi \circ F:X\to \mathbb R\) は \(\mathcal M\)-可測である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000875">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>任意のBorel集合 \(B\subset \mathbb R\) に対して， \(\Phi \) の連続性より \(\Phi ^{-1}(B)\in \mathcal B(\mathbb R^n)\) である． したがって \((\Phi \circ F)^{-1}(B)=F^{-1}(\Phi ^{-1}(B))\) は可測である． よって \(\Phi \circ F\) は可測である． </p>
+
+  </div>
+</div>
+<div class="corollary_thmwrapper theorem-style-plain" id="cor:measurable-algebra-operations">
+  <div class="corollary_thmheading">
+    <span class="corollary_thmcaption">
+    Corollary
+    </span>
+    <span class="corollary_thmlabel">.15</span>
+    <span class="corollary_thmtitle">代数演算と合成</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#cor:measurable-algebra-operations">#</a>
+    
+    <a class="icon proof" href="sect0007.html#a0000000876"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="corollary_thmcontent">
+  <p> \((X,\mathcal M)\) を可測空間とし， \(f,g\in M(X;\mathbb R)\) とする． このとき次が成り立つ． </p>
+<ol class="enumerate">
+  <li><p>任意の \(c\in \mathbb R\) に対して \(cf\) は可測である </p>
+</li>
+  <li><p>\(f+g\) と \(fg\) は可測である </p>
+</li>
+  <li><p>\(\max (f,g)\) と \(\min (f,g)\) は可測である </p>
+</li>
+  <li><p>\(p{\gt}0\) に対して \(|f|^p\) は可測である </p>
+</li>
+  <li><p>\(\phi :\mathbb R\to \mathbb R\) が連続なら \(\phi \circ f\) は可測である </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000876">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <ol class="enumerate">
+  <li><p>\(\Phi (t):=ct\) は連続だから，??thm:measurable-continuous-compositionを \(n=1\) に適用すればよい． </p>
+</li>
+  <li><p>\(\Phi (u,v):=u+v\) と \(\Psi (u,v):=uv\) は \(\mathbb R^2\) 上連続である． また \((f,g):X\to \mathbb R^2\) は??prop:measurable-vector-mapより可測である． よって \(f+g=\Phi \circ (f,g)\) と \(fg=\Psi \circ (f,g)\) は可測である． </p>
+</li>
+  <li><p>\(\Phi (u,v):=\max (u,v)\) と \(\Psi (u,v):=\min (u,v)\) は連続だから，同様に従う． </p>
+</li>
+  <li><p>\(\phi (t):=|t|^p\) は連続だから従う． </p>
+</li>
+  <li><p>??thm:measurable-continuous-compositionそのものである． </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:measurable-reciprocal">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.16</span>
+    <span class="proposition_thmtitle">逆数</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#prop:measurable-reciprocal">#</a>
+    
+    <a class="icon proof" href="sect0007.html#a0000000877"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \((X,\mathcal M)\) を可測空間とし，\(f\in M(X;\mathbb R)\) とする． このとき \(E_0:=\{ x\in X\mid f(x)\ne 0\} \) は \(\mathcal M\) に属し， \(1/f:E_0\to \mathbb R\) は \(\mathcal M(E_0)\)-可測である． 特に \(f(x)\ne 0\) がすべての \(x\in X\) で成り立つなら，\(1/f\) は \(X\) 上可測である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000877">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>まず </p>
+<div class="displaymath" id="a0000000878">
+  \[  E_0=\{ f{\gt}0\} \cup \{ f{\lt}0\}   \]
+</div>
+<p> だから \(E_0\in \mathcal M\) である． </p>
+<p>\(h:=1/f:E_0\to \mathbb R\) とおく． 任意の \(a\in \mathbb R\) に対して </p>
+<div class="displaymath" id="a0000000879">
+  \[  \{ h{\gt}a\}  = \begin{cases}  E_0\cap \{ 0{\lt}f{\lt}1/a\}  &  (a{\gt}0),\\ E_0\cap \{ f{\gt}0\}  &  (a=0),\\ E_0\cap \bigl(\{ f{\gt}0\} \cup \{ f{\lt}1/a\} \bigr) &  (a{\lt}0) \end{cases}  \]
+</div>
+<p> である． 右辺はいずれも \(\mathcal M(E_0)\) に属する． よって??thm:lebesgue-measurable-function-criterionより \(h\) は \(\mathcal M(E_0)\)-可測である． </p>
+
+  </div>
+</div>
+<h1 id="a0000000190"> 不等式・極限で作られる関数</h1>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:measurable-comparison-sets">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.17</span>
+    <span class="proposition_thmtitle">比較からできる集合</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#prop:measurable-comparison-sets">#</a>
+    
+    <a class="icon proof" href="sect0007.html#a0000000880"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \((X,\mathcal M)\) を可測空間とし， \(f,g\in M(X)\) とする． このとき次の集合はすべて \(\mathcal M\) に属する． </p>
+<div class="displaymath" id="a0000000881">
+  \[  \{ x\in X \mid f(x){\gt}g(x)\} ,\quad \{ x\in X \mid f(x)\ge g(x)\} ,\quad \{ x\in X \mid f(x)=g(x)\}   \]
+</div>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000880">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>まず \(\{ f{\gt}g\} =\bigcup _{q\in \mathbb Q}(\{ f{\gt}q\} \cap \{ g{\lt}q\} )\) を示す． 左辺に \(x\) が属するとする． すると \(f(x){\gt}g(x)\) だから，有理数の稠密性より \(g(x){\lt}q{\lt}f(x)\) を満たす \(q\in \mathbb Q\) が存在する． したがって \(x\) は右辺に属する． 逆向きは明らかである． 右辺は可測集合の可算和だから可測である． </p>
+<p>続いて </p>
+<div class="displaymath" id="a0000000882">
+  \[  \{ f\ge g\} =X\setminus \{ g{\gt}f\}   \]
+</div>
+<p> だから可測である． </p>
+<p>そして </p>
+<div class="displaymath" id="a0000000883">
+  \[  \{ f=g\} =\{ f\ge g\} \cap \{ g\ge f\}   \]
+</div>
+<p> だから可測である． </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:pointwise-limits">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.18</span>
+    <span class="definition_thmtitle">各点の上限・下限・上極限・下極限・極限関数</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#def:pointwise-limits">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 関数列 \(f_n:X\to \overline{\mathbb R}\) に対し， \(\sup _n f_n,\  \inf _n f_n,\  \limsup _{n\to \infty }f_n,\  \liminf _{n\to \infty }f_n\) を各点 \(x\in X\) で次のように定義する． </p>
+<div class="displaymath" id="a0000000884">
+  \begin{align*} & \left(\sup _{n}f_n\right)(x) := \sup \{ f_n(x) \mid n \in \mathbb N\} , & & \left(\inf _{n}f_n\right)(x) := \inf \{ f_n(x) \mid n \in \mathbb N\} ,\\ & \left(\limsup _{n \to \infty } f_n\right)(x) := \inf _{n\in \mathbb N}\sup \{ f_k(x)\mid k\ge n\} , & & \left(\liminf _{n \to \infty } f_n\right)(x) := \sup _{n\in \mathbb N}\inf \{ f_k(x)\mid k\ge n\} . \end{align*}
+</div>
+<p> さらに，すべての \(x\in X\) で \(\lim _{n\to \infty }f_n(x)\) が \(\overline{\mathbb R}\) の意味で存在するとき，極限関数 \(\lim _{n\to \infty }f_n:X\to \overline{\mathbb R}\) を </p>
+<div class="displaymath" id="a0000000885">
+  \[  \left(\lim _{n\to \infty }f_n\right)(x) :=\lim _{n\to \infty }f_n(x)  \]
+</div>
+<p> で定義する．このとき関数として </p>
+<div class="displaymath" id="a0000000886">
+  \[  \lim _{n\to \infty }f_n =\limsup _{n\to \infty }f_n =\liminf _{n\to \infty }f_n  \]
+</div>
+<p> である． </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:measurable-countable-sup-inf">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.19</span>
+    <span class="proposition_thmtitle">可算上限・可算下限の可測性</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#prop:measurable-countable-sup-inf">#</a>
+    
+    <a class="icon proof" href="sect0007.html#a0000000887"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \((X,\mathcal M)\) を可測空間とし， \(f_n\in M(X)\) \((n\in \mathbb N)\) とする． このとき， </p>
+<div class="displaymath" id="a0000000888">
+  \[  \sup _{n}f_n, \qquad \inf _{n}f_n  \]
+</div>
+<p> は \(\mathcal M\)-可測である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000887">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>任意の \(a\in \mathbb R\) に対して </p>
+<div class="displaymath" id="a0000000889">
+  \[  \left\{ \sup _n f_n{\gt}a\right\}  = \bigcup _{n=1}^{\infty }\{ f_n{\gt}a\}   \]
+</div>
+<p> である． 右辺は可測集合の可算和だから可測である． よって \(\sup _n f_n\) は可測である． </p>
+<p>また任意の \(a\in \mathbb R\) に対して </p>
+<div class="displaymath" id="a0000000890">
+  \[  \left\{ \inf _n f_n{\lt}a\right\}  = \bigcup _{n=1}^{\infty }\{ f_n{\lt}a\}   \]
+</div>
+<p> である． 右辺は可測集合の可算和だから可測である． よって \(\inf _n f_n\) も可測である． </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:measurable-limsup-liminf">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.20</span>
+    <span class="proposition_thmtitle">上極限・下極限・極限関数の可測性</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#prop:measurable-limsup-liminf">#</a>
+    
+    <a class="icon proof" href="sect0007.html#a0000000891"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \((X,\mathcal M)\) を可測空間とし， \(f_n\in M(X)\) \((n\in \mathbb N)\) とする． このとき </p>
+<div class="displaymath" id="a0000000892">
+  \[  \limsup _{n\to \infty }f_n,\qquad \liminf _{n\to \infty }f_n  \]
+</div>
+<p> は \(\mathcal M\)-可測である． さらに，もし各点で極限が存在し， </p>
+<div class="displaymath" id="a0000000893">
+  \[  f=\lim _{n\to \infty }f_n  \]
+</div>
+<p> とおくなら，\(f\) も \(\mathcal M\)-可測である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000891">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>定義により </p>
+<div class="displaymath" id="a0000000894">
+  \[  \limsup _{n\to \infty }f_n = \inf _{n\in \mathbb N}\sup _{k\ge n}f_k, \qquad \liminf _{n\to \infty }f_n = \sup _{n\in \mathbb N}\inf _{k\ge n}f_k.  \]
+</div>
+<p> 右辺は可測関数に対する可算上限・可算下限で作られているから可測である． </p>
+<p>さらに各点で極限が存在するなら </p>
+<div class="displaymath" id="a0000000895">
+  \[  f=\limsup _{n\to \infty }f_n=\liminf _{n\to \infty }f_n  \]
+</div>
+<p> だから \(f\) は可測である． </p>
+
+  </div>
+</div>
+<h1 id="a0000000191"> ほとんど至る所（almost everywhere）</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:ae-prop">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.21</span>
+    <span class="definition_thmtitle">ほとんど至る所（almost everywhere）</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#def:ae-prop">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 測度空間\((X,\mathcal M,\mu )\) 上の述語\(P\)（つまり，各点 \(x \in X\) に命題\(P(x)\)を対応付ける写像） と可測集合\(E \in \mathcal M\) に対し， 「\(P\)が\(E\)上ほとんど至る所（almost everywhere）成り立つ」または「ほとんど至る所の点\(x \in E\)で\(P\)が成り立つ」 </p>
+<div class="displaymath" id="a0000000896">
+  \[  P \text{ $\mu $-a.e.\  on } E, \quad P(x) \text{ at $\mu $-a.e. } x \in E  \]
+</div>
+<p> とは，\(P\)が成り立たない点の集合が\(\mu \)-零集合となることをいう </p>
+<div class="displaymath" id="a0000000897">
+  \[  \exists N \in \mathcal M\text{ such that } \mu (N)=0 \text{ and } \{  x \in E \mid \neg P(x) \}  \subset N.  \]
+</div>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:ae-equality-equivalence">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.22</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#prop:ae-equality-equivalence">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> 測度空間 \((X,\mathcal M,\mu )\) と \(E\in \mathcal M\) を固定する． \(E\) 上の拡大実数値関数全体において， \(f\sim g \iff f=g \)</p>
+
+  </div>
+</div>
+<p> \(\)μ\(-a.e.\  on \) E\(\) で定める関係 \(\sim \) は同値関係である． </p>
+<div class="proposition_thmwrapper theorem-style-plain" id="a0000000898">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#a0000000898">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000899">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p><b class="bfseries">反射律</b>&#8195;\(\{ f\ne f\} =\emptyset \) だから \(f\sim f\) である． </p>
+<p><b class="bfseries">対称律</b>&#8195;\(\{ f\ne g\} =\{ g\ne f\} \) だから \(f\sim g\) なら \(g\sim f\) である． </p>
+<p><b class="bfseries">推移律</b>&#8195;\(f\sim g\) かつ \(g\sim h\) とする． このとき </p>
+<div class="displaymath" id="a0000000900">
+  \[  \{ f\ne g\} \subset N_1,\qquad \{ g\ne h\} \subset N_2  \]
+</div>
+<p> かつ \(\mu (N_1)=\mu (N_2)=0\) を満たす \(N_1,N_2\in \mathcal M\) が存在する． すると \(\{ f\ne h\} \subset \{ f\ne g\} \cup \{ g\ne h\} \) である． したがって </p>
+<div class="displaymath" id="a0000000901">
+  \[  \{ f\ne h\} \subset N_1\cup N_2  \]
+</div>
+<p> であり，\(N_1\cup N_2\) は零集合である． したがって \(f\sim h\) である． </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:ae-modification-measurable">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.23</span>
+    <span class="proposition_thmtitle">a.e. 修正による可測性</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#prop:ae-modification-measurable">#</a>
+    
+    <a class="icon proof" href="sect0007.html#a0000000902"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \((X,\mathcal M,\mu )\) を完備な測度空間とし，\(E\in \mathcal M\) とする． \(f\in M(E)\) とし， \(g:E\to \overline{\mathbb R}\) が </p>
+<div class="displaymath" id="a0000000903">
+  \[  f=g \quad \text{$\mu $-a.e.\  on } E  \]
+</div>
+<p> を満たすとする． このとき \(g\) も \(\mathcal M(E)\)-可測である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000902">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <div class="displaymath" id="a0000000904">
+  \[  A:=\{ x\in E\mid f(x)\ne g(x)\}   \]
+</div>
+<p> とおく． \(f=g\) が \(\mu \)-a.e. on \(E\) で成り立つから， \(A\subset N\) かつ \(\mu (N)=0\) を満たす \(N\in \mathcal M\) が存在する． 測度空間は完備なので，\(A\) および \(A\) の任意の部分集合は \(\mathcal M\) に属する． 特にそれらは \(\mathcal M(E)\) に属する． </p>
+<p>任意の \(a\in \mathbb R\) に対して </p>
+<div class="displaymath" id="a0000000905">
+  \[  \{ g{\gt}a\}  = \bigl(\{ f{\gt}a\} \cap (E\setminus A)\bigr)\cup \bigl(\{ g{\gt}a\} \cap A\bigr)  \]
+</div>
+<p> である． 右辺第1項は可測であり， 第2項は \(A\) の部分集合だから可測である． よって </p>
+<div class="displaymath" id="a0000000906">
+  \[  \{ g{\gt}a\}   \]
+</div>
+<p> は可測である． したがって??thm:lebesgue-measurable-function-criterionより \(g\) は \(\mathcal M(E)\)-可測である． </p>
+
+  </div>
+</div>
+<h1 id="sec:ae-convergence"> 概収束</h1>
+
+<div class="definition_thmwrapper theorem-style-definition" id="def:ae-convergence">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.24</span>
+    <span class="definition_thmtitle">概収束</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#def:ae-convergence">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 測度空間 \((X,\mathcal M,\mu )\) と \(E\in \mathcal M\) を固定し， \(f_n,f:E\to \overline{\mathbb R}\) とする． \(\{ f_n\} _{n=1}^{\infty }\) が \(f\) に概収束する，または a.e. 収束するとは， ある \(\mu \)-零集合 \(N\in \mathcal M\) が存在して，すべての \(x\in E\setminus N\) に対して数列 \(\{ f_n(x)\} _{n=1}^{\infty }\) が \(\overline{\mathbb R}\) の意味で \(f(x)\) に収束することをいう． このとき </p>
+<div class="displaymath" id="a0000000907">
+  \[  f_n\to f \quad \text{$\mu $-a.e.\  on } E  \]
+</div>
+<p> と書く． つまり， \(\{ x\in E\mid f_n(x)\not\to f(x)\} \) が \(\mu \)-零集合に含まれることをいう． 各 \(f_n\) や \(f\) を零集合上で変更しても，例外集合は可算和をとるだけなので， この条件は a.e. 同値類に対してもよく定義されている． </p>
+
+  </div>
+</div>
+<div class="corollary_thmwrapper theorem-style-plain" id="cor:ae-limit-measurable">
+  <div class="corollary_thmheading">
+    <span class="corollary_thmcaption">
+    Corollary
+    </span>
+    <span class="corollary_thmlabel">.25</span>
+    <span class="corollary_thmtitle">概収束の極限の可測性</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0007.html#cor:ae-limit-measurable">#</a>
+    
+    <a class="icon proof" href="sect0007.html#a0000000908"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="corollary_thmcontent">
+  <p> \((X,\mathcal M,\mu )\) を完備な測度空間とし，\(E\in \mathcal M\) とする． \(f_n\in M(E)\) \((n\in \mathbb N)\) とし， </p>
+<div class="displaymath" id="a0000000909">
+  \[  f_n\to f\quad \text{$\mu $-a.e.\  on } E  \]
+</div>
+<p> とする． このとき \(f\) は \(\mathcal M(E)\)-可測である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000908">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <div class="displaymath" id="a0000000910">
+  \[  g:=\limsup _{n\to \infty }f_n  \]
+</div>
+<p> とおくと，??prop:measurable-limsup-liminfを 可測空間 \((E,\mathcal M(E))\) に適用して，\(g\) は \(\mathcal M(E)\)-可測である． また極限が存在する点では </p>
+<div class="displaymath" id="a0000000911">
+  \[  g(x)=\lim _{n\to \infty }f_n(x)=f(x)  \]
+</div>
+<p> である． したがって </p>
+<div class="displaymath" id="a0000000912">
+  \[  f=g \quad \text{$\mu $-a.e.\  on } E.  \]
+</div>
+<p> ゆえに??prop:ae-modification-measurableより \(f\) は \(\mathcal M(E)\)-可測である． </p>
+
+  </div>
+</div>
+<h1 id="a0000000192"> 解釈とまとめ</h1>
+<p>可測関数空間 \(M(X)\) の元とは，??thm:lebesgue-measurable-function-criterionで見たように \(\{ f{\gt}a\} \) のようなレベル集合が可測である関数であった． つまり，関数の値そのものより， その値をとる領域の幾何学が測度で追えることが本質である． </p>
+<p>本章で得た重要な事実は次の通りである． </p>
+<ol class="enumerate">
+  <li><p>連続関数と指示関数は可測である </p>
+</li>
+  <li><p>\(M(X;\mathbb R)\) は和・積・逆数・合成で閉じている（??cor:measurable-algebra-operations,prop:measurable-reciprocal） </p>
+</li>
+  <li><p>\(M(X)\) は \(\sup ,\inf ,\limsup ,\liminf ,\lim \) で閉じている（??prop:measurable-countable-sup-inf,prop:measurable-limsup-liminf） </p>
+</li>
+  <li><p>完備な測度空間では，零集合上で値を変えても可測性は変わらない（??prop:ae-modification-measurable） </p>
+</li>
+</ol>
+<p>次章では，Lebesgue可測関数に対してLebesgue積分を定義する． その出発点は， </p>
+<div class="displaymath" id="a0000000913">
+  \[  \text{指示関数} \to \text{単関数} \to \text{一般の可測関数}  \]
+</div>
+<p> という拡張である．  </p>
+<p><br />  </p>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="sect0006.html" title="Carathéodory流の測度論"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="Lecture note on KSK"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+  <a href="sect0008.html" title="Lebesgue積分"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>

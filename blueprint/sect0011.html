@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Fubiniと変数変換</title>
+<link rel="next" href="sect0012.html" title="Banach空間" />
+<link rel="prev" href="sect0010.html" title="収束定理" />
+<link rel="up" href="index.html" title="Lecture note on KSK" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">Lecture note on KSK</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Riemann積分</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0001.html#a0000000018"><span class="toc_ref"></span> <span class="toc_entry">Riemann和による定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000028"><span class="toc_ref"></span> <span class="toc_entry">Darbouxの上積分と下積分による定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000039"><span class="toc_ref"></span> <span class="toc_entry">Riemann可積分関数の例</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000101"><span class="toc_ref"></span> <span class="toc_entry">Riemann可積分でない例</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000114"><span class="toc_ref"></span> <span class="toc_entry">極限と積分の順序交換</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000123"><span class="toc_ref"></span> <span class="toc_entry">順序交換の応用例</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000132"><span class="toc_ref"></span> <span class="toc_entry">Riemann積分の長所と短所</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0001.html#a0000000133"><span class="toc_ref"></span> <span class="toc_entry">長所：定義が素朴であり，計算しやすい</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000134"><span class="toc_ref"></span> <span class="toc_entry">短所：無限回操作に対して不安定</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000135"><span class="toc_ref"></span> <span class="toc_entry">原因：Riemann積分の定義が有限和（有限分割\(\mathcal P\)）の極限</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000137"><span class="toc_ref"></span> <span class="toc_entry">技術的課題：無限和（無限分割）にすると何が起きるか</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000139"><span class="toc_ref"></span> <span class="toc_entry">解決策：Lebesgue積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000140"><span class="toc_ref"></span> <span class="toc_entry">展望：何が嬉しいか</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000141"><span class="toc_ref"></span> <span class="toc_entry">多くの応用先</span></a>
+ </li>
+
+  </ul>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0002.html#a0000000142"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000143"><span class="toc_ref"></span> <span class="toc_entry">\(\mathbb R^d\)の基本集合</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000144"><span class="toc_ref"></span> <span class="toc_entry">\(\mathbb R^d\)のRiemann積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000145"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度・Jordan可測</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000146"><span class="toc_ref"></span> <span class="toc_entry">Jordan零集合</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000147"><span class="toc_ref"></span> <span class="toc_entry">Jordan可測性の判定法</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000148"><span class="toc_ref"></span> <span class="toc_entry">Jordan可測集合の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000149"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000150"><span class="toc_ref"></span> <span class="toc_entry">有限加法族・有限加法的測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000151"><span class="toc_ref"></span> <span class="toc_entry">概念の整理</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0003.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0003.html#a0000000152"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000153"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000154"><span class="toc_ref"></span> <span class="toc_entry">拡大実数</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000155"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000156"><span class="toc_ref"></span> <span class="toc_entry">具体例</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000157"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000158"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度との整合</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000159"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の外正則性</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000160"><span class="toc_ref"></span> <span class="toc_entry">解釈</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0004.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue内測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0004.html#a0000000161"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000162"><span class="toc_ref"></span> <span class="toc_entry">定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000163"><span class="toc_ref"></span> <span class="toc_entry">基本性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000164"><span class="toc_ref"></span> <span class="toc_entry">具体例</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000165"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度との関係</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000166"><span class="toc_ref"></span> <span class="toc_entry">同値な定義</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0004.html#a0000000167"><span class="toc_ref"></span> <span class="toc_entry">外測度に関する補助定理</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000168"><span class="toc_ref"></span> <span class="toc_entry">解釈</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0005.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0005.html#a0000000169"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000170"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合とLebesgue測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000171"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合の性質</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0005.html#a0000000172"><span class="toc_ref"></span> <span class="toc_entry">有界閉区間上のLebesgue可測集合</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000173"><span class="toc_ref"></span> <span class="toc_entry">全空間上のLebesgue可測集合</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0005.html#sec:lebesgue-measure-properties"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#sec:lebesgue-caratheodory-comparison"><span class="toc_ref"></span> <span class="toc_entry">Carathéodory条件との比較</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000174"><span class="toc_ref"></span> <span class="toc_entry">まとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0006.html"><span class="toc_ref"></span> <span class="toc_entry">Carathéodory流の測度論</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0006.html#a0000000175"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000176"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000177"><span class="toc_ref"></span> <span class="toc_entry">可測空間と測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000178"><span class="toc_ref"></span> <span class="toc_entry">外測度とCarathéodory可測性</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000179"><span class="toc_ref"></span> <span class="toc_entry">半加法族と前測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000180"><span class="toc_ref"></span> <span class="toc_entry">誘導外測度と拡張定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000181"><span class="toc_ref"></span> <span class="toc_entry">Borel集合族</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000182"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測性の限界</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000183"><span class="toc_ref"></span> <span class="toc_entry">まとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0007.html"><span class="toc_ref"></span> <span class="toc_entry">可測関数</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0007.html#a0000000184"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000185"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000186"><span class="toc_ref"></span> <span class="toc_entry">可測写像</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000187"><span class="toc_ref"></span> <span class="toc_entry">可測関数の定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000188"><span class="toc_ref"></span> <span class="toc_entry">基本例</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000189"><span class="toc_ref"></span> <span class="toc_entry">ベクトル値可測写像と合成</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000190"><span class="toc_ref"></span> <span class="toc_entry">不等式・極限で作られる関数</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000191"><span class="toc_ref"></span> <span class="toc_entry">ほとんど至る所（almost everywhere）</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#sec:ae-convergence"><span class="toc_ref"></span> <span class="toc_entry">概収束</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000192"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0008.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue積分</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0008.html#a0000000193"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000194"><span class="toc_ref"></span> <span class="toc_entry">単関数の積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000195"><span class="toc_ref"></span> <span class="toc_entry">非負可測関数の積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000196"><span class="toc_ref"></span> <span class="toc_entry">零集合と almost everywhere</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000197"><span class="toc_ref"></span> <span class="toc_entry">符号付可測関数の積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000198"><span class="toc_ref"></span> <span class="toc_entry">積分の絶対連続性</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000199"><span class="toc_ref"></span> <span class="toc_entry">具体例</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000200"><span class="toc_ref"></span> <span class="toc_entry">Riemann積分との関係</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000201"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0009.html"><span class="toc_ref"></span> <span class="toc_entry">測度空間上の積分の性質</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0009.html#a0000000202"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000203"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000204"><span class="toc_ref"></span> <span class="toc_entry">準備：正部分と負部分</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000205"><span class="toc_ref"></span> <span class="toc_entry">集合に関する性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000206"><span class="toc_ref"></span> <span class="toc_entry">順序と大きさ</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000207"><span class="toc_ref"></span> <span class="toc_entry">線形性</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000208"><span class="toc_ref"></span> <span class="toc_entry">計算則のまとめ</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000209"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0010.html"><span class="toc_ref"></span> <span class="toc_entry">収束定理</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0010.html#a0000000210"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000211"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000212"><span class="toc_ref"></span> <span class="toc_entry">設定</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000213"><span class="toc_ref"></span> <span class="toc_entry">単調収束定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000214"><span class="toc_ref"></span> <span class="toc_entry">Fatouの補題</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000215"><span class="toc_ref"></span> <span class="toc_entry">優収束定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000216"><span class="toc_ref"></span> <span class="toc_entry">項別積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000217"><span class="toc_ref"></span> <span class="toc_entry">積分記号下の微分</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000218"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class=" active current">
+  <a href="sect0011.html"><span class="toc_ref"></span> <span class="toc_entry">Fubiniと変数変換</span></a>
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
+     <li class="">
+  <a href="sect0011.html#a0000000219"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html#a0000000220"><span class="toc_ref"></span> <span class="toc_entry">積測度と切片</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html#a0000000221"><span class="toc_ref"></span> <span class="toc_entry">Tonelliの定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html#a0000000222"><span class="toc_ref"></span> <span class="toc_entry">Fubiniの定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html#a0000000223"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度での積測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html#a0000000224"><span class="toc_ref"></span> <span class="toc_entry">変数変換</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html#a0000000225"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0012.html"><span class="toc_ref"></span> <span class="toc_entry">Banach空間</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0012.html#a0000000226"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000227"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000228"><span class="toc_ref"></span> <span class="toc_entry">ノルム空間とBanach空間</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000229"><span class="toc_ref"></span> <span class="toc_entry">\(C(X)\) と sup-norm</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000230"><span class="toc_ref"></span> <span class="toc_entry">\(L^p(X)\) 空間</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000231"><span class="toc_ref"></span> <span class="toc_entry">Hölderの不等式とMinkowskiの不等式</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000232"><span class="toc_ref"></span> <span class="toc_entry">Riesz–Fischerの定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000233"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0013.html"><span class="toc_ref"></span> <span class="toc_entry">Hilbert空間</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0013.html#a0000000234"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000235"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000236"><span class="toc_ref"></span> <span class="toc_entry">内積空間とHilbert空間</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000237"><span class="toc_ref"></span> <span class="toc_entry">\(L^2(X)\) はHilbert空間</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000238"><span class="toc_ref"></span> <span class="toc_entry">正規直交系と直交射影</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000239"><span class="toc_ref"></span> <span class="toc_entry">Fourier関数系</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000240"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0014.html"><span class="toc_ref"></span> <span class="toc_entry">線形作用素</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0014.html#a0000000241"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000242"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000243"><span class="toc_ref"></span> <span class="toc_entry">線形作用素と連続性</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000244"><span class="toc_ref"></span> <span class="toc_entry">作用素ノルム</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000245"><span class="toc_ref"></span> <span class="toc_entry">\(\mathcal B(X,Y)\) の完備性</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000246"><span class="toc_ref"></span> <span class="toc_entry">例</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000247"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000012"> Fubiniと変数変換</h1>
+<h4 id="a0000000219">本章の目標</h4>
+<p> 本章では，多変数積分を計算するための2つの道具を事実として使える形で整理する． 前半では一般の測度空間上でTonelliの定理とFubiniの定理を述べ，積分順序を交換する条件を確認する． 後半ではLebesgue測度上の変数変換公式を述べ，Jacobianの絶対値が面積・体積の伸び縮みを表すことを確認する． </p>
+<h1 id="a0000000220"> 積測度と切片</h1>
+<p>本章の前半では，\(\sigma \)-有限な測度空間 \((X,\mathcal M,\mu )\) と \((Y,\mathcal N,\nu )\) を固定する． 積空間には積 \(\sigma \)-加法族 \(\mathcal M\otimes \mathcal N\) と積測度 \(\mu \otimes \nu \) を入れる． 積測度は可測矩形について \((\mu \otimes \nu )(A\times B)=\mu (A)\nu (B)\) を満たす測度である． </p>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000001009">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">44</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0011.html#a0000001009">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>\(\sigma \)-有限性は，積測度の一意性やTonelli–Fubiniの標準形を使うための仮定である． Lebesgue測度空間は \(\sigma \)-有限なので，本章の定理は \(\mathbb R^m\times \mathbb R^n\) 上の積分にもそのまま適用できる． </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:sections">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.1</span>
+    <span class="definition_thmtitle">切片</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0011.html#def:sections">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> \(E\subset X\times Y\) と \(f:X\times Y\to \overline{\mathbb R}\) に対して，各 \(x\in X\)，\(y\in Y\) について \(E_x:=\{ y\in Y\mid (x,y)\in E\} \)，\(E^y:=\{ x\in X\mid (x,y)\in E\} \) と書く． また \(f_x(y):=f(x,y)\)，\(f^y(x):=f(x,y)\) と書き，これらを切片という． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:sections-measurable-general">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">.2</span>
+    <span class="theorem_thmtitle">切片の可測性</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0011.html#thm:sections-measurable-general">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> \(E\in \mathcal M\otimes \mathcal N\) なら，すべての \(x\in X\) と \(y\in Y\) に対して \(E_x\in \mathcal N\)，\(E^y\in \mathcal M\) である． また \(f\in M(X\times Y;\overline{\mathbb R})\) なら，すべての \(x\in X\) と \(y\in Y\) に対して \(f_x\in M(Y;\overline{\mathbb R})\)，\(f^y\in M(X;\overline{\mathbb R})\) である． </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000001010">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">45</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0011.html#a0000001010">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>ここで \(M(X\times Y;\overline{\mathbb R})\) は積測度空間 \((X\times Y,\mathcal M\otimes \mathcal N,\mu \otimes \nu )\) 上の可測関数全体を表す． 以下でも，文脈が明らかなときはこの記法を省略して使う． </p>
+
+  </div>
+</div>
+<h1 id="a0000000221"> Tonelliの定理</h1>
+<p>Tonelliの定理は，非負関数なら積分可能性を先に確認しなくても反復積分に直せる，という定理である． 両辺が \(+\infty \) になることも許す． </p>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:tonelli">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">.3</span>
+    <span class="theorem_thmtitle">Tonelliの定理</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0011.html#thm:tonelli">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> \(f\in M^+(X\times Y)\) とする． このとき \(x\mapsto \int _Y f(x,y)\, d\nu (y)\) は \(M^+(X)\) に属し， \(y\mapsto \int _X f(x,y)\, d\mu (x)\) は \(M^+(Y)\) に属する． さらに </p>
+<div class="displaymath" id="a0000001011">
+  \[  \int _{X\times Y} f\, d(\mu \otimes \nu )=\int _X\! \int _Y f(x,y)\, d\nu (y)\, d\mu (x)=\int _Y\! \int _X f(x,y)\, d\mu (x)\, d\nu (y)  \]
+</div>
+<p> が成り立つ． </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000001012">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">46</span>
+    <span class="remark_thmtitle">使い方</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0011.html#a0000001012">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p> 被積分関数が非負なら，まずTonelliを使ってよい． 例えば \(f\ge 0\) のときは，\(\int _{X\times Y}f\) を直接計算しても， \(\int _X\int _Y f\) または \(\int _Y\int _X f\) として計算してもよい． 収束性を先に調べる必要はないが，答えが \(+\infty \) になる可能性は残る． </p>
+
+  </div>
+</div>
+<div class="example_thmwrapper theorem-style-plain" id="ex:triangle-area-tonelli">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
+    </span>
+    <span class="example_thmlabel">.4</span>
+    <span class="example_thmtitle">三角形の面積</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0011.html#ex:triangle-area-tonelli">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="example_thmcontent">
+  <p> \(E:=\{ (x,y)\in [0,1]^2\mid x+y\le 1\} \) とする． 指示関数 \(1_E\) は非負可測なのでTonelliを使える． 各 \(x\in [0,1]\) について \(E_x=[0,1-x]\) だから \((\lambda _1\otimes \lambda _1)(E)=\int _0^1 \lambda _1(E_x)\, d\lambda _1(x)=\int _0^1(1-x)\, dx=\frac12\) である． </p>
+
+  </div>
+</div>
+<div class="example_thmwrapper theorem-style-plain" id="ex:product-function-tonelli">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
+    </span>
+    <span class="example_thmlabel">.5</span>
+    <span class="example_thmtitle">直積形の関数</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0011.html#ex:product-function-tonelli">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="example_thmcontent">
+  <p> \(f\in M^+(X)\)，\(g\in M^+(Y)\) とする． このとき \(h(x,y):=f(x)g(y)\) は \(M^+(X\times Y)\) に属し，Tonelliより \(\int _{X\times Y}h\, d(\mu \otimes \nu )=\left(\int _X f\, d\mu \right)\left(\int _Y g\, d\nu \right)\) である． これは，長方形の測度公式 \((\mu \otimes \nu )(A\times B)=\mu (A)\nu (B)\) の関数版である． </p>
+
+  </div>
+</div>
+<h1 id="a0000000222"> Fubiniの定理</h1>
+<p>Fubiniの定理は，符号がある関数でも絶対可積分なら積分順序を交換できる，という定理である． Tonelliが「非負ならよい」という定理であるのに対し，Fubiniは「絶対値が積分できるならよい」という定理である． </p>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:fubini">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">.6</span>
+    <span class="theorem_thmtitle">Fubiniの定理</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0011.html#thm:fubini">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> \(f\in \mathcal L^1(X\times Y)\) とする． このとき，\(\mu \)-a.e. の \(x\in X\) に対して \(f_x\in \mathcal L^1(Y)\) であり， \(\nu \)-a.e. の \(y\in Y\) に対して \(f^y\in \mathcal L^1(X)\) である． さらに，\(g(x):=\int _Y f(x,y)\, d\nu (y)\) と \(h(y):=\int _X f(x,y)\, d\mu (x)\) は a.e. の値を適当に定めれば \(g\in \mathcal L^1(X)\)，\(h\in \mathcal L^1(Y)\) となり， </p>
+<div class="displaymath" id="a0000001013">
+  \[  \int _{X\times Y} f\, d(\mu \otimes \nu )=\int _X\! \int _Y f(x,y)\, d\nu (y)\, d\mu (x)=\int _Y\! \int _X f(x,y)\, d\mu (x)\, d\nu (y)  \]
+</div>
+<p> が成り立つ． </p>
+
+  </div>
+</div>
+<div class="corollary_thmwrapper theorem-style-plain" id="cor:iterated-integral-exchange">
+  <div class="corollary_thmheading">
+    <span class="corollary_thmcaption">
+    Corollary
+    </span>
+    <span class="corollary_thmlabel">.7</span>
+    <span class="corollary_thmtitle">積分順序の交換判定</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0011.html#cor:iterated-integral-exchange">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="corollary_thmcontent">
+  <p> \(f\in M(X\times Y)\) とし， \(\int _X(\int _Y |f(x,y)|\, d\nu (y))d\mu (x){\lt}\infty \) が成り立つとする． このとき \(f\in \mathcal L^1(X\times Y)\) であり， </p>
+<div class="displaymath" id="a0000001014">
+  \[  \int _X\! \int _Y f(x,y)\, d\nu (y)\, d\mu (x)=\int _Y\! \int _X f(x,y)\, d\mu (x)\, d\nu (y)  \]
+</div>
+<p> が成り立つ． </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000001015">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">47</span>
+    <span class="remark_thmtitle">確認の順番</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0011.html#a0000001015">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p> 実際の計算では，まず \(f\ge 0\) ならTonelliを使う． 符号がある場合は，先に \(\int \int |f|{\lt}\infty \) を確認してからFubiniを使う． 絶対可積分性を確認せずに順序交換すると，値が変わることがある． </p>
+
+  </div>
+</div>
+<div class="example_thmwrapper theorem-style-plain" id="ex:change-order-triangle">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
+    </span>
+    <span class="example_thmlabel">.8</span>
+    <span class="example_thmtitle">積分領域の入れ替え</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0011.html#ex:change-order-triangle">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="example_thmcontent">
+  <p> 連続関数 \(\varphi :[0,1]\to \mathbb R\) に対して Fubiniより \(\int _0^1(\int _0^x \varphi (y)\, dy)dx=\int _0^1(\int _y^1 \varphi (y)\, dx)dy=\int _0^1(1-y)\varphi (y)\, dy\) である． これは領域 \(0\le y\le x\le 1\) を，\(0\le y\le 1\)，\(y\le x\le 1\) と読み替えただけである． 例えば \(\varphi (y)=e^{y^2}\) のように原始関数が初等的に書けない場合でも，順序交換により計算しやすい形へ変えられる． </p>
+
+  </div>
+</div>
+<h1 id="a0000000223"> Lebesgue測度での積測度</h1>
+<p>Lebesgue測度の場合，\(\mathbb R^m\times \mathbb R^n\) は自然に \(\mathbb R^{m+n}\) と同一視される． この同一視のもとで，\(\lambda _m\otimes \lambda _n\) は \(\lambda _{m+n}\) と同じものとして扱ってよい． 厳密には積 \(\sigma \)-加法族の完備化を考えるが，通常の計算ではこの違いは問題にならない． </p>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000001016">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">48</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0011.html#a0000001016">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>今後は \(\int _{\mathbb R^m\times \mathbb R^n} f(x,y)\, d(\lambda _m\otimes \lambda _n)\) を \(\int _{\mathbb R^m}\int _{\mathbb R^n} f(x,y)\, dy\, dx\) のように略記する． これは記法の省略であり，正当化はTonelliまたはFubiniによって行う． </p>
+
+  </div>
+</div>
+<h1 id="a0000000224"> 変数変換</h1>
+<p>ここからはLebesgue測度に固有の話に戻る． 変数変換では，写像によって面積や体積がどれだけ伸び縮みするかを補正する必要がある． この補正係数がJacobianの絶対値である． </p>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:one-dimensional-affine-change-variables">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">.9</span>
+    <span class="theorem_thmtitle">1変数の affine 変数変換</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0011.html#thm:one-dimensional-affine-change-variables">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> \(a\in \mathbb R\setminus \{ 0\} \)，\(b\in \mathbb R\) とする． \(f\in M^+(\mathbb R)\) または \(f\in \mathcal L^1(\mathbb R)\) なら </p>
+<div class="displaymath" id="a0000001017">
+  \[  \int _{\mathbb R} f(au+b)\, d\lambda _1(u)=\frac1{|a|}\int _{\mathbb R}f(x)\, d\lambda _1(x)  \]
+</div>
+<p> が成り立つ．同値な形で，\(\int _{\mathbb R} f(x)\, d\lambda _1(x)=\int _{\mathbb R} f(au+b)|a|\, d\lambda _1(u)\) である． </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000001018">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">49</span>
+    <span class="remark_thmtitle">向きと絶対値</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0011.html#a0000001018">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p> \(a{\lt}0\) のとき，Riemann積分の向きつき記法では符号が現れることがある． しかしLebesgue積分は集合上の積分なので向きを持たない． そのため変数変換では \(a\) ではなく \(|a|\) が現れる． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:linear-change-of-variables">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">.10</span>
+    <span class="theorem_thmtitle">線形変数変換</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0011.html#thm:linear-change-of-variables">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> \(T\in GL(d,\mathbb R)\) とする． \(f\in M^+(\mathbb R^d)\) または \(f\in \mathcal L^1(\mathbb R^d)\) なら </p>
+<div class="displaymath" id="a0000001019">
+  \[  \int _{\mathbb R^d} f(Tu)\, d\lambda _d(u)=\frac1{|\det T|}\int _{\mathbb R^d}f(x)\, d\lambda _d(x)  \]
+</div>
+<p> が成り立つ．同値な形で，\(\int _{\mathbb R^d}f(x)\, d\lambda _d(x)=\int _{\mathbb R^d}f(Tu)|\det T|\, d\lambda _d(u)\) である． </p>
+
+  </div>
+</div>
+<div class="corollary_thmwrapper theorem-style-plain" id="cor:affine-change-of-variables">
+  <div class="corollary_thmheading">
+    <span class="corollary_thmcaption">
+    Corollary
+    </span>
+    <span class="corollary_thmlabel">.11</span>
+    <span class="corollary_thmtitle">affine 変数変換</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0011.html#cor:affine-change-of-variables">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="corollary_thmcontent">
+  <p> \(T\in GL(d,\mathbb R)\)，\(b\in \mathbb R^d\) とする． \(f\in M^+(\mathbb R^d)\) または \(f\in \mathcal L^1(\mathbb R^d)\) なら </p>
+<div class="displaymath" id="a0000001020">
+  \[  \int _{\mathbb R^d} f(Tu+b)|\det T|\, d\lambda _d(u)=\int _{\mathbb R^d}f(x)\, d\lambda _d(x)  \]
+</div>
+<p> が成り立つ． </p>
+
+  </div>
+</div>
+<div class="corollary_thmwrapper theorem-style-plain" id="cor:volume-under-affine-map">
+  <div class="corollary_thmheading">
+    <span class="corollary_thmcaption">
+    Corollary
+    </span>
+    <span class="corollary_thmlabel">.12</span>
+    <span class="corollary_thmtitle">集合の体積の変換</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0011.html#cor:volume-under-affine-map">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="corollary_thmcontent">
+  <p> \(T\in GL(d,\mathbb R)\)，\(b\in \mathbb R^d\) とし，\(A\subset \mathbb R^d\) をLebesgue可測集合とする． このとき \(TA+b\) はLebesgue可測であり，\(\lambda _d(TA+b)=|\det T|\, \lambda _d(A)\) が成り立つ． </p>
+
+  </div>
+</div>
+<div class="example_thmwrapper theorem-style-plain" id="ex:parallelogram-area">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
+    </span>
+    <span class="example_thmlabel">.13</span>
+    <span class="example_thmtitle">平行四辺形の面積</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0011.html#ex:parallelogram-area">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="example_thmcontent">
+  <p> \(T=\begin{pmatrix} a
+
+& c
+
+\\ b
+
+& d
+
+\end{pmatrix}\) とし，\(Q:=[0,1]^2\) とする． このとき \(TQ\) は原点を頂点にもつ平行四辺形であり， \(\lambda _2(TQ)=|\det T|\lambda _2(Q)=|ad-bc|\) である． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:change-of-variables-diffeomorphism">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">.14</span>
+    <span class="theorem_thmtitle">一般の変数変換公式</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0011.html#thm:change-of-variables-diffeomorphism">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> \(U,V\subset \mathbb R^d\) を開集合とし，\(\Phi :U\to V\) を \(C^1\) 級微分同相写像とする． \(f\in M^+(V)\) または \(f\in \mathcal L^1(V)\) なら </p>
+<div class="displaymath" id="a0000001021">
+  \[  \int _V f(x)\, d\lambda _d(x)=\int _U f(\Phi (u))\, |\det D\Phi (u)|\, d\lambda _d(u)  \]
+</div>
+<p> が成り立つ． </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000001022">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">50</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0011.html#a0000001022">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>本講義ではこの一般形の証明は扱わない． affine 変換では \(D\Phi =T\) が定数行列なので，Jacobian \(|\det D\Phi |\) は \(|\det T|\) になる． </p>
+
+  </div>
+</div>
+<div class="example_thmwrapper theorem-style-plain" id="ex:polar-coordinates">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
+    </span>
+    <span class="example_thmlabel">.15</span>
+    <span class="example_thmtitle">極座標</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0011.html#ex:polar-coordinates">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="example_thmcontent">
+  <p> \(\Phi (r,\theta )=(r\cos \theta ,r\sin \theta )\) とおくと，Jacobianは \(|\det D\Phi (r,\theta )|=r\) である． 厳密には原点と角度の端点を除いて微分同相な領域に分けて適用するが，零集合は積分値に影響しない． したがって非負可測関数または可積分関数 \(f:\mathbb R^2\to \overline{\mathbb R}\) に対して </p>
+<div class="displaymath" id="a0000001023">
+  \[  \int _{\mathbb R^2}f(x,y)\, dx\, dy=\int _0^\infty \! \int _0^{2\pi } f(r\cos \theta ,r\sin \theta )\, r\, d\theta \, dr  \]
+</div>
+<p> が成り立つ．例えば \(f=1_{\{ x^2+y^2\le R^2\} }\) とすれば， \(\lambda _2(\{ x^2+y^2\le R^2\} )=\int _0^R\int _0^{2\pi }r\, d\theta \, dr=\pi R^2\) である． </p>
+
+  </div>
+</div>
+<h1 id="a0000000225"> 解釈とまとめ</h1>
+<p>Tonelliの定理は「非負なら積分順序を自由に選べる」という定理である． Fubiniの定理は「絶対可積分なら符号があっても積分順序を交換できる」という定理である． 実際の計算では，\(f\ge 0\) ならTonelli，符号があるなら \(\int \int |f|{\lt}\infty \) を確認してFubini，という順で使う． </p>
+<p>変数変換公式は，Lebesgue測度が向きを持たず，体積だけを測ることを反映している． そのためJacobianは \(\det D\Phi \) ではなく \(|\det D\Phi |\) として現れる． 多変数積分では，積分順序を変える操作と変数を取り替える操作を組み合わせることで，計算しにくい積分を扱いやすい形へ変形する．  </p>
+
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="sect0010.html" title="収束定理"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="Lecture note on KSK"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+  <a href="sect0012.html" title="Banach空間"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>

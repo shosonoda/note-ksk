@@ -12,9 +12,9 @@
 <meta name="generator" content="plasTeX" />
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Lebesgue内測度</title>
-<link rel="next" href="sect0005.html" title="Lebesgue測度" />
-<link rel="prev" href="sect0003.html" title="Lebesgue外測度" />
+<title>測度空間上の積分の性質</title>
+<link rel="next" href="sect0010.html" title="収束定理" />
+<link rel="prev" href="sect0008.html" title="Lebesgue積分" />
 <link rel="up" href="index.html" title="Lecture note on KSK" />
 <link rel="stylesheet" href="styles/theme-white.css" />
 <link rel="stylesheet" href="styles/amsthm.css" />
@@ -156,10 +156,10 @@
 
   </ul>
  </li>
-<li class=" active current">
+<li class="">
   <a href="sect0004.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue内測度</span></a>
-  <span class="expand-toc">▼</span>
-  <ul class="sub-toc-1 active">
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
      <li class="">
   <a href="sect0004.html#a0000000161"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
  </li>
@@ -331,10 +331,10 @@
 
   </ul>
  </li>
-<li class="">
+<li class=" active current">
   <a href="sect0009.html"><span class="toc_ref"></span> <span class="toc_entry">測度空間上の積分の性質</span></a>
-  <span class="expand-toc">▶</span>
-  <ul class="sub-toc-1">
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
      <li class="">
   <a href="sect0009.html#a0000000202"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
  </li>
@@ -520,112 +520,67 @@
 
 
 <div class="main-text">
-<h1 id="a0000000005"> Lebesgue内測度</h1>
-<h4 id="a0000000161">本章の目標</h4>
-<p> Lebesgue流の可測性 </p>
-<div class="displaymath" id="a0000000505">
-  \[  \text{外測度}=\text{内測度}  \]
-</div>
-<p> を定義するため， Lebesgue内測度を導入する． ただし，内測度は外測度や位相の言葉を用いて定義される副次的な量であり， Carathéodoryが整理した抽象理論では外測度が主役となることを後に説明する． </p>
-<h1 id="a0000000162"> 定義</h1>
-<div class="definition_thmwrapper theorem-style-definition" id="a0000000506">
-  <div class="definition_thmheading">
-    <span class="definition_thmcaption">
-    Definition
+<h1 id="a0000000010"> 測度空間上の積分の性質</h1>
+<h4 id="a0000000202">本章の目標</h4>
+<p> ??def:nonnegative-lebesgue-integral,def:lebesgue-integrable-function,def:L1-spaceで 測度空間上の積分と関数空間 \(\mathcal L^1(X)\)，\(L^1(X)\) を定義した． 本章では，その積分を実際の計算に使うための基本性質を整理する． 特に単調性，線形性，a.e. 不変性，Chebyshev不等式を証明し， 確率論や関数解析で必要になる計算規則を揃える． </p>
+<h1 id="a0000000203"> 動機づけ</h1>
+<p>積分を定義しただけでは，まだ計算には使いにくい． 例えば \(\int _X(f+g)\, d\mu \)，\(\int _X cf\, d\mu \)，\(\int _{A\sqcup B}f\, d\mu \) がどう振る舞うかが分からなければ， 実際の応用ではほとんど何もできない． </p>
+<p>また，測度空間上の積分では \(f=g\) a.e. を同一視してよいことが本質である． この原理があるからこそ，零集合上で生じるコーナーケースを気にせず， 確率変数や関数列を計算できる． </p>
+<h1 id="a0000000204"> 準備：正部分と負部分</h1>
+<p>以後，測度空間 \((X,\mathcal M,\mu )\) を固定し，\(f,g\in M(X)\) とする． </p>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:positive-negative-basic-identities">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
     </span>
-    <span class="definition_thmlabel">.1</span>
-    <span class="definition_thmtitle">Lebesgue内測度</span>
+    <span class="proposition_thmlabel">.1</span>
+    <span class="proposition_thmtitle">基本恒等式</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0004.html#a0000000506">#</a>
+    <a class="icon proof" href="sect0009.html#prop:positive-negative-basic-identities">#</a>
+    
+    <a class="icon proof" href="sect0009.html#a0000000966"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
     
     
     
         </div>
   </div>
-  <div class="definition_thmcontent">
-  <p> 集合 \(A \subset \mathbb R^d\) に対し，Lebesgue内測度 \(\lambda _*(A)\) を </p>
-<div class="displaymath" id="a0000000507">
-  \[  \lambda _*(A) := \sup \{ \lambda ^*(K) \mid K \subset A,\  K \text{ はコンパクト}\}   \]
-</div>
-<p> で定める． </p>
+  <div class="proposition_thmcontent">
+  <p> 任意の可測関数 \(f\) に対して \(f=f^+-f^-\)，\(|f|=f^++f^-\)，\(f^+f^-=0\) が成り立つ． </p>
 
   </div>
 </div>
-<div class="remark_thmwrapper theorem-style-remark" id="a0000000508">
-  <div class="remark_thmheading">
-    <span class="remark_thmcaption">
-    Remark
+<div class="proof_wrapper" id="a0000000966">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
     </span>
-    <span class="remark_thmlabel">15</span>
-    <div class="thm_header_extras">
-
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0004.html#a0000000508">#</a>
-    
-    
-    
-        </div>
+    <span class="expand-proof">▶</span>
   </div>
-  <div class="remark_thmcontent">
-  <p>この定義は，Lebesgue外測度や，\(\mathbb R^d\) のコンパクト集合という位相構造を用いて記述されている． 第3章では，Lebesgue外測度が開被覆の下限として言い換えられることを見た．位相論において，開集合の対照的な概念は（閉集合ではなく）コンパクト集合であり，この観点で内測度は外測度の対照的な量である． </p>
+  <div class="proof_content">
+  <p>\(f(x)\ge 0\) のとき \(f^+(x)=f(x)\)，\(f^-(x)=0\) であり， \(f(x){\lt}0\) のとき \(f^+(x)=0\)，\(f^-(x)=-f(x)\) である． したがって各点 \(x\) ごとに上の3つの等式が成り立つ． </p>
 
   </div>
 </div>
-<div class="remark_thmwrapper theorem-style-remark" id="a0000000509">
-  <div class="remark_thmheading">
-    <span class="remark_thmcaption">
-    Remark
-    </span>
-    <span class="remark_thmlabel">16</span>
-    <span class="remark_thmtitle">区間による内側近似がうまくいかない理由</span>
-    <div class="thm_header_extras">
-
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0004.html#a0000000509">#</a>
-    
-    
-    
-        </div>
-  </div>
-  <div class="remark_thmcontent">
-  <p> Jordan内測度との類推から，内測度を </p>
-<div class="displaymath" id="a0000000510">
-  \[  \gamma (A) := \sup \left\{  \sum _{i=1}^\infty |R_i| \; \middle |\;  \bigsqcup _{i=1}^\infty R_i \subset A,\  R_i \text{ は互いに素な左半開区間}\right\}   \]
-</div>
-<p> のように定めても，あまりうまくいかない． </p>
-<p>まず，同じ部分を重複して測ると上限が発散するため，内側からの近似では重なりを許す被覆（covering）ではなく充填（packing）を用いる必要がある． </p>
-<p>しかし，左半開区間だけでは \(A\) の内部しか見えない． 非退化な左半開区間 \(R_i\) は空でない開集合を含むので，\(R_i \subset A\) なら </p>
-<div class="displaymath" id="a0000000511">
-  \[  \operatorname{int}R_i \subset \operatorname{int}A  \]
-</div>
-<p> である． しかも境界は測度 \(0\) だから，\(|R_i|=|\operatorname{int}R_i|\) であり， この方法で得られる量は高々 \(\lambda ^*(\operatorname{int}A)\) である． したがって，\(\operatorname{int}A=\emptyset \) ならこの方法は常に \(0\) しか与えない． </p>
-<p>ところが，fat Cantor 集合（Smith–Volterra–Cantor 集合）のように， 内部が空でありながら正のLebesgue測度をもつコンパクト集合が存在するので， 区間充填ではこのような集合を測れない． このような背景を踏まえ，Lebesgue内測度では区間ではなく，コンパクト集合による充填を用いる． </p>
-
-  </div>
-</div>
-<h1 id="a0000000163"> 基本性質</h1>
-<div class="proposition_thmwrapper theorem-style-plain" id="prop:lebesgue-inner-basic">
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:integrable-as-difference">
   <div class="proposition_thmheading">
     <span class="proposition_thmcaption">
     Proposition
     </span>
     <span class="proposition_thmlabel">.2</span>
+    <span class="proposition_thmtitle">非負関数による表示</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0004.html#prop:lebesgue-inner-basic">#</a>
+    <a class="icon proof" href="sect0009.html#prop:integrable-as-difference">#</a>
     
-    <a class="icon proof" href="sect0004.html#a0000000512"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0009.html#a0000000967"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -633,17 +588,11 @@
         </div>
   </div>
   <div class="proposition_thmcontent">
-  <p> 任意の \(A,B \subset \mathbb R^d\) に対して次が成り立つ． </p>
-<ol class="enumerate">
-  <li><p>\(0 \le \lambda _*(A) \le \lambda ^*(A)\) </p>
-</li>
-  <li><p>\(A \subset B\) ならば \(\lambda _*(A) \le \lambda _*(B)\) </p>
-</li>
-</ol>
+  <p> \(f\in \mathcal L^1(X)\) であることと， ある \(u,v\in M^+(X)\cap \mathcal L^1(X)\) が存在して \(f=u-v\) と書けることは同値である． このとき \(\int _X f\, d\mu =\int _X u\, d\mu -\int _X v\, d\mu \) が成り立つ． </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000512">
+<div class="proof_wrapper" id="a0000000967">
   <div class="proof_heading">
     <span class="proof_caption">
     
@@ -651,38 +600,28 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <ol class="enumerate">
-  <li><p>コンパクト集合 \(K \subset A\) に対して，外測度の単調性より </p>
-<div class="displaymath" id="a0000000513">
-  \[  \lambda ^*(K) \le \lambda ^*(A)  \]
-</div>
-<p> である． 左辺について上限を取れば </p>
-<div class="displaymath" id="a0000000514">
-  \[  \lambda _*(A) \le \lambda ^*(A)  \]
-</div>
-<p> を得る． また外測度は常に非負なので，その上限である \(\lambda _*(A)\) も非負である． </p>
-</li>
-  <li><p>\(A \subset B\) とする． \(K \subset A\) なる任意のコンパクト集合は，そのまま \(K \subset B\) も満たす． したがって，\(A\) に対して取る上限は \(B\) に対して取る上限以下である． </p>
-</li>
-</ol>
+  <p>??prop:integral-representation-independenceより， \(f=u-v\) と書ければ積分値 \(\int _X u\, d\mu -\int _X v\, d\mu \) は表示に依らない． </p>
+<p>まず \(f\) が可積分なら \(f=f^+-f^-\) であり， \(f^+,f^-\) は非負可積分であるから条件を満たす． </p>
+<p>逆に \(f=u-v\) と書け，\(u,v\) が非負可積分とする． このとき \(f^+\le u\)，\(f^-\le v\) が成り立つ． 実際，\(f(x)\ge 0\) なら \(f^+(x)=f(x)=u(x)-v(x)\le u(x)\) であり，\(f(x){\lt}0\) なら \(f^+(x)=0\le u(x)\) である． \(f^-\le v\) も同様である． したがって??prop:nonnegative-integral-basicより \(\int _X f^+\, d\mu \le \int _X u\, d\mu {\lt}\infty \)， \(\int _X f^-\, d\mu \le \int _X v\, d\mu {\lt}\infty \) である． よって \(f\) は可積分である． </p>
 
   </div>
 </div>
-<div class="proposition_thmwrapper theorem-style-plain" id="prop:compact-inner-outer-equal">
+<h1 id="a0000000205"> 集合に関する性質</h1>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:integral-zero-on-null-set">
   <div class="proposition_thmheading">
     <span class="proposition_thmcaption">
     Proposition
     </span>
     <span class="proposition_thmlabel">.3</span>
-    <span class="proposition_thmtitle">コンパクト集合では内外が一致する</span>
+    <span class="proposition_thmtitle">零集合上では積分は消える</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0004.html#prop:compact-inner-outer-equal">#</a>
+    <a class="icon proof" href="sect0009.html#prop:integral-zero-on-null-set">#</a>
     
-    <a class="icon proof" href="sect0004.html#a0000000515"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0009.html#a0000000968"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -690,15 +629,11 @@
         </div>
   </div>
   <div class="proposition_thmcontent">
-  <p>  コンパクト集合 \(K \subset \mathbb R^d\) に対して </p>
-<div class="displaymath" id="a0000000516">
-  \[  \lambda _*(K)=\lambda ^*(K)  \]
-</div>
-<p> が成り立つ． </p>
+  <p> \(\mu (X)=0\) で \(f\in \mathcal L^1(X)\) ならば \(\int _X f\, d\mu =0\) が成り立つ． </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000515">
+<div class="proof_wrapper" id="a0000000968">
   <div class="proof_heading">
     <span class="proof_caption">
     
@@ -706,29 +641,392 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>\(K\) 自身がコンパクトだから， 内測度の上限を取る集合の中に \(K\) そのものが含まれている． したがって </p>
-<div class="displaymath" id="a0000000517">
-  \[  \lambda _*(K) \ge \lambda ^*(K)  \]
-</div>
-<p> である． 逆向きの不等式は前命題から従う． </p>
+  <p>??prop:null-set-integral-signedそのものである． </p>
 
   </div>
 </div>
-<div class="corollary_thmwrapper theorem-style-plain" id="a0000000518">
-  <div class="corollary_thmheading">
-    <span class="corollary_thmcaption">
-    Corollary
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:integral-disjoint-additivity">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
     </span>
-    <span class="corollary_thmlabel">.4</span>
-    <span class="corollary_thmtitle">外測度零集合の内測度</span>
+    <span class="proposition_thmlabel">.4</span>
+    <span class="proposition_thmtitle">互いに素な集合への加法性</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0004.html#a0000000518">#</a>
+    <a class="icon proof" href="sect0009.html#prop:integral-disjoint-additivity">#</a>
     
-    <a class="icon proof" href="sect0004.html#a0000000519"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0009.html#a0000000969"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \(A,B \subset X\) を互いに素な可測集合とし， \(f\in \mathcal L^1(X)\) とする． このとき \(\int _{A \sqcup B} f\, d\mu =\int _A f\, d\mu +\int _B f\, d\mu \) が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000969">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(f=f^+-f^-\) と書く． \(f^+,f^-\) は非負可積分だから，??prop:nonnegative-integral-disjoint-additivityより \(\int _{A \sqcup B} f^+\, d\mu =\int _A f^+\, d\mu +\int _B f^+\, d\mu \) および \(\int _{A \sqcup B} f^-\, d\mu =\int _A f^-\, d\mu +\int _B f^-\, d\mu \) が成り立つ． したがって </p>
+<div class="displaymath" id="a0000000970">
+  \[  \int _{A \sqcup B} f\, d\mu =\int _{A \sqcup B} f^+\, d\mu -\int _{A \sqcup B} f^-\, d\mu =\int _A f\, d\mu +\int _B f\, d\mu .  \]
+</div>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:integral-ae-invariance">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.5</span>
+    <span class="proposition_thmtitle">a.e. 不変性</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#prop:integral-ae-invariance">#</a>
+    
+    <a class="icon proof" href="sect0009.html#a0000000971"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \(f,g\in \mathcal L^1(X)\) とする． もし \(f=g\) a.e. on \(X\) ならば \(\int _X f\, d\mu =\int _X g\, d\mu \) が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000971">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>??prop:signed-integral-ae-invarianceそのものである． </p>
+
+  </div>
+</div>
+<h1 id="a0000000206"> 順序と大きさ</h1>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:integral-monotonicity">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.6</span>
+    <span class="proposition_thmtitle">単調性</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#prop:integral-monotonicity">#</a>
+    
+    <a class="icon proof" href="sect0009.html#a0000000972"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \(f,g\in \mathcal L^1(X)\) とする． もし \(f\le g\) a.e. on \(X\) ならば \(\int _X f\, d\mu \le \int _X g\, d\mu \) が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000972">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>零集合上で値を変えても積分値は変わらない （??prop:integral-ae-invariance）ので，\(f\le g\) が各点で成り立つとしてよい． このとき \(g^+ + f^- \ge f^+ + g^-\) である． 実際，これは \(g^+-g^- \ge f^+-f^-\) と同値である． ??prop:nonnegative-integral-basicを非負関数に適用すると </p>
+<div class="displaymath" id="a0000000973">
+  \[  \int _X g^+\, d\mu +\int _X f^-\, d\mu \ge \int _X f^+\, d\mu +\int _X g^-\, d\mu  \]
+</div>
+<p> である．両辺を移項して \(\int _X f\, d\mu \le \int _X g\, d\mu \) を得る． </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:integral-bound-by-constants">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.7</span>
+    <span class="proposition_thmtitle">定数による評価</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#prop:integral-bound-by-constants">#</a>
+    
+    <a class="icon proof" href="sect0009.html#a0000000974"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \(\mu (X){\lt}\infty \) とし，\(a,b \in \mathbb R\) が \(a\le f(x)\le b\) a.e. on \(X\) を満たすとする． このとき \(a\, \mu (X)\le \int _X f\, d\mu \le b\, \mu (X)\) が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000974">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>a.e. で \(a1_X\le f\le b1_X\) だから，??prop:integral-monotonicityより \(\int _X a1_X\, d\mu \le \int _X f\, d\mu \le \int _X b1_X\, d\mu \) である． 定数関数の積分 \(\int _X c1_X\, d\mu =c\, \mu (X)\) を用いれば結論を得る． </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:integral-absolute-value-bound">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.8</span>
+    <span class="proposition_thmtitle">絶対値による評価</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#prop:integral-absolute-value-bound">#</a>
+    
+    <a class="icon proof" href="sect0009.html#a0000000975"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \(f\in \mathcal L^1(X)\) ならば \(\left|\int _X f\, d\mu \right|\le \int _X |f|\, d\mu \) が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000975">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>a.e. で \(-|f|\le f\le |f|\) だから，??prop:integral-monotonicityより \(-\int _X |f|\, d\mu \le \int _X f\, d\mu \le \int _X |f|\, d\mu \) である． したがって絶対値をとればよい． </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:integral-zero-iff-ae-zero">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.9</span>
+    <span class="proposition_thmtitle">積分が \(0\) であることの判定</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#prop:integral-zero-iff-ae-zero">#</a>
+    
+    <a class="icon proof" href="sect0009.html#a0000000976"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \(f\in \mathcal L^1(X)\) とする． このとき次は同値である． </p>
+<ol class="enumerate">
+  <li><p>\(\int _X |f|\, d\mu =0\) </p>
+</li>
+  <li><p>\(f=0\) a.e. on \(X\) </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000976">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p><b class="bfseries">(2) \(\Rightarrow \) (1)</b>&#8195;\(|f|=0\) a.e. だから，??prop:integral-ae-invarianceより \(\int _X |f|\, d\mu =0\) である． </p>
+<p><b class="bfseries">(1) \(\Rightarrow \) (2)</b>&#8195;\(|f|\) は非負可測関数であり， ??prop:nonnegative-integral-zero-iff-ae-zeroより \(|f|=0\) a.e. on \(X\) である． これは \(f=0\) a.e. と同値である． </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:chebyshev-inequality">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.10</span>
+    <span class="proposition_thmtitle">Chebyshev不等式</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#prop:chebyshev-inequality">#</a>
+    
+    <a class="icon proof" href="sect0009.html#a0000000977"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \(f\in \mathcal L^1(X)\) とし，\(\alpha {\gt}0\) とする． このとき \(\mu (\{ x \in X \mid |f(x)|\ge \alpha \} )\le \alpha ^{-1}\int _X |f|\, d\mu \) が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000977">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(A:=\{ x \in X \mid |f(x)|\ge \alpha \} \) とおく． すると a.e. で \(\alpha 1_A\le |f|\) が成り立つので，??prop:integral-monotonicityより \(\alpha \, \mu (A)=\int _X \alpha 1_A\, d\mu \le \int _X |f|\, d\mu \) である． 両辺を \(\alpha \) で割ればよい． </p>
+
+  </div>
+</div>
+<h1 id="a0000000207"> 線形性</h1>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:integral-homogeneity">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.11</span>
+    <span class="proposition_thmtitle">斉次性</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#prop:integral-homogeneity">#</a>
+    
+    <a class="icon proof" href="sect0009.html#a0000000978"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \(f\in \mathcal L^1(X)\)，\(c \in \mathbb R\) とする． このとき \(\int _X cf\, d\mu =c\int _X f\, d\mu \) が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000978">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>まず \(c\ge 0\) の場合を示す．\(f=f^+-f^-\) だから \(cf=(cf^+)-(cf^-)\) であり，\(cf^+,cf^-\) は非負可積分である． したがって </p>
+<div class="displaymath" id="a0000000979">
+  \[  \int _X cf\, d\mu =\int _X cf^+\, d\mu -\int _X cf^-\, d\mu =c\int _X f^+\, d\mu -c\int _X f^-\, d\mu =c\int _X f\, d\mu .  \]
+</div>
+<p>次に \(c{\lt}0\) とする． このとき \(cf=(-c)(-f)\) であり，\(-c{\gt}0\) だから前半の結果を \(-f\) に適用して \(\int _X cf\, d\mu =(-c)\int _X (-f)\, d\mu =(-c)(-\int _X f\, d\mu )=c\int _X f\, d\mu \) を得る． </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:integral-additivity">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.12</span>
+    <span class="proposition_thmtitle">加法性</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#prop:integral-additivity">#</a>
+    
+    <a class="icon proof" href="sect0009.html#a0000000980"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \(f,g\in \mathcal L^1(X)\) とする． このとき \(f+g\in \mathcal L^1(X)\) で， \(\int _X (f+g)\, d\mu =\int _X f\, d\mu +\int _X g\, d\mu \) が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000980">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>まず \(|f+g|\le |f|+|g|\) だから，右辺の可積分性より ??cor:dominated-integrabilityから \(f+g\) も可積分である． </p>
+<p>次に \(f=f^+-f^-\)，\(g=g^+-g^-\) と書くと \(f+g=(f^++g^+)-(f^-+g^-)\) である． \(f^++g^+\) と \(f^-+g^-\) は非負可積分であるから， ??prop:nonnegative-integral-basic,prop:integral-representation-independenceより </p>
+<div class="displaymath" id="a0000000981">
+  \[  \int _X (f+g)\, d\mu =\int _X (f^++g^+)\, d\mu -\int _X (f^-+g^-)\, d\mu  \]
+</div>
+<p> である． また \(\int _X (f^++g^+)\, d\mu =\int _X f^+\, d\mu +\int _X g^+\, d\mu \) かつ \(\int _X (f^-+g^-)\, d\mu =\int _X f^-\, d\mu +\int _X g^-\, d\mu \) だから， 右辺は \(\int _X f\, d\mu +\int _X g\, d\mu \) に等しい． </p>
+
+  </div>
+</div>
+<div class="corollary_thmwrapper theorem-style-plain" id="cor:integral-finite-sum">
+  <div class="corollary_thmheading">
+    <span class="corollary_thmcaption">
+    Corollary
+    </span>
+    <span class="corollary_thmlabel">.13</span>
+    <span class="corollary_thmtitle">有限和</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#cor:integral-finite-sum">#</a>
+    
+    <a class="icon proof" href="sect0009.html#a0000000982"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -736,15 +1034,11 @@
         </div>
   </div>
   <div class="corollary_thmcontent">
-  <p> \(\lambda ^*(A)=0\) ならば </p>
-<div class="displaymath" id="a0000000520">
-  \[  \lambda _*(A)=0  \]
-</div>
-<p> である． </p>
+  <p> \(f_1,\dots ,f_n\in \mathcal L^1(X)\) とすると \(\int _X (\sum _{k=1}^n f_k)\, d\mu =\sum _{k=1}^n \int _X f_k\, d\mu \) が成り立つ． </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000519">
+<div class="proof_wrapper" id="a0000000982">
   <div class="proof_heading">
     <span class="proof_caption">
     
@@ -752,29 +1046,105 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <p>基本性質の (1) より </p>
-<div class="displaymath" id="a0000000521">
-  \[  0 \le \lambda _*(A) \le \lambda ^*(A)=0  \]
-</div>
-<p> だからである． </p>
+  <p>??prop:integral-additivityを繰り返し用いればよい． </p>
 
   </div>
 </div>
-<h1 id="a0000000164"> 具体例</h1>
-<div class="example_thmwrapper theorem-style-plain" id="a0000000522">
-  <div class="example_thmheading">
-    <span class="example_thmcaption">
-    Example
+<h1 id="a0000000208"> 計算則のまとめ</h1>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:lebesgue-integral-basic-formulas">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
     </span>
-    <span class="example_thmlabel">.5</span>
+    <span class="theorem_thmlabel">.14</span>
+    <span class="theorem_thmtitle">測度空間上の積分の基本公式</span>
     <div class="thm_header_extras">
 
         </div>
     <div class="thm_header_hidden_extras">
 
-    <a class="icon proof" href="sect0004.html#a0000000522">#</a>
+    <a class="icon proof" href="sect0009.html#thm:lebesgue-integral-basic-formulas">#</a>
     
-    <a class="icon proof" href="sect0004.html#a0000000523"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+    <a class="icon proof" href="sect0009.html#a0000000983"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> \(f,g\in \mathcal L^1(X)\) とする． このとき次が成り立つ． </p>
+<ol class="enumerate">
+  <li><p>\(\mu (X)=0\) なら \(\int _X f\, d\mu =0\) </p>
+</li>
+  <li><p>\(f=g\) a.e. なら \(\int _X f\, d\mu =\int _X g\, d\mu \) </p>
+</li>
+  <li><p>\(f\le g\) a.e. なら \(\int _X f\, d\mu \le \int _X g\, d\mu \) </p>
+</li>
+  <li><p>任意の \(c \in \mathbb R\) に対して \(\int _X cf\, d\mu =c\int _X f\, d\mu \) </p>
+</li>
+  <li><p>\(\int _X (f+g)\, d\mu =\int _X f\, d\mu +\int _X g\, d\mu \) </p>
+</li>
+  <li><p>\(\left|\int _X f\, d\mu \right|\le \int _X |f|\, d\mu \) </p>
+</li>
+  <li><p>\(\int _X |f|\, d\mu =0 \iff f=0\) a.e. on \(X\) </p>
+</li>
+  <li><p>\(A,B \subset X\) が互いに素な可測集合なら \(\int _{A \sqcup B} f\, d\mu =\int _A f\, d\mu +\int _B f\, d\mu \) </p>
+</li>
+  <li><p>\(\alpha {\gt}0\) に対して \(\mu (\{ |f|\ge \alpha \} )\le \alpha ^{-1}\int _X |f|\, d\mu \) </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000983">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>各項は順に ??prop:integral-zero-on-null-set,prop:integral-ae-invariance,prop:integral-monotonicity,prop:integral-homogeneity,prop:integral-additivity,prop:integral-absolute-value-bound,prop:integral-zero-iff-ae-zero,prop:integral-disjoint-additivity,prop:chebyshev-inequality で示した内容である． </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000000984">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">41</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#a0000000984">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>この章で得た公式は，今後の章でほぼ毎回使う． 特に \(f=g\) a.e. なら積分値を区別しなくてよいこと，および \(\left|\int f\right|\le \int |f|\) という評価は， 収束定理を運用する際の基本になる． </p>
+
+  </div>
+</div>
+<div class="example_thmwrapper theorem-style-plain" id="a0000000985">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
+    </span>
+    <span class="example_thmlabel">.15</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0009.html#a0000000985">#</a>
+    
+    <a class="icon proof" href="sect0009.html#a0000000986"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
 </a>
     
     
@@ -782,26 +1152,11 @@
         </div>
   </div>
   <div class="example_thmcontent">
-  <ol class="enumerate">
-  <li><p>任意のコンパクト集合では内測度と外測度が一致する </p>
-</li>
-  <li><p>任意の可算集合 \(A\) に対して </p>
-<div class="displaymath" id="a0000000524">
-  \[  \lambda _*(A)=0  \]
-</div>
-<p> である </p>
-</li>
-  <li><p>特に </p>
-<div class="displaymath" id="a0000000525">
-  \[  \mathbb Q\cap [0,1]  \]
-</div>
-<p> は内測度 \(0\) をもつ </p>
-</li>
-</ol>
+  <p>\(\mu (X){\lt}\infty \) とし， \(f\in M(X)\) が \(|f(x)|\le M\) a.e. on \(X\) を満たすとする． このとき \(f\) は可積分で，\(\left|\int _X f\, d\mu \right|\le M\, \mu (X)\) が成り立つ． </p>
 
   </div>
 </div>
-<div class="proof_wrapper" id="a0000000523">
+<div class="proof_wrapper" id="a0000000986">
   <div class="proof_heading">
     <span class="proof_caption">
     
@@ -809,495 +1164,23 @@
     <span class="expand-proof">▶</span>
   </div>
   <div class="proof_content">
-  <ol class="enumerate">
-  <li><p>直前の命題で示した． </p>
-</li>
-  <li><p>第3章で可算集合の外測度は \(0\) であることを示したから， 直前の系より </p>
-<div class="displaymath" id="a0000000526">
-  \[  \lambda _*(A)=0  \]
-</div>
-<p> である． </p>
-</li>
-  <li><p>(2) を </p>
-<div class="displaymath" id="a0000000527">
-  \[  A=\mathbb Q\cap [0,1]  \]
-</div>
-<p> に適用すればよい． </p>
-</li>
-</ol>
+  <p>\(|f|\le M1_X\) だから \(\int _X |f|\, d\mu \le M\, \mu (X){\lt}\infty \) である． よって \(f\) は可積分である． さらに??prop:integral-absolute-value-boundより \(\left|\int _X f\, d\mu \right|\le \int _X |f|\, d\mu \le M\, \mu (X)\) である． </p>
 
   </div>
 </div>
-<h1 id="a0000000165"> Jordan測度との関係</h1>
-<div class="theorem_thmwrapper theorem-style-plain" id="thm:jordan-inner-lebesgue-inner">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">.6</span>
-    <div class="thm_header_extras">
-
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0004.html#thm:jordan-inner-lebesgue-inner">#</a>
-    
-    <a class="icon proof" href="sect0004.html#a0000000528"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    
-        </div>
-  </div>
-  <div class="theorem_thmcontent">
-  <p> 集合 \(A \subset \mathbb R^d\) に対し，</p>
-<div class="displaymath" id="a0000000529">
-  \[  m_{J,*}(A) \le \lambda _*(A)  \]
-</div>
-<p> である． </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000528">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>\(E\subset A\) を満たす基本集合 \(E\) を任意に取る． \(E=\emptyset \) のときは \(m_J(E)=0\le \lambda _*(A)\) だからよい． 以下では \(E\neq \emptyset \) とする． このとき </p>
-<div class="displaymath" id="a0000000530">
-  \[  E=\bigsqcup _{j=1}^{N}Q_j  \]
-</div>
-<p> と互いに素な有界区間の有限合併に書ける． 任意の \(\varepsilon {\gt}0\) に対し，各 \(Q_j\) の端点を少し内側へ動かせば， コンパクト区間 \(C_j\subset Q_j\) で </p>
-<div class="displaymath" id="a0000000531">
-  \[  |C_j|{\gt}|Q_j|-\frac{\varepsilon }{N}  \]
-</div>
-<p> を満たすものが取れる．ただし \(|Q_j|=0\) の場合は \(C_j=\emptyset \) とすればよい． </p>
-<p>そこで </p>
-<div class="displaymath" id="a0000000532">
-  \[  K:=\bigcup _{j=1}^{N}C_j  \]
-</div>
-<p> とおくと，\(K\) はコンパクト集合であり，\(K\subset E\subset A\) である． また \(Q_j\) たちは互いに素なので，\(C_j\) たちも互いに素である． したがって \(K\) はJordan可測であり，第3章で示した Jordan測度とLebesgue外測度の一致より </p>
-<div class="displaymath" id="a0000000533">
-  \[  \lambda ^*(K)=m_J(K)=\sum _{j=1}^{N}|C_j|.  \]
-</div>
-<p> よって </p>
-<div class="displaymath" id="a0000000534">
-  \[  \lambda _*(A) \ge \lambda ^*(K) =\sum _{j=1}^{N}|C_j| {\gt} \sum _{j=1}^{N}|Q_j|-\varepsilon =m_J(E)-\varepsilon .  \]
-</div>
-<p> \(\varepsilon {\gt}0\) は任意なので </p>
-<div class="displaymath" id="a0000000535">
-  \[  m_J(E)\le \lambda _*(A)  \]
-</div>
-<p> である． </p>
-<p>最後に，\(E\subset A\) を満たす基本集合全体について上限を取ると </p>
-<div class="displaymath" id="a0000000536">
-  \[  m_{J,*}(A)\le \lambda _*(A)  \]
-</div>
-<p> を得る． </p>
-
-  </div>
-</div>
-<h1 id="a0000000166"> 同値な定義</h1>
-<p>有界区間 \(Q\) の中では，内測度は補集合の外測度で表せる． この形は次章で可測性を判定するときに最も使いやすい． </p>
-<div class="theorem_thmwrapper theorem-style-plain" id="cor:inner-measure-via-interval">
-  <div class="theorem_thmheading">
-    <span class="theorem_thmcaption">
-    Theorem
-    </span>
-    <span class="theorem_thmlabel">.7</span>
-    <span class="theorem_thmtitle">区間を用いた内測度表示</span>
-    <div class="thm_header_extras">
-
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0004.html#cor:inner-measure-via-interval">#</a>
-    
-    <a class="icon proof" href="sect0004.html#a0000000537"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    
-        </div>
-  </div>
-  <div class="theorem_thmcontent">
-  <p> 有界区間 \(Q\subset \mathbb R^d\) と \(A\subset Q\) に対して </p>
-<div class="displaymath" id="a0000000538">
-  \[  \lambda _*(A) = |Q|-\lambda ^*(Q\setminus A)  \]
-</div>
-<p> が成り立つ． </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000537">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>\(Q=\emptyset \) のときは自明である．以下では \(Q\neq \emptyset \) とする． \(C:=\overline Q\) とおく．第3章で示した区間の外測度の計算より \(\lambda ^*(C)=|Q|\) であり，また \(C\setminus Q\) は零集合なので </p>
-<div class="displaymath" id="a0000000539">
-  \[  \lambda ^*(C\setminus A)=\lambda ^*(Q\setminus A)  \]
-</div>
-<p> である． </p>
-<p>まず \(\lambda _*(A)\le |Q|-\lambda ^*(Q\setminus A)\) を示す． コンパクト集合 \(K\subset A\) を取る． ??lem:compact-splits-outer-measure を \(B=C\) とコンパクト集合 \(K\) に適用すると </p>
-<div class="displaymath" id="a0000000540">
-  \[  \lambda ^*(C)=\lambda ^*(K)+\lambda ^*(C\setminus K)  \]
-</div>
-<p> である．また \(Q\setminus A\subset C\setminus K\) だから </p>
-<div class="displaymath" id="a0000000541">
-  \[  \lambda ^*(K) \le \lambda ^*(C)-\lambda ^*(Q\setminus A) = |Q|-\lambda ^*(Q\setminus A).  \]
-</div>
-<p> 上限を取ると </p>
-<div class="displaymath" id="a0000000542">
-  \[  \lambda _*(A)\le |Q|-\lambda ^*(Q\setminus A)  \]
-</div>
-<p> である． </p>
-<p>逆向きの不等式を示す．\(\varepsilon {\gt}0\) を任意に取る． 開集合による外正則性より，\(C\setminus A\) を含む開集合 \(U\) で </p>
-<div class="displaymath" id="a0000000543">
-  \[  \lambda ^*(U){\lt}\lambda ^*(C\setminus A)+\varepsilon  \]
-</div>
-<p> となるものを取る． このとき \(K:=C\setminus U\) は \(A\) に含まれるコンパクト集合である． \(C\subset K\cup U\) だから </p>
-<div class="displaymath" id="a0000000544">
-  \[  \lambda ^*(C)\le \lambda ^*(K)+\lambda ^*(U)  \]
-</div>
-<p> であり， </p>
-<div class="displaymath" id="a0000000545">
-  \[  \lambda ^*(K) {\gt} \lambda ^*(C)-\lambda ^*(C\setminus A)-\varepsilon = |Q|-\lambda ^*(Q\setminus A)-\varepsilon .  \]
-</div>
-<p> 内測度の定義より </p>
-<div class="displaymath" id="a0000000546">
-  \[  \lambda _*(A)\ge |Q|-\lambda ^*(Q\setminus A)-\varepsilon  \]
-</div>
-<p> である．\(\varepsilon {\gt}0\) は任意なので逆向きの不等式も従う． </p>
-
-  </div>
-</div>
-<div class="corollary_thmwrapper theorem-style-plain" id="cor:interval-outer-measure-split">
-  <div class="corollary_thmheading">
-    <span class="corollary_thmcaption">
-    Corollary
-    </span>
-    <span class="corollary_thmlabel">.8</span>
-    <span class="corollary_thmtitle">区間による外測度の分解</span>
-    <div class="thm_header_extras">
-
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0004.html#cor:interval-outer-measure-split">#</a>
-    
-    <a class="icon proof" href="sect0004.html#a0000000547"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    
-        </div>
-  </div>
-  <div class="corollary_thmcontent">
-  <p> 有界区間 \(Q\subset \mathbb R^d\) と \(A\subset Q\) に対して </p>
-<div class="displaymath" id="a0000000548">
-  \[  \lambda _*(A)=\lambda ^*(A) \qquad \Longleftrightarrow \qquad |Q|=\lambda ^*(A)+\lambda ^*(Q\setminus A)  \]
-</div>
-<p> である． </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000547">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>??thm:inner-measure-via-interval により </p>
-<div class="displaymath" id="a0000000549">
-  \[  \lambda _*(A)=|Q|-\lambda ^*(Q\setminus A)  \]
-</div>
-<p> である．これを \(\lambda _*(A)=\lambda ^*(A)\) に代入すればよい． </p>
-
-  </div>
-</div>
-<h2 id="a0000000167"> 外測度に関する補助定理</h2>
-<p>上の証明と次章で使う外測度の補助定理をまとめておく． </p>
-<div class="lemma_thmwrapper theorem-style-plain" id="lem:positive-distance-additive">
-  <div class="lemma_thmheading">
-    <span class="lemma_thmcaption">
-    Lemma
-    </span>
-    <span class="lemma_thmlabel">.9</span>
-    <div class="thm_header_extras">
-
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0004.html#lem:positive-distance-additive">#</a>
-    
-    <a class="icon proof" href="sect0004.html#a0000000550"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    
-        </div>
-  </div>
-  <div class="lemma_thmcontent">
-  <p> \(A,B\subset \mathbb R^d\) が正の距離だけ離れていれば </p>
-<div class="displaymath" id="a0000000551">
-  \[  \lambda ^*(A\cup B)=\lambda ^*(A)+\lambda ^*(B)  \]
-</div>
-<p> である． </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000550">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>片方が空集合の場合は自明なので，以下では \(A,B\) は空でないとする． 実際，\(\operatorname {dist}(A,B){\gt}0\) とし， \(0{\lt}\rho {\lt}\operatorname {dist}(A,B)\) を取る． \(A\cup B\) を覆う区間列 \(\{ R_i\} _{i=1}^{\infty }\subset \mathcal E_d\) を任意に取る． \(\sum _i |R_i|=\infty \) の場合は自明なので，この和は有限としてよい． すると各 \(R_i\) は有界であり，有限個の左半開区間に分割して， 各小区間の直径を \(\rho \) 未満にできる． そのような小区間は \(A\) と \(B\) の両方には交わらない． したがって，\(A\) に交わる小区間全体は \(A\) を覆い， \(B\) に交わる小区間全体は \(B\) を覆うので， </p>
-<div class="displaymath" id="a0000000552">
-  \[  \lambda ^*(A)+\lambda ^*(B)\le \sum _{i=1}^{\infty }|R_i|.  \]
-</div>
-<p> 被覆について下限を取れば </p>
-<div class="displaymath" id="a0000000553">
-  \[  \lambda ^*(A)+\lambda ^*(B)\le \lambda ^*(A\cup B)  \]
-</div>
-<p> を得る．逆向きの不等式は外測度の劣加法性である． </p>
-
-  </div>
-</div>
-<div class="lemma_thmwrapper theorem-style-plain" id="lem:finite-open-inner-compact">
-  <div class="lemma_thmheading">
-    <span class="lemma_thmcaption">
-    Lemma
-    </span>
-    <span class="lemma_thmlabel">.10</span>
-    <div class="thm_header_extras">
-
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0004.html#lem:finite-open-inner-compact">#</a>
-    
-    <a class="icon proof" href="sect0004.html#a0000000554"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    
-        </div>
-  </div>
-  <div class="lemma_thmcontent">
-  <p> \(\lambda ^*(U){\lt}\infty \) である開集合 \(U\) は内側からコンパクト集合で近似できる． すなわち任意の \(\varepsilon {\gt}0\) に対し，コンパクト集合 \(F\subset U\) で </p>
-<div class="displaymath" id="a0000000555">
-  \[  \lambda ^*(F){\gt}\lambda ^*(U)-\varepsilon  \]
-</div>
-<p> となるものが取れる． </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000554">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>もし \(U=\emptyset \) なら \(F=\emptyset \) とすればよい． 以下では \(U\neq \emptyset \) とする． これを見るため，有理数端点をもつ有界閉区間で \(U\) に含まれるもの全体を </p>
-<div class="displaymath" id="a0000000556">
-  \[  C_1,C_2,\dots  \]
-</div>
-<p> と列挙する．\(U\) は開集合だから，これらは \(U\) を覆う． </p>
-<div class="displaymath" id="a0000000557">
-  \[  B_1:=C_1,\qquad B_n:=C_n\setminus \bigcup _{j=1}^{n-1}C_j\quad (n\ge 2)  \]
-</div>
-<p> とおくと，\(\{ B_n\} \) は互いに素なJordan可測集合列で， </p>
-<div class="displaymath" id="a0000000558">
-  \[  U=\bigsqcup _{n=1}^{\infty }B_n  \]
-</div>
-<p> である．第3章で示した \(\mathcal A_J\) 上の可算加法性より </p>
-<div class="displaymath" id="a0000000559">
-  \[  \lambda ^*(U)=\sum _{n=1}^{\infty }\lambda ^*(B_n).  \]
-</div>
-<p> よってある \(N\) が存在して </p>
-<div class="displaymath" id="a0000000560">
-  \[  \sum _{n=1}^{N}\lambda ^*(B_n){\gt}\lambda ^*(U)-\varepsilon  \]
-</div>
-<p> となる． このとき </p>
-<div class="displaymath" id="a0000000561">
-  \[  F:=\bigcup _{n=1}^{N}C_n  \]
-</div>
-<p> は \(U\) に含まれるコンパクト集合であり， </p>
-<div class="displaymath" id="a0000000562">
-  \[  \lambda ^*(F) = \sum _{n=1}^{N}\lambda ^*(B_n) {\gt} \lambda ^*(U)-\varepsilon  \]
-</div>
-<p> である． </p>
-
-  </div>
-</div>
-<div class="lemma_thmwrapper theorem-style-plain" id="lem:finite-open-compact-split">
-  <div class="lemma_thmheading">
-    <span class="lemma_thmcaption">
-    Lemma
-    </span>
-    <span class="lemma_thmlabel">.11</span>
-    <div class="thm_header_extras">
-
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0004.html#lem:finite-open-compact-split">#</a>
-    
-    <a class="icon proof" href="sect0004.html#a0000000563"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    
-        </div>
-  </div>
-  <div class="lemma_thmcontent">
-  <p> \(\lambda ^*(O){\lt}\infty \) である開集合 \(O \in \mathcal O_d\) とコンパクト集合 \(K\) に対し， </p>
-<div class="displaymath" id="a0000000564">
-  \[  \lambda ^*(O) = \lambda ^*(O \cap K) + \lambda ^*(O \setminus K)  \]
-</div>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000563">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>外測度の劣加法性より </p>
-<div class="displaymath" id="a0000000565">
-  \[  \lambda ^*(O) \le \lambda ^*(O\cap K)+\lambda ^*(O\setminus K)  \]
-</div>
-<p> である． </p>
-<p>逆向きの不等式を示す．\(\varepsilon {\gt}0\) を任意に取る． \(O\setminus K\) は開集合であり，単調性より </p>
-<div class="displaymath" id="a0000000566">
-  \[  \lambda ^*(O\setminus K)\le \lambda ^*(O){\lt}\infty  \]
-</div>
-<p> である． したがって上の補題より，コンパクト集合 \(F\subset O\setminus K\) で </p>
-<div class="displaymath" id="a0000000567">
-  \[  \lambda ^*(F){\gt}\lambda ^*(O\setminus K)-\varepsilon  \]
-</div>
-<p> となるものが取れる． もし \(F=\emptyset \) なら </p>
-<div class="displaymath" id="a0000000568">
-  \[  \lambda ^*((O\cap K)\cup F) = \lambda ^*(O\cap K)+\lambda ^*(F)  \]
-</div>
-<p> は自明である． もし \(F\neq \emptyset \) なら，\(F\) はコンパクトで \(K\) と交わらないから， </p>
-<div class="displaymath" id="a0000000569">
-  \[  \operatorname {dist}(F,K){\gt}0  \]
-</div>
-<p> である．特に \(F\) と \(O\cap K\) も正の距離だけ離れている． この場合は補題より </p>
-<div class="displaymath" id="a0000000570">
-  \[  \lambda ^*((O\cap K)\cup F) = \lambda ^*(O\cap K)+\lambda ^*(F)  \]
-</div>
-<p> である．いずれの場合も上の等式が成り立つ． 一方 \((O\cap K)\cup F\subset O\) だから，単調性より </p>
-<div class="displaymath" id="a0000000571">
-  \[  \lambda ^*(O) \ge \lambda ^*(O\cap K)+\lambda ^*(F) {\gt} \lambda ^*(O\cap K)+\lambda ^*(O\setminus K)-\varepsilon .  \]
-</div>
-<p> \(\varepsilon {\gt}0\) は任意なので </p>
-<div class="displaymath" id="a0000000572">
-  \[  \lambda ^*(O) \ge \lambda ^*(O\cap K)+\lambda ^*(O\setminus K)  \]
-</div>
-<p> を得る．以上より等号が成り立つ． </p>
-
-  </div>
-</div>
-<div class="lemma_thmwrapper theorem-style-plain" id="lem:compact-splits-outer-measure">
-  <div class="lemma_thmheading">
-    <span class="lemma_thmcaption">
-    Lemma
-    </span>
-    <span class="lemma_thmlabel">.12</span>
-    <span class="lemma_thmtitle">コンパクト集合による外測度の分解</span>
-    <div class="thm_header_extras">
-
-        </div>
-    <div class="thm_header_hidden_extras">
-
-    <a class="icon proof" href="sect0004.html#lem:compact-splits-outer-measure">#</a>
-    
-    <a class="icon proof" href="sect0004.html#a0000000573"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
-</a>
-    
-    
-    
-        </div>
-  </div>
-  <div class="lemma_thmcontent">
-  <p> コンパクト集合 \(C\subset \mathbb R^d\) と任意の集合 \(B\subset \mathbb R^d\) に対して </p>
-<div class="displaymath" id="a0000000574">
-  \[  \lambda ^*(B) = \lambda ^*(B\cap C)+\lambda ^*(B\setminus C)  \]
-</div>
-<p> が成り立つ． </p>
-
-  </div>
-</div>
-<div class="proof_wrapper" id="a0000000573">
-  <div class="proof_heading">
-    <span class="proof_caption">
-    
-    </span>
-    <span class="expand-proof">▶</span>
-  </div>
-  <div class="proof_content">
-  <p>外測度の劣加法性より </p>
-<div class="displaymath" id="a0000000575">
-  \[  \lambda ^*(B) \le \lambda ^*(B\cap C)+\lambda ^*(B\setminus C)  \]
-</div>
-<p> である． </p>
-<p>逆向きの不等式を示す．\(\lambda ^*(B)=\infty \) のときは自明なので， \(\lambda ^*(B){\lt}\infty \) とする． \(\varepsilon {\gt}0\) を任意に取る．開集合による外正則性 （??thm:lebesgue-outer-regularity-open）より， \(B\subset U\) を満たす開集合 \(U\) で </p>
-<div class="displaymath" id="a0000000576">
-  \[  \lambda ^*(U){\lt}\lambda ^*(B)+\varepsilon  \]
-</div>
-<p> となるものが取れる． 特に \(\lambda ^*(U){\lt}\infty \) である． ??lem:finite-open-compact-split を \(U\) と \(C\) に適用すると </p>
-<div class="displaymath" id="a0000000577">
-  \[  \lambda ^*(U) = \lambda ^*(U\cap C)+\lambda ^*(U\setminus C)  \]
-</div>
-<p> である． また </p>
-<div class="displaymath" id="a0000000578">
-  \[  B\cap C\subset U\cap C,\qquad B\setminus C\subset U\setminus C  \]
-</div>
-<p> だから，単調性より </p>
-<div class="displaymath" id="a0000000579">
-  \[  \lambda ^*(B\cap C)+\lambda ^*(B\setminus C) \le \lambda ^*(U) {\lt} \lambda ^*(B)+\varepsilon .  \]
-</div>
-<p> \(\varepsilon {\gt}0\) は任意なので </p>
-<div class="displaymath" id="a0000000580">
-  \[  \lambda ^*(B\cap C)+\lambda ^*(B\setminus C) \le \lambda ^*(B)  \]
-</div>
-<p> である． </p>
-
-  </div>
-</div>
-<h1 id="a0000000168"> 解釈</h1>
-<p>Lebesgue内測度 \(\lambda _*(A)\) は， 「\(A\) の中に入るコンパクト集合のうち，どこまで大きな面積を確保できるか」 を表している． したがって，Lebesgue流の可測性 </p>
-<div class="displaymath" id="a0000000581">
-  \[  \lambda ^*(A)=\lambda _*(A)  \]
-</div>
-<p> とは，外から見た大きさと内から見た大きさが一致して， その集合の面積がぶれないことを意味している． </p>
-<p>ただし，この定義は補助的である． 理由は2つある． </p>
+<h1 id="a0000000209"> 解釈とまとめ</h1>
+<p>本章で示した性質により，\(\mathcal L^1(X)\) 上の積分は順序を保ち，線形で，零集合を無視できることが分かった． これはまさに，確率論や関数解析で積分を計算道具として使うために必要な性質である． </p>
+<p>特に重要なのは次の3点である． </p>
 <ol class="enumerate">
-  <li><p>コンパクト集合という位相的概念に依存している </p>
+  <li><p>\(f=g\) a.e. なら積分値も同じ </p>
 </li>
-  <li><p>この定義だけから可測集合全体の構造を調べるのは難しい </p>
+  <li><p>\(|f|\) を積分すれば \(f\) の大きさを制御できる </p>
+</li>
+  <li><p>集合の大きさと積分の大きさをChebyshev不等式で結びつけられる </p>
 </li>
 </ol>
-<p>  <br />  </p>
+<p>次章では，これらの性質を基礎にして \(\lim \) と \(\int \) の順序交換を正当化する収束定理を学ぶ．  </p>
+<p><br />  </p>
 
 </div> <!--main-text -->
 </div> <!-- content-wrapper -->
@@ -1309,11 +1192,11 @@
 
   <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
 
-  <a href="sect0003.html" title="Lebesgue外測度"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+  <a href="sect0008.html" title="Lebesgue積分"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
 </a>
   <a href="index.html" title="Lecture note on KSK"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
 </a>
-  <a href="sect0005.html" title="Lebesgue測度"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+  <a href="sect0010.html" title="収束定理"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
 </a>
 </nav>
 

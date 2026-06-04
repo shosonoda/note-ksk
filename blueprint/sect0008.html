@@ -1,0 +1,1808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>
+  MathJax = { 
+    tex: {
+		    inlineMath: [['$','$'], ['\\(','\\)']]
+	} }
+</script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js">
+</script>
+<meta name="generator" content="plasTeX" />
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Lebesgue積分</title>
+<link rel="next" href="sect0009.html" title="測度空間上の積分の性質" />
+<link rel="prev" href="sect0007.html" title="可測関数" />
+<link rel="up" href="index.html" title="Lecture note on KSK" />
+<link rel="stylesheet" href="styles/theme-white.css" />
+<link rel="stylesheet" href="styles/amsthm.css" />
+<link rel="stylesheet" href="styles/showmore.css" />
+<link rel="stylesheet" href="styles/blueprint.css" />
+<link rel="stylesheet" href="styles/extra_styles.css" />
+</head>
+
+<body>
+<header>
+<svg  id="toc-toggle" class="icon icon-list-numbered "><use xlink:href="symbol-defs.svg#icon-list-numbered"></use></svg>
+<h1 id="doc_title"><a href="index.html">Lecture note on KSK</a></h1>
+</header>
+
+<div class="wrapper">
+<nav class="toc">
+<ul class="sub-toc-0">
+<li class="">
+  <a href="sect0001.html"><span class="toc_ref"></span> <span class="toc_entry">Riemann積分</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0001.html#a0000000018"><span class="toc_ref"></span> <span class="toc_entry">Riemann和による定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000028"><span class="toc_ref"></span> <span class="toc_entry">Darbouxの上積分と下積分による定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000039"><span class="toc_ref"></span> <span class="toc_entry">Riemann可積分関数の例</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000101"><span class="toc_ref"></span> <span class="toc_entry">Riemann可積分でない例</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000114"><span class="toc_ref"></span> <span class="toc_entry">極限と積分の順序交換</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000123"><span class="toc_ref"></span> <span class="toc_entry">順序交換の応用例</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000132"><span class="toc_ref"></span> <span class="toc_entry">Riemann積分の長所と短所</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0001.html#a0000000133"><span class="toc_ref"></span> <span class="toc_entry">長所：定義が素朴であり，計算しやすい</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000134"><span class="toc_ref"></span> <span class="toc_entry">短所：無限回操作に対して不安定</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000135"><span class="toc_ref"></span> <span class="toc_entry">原因：Riemann積分の定義が有限和（有限分割\(\mathcal P\)）の極限</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000137"><span class="toc_ref"></span> <span class="toc_entry">技術的課題：無限和（無限分割）にすると何が起きるか</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000139"><span class="toc_ref"></span> <span class="toc_entry">解決策：Lebesgue積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000140"><span class="toc_ref"></span> <span class="toc_entry">展望：何が嬉しいか</span></a>
+ </li>
+<li class="">
+  <a href="sect0001.html#a0000000141"><span class="toc_ref"></span> <span class="toc_entry">多くの応用先</span></a>
+ </li>
+
+  </ul>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0002.html"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0002.html#a0000000142"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000143"><span class="toc_ref"></span> <span class="toc_entry">\(\mathbb R^d\)の基本集合</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000144"><span class="toc_ref"></span> <span class="toc_entry">\(\mathbb R^d\)のRiemann積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000145"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度・Jordan可測</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000146"><span class="toc_ref"></span> <span class="toc_entry">Jordan零集合</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000147"><span class="toc_ref"></span> <span class="toc_entry">Jordan可測性の判定法</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000148"><span class="toc_ref"></span> <span class="toc_entry">Jordan可測集合の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000149"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000150"><span class="toc_ref"></span> <span class="toc_entry">有限加法族・有限加法的測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0002.html#a0000000151"><span class="toc_ref"></span> <span class="toc_entry">概念の整理</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0003.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0003.html#a0000000152"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000153"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000154"><span class="toc_ref"></span> <span class="toc_entry">拡大実数</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000155"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000156"><span class="toc_ref"></span> <span class="toc_entry">具体例</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000157"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000158"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度との整合</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000159"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue外測度の外正則性</span></a>
+ </li>
+<li class="">
+  <a href="sect0003.html#a0000000160"><span class="toc_ref"></span> <span class="toc_entry">解釈</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0004.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue内測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0004.html#a0000000161"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000162"><span class="toc_ref"></span> <span class="toc_entry">定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000163"><span class="toc_ref"></span> <span class="toc_entry">基本性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000164"><span class="toc_ref"></span> <span class="toc_entry">具体例</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000165"><span class="toc_ref"></span> <span class="toc_entry">Jordan測度との関係</span></a>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000166"><span class="toc_ref"></span> <span class="toc_entry">同値な定義</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0004.html#a0000000167"><span class="toc_ref"></span> <span class="toc_entry">外測度に関する補助定理</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0004.html#a0000000168"><span class="toc_ref"></span> <span class="toc_entry">解釈</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0005.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0005.html#a0000000169"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000170"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合とLebesgue測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000171"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測集合の性質</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-2">
+     <li class="">
+  <a href="sect0005.html#a0000000172"><span class="toc_ref"></span> <span class="toc_entry">有界閉区間上のLebesgue可測集合</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000173"><span class="toc_ref"></span> <span class="toc_entry">全空間上のLebesgue可測集合</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0005.html#sec:lebesgue-measure-properties"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度の性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#sec:lebesgue-caratheodory-comparison"><span class="toc_ref"></span> <span class="toc_entry">Carathéodory条件との比較</span></a>
+ </li>
+<li class="">
+  <a href="sect0005.html#a0000000174"><span class="toc_ref"></span> <span class="toc_entry">まとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0006.html"><span class="toc_ref"></span> <span class="toc_entry">Carathéodory流の測度論</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0006.html#a0000000175"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000176"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000177"><span class="toc_ref"></span> <span class="toc_entry">可測空間と測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000178"><span class="toc_ref"></span> <span class="toc_entry">外測度とCarathéodory可測性</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000179"><span class="toc_ref"></span> <span class="toc_entry">半加法族と前測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000180"><span class="toc_ref"></span> <span class="toc_entry">誘導外測度と拡張定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000181"><span class="toc_ref"></span> <span class="toc_entry">Borel集合族</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000182"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue可測性の限界</span></a>
+ </li>
+<li class="">
+  <a href="sect0006.html#a0000000183"><span class="toc_ref"></span> <span class="toc_entry">まとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0007.html"><span class="toc_ref"></span> <span class="toc_entry">可測関数</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0007.html#a0000000184"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000185"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000186"><span class="toc_ref"></span> <span class="toc_entry">可測写像</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000187"><span class="toc_ref"></span> <span class="toc_entry">可測関数の定義</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000188"><span class="toc_ref"></span> <span class="toc_entry">基本例</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000189"><span class="toc_ref"></span> <span class="toc_entry">ベクトル値可測写像と合成</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000190"><span class="toc_ref"></span> <span class="toc_entry">不等式・極限で作られる関数</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000191"><span class="toc_ref"></span> <span class="toc_entry">ほとんど至る所（almost everywhere）</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#sec:ae-convergence"><span class="toc_ref"></span> <span class="toc_entry">概収束</span></a>
+ </li>
+<li class="">
+  <a href="sect0007.html#a0000000192"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class=" active current">
+  <a href="sect0008.html"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue積分</span></a>
+  <span class="expand-toc">▼</span>
+  <ul class="sub-toc-1 active">
+     <li class="">
+  <a href="sect0008.html#a0000000193"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000194"><span class="toc_ref"></span> <span class="toc_entry">単関数の積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000195"><span class="toc_ref"></span> <span class="toc_entry">非負可測関数の積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000196"><span class="toc_ref"></span> <span class="toc_entry">零集合と almost everywhere</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000197"><span class="toc_ref"></span> <span class="toc_entry">符号付可測関数の積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000198"><span class="toc_ref"></span> <span class="toc_entry">積分の絶対連続性</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000199"><span class="toc_ref"></span> <span class="toc_entry">具体例</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000200"><span class="toc_ref"></span> <span class="toc_entry">Riemann積分との関係</span></a>
+ </li>
+<li class="">
+  <a href="sect0008.html#a0000000201"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0009.html"><span class="toc_ref"></span> <span class="toc_entry">測度空間上の積分の性質</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0009.html#a0000000202"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000203"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000204"><span class="toc_ref"></span> <span class="toc_entry">準備：正部分と負部分</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000205"><span class="toc_ref"></span> <span class="toc_entry">集合に関する性質</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000206"><span class="toc_ref"></span> <span class="toc_entry">順序と大きさ</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000207"><span class="toc_ref"></span> <span class="toc_entry">線形性</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000208"><span class="toc_ref"></span> <span class="toc_entry">計算則のまとめ</span></a>
+ </li>
+<li class="">
+  <a href="sect0009.html#a0000000209"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0010.html"><span class="toc_ref"></span> <span class="toc_entry">収束定理</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0010.html#a0000000210"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000211"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000212"><span class="toc_ref"></span> <span class="toc_entry">設定</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000213"><span class="toc_ref"></span> <span class="toc_entry">単調収束定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000214"><span class="toc_ref"></span> <span class="toc_entry">Fatouの補題</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000215"><span class="toc_ref"></span> <span class="toc_entry">優収束定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000216"><span class="toc_ref"></span> <span class="toc_entry">項別積分</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000217"><span class="toc_ref"></span> <span class="toc_entry">積分記号下の微分</span></a>
+ </li>
+<li class="">
+  <a href="sect0010.html#a0000000218"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0011.html"><span class="toc_ref"></span> <span class="toc_entry">Fubiniと変数変換</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0011.html#a0000000219"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html#a0000000220"><span class="toc_ref"></span> <span class="toc_entry">積測度と切片</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html#a0000000221"><span class="toc_ref"></span> <span class="toc_entry">Tonelliの定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html#a0000000222"><span class="toc_ref"></span> <span class="toc_entry">Fubiniの定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html#a0000000223"><span class="toc_ref"></span> <span class="toc_entry">Lebesgue測度での積測度</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html#a0000000224"><span class="toc_ref"></span> <span class="toc_entry">変数変換</span></a>
+ </li>
+<li class="">
+  <a href="sect0011.html#a0000000225"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0012.html"><span class="toc_ref"></span> <span class="toc_entry">Banach空間</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0012.html#a0000000226"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000227"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000228"><span class="toc_ref"></span> <span class="toc_entry">ノルム空間とBanach空間</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000229"><span class="toc_ref"></span> <span class="toc_entry">\(C(X)\) と sup-norm</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000230"><span class="toc_ref"></span> <span class="toc_entry">\(L^p(X)\) 空間</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000231"><span class="toc_ref"></span> <span class="toc_entry">Hölderの不等式とMinkowskiの不等式</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000232"><span class="toc_ref"></span> <span class="toc_entry">Riesz–Fischerの定理</span></a>
+ </li>
+<li class="">
+  <a href="sect0012.html#a0000000233"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0013.html"><span class="toc_ref"></span> <span class="toc_entry">Hilbert空間</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0013.html#a0000000234"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000235"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000236"><span class="toc_ref"></span> <span class="toc_entry">内積空間とHilbert空間</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000237"><span class="toc_ref"></span> <span class="toc_entry">\(L^2(X)\) はHilbert空間</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000238"><span class="toc_ref"></span> <span class="toc_entry">正規直交系と直交射影</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000239"><span class="toc_ref"></span> <span class="toc_entry">Fourier関数系</span></a>
+ </li>
+<li class="">
+  <a href="sect0013.html#a0000000240"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li class="">
+  <a href="sect0014.html"><span class="toc_ref"></span> <span class="toc_entry">線形作用素</span></a>
+  <span class="expand-toc">▶</span>
+  <ul class="sub-toc-1">
+     <li class="">
+  <a href="sect0014.html#a0000000241"><span class="toc_ref"></span> <span class="toc_entry">本章の目標</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000242"><span class="toc_ref"></span> <span class="toc_entry">動機づけ</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000243"><span class="toc_ref"></span> <span class="toc_entry">線形作用素と連続性</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000244"><span class="toc_ref"></span> <span class="toc_entry">作用素ノルム</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000245"><span class="toc_ref"></span> <span class="toc_entry">\(\mathcal B(X,Y)\) の完備性</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000246"><span class="toc_ref"></span> <span class="toc_entry">例</span></a>
+ </li>
+<li class="">
+  <a href="sect0014.html#a0000000247"><span class="toc_ref"></span> <span class="toc_entry">解釈とまとめ</span></a>
+ </li>
+
+  </ul>
+ </li>
+<li ><a href="dep_graph_document.html">Dependency graph</a></li>
+</ul>
+</nav>
+
+<div class="content">
+<div class="content-wrapper">
+
+
+<div class="main-text">
+<h1 id="a0000000009"> Lebesgue積分</h1>
+<h4 id="a0000000193">本章の目標</h4>
+<p> 可測関数が準備できたので，いよいよLebesgue積分を定義する． 単関数，非負可測関数，符号付可測関数の順に測度空間上の積分を定義し， その基本性質とRiemann積分との関係を確認する． </p>
+<h1 id="a0000000194"> 単関数の積分</h1>
+<p>以後，本章の一般論では測度空間 \((X,\mathcal M,\mu )\) を固定する． </p>
+<div class="definition_thmwrapper theorem-style-definition" id="def:nonnegative-simple-function">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.1</span>
+    <span class="definition_thmtitle">非負単関数</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#def:nonnegative-simple-function">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 写像 \(s:X \to [0,\infty )\) が非負の単関数（simple function）または階段関数（step function）であるとは， <b class="bfseries">有限個</b>の非負実数 \(a_1,\dots ,a_n\) と 互いに素な可測集合 \(A_1,\dots ,A_n \subset X\) を用いて \(s=\sum _{k=1}^n a_k 1_{A_k}\) と書けることをいう． 非負単関数全体を \(S^+(X)\) と書く． </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000000914">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">34</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#a0000000914">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>単関数は関数値が有限個しかない可測関数であり，\(S^+(X)\subset M^+(X)\) である． 特に指示関数 \(1_A\) は最も基本的な単関数である． </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:simple-function-integral">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.2</span>
+    <span class="definition_thmtitle">単関数の積分</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#def:simple-function-integral">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 非負単関数 \(s\in S^+(X)\) を \(s=\sum _{k=1}^n a_k 1_{A_k}\) と書くとき， </p>
+<div class="displaymath" id="a0000000915">
+  \[  \int _X s\, d\mu := \sum _{k=1}^n a_k\, \mu (A_k)  \]
+</div>
+<p> と定める． </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:simple-function-integral-well-defined">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.3</span>
+    <span class="proposition_thmtitle">単関数の積分のwell-definedness</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#prop:simple-function-integral-well-defined">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000916"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> 非負単関数 \(s\) の表示の仕方によらず，\(\int _X s\, d\mu \) は同じ値を与える． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000916">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(s=\sum _{i=1}^n a_i 1_{A_i}=\sum _{j=1}^m b_j 1_{B_j}\) と2通りに表したとする． ここで \(\{ A_i\} \) と \(\{ B_j\} \) はそれぞれ互いに素で可測である． 各 \(i,j\) に対して \(C_{ij}:=A_i \cap B_j\) とおくと，\(\{ C_{ij}\} _{i,j}\) は互いに素な可測集合族であり， \(A_i=\bigsqcup _{j=1}^m C_{ij}\)，\(B_j=\bigsqcup _{i=1}^n C_{ij}\) が成り立つ． また \(x \in C_{ij}\) なら \(s(x)=a_i=b_j\) だから，\(C_{ij}\) 上では係数が一致する． ゆえに測度の可算加法性より </p>
+<div class="displaymath" id="a0000000917">
+  \[  \sum _{i=1}^n a_i\, \mu (A_i) =\sum _{i,j}a_i\, \mu (C_{ij}) =\sum _{i,j}b_j\, \mu (C_{ij}) =\sum _{j=1}^m b_j\, \mu (B_j).  \]
+</div>
+<p> したがって積分値は表示に依らない． </p>
+
+  </div>
+</div>
+<div class="example_thmwrapper theorem-style-plain" id="a0000000918">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
+    </span>
+    <span class="example_thmlabel">.4</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#a0000000918">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="example_thmcontent">
+  <ol class="enumerate">
+  <li><p>可測集合 \(A \subset X\) に対して \(\int _X 1_A\, d\mu = \mu (A)\) である </p>
+</li>
+  <li><p>定数関数 \(c \ge 0\) に対して \(\int _X c\, d\mu = c\, \mu (X)\) である </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:simple-function-integral-basic">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.5</span>
+    <span class="proposition_thmtitle">単関数の基本性質</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#prop:simple-function-integral-basic">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000919"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \(s,t\in S^+(X)\) と \(c \ge 0\) に対して次が成り立つ． </p>
+<ol class="enumerate">
+  <li><p>\(\int _X (s+t)\, d\mu = \int _X s\, d\mu + \int _X t\, d\mu \) </p>
+</li>
+  <li><p>\(\int _X cs\, d\mu = c \int _X s\, d\mu \) </p>
+</li>
+  <li><p>\(s \le t\) なら \(\int _X s\, d\mu \le \int _X t\, d\mu \) </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000919">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>まず \(s=\sum _{i=1}^n a_i 1_{A_i}\)，\(t=\sum _{j=1}^m b_j 1_{B_j}\) と書く． 共通細分 \(C_{ij}:=A_i \cap B_j\) を取れば，\(s+t=\sum _{i=1}^n \sum _{j=1}^m (a_i+b_j)1_{C_{ij}}\) である． したがって </p>
+<div class="displaymath" id="a0000000920">
+  \[  \int _X (s+t)\, d\mu =\sum _{i,j}(a_i+b_j)\mu (C_{ij}) =\sum _i a_i \mu (A_i)+\sum _j b_j \mu (B_j) =\int _X s\, d\mu +\int _X t\, d\mu .  \]
+</div>
+<p> これで (1) が従う． </p>
+<p>(2) は \(cs=\sum _{i=1}^n (ca_i)1_{A_i}\) と書けば直ちに従う． </p>
+<p>(3) を示す． \(t-s\) は非負単関数であるから (1), (2) より \(\int _X t\, d\mu =\int _X s\, d\mu +\int _X (t-s)\, d\mu \ge \int _X s\, d\mu \) である． </p>
+
+  </div>
+</div>
+<h1 id="a0000000195"> 非負可測関数の積分</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:nonnegative-lebesgue-integral">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.6</span>
+    <span class="definition_thmtitle">非負可測関数の積分</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#def:nonnegative-lebesgue-integral">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> 非負可測関数 \(f\in M^+(X)\) に対して </p>
+<div class="displaymath" id="a0000000921">
+  \[  \int _X f\, d\mu := \sup \left\{ \int _X s\, d\mu \; \middle |\;  s\in S^+(X),\  0 \le s \le f\right\}   \]
+</div>
+<p> と定める． </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000000922">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">35</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#a0000000922">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>単関数は値が有限個しかないので計算しやすい． したがって上の定義は， 「\(f\) の下側から入る単関数でどこまで積分値を近づけられるか」 を表している． つまり，複雑な可測関数を より簡単な単関数で近似して積分している． </p>
+
+  </div>
+</div>
+<div class="lemma_thmwrapper theorem-style-plain" id="lem:simple-function-approximation">
+  <div class="lemma_thmheading">
+    <span class="lemma_thmcaption">
+    Lemma
+    </span>
+    <span class="lemma_thmlabel">.7</span>
+    <span class="lemma_thmtitle">単関数による近似</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#lem:simple-function-approximation">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000923"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="lemma_thmcontent">
+  <p> 任意の \(f\in M^+(X)\) に対して， \(S^+(X)\) の列 \(\{ s_n\} _{n=1}^{\infty }\) で \(0 \le s_1 \le s_2 \le \cdots \le f\) かつ \(s_n(x) \to f(x)\) \((x \in X)\) を満たすものが存在する． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000923">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>各 \(n \in \mathbb N\) に対して </p>
+<div class="displaymath" id="a0000000924">
+  \[  s_n(x) := \begin{cases}  \dfrac {k}{2^n} & \left( \dfrac {k}{2^n} \le f(x) {\lt} \dfrac {k+1}{2^n}, \  \  0 \le k \le n2^n-1 \right),\\[1.2ex] n &  (f(x)\ge n) \end{cases}  \]
+</div>
+<p> と定める． すると \(s_n\) は有限個の値しかとらず， 各値をとる集合は \(\{ x \in X \mid k/2^n \le f(x) {\lt} (k+1)/2^n\} \) または \(\{ x \in X \mid f(x)\ge n\} \) の形で書けるので可測である． したがって \(s_n\) は単関数である． </p>
+<p>また定義から \(0 \le s_n(x) \le f(x)\) が成り立つ． さらに，\(f(x){\lt}\infty \) のとき \(n{\gt}f(x)\) なら \(0 \le f(x)-s_n(x){\lt}2^{-n}\) であり， \(f(x)=\infty \) のときは \(s_n(x)=n \to \infty \) である． したがって \(s_n(x)\to f(x)\) である． </p>
+<p>最後に，二進展開の精度が上がるので \(s_n(x)\le s_{n+1}(x)\) が成り立つ． よって所望の単関数列を得る． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:nonnegative-integral-simple-approximation">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">.8</span>
+    <span class="theorem_thmtitle">非負可測関数の積分は単関数近似の極限</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#thm:nonnegative-integral-simple-approximation">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000925"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> \(f\in M^+(X)\) とし， \(s_n\in S^+(X)\) を \(0 \le s_1 \le s_2 \le \cdots \le f\) かつ \(s_n \to f\) を満たす単関数列とする． このとき \(\int _X f\, d\mu =\lim _{n\to \infty }\int _X s_n\, d\mu \) が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000925">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>各 \(n\) について \(s_n \le f\) だから， 定義より \(\int _X s_n\, d\mu \le \int _X f\, d\mu \) である． また \(s_n \le s_{n+1}\) だから，単関数の単調性より \(\int _X s_n\, d\mu \le \int _X s_{n+1}\, d\mu \) である． したがって列 \(\{ \int _X s_n\, d\mu \} _{n=1}^{\infty }\) は単調増加であり， \(L:=\lim _{n\to \infty }\int _X s_n\, d\mu \) が存在して \(L \le \int _X f\, d\mu \) である． </p>
+<p>逆向きの不等式を示すため， \(t \le f\) を満たす任意の非負単関数 \(t=\sum _{j=1}^m a_j 1_{A_j}\) を取る． ここで \(a_j \ge 0\)，\(A_j\) は互いに素な可測集合とする． 各 \(j,n\) に対して \(A_{j,n}:=A_j \cap \{ x \in X \mid s_n(x)\ge a_j-1/n\} \) とおく． \(s_n(x)\to f(x)\ge a_j\) が \(A_j\) 上で成り立つので， \(A_{j,1}\subset A_{j,2}\subset \cdots \) かつ \(\bigcup _{n=1}^{\infty }A_{j,n}=A_j\) である． </p>
+<p>そこで \(u_n:=\sum _{j=1}^m (a_j-1/n)_+ 1_{A_{j,n}}\) とおくと，\(u_n\) は非負単関数であり， \(A_{j,n}\) 上では \((a_j-1/n)_+ \le s_n\) だから \(u_n \le s_n\) が成り立つ． したがって \(\int _X u_n\, d\mu \le \int _X s_n\, d\mu \le L\) である． </p>
+<p>一方，測度の下からの連続性より \(\mu (A_{j,n}) \to \mu (A_j)\) であるから， </p>
+<div class="displaymath" id="a0000000926">
+  \[  \int _X u_n\, d\mu =\sum _{j=1}^m \left(a_j-\frac1n\right)_+ \mu (A_{j,n}) \to \sum _{j=1}^m a_j \mu (A_j) =\int _X t\, d\mu .  \]
+</div>
+<p> よって \(\int _X t\, d\mu \le L\) である． \(t \le f\) を満たす単関数 \(t\) は任意であったから， 定義より \(\int _X f\, d\mu \le L\) である．以上より \(\int _X f\, d\mu =L\) が従う． </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:nonnegative-integral-basic">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.9</span>
+    <span class="proposition_thmtitle">非負可測関数の基本性質</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#prop:nonnegative-integral-basic">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000927"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \(f,g\in M^+(X)\) と \(c \ge 0\) に対して次が成り立つ． </p>
+<ol class="enumerate">
+  <li><p>\(\int _X (f+g)\, d\mu = \int _X f\, d\mu + \int _X g\, d\mu \) </p>
+</li>
+  <li><p>\(\int _X cf\, d\mu = c\int _X f\, d\mu \) </p>
+</li>
+  <li><p>\(f \le g\) なら \(\int _X f\, d\mu \le \int _X g\, d\mu \) </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000927">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>単関数列 \(s_n \uparrow f\)，\(t_n \uparrow g\) を取る． すると \(s_n+t_n \uparrow f+g\)，\(cs_n \uparrow cf\) である． したがって??thm:nonnegative-integral-simple-approximation,prop:simple-function-integral-basicより </p>
+<div class="displaymath" id="a0000000928">
+  \[  \int _X (f+g)\, d\mu =\lim _{n\to \infty }\int _X (s_n+t_n)\, d\mu =\lim _{n\to \infty }\left(\int _X s_n\, d\mu +\int _X t_n\, d\mu \right) =\int _X f\, d\mu +\int _X g\, d\mu ,  \]
+</div>
+<p> および \(\int _X cf\, d\mu =\lim _{n\to \infty }\int _X cs_n\, d\mu =\lim _{n\to \infty } c\int _X s_n\, d\mu =c\int _X f\, d\mu \) を得る． </p>
+<p>また \(f\le g\) なら，\(f\) 以下の非負単関数はすべて \(g\) 以下でもある． したがって上限をとれば \(\int _X f\, d\mu \le \int _X g\, d\mu \) であり，(3) が従う． </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:integral-over-subset">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.10</span>
+    <span class="definition_thmtitle">部分集合上の積分</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#def:integral-over-subset">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> \(A \subset X\) を可測集合とする． 非負可測関数 \(f\in M^+(X)\) に対して \(\int _A f\, d\mu := \int _X f1_A\, d\mu \) と定める． 符号付可測関数の場合も同様に定める． </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:nonnegative-integral-disjoint-additivity">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.11</span>
+    <span class="proposition_thmtitle">集合に関する加法性</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#prop:nonnegative-integral-disjoint-additivity">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000929"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \(A,B \subset X\) を互いに素な可測集合とし， \(f\in M^+(X)\) とする． このとき \(\int _{A \sqcup B} f\, d\mu =\int _A f\, d\mu +\int _B f\, d\mu \) が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000929">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(1_{A \sqcup B}=1_A+1_B\) だから，非負可測関数の加法性より </p>
+<div class="displaymath" id="a0000000930">
+  \[  \int _{A \sqcup B} f\, d\mu =\int _X f1_{A \sqcup B}\, d\mu =\int _X f1_A\, d\mu +\int _X f1_B\, d\mu =\int _A f\, d\mu +\int _B f\, d\mu .  \]
+</div>
+
+  </div>
+</div>
+<h1 id="a0000000196"> 零集合と almost everywhere</h1>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:null-set-integral-nonnegative">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.12</span>
+    <span class="proposition_thmtitle">零集合上の積分</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#prop:null-set-integral-nonnegative">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000931"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \(N \subset X\) が可測で \(\mu (N)=0\) ならば， 任意の \(f\in M^+(X)\) に対して \(\int _N f\, d\mu =0\) が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000931">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>定義より </p>
+<div class="displaymath" id="a0000000932">
+  \[  \int _N f\, d\mu =\sup \left\{ \int _N s\, d\mu \; \middle |\;  0 \le s \le f,\  s \text{ は単関数}\right\} .  \]
+</div>
+<p> ところが \(N\) 上の任意の単関数 \(s=\sum _{k=1}^n a_k1_{A_k}\) について， 各 \(A_k \subset N\) だから \(\mu (A_k)\le \mu (N)=0\) である． したがって \(\int _N s\, d\mu =\sum _{k=1}^n a_k \mu (A_k)=0\) である． ゆえに上限も \(0\) である． </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:nonnegative-integral-ae-invariance">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.13</span>
+    <span class="proposition_thmtitle">非負関数の a.e. 不変性</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#prop:nonnegative-integral-ae-invariance">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000933"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \(f,g\in M^+(X)\) とする． \(f=g\) a.e. on \(X\) ならば \(\int _X f\, d\mu =\int _X g\, d\mu \) が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000933">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(N:=\{ x \in X \mid f(x)\ne g(x)\} \) とおくと \(\mu (N)=0\) である． したがって??prop:null-set-integral-nonnegativeより \(\int _N f\, d\mu =\int _N g\, d\mu =0\) である． また \(X=(X\setminus N)\sqcup N\) だから， 集合に関する加法性より </p>
+<div class="displaymath" id="a0000000934">
+  \[  \int _X f\, d\mu =\int _{X\setminus N} f\, d\mu +\int _N f\, d\mu =\int _{X\setminus N} g\, d\mu +\int _N g\, d\mu =\int _X g\, d\mu .  \]
+</div>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:nonnegative-integral-zero-iff-ae-zero">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.14</span>
+    <span class="proposition_thmtitle">非負関数の積分が \(0\) であることの判定</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#prop:nonnegative-integral-zero-iff-ae-zero">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000935"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \(f\in M^+(X)\) に対して，次は同値である． </p>
+<ol class="enumerate">
+  <li><p>\(\int _X f\, d\mu =0\) </p>
+</li>
+  <li><p>\(f=0\) a.e. on \(X\) </p>
+</li>
+</ol>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000935">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p><b class="bfseries">(2) \(\Rightarrow \) (1)</b>&#8195;\(f=0\) a.e. なら，??prop:nonnegative-integral-ae-invarianceを \(g=0\) に適用して \(\int _X f\, d\mu =\int _X 0\, d\mu =0\) である． </p>
+<p><b class="bfseries">(1) \(\Rightarrow \) (2)</b>&#8195;各 \(n \in \mathbb N\) に対して \(A_n:=\{ x \in X \mid f(x)\ge 1/n\} \) とおく． すると \(n^{-1}1_{A_n}\le f\) だから単調性より </p>
+<div class="displaymath" id="a0000000936">
+  \[  \frac1n \mu (A_n) =\int _X \frac1n 1_{A_n}\, d\mu \le \int _X f\, d\mu =0.  \]
+</div>
+<p> よって \(\mu (A_n)=0\) である． 一方，\(\{ x \in X \mid f(x){\gt}0\} =\bigcup _{n=1}^{\infty }A_n\) だから可算加法性より \(\mu (\{ f{\gt}0\} )=0\) である． したがって \(f=0\) a.e. である． </p>
+
+  </div>
+</div>
+<h1 id="a0000000197"> 符号付可測関数の積分</h1>
+<div class="definition_thmwrapper theorem-style-definition" id="def:positive-negative-parts">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.15</span>
+    <span class="definition_thmtitle">正部分と負部分</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#def:positive-negative-parts">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> \(f\in M(X)\) に対して \(f^+:=\max (f,0)\)，\(f^-:=\max (-f,0)\) を \(f\) の正部分，負部分という． </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000000937">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">36</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#a0000000937">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>常に \(f=f^+-f^-\)，\(|f|=f^++f^-\) が成り立つ． したがって符号付関数の積分は， 非負関数の積分に帰着できる． </p>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:lebesgue-integrable-function">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.16</span>
+    <span class="definition_thmtitle">可積分関数</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#def:lebesgue-integrable-function">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> \(f\in M(X)\) が可積分であるとは， \(\int _X f^+\, d\mu {\lt}\infty \) かつ \(\int _X f^-\, d\mu {\lt}\infty \) が成り立つことをいう． このとき \(\int _X f\, d\mu :=\int _X f^+\, d\mu -\int _X f^-\, d\mu \) で定める． 可積分関数全体を \(\mathcal L^1(X)\) と書く． 測度を明示したいときは \(\mathcal L^1(X,\mu )\) と書く． </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000000938">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">37</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#a0000000938">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>\(\infty -\infty \) は定義しないので， 正部分と負部分の両方が有限であるときにだけ 符号付関数の積分を定義する． この条件は，後で見るように \(\int _X |f|\, d\mu {\lt}\infty \) と同値である． </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:integral-representation-independence">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.17</span>
+    <span class="proposition_thmtitle">表示の独立性</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#prop:integral-representation-independence">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000939"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \(f=u-v=u'-v'\) と書け， \(u,v,u',v'\) がすべて非負可測で \(\int _X u\, d\mu ,\  \int _X v\, d\mu ,\  \int _X u'\, d\mu ,\  \int _X v'\, d\mu {\lt}\infty \) とする．このとき \(\int _X u\, d\mu -\int _X v\, d\mu =\int _X u'\, d\mu -\int _X v'\, d\mu \) が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000939">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(u-v=u'-v'\) だから \(u+v'=u'+v\) である． 両辺は非負可測関数なので，加法性より </p>
+<div class="displaymath" id="a0000000940">
+  \[  \int _X u\, d\mu +\int _X v'\, d\mu =\int _X (u+v')\, d\mu =\int _X (u'+v)\, d\mu =\int _X u'\, d\mu +\int _X v\, d\mu .  \]
+</div>
+<p> したがって移項して \(\int _X u\, d\mu -\int _X v\, d\mu =\int _X u'\, d\mu -\int _X v'\, d\mu \) を得る． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:integrable-iff-absolute">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">.18</span>
+    <span class="theorem_thmtitle">可積分性と絶対値</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#thm:integrable-iff-absolute">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000941"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> \(f\in M(X)\) に対して，次は同値である． </p>
+<ol class="enumerate">
+  <li><p>\(f\in \mathcal L^1(X)\) </p>
+</li>
+  <li><p>\(|f|\in \mathcal L^1(X)\) </p>
+</li>
+</ol>
+<p> さらに，このとき \(\int _X |f|\, d\mu =\int _X f^+\, d\mu +\int _X f^-\, d\mu \) が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000941">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(|f|=f^++f^-\) だから，非負可測関数の加法性より \(\int _X |f|\, d\mu =\int _X f^+\, d\mu +\int _X f^-\, d\mu \) である． したがって右辺が有限であることと \(\int _X f^+\, d\mu {\lt}\infty \)，\(\int _X f^-\, d\mu {\lt}\infty \) が成り立つことは同値である． これはまさに \(f\) の可積分性の定義である． </p>
+
+  </div>
+</div>
+<div class="corollary_thmwrapper theorem-style-plain" id="cor:dominated-integrability">
+  <div class="corollary_thmheading">
+    <span class="corollary_thmcaption">
+    Corollary
+    </span>
+    <span class="corollary_thmlabel">.19</span>
+    <span class="corollary_thmtitle">優関数による可積分性の判定</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#cor:dominated-integrability">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000942"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="corollary_thmcontent">
+  <p> \(f\in M(X)\) とし，\(g\in M^+(X)\cap \mathcal L^1(X)\) とする． もし \(|f|\le g\) a.e. on \(X\) ならば \(f\) は可積分である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000942">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(N:=\{ x \in X \mid |f(x)|{\gt}g(x)\} \) とおくと \(\mu (N)=0\) である． したがって \(|f|=|f|1_{X\setminus N}\) a.e. であり，非負関数の a.e. 不変性より \(\int _X |f|\, d\mu =\int _X |f|1_{X\setminus N}\, d\mu \) である． しかも \(X\setminus N\) 上では \(|f|1_{X\setminus N}\le g\) だから単調性より \(\int _X |f|\, d\mu \le \int _X g\, d\mu {\lt}\infty \) である． ゆえに??thm:integrable-iff-absoluteより \(f\) は可積分である． </p>
+
+  </div>
+</div>
+<div class="corollary_thmwrapper theorem-style-plain" id="cor:integrable-finite-ae">
+  <div class="corollary_thmheading">
+    <span class="corollary_thmcaption">
+    Corollary
+    </span>
+    <span class="corollary_thmlabel">.20</span>
+    <span class="corollary_thmtitle">可積分関数は有限値を a.e. でとる</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#cor:integrable-finite-ae">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000943"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="corollary_thmcontent">
+  <p> \(f\in \mathcal L^1(X)\) ならば \(|f|{\lt}\infty \) a.e. on \(X\) が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000943">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(N:=\{ x \in X \mid |f(x)|=\infty \} \) とおく． 各 \(n \in \mathbb N\) について \(n1_N\le |f|\) だから，単調性より \(n\, \mu (N)=\int _X n1_N\, d\mu \le \int _X |f|\, d\mu {\lt}\infty \) である． これがすべての \(n\) で成り立つためには \(\mu (N)=0\) でなければならない． </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:null-set-integral-signed">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.21</span>
+    <span class="proposition_thmtitle">零集合上の任意の関数</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#prop:null-set-integral-signed">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000944"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \(N \subset X\) が可測で \(\mu (N)=0\) ならば， 任意の \(f\in M(X)\) は \(N\) 上で可積分であり， \(\int _N f\, d\mu =0\) が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000944">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>非負可測関数については零集合上の積分は \(0\) である （??prop:null-set-integral-nonnegative）． したがって \(\int _N f^+\, d\mu =\int _N f^-\, d\mu =0\) である． よって \(f\) は \(N\) 上で可積分で， \(\int _N f\, d\mu =\int _N f^+\, d\mu -\int _N f^-\, d\mu =0\) となる． </p>
+
+  </div>
+</div>
+<div class="proposition_thmwrapper theorem-style-plain" id="prop:signed-integral-ae-invariance">
+  <div class="proposition_thmheading">
+    <span class="proposition_thmcaption">
+    Proposition
+    </span>
+    <span class="proposition_thmlabel">.22</span>
+    <span class="proposition_thmtitle">符号付関数の a.e. 不変性</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#prop:signed-integral-ae-invariance">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000945"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="proposition_thmcontent">
+  <p> \(f,g\in M(X)\) とする． \(f=g\) a.e. on \(X\) で，\(f\in \mathcal L^1(X)\) ならば \(g\in \mathcal L^1(X)\) であり， \(\int _X f\, d\mu =\int _X g\, d\mu \) が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000945">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(N:=\{ x \in X \mid f(x)\ne g(x)\} \) とおくと \(\mu (N)=0\) である． \(X\setminus N\) 上では \(|g|=|f|\) であり， \(N\) 上の積分はどちらも \(0\) だから </p>
+<div class="displaymath" id="a0000000946">
+  \[  \int _X |g|\, d\mu =\int _{X\setminus N}|g|\, d\mu +\int _N |g|\, d\mu =\int _{X\setminus N}|f|\, d\mu \le \int _X |f|\, d\mu {\lt}\infty .  \]
+</div>
+<p> よって \(g\) も可積分である． </p>
+<p>さらに </p>
+<div class="displaymath" id="a0000000947">
+  \[  \int _X f\, d\mu =\int _{X\setminus N} f\, d\mu +\int _N f\, d\mu =\int _{X\setminus N} g\, d\mu +\int _N g\, d\mu =\int _X g\, d\mu .  \]
+</div>
+
+  </div>
+</div>
+<div class="definition_thmwrapper theorem-style-definition" id="def:L1-space">
+  <div class="definition_thmheading">
+    <span class="definition_thmcaption">
+    Definition
+    </span>
+    <span class="definition_thmlabel">.23</span>
+    <span class="definition_thmtitle">\(L^1\) 空間</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#def:L1-space">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="definition_thmcontent">
+  <p> \(\mathcal L^1(X)\) を a.e. 同値関係で割った商集合を \(L^1(X):=\mathcal L^1(X)/{\sim }\) と書く． ??prop:signed-integral-ae-invarianceより，積分値 \(\int _X f\, d\mu \) は代表元の取り方に依らず \(L^1(X)\) 上で定まる． 測度を明示したいときは \(L^1(X,\mu )\) と書く． </p>
+
+  </div>
+</div>
+<h1 id="a0000000198"> 積分の絶対連続性</h1>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:integral-absolute-continuity">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">.24</span>
+    <span class="theorem_thmtitle">積分の絶対連続性</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#thm:integral-absolute-continuity">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000948"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> \(f\in \mathcal L^1(X)\) とする． このとき任意の \(\varepsilon {\gt}0\) に対して，ある \(\delta {\gt}0\) が存在して， 可測集合 \(A \subset X\) が \(\mu (A){\lt}\delta \) を満たせば \(\int _A |f|\, d\mu {\lt}\varepsilon \) が成り立つ． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000948">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(h:=|f|\) とおくと，\(h\) は非負可積分である． 積分の定義より，ある \(s\in S^+(X)\) で \(s \le h\) を満たすものが存在して \(\int _X h\, d\mu -\int _X s\, d\mu {\lt}\varepsilon /2\) となる． いま \(s=\sum _{k=1}^n a_k1_{A_k}\) と書き，\(M:=\max _{1\le k\le n}a_k\) とおく． </p>
+<p>\(M=0\) なら \(s=0\) だから \(\int _X h\, d\mu {\lt}\varepsilon /2\) である． この場合は任意の \(\delta {\gt}0\) でよい． </p>
+<p>\(M{\gt}0\) の場合は \(\delta :=\varepsilon /(2M)\) とおく． 可測集合 \(A \subset X\) が \(\mu (A){\lt}\delta \) を満たすとする． すると集合に関する加法性と \(s\le h\) から </p>
+<div class="displaymath" id="a0000000949">
+  \[  \int _X h\, d\mu =\int _A h\, d\mu +\int _{X\setminus A}h\, d\mu \ge \int _A h\, d\mu +\int _{X\setminus A}s\, d\mu .  \]
+</div>
+<p> よって </p>
+<div class="displaymath" id="a0000000950">
+  \[  \int _A h\, d\mu \le \int _X h\, d\mu -\int _{X\setminus A}s\, d\mu =\left(\int _X h\, d\mu -\int _X s\, d\mu \right)+\int _A s\, d\mu {\lt}\frac{\varepsilon }{2}+M\, \mu (A) {\lt}\frac{\varepsilon }{2}+M\delta =\varepsilon .  \]
+</div>
+<p> これで示された． </p>
+
+  </div>
+</div>
+<h1 id="a0000000199"> 具体例</h1>
+<div class="example_thmwrapper theorem-style-plain" id="a0000000951">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
+    </span>
+    <span class="example_thmlabel">.25</span>
+    <span class="example_thmtitle">Dirichlet関数</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#a0000000951">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000952"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="example_thmcontent">
+  <p> \(f:=1_{\mathbb Q\cap [0,1]}\) とする．このとき \(\int _{[0,1]} f\, d\lambda =0\) である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000952">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>高々可算集合はLebesgue零集合なので， \(\lambda (\mathbb Q\cap [0,1])=0\) である． したがって \(\int _{[0,1]} f\, d\lambda =\int _{[0,1]} 1_{\mathbb Q\cap [0,1]}\, d\lambda =\lambda (\mathbb Q\cap [0,1])=0\) である． </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000000953">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">38</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#a0000000953">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>Dirichlet関数はRiemann積分できなかったが，Lebesgue積分では \(0\) と自然に積分できる． ここに，Lebesgue積分が 「どこで値をとるか」と「その領域の面積」を直接結びつけていることが表れている． </p>
+
+  </div>
+</div>
+<div class="example_thmwrapper theorem-style-plain" id="a0000000954">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
+    </span>
+    <span class="example_thmlabel">.26</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#a0000000954">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000955"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="example_thmcontent">
+  <p>\(g:=1_{[0,1]\setminus \mathbb Q}\) とすると \(g=1\) a.e. on \([0,1]\) だから \(\int _{[0,1]} g\, d\lambda =1\) である． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000955">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>\(N:=\mathbb Q\cap [0,1]\) は零集合であり，\([0,1]\setminus N\) 上で \(g=1_{[0,1]\setminus N}=1\) である． したがって a.e. 不変性より \(\int _{[0,1]} g\, d\lambda =\int _{[0,1]} 1\, d\lambda =\lambda ([0,1])=1\) である． </p>
+
+  </div>
+</div>
+<h1 id="a0000000200"> Riemann積分との関係</h1>
+<div class="remark_thmwrapper theorem-style-remark" id="rem:lebesgue-integral-no-orientation">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">39</span>
+    <span class="remark_thmtitle">積分区間の向き</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#rem:lebesgue-integral-no-orientation">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p> Lebesgue積分 \(\int _A f\, d\lambda \) は可測集合 \(A\) 上の積分であり，積分区間の向きは含まない． 例えば \([0,1]\) 上では \(\int _{[0,1]} f\, d\lambda \) が定義されるが， Riemann積分の記法 \(\int _1^0 f(x)\, dx\) をどう定義するかは別の約束である． 向きつきの約束では \(\int _1^0 f(x)\, dx=-\int _0^1 f(x)\, dx\) とすることが多いが， この符号はLebesgue測度から来るものではない． Lebesgue積分で逆向きを表したいなら，別途 \(-\int _{[0,1]}f\, d\lambda \) と符号を付ける． また，空区間として扱う約束なら積分値は \(0\) になるが，これも向きではなく積分する集合の選び方である． </p>
+<p>したがって以下の「Riemann積分値との一致」は， 集合としての有界閉区間 \(I\) 上の通常のRiemann積分値との一致を意味する． この違いは，後の変数変換公式でJacobianの絶対値が現れることとも関係している． </p>
+
+  </div>
+</div>
+<div class="theorem_thmwrapper theorem-style-plain" id="thm:riemann-implies-lebesgue-integrable">
+  <div class="theorem_thmheading">
+    <span class="theorem_thmcaption">
+    Theorem
+    </span>
+    <span class="theorem_thmlabel">.27</span>
+    <span class="theorem_thmtitle">Riemann可積分ならLebesgue可積分</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#thm:riemann-implies-lebesgue-integrable">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000956"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="theorem_thmcontent">
+  <p> \(I \subset \mathbb R^d\) を有界閉区間とし， \(f:I \to \mathbb R\) をRiemann可積分関数とする． このとき \(f\) はLebesgue可測かつLebesgue可積分であり，\(\int _I f\, d\lambda \) はRiemann積分値に一致する． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000956">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>Riemann可積分性より，任意の \(n \in \mathbb N\) に対して 分割 \(\mathcal P_n\) が存在して \(U(f,\mathcal P_n)-L(f,\mathcal P_n){\lt}1/n\) となる． この分割の各小区間を \(R_{n,1},\dots ,R_{n,N_n}\) と書き， 各小区間上の下限と上限を \(\ell _{n,j}:=\inf _{x \in R_{n,j}} f(x)\)，\(u_{n,j}:=\sup _{x \in R_{n,j}} f(x)\) とおく． すると \(\phi _n:=\sum _{j=1}^{N_n} \ell _{n,j}1_{R_{n,j}}\)， \(\psi _n:=\sum _{j=1}^{N_n} u_{n,j}1_{R_{n,j}}\) は単関数で，\(\phi _n \le f \le \psi _n\) が成り立つ． さらに \(\int _I \phi _n\, d\lambda = L(f,\mathcal P_n)\)，\(\int _I \psi _n\, d\lambda = U(f,\mathcal P_n)\) である． </p>
+<p>ここで \(g:=\sup _{n\in \mathbb N}\phi _n\)，\(h:=\inf _{n\in \mathbb N}\psi _n\) とおく． 単関数は可測だから \(g,h\) は可測であり，\(g \le f \le h\) である． しかも各 \(n\) に対して \(0 \le h-g \le \psi _n-\phi _n\) だから単調性より </p>
+<div class="displaymath" id="a0000000957">
+  \[  0 \le \int _I (h-g)\, d\lambda \le \int _I (\psi _n-\phi _n)\, d\lambda =U(f,\mathcal P_n)-L(f,\mathcal P_n) {\lt}\frac1n.  \]
+</div>
+<p> したがって \(\int _I (h-g)\, d\lambda =0\) であり，非負関数の積分が \(0\) であることの判定より \(h-g=0\) a.e. on \(I\) である． 特に \(N:=\{ x \in I \mid g(x){\lt}h(x)\} \) は零集合であり，\(I\setminus N\) 上では \(f=g=h\) である． </p>
+<p>よって \(f\) は可測であることを示す． 実数 \(a\) に対して </p>
+<div class="displaymath" id="a0000000958">
+  \[  \{ x \in I \mid f(x){\gt}a\}  =\bigl(\{ g{\gt}a\} \cap (I\setminus N)\bigr)\cup \bigl(\{ f{\gt}a\} \cap N\bigr)  \]
+</div>
+<p> と書ける． \(g\) は可測，\(N\) は零集合だから可測であり， しかもLebesgue測度の完備性より \(N\) の任意の部分集合は可測である． したがって右辺は可測である． ゆえに \(f\) はLebesgue可測である． </p>
+<p>次に可積分性を示す． Riemann可積分関数は有界だから，ある \(M{\gt}0\) が存在して \(|f(x)|\le M\) \((x \in I)\) である．したがって \(|f|\le M1_I\) である． \(I\) は有界閉区間なので \(\int _I M1_I\, d\lambda = M\, \lambda (I)=M|I|{\lt}\infty \) である． よって??cor:dominated-integrabilityより \(f\) はLebesgue可積分である． </p>
+<p>最後に積分値の一致を示す． 各 \(n\) に対して \(\phi _n \le f \le \psi _n\) だから単調性より </p>
+<div class="displaymath" id="a0000000959">
+  \[  L(f,\mathcal P_n)=\int _I \phi _n\, d\lambda \le \int _I f\, d\lambda \le \int _I \psi _n\, d\lambda =U(f,\mathcal P_n).  \]
+</div>
+<p> Riemann可積分性より \(U(f,\mathcal P_n)-L(f,\mathcal P_n)\to 0\) である． したがってはさみうちにより \(\int _I f\, d\lambda =\lim _{n\to \infty }L(f,\mathcal P_n)=\lim _{n\to \infty }U(f,\mathcal P_n)\) である． これはRiemann積分値そのものである． </p>
+
+  </div>
+</div>
+<div class="remark_thmwrapper theorem-style-remark" id="a0000000960">
+  <div class="remark_thmheading">
+    <span class="remark_thmcaption">
+    Remark
+    </span>
+    <span class="remark_thmlabel">40</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#a0000000960">#</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="remark_thmcontent">
+  <p>この定理により，Lebesgue積分はRiemann積分の拡張になっている． ただし本質は，単に対象が増えただけではなく， 零集合と極限に関してはるかに安定な理論になっている点にある． </p>
+
+  </div>
+</div>
+<div class="example_thmwrapper theorem-style-plain" id="a0000000961">
+  <div class="example_thmheading">
+    <span class="example_thmcaption">
+    Example
+    </span>
+    <span class="example_thmlabel">.28</span>
+    <span class="example_thmtitle">広義Riemann積分可能だがLebesgue積分可能でない関数</span>
+    <div class="thm_header_extras">
+
+        </div>
+    <div class="thm_header_hidden_extras">
+
+    <a class="icon proof" href="sect0008.html#a0000000961">#</a>
+    
+    <a class="icon proof" href="sect0008.html#a0000000962"><svg  class="icon icon-cogs "><use xlink:href="symbol-defs.svg#icon-cogs"></use></svg>
+</a>
+    
+    
+    
+        </div>
+  </div>
+  <div class="example_thmcontent">
+  <p> \(f(x):=\sin x/x\) \((x \ge 1)\) を考える． このとき \(\int _1^{\infty } \frac{\sin x}{x}\, dx\) は広義Riemann積分として収束するが， \(f\) はLebesgue可積分ではない． </p>
+
+  </div>
+</div>
+<div class="proof_wrapper" id="a0000000962">
+  <div class="proof_heading">
+    <span class="proof_caption">
+    
+    </span>
+    <span class="expand-proof">▶</span>
+  </div>
+  <div class="proof_content">
+  <p>まず広義Riemann積分の収束を示す． \(1{\lt}R{\lt}\infty \) に対して部分積分を行うと </p>
+<div class="displaymath" id="a0000000963">
+  \[  \int _1^R \frac{\sin x}{x}\, dx =\left[-\frac{\cos x}{x}\right]_{x=1}^{x=R} -\int _1^R \frac{\cos x}{x^2}\, dx.  \]
+</div>
+<p> 右辺第1項は \(R\to \infty \) で極限をもち， 第2項は </p>
+<div class="displaymath" id="a0000000964">
+  \[  \int _1^{\infty }\frac{|\cos x|}{x^2}\, dx \le \int _1^{\infty }\frac{1}{x^2}\, dx {\lt}\infty  \]
+</div>
+<p> だから収束する． よって \(\int _1^{\infty } \frac{\sin x}{x}\, dx\) は広義Riemann積分として収束する． </p>
+<p>次にLebesgue可積分でないことを示す． 各 \(k \in \mathbb N\) に対して \(I_k:=[k\pi +\pi /6,\  k\pi +5\pi /6]\) とおくと，\(x \in I_k\) では \(|\sin x|\ge 1/2\) である． したがって </p>
+<div class="displaymath" id="a0000000965">
+  \[  \int _1^{\infty }\frac{|\sin x|}{x}\, dx \ge \sum _{k=1}^{\infty }\int _{I_k}\frac{|\sin x|}{x}\, dx \ge \frac12\sum _{k=1}^{\infty }\int _{I_k}\frac{1}{x}\, dx \ge \frac{\pi }{3}\sum _{k=1}^{\infty }\frac{1}{k\pi +\frac{5\pi }{6}}.  \]
+</div>
+<p> 右辺は調和級数と同程度に発散するから \(\int _1^{\infty }\frac{|\sin x|}{x}\, dx=\infty \) である． よって \(\sin x/x\) はLebesgue可積分ではない． </p>
+
+  </div>
+</div>
+<h1 id="a0000000201"> 解釈とまとめ</h1>
+<p>測度空間上の積分では，まず \(S^+(X)\) に属する単関数から積分を定め， 次に \(M^+(X)\) の元へ拡張し，最後に \(\mathcal L^1(X)\) を取り出した． したがってこの積分の本質は， 関数値そのものよりも「その値をとる領域の大きさ」を正確に足し合わせることにある． </p>
+<p>特に本章で得た重要な事実は次の通りである． </p>
+<ol class="enumerate">
+  <li><p>Dirichlet関数はLebesgue積分でき，積分値は \(0\) である </p>
+</li>
+  <li><p>\(f\in \mathcal L^1(X)\) であることと \(|f|\in \mathcal L^1(X)\) であることは同値である </p>
+</li>
+  <li><p>可積分関数は零集合上で値を変えても積分値が変わらない </p>
+</li>
+  <li><p>Riemann可積分関数はすべてLebesgue可積分である </p>
+</li>
+</ol>
+<p>次章では，この積分を実際に計算で運用するための基本公式 \(\int (f+g)\)，\(\int cf\)，\(\int |f|\)，\(\int _X f\) を体系的に整理する．  </p>
+<p><br />  </p>
+
+</div> <!--main-text -->
+</div> <!-- content-wrapper -->
+</div> <!-- content -->
+</div> <!-- wrapper -->
+
+<nav class="prev_up_next">
+  <svg  id="showmore-minus" class="icon icon-eye-minus showmore"><use xlink:href="symbol-defs.svg#icon-eye-minus"></use></svg>
+
+  <svg  id="showmore-plus" class="icon icon-eye-plus showmore"><use xlink:href="symbol-defs.svg#icon-eye-plus"></use></svg>
+
+  <a href="sect0007.html" title="可測関数"><svg  class="icon icon-arrow-left "><use xlink:href="symbol-defs.svg#icon-arrow-left"></use></svg>
+</a>
+  <a href="index.html" title="Lecture note on KSK"><svg  class="icon icon-arrow-up "><use xlink:href="symbol-defs.svg#icon-arrow-up"></use></svg>
+</a>
+  <a href="sect0009.html" title="測度空間上の積分の性質"><svg  class="icon icon-arrow-right "><use xlink:href="symbol-defs.svg#icon-arrow-right"></use></svg>
+</a>
+</nav>
+
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/plastex.js"></script>
+<script type="text/javascript" src="js/svgxuse.js"></script>
+<script type="text/javascript" src="js/js.cookie.min.js"></script>
+<script type="text/javascript" src="js/showmore.js"></script>
+</body>
+</html>
