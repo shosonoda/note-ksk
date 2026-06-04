@@ -142,6 +142,8 @@ f^{-1}\left(\sigma(\calE)\right) = \sigma\left(f^{-1}(\calE)\right)
 \end{lemma}
 \begin{remark}
     したがって，$Y$ 側の $\sigma$-加法族がある生成族で記述されていれば，$X$ 側ではその生成族の逆像だけを調べればよい．
+    可測集合の全体$\calB$はしばしば超越的なので，その素性はよく分からないが，生成系$\calE$の方はある程度分かりやすい構造を持っていることがある．例えば，開集合系$\calO$が生成するBorel集合系$\calB(\calO)$などが典型的である．
+    そのような場合にこの補題は威力を発揮する．
 \end{remark}
 \begin{proof}
 $\sigma(\calE)$ は $Y$ 上の $\sigma$-加法族である．
@@ -269,6 +271,16 @@ f:(X,\calM)\to (\eRR,\calB(\eRR))
 \]
 が\cref{def:measurable-map}の意味で可測写像であることをいう．
 特に$X$ がLebesgue可測集合で $\calM=\calL_d(X)$ のとき，$f$ をLebesgue可測関数という．また，$\calM$がBorel $\sigma$-加法族のとき，$f$ をBorel可測関数という．
+\end{definition}
+
+\begin{definition}[可測関数空間の記号]\label{def:measurable-function-space-notation}
+可測空間 $(X,\calM)$ 上の拡大実数値可測関数全体を
+$M(X;\eRR)$ と書く．文脈から値域が明らかなときは $M(X):=M(X;\eRR)$ と略記する．
+また，実数値可測関数全体を $M(X;\RR)$，非負可測関数全体を
+$M^+(X):=\{f\in M(X;\eRR)\mid f\ge 0\}$ と書く．
+
+$\sigma$-加法族を明示したいときは $M(X,\calM;\eRR)$ のように書く．
+可測集合 $E\in\calM$ について $M(E;\eRR)$ と書く場合は，相対可測空間 $(E,\calM(E))$ 上の可測関数全体を意味する．
 \end{definition}
 
 \begin{theorem}[可測関数の判定法]\label{thm:lebesgue-measurable-function-criterion}
@@ -402,7 +414,7 @@ $f$ はBorel可測である．
 
 \begin{example}[指示関数]\label{ex:indicator-function-measurable}
 $(X,\calM)$ を可測空間とする．
-$A \in \calM$ なら $1_A:X\to\RR$ は $\calM$-可測関数である．
+$A \in \calM$ なら $1_A\in M(X;\RR)$ である．
 \end{example}
 \begin{proof}
 任意の $a\in\RR$ に対して
@@ -442,7 +454,7 @@ Lebesgue積分論ではまず「可測である」ことが分かる．
 
 \begin{proposition}[有限個の可測関数をまとめた写像]\label{prop:measurable-vector-map}
 $(X,\calM)$ を可測空間とし，
-$f_1,\dots,f_n:X\to\RR$ を $\calM$-可測関数とする．
+$f_1,\dots,f_n\in M(X;\RR)$ とする．
 このとき $F:X\to\RR^n,\ F(x):=(f_1(x),\dots,f_n(x))$ は可測である．
 \end{proposition}
 \begin{proof}
@@ -487,7 +499,7 @@ $\Phi$ の連続性より $\Phi^{-1}(B)\in\calB(\RR^n)$ である．
 
 \begin{corollary}[代数演算と合成]\label{cor:measurable-algebra-operations}
 $(X,\calM)$ を可測空間とし，
-$f,g:X\to\RR$ を $\calM$-可測関数とする．
+$f,g\in M(X;\RR)$ とする．
 このとき次が成り立つ．
 \begin{enumerate}
     \item 任意の $c\in\RR$ に対して $cf$ は可測である
@@ -514,7 +526,7 @@ $f,g:X\to\RR$ を $\calM$-可測関数とする．
 \end{proof}
 
 \begin{proposition}[逆数]\label{prop:measurable-reciprocal}
-$(X,\calM)$ を可測空間とし，$f:X\to\RR$ を $\calM$-可測関数とする．
+$(X,\calM)$ を可測空間とし，$f\in M(X;\RR)$ とする．
 このとき $E_0:=\{x\in X\mid f(x)\ne 0\}$ は $\calM$ に属し，
 $1/f:E_0\to\RR$ は $\calM(E_0)$-可測である．
 特に $f(x)\ne 0$ がすべての $x\in X$ で成り立つなら，$1/f$ は $X$ 上可測である．
@@ -546,7 +558,7 @@ E_0\cap\bigl(\{f>0\}\cup\{f<1/a\}\bigr) & (a<0)
 
 \begin{proposition}[比較からできる集合]\label{prop:measurable-comparison-sets}
 $(X,\calM)$ を可測空間とし，
-$f,g:X\to\eRR$ を $\calM$-可測関数とする．
+$f,g\in M(X)$ とする．
 このとき次の集合はすべて $\calM$ に属する．
 %\begin{enumerate}
 %    \item
@@ -621,7 +633,7 @@ $\eRR$ の意味で存在するとき，極限関数 $\lim_{n\to\infty}f_n:X\to\
 
 \begin{proposition}[可算上限・可算下限の可測性]\label{prop:measurable-countable-sup-inf}
 $(X,\calM)$ を可測空間とし，
-$f_n:X\to\eRR$ を $\calM$-可測関数列とする．
+$f_n\in M(X)$ $(n\in\NN)$ とする．
 このとき，
 \[
 \sup_{n}f_n,
@@ -654,7 +666,7 @@ $f_n:X\to\eRR$ を $\calM$-可測関数列とする．
 
 \begin{proposition}[上極限・下極限・極限関数の可測性]\label{prop:measurable-limsup-liminf}
 $(X,\calM)$ を可測空間とし，
-$f_n:X\to\eRR$ を $\calM$-可測関数列とする．
+$f_n\in M(X)$ $(n\in\NN)$ とする．
 このとき
 \[
 \limsup_{n\to\infty}f_n,\qquad
@@ -748,7 +760,7 @@ $f\sim g$ かつ $g\sim h$ とする．
 
 \begin{proposition}[a.e.\ 修正による可測性]\label{prop:ae-modification-measurable}
 $(X,\calM,\mu)$ を完備な測度空間とし，$E\in\calM$ とする．
-$f:E\to\eRR$ を $\calM(E)$-可測関数とし，
+$f\in M(E)$ とし，
 $g:E\to\eRR$ が
 \[
 f=g \quad \text{$\mu$-a.e.\ on } E
@@ -808,7 +820,7 @@ $\{x\in E\mid f_n(x)\not\to f(x)\}$
 
 \begin{corollary}[概収束の極限の可測性]\label{cor:ae-limit-measurable}
 $(X,\calM,\mu)$ を完備な測度空間とし，$E\in\calM$ とする．
-$f_n:E\to\eRR$ を $\calM(E)$-可測関数列とし，
+$f_n\in M(E)$ $(n\in\NN)$ とし，
 \[
 f_n\to f\quad \text{$\mu$-a.e.\ on } E
 \]
@@ -835,7 +847,7 @@ f=g \quad \text{$\mu$-a.e.\ on } E.
 
 \section{解釈とまとめ}
 
-可測関数とは，\cref{thm:lebesgue-measurable-function-criterion}で見たように
+可測関数空間 $M(X)$ の元とは，\cref{thm:lebesgue-measurable-function-criterion}で見たように
 $\{f>a\}$ のようなレベル集合が可測である関数であった．
 つまり，関数の値そのものより，
 その値をとる領域の幾何学が測度で追えることが本質である．
@@ -843,8 +855,8 @@ $\{f>a\}$ のようなレベル集合が可測である関数であった．
 本章で得た重要な事実は次の通りである．
 \begin{enumerate}
     \item 連続関数と指示関数は可測である
-    \item 可測関数は和・積・逆数・合成で閉じている（\cref{cor:measurable-algebra-operations,prop:measurable-reciprocal}）
-    \item $\sup,\inf,\limsup,\liminf,\lim$ をとっても可測性は保たれる（\cref{prop:measurable-countable-sup-inf,prop:measurable-limsup-liminf}）
+    \item $M(X;\RR)$ は和・積・逆数・合成で閉じている（\cref{cor:measurable-algebra-operations,prop:measurable-reciprocal}）
+    \item $M(X)$ は $\sup,\inf,\limsup,\liminf,\lim$ で閉じている（\cref{prop:measurable-countable-sup-inf,prop:measurable-limsup-liminf}）
     \item 完備な測度空間では，零集合上で値を変えても可測性は変わらない（\cref{prop:ae-modification-measurable}）
 \end{enumerate}
 

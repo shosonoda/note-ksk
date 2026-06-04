@@ -27,7 +27,7 @@ $\int f_n\,d\mu \to \int f\,d\mu$ を言いたい場面が非常に多い．
 \section{単調収束定理}
 
 \begin{theorem}[単調収束定理]\label{thm:monotone-convergence}
-$f_n:X \to [0,\infty]$ を非負可測関数列とする．
+$f_n\in M^+(X)$ $(n\in\NN)$ とする．
 もし $f_1\le f_2\le \cdots$ かつ $f_n(x)\to f(x)$ $(x \in X)$ ならば
 $\int_X f_n\,d\mu \uparrow \int_X f\,d\mu$，すなわち
 $\lim_{n\to\infty}\int_X f_n\,d\mu=\int_X f\,d\mu$ が成り立つ．
@@ -63,7 +63,7 @@ $s \le f$ を満たす単関数 $s$ は任意だから，
 \end{proof}
 
 \begin{corollary}[非負級数の項別積分]\label{cor:nonnegative-series-termwise-integration}
-$f_n:X \to [0,\infty]$ を非負可測関数列とする．
+$f_n\in M^+(X)$ $(n\in\NN)$ とする．
 このとき $\int_X (\sum_{n=1}^{\infty}f_n)\,d\mu=\sum_{n=1}^{\infty}\int_X f_n\,d\mu$ が成り立つ．
 \end{corollary}
 \begin{proof}
@@ -84,7 +84,7 @@ $\int_X S_N\,d\mu=\sum_{n=1}^N \int_X f_n\,d\mu$ である．
 \section{Fatouの補題}
 
 \begin{theorem}[Fatouの補題]\label{thm:fatou-lemma}
-$f_n:X \to [0,\infty]$ を非負可測関数列とする．このとき
+$f_n\in M^+(X)$ $(n\in\NN)$ とする．このとき
 \[
 \int_X \liminf_{n\to\infty} f_n\,d\mu
 \le
@@ -120,10 +120,9 @@ $\int_X \liminf_{n\to\infty} f_n\,d\mu=\lim_{n\to\infty}\int_X g_n\,d\mu$ であ
 \section{優収束定理}
 
 \begin{theorem}[優収束定理]\label{thm:dominated-convergence}
-$f_n:X \to \eRR$ を可測関数列，$f:X \to \eRR$ を可測関数とし，
-$g:X \to [0,\infty]$ を可積分な関数とする．
+$f_n\in M(X)$ $(n\in\NN)$，$f\in M(X)$ とし，$g\in M^+(X)\cap\calL^1(X)$ とする．
 もし $f_n(x)\to f(x)$ a.e.\ on $X$ かつ $|f_n(x)|\le g(x)$ a.e.\ on $X$ がすべての $n$ について成り立つならば，
-$f$ は可積分であり，
+$f\in\calL^1(X)$ であり，
 $\lim_{n\to\infty}\int_X |f_n-f|\,d\mu=0$ である．
 したがって $\lim_{n\to\infty}\int_X f_n\,d\mu=\int_X f\,d\mu$ が成り立つ．
 \end{theorem}
@@ -166,10 +165,10 @@ $\lim_{n\to\infty}\int_X h_n\,d\mu=0$，すなわち $\int_X |f_n-f|\,d\mu \to 0
 
 \begin{corollary}[有界収束定理]\label{cor:bounded-convergence}
 $\mu(X)<\infty$ とし，
-$f_n:X \to \eRR$ を可測関数列，$f:X \to \eRR$ を可測関数とする．
+$f_n\in M(X)$ $(n\in\NN)$，$f\in M(X)$ とする．
 もし $f_n(x)\to f(x)$ a.e.\ on $X$ かつある定数 $M>0$ が存在して
 $|f_n(x)|\le M$ a.e.\ on $X$ がすべての $n$ について成り立つならば，
-$f$ は可積分で $\int_X f_n\,d\mu\to \int_X f\,d\mu$ が成り立つ．
+$f\in\calL^1(X)$ で $\int_X f_n\,d\mu\to \int_X f\,d\mu$ が成り立つ．
 \end{corollary}
 \begin{proof}
 $g:=M1_X$ とおくと $\int_X g\,d\mu=M\,\mu(X)<\infty$ だから $g$ は可積分である．
@@ -179,11 +178,11 @@ $g:=M1_X$ とおくと $\int_X g\,d\mu=M\,\mu(X)<\infty$ だから $g$ は可積
 \section{項別積分}
 
 \begin{theorem}[優収束定理による項別積分]\label{thm:dominated-series-termwise-integration}
-$f_n:X \to \eRR$ を可積分関数列とする．
-さらに，ある可積分関数 $g:X \to [0,\infty]$ が存在して
+$f_n\in\calL^1(X)$ $(n\in\NN)$ とする．
+さらに，ある $g\in M^+(X)\cap\calL^1(X)$ が存在して
 $\sum_{n=1}^{\infty}|f_n(x)|\le g(x)$ a.e.\ on $X$ を満たすとする．
 このとき級数 $\sum_{n=1}^{\infty}f_n(x)$ は a.e.\ で絶対収束し，
-その和を $f$ と書けば $f$ は可積分で，
+その和を $f$ と書けば $f\in\calL^1(X)$ で，
 $\int_X f\,d\mu=\sum_{n=1}^{\infty}\int_X f_n\,d\mu$ が成り立つ．
 \end{theorem}
 \begin{proof}
@@ -218,9 +217,9 @@ $\int_X S_N\,d\mu=\sum_{n=1}^N \int_X f_n\,d\mu$ である．
 $I \subset \RR$ を開区間とし，関数 $F:I \times X \to \RR$ が次を満たすとする．
 \begin{enumerate}
     \item ほとんどすべての $x \in X$ に対して，$t \mapsto F(t,x)$ は $I$ 上で $C^1$ 級である
-    \item 各 $t \in I$ に対して，$x \mapsto F(t,x)$ と $x \mapsto \partial_tF(t,x)$ は可測である
-    \item ある $t_0 \in I$ について $F(t_0,\cdot)$ は可積分である
-    \item ある可積分関数 $g:X \to [0,\infty]$ が存在して，$|\partial_tF(t,x)|\le g(x)$ がすべての $t \in I$ と a.e.\ の $x \in X$ で成り立つ
+    \item 各 $t \in I$ に対して，$F(t,\cdot)$ と $\partial_tF(t,\cdot)$ は $M(X;\RR)$ に属する
+    \item ある $t_0 \in I$ について $F(t_0,\cdot)\in\calL^1(X)$ である
+    \item ある $g\in M^+(X)\cap\calL^1(X)$ が存在して，$|\partial_tF(t,x)|\le g(x)$ がすべての $t \in I$ と a.e.\ の $x \in X$ で成り立つ
 \end{enumerate}
 このとき $G(t):=\int_X F(t,x)\,d\mu(x)$ は $I$ 上でよく定義されて微分可能であり，
 $G'(t)=\int_X \partial_tF(t,x)\,d\mu(x)$ が成り立つ．
@@ -282,7 +281,7 @@ $G'(t)=\int_0^{\infty}(-x)e^{-tx}\,dx$ を得る．
 \begin{enumerate}
     \item $f_n \uparrow f$ なら $\int f_n \to \int f$
     \item 一般の非負列では $\int \liminf f_n \le \liminf \int f_n$
-    \item $|f_n|\le g \in L^1$ なら $\int f_n \to \int f$
+    \item $|f_n|\le g\in\calL^1(X)$ なら $\int f_n \to \int f$
     \item 有限測度空間では，一様有界性だけで優関数を作れる
 \end{enumerate}
 
