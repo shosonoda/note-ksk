@@ -7,6 +7,7 @@ import NoteKsk.«05lebesgue-measure»
 import NoteKsk.«06caratheodory»
 import NoteKsk.«07mble-funcs»
 import NoteKsk.«08lintegral»
+import NoteKsk.«09lintegral-prop»
 
 -- import NoteKsk.«11measure»
 -- import NoteKsk.«12jordan-riemann»

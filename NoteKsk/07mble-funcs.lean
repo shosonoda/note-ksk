@@ -3,7 +3,7 @@ Copyright (c) 2026 Sho Sonoda. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Sho Sonoda
 -/
-import NoteKsk.«06caratheodory»
+import NoteKsk.Defs
 
 /-!
 # Chapter 07: Measurable functions
@@ -36,7 +36,6 @@ open scoped BigOperators Topology ENNReal
 open Set MeasureTheory Filter
 
 namespace NoteKsk
-open Chapter05 Chapter06
 
 namespace Chapter07
 

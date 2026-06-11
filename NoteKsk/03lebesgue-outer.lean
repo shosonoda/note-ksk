@@ -3,7 +3,7 @@ Copyright (c) 2026 Sho Sonoda. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Sho Sonoda
 -/
-import NoteKsk.«02jordan»
+import NoteKsk.Defs
 
 /-!
 # Chapter 03: Lebesgue outer measure
@@ -19,8 +19,9 @@ We therefore use
 * `(volume : Measure (Fin d → ℝ))` as Lebesgue outer measure on all subsets;
 * explicit boxes and cover-cost definitions to keep the blueprint definition visible.
 
-Statements depending on the Jordan theory of Chapter 2 import their definitions
-and bridge theorems from `NoteKsk/02jordan.lean`.
+Although the lecture notes place Jordan measure before Lebesgue outer measure,
+this file does not import Chapter 02.  The few Jordan compatibility statements
+below use only the shared definitions from `Defs.lean` and mathlib's `volume`.
 -/
 
 noncomputable section
@@ -588,8 +589,32 @@ This is a Chapter 2 compatibility statement.
 theorem jordanMeasure_eq_lambdaStar {d : ℕ} {A : Set (Space d)}
     (hA : JordanMeasurable A) :
     jordanMeasure A = lambdaStar A := by
-  simpa [lambdaStar] using
-    (Chapter02.jordanMeasure_eq_volume_of_jordanMeasurable (d := d) (A := A) hA)
+  have h_inner_le_volume :
+      jordanInnerMeasure A ≤ lambdaStar A := by
+    refine iSup_le ?_
+    intro E
+    refine iSup_le ?_
+    intro _hE
+    refine iSup_le ?_
+    intro hEA
+    simpa [lambdaStar, elementaryVolume] using
+      (measure_mono (μ := (volume : Measure (Space d))) hEA)
+  have h_volume_le_outer :
+      lambdaStar A ≤ jordanOuterMeasure A := by
+    refine le_iInf ?_
+    intro E
+    refine le_iInf ?_
+    intro _hE
+    refine le_iInf ?_
+    intro hAE
+    simpa [lambdaStar, elementaryVolume] using
+      (measure_mono (μ := (volume : Measure (Space d))) hAE)
+  have h_outer_le_volume :
+      jordanOuterMeasure A ≤ lambdaStar A := by
+    simpa [hA.2.2] using h_inner_le_volume
+  exact le_antisymm
+    (by simpa [jordanMeasure] using h_outer_le_volume)
+    (by simpa [jordanMeasure] using h_volume_le_outer)
 
 /--
 Countable additivity of `λ*` on pairwise disjoint Jordan measurable sets.
@@ -600,8 +625,12 @@ theorem lambdaStar_iUnion_eq_tsum_of_jordanMeasurable {d : ℕ}
     (hdisj : ∀ ⦃m n : ℕ⦄, m ≠ n → Disjoint (A m) (A n))
     (hA : ∀ n, JordanMeasurable (A n)) :
     lambdaStar (⋃ n, A n) = ∑' n, lambdaStar (A n) := by
+  have hpair : Pairwise (Function.onFun Disjoint A) := by
+    intro m n hmn
+    exact hdisj hmn
+  have hmeas : ∀ n, MeasurableSet (A n) := fun n => (hA n).2.1
   simpa [lambdaStar] using
-    (Chapter02.volume_iUnion_eq_tsum_of_jordanMeasurable (d := d) A hdisj hA)
+    (measure_iUnion (μ := (volume : Measure (Space d))) hpair hmeas)
 
 /-! ## 6. Outer regularity by open supersets -/
 

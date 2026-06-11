@@ -246,6 +246,22 @@ noncomputable abbrev positivePart {α : Type*} (f : α → ℝ) : α → ENNReal
 noncomputable abbrev negativePart {α : Type*} (f : α → ℝ) : α → ENNReal :=
   fun x => ENNReal.ofReal (-f x)
 
+/--
+Positive part of a real-valued function, represented as a real-valued function.
+This is the notation used in Chapter 09 for identities such as
+`f = f⁺ - f⁻`.  The earlier `positivePart` is `ENNReal`-valued because it is
+adapted to lower Lebesgue integrals.
+-/
+noncomputable abbrev realPositivePart {α : Type*} (f : α → ℝ) : α → ℝ :=
+  fun x => max (f x) 0
+
+/--
+Negative part of a real-valued function, represented as a real-valued function.
+This is kept separate from the `ENNReal`-valued `negativePart` used in Chapter 08.
+-/
+noncomputable abbrev realNegativePart {α : Type*} (f : α → ℝ) : α → ℝ :=
+  fun x => max (-f x) 0
+
 /-- Lecture-note synonym for mathlib's Bochner integrability of real-valued functions. -/
 abbrev LebesgueIntegrable {α : Type*} [MeasurableSpace α]
     (μ : Measure α) (f : α → ℝ) : Prop :=
