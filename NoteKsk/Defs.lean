@@ -71,6 +71,17 @@ def Nondegenerate (Q : Box d) : Prop :=
 
 end Box
 
+/-! ## Standard windows -/
+
+/-- The closed cube `[-R, R]^d`, bundled as a `Box`. -/
+def closedCubeBox (d : ℕ) (R : ℝ) : Box d where
+  lower := fun _ => -R
+  upper := fun _ => R
+
+/-- The closed cube `Q_R = [-R, R]^d` used to localize unbounded sets. -/
+def closedCube (d : ℕ) (R : ℝ) : Set (Space d) :=
+  (closedCubeBox d R).Icc
+
 /--
 The family `𝓔_d`: left half-open rectangles together with the empty set.
 Endpoints are finite real numbers at this stage of the development.

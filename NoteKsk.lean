@@ -4,6 +4,7 @@ import NoteKsk.«01riemann»
 import NoteKsk.«02jordan»
 import NoteKsk.«03lebesgue-outer»
 import NoteKsk.«04lebesgue-inner»
+import NoteKsk.«05lebesgue-measure»
 
 -- import NoteKsk.«11measure»
 -- import NoteKsk.«12jordan-riemann»
