@@ -129,6 +129,18 @@ $-\int_X |f|\,d\mu\le \int_X f\,d\mu\le \int_X |f|\,d\mu$ である．
 したがって絶対値をとればよい．
 \end{proof}
 
+\begin{remark}[ベクトル値の場合]
+有限次元ベクトル値関数 $F:X\to\RR^n$ についても，
+絶対値をノルムに置き換えた評価
+\[
+\left\|\int_X F\,d\mu\right\|
+\le \int_X \|F\|\,d\mu
+\]
+が成り立つ．
+この講義のこの段階では，必要なら各成分ごとに実数値関数の積分として読めば十分である．
+後でより一般のベクトル値積分を扱うときも，この評価が基本になる．
+\end{remark}
+
 \begin{proposition}[積分が $0$ であることの判定]\label{prop:integral-zero-iff-ae-zero}
 $f\in\calL^1(X)$ とする．
 このとき次は同値である．
@@ -147,15 +159,28 @@ $|f|$ は非負可測関数であり，
 これは $f=0$ a.e.\ と同値である．
 \end{proof}
 
-\begin{proposition}[Chebyshev不等式]\label{prop:chebyshev-inequality}
-$f\in\calL^1(X)$ とし，$\alpha>0$ とする．
-このとき $\mu(\{x \in X \mid |f(x)|\ge \alpha\})\le \alpha^{-1}\int_X |f|\,d\mu$ が成り立つ．
+\begin{proposition}[非負関数のChebyshev不等式]\label{prop:nonnegative-chebyshev-inequality}
+$f\in M^+(X)$ とし，$\alpha>0$ とする．
+このとき
+\[
+\mu(\{x\in X\mid f(x)\ge \alpha\})
+\le \alpha^{-1}\int_X f\,d\mu
+\]
+が成り立つ．
 \end{proposition}
 \begin{proof}
-$A:=\{x \in X \mid |f(x)|\ge \alpha\}$ とおく．
-すると a.e.\ で $\alpha 1_A\le |f|$ が成り立つので，\cref{prop:integral-monotonicity}より
-$\alpha\,\mu(A)=\int_X \alpha 1_A\,d\mu\le \int_X |f|\,d\mu$ である．
+$A:=\{x\in X\mid f(x)\ge \alpha\}$ とおく．
+すると $\alpha 1_A\le f$ だから，単調性より
+$\alpha\mu(A)=\int_X \alpha1_A\,d\mu\le \int_X f\,d\mu$ である．
 両辺を $\alpha$ で割ればよい．
+\end{proof}
+
+\begin{corollary}[Chebyshev不等式]\label{prop:chebyshev-inequality}
+$f\in\calL^1(X)$ とし，$\alpha>0$ とする．
+このとき $\mu(\{x \in X \mid |f(x)|\ge \alpha\})\le \alpha^{-1}\int_X |f|\,d\mu$ が成り立つ．
+\end{corollary}
+\begin{proof}
+\cref{prop:nonnegative-chebyshev-inequality}を $|f|$ に適用すればよい．
 \end{proof}
 
 \section{線形性}

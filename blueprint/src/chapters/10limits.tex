@@ -120,11 +120,10 @@ $\int_X \liminf_{n\to\infty} f_n\,d\mu=\lim_{n\to\infty}\int_X g_n\,d\mu$ であ
 \section{優収束定理}
 
 \begin{theorem}[優収束定理]\label{thm:dominated-convergence}
-$f_n\in M(X)$ $(n\in\NN)$，$f\in M(X)$ とし，$g\in M^+(X)\cap\calL^1(X)$ とする．
+$f_n\in M(X;\RR)$ $(n\in\NN)$，$f\in M(X;\RR)$ とし，$g\in M^+(X)\cap\calL^1(X)$ とする．
 もし $f_n(x)\to f(x)$ a.e.\ on $X$ かつ $|f_n(x)|\le g(x)$ a.e.\ on $X$ がすべての $n$ について成り立つならば，
 $f\in\calL^1(X)$ であり，
-$\lim_{n\to\infty}\int_X |f_n-f|\,d\mu=0$ である．
-したがって $\lim_{n\to\infty}\int_X f_n\,d\mu=\int_X f\,d\mu$ が成り立つ．
+$\lim_{n\to\infty}\int_X f_n\,d\mu=\int_X f\,d\mu$ が成り立つ．
 \end{theorem}
 \begin{proof}
 零集合上で値を変えても積分値は変わらないので，以下では $f_n\to f$ と $|f_n|\le g$ が各点で成り立つとしてよい．
@@ -163,9 +162,20 @@ $\lim_{n\to\infty}\int_X h_n\,d\mu=0$，すなわち $\int_X |f_n-f|\,d\mu \to 0
 より $\int_X f_n\,d\mu\to \int_X f\,d\mu$ を得る．
 \end{proof}
 
+\begin{corollary}[$L^1$ 収束版の優収束定理]\label{cor:dominated-convergence-l1}
+\cref{thm:dominated-convergence}と同じ仮定のもとで
+\[
+\lim_{n\to\infty}\int_X |f_n-f|\,d\mu=0
+\]
+が成り立つ．
+\end{corollary}
+\begin{proof}
+\cref{thm:dominated-convergence}の証明中で示した通りである．
+\end{proof}
+
 \begin{corollary}[有界収束定理]\label{cor:bounded-convergence}
 $\mu(X)<\infty$ とし，
-$f_n\in M(X)$ $(n\in\NN)$，$f\in M(X)$ とする．
+$f_n\in M(X;\RR)$ $(n\in\NN)$，$f\in M(X;\RR)$ とする．
 もし $f_n(x)\to f(x)$ a.e.\ on $X$ かつある定数 $M>0$ が存在して
 $|f_n(x)|\le M$ a.e.\ on $X$ がすべての $n$ について成り立つならば，
 $f\in\calL^1(X)$ で $\int_X f_n\,d\mu\to \int_X f\,d\mu$ が成り立つ．
@@ -211,7 +221,33 @@ $\int_X S_N\,d\mu=\sum_{n=1}^N \int_X f_n\,d\mu$ である．
 これが「和と積分の交換」の基本形である．
 \end{remark}
 
-\section{積分記号下の微分}
+\section{積分記号下の連続性と微分}
+
+\begin{theorem}[積分記号下の連続性]\label{thm:continuity-under-integral-sign}
+$I\subset\RR$ を開区間とし，$t_0\in I$ とする．
+関数 $F:I\times X\to\RR$ が次を満たすとする．
+\begin{enumerate}
+    \item 各 $t\in I$ に対して，$F(t,\cdot)\in M(X;\RR)$ である
+    \item ほとんどすべての $x\in X$ に対して，$t\mapsto F(t,x)$ は $t_0$ で連続である
+    \item ある $g\in M^+(X)\cap\calL^1(X)$ が存在して，$|F(t,x)|\le g(x)$ がすべての $t\in I$ と a.e.\ の $x\in X$ で成り立つ
+\end{enumerate}
+このとき
+\[
+G(t):=\int_X F(t,x)\,d\mu(x)
+\]
+は $t_0$ で連続である．
+\end{theorem}
+\begin{proof}
+$t_n\to t_0$ とする．
+仮定より $F(t_n,x)\to F(t_0,x)$ が a.e.\ で成り立ち，
+また $|F(t_n,x)|\le g(x)$ である．
+したがって\cref{thm:dominated-convergence}より
+\[
+\int_X F(t_n,x)\,d\mu(x)\to \int_X F(t_0,x)\,d\mu(x)
+\]
+である．
+これは $G$ が $t_0$ で連続であることを意味する．
+\end{proof}
 
 \begin{theorem}[積分記号下の微分]\label{thm:differentiation-under-integral-sign}
 $I \subset \RR$ を開区間とし，関数 $F:I \times X \to \RR$ が次を満たすとする．
