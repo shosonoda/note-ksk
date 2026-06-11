@@ -12,9 +12,9 @@ maxSynthPendingDepth = 3
 [[lean_lib]]
 name = "NoteKsk"
 
-# [[require]]
-# name = "checkdecls"
-# git = "https://github.com/PatrickMassot/checkdecls.git"
+[[require]]
+name = "checkdecls"
+git = "https://github.com/PatrickMassot/checkdecls.git"
 
 # [[require]]
 # name = "«doc-gen4»"
