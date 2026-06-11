@@ -54,21 +54,22 @@ theorem riemannIntegrable_of_continuousOn
     RiemannIntegrableOn f a b := by
   sorry
 
-/-- Piecewise constant functions are Riemann integrable.  The precise encoding is TODO. -/
+/-- Piecewise constant functions are Riemann integrable. -/
 theorem riemannIntegrable_piecewiseConstant
-    (a b : ℝ) (f : ℝ → ℝ) :
+    {a b : ℝ} {f : ℝ → ℝ} (hf : PiecewiseConstantOnInterval f a b) :
     RiemannIntegrableOn f a b := by
   sorry
 
-/-- Piecewise continuous functions are Riemann integrable.  The precise encoding is TODO. -/
+/-- Piecewise continuous functions are Riemann integrable. -/
 theorem riemannIntegrable_piecewiseContinuous
-    (a b : ℝ) (f : ℝ → ℝ) :
+    {a b : ℝ} {f : ℝ → ℝ} (hf : PiecewiseContinuousOnInterval f a b) :
     RiemannIntegrableOn f a b := by
   sorry
 
 theorem riemann_sums_tendsto_integral
     {f : ℝ → ℝ} {a b : ℝ} (hf : RiemannIntegrableOn f a b)
     (P : ℕ → IntervalPartition) (tags : ℕ → ℕ → ℝ)
+    (htagged : ∀ n, (P n).IsTagged (tags n))
     (hmesh : Filter.Tendsto (fun n => mesh (P n)) Filter.atTop (𝓝 0)) :
     Filter.Tendsto
       (fun n => riemannSum f (P n) (tags n))

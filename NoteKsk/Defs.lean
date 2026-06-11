@@ -217,6 +217,49 @@ def AEConvergesOn {α β : Type*} [MeasurableSpace α] [TopologicalSpace β]
     (μ : Measure α) (E : Set α) (f : ℕ → α → β) (g : α → β) : Prop :=
   ∀ᵐ x ∂ μ.restrict E, Filter.Tendsto (fun n : ℕ => f n x) Filter.atTop (𝓝 (g x))
 
+/-! ## Lebesgue integral vocabulary -/
+
+/-- Nonnegative extended-real-valued simple functions. -/
+abbrev SimpleNNFun (α : Type*) [MeasurableSpace α] : Type _ :=
+  MeasureTheory.SimpleFunc α ENNReal
+
+/-- The integral of a nonnegative simple function, using mathlib's `SimpleFunc.lintegral`. -/
+noncomputable abbrev simpleLintegral {α : Type*} [MeasurableSpace α]
+    (μ : Measure α) (f : SimpleNNFun α) : ENNReal :=
+  f.lintegral μ
+
+/-- The lower Lebesgue integral of an `ENNReal`-valued function. -/
+noncomputable abbrev lintegralNN {α : Type*} [MeasurableSpace α]
+    (μ : Measure α) (f : α → ENNReal) : ENNReal :=
+  ∫⁻ x, f x ∂μ
+
+/-- The lower Lebesgue integral over a subset. -/
+noncomputable abbrev setLintegralNN {α : Type*} [MeasurableSpace α]
+    (μ : Measure α) (s : Set α) (f : α → ENNReal) : ENNReal :=
+  ∫⁻ x in s, f x ∂μ
+
+/-- Positive part of a real-valued function, represented as an `ENNReal`-valued function. -/
+noncomputable abbrev positivePart {α : Type*} (f : α → ℝ) : α → ENNReal :=
+  fun x => ENNReal.ofReal (f x)
+
+/-- Negative part of a real-valued function, represented as an `ENNReal`-valued function. -/
+noncomputable abbrev negativePart {α : Type*} (f : α → ℝ) : α → ENNReal :=
+  fun x => ENNReal.ofReal (-f x)
+
+/-- Lecture-note synonym for mathlib's Bochner integrability of real-valued functions. -/
+abbrev LebesgueIntegrable {α : Type*} [MeasurableSpace α]
+    (μ : Measure α) (f : α → ℝ) : Prop :=
+  Integrable f μ
+
+/-- The signed Lebesgue integral of a real-valued integrable function. -/
+noncomputable abbrev lebesgueIntegral {α : Type*} [MeasurableSpace α]
+    (μ : Measure α) (f : α → ℝ) : ℝ :=
+  ∫ x, f x ∂μ
+
+/-- The `L¹` space as mathlib's space of a.e.-equivalence classes of integrable functions. -/
+abbrev L1Space (α : Type*) [MeasurableSpace α] (μ : Measure α) : Type _ :=
+  α →₁[μ] ℝ
+
 /-- Carathéodory measurability for an outer measure. -/
 def CaratheodoryMeasurableSet {α : Type*} (μ : OuterMeasure α) (A : Set α) : Prop :=
   μ.IsCaratheodory A
