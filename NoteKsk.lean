@@ -1,4 +1,3 @@
--- import NoteKsk.Basic
 import NoteKsk.Defs
 import NoteKsk.«01riemann»
 import NoteKsk.«02jordan»
