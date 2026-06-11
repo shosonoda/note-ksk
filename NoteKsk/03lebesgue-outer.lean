@@ -25,7 +25,7 @@ and bridge theorems from `NoteKsk/02jordan.lean`.
 
 noncomputable section
 
-open scoped BigOperators
+open scoped BigOperators Topology
 open Set MeasureTheory
 
 namespace NoteKsk
@@ -289,6 +289,86 @@ theorem lambdaStar_outerRegular_open {d : ℕ} (A : Set (Space d)) :
     lambdaStar A = lambdaStarByOpenSupersets A := by
   simpa [lambdaStarByOpenSupersets, lambdaStar] using
     (Set.measure_eq_iInf_isOpen (A := A) (μ := (volume : Measure (Space d))))
+
+/-! ## 7. Auxiliary outer-measure lemmas -/
+
+/-- Two sets are separated by a positive distance. -/
+def PositiveDistanceApart {d : ℕ} (A B : Set (Space d)) : Prop :=
+  ∃ δ : ℝ, 0 < δ ∧ ∀ ⦃a⦄, a ∈ A → ∀ ⦃b⦄, b ∈ B → δ ≤ dist a b
+
+/-- Lebesgue outer measure is additive on sets separated by positive distance. -/
+theorem lambdaStar_union_of_positiveDistanceApart {d : ℕ}
+    {A B : Set (Space d)} (hsep : PositiveDistanceApart A B) :
+    lambdaStar (A ∪ B) = lambdaStar A + lambdaStar B := by
+  rcases hsep with ⟨δ, hδpos, hδ⟩
+  let S : Set (Space d) := {x | ENNReal.ofReal (δ / 2) ≤ Metric.infEDist x B}
+  have hhalf_pos : 0 < δ / 2 := by linarith
+  have hSclosed : IsClosed S := by
+    simpa [S] using
+      (isClosed_Ici.preimage (Metric.continuous_infEDist (s := B)))
+  have hA_subset_S : A ⊆ S := by
+    intro a ha
+    dsimp [S]
+    rw [Metric.le_infEDist]
+    intro b hb
+    have hhalf_le : δ / 2 ≤ dist a b := by
+      linarith [hδ ha hb]
+    simpa [edist_dist] using ENNReal.ofReal_le_ofReal hhalf_le
+  have hB_subset_compl : B ⊆ Sᶜ := by
+    intro b hb hbS
+    have hpos : 0 < ENNReal.ofReal (δ / 2) := ENNReal.ofReal_pos.mpr hhalf_pos
+    have hzero : Metric.infEDist b B = 0 := Metric.infEDist_zero_of_mem hb
+    exact (not_le_of_gt hpos) (by simpa [S, hzero] using hbS)
+  have h_inter : (A ∪ B) ∩ S = A := by
+    ext x
+    constructor
+    · rintro ⟨hxAB, hxS⟩
+      rcases hxAB with hxA | hxB
+      · exact hxA
+      · exact False.elim ((hB_subset_compl hxB) hxS)
+    · intro hxA
+      exact ⟨Or.inl hxA, hA_subset_S hxA⟩
+  have h_diff : (A ∪ B) \ S = B := by
+    ext x
+    constructor
+    · rintro ⟨hxAB, hxS⟩
+      rcases hxAB with hxA | hxB
+      · exact False.elim (hxS (hA_subset_S hxA))
+      · exact hxB
+    · intro hxB
+      exact ⟨Or.inr hxB, hB_subset_compl hxB⟩
+  have hsplit :=
+    measure_inter_add_diff (μ := (volume : Measure (Space d))) (s := A ∪ B) hSclosed.measurableSet
+  simpa [lambdaStar, h_inter, h_diff] using hsplit.symm
+
+/--
+Finite-measure open sets can be approximated from inside by compact sets.
+The `ENNReal` form avoids subtracting an epsilon from an extended value.
+-/
+theorem finiteOpen_innerCompact_exists {d : ℕ}
+    {U : Set (Space d)} (hUopen : IsOpen U) (hUfin : lambdaStar U < ⊤)
+    {ε : ENNReal} (hε : ε ≠ 0) :
+    ∃ K : Set (Space d),
+      IsCompact K ∧ K ⊆ U ∧ lambdaStar U ≤ lambdaStar K + ε := by
+  rcases hUopen.measurableSet.exists_isCompact_lt_add
+      (μ := (volume : Measure (Space d)))
+      (by simpa [lambdaStar] using hUfin.ne) hε with ⟨K, hKU, hK, hKμ⟩
+  exact ⟨K, hK, hKU, le_of_lt (by simpa [lambdaStar] using hKμ)⟩
+
+/-- Splitting a finite-measure open set by a compact set. -/
+theorem finiteOpen_compact_split {d : ℕ}
+    {O K : Set (Space d)}
+    (_hOopen : IsOpen O) (_hOfin : lambdaStar O < ⊤) (hK : IsCompact K) :
+    lambdaStar O = lambdaStar (O ∩ K) + lambdaStar (O \ K) := by
+  simpa [lambdaStar] using
+    (measure_inter_add_diff (μ := (volume : Measure (Space d))) (s := O) hK.measurableSet).symm
+
+/-- Compact sets split Lebesgue outer measure of arbitrary sets. -/
+theorem compact_splits_lambdaStar {d : ℕ}
+    {C B : Set (Space d)} (hC : IsCompact C) :
+    lambdaStar B = lambdaStar (B ∩ C) + lambdaStar (B \ C) := by
+  simpa [lambdaStar] using
+    (measure_inter_add_diff (μ := (volume : Measure (Space d))) (s := B) hC.measurableSet).symm
 
 end Chapter03
 end NoteKsk
