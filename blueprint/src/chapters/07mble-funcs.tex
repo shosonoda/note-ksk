@@ -484,17 +484,31 @@ $\mathcal B(\RR^n)\subset \mathcal C$
 よって $F$ は可測である．
 \end{proof}
 
-\begin{theorem}[連続写像との合成]\label{thm:measurable-continuous-composition}
+\begin{theorem}[可測写像の合成]\label{thm:measurable-map-composition}
+$(X,\calM)$，$(Y,\calN)$，$(Z,\calP)$ を可測空間とする．
+$F:(X,\calM)\to(Y,\calN)$ と $G:(Y,\calN)\to(Z,\calP)$ が可測写像なら，
+$G\circ F:(X,\calM)\to(Z,\calP)$ も可測写像である．
+\end{theorem}
+\begin{proof}
+任意の $B\in\calP$ を取る．
+$G$ は可測だから $G^{-1}(B)\in\calN$ であり，さらに $F$ は可測だから
+%\[
+$(G\circ F)^{-1}(B)=F^{-1}(G^{-1}(B))\in\calM$
+%\]
+である．
+したがって $G\circ F$ は可測である．
+\end{proof}
+
+\begin{corollary}[連続写像との合成]\label{thm:measurable-continuous-composition}
 $(X,\calM)$ を可測空間とする．
 $F:(X,\calM)\to(\RR^n,\calB(\RR^n))$ を可測写像，
 $\Phi:\RR^n\to\RR$ を連続関数とする．
 このとき $\Phi\circ F:X\to\RR$ は $\calM$-可測である．
-\end{theorem}
+\end{corollary}
 \begin{proof}
-任意のBorel集合 $B\subset\RR$ に対して，
-$\Phi$ の連続性より $\Phi^{-1}(B)\in\calB(\RR^n)$ である．
-したがって $(\Phi\circ F)^{-1}(B)=F^{-1}(\Phi^{-1}(B))$ は可測である．
-よって $\Phi\circ F$ は可測である．
+$\Phi$ は連続だから，\cref{ex:continuous-function-measurable}より
+$\Phi:(\RR^n,\calB(\RR^n))\to(\RR,\calB(\RR))$ は可測写像である．
+したがって\cref{thm:measurable-map-composition}より $\Phi\circ F$ は可測である．
 \end{proof}
 
 \begin{corollary}[代数演算と合成]\label{cor:measurable-algebra-operations}
